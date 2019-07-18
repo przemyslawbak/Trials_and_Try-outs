@@ -1,0 +1,11 @@
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\Albahari C# 6.0\30 LINQ operatory\30 LINQ operatory\bin\Debug\netcoreapp2.1\30 LINQ operatory.deps.json
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\Albahari C# 6.0\30 LINQ operatory\30 LINQ operatory\bin\Debug\netcoreapp2.1\30 LINQ operatory.runtimeconfig.json
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\Albahari C# 6.0\30 LINQ operatory\30 LINQ operatory\bin\Debug\netcoreapp2.1\30 LINQ operatory.runtimeconfig.dev.json
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\Albahari C# 6.0\30 LINQ operatory\30 LINQ operatory\bin\Debug\netcoreapp2.1\30 LINQ operatory.dll
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\Albahari C# 6.0\30 LINQ operatory\30 LINQ operatory\bin\Debug\netcoreapp2.1\30 LINQ operatory.pdb
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\Albahari C# 6.0\30 LINQ operatory\30 LINQ operatory\obj\Debug\netcoreapp2.1\30 LINQ operatory.csprojAssemblyReference.cache
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\Albahari C# 6.0\30 LINQ operatory\30 LINQ operatory\obj\Debug\netcoreapp2.1\30 LINQ operatory.csproj.CoreCompileInputs.cache
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\Albahari C# 6.0\30 LINQ operatory\30 LINQ operatory\obj\Debug\netcoreapp2.1\30 LINQ operatory.AssemblyInfoInputs.cache
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\Albahari C# 6.0\30 LINQ operatory\30 LINQ operatory\obj\Debug\netcoreapp2.1\30 LINQ operatory.AssemblyInfo.cs
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\Albahari C# 6.0\30 LINQ operatory\30 LINQ operatory\obj\Debug\netcoreapp2.1\30 LINQ operatory.dll
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\Albahari C# 6.0\30 LINQ operatory\30 LINQ operatory\obj\Debug\netcoreapp2.1\30 LINQ operatory.pdb

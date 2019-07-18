@@ -1,0 +1,6 @@
+C:\Users\asus\Desktop\Programowanie\Tutoriale i Testy\TutorialsPoint 01a System.Collections\TutorialsPoint 01a System.Collections\bin\Debug\TutorialsPoint 01a System.Collections.exe.config
+C:\Users\asus\Desktop\Programowanie\Tutoriale i Testy\TutorialsPoint 01a System.Collections\TutorialsPoint 01a System.Collections\bin\Debug\TutorialsPoint 01a System.Collections.exe
+C:\Users\asus\Desktop\Programowanie\Tutoriale i Testy\TutorialsPoint 01a System.Collections\TutorialsPoint 01a System.Collections\bin\Debug\TutorialsPoint 01a System.Collections.pdb
+C:\Users\asus\Desktop\Programowanie\Tutoriale i Testy\TutorialsPoint 01a System.Collections\TutorialsPoint 01a System.Collections\obj\Debug\TutorialsPoint 01a System.Collections.csprojResolveAssemblyReference.cache
+C:\Users\asus\Desktop\Programowanie\Tutoriale i Testy\TutorialsPoint 01a System.Collections\TutorialsPoint 01a System.Collections\obj\Debug\TutorialsPoint 01a System.Collections.exe
+C:\Users\asus\Desktop\Programowanie\Tutoriale i Testy\TutorialsPoint 01a System.Collections\TutorialsPoint 01a System.Collections\obj\Debug\TutorialsPoint 01a System.Collections.pdb

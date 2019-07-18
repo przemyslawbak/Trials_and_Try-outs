@@ -1,0 +1,11 @@
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\!!Trials!!\Albahari C# 6.0\05 Znaki\05 Znaki\bin\Debug\netcoreapp2.1\05 Znaki.deps.json
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\!!Trials!!\Albahari C# 6.0\05 Znaki\05 Znaki\bin\Debug\netcoreapp2.1\05 Znaki.runtimeconfig.json
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\!!Trials!!\Albahari C# 6.0\05 Znaki\05 Znaki\bin\Debug\netcoreapp2.1\05 Znaki.runtimeconfig.dev.json
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\!!Trials!!\Albahari C# 6.0\05 Znaki\05 Znaki\bin\Debug\netcoreapp2.1\05 Znaki.dll
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\!!Trials!!\Albahari C# 6.0\05 Znaki\05 Znaki\bin\Debug\netcoreapp2.1\05 Znaki.pdb
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\!!Trials!!\Albahari C# 6.0\05 Znaki\05 Znaki\obj\Debug\netcoreapp2.1\05 Znaki.csprojAssemblyReference.cache
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\!!Trials!!\Albahari C# 6.0\05 Znaki\05 Znaki\obj\Debug\netcoreapp2.1\05 Znaki.csproj.CoreCompileInputs.cache
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\!!Trials!!\Albahari C# 6.0\05 Znaki\05 Znaki\obj\Debug\netcoreapp2.1\05 Znaki.AssemblyInfoInputs.cache
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\!!Trials!!\Albahari C# 6.0\05 Znaki\05 Znaki\obj\Debug\netcoreapp2.1\05 Znaki.AssemblyInfo.cs
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\!!Trials!!\Albahari C# 6.0\05 Znaki\05 Znaki\obj\Debug\netcoreapp2.1\05 Znaki.dll
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\!!Trials!!\Albahari C# 6.0\05 Znaki\05 Znaki\obj\Debug\netcoreapp2.1\05 Znaki.pdb

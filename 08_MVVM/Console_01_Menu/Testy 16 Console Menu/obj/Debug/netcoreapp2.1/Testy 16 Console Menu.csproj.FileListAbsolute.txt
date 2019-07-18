@@ -1,0 +1,11 @@
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\Testy 16 Console Menu\Testy 16 Console Menu\bin\Debug\netcoreapp2.1\Testy 16 Console Menu.deps.json
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\Testy 16 Console Menu\Testy 16 Console Menu\bin\Debug\netcoreapp2.1\Testy 16 Console Menu.runtimeconfig.json
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\Testy 16 Console Menu\Testy 16 Console Menu\bin\Debug\netcoreapp2.1\Testy 16 Console Menu.runtimeconfig.dev.json
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\Testy 16 Console Menu\Testy 16 Console Menu\bin\Debug\netcoreapp2.1\Testy 16 Console Menu.dll
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\Testy 16 Console Menu\Testy 16 Console Menu\bin\Debug\netcoreapp2.1\Testy 16 Console Menu.pdb
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\Testy 16 Console Menu\Testy 16 Console Menu\obj\Debug\netcoreapp2.1\Testy 16 Console Menu.csprojAssemblyReference.cache
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\Testy 16 Console Menu\Testy 16 Console Menu\obj\Debug\netcoreapp2.1\Testy 16 Console Menu.csproj.CoreCompileInputs.cache
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\Testy 16 Console Menu\Testy 16 Console Menu\obj\Debug\netcoreapp2.1\Testy 16 Console Menu.AssemblyInfoInputs.cache
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\Testy 16 Console Menu\Testy 16 Console Menu\obj\Debug\netcoreapp2.1\Testy 16 Console Menu.AssemblyInfo.cs
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\Testy 16 Console Menu\Testy 16 Console Menu\obj\Debug\netcoreapp2.1\Testy 16 Console Menu.dll
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\Testy 16 Console Menu\Testy 16 Console Menu\obj\Debug\netcoreapp2.1\Testy 16 Console Menu.pdb

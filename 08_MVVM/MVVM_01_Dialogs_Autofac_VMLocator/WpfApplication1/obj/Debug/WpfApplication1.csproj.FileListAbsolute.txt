@@ -1,0 +1,50 @@
+C:\Users\asus\Desktop\WpfApplicationResultPart3\WpfApplication1\WpfApplication1\bin\Debug\WpfApplication1.exe
+C:\Users\asus\Desktop\WpfApplicationResultPart3\WpfApplication1\WpfApplication1\bin\Debug\WpfApplication1.pdb
+C:\Users\asus\Desktop\WpfApplicationResultPart3\WpfApplication1\WpfApplication1\obj\Debug\WpfApplication1.csprojAssemblyReference.cache
+C:\Users\asus\Desktop\WpfApplicationResultPart3\WpfApplication1\WpfApplication1\obj\Debug\Views\MainWindow.g.cs
+C:\Users\asus\Desktop\WpfApplicationResultPart3\WpfApplication1\WpfApplication1\obj\Debug\App.g.cs
+C:\Users\asus\Desktop\WpfApplicationResultPart3\WpfApplication1\WpfApplication1\obj\Debug\GeneratedInternalTypeHelper.g.cs
+C:\Users\asus\Desktop\WpfApplicationResultPart3\WpfApplication1\WpfApplication1\obj\Debug\WpfApplication1_MarkupCompile.cache
+C:\Users\asus\Desktop\WpfApplicationResultPart3\WpfApplication1\WpfApplication1\obj\Debug\WpfApplication1_MarkupCompile.lref
+C:\Users\asus\Desktop\WpfApplicationResultPart3\WpfApplication1\WpfApplication1\obj\Debug\Views\MainWindow.baml
+C:\Users\asus\Desktop\WpfApplicationResultPart3\WpfApplication1\WpfApplication1\obj\Debug\WpfApplication1.g.resources
+C:\Users\asus\Desktop\WpfApplicationResultPart3\WpfApplication1\WpfApplication1\obj\Debug\WpfApplication1.Properties.Resources.resources
+C:\Users\asus\Desktop\WpfApplicationResultPart3\WpfApplication1\WpfApplication1\obj\Debug\WpfApplication1.csproj.GenerateResource.cache
+C:\Users\asus\Desktop\WpfApplicationResultPart3\WpfApplication1\WpfApplication1\obj\Debug\WpfApplication1.csproj.CoreCompileInputs.cache
+C:\Users\asus\Desktop\WpfApplicationResultPart3\WpfApplication1\WpfApplication1\obj\Debug\WpfApplication1.csproj.CopyComplete
+C:\Users\asus\Desktop\WpfApplicationResultPart3\WpfApplication1\WpfApplication1\obj\Debug\WpfApplication1.exe
+C:\Users\asus\Desktop\WpfApplicationResultPart3\WpfApplication1\WpfApplication1\obj\Debug\WpfApplication1.pdb
+C:\Users\asus\Desktop\WpfApplicationResultPart3\WpfApplication1\WpfApplication1\bin\Debug\WpfApplication1.exe.config
+C:\Users\asus\Desktop\WpfApplicationResultPart3\WpfApplication1\WpfApplication1\bin\Debug\Autofac.dll
+C:\Users\asus\Desktop\WpfApplicationResultPart3\WpfApplication1\WpfApplication1\bin\Debug\Autofac.pdb
+C:\Users\asus\Desktop\WpfApplicationResultPart3\WpfApplication1\WpfApplication1\bin\Debug\Autofac.xml
+C:\Users\asus\Desktop\WpfApplicationResultPart3\WpfApplication1\WpfApplication1\obj\Debug\Views\DialogYesNoView.baml
+C:\Users\asus\Desktop\WpfApplicationResultPart3\WpfApplication1\WpfApplication1\obj\Debug\Views\DialogYesNoView.g.cs
+C:\Users\asus\Desktop\WpfApplicationResultPart3\WpfApplication1\WpfApplication1\obj\Debug\Views\DialogWindow.baml
+C:\Users\asus\Desktop\WpfApplicationResultPart3\WpfApplication1\WpfApplication1\obj\Debug\Views\DialogWindow.g.cs
+C:\Users\asus\Desktop\WpfApplicationResultPart3\WpfApplication1\WpfApplication1\obj\Debug\App.baml
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\MVVM_01_Dialogs_Autofac_VMLocator\WpfApplication1\bin\Debug\WpfApplication1.exe.config
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\MVVM_01_Dialogs_Autofac_VMLocator\WpfApplication1\bin\Debug\WpfApplication1.exe
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\MVVM_01_Dialogs_Autofac_VMLocator\WpfApplication1\bin\Debug\WpfApplication1.pdb
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\MVVM_01_Dialogs_Autofac_VMLocator\WpfApplication1\bin\Debug\Autofac.dll
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\MVVM_01_Dialogs_Autofac_VMLocator\WpfApplication1\bin\Debug\Autofac.pdb
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\MVVM_01_Dialogs_Autofac_VMLocator\WpfApplication1\bin\Debug\Autofac.xml
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\MVVM_01_Dialogs_Autofac_VMLocator\WpfApplication1\obj\Debug\WpfApplication1.csprojAssemblyReference.cache
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\MVVM_01_Dialogs_Autofac_VMLocator\WpfApplication1\obj\Debug\Views\DialogWindow.baml
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\MVVM_01_Dialogs_Autofac_VMLocator\WpfApplication1\obj\Debug\Views\DialogYesNoView.baml
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\MVVM_01_Dialogs_Autofac_VMLocator\WpfApplication1\obj\Debug\Views\DialogWindow.g.cs
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\MVVM_01_Dialogs_Autofac_VMLocator\WpfApplication1\obj\Debug\Views\DialogYesNoView.g.cs
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\MVVM_01_Dialogs_Autofac_VMLocator\WpfApplication1\obj\Debug\Views\MainWindow.g.cs
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\MVVM_01_Dialogs_Autofac_VMLocator\WpfApplication1\obj\Debug\App.g.cs
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\MVVM_01_Dialogs_Autofac_VMLocator\WpfApplication1\obj\Debug\GeneratedInternalTypeHelper.g.cs
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\MVVM_01_Dialogs_Autofac_VMLocator\WpfApplication1\obj\Debug\WpfApplication1_MarkupCompile.cache
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\MVVM_01_Dialogs_Autofac_VMLocator\WpfApplication1\obj\Debug\WpfApplication1_MarkupCompile.lref
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\MVVM_01_Dialogs_Autofac_VMLocator\WpfApplication1\obj\Debug\App.baml
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\MVVM_01_Dialogs_Autofac_VMLocator\WpfApplication1\obj\Debug\Views\MainWindow.baml
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\MVVM_01_Dialogs_Autofac_VMLocator\WpfApplication1\obj\Debug\WpfApplication1.g.resources
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\MVVM_01_Dialogs_Autofac_VMLocator\WpfApplication1\obj\Debug\WpfApplication1.Properties.Resources.resources
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\MVVM_01_Dialogs_Autofac_VMLocator\WpfApplication1\obj\Debug\WpfApplication1.csproj.GenerateResource.cache
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\MVVM_01_Dialogs_Autofac_VMLocator\WpfApplication1\obj\Debug\WpfApplication1.csproj.CoreCompileInputs.cache
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\MVVM_01_Dialogs_Autofac_VMLocator\WpfApplication1\obj\Debug\WpfApplication1.csproj.CopyComplete
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\MVVM_01_Dialogs_Autofac_VMLocator\WpfApplication1\obj\Debug\WpfApplication1.exe
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\MVVM_01_Dialogs_Autofac_VMLocator\WpfApplication1\obj\Debug\WpfApplication1.pdb

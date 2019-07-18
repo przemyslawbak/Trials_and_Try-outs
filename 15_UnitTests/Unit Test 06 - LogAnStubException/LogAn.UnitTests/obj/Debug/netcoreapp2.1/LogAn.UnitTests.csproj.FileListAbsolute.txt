@@ -1,0 +1,108 @@
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\LogAn\LogAn.UnitTests\bin\Debug\netcoreapp2.1\NUnit3.TestAdapter.dll
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\LogAn\LogAn.UnitTests\bin\Debug\netcoreapp2.1\NUnit3.TestAdapter.pdb
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\LogAn\LogAn.UnitTests\bin\Debug\netcoreapp2.1\nunit.engine.netstandard.dll
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\LogAn\LogAn.UnitTests\bin\Debug\netcoreapp2.1\Mono.Cecil.dll
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\LogAn\LogAn.UnitTests\bin\Debug\netcoreapp2.1\LogAn.UnitTests.deps.json
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\LogAn\LogAn.UnitTests\bin\Debug\netcoreapp2.1\LogAn.UnitTests.runtimeconfig.json
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\LogAn\LogAn.UnitTests\bin\Debug\netcoreapp2.1\LogAn.UnitTests.runtimeconfig.dev.json
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\LogAn\LogAn.UnitTests\bin\Debug\netcoreapp2.1\LogAn.UnitTests.dll
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\LogAn\LogAn.UnitTests\bin\Debug\netcoreapp2.1\LogAn.UnitTests.pdb
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\LogAn\LogAn.UnitTests\bin\Debug\netcoreapp2.1\LogAn.dll
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\LogAn\LogAn.UnitTests\bin\Debug\netcoreapp2.1\LogAn.pdb
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\LogAn\LogAn.UnitTests\obj\Debug\netcoreapp2.1\LogAn.UnitTests.csprojAssemblyReference.cache
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\LogAn\LogAn.UnitTests\obj\Debug\netcoreapp2.1\LogAn.UnitTests.csproj.CoreCompileInputs.cache
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\LogAn\LogAn.UnitTests\obj\Debug\netcoreapp2.1\LogAn.UnitTests.AssemblyInfoInputs.cache
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\LogAn\LogAn.UnitTests\obj\Debug\netcoreapp2.1\LogAn.UnitTests.AssemblyInfo.cs
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\LogAn\LogAn.UnitTests\obj\Debug\netcoreapp2.1\LogAn.UnitTests.csproj.CopyComplete
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\LogAn\LogAn.UnitTests\obj\Debug\netcoreapp2.1\LogAn.UnitTests.dll
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\LogAn\LogAn.UnitTests\obj\Debug\netcoreapp2.1\LogAn.UnitTests.pdb
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\Unit Test 03 - LogAn\LogAn.UnitTests\bin\Debug\netcoreapp2.1\NUnit3.TestAdapter.dll
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\Unit Test 03 - LogAn\LogAn.UnitTests\bin\Debug\netcoreapp2.1\NUnit3.TestAdapter.pdb
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\Unit Test 03 - LogAn\LogAn.UnitTests\bin\Debug\netcoreapp2.1\nunit.engine.netstandard.dll
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\Unit Test 03 - LogAn\LogAn.UnitTests\bin\Debug\netcoreapp2.1\Mono.Cecil.dll
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\Unit Test 03 - LogAn\LogAn.UnitTests\bin\Debug\netcoreapp2.1\LogAn.UnitTests.deps.json
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\Unit Test 03 - LogAn\LogAn.UnitTests\bin\Debug\netcoreapp2.1\LogAn.UnitTests.runtimeconfig.json
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\Unit Test 03 - LogAn\LogAn.UnitTests\bin\Debug\netcoreapp2.1\LogAn.UnitTests.runtimeconfig.dev.json
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\Unit Test 03 - LogAn\LogAn.UnitTests\bin\Debug\netcoreapp2.1\LogAn.UnitTests.dll
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\Unit Test 03 - LogAn\LogAn.UnitTests\bin\Debug\netcoreapp2.1\LogAn.UnitTests.pdb
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\Unit Test 03 - LogAn\LogAn.UnitTests\bin\Debug\netcoreapp2.1\LogAn.dll
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\Unit Test 03 - LogAn\LogAn.UnitTests\bin\Debug\netcoreapp2.1\LogAn.pdb
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\Unit Test 03 - LogAn\LogAn.UnitTests\obj\Debug\netcoreapp2.1\LogAn.UnitTests.csprojAssemblyReference.cache
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\Unit Test 03 - LogAn\LogAn.UnitTests\obj\Debug\netcoreapp2.1\LogAn.UnitTests.csproj.CoreCompileInputs.cache
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\Unit Test 03 - LogAn\LogAn.UnitTests\obj\Debug\netcoreapp2.1\LogAn.UnitTests.AssemblyInfoInputs.cache
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\Unit Test 03 - LogAn\LogAn.UnitTests\obj\Debug\netcoreapp2.1\LogAn.UnitTests.AssemblyInfo.cs
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\Unit Test 03 - LogAn\LogAn.UnitTests\obj\Debug\netcoreapp2.1\LogAn.UnitTests.csproj.CopyComplete
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\Unit Test 03 - LogAn\LogAn.UnitTests\obj\Debug\netcoreapp2.1\LogAn.UnitTests.dll
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\Unit Test 03 - LogAn\LogAn.UnitTests\obj\Debug\netcoreapp2.1\LogAn.UnitTests.pdb
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\!!Trials!!\Unit Test 03 - LogAn\LogAn.UnitTests\bin\Debug\netcoreapp2.1\NUnit3.TestAdapter.dll
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\!!Trials!!\Unit Test 03 - LogAn\LogAn.UnitTests\bin\Debug\netcoreapp2.1\NUnit3.TestAdapter.pdb
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\!!Trials!!\Unit Test 03 - LogAn\LogAn.UnitTests\bin\Debug\netcoreapp2.1\nunit.engine.netstandard.dll
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\!!Trials!!\Unit Test 03 - LogAn\LogAn.UnitTests\bin\Debug\netcoreapp2.1\Mono.Cecil.dll
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\!!Trials!!\Unit Test 03 - LogAn\LogAn.UnitTests\bin\Debug\netcoreapp2.1\LogAn.UnitTests.deps.json
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\!!Trials!!\Unit Test 03 - LogAn\LogAn.UnitTests\bin\Debug\netcoreapp2.1\LogAn.UnitTests.runtimeconfig.json
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\!!Trials!!\Unit Test 03 - LogAn\LogAn.UnitTests\bin\Debug\netcoreapp2.1\LogAn.UnitTests.runtimeconfig.dev.json
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\!!Trials!!\Unit Test 03 - LogAn\LogAn.UnitTests\bin\Debug\netcoreapp2.1\LogAn.UnitTests.dll
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\!!Trials!!\Unit Test 03 - LogAn\LogAn.UnitTests\bin\Debug\netcoreapp2.1\LogAn.UnitTests.pdb
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\!!Trials!!\Unit Test 03 - LogAn\LogAn.UnitTests\bin\Debug\netcoreapp2.1\LogAn.dll
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\!!Trials!!\Unit Test 03 - LogAn\LogAn.UnitTests\bin\Debug\netcoreapp2.1\LogAn.pdb
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\!!Trials!!\Unit Test 03 - LogAn\LogAn.UnitTests\obj\Debug\netcoreapp2.1\LogAn.UnitTests.csprojAssemblyReference.cache
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\!!Trials!!\Unit Test 03 - LogAn\LogAn.UnitTests\obj\Debug\netcoreapp2.1\LogAn.UnitTests.csproj.CoreCompileInputs.cache
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\!!Trials!!\Unit Test 03 - LogAn\LogAn.UnitTests\obj\Debug\netcoreapp2.1\LogAn.UnitTests.AssemblyInfoInputs.cache
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\!!Trials!!\Unit Test 03 - LogAn\LogAn.UnitTests\obj\Debug\netcoreapp2.1\LogAn.UnitTests.AssemblyInfo.cs
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\!!Trials!!\Unit Test 03 - LogAn\LogAn.UnitTests\obj\Debug\netcoreapp2.1\LogAn.UnitTests.csproj.CopyComplete
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\!!Trials!!\Unit Test 03 - LogAn\LogAn.UnitTests\obj\Debug\netcoreapp2.1\LogAn.UnitTests.dll
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\!!Trials!!\Unit Test 03 - LogAn\LogAn.UnitTests\obj\Debug\netcoreapp2.1\LogAn.UnitTests.pdb
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\Unit Test 03 - LogAn\LogAn.UnitTests\bin\Debug\netcoreapp2.1\NUnit3.TestAdapter.dll
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\Unit Test 03 - LogAn\LogAn.UnitTests\bin\Debug\netcoreapp2.1\NUnit3.TestAdapter.pdb
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\Unit Test 03 - LogAn\LogAn.UnitTests\bin\Debug\netcoreapp2.1\nunit.engine.netstandard.dll
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\Unit Test 03 - LogAn\LogAn.UnitTests\bin\Debug\netcoreapp2.1\Mono.Cecil.dll
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\Unit Test 03 - LogAn\LogAn.UnitTests\bin\Debug\netcoreapp2.1\LogAn.UnitTests.deps.json
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\Unit Test 03 - LogAn\LogAn.UnitTests\bin\Debug\netcoreapp2.1\LogAn.UnitTests.runtimeconfig.json
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\Unit Test 03 - LogAn\LogAn.UnitTests\bin\Debug\netcoreapp2.1\LogAn.UnitTests.runtimeconfig.dev.json
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\Unit Test 03 - LogAn\LogAn.UnitTests\bin\Debug\netcoreapp2.1\LogAn.UnitTests.dll
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\Unit Test 03 - LogAn\LogAn.UnitTests\bin\Debug\netcoreapp2.1\LogAn.UnitTests.pdb
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\Unit Test 03 - LogAn\LogAn.UnitTests\bin\Debug\netcoreapp2.1\LogAn.dll
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\Unit Test 03 - LogAn\LogAn.UnitTests\bin\Debug\netcoreapp2.1\LogAn.pdb
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\Unit Test 03 - LogAn\LogAn.UnitTests\obj\Debug\netcoreapp2.1\LogAn.UnitTests.csprojAssemblyReference.cache
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\Unit Test 03 - LogAn\LogAn.UnitTests\obj\Debug\netcoreapp2.1\LogAn.UnitTests.csproj.CoreCompileInputs.cache
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\Unit Test 03 - LogAn\LogAn.UnitTests\obj\Debug\netcoreapp2.1\LogAn.UnitTests.AssemblyInfoInputs.cache
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\Unit Test 03 - LogAn\LogAn.UnitTests\obj\Debug\netcoreapp2.1\LogAn.UnitTests.AssemblyInfo.cs
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\Unit Test 03 - LogAn\LogAn.UnitTests\obj\Debug\netcoreapp2.1\LogAn.UnitTests.csproj.CopyComplete
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\Unit Test 03 - LogAn\LogAn.UnitTests\obj\Debug\netcoreapp2.1\LogAn.UnitTests.dll
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\Unit Test 03 - LogAn\LogAn.UnitTests\obj\Debug\netcoreapp2.1\LogAn.UnitTests.pdb
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\Unit Test 05 - LogAnStub\LogAn.UnitTests\bin\Debug\netcoreapp2.1\NUnit3.TestAdapter.dll
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\Unit Test 05 - LogAnStub\LogAn.UnitTests\bin\Debug\netcoreapp2.1\NUnit3.TestAdapter.pdb
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\Unit Test 05 - LogAnStub\LogAn.UnitTests\bin\Debug\netcoreapp2.1\nunit.engine.netstandard.dll
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\Unit Test 05 - LogAnStub\LogAn.UnitTests\bin\Debug\netcoreapp2.1\Mono.Cecil.dll
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\Unit Test 05 - LogAnStub\LogAn.UnitTests\bin\Debug\netcoreapp2.1\LogAn.UnitTests.deps.json
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\Unit Test 05 - LogAnStub\LogAn.UnitTests\bin\Debug\netcoreapp2.1\LogAn.UnitTests.runtimeconfig.json
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\Unit Test 05 - LogAnStub\LogAn.UnitTests\bin\Debug\netcoreapp2.1\LogAn.UnitTests.runtimeconfig.dev.json
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\Unit Test 05 - LogAnStub\LogAn.UnitTests\bin\Debug\netcoreapp2.1\LogAn.UnitTests.dll
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\Unit Test 05 - LogAnStub\LogAn.UnitTests\bin\Debug\netcoreapp2.1\LogAn.UnitTests.pdb
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\Unit Test 05 - LogAnStub\LogAn.UnitTests\bin\Debug\netcoreapp2.1\LogAn.dll
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\Unit Test 05 - LogAnStub\LogAn.UnitTests\bin\Debug\netcoreapp2.1\LogAn.pdb
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\Unit Test 05 - LogAnStub\LogAn.UnitTests\obj\Debug\netcoreapp2.1\LogAn.UnitTests.csprojAssemblyReference.cache
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\Unit Test 05 - LogAnStub\LogAn.UnitTests\obj\Debug\netcoreapp2.1\LogAn.UnitTests.csproj.CoreCompileInputs.cache
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\Unit Test 05 - LogAnStub\LogAn.UnitTests\obj\Debug\netcoreapp2.1\LogAn.UnitTests.AssemblyInfoInputs.cache
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\Unit Test 05 - LogAnStub\LogAn.UnitTests\obj\Debug\netcoreapp2.1\LogAn.UnitTests.AssemblyInfo.cs
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\Unit Test 05 - LogAnStub\LogAn.UnitTests\obj\Debug\netcoreapp2.1\LogAn.UnitTests.csproj.CopyComplete
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\Unit Test 05 - LogAnStub\LogAn.UnitTests\obj\Debug\netcoreapp2.1\LogAn.UnitTests.dll
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\Unit Test 05 - LogAnStub\LogAn.UnitTests\obj\Debug\netcoreapp2.1\LogAn.UnitTests.pdb
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\Unit Test 06 - LogAnStubException\LogAn.UnitTests\bin\Debug\netcoreapp2.1\NUnit3.TestAdapter.dll
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\Unit Test 06 - LogAnStubException\LogAn.UnitTests\bin\Debug\netcoreapp2.1\NUnit3.TestAdapter.pdb
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\Unit Test 06 - LogAnStubException\LogAn.UnitTests\bin\Debug\netcoreapp2.1\nunit.engine.netstandard.dll
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\Unit Test 06 - LogAnStubException\LogAn.UnitTests\bin\Debug\netcoreapp2.1\Mono.Cecil.dll
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\Unit Test 06 - LogAnStubException\LogAn.UnitTests\bin\Debug\netcoreapp2.1\LogAn.UnitTests.deps.json
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\Unit Test 06 - LogAnStubException\LogAn.UnitTests\bin\Debug\netcoreapp2.1\LogAn.UnitTests.runtimeconfig.json
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\Unit Test 06 - LogAnStubException\LogAn.UnitTests\bin\Debug\netcoreapp2.1\LogAn.UnitTests.runtimeconfig.dev.json
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\Unit Test 06 - LogAnStubException\LogAn.UnitTests\bin\Debug\netcoreapp2.1\LogAn.UnitTests.dll
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\Unit Test 06 - LogAnStubException\LogAn.UnitTests\bin\Debug\netcoreapp2.1\LogAn.UnitTests.pdb
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\Unit Test 06 - LogAnStubException\LogAn.UnitTests\bin\Debug\netcoreapp2.1\LogAn.dll
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\Unit Test 06 - LogAnStubException\LogAn.UnitTests\bin\Debug\netcoreapp2.1\LogAn.pdb
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\Unit Test 06 - LogAnStubException\LogAn.UnitTests\obj\Debug\netcoreapp2.1\LogAn.UnitTests.csprojAssemblyReference.cache
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\Unit Test 06 - LogAnStubException\LogAn.UnitTests\obj\Debug\netcoreapp2.1\LogAn.UnitTests.csproj.CoreCompileInputs.cache
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\Unit Test 06 - LogAnStubException\LogAn.UnitTests\obj\Debug\netcoreapp2.1\LogAn.UnitTests.AssemblyInfoInputs.cache
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\Unit Test 06 - LogAnStubException\LogAn.UnitTests\obj\Debug\netcoreapp2.1\LogAn.UnitTests.AssemblyInfo.cs
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\Unit Test 06 - LogAnStubException\LogAn.UnitTests\obj\Debug\netcoreapp2.1\LogAn.UnitTests.csproj.CopyComplete
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\Unit Test 06 - LogAnStubException\LogAn.UnitTests\obj\Debug\netcoreapp2.1\LogAn.UnitTests.dll
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\Unit Test 06 - LogAnStubException\LogAn.UnitTests\obj\Debug\netcoreapp2.1\LogAn.UnitTests.pdb

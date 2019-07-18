@@ -1,0 +1,11 @@
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\Albahari C# 6.0\25 Przeliczalnosc\25 Przeliczalnosc\bin\Debug\netcoreapp2.1\25 Przeliczalnosc.deps.json
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\Albahari C# 6.0\25 Przeliczalnosc\25 Przeliczalnosc\bin\Debug\netcoreapp2.1\25 Przeliczalnosc.runtimeconfig.json
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\Albahari C# 6.0\25 Przeliczalnosc\25 Przeliczalnosc\bin\Debug\netcoreapp2.1\25 Przeliczalnosc.runtimeconfig.dev.json
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\Albahari C# 6.0\25 Przeliczalnosc\25 Przeliczalnosc\bin\Debug\netcoreapp2.1\25 Przeliczalnosc.dll
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\Albahari C# 6.0\25 Przeliczalnosc\25 Przeliczalnosc\bin\Debug\netcoreapp2.1\25 Przeliczalnosc.pdb
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\Albahari C# 6.0\25 Przeliczalnosc\25 Przeliczalnosc\obj\Debug\netcoreapp2.1\25 Przeliczalnosc.csprojAssemblyReference.cache
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\Albahari C# 6.0\25 Przeliczalnosc\25 Przeliczalnosc\obj\Debug\netcoreapp2.1\25 Przeliczalnosc.csproj.CoreCompileInputs.cache
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\Albahari C# 6.0\25 Przeliczalnosc\25 Przeliczalnosc\obj\Debug\netcoreapp2.1\25 Przeliczalnosc.AssemblyInfoInputs.cache
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\Albahari C# 6.0\25 Przeliczalnosc\25 Przeliczalnosc\obj\Debug\netcoreapp2.1\25 Przeliczalnosc.AssemblyInfo.cs
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\Albahari C# 6.0\25 Przeliczalnosc\25 Przeliczalnosc\obj\Debug\netcoreapp2.1\25 Przeliczalnosc.dll
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\Albahari C# 6.0\25 Przeliczalnosc\25 Przeliczalnosc\obj\Debug\netcoreapp2.1\25 Przeliczalnosc.pdb

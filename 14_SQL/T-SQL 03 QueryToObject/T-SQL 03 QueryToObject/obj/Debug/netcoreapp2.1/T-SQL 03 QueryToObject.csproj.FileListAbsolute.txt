@@ -1,0 +1,11 @@
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\T-SQL 03 QueryToObject\T-SQL 03 QueryToObject\bin\Debug\netcoreapp2.1\T-SQL 03 QueryToObject.deps.json
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\T-SQL 03 QueryToObject\T-SQL 03 QueryToObject\bin\Debug\netcoreapp2.1\T-SQL 03 QueryToObject.runtimeconfig.json
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\T-SQL 03 QueryToObject\T-SQL 03 QueryToObject\bin\Debug\netcoreapp2.1\T-SQL 03 QueryToObject.runtimeconfig.dev.json
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\T-SQL 03 QueryToObject\T-SQL 03 QueryToObject\bin\Debug\netcoreapp2.1\T-SQL 03 QueryToObject.dll
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\T-SQL 03 QueryToObject\T-SQL 03 QueryToObject\obj\Debug\netcoreapp2.1\T-SQL 03 QueryToObject.csprojAssemblyReference.cache
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\T-SQL 03 QueryToObject\T-SQL 03 QueryToObject\obj\Debug\netcoreapp2.1\T-SQL 03 QueryToObject.csproj.CoreCompileInputs.cache
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\T-SQL 03 QueryToObject\T-SQL 03 QueryToObject\obj\Debug\netcoreapp2.1\T-SQL 03 QueryToObject.AssemblyInfoInputs.cache
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\T-SQL 03 QueryToObject\T-SQL 03 QueryToObject\obj\Debug\netcoreapp2.1\T-SQL 03 QueryToObject.AssemblyInfo.cs
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\T-SQL 03 QueryToObject\T-SQL 03 QueryToObject\bin\Debug\netcoreapp2.1\T-SQL 03 QueryToObject.pdb
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\T-SQL 03 QueryToObject\T-SQL 03 QueryToObject\obj\Debug\netcoreapp2.1\T-SQL 03 QueryToObject.dll
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\T-SQL 03 QueryToObject\T-SQL 03 QueryToObject\obj\Debug\netcoreapp2.1\T-SQL 03 QueryToObject.pdb

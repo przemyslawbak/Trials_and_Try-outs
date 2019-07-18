@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<!--Data zapisania: 16.05.2018 13:58:03-->
+<Persons>
+  <Person>
+    <ID>0</ID>
+    <FirstName>Pszemek</FirstName>
+    <SecondName>Boniek</SecondName>
+    <Height>7</Height>
+  </Person>
+  <Person>
+    <ID>1</ID>
+    <FirstName>Alicja</FirstName>
+    <SecondName>Zet</SecondName>
+    <Height>5</Height>
+  </Person>
+  <Person>
+    <ID>2</ID>
+    <FirstName>Piotr Szymon</FirstName>
+    <SecondName>Seledyn</SecondName>
+    <Height>7</Height>
+  </Person>
+  <Person>
+    <ID>3</ID>
+    <FirstName>George Jr</FirstName>
+    <SecondName>Robb</SecondName>
+    <Height>7</Height>
+  </Person>
+  <Person>
+    <ID>4</ID>
+    <FirstName>Piotr Szymon</FirstName>
+    <SecondName>Seledyn</SecondName>
+    <Height>0</Height>
+  </Person>
+  <Person>
+    <ID>5</ID>
+    <FirstName>ss</FirstName>
+    <SecondName>ss</SecondName>
+    <Height>0</Height>
+  </Person>
+</Persons>

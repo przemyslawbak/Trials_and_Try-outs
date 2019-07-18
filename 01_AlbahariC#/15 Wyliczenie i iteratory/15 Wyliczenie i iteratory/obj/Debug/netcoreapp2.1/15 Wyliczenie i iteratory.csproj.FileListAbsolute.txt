@@ -1,0 +1,11 @@
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\Albahari C# 6.0\15 Wyliczenie i iteratory\15 Wyliczenie i iteratory\bin\Debug\netcoreapp2.1\15 Wyliczenie i iteratory.deps.json
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\Albahari C# 6.0\15 Wyliczenie i iteratory\15 Wyliczenie i iteratory\bin\Debug\netcoreapp2.1\15 Wyliczenie i iteratory.runtimeconfig.json
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\Albahari C# 6.0\15 Wyliczenie i iteratory\15 Wyliczenie i iteratory\bin\Debug\netcoreapp2.1\15 Wyliczenie i iteratory.runtimeconfig.dev.json
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\Albahari C# 6.0\15 Wyliczenie i iteratory\15 Wyliczenie i iteratory\bin\Debug\netcoreapp2.1\15 Wyliczenie i iteratory.dll
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\Albahari C# 6.0\15 Wyliczenie i iteratory\15 Wyliczenie i iteratory\bin\Debug\netcoreapp2.1\15 Wyliczenie i iteratory.pdb
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\Albahari C# 6.0\15 Wyliczenie i iteratory\15 Wyliczenie i iteratory\obj\Debug\netcoreapp2.1\15 Wyliczenie i iteratory.csprojAssemblyReference.cache
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\Albahari C# 6.0\15 Wyliczenie i iteratory\15 Wyliczenie i iteratory\obj\Debug\netcoreapp2.1\15 Wyliczenie i iteratory.csproj.CoreCompileInputs.cache
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\Albahari C# 6.0\15 Wyliczenie i iteratory\15 Wyliczenie i iteratory\obj\Debug\netcoreapp2.1\15 Wyliczenie i iteratory.AssemblyInfoInputs.cache
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\Albahari C# 6.0\15 Wyliczenie i iteratory\15 Wyliczenie i iteratory\obj\Debug\netcoreapp2.1\15 Wyliczenie i iteratory.AssemblyInfo.cs
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\Albahari C# 6.0\15 Wyliczenie i iteratory\15 Wyliczenie i iteratory\obj\Debug\netcoreapp2.1\15 Wyliczenie i iteratory.dll
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\Albahari C# 6.0\15 Wyliczenie i iteratory\15 Wyliczenie i iteratory\obj\Debug\netcoreapp2.1\15 Wyliczenie i iteratory.pdb

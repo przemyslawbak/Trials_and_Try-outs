@@ -1,0 +1,14 @@
+C:\Users\asus\Desktop\Splitter\Splitter\bin\Debug\Splitter.exe.config
+C:\Users\asus\Desktop\Splitter\Splitter\bin\Debug\Splitter.exe
+C:\Users\asus\Desktop\Splitter\Splitter\bin\Debug\Splitter.pdb
+C:\Users\asus\Desktop\Splitter\Splitter\obj\Debug\Splitter.csprojAssemblyReference.cache
+C:\Users\asus\Desktop\Splitter\Splitter\obj\Debug\Splitter.csproj.CoreCompileInputs.cache
+C:\Users\asus\Desktop\Splitter\Splitter\obj\Debug\Splitter.exe
+C:\Users\asus\Desktop\Splitter\Splitter\obj\Debug\Splitter.pdb
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\String_03_Splitter2\Splitter\bin\Debug\Splitter.exe.config
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\String_03_Splitter2\Splitter\bin\Debug\Splitter.exe
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\String_03_Splitter2\Splitter\bin\Debug\Splitter.pdb
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\String_03_Splitter2\Splitter\obj\Debug\Splitter.csprojAssemblyReference.cache
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\String_03_Splitter2\Splitter\obj\Debug\Splitter.csproj.CoreCompileInputs.cache
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\String_03_Splitter2\Splitter\obj\Debug\Splitter.exe
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\String_03_Splitter2\Splitter\obj\Debug\Splitter.pdb

@@ -1,0 +1,11 @@
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\Albahari C# 6.0\19 Formatowanie i parsowanie\19 Formatowanie i parsowanie\bin\Debug\netcoreapp2.1\19 Formatowanie i parsowanie.deps.json
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\Albahari C# 6.0\19 Formatowanie i parsowanie\19 Formatowanie i parsowanie\bin\Debug\netcoreapp2.1\19 Formatowanie i parsowanie.runtimeconfig.json
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\Albahari C# 6.0\19 Formatowanie i parsowanie\19 Formatowanie i parsowanie\bin\Debug\netcoreapp2.1\19 Formatowanie i parsowanie.runtimeconfig.dev.json
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\Albahari C# 6.0\19 Formatowanie i parsowanie\19 Formatowanie i parsowanie\bin\Debug\netcoreapp2.1\19 Formatowanie i parsowanie.dll
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\Albahari C# 6.0\19 Formatowanie i parsowanie\19 Formatowanie i parsowanie\bin\Debug\netcoreapp2.1\19 Formatowanie i parsowanie.pdb
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\Albahari C# 6.0\19 Formatowanie i parsowanie\19 Formatowanie i parsowanie\obj\Debug\netcoreapp2.1\19 Formatowanie i parsowanie.csprojAssemblyReference.cache
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\Albahari C# 6.0\19 Formatowanie i parsowanie\19 Formatowanie i parsowanie\obj\Debug\netcoreapp2.1\19 Formatowanie i parsowanie.csproj.CoreCompileInputs.cache
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\Albahari C# 6.0\19 Formatowanie i parsowanie\19 Formatowanie i parsowanie\obj\Debug\netcoreapp2.1\19 Formatowanie i parsowanie.AssemblyInfoInputs.cache
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\Albahari C# 6.0\19 Formatowanie i parsowanie\19 Formatowanie i parsowanie\obj\Debug\netcoreapp2.1\19 Formatowanie i parsowanie.AssemblyInfo.cs
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\Albahari C# 6.0\19 Formatowanie i parsowanie\19 Formatowanie i parsowanie\obj\Debug\netcoreapp2.1\19 Formatowanie i parsowanie.dll
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\Albahari C# 6.0\19 Formatowanie i parsowanie\19 Formatowanie i parsowanie\obj\Debug\netcoreapp2.1\19 Formatowanie i parsowanie.pdb

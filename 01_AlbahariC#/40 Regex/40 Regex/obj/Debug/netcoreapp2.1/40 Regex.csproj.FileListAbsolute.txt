@@ -1,0 +1,11 @@
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\Albahari C# 6.0\40 Regex\40 Regex\bin\Debug\netcoreapp2.1\40 Regex.deps.json
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\Albahari C# 6.0\40 Regex\40 Regex\bin\Debug\netcoreapp2.1\40 Regex.runtimeconfig.json
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\Albahari C# 6.0\40 Regex\40 Regex\bin\Debug\netcoreapp2.1\40 Regex.runtimeconfig.dev.json
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\Albahari C# 6.0\40 Regex\40 Regex\bin\Debug\netcoreapp2.1\40 Regex.dll
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\Albahari C# 6.0\40 Regex\40 Regex\bin\Debug\netcoreapp2.1\40 Regex.pdb
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\Albahari C# 6.0\40 Regex\40 Regex\obj\Debug\netcoreapp2.1\40 Regex.csprojAssemblyReference.cache
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\Albahari C# 6.0\40 Regex\40 Regex\obj\Debug\netcoreapp2.1\40 Regex.csproj.CoreCompileInputs.cache
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\Albahari C# 6.0\40 Regex\40 Regex\obj\Debug\netcoreapp2.1\40 Regex.AssemblyInfoInputs.cache
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\Albahari C# 6.0\40 Regex\40 Regex\obj\Debug\netcoreapp2.1\40 Regex.AssemblyInfo.cs
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\Albahari C# 6.0\40 Regex\40 Regex\obj\Debug\netcoreapp2.1\40 Regex.dll
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\Albahari C# 6.0\40 Regex\40 Regex\obj\Debug\netcoreapp2.1\40 Regex.pdb

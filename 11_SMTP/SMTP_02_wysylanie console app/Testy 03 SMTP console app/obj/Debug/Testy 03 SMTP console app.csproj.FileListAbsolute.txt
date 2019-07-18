@@ -1,0 +1,16 @@
+C:\Users\asus\Desktop\Programowanie\Tutoriale i Testy\Testy 03 SMTP console app\Testy 03 SMTP console app\bin\Debug\Testy 03 SMTP console app.exe.config
+C:\Users\asus\Desktop\Programowanie\Tutoriale i Testy\Testy 03 SMTP console app\Testy 03 SMTP console app\bin\Debug\Testy 03 SMTP console app.exe
+C:\Users\asus\Desktop\Programowanie\Tutoriale i Testy\Testy 03 SMTP console app\Testy 03 SMTP console app\bin\Debug\Testy 03 SMTP console app.pdb
+C:\Users\asus\Desktop\Programowanie\Tutoriale i Testy\Testy 03 SMTP console app\Testy 03 SMTP console app\obj\Debug\Testy 03 SMTP console app.csprojResolveAssemblyReference.cache
+C:\Users\asus\Desktop\Programowanie\Tutoriale i Testy\Testy 03 SMTP console app\Testy 03 SMTP console app\obj\Debug\Testy 03 SMTP console app.exe
+C:\Users\asus\Desktop\Programowanie\Tutoriale i Testy\Testy 03 SMTP console app\Testy 03 SMTP console app\obj\Debug\Testy 03 SMTP console app.pdb
+C:\Users\asus\Desktop\Programowanie\Tutoriale i Testy\Testy 03 SMTP wysylanie console app\Testy 03 SMTP console app\bin\Debug\Testy 03 SMTP console app.exe.config
+C:\Users\asus\Desktop\Programowanie\Tutoriale i Testy\Testy 03 SMTP wysylanie console app\Testy 03 SMTP console app\obj\Debug\Testy 03 SMTP console app.exe
+C:\Users\asus\Desktop\Programowanie\Tutoriale i Testy\Testy 03 SMTP wysylanie console app\Testy 03 SMTP console app\obj\Debug\Testy 03 SMTP console app.pdb
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\Testy 03 SMTP wysylanie console app\Testy 03 SMTP console app\bin\Debug\Testy 03 SMTP console app.exe.config
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\Testy 03 SMTP wysylanie console app\Testy 03 SMTP console app\bin\Debug\Testy 03 SMTP console app.exe
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\Testy 03 SMTP wysylanie console app\Testy 03 SMTP console app\bin\Debug\Testy 03 SMTP console app.pdb
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\Testy 03 SMTP wysylanie console app\Testy 03 SMTP console app\obj\Debug\Testy 03 SMTP console app.csprojAssemblyReference.cache
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\Testy 03 SMTP wysylanie console app\Testy 03 SMTP console app\obj\Debug\Testy 03 SMTP console app.csproj.CoreCompileInputs.cache
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\Testy 03 SMTP wysylanie console app\Testy 03 SMTP console app\obj\Debug\Testy 03 SMTP console app.exe
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\Testy 03 SMTP wysylanie console app\Testy 03 SMTP console app\obj\Debug\Testy 03 SMTP console app.pdb

@@ -1,0 +1,6 @@
+C:\Users\asus\Desktop\FriendStorage\FriendStorage.Model\bin\Debug\FriendStorage.Model.dll
+C:\Users\asus\Desktop\FriendStorage\FriendStorage.Model\bin\Debug\FriendStorage.Model.pdb
+C:\Users\asus\Desktop\FriendStorage\FriendStorage.Model\obj\Debug\FriendStorage.Model.csprojAssemblyReference.cache
+C:\Users\asus\Desktop\FriendStorage\FriendStorage.Model\obj\Debug\FriendStorage.Model.csproj.CoreCompileInputs.cache
+C:\Users\asus\Desktop\FriendStorage\FriendStorage.Model\obj\Debug\FriendStorage.Model.dll
+C:\Users\asus\Desktop\FriendStorage\FriendStorage.Model\obj\Debug\FriendStorage.Model.pdb

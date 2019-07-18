@@ -1,0 +1,22 @@
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\Unit Test 02 - Przyklad Ksiazka\Unit Test 02 - Przyklad Ksiazka\bin\Debug\netcoreapp2.1\Unit Test 02 - Przyklad Ksiazka.deps.json
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\Unit Test 02 - Przyklad Ksiazka\Unit Test 02 - Przyklad Ksiazka\bin\Debug\netcoreapp2.1\Unit Test 02 - Przyklad Ksiazka.runtimeconfig.json
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\Unit Test 02 - Przyklad Ksiazka\Unit Test 02 - Przyklad Ksiazka\bin\Debug\netcoreapp2.1\Unit Test 02 - Przyklad Ksiazka.runtimeconfig.dev.json
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\Unit Test 02 - Przyklad Ksiazka\Unit Test 02 - Przyklad Ksiazka\bin\Debug\netcoreapp2.1\Unit Test 02 - Przyklad Ksiazka.dll
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\Unit Test 02 - Przyklad Ksiazka\Unit Test 02 - Przyklad Ksiazka\bin\Debug\netcoreapp2.1\Unit Test 02 - Przyklad Ksiazka.pdb
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\Unit Test 02 - Przyklad Ksiazka\Unit Test 02 - Przyklad Ksiazka\obj\Debug\netcoreapp2.1\Unit Test 02 - Przyklad Ksiazka.csprojAssemblyReference.cache
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\Unit Test 02 - Przyklad Ksiazka\Unit Test 02 - Przyklad Ksiazka\obj\Debug\netcoreapp2.1\Unit Test 02 - Przyklad Ksiazka.csproj.CoreCompileInputs.cache
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\Unit Test 02 - Przyklad Ksiazka\Unit Test 02 - Przyklad Ksiazka\obj\Debug\netcoreapp2.1\Unit Test 02 - Przyklad Ksiazka.AssemblyInfoInputs.cache
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\Unit Test 02 - Przyklad Ksiazka\Unit Test 02 - Przyklad Ksiazka\obj\Debug\netcoreapp2.1\Unit Test 02 - Przyklad Ksiazka.AssemblyInfo.cs
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\Unit Test 02 - Przyklad Ksiazka\Unit Test 02 - Przyklad Ksiazka\obj\Debug\netcoreapp2.1\Unit Test 02 - Przyklad Ksiazka.dll
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\Unit Test 02 - Przyklad Ksiazka\Unit Test 02 - Przyklad Ksiazka\obj\Debug\netcoreapp2.1\Unit Test 02 - Przyklad Ksiazka.pdb
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\Unit Test 02 - Przyklad Ksiazka\Unit Test 02 - Przyklad Ksiazka\bin\Debug\netcoreapp2.1\Unit Test 02 - Przyklad Ksiazka.deps.json
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\Unit Test 02 - Przyklad Ksiazka\Unit Test 02 - Przyklad Ksiazka\bin\Debug\netcoreapp2.1\Unit Test 02 - Przyklad Ksiazka.runtimeconfig.json
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\Unit Test 02 - Przyklad Ksiazka\Unit Test 02 - Przyklad Ksiazka\bin\Debug\netcoreapp2.1\Unit Test 02 - Przyklad Ksiazka.runtimeconfig.dev.json
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\Unit Test 02 - Przyklad Ksiazka\Unit Test 02 - Przyklad Ksiazka\bin\Debug\netcoreapp2.1\Unit Test 02 - Przyklad Ksiazka.dll
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\Unit Test 02 - Przyklad Ksiazka\Unit Test 02 - Przyklad Ksiazka\bin\Debug\netcoreapp2.1\Unit Test 02 - Przyklad Ksiazka.pdb
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\Unit Test 02 - Przyklad Ksiazka\Unit Test 02 - Przyklad Ksiazka\obj\Debug\netcoreapp2.1\Unit Test 02 - Przyklad Ksiazka.csprojAssemblyReference.cache
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\Unit Test 02 - Przyklad Ksiazka\Unit Test 02 - Przyklad Ksiazka\obj\Debug\netcoreapp2.1\Unit Test 02 - Przyklad Ksiazka.csproj.CoreCompileInputs.cache
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\Unit Test 02 - Przyklad Ksiazka\Unit Test 02 - Przyklad Ksiazka\obj\Debug\netcoreapp2.1\Unit Test 02 - Przyklad Ksiazka.AssemblyInfoInputs.cache
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\Unit Test 02 - Przyklad Ksiazka\Unit Test 02 - Przyklad Ksiazka\obj\Debug\netcoreapp2.1\Unit Test 02 - Przyklad Ksiazka.AssemblyInfo.cs
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\Unit Test 02 - Przyklad Ksiazka\Unit Test 02 - Przyklad Ksiazka\obj\Debug\netcoreapp2.1\Unit Test 02 - Przyklad Ksiazka.dll
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\Unit Test 02 - Przyklad Ksiazka\Unit Test 02 - Przyklad Ksiazka\obj\Debug\netcoreapp2.1\Unit Test 02 - Przyklad Ksiazka.pdb

@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.168
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "26_Listy_kolejki_stosy", "26 Listy kolejki stosy\26_Listy_kolejki_stosy.csproj", "{A5F08731-93AD-4560-A1FB-A1565D744F16}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A5F08731-93AD-4560-A1FB-A1565D744F16}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A5F08731-93AD-4560-A1FB-A1565D744F16}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A5F08731-93AD-4560-A1FB-A1565D744F16}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A5F08731-93AD-4560-A1FB-A1565D744F16}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {0D197A5C-A0AE-4490-8D10-156A1D670585}
+	EndGlobalSection
+EndGlobal

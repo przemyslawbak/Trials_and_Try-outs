@@ -1,0 +1,138 @@
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\wpf-mvvm-test-driven-development-viewmodels\1-wpf-mvvm-test-driven-development-viewmodels-m1-exercise-files\FriendStorage\FriendStorage.UI\obj\Debug\FriendStorage.UI.csprojAssemblyReference.cache
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\wpf-mvvm-test-driven-development-viewmodels\1-wpf-mvvm-test-driven-development-viewmodels-m1-exercise-files\FriendStorage\FriendStorage.UI\obj\Debug\Styles\Brushes.baml
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\wpf-mvvm-test-driven-development-viewmodels\1-wpf-mvvm-test-driven-development-viewmodels-m1-exercise-files\FriendStorage\FriendStorage.UI\obj\Debug\Styles\Button.baml
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\wpf-mvvm-test-driven-development-viewmodels\1-wpf-mvvm-test-driven-development-viewmodels-m1-exercise-files\FriendStorage\FriendStorage.UI\obj\Debug\Styles\CheckBox.baml
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\wpf-mvvm-test-driven-development-viewmodels\1-wpf-mvvm-test-driven-development-viewmodels-m1-exercise-files\FriendStorage\FriendStorage.UI\obj\Debug\Styles\DatePicker.baml
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\wpf-mvvm-test-driven-development-viewmodels\1-wpf-mvvm-test-driven-development-viewmodels-m1-exercise-files\FriendStorage\FriendStorage.UI\obj\Debug\Styles\Label.baml
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\wpf-mvvm-test-driven-development-viewmodels\1-wpf-mvvm-test-driven-development-viewmodels-m1-exercise-files\FriendStorage\FriendStorage.UI\obj\Debug\Styles\TextBox.baml
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\wpf-mvvm-test-driven-development-viewmodels\1-wpf-mvvm-test-driven-development-viewmodels-m1-exercise-files\FriendStorage\FriendStorage.UI\obj\Debug\View\FriendEditView.baml
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\wpf-mvvm-test-driven-development-viewmodels\1-wpf-mvvm-test-driven-development-viewmodels-m1-exercise-files\FriendStorage\FriendStorage.UI\obj\Debug\View\NavigationView.baml
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\wpf-mvvm-test-driven-development-viewmodels\1-wpf-mvvm-test-driven-development-viewmodels-m1-exercise-files\FriendStorage\FriendStorage.UI\obj\Debug\App.baml
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\wpf-mvvm-test-driven-development-viewmodels\1-wpf-mvvm-test-driven-development-viewmodels-m1-exercise-files\FriendStorage\FriendStorage.UI\obj\Debug\View\FriendEditView.g.cs
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\wpf-mvvm-test-driven-development-viewmodels\1-wpf-mvvm-test-driven-development-viewmodels-m1-exercise-files\FriendStorage\FriendStorage.UI\obj\Debug\View\MainWindow.g.cs
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\wpf-mvvm-test-driven-development-viewmodels\1-wpf-mvvm-test-driven-development-viewmodels-m1-exercise-files\FriendStorage\FriendStorage.UI\obj\Debug\View\NavigationView.g.cs
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\wpf-mvvm-test-driven-development-viewmodels\1-wpf-mvvm-test-driven-development-viewmodels-m1-exercise-files\FriendStorage\FriendStorage.UI\obj\Debug\App.g.cs
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\wpf-mvvm-test-driven-development-viewmodels\1-wpf-mvvm-test-driven-development-viewmodels-m1-exercise-files\FriendStorage\FriendStorage.UI\obj\Debug\GeneratedInternalTypeHelper.g.cs
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\wpf-mvvm-test-driven-development-viewmodels\1-wpf-mvvm-test-driven-development-viewmodels-m1-exercise-files\FriendStorage\FriendStorage.UI\obj\Debug\FriendStorage.UI_MarkupCompile.cache
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\wpf-mvvm-test-driven-development-viewmodels\1-wpf-mvvm-test-driven-development-viewmodels-m1-exercise-files\FriendStorage\FriendStorage.UI\obj\Debug\FriendStorage.UI_MarkupCompile.lref
+C:\Users\asus\Desktop\TDD_MVVM_WPF\FriendStorage\FriendStorage.UI\bin\Debug\FriendStorage.UI.exe.config
+C:\Users\asus\Desktop\TDD_MVVM_WPF\FriendStorage\FriendStorage.UI\bin\Debug\FriendStorage.UI.exe
+C:\Users\asus\Desktop\TDD_MVVM_WPF\FriendStorage\FriendStorage.UI\bin\Debug\FriendStorage.UI.pdb
+C:\Users\asus\Desktop\TDD_MVVM_WPF\FriendStorage\FriendStorage.UI\bin\Debug\FriendStorage.DataAccess.dll
+C:\Users\asus\Desktop\TDD_MVVM_WPF\FriendStorage\FriendStorage.UI\bin\Debug\FriendStorage.Model.dll
+C:\Users\asus\Desktop\TDD_MVVM_WPF\FriendStorage\FriendStorage.UI\bin\Debug\Newtonsoft.Json.dll
+C:\Users\asus\Desktop\TDD_MVVM_WPF\FriendStorage\FriendStorage.UI\bin\Debug\FriendStorage.DataAccess.pdb
+C:\Users\asus\Desktop\TDD_MVVM_WPF\FriendStorage\FriendStorage.UI\bin\Debug\FriendStorage.Model.pdb
+C:\Users\asus\Desktop\TDD_MVVM_WPF\FriendStorage\FriendStorage.UI\bin\Debug\Newtonsoft.Json.xml
+C:\Users\asus\Desktop\TDD_MVVM_WPF\FriendStorage\FriendStorage.UI\obj\Debug\FriendStorage.UI.csprojAssemblyReference.cache
+C:\Users\asus\Desktop\TDD_MVVM_WPF\FriendStorage\FriendStorage.UI\obj\Debug\Styles\Brushes.baml
+C:\Users\asus\Desktop\TDD_MVVM_WPF\FriendStorage\FriendStorage.UI\obj\Debug\Styles\Button.baml
+C:\Users\asus\Desktop\TDD_MVVM_WPF\FriendStorage\FriendStorage.UI\obj\Debug\Styles\CheckBox.baml
+C:\Users\asus\Desktop\TDD_MVVM_WPF\FriendStorage\FriendStorage.UI\obj\Debug\Styles\DatePicker.baml
+C:\Users\asus\Desktop\TDD_MVVM_WPF\FriendStorage\FriendStorage.UI\obj\Debug\Styles\Label.baml
+C:\Users\asus\Desktop\TDD_MVVM_WPF\FriendStorage\FriendStorage.UI\obj\Debug\Styles\TextBox.baml
+C:\Users\asus\Desktop\TDD_MVVM_WPF\FriendStorage\FriendStorage.UI\obj\Debug\View\FriendEditView.baml
+C:\Users\asus\Desktop\TDD_MVVM_WPF\FriendStorage\FriendStorage.UI\obj\Debug\View\NavigationView.baml
+C:\Users\asus\Desktop\TDD_MVVM_WPF\FriendStorage\FriendStorage.UI\obj\Debug\App.baml
+C:\Users\asus\Desktop\TDD_MVVM_WPF\FriendStorage\FriendStorage.UI\obj\Debug\View\FriendEditView.g.cs
+C:\Users\asus\Desktop\TDD_MVVM_WPF\FriendStorage\FriendStorage.UI\obj\Debug\View\MainWindow.g.cs
+C:\Users\asus\Desktop\TDD_MVVM_WPF\FriendStorage\FriendStorage.UI\obj\Debug\View\NavigationView.g.cs
+C:\Users\asus\Desktop\TDD_MVVM_WPF\FriendStorage\FriendStorage.UI\obj\Debug\App.g.cs
+C:\Users\asus\Desktop\TDD_MVVM_WPF\FriendStorage\FriendStorage.UI\obj\Debug\GeneratedInternalTypeHelper.g.cs
+C:\Users\asus\Desktop\TDD_MVVM_WPF\FriendStorage\FriendStorage.UI\obj\Debug\FriendStorage.UI_MarkupCompile.cache
+C:\Users\asus\Desktop\TDD_MVVM_WPF\FriendStorage\FriendStorage.UI\obj\Debug\FriendStorage.UI_MarkupCompile.lref
+C:\Users\asus\Desktop\TDD_MVVM_WPF\FriendStorage\FriendStorage.UI\obj\Debug\View\MainWindow.baml
+C:\Users\asus\Desktop\TDD_MVVM_WPF\FriendStorage\FriendStorage.UI\obj\Debug\FriendStorage.UI.g.resources
+C:\Users\asus\Desktop\TDD_MVVM_WPF\FriendStorage\FriendStorage.UI\obj\Debug\FriendStorage.UI.Properties.Resources.resources
+C:\Users\asus\Desktop\TDD_MVVM_WPF\FriendStorage\FriendStorage.UI\obj\Debug\FriendStorage.UI.csproj.GenerateResource.cache
+C:\Users\asus\Desktop\TDD_MVVM_WPF\FriendStorage\FriendStorage.UI\obj\Debug\FriendStorage.UI.csproj.CoreCompileInputs.cache
+C:\Users\asus\Desktop\TDD_MVVM_WPF\FriendStorage\FriendStorage.UI\obj\Debug\FriendStorage.UI.csproj.CopyComplete
+C:\Users\asus\Desktop\TDD_MVVM_WPF\FriendStorage\FriendStorage.UI\obj\Debug\FriendStorage.UI.exe
+C:\Users\asus\Desktop\TDD_MVVM_WPF\FriendStorage\FriendStorage.UI\obj\Debug\FriendStorage.UI.pdb
+C:\Users\asus\Desktop\TDD_MVVM_WPF_01_Preps\FriendStorage.UI\obj\Debug\FriendStorage.UI.csprojAssemblyReference.cache
+C:\Users\asus\Desktop\TDD_MVVM_WPF_01_Preps\FriendStorage.UI\obj\Debug\Styles\Brushes.baml
+C:\Users\asus\Desktop\TDD_MVVM_WPF_01_Preps\FriendStorage.UI\obj\Debug\Styles\Button.baml
+C:\Users\asus\Desktop\TDD_MVVM_WPF_01_Preps\FriendStorage.UI\obj\Debug\Styles\CheckBox.baml
+C:\Users\asus\Desktop\TDD_MVVM_WPF_01_Preps\FriendStorage.UI\obj\Debug\Styles\DatePicker.baml
+C:\Users\asus\Desktop\TDD_MVVM_WPF_01_Preps\FriendStorage.UI\obj\Debug\Styles\Label.baml
+C:\Users\asus\Desktop\TDD_MVVM_WPF_01_Preps\FriendStorage.UI\obj\Debug\Styles\TextBox.baml
+C:\Users\asus\Desktop\TDD_MVVM_WPF_01_Preps\FriendStorage.UI\obj\Debug\View\NavigationView.baml
+C:\Users\asus\Desktop\TDD_MVVM_WPF_01_Preps\FriendStorage.UI\obj\Debug\App.baml
+C:\Users\asus\Desktop\TDD_MVVM_WPF_01_Preps\FriendStorage.UI\obj\Debug\View\MainWindow.g.cs
+C:\Users\asus\Desktop\TDD_MVVM_WPF_01_Preps\FriendStorage.UI\obj\Debug\View\NavigationView.g.cs
+C:\Users\asus\Desktop\TDD_MVVM_WPF_01_Preps\FriendStorage.UI\obj\Debug\App.g.cs
+C:\Users\asus\Desktop\TDD_MVVM_WPF_01_Preps\FriendStorage.UI\obj\Debug\FriendStorage.UI_MarkupCompile.cache
+C:\Users\asus\Desktop\TDD_MVVM_WPF_01_Preps\FriendStorage.UI\obj\Debug\FriendStorage.UI_MarkupCompile.lref
+C:\Users\asus\Desktop\TDD_MVVM_WPF_01_Preps\FriendStorage.UI\obj\Debug\FriendStorage.UI.exe
+C:\Users\asus\Desktop\TDD_MVVM_WPF_01_Preps\FriendStorage.UI\obj\Debug\FriendStorage.UI.pdb
+C:\Users\asus\Desktop\TDD_MVVM_WPF_01_Preps\FriendStorage.UI\bin\Debug\FriendStorage.UI.exe.config
+C:\Users\asus\Desktop\TDD_MVVM_WPF_01_Preps\FriendStorage.UI\bin\Debug\FriendStorage.UI.exe
+C:\Users\asus\Desktop\TDD_MVVM_WPF_01_Preps\FriendStorage.UI\bin\Debug\FriendStorage.UI.pdb
+C:\Users\asus\Desktop\TDD_MVVM_WPF_01_Preps\FriendStorage.UI\obj\Debug\View\MainWindow.baml
+C:\Users\asus\Desktop\TDD_MVVM_WPF_01_Preps\FriendStorage.UI\obj\Debug\FriendStorage.UI.g.resources
+C:\Users\asus\Desktop\TDD_MVVM_WPF_01_Preps\FriendStorage.UI\obj\Debug\FriendStorage.UI.Properties.Resources.resources
+C:\Users\asus\Desktop\TDD_MVVM_WPF_01_Preps\FriendStorage.UI\obj\Debug\FriendStorage.UI.csproj.GenerateResource.cache
+C:\Users\asus\Desktop\TDD_MVVM_WPF_01_Preps\FriendStorage.UI\obj\Debug\FriendStorage.UI.csproj.CoreCompileInputs.cache
+C:\Users\asus\Desktop\TDD_MVVM_WPF_01_Preps\FriendStorage.UI\obj\Debug\FriendStorage.UI.csproj.CopyComplete
+C:\Users\asus\Desktop\TDD_MVVM_WPF_01_Preps\FriendStorage.UI\bin\Debug\Autofac.dll
+C:\Users\asus\Desktop\TDD_MVVM_WPF_01_Preps\FriendStorage.UI\bin\Debug\Autofac.pdb
+C:\Users\asus\Desktop\TDD_MVVM_WPF_01_Preps\FriendStorage.UI\bin\Debug\Autofac.xml
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\MVVM_06_Services\FriendStorage.UI\obj\Debug\FriendStorage.UI.csprojAssemblyReference.cache
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\MVVM_06_Services\FriendStorage.UI\obj\Debug\Styles\Brushes.baml
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\MVVM_06_Services\FriendStorage.UI\obj\Debug\Styles\Button.baml
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\MVVM_06_Services\FriendStorage.UI\obj\Debug\Styles\CheckBox.baml
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\MVVM_06_Services\FriendStorage.UI\obj\Debug\Styles\DatePicker.baml
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\MVVM_06_Services\FriendStorage.UI\obj\Debug\Styles\Label.baml
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\MVVM_06_Services\FriendStorage.UI\obj\Debug\Styles\TextBox.baml
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\MVVM_06_Services\FriendStorage.UI\obj\Debug\View\NavigationView.baml
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\MVVM_06_Services\FriendStorage.UI\obj\Debug\App.baml
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\MVVM_06_Services\FriendStorage.UI\obj\Debug\View\MainWindow.g.cs
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\MVVM_06_Services\FriendStorage.UI\obj\Debug\View\NavigationView.g.cs
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\MVVM_06_Services\FriendStorage.UI\obj\Debug\App.g.cs
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\MVVM_06_Services\FriendStorage.UI\obj\Debug\FriendStorage.UI_MarkupCompile.cache
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\MVVM_06_Services\FriendStorage.UI\obj\Debug\FriendStorage.UI_MarkupCompile.lref
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\MVVM_06_Services\FriendStorage.UI\obj\Debug\FriendStorage.UI.exe
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\MVVM_06_Services\FriendStorage.UI\obj\Debug\FriendStorage.UI.pdb
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\MVVM_06_Services\FriendStorage.UI\bin\Debug\FriendStorage.UI.exe.config
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\MVVM_06_Services\FriendStorage.UI\bin\Debug\FriendStorage.UI.exe
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\MVVM_06_Services\FriendStorage.UI\bin\Debug\FriendStorage.UI.pdb
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\MVVM_06_Services\FriendStorage.UI\bin\Debug\Autofac.pdb
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\MVVM_06_Services\FriendStorage.UI\bin\Debug\Autofac.xml
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\MVVM_06_Services\FriendStorage.UI\obj\Debug\View\MainWindow.baml
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\MVVM_06_Services\FriendStorage.UI\obj\Debug\FriendStorage.UI.g.resources
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\MVVM_06_Services\FriendStorage.UI\obj\Debug\FriendStorage.UI.Properties.Resources.resources
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\MVVM_06_Services\FriendStorage.UI\obj\Debug\FriendStorage.UI.csproj.GenerateResource.cache
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\MVVM_06_Services\FriendStorage.UI\obj\Debug\FriendStorage.UI.csproj.CoreCompileInputs.cache
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\MVVM_06_Services\FriendStorage.UI\obj\Debug\FriendStorage.UI.csproj.CopyComplete
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\MVVM_06_Services\FriendStorage.UI\bin\Debug\Autofac.dll
+C:\Users\asus\Desktop\MVVM_08_\FriendStorage.UI\obj\Debug\FriendStorage.UI.csprojAssemblyReference.cache
+C:\Users\asus\Desktop\MVVM_08_\FriendStorage.UI\obj\Debug\Styles\Brushes.baml
+C:\Users\asus\Desktop\MVVM_08_\FriendStorage.UI\obj\Debug\Styles\Button.baml
+C:\Users\asus\Desktop\MVVM_08_\FriendStorage.UI\obj\Debug\Styles\CheckBox.baml
+C:\Users\asus\Desktop\MVVM_08_\FriendStorage.UI\obj\Debug\Styles\DatePicker.baml
+C:\Users\asus\Desktop\MVVM_08_\FriendStorage.UI\obj\Debug\Styles\Label.baml
+C:\Users\asus\Desktop\MVVM_08_\FriendStorage.UI\obj\Debug\Styles\TextBox.baml
+C:\Users\asus\Desktop\MVVM_08_\FriendStorage.UI\obj\Debug\App.baml
+C:\Users\asus\Desktop\MVVM_08_\FriendStorage.UI\obj\Debug\View\MainWindow.g.cs
+C:\Users\asus\Desktop\MVVM_08_\FriendStorage.UI\obj\Debug\View\View1.g.cs
+C:\Users\asus\Desktop\MVVM_08_\FriendStorage.UI\obj\Debug\View\View2.g.cs
+C:\Users\asus\Desktop\MVVM_08_\FriendStorage.UI\obj\Debug\App.g.cs
+C:\Users\asus\Desktop\MVVM_08_\FriendStorage.UI\obj\Debug\GeneratedInternalTypeHelper.g.cs
+C:\Users\asus\Desktop\MVVM_08_\FriendStorage.UI\obj\Debug\FriendStorage.UI_MarkupCompile.cache
+C:\Users\asus\Desktop\MVVM_08_\FriendStorage.UI\obj\Debug\FriendStorage.UI_MarkupCompile.lref
+C:\Users\asus\Desktop\MVVM_08_\FriendStorage.UI\obj\Debug\View\View1.baml
+C:\Users\asus\Desktop\MVVM_08_\FriendStorage.UI\obj\Debug\View\View2.baml
+C:\Users\asus\Desktop\MVVM_08_\FriendStorage.UI\obj\Debug\FriendStorage.UI.exe
+C:\Users\asus\Desktop\MVVM_08_\FriendStorage.UI\obj\Debug\FriendStorage.UI.pdb
+C:\Users\asus\Desktop\MVVM_08_\FriendStorage.UI\bin\Debug\FriendStorage.UI.exe.config
+C:\Users\asus\Desktop\MVVM_08_\FriendStorage.UI\bin\Debug\FriendStorage.UI.exe
+C:\Users\asus\Desktop\MVVM_08_\FriendStorage.UI\bin\Debug\FriendStorage.UI.pdb
+C:\Users\asus\Desktop\MVVM_08_\FriendStorage.UI\bin\Debug\Autofac.dll
+C:\Users\asus\Desktop\MVVM_08_\FriendStorage.UI\bin\Debug\Autofac.pdb
+C:\Users\asus\Desktop\MVVM_08_\FriendStorage.UI\bin\Debug\Autofac.xml
+C:\Users\asus\Desktop\MVVM_08_\FriendStorage.UI\obj\Debug\View\MainWindow.baml
+C:\Users\asus\Desktop\MVVM_08_\FriendStorage.UI\obj\Debug\FriendStorage.UI.g.resources
+C:\Users\asus\Desktop\MVVM_08_\FriendStorage.UI\obj\Debug\FriendStorage.UI.Properties.Resources.resources
+C:\Users\asus\Desktop\MVVM_08_\FriendStorage.UI\obj\Debug\FriendStorage.UI.csproj.GenerateResource.cache
+C:\Users\asus\Desktop\MVVM_08_\FriendStorage.UI\obj\Debug\FriendStorage.UI.csproj.CoreCompileInputs.cache
+C:\Users\asus\Desktop\MVVM_08_\FriendStorage.UI\obj\Debug\FriendStorage.UI.csproj.CopyComplete

@@ -1,0 +1,11 @@
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\Albahari C# 6.0\24 Okreslanie kolejnosci\24 Okreslanie kolejnosci\bin\Debug\netcoreapp2.1\24 Okreslanie kolejnosci.deps.json
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\Albahari C# 6.0\24 Okreslanie kolejnosci\24 Okreslanie kolejnosci\bin\Debug\netcoreapp2.1\24 Okreslanie kolejnosci.runtimeconfig.json
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\Albahari C# 6.0\24 Okreslanie kolejnosci\24 Okreslanie kolejnosci\bin\Debug\netcoreapp2.1\24 Okreslanie kolejnosci.runtimeconfig.dev.json
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\Albahari C# 6.0\24 Okreslanie kolejnosci\24 Okreslanie kolejnosci\bin\Debug\netcoreapp2.1\24 Okreslanie kolejnosci.dll
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\Albahari C# 6.0\24 Okreslanie kolejnosci\24 Okreslanie kolejnosci\bin\Debug\netcoreapp2.1\24 Okreslanie kolejnosci.pdb
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\Albahari C# 6.0\24 Okreslanie kolejnosci\24 Okreslanie kolejnosci\obj\Debug\netcoreapp2.1\24 Okreslanie kolejnosci.csprojAssemblyReference.cache
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\Albahari C# 6.0\24 Okreslanie kolejnosci\24 Okreslanie kolejnosci\obj\Debug\netcoreapp2.1\24 Okreslanie kolejnosci.csproj.CoreCompileInputs.cache
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\Albahari C# 6.0\24 Okreslanie kolejnosci\24 Okreslanie kolejnosci\obj\Debug\netcoreapp2.1\24 Okreslanie kolejnosci.AssemblyInfoInputs.cache
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\Albahari C# 6.0\24 Okreslanie kolejnosci\24 Okreslanie kolejnosci\obj\Debug\netcoreapp2.1\24 Okreslanie kolejnosci.AssemblyInfo.cs
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\Albahari C# 6.0\24 Okreslanie kolejnosci\24 Okreslanie kolejnosci\obj\Debug\netcoreapp2.1\24 Okreslanie kolejnosci.dll
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\Albahari C# 6.0\24 Okreslanie kolejnosci\24 Okreslanie kolejnosci\obj\Debug\netcoreapp2.1\24 Okreslanie kolejnosci.pdb

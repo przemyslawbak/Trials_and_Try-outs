@@ -1,0 +1,16 @@
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\YT MVVM 01 INotifyPropertyChanged\YT MVVM 01 INotifyPropertyChanged\obj\Debug\YT MVVM 01 INotifyPropertyChanged.csprojAssemblyReference.cache
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\YT MVVM 01 INotifyPropertyChanged\YT MVVM 01 INotifyPropertyChanged\obj\Debug\MainWindow.g.cs
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\YT MVVM 01 INotifyPropertyChanged\YT MVVM 01 INotifyPropertyChanged\obj\Debug\App.g.cs
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\YT MVVM 01 INotifyPropertyChanged\YT MVVM 01 INotifyPropertyChanged\obj\Debug\GeneratedInternalTypeHelper.g.cs
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\YT MVVM 01 INotifyPropertyChanged\YT MVVM 01 INotifyPropertyChanged\obj\Debug\YT MVVM 01 INotifyPropertyChanged_MarkupCompile.cache
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\YT MVVM 01 INotifyPropertyChanged\YT MVVM 01 INotifyPropertyChanged\obj\Debug\YT MVVM 01 INotifyPropertyChanged_MarkupCompile.lref
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\YT MVVM 01 INotifyPropertyChanged\YT MVVM 01 INotifyPropertyChanged\bin\Debug\YT MVVM 01 INotifyPropertyChanged.exe.config
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\YT MVVM 01 INotifyPropertyChanged\YT MVVM 01 INotifyPropertyChanged\bin\Debug\YT MVVM 01 INotifyPropertyChanged.exe
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\YT MVVM 01 INotifyPropertyChanged\YT MVVM 01 INotifyPropertyChanged\bin\Debug\YT MVVM 01 INotifyPropertyChanged.pdb
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\YT MVVM 01 INotifyPropertyChanged\YT MVVM 01 INotifyPropertyChanged\obj\Debug\MainWindow.baml
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\YT MVVM 01 INotifyPropertyChanged\YT MVVM 01 INotifyPropertyChanged\obj\Debug\YT MVVM 01 INotifyPropertyChanged.g.resources
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\YT MVVM 01 INotifyPropertyChanged\YT MVVM 01 INotifyPropertyChanged\obj\Debug\YT_MVVM_01_INotifyPropertyChanged.Properties.Resources.resources
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\YT MVVM 01 INotifyPropertyChanged\YT MVVM 01 INotifyPropertyChanged\obj\Debug\YT MVVM 01 INotifyPropertyChanged.csproj.GenerateResource.cache
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\YT MVVM 01 INotifyPropertyChanged\YT MVVM 01 INotifyPropertyChanged\obj\Debug\YT MVVM 01 INotifyPropertyChanged.csproj.CoreCompileInputs.cache
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\YT MVVM 01 INotifyPropertyChanged\YT MVVM 01 INotifyPropertyChanged\obj\Debug\YT MVVM 01 INotifyPropertyChanged.exe
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\YT MVVM 01 INotifyPropertyChanged\YT MVVM 01 INotifyPropertyChanged\obj\Debug\YT MVVM 01 INotifyPropertyChanged.pdb

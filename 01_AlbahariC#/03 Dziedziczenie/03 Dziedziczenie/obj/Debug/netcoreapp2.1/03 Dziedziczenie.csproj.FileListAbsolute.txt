@@ -1,0 +1,11 @@
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\!!Trials!!\Albahari C# 6.0\03 Dziedziczenie\03 Dziedziczenie\bin\Debug\netcoreapp2.1\03 Dziedziczenie.deps.json
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\!!Trials!!\Albahari C# 6.0\03 Dziedziczenie\03 Dziedziczenie\bin\Debug\netcoreapp2.1\03 Dziedziczenie.runtimeconfig.json
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\!!Trials!!\Albahari C# 6.0\03 Dziedziczenie\03 Dziedziczenie\bin\Debug\netcoreapp2.1\03 Dziedziczenie.runtimeconfig.dev.json
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\!!Trials!!\Albahari C# 6.0\03 Dziedziczenie\03 Dziedziczenie\bin\Debug\netcoreapp2.1\03 Dziedziczenie.dll
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\!!Trials!!\Albahari C# 6.0\03 Dziedziczenie\03 Dziedziczenie\bin\Debug\netcoreapp2.1\03 Dziedziczenie.pdb
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\!!Trials!!\Albahari C# 6.0\03 Dziedziczenie\03 Dziedziczenie\obj\Debug\netcoreapp2.1\03 Dziedziczenie.csprojAssemblyReference.cache
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\!!Trials!!\Albahari C# 6.0\03 Dziedziczenie\03 Dziedziczenie\obj\Debug\netcoreapp2.1\03 Dziedziczenie.csproj.CoreCompileInputs.cache
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\!!Trials!!\Albahari C# 6.0\03 Dziedziczenie\03 Dziedziczenie\obj\Debug\netcoreapp2.1\03 Dziedziczenie.AssemblyInfoInputs.cache
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\!!Trials!!\Albahari C# 6.0\03 Dziedziczenie\03 Dziedziczenie\obj\Debug\netcoreapp2.1\03 Dziedziczenie.AssemblyInfo.cs
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\!!Trials!!\Albahari C# 6.0\03 Dziedziczenie\03 Dziedziczenie\obj\Debug\netcoreapp2.1\03 Dziedziczenie.dll
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\!!Trials!!\Albahari C# 6.0\03 Dziedziczenie\03 Dziedziczenie\obj\Debug\netcoreapp2.1\03 Dziedziczenie.pdb

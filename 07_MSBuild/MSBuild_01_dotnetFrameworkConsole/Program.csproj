@@ -1,0 +1,36 @@
+<!--creating msbuild project: https://docs.microsoft.com/en-us/visualstudio/msbuild/walkthrough-creating-an-msbuild-project-file-from-scratch?view=vs-2019-->
+<!--msbuild props info: https://docs.microsoft.com/en-us/visualstudio/msbuild/common-msbuild-project-properties?view=vs-2019-->
+<!--console cmd log: https://docs.microsoft.com/en-us/visualstudio/msbuild/obtaining-build-logs-with-msbuild?view=vs-2019-->
+<!--log4net config tips: https://www.pkimber.net/howto/microsoft/dev/dotnet/log4net/getting-started.html-->
+
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+		
+ <PropertyGroup>
+  <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+  <AppDesignerFolder>Properties</AppDesignerFolder>
+  <RootNamespace>First_Sample</RootNamespace>
+  <AssemblyName>First_Sample</AssemblyName>
+ </PropertyGroup>
+ <ItemGroup>
+  <Reference Include="log4net, Version=2.0.8.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\log4net.dll</HintPath>
+    </Reference>
+	<Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+ </ItemGroup>
+ <ItemGroup>
+  <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+ </ItemGroup>
+ <ItemGroup>
+  <None Include="App.config" />
+  <None Include="packages.config" />
+ </ItemGroup>
+ <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

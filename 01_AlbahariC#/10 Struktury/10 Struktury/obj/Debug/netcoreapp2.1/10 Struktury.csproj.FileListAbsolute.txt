@@ -1,0 +1,11 @@
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\!!Trials!!\Albahari C# 6.0\10 Struktury\10 Struktury\bin\Debug\netcoreapp2.1\10 Struktury.deps.json
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\!!Trials!!\Albahari C# 6.0\10 Struktury\10 Struktury\bin\Debug\netcoreapp2.1\10 Struktury.runtimeconfig.json
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\!!Trials!!\Albahari C# 6.0\10 Struktury\10 Struktury\bin\Debug\netcoreapp2.1\10 Struktury.runtimeconfig.dev.json
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\!!Trials!!\Albahari C# 6.0\10 Struktury\10 Struktury\bin\Debug\netcoreapp2.1\10 Struktury.dll
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\!!Trials!!\Albahari C# 6.0\10 Struktury\10 Struktury\bin\Debug\netcoreapp2.1\10 Struktury.pdb
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\!!Trials!!\Albahari C# 6.0\10 Struktury\10 Struktury\obj\Debug\netcoreapp2.1\10 Struktury.csprojAssemblyReference.cache
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\!!Trials!!\Albahari C# 6.0\10 Struktury\10 Struktury\obj\Debug\netcoreapp2.1\10 Struktury.csproj.CoreCompileInputs.cache
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\!!Trials!!\Albahari C# 6.0\10 Struktury\10 Struktury\obj\Debug\netcoreapp2.1\10 Struktury.AssemblyInfoInputs.cache
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\!!Trials!!\Albahari C# 6.0\10 Struktury\10 Struktury\obj\Debug\netcoreapp2.1\10 Struktury.AssemblyInfo.cs
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\!!Trials!!\Albahari C# 6.0\10 Struktury\10 Struktury\obj\Debug\netcoreapp2.1\10 Struktury.dll
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\!!Trials!!\Albahari C# 6.0\10 Struktury\10 Struktury\obj\Debug\netcoreapp2.1\10 Struktury.pdb

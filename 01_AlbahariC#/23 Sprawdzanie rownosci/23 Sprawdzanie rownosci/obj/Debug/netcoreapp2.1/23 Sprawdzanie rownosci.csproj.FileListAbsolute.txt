@@ -1,0 +1,11 @@
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\Albahari C# 6.0\23 Sprawdzanie rownosci\23 Sprawdzanie rownosci\bin\Debug\netcoreapp2.1\23 Sprawdzanie rownosci.deps.json
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\Albahari C# 6.0\23 Sprawdzanie rownosci\23 Sprawdzanie rownosci\bin\Debug\netcoreapp2.1\23 Sprawdzanie rownosci.runtimeconfig.json
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\Albahari C# 6.0\23 Sprawdzanie rownosci\23 Sprawdzanie rownosci\bin\Debug\netcoreapp2.1\23 Sprawdzanie rownosci.runtimeconfig.dev.json
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\Albahari C# 6.0\23 Sprawdzanie rownosci\23 Sprawdzanie rownosci\bin\Debug\netcoreapp2.1\23 Sprawdzanie rownosci.dll
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\Albahari C# 6.0\23 Sprawdzanie rownosci\23 Sprawdzanie rownosci\bin\Debug\netcoreapp2.1\23 Sprawdzanie rownosci.pdb
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\Albahari C# 6.0\23 Sprawdzanie rownosci\23 Sprawdzanie rownosci\obj\Debug\netcoreapp2.1\23 Sprawdzanie rownosci.csprojAssemblyReference.cache
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\Albahari C# 6.0\23 Sprawdzanie rownosci\23 Sprawdzanie rownosci\obj\Debug\netcoreapp2.1\23 Sprawdzanie rownosci.csproj.CoreCompileInputs.cache
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\Albahari C# 6.0\23 Sprawdzanie rownosci\23 Sprawdzanie rownosci\obj\Debug\netcoreapp2.1\23 Sprawdzanie rownosci.AssemblyInfoInputs.cache
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\Albahari C# 6.0\23 Sprawdzanie rownosci\23 Sprawdzanie rownosci\obj\Debug\netcoreapp2.1\23 Sprawdzanie rownosci.AssemblyInfo.cs
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\Albahari C# 6.0\23 Sprawdzanie rownosci\23 Sprawdzanie rownosci\obj\Debug\netcoreapp2.1\23 Sprawdzanie rownosci.dll
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\Albahari C# 6.0\23 Sprawdzanie rownosci\23 Sprawdzanie rownosci\obj\Debug\netcoreapp2.1\23 Sprawdzanie rownosci.pdb

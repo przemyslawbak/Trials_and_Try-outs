@@ -1,0 +1,11 @@
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\Albahari C# 6.0\37 HTTP\37 HTTP\obj\Debug\netcoreapp2.1\37 HTTP.csprojAssemblyReference.cache
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\Albahari C# 6.0\37 HTTP\37 HTTP\obj\Debug\netcoreapp2.1\37 HTTP.csproj.CoreCompileInputs.cache
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\Albahari C# 6.0\37 HTTP\37 HTTP\obj\Debug\netcoreapp2.1\37 HTTP.AssemblyInfoInputs.cache
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\Albahari C# 6.0\37 HTTP\37 HTTP\obj\Debug\netcoreapp2.1\37 HTTP.AssemblyInfo.cs
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\Albahari C# 6.0\37 HTTP\37 HTTP\bin\Debug\netcoreapp2.1\37 HTTP.deps.json
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\Albahari C# 6.0\37 HTTP\37 HTTP\bin\Debug\netcoreapp2.1\37 HTTP.runtimeconfig.json
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\Albahari C# 6.0\37 HTTP\37 HTTP\bin\Debug\netcoreapp2.1\37 HTTP.runtimeconfig.dev.json
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\Albahari C# 6.0\37 HTTP\37 HTTP\bin\Debug\netcoreapp2.1\37 HTTP.dll
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\Albahari C# 6.0\37 HTTP\37 HTTP\bin\Debug\netcoreapp2.1\37 HTTP.pdb
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\Albahari C# 6.0\37 HTTP\37 HTTP\obj\Debug\netcoreapp2.1\37 HTTP.dll
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\Albahari C# 6.0\37 HTTP\37 HTTP\obj\Debug\netcoreapp2.1\37 HTTP.pdb

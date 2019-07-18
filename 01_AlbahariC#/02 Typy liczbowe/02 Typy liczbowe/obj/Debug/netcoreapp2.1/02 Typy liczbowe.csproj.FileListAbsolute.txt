@@ -1,0 +1,11 @@
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\!!Trials!!\Albahari C# 6.0\02 Typy liczbowe\02 Typy liczbowe\bin\Debug\netcoreapp2.1\02 Typy liczbowe.deps.json
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\!!Trials!!\Albahari C# 6.0\02 Typy liczbowe\02 Typy liczbowe\bin\Debug\netcoreapp2.1\02 Typy liczbowe.runtimeconfig.json
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\!!Trials!!\Albahari C# 6.0\02 Typy liczbowe\02 Typy liczbowe\bin\Debug\netcoreapp2.1\02 Typy liczbowe.runtimeconfig.dev.json
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\!!Trials!!\Albahari C# 6.0\02 Typy liczbowe\02 Typy liczbowe\bin\Debug\netcoreapp2.1\02 Typy liczbowe.dll
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\!!Trials!!\Albahari C# 6.0\02 Typy liczbowe\02 Typy liczbowe\bin\Debug\netcoreapp2.1\02 Typy liczbowe.pdb
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\!!Trials!!\Albahari C# 6.0\02 Typy liczbowe\02 Typy liczbowe\obj\Debug\netcoreapp2.1\02 Typy liczbowe.csprojAssemblyReference.cache
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\!!Trials!!\Albahari C# 6.0\02 Typy liczbowe\02 Typy liczbowe\obj\Debug\netcoreapp2.1\02 Typy liczbowe.csproj.CoreCompileInputs.cache
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\!!Trials!!\Albahari C# 6.0\02 Typy liczbowe\02 Typy liczbowe\obj\Debug\netcoreapp2.1\02 Typy liczbowe.AssemblyInfoInputs.cache
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\!!Trials!!\Albahari C# 6.0\02 Typy liczbowe\02 Typy liczbowe\obj\Debug\netcoreapp2.1\02 Typy liczbowe.AssemblyInfo.cs
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\!!Trials!!\Albahari C# 6.0\02 Typy liczbowe\02 Typy liczbowe\obj\Debug\netcoreapp2.1\02 Typy liczbowe.dll
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\!!Trials!!\Albahari C# 6.0\02 Typy liczbowe\02 Typy liczbowe\obj\Debug\netcoreapp2.1\02 Typy liczbowe.pdb

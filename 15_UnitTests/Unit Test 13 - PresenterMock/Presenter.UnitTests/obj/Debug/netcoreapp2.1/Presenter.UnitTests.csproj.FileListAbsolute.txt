@@ -1,0 +1,5 @@
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\Unit Test 13 - PresenterMock\Presenter.UnitTests\bin\Debug\netcoreapp2.1\Presenter.dll
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\Unit Test 13 - PresenterMock\Presenter.UnitTests\obj\Debug\netcoreapp2.1\Presenter.UnitTests.csprojAssemblyReference.cache
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\Unit Test 13 - PresenterMock\Presenter.UnitTests\obj\Debug\netcoreapp2.1\Presenter.UnitTests.csproj.CoreCompileInputs.cache
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\Unit Test 13 - PresenterMock\Presenter.UnitTests\obj\Debug\netcoreapp2.1\Presenter.UnitTests.AssemblyInfoInputs.cache
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\Unit Test 13 - PresenterMock\Presenter.UnitTests\obj\Debug\netcoreapp2.1\Presenter.UnitTests.AssemblyInfo.cs

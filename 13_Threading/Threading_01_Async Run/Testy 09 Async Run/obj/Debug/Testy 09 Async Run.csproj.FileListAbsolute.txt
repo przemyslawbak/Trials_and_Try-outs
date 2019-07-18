@@ -1,0 +1,7 @@
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\Testy 09 Async Run\Testy 09 Async Run\bin\Debug\Testy 09 Async Run.exe.config
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\Testy 09 Async Run\Testy 09 Async Run\bin\Debug\Testy 09 Async Run.exe
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\Testy 09 Async Run\Testy 09 Async Run\bin\Debug\Testy 09 Async Run.pdb
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\Testy 09 Async Run\Testy 09 Async Run\obj\Debug\Testy 09 Async Run.csprojAssemblyReference.cache
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\Testy 09 Async Run\Testy 09 Async Run\obj\Debug\Testy 09 Async Run.csproj.CoreCompileInputs.cache
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\Testy 09 Async Run\Testy 09 Async Run\obj\Debug\Testy 09 Async Run.exe
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\Testy 09 Async Run\Testy 09 Async Run\obj\Debug\Testy 09 Async Run.pdb

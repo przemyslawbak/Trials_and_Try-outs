@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<!--Data zapisania: 07.02.2019 13:36:56-->
+<Zadania>
+  <Zadanie>
+    <Opis>fdsgh</Opis>
+    <DataUtworzenia>2018-04-30T17:42:54.6215825+02:00</DataUtworzenia>
+    <PlanowanaDataRealizacji>30.04.2018 00:00:00</PlanowanaDataRealizacji>
+    <Priorytet>2</Priorytet>
+    <CzyZrealizowane>False</CzyZrealizowane>
+  </Zadanie>
+  <Zadanie>
+    <Opis>dasdsadasdasdasd</Opis>
+    <DataUtworzenia>2018-04-19T10:07:57.3033489+02:00</DataUtworzenia>
+    <PlanowanaDataRealizacji>19.04.2018 00:00:00</PlanowanaDataRealizacji>
+    <Priorytet>1</Priorytet>
+    <CzyZrealizowane>True</CzyZrealizowane>
+  </Zadanie>
+  <Zadanie>
+    <Opis>ssssssssssss</Opis>
+    <DataUtworzenia>2018-04-24T13:04:20.6176484+02:00</DataUtworzenia>
+    <PlanowanaDataRealizacji>24.04.2018 00:00:00</PlanowanaDataRealizacji>
+    <Priorytet>1</Priorytet>
+    <CzyZrealizowane>False</CzyZrealizowane>
+  </Zadanie>
+  <Zadanie>
+    <Opis>fdsgfsdg</Opis>
+    <DataUtworzenia>2018-04-30T17:42:49.7206281+02:00</DataUtworzenia>
+    <PlanowanaDataRealizacji>30.04.2018 00:00:00</PlanowanaDataRealizacji>
+    <Priorytet>1</Priorytet>
+    <CzyZrealizowane>True</CzyZrealizowane>
+  </Zadanie>
+  <Zadanie>
+    <Opis>ghjk</Opis>
+    <DataUtworzenia>2018-04-30T17:43:06.2686198+02:00</DataUtworzenia>
+    <PlanowanaDataRealizacji>30.04.2018 00:00:00</PlanowanaDataRealizacji>
+    <Priorytet>1</Priorytet>
+    <CzyZrealizowane>False</CzyZrealizowane>
+  </Zadanie>
+  <Zadanie>
+    <Opis>dfsdfdsf</Opis>
+    <DataUtworzenia>2018-04-30T17:42:44.7972058+02:00</DataUtworzenia>
+    <PlanowanaDataRealizacji>30.04.2018 00:00:00</PlanowanaDataRealizacji>
+    <Priorytet>0</Priorytet>
+    <CzyZrealizowane>False</CzyZrealizowane>
+  </Zadanie>
+  <Zadanie>
+    <Opis>sddada</Opis>
+    <DataUtworzenia>2018-04-30T17:43:00.7983147+02:00</DataUtworzenia>
+    <PlanowanaDataRealizacji>30.04.2018 00:00:00</PlanowanaDataRealizacji>
+    <Priorytet>0</Priorytet>
+    <CzyZrealizowane>False</CzyZrealizowane>
+  </Zadanie>
+</Zadania>

@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.102
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "06 Tablice", "06 Tablice\06 Tablice.csproj", "{2257A453-0E75-4C50-AD2E-E3919EA449ED}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2257A453-0E75-4C50-AD2E-E3919EA449ED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2257A453-0E75-4C50-AD2E-E3919EA449ED}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2257A453-0E75-4C50-AD2E-E3919EA449ED}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2257A453-0E75-4C50-AD2E-E3919EA449ED}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {7D0EA708-02E5-430E-AB6E-D02D60EE6DAB}
+	EndGlobalSection
+EndGlobal

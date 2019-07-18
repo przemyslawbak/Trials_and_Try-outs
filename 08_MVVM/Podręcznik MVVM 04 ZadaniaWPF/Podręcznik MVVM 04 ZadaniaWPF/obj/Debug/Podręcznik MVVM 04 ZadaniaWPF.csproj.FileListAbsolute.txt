@@ -1,0 +1,111 @@
+C:\Users\asus\Desktop\Programowanie\Tutoriale\Podręcznik MVVM 04 ZadaniaWPF\Podręcznik MVVM 04 ZadaniaWPF\bin\Debug\Podręcznik MVVM 04 ZadaniaWPF.exe.config
+C:\Users\asus\Desktop\Programowanie\Tutoriale\Podręcznik MVVM 04 ZadaniaWPF\Podręcznik MVVM 04 ZadaniaWPF\bin\Debug\Podręcznik MVVM 04 ZadaniaWPF.exe
+C:\Users\asus\Desktop\Programowanie\Tutoriale\Podręcznik MVVM 04 ZadaniaWPF\Podręcznik MVVM 04 ZadaniaWPF\bin\Debug\Podręcznik MVVM 04 ZadaniaWPF.pdb
+C:\Users\asus\Desktop\Programowanie\Tutoriale\Podręcznik MVVM 04 ZadaniaWPF\Podręcznik MVVM 04 ZadaniaWPF\obj\Debug\Podręcznik MVVM 04 ZadaniaWPF.csprojResolveAssemblyReference.cache
+C:\Users\asus\Desktop\Programowanie\Tutoriale\Podręcznik MVVM 04 ZadaniaWPF\Podręcznik MVVM 04 ZadaniaWPF\obj\Debug\MainWindow.g.cs
+C:\Users\asus\Desktop\Programowanie\Tutoriale\Podręcznik MVVM 04 ZadaniaWPF\Podręcznik MVVM 04 ZadaniaWPF\obj\Debug\App.g.cs
+C:\Users\asus\Desktop\Programowanie\Tutoriale\Podręcznik MVVM 04 ZadaniaWPF\Podręcznik MVVM 04 ZadaniaWPF\obj\Debug\Podręcznik MVVM 04 ZadaniaWPF_MarkupCompile.cache
+C:\Users\asus\Desktop\Programowanie\Tutoriale\Podręcznik MVVM 04 ZadaniaWPF\Podręcznik MVVM 04 ZadaniaWPF\obj\Debug\Podręcznik MVVM 04 ZadaniaWPF_MarkupCompile.lref
+C:\Users\asus\Desktop\Programowanie\Tutoriale\Podręcznik MVVM 04 ZadaniaWPF\Podręcznik MVVM 04 ZadaniaWPF\obj\Debug\MainWindow.baml
+C:\Users\asus\Desktop\Programowanie\Tutoriale\Podręcznik MVVM 04 ZadaniaWPF\Podręcznik MVVM 04 ZadaniaWPF\obj\Debug\Podręcznik MVVM 04 ZadaniaWPF.g.resources
+C:\Users\asus\Desktop\Programowanie\Tutoriale\Podręcznik MVVM 04 ZadaniaWPF\Podręcznik MVVM 04 ZadaniaWPF\obj\Debug\Podręcznik_MVVM_04_ZadaniaWPF.Properties.Resources.resources
+C:\Users\asus\Desktop\Programowanie\Tutoriale\Podręcznik MVVM 04 ZadaniaWPF\Podręcznik MVVM 04 ZadaniaWPF\obj\Debug\Podręcznik MVVM 04 ZadaniaWPF.csproj.GenerateResource.Cache
+C:\Users\asus\Desktop\Programowanie\Tutoriale\Podręcznik MVVM 04 ZadaniaWPF\Podręcznik MVVM 04 ZadaniaWPF\obj\Debug\Podręcznik MVVM 04 ZadaniaWPF.exe
+C:\Users\asus\Desktop\Programowanie\Tutoriale\Podręcznik MVVM 04 ZadaniaWPF\Podręcznik MVVM 04 ZadaniaWPF\obj\Debug\Podręcznik MVVM 04 ZadaniaWPF.pdb
+C:\Users\asus\Desktop\Programowanie\Tutoriale\Podręcznik MVVM 04 ZadaniaWPF\Podręcznik MVVM 04 ZadaniaWPF\obj\Debug\GeneratedInternalTypeHelper.g.cs
+C:\Users\asus\Desktop\Programowanie\Tutoriale\Podręcznik MVVM 04 ZadaniaWPF\Podręcznik MVVM 04 ZadaniaWPF\bin\Debug\Microsoft.Expression.Interactions.dll
+C:\Users\asus\Desktop\Programowanie\Tutoriale\Podręcznik MVVM 04 ZadaniaWPF\Podręcznik MVVM 04 ZadaniaWPF\bin\Debug\System.Windows.Interactivity.dll
+C:\Users\asus\Desktop\Programowanie\Tutoriale\Podręcznik MVVM 04 ZadaniaWPF\Podręcznik MVVM 04 ZadaniaWPF\bin\Debug\de\Microsoft.Expression.Interactions.resources.dll
+C:\Users\asus\Desktop\Programowanie\Tutoriale\Podręcznik MVVM 04 ZadaniaWPF\Podręcznik MVVM 04 ZadaniaWPF\bin\Debug\en\Microsoft.Expression.Interactions.resources.dll
+C:\Users\asus\Desktop\Programowanie\Tutoriale\Podręcznik MVVM 04 ZadaniaWPF\Podręcznik MVVM 04 ZadaniaWPF\bin\Debug\es\Microsoft.Expression.Interactions.resources.dll
+C:\Users\asus\Desktop\Programowanie\Tutoriale\Podręcznik MVVM 04 ZadaniaWPF\Podręcznik MVVM 04 ZadaniaWPF\bin\Debug\fr\Microsoft.Expression.Interactions.resources.dll
+C:\Users\asus\Desktop\Programowanie\Tutoriale\Podręcznik MVVM 04 ZadaniaWPF\Podręcznik MVVM 04 ZadaniaWPF\bin\Debug\it\Microsoft.Expression.Interactions.resources.dll
+C:\Users\asus\Desktop\Programowanie\Tutoriale\Podręcznik MVVM 04 ZadaniaWPF\Podręcznik MVVM 04 ZadaniaWPF\bin\Debug\ja\Microsoft.Expression.Interactions.resources.dll
+C:\Users\asus\Desktop\Programowanie\Tutoriale\Podręcznik MVVM 04 ZadaniaWPF\Podręcznik MVVM 04 ZadaniaWPF\bin\Debug\ko\Microsoft.Expression.Interactions.resources.dll
+C:\Users\asus\Desktop\Programowanie\Tutoriale\Podręcznik MVVM 04 ZadaniaWPF\Podręcznik MVVM 04 ZadaniaWPF\bin\Debug\ru\Microsoft.Expression.Interactions.resources.dll
+C:\Users\asus\Desktop\Programowanie\Tutoriale\Podręcznik MVVM 04 ZadaniaWPF\Podręcznik MVVM 04 ZadaniaWPF\bin\Debug\zh-Hans\Microsoft.Expression.Interactions.resources.dll
+C:\Users\asus\Desktop\Programowanie\Tutoriale\Podręcznik MVVM 04 ZadaniaWPF\Podręcznik MVVM 04 ZadaniaWPF\bin\Debug\zh-Hant\Microsoft.Expression.Interactions.resources.dll
+C:\Users\asus\Desktop\Programowanie\Tutoriale\Podręcznik MVVM 04 ZadaniaWPF\Podręcznik MVVM 04 ZadaniaWPF\bin\Debug\de\System.Windows.Interactivity.resources.dll
+C:\Users\asus\Desktop\Programowanie\Tutoriale\Podręcznik MVVM 04 ZadaniaWPF\Podręcznik MVVM 04 ZadaniaWPF\bin\Debug\en\System.Windows.Interactivity.resources.dll
+C:\Users\asus\Desktop\Programowanie\Tutoriale\Podręcznik MVVM 04 ZadaniaWPF\Podręcznik MVVM 04 ZadaniaWPF\bin\Debug\es\System.Windows.Interactivity.resources.dll
+C:\Users\asus\Desktop\Programowanie\Tutoriale\Podręcznik MVVM 04 ZadaniaWPF\Podręcznik MVVM 04 ZadaniaWPF\bin\Debug\fr\System.Windows.Interactivity.resources.dll
+C:\Users\asus\Desktop\Programowanie\Tutoriale\Podręcznik MVVM 04 ZadaniaWPF\Podręcznik MVVM 04 ZadaniaWPF\bin\Debug\it\System.Windows.Interactivity.resources.dll
+C:\Users\asus\Desktop\Programowanie\Tutoriale\Podręcznik MVVM 04 ZadaniaWPF\Podręcznik MVVM 04 ZadaniaWPF\bin\Debug\ja\System.Windows.Interactivity.resources.dll
+C:\Users\asus\Desktop\Programowanie\Tutoriale\Podręcznik MVVM 04 ZadaniaWPF\Podręcznik MVVM 04 ZadaniaWPF\bin\Debug\ko\System.Windows.Interactivity.resources.dll
+C:\Users\asus\Desktop\Programowanie\Tutoriale\Podręcznik MVVM 04 ZadaniaWPF\Podręcznik MVVM 04 ZadaniaWPF\bin\Debug\ru\System.Windows.Interactivity.resources.dll
+C:\Users\asus\Desktop\Programowanie\Tutoriale\Podręcznik MVVM 04 ZadaniaWPF\Podręcznik MVVM 04 ZadaniaWPF\bin\Debug\zh-Hans\System.Windows.Interactivity.resources.dll
+C:\Users\asus\Desktop\Programowanie\Tutoriale\Podręcznik MVVM 04 ZadaniaWPF\Podręcznik MVVM 04 ZadaniaWPF\bin\Debug\zh-Hant\System.Windows.Interactivity.resources.dll
+C:\Users\asus\Desktop\Programowanie\Tutoriale i Testy\Podręcznik MVVM 04 ZadaniaWPF\Podręcznik MVVM 04 ZadaniaWPF\bin\Debug\Podręcznik MVVM 04 ZadaniaWPF.exe.config
+C:\Users\asus\Desktop\Programowanie\Tutoriale i Testy\Podręcznik MVVM 04 ZadaniaWPF\Podręcznik MVVM 04 ZadaniaWPF\obj\Debug\Podręcznik MVVM 04 ZadaniaWPF.exe
+C:\Users\asus\Desktop\Programowanie\Tutoriale i Testy\Podręcznik MVVM 04 ZadaniaWPF\Podręcznik MVVM 04 ZadaniaWPF\obj\Debug\Podręcznik MVVM 04 ZadaniaWPF.pdb
+C:\Users\asus\Desktop\Programowanie\Tutoriale i Testy\Podręcznik MVVM 04 ZadaniaWPF\Podręcznik MVVM 04 ZadaniaWPF\bin\Debug\Podręcznik MVVM 04 ZadaniaWPF.exe
+C:\Users\asus\Desktop\Programowanie\Tutoriale i Testy\Podręcznik MVVM 04 ZadaniaWPF\Podręcznik MVVM 04 ZadaniaWPF\bin\Debug\Podręcznik MVVM 04 ZadaniaWPF.pdb
+C:\Users\asus\Desktop\Programowanie\Tutoriale i Testy\Podręcznik MVVM 04 ZadaniaWPF\Podręcznik MVVM 04 ZadaniaWPF\bin\Debug\Microsoft.Expression.Interactions.dll
+C:\Users\asus\Desktop\Programowanie\Tutoriale i Testy\Podręcznik MVVM 04 ZadaniaWPF\Podręcznik MVVM 04 ZadaniaWPF\bin\Debug\System.Windows.Interactivity.dll
+C:\Users\asus\Desktop\Programowanie\Tutoriale i Testy\Podręcznik MVVM 04 ZadaniaWPF\Podręcznik MVVM 04 ZadaniaWPF\bin\Debug\de\Microsoft.Expression.Interactions.resources.dll
+C:\Users\asus\Desktop\Programowanie\Tutoriale i Testy\Podręcznik MVVM 04 ZadaniaWPF\Podręcznik MVVM 04 ZadaniaWPF\bin\Debug\en\Microsoft.Expression.Interactions.resources.dll
+C:\Users\asus\Desktop\Programowanie\Tutoriale i Testy\Podręcznik MVVM 04 ZadaniaWPF\Podręcznik MVVM 04 ZadaniaWPF\bin\Debug\es\Microsoft.Expression.Interactions.resources.dll
+C:\Users\asus\Desktop\Programowanie\Tutoriale i Testy\Podręcznik MVVM 04 ZadaniaWPF\Podręcznik MVVM 04 ZadaniaWPF\bin\Debug\fr\Microsoft.Expression.Interactions.resources.dll
+C:\Users\asus\Desktop\Programowanie\Tutoriale i Testy\Podręcznik MVVM 04 ZadaniaWPF\Podręcznik MVVM 04 ZadaniaWPF\bin\Debug\it\Microsoft.Expression.Interactions.resources.dll
+C:\Users\asus\Desktop\Programowanie\Tutoriale i Testy\Podręcznik MVVM 04 ZadaniaWPF\Podręcznik MVVM 04 ZadaniaWPF\bin\Debug\ja\Microsoft.Expression.Interactions.resources.dll
+C:\Users\asus\Desktop\Programowanie\Tutoriale i Testy\Podręcznik MVVM 04 ZadaniaWPF\Podręcznik MVVM 04 ZadaniaWPF\bin\Debug\ko\Microsoft.Expression.Interactions.resources.dll
+C:\Users\asus\Desktop\Programowanie\Tutoriale i Testy\Podręcznik MVVM 04 ZadaniaWPF\Podręcznik MVVM 04 ZadaniaWPF\bin\Debug\ru\Microsoft.Expression.Interactions.resources.dll
+C:\Users\asus\Desktop\Programowanie\Tutoriale i Testy\Podręcznik MVVM 04 ZadaniaWPF\Podręcznik MVVM 04 ZadaniaWPF\bin\Debug\zh-Hans\Microsoft.Expression.Interactions.resources.dll
+C:\Users\asus\Desktop\Programowanie\Tutoriale i Testy\Podręcznik MVVM 04 ZadaniaWPF\Podręcznik MVVM 04 ZadaniaWPF\bin\Debug\zh-Hant\Microsoft.Expression.Interactions.resources.dll
+C:\Users\asus\Desktop\Programowanie\Tutoriale i Testy\Podręcznik MVVM 04 ZadaniaWPF\Podręcznik MVVM 04 ZadaniaWPF\bin\Debug\de\System.Windows.Interactivity.resources.dll
+C:\Users\asus\Desktop\Programowanie\Tutoriale i Testy\Podręcznik MVVM 04 ZadaniaWPF\Podręcznik MVVM 04 ZadaniaWPF\bin\Debug\en\System.Windows.Interactivity.resources.dll
+C:\Users\asus\Desktop\Programowanie\Tutoriale i Testy\Podręcznik MVVM 04 ZadaniaWPF\Podręcznik MVVM 04 ZadaniaWPF\bin\Debug\es\System.Windows.Interactivity.resources.dll
+C:\Users\asus\Desktop\Programowanie\Tutoriale i Testy\Podręcznik MVVM 04 ZadaniaWPF\Podręcznik MVVM 04 ZadaniaWPF\bin\Debug\fr\System.Windows.Interactivity.resources.dll
+C:\Users\asus\Desktop\Programowanie\Tutoriale i Testy\Podręcznik MVVM 04 ZadaniaWPF\Podręcznik MVVM 04 ZadaniaWPF\bin\Debug\it\System.Windows.Interactivity.resources.dll
+C:\Users\asus\Desktop\Programowanie\Tutoriale i Testy\Podręcznik MVVM 04 ZadaniaWPF\Podręcznik MVVM 04 ZadaniaWPF\bin\Debug\ja\System.Windows.Interactivity.resources.dll
+C:\Users\asus\Desktop\Programowanie\Tutoriale i Testy\Podręcznik MVVM 04 ZadaniaWPF\Podręcznik MVVM 04 ZadaniaWPF\bin\Debug\ko\System.Windows.Interactivity.resources.dll
+C:\Users\asus\Desktop\Programowanie\Tutoriale i Testy\Podręcznik MVVM 04 ZadaniaWPF\Podręcznik MVVM 04 ZadaniaWPF\bin\Debug\ru\System.Windows.Interactivity.resources.dll
+C:\Users\asus\Desktop\Programowanie\Tutoriale i Testy\Podręcznik MVVM 04 ZadaniaWPF\Podręcznik MVVM 04 ZadaniaWPF\bin\Debug\zh-Hans\System.Windows.Interactivity.resources.dll
+C:\Users\asus\Desktop\Programowanie\Tutoriale i Testy\Podręcznik MVVM 04 ZadaniaWPF\Podręcznik MVVM 04 ZadaniaWPF\bin\Debug\zh-Hant\System.Windows.Interactivity.resources.dll
+C:\Users\asus\Desktop\Programowanie\Tutoriale i Testy\Podręcznik MVVM 04 ZadaniaWPF\Podręcznik MVVM 04 ZadaniaWPF\obj\Debug\Podręcznik MVVM 04 ZadaniaWPF.csprojResolveAssemblyReference.cache
+C:\Users\asus\Desktop\Programowanie\Tutoriale i Testy\Podręcznik MVVM 04 ZadaniaWPF\Podręcznik MVVM 04 ZadaniaWPF\obj\Debug\MainWindow.g.cs
+C:\Users\asus\Desktop\Programowanie\Tutoriale i Testy\Podręcznik MVVM 04 ZadaniaWPF\Podręcznik MVVM 04 ZadaniaWPF\obj\Debug\App.g.cs
+C:\Users\asus\Desktop\Programowanie\Tutoriale i Testy\Podręcznik MVVM 04 ZadaniaWPF\Podręcznik MVVM 04 ZadaniaWPF\obj\Debug\GeneratedInternalTypeHelper.g.cs
+C:\Users\asus\Desktop\Programowanie\Tutoriale i Testy\Podręcznik MVVM 04 ZadaniaWPF\Podręcznik MVVM 04 ZadaniaWPF\obj\Debug\Podręcznik MVVM 04 ZadaniaWPF_MarkupCompile.cache
+C:\Users\asus\Desktop\Programowanie\Tutoriale i Testy\Podręcznik MVVM 04 ZadaniaWPF\Podręcznik MVVM 04 ZadaniaWPF\obj\Debug\Podręcznik MVVM 04 ZadaniaWPF_MarkupCompile.lref
+C:\Users\asus\Desktop\Programowanie\Tutoriale i Testy\Podręcznik MVVM 04 ZadaniaWPF\Podręcznik MVVM 04 ZadaniaWPF\obj\Debug\MainWindow.baml
+C:\Users\asus\Desktop\Programowanie\Tutoriale i Testy\Podręcznik MVVM 04 ZadaniaWPF\Podręcznik MVVM 04 ZadaniaWPF\obj\Debug\Podręcznik MVVM 04 ZadaniaWPF.g.resources
+C:\Users\asus\Desktop\Programowanie\Tutoriale i Testy\Podręcznik MVVM 04 ZadaniaWPF\Podręcznik MVVM 04 ZadaniaWPF\obj\Debug\Podręcznik_MVVM_04_ZadaniaWPF.Properties.Resources.resources
+C:\Users\asus\Desktop\Programowanie\Tutoriale i Testy\Podręcznik MVVM 04 ZadaniaWPF\Podręcznik MVVM 04 ZadaniaWPF\obj\Debug\Podręcznik MVVM 04 ZadaniaWPF.csproj.GenerateResource.Cache
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\Podręcznik MVVM 04 ZadaniaWPF\Podręcznik MVVM 04 ZadaniaWPF\bin\Debug\Podręcznik MVVM 04 ZadaniaWPF.exe.config
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\Podręcznik MVVM 04 ZadaniaWPF\Podręcznik MVVM 04 ZadaniaWPF\bin\Debug\Podręcznik MVVM 04 ZadaniaWPF.exe
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\Podręcznik MVVM 04 ZadaniaWPF\Podręcznik MVVM 04 ZadaniaWPF\bin\Debug\Podręcznik MVVM 04 ZadaniaWPF.pdb
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\Podręcznik MVVM 04 ZadaniaWPF\Podręcznik MVVM 04 ZadaniaWPF\bin\Debug\de\Microsoft.Expression.Interactions.resources.dll
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\Podręcznik MVVM 04 ZadaniaWPF\Podręcznik MVVM 04 ZadaniaWPF\bin\Debug\en\Microsoft.Expression.Interactions.resources.dll
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\Podręcznik MVVM 04 ZadaniaWPF\Podręcznik MVVM 04 ZadaniaWPF\bin\Debug\es\Microsoft.Expression.Interactions.resources.dll
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\Podręcznik MVVM 04 ZadaniaWPF\Podręcznik MVVM 04 ZadaniaWPF\bin\Debug\fr\Microsoft.Expression.Interactions.resources.dll
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\Podręcznik MVVM 04 ZadaniaWPF\Podręcznik MVVM 04 ZadaniaWPF\bin\Debug\it\Microsoft.Expression.Interactions.resources.dll
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\Podręcznik MVVM 04 ZadaniaWPF\Podręcznik MVVM 04 ZadaniaWPF\bin\Debug\ja\Microsoft.Expression.Interactions.resources.dll
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\Podręcznik MVVM 04 ZadaniaWPF\Podręcznik MVVM 04 ZadaniaWPF\bin\Debug\ko\Microsoft.Expression.Interactions.resources.dll
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\Podręcznik MVVM 04 ZadaniaWPF\Podręcznik MVVM 04 ZadaniaWPF\bin\Debug\ru\Microsoft.Expression.Interactions.resources.dll
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\Podręcznik MVVM 04 ZadaniaWPF\Podręcznik MVVM 04 ZadaniaWPF\bin\Debug\zh-Hans\Microsoft.Expression.Interactions.resources.dll
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\Podręcznik MVVM 04 ZadaniaWPF\Podręcznik MVVM 04 ZadaniaWPF\bin\Debug\zh-Hant\Microsoft.Expression.Interactions.resources.dll
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\Podręcznik MVVM 04 ZadaniaWPF\Podręcznik MVVM 04 ZadaniaWPF\bin\Debug\de\System.Windows.Interactivity.resources.dll
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\Podręcznik MVVM 04 ZadaniaWPF\Podręcznik MVVM 04 ZadaniaWPF\bin\Debug\en\System.Windows.Interactivity.resources.dll
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\Podręcznik MVVM 04 ZadaniaWPF\Podręcznik MVVM 04 ZadaniaWPF\bin\Debug\es\System.Windows.Interactivity.resources.dll
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\Podręcznik MVVM 04 ZadaniaWPF\Podręcznik MVVM 04 ZadaniaWPF\bin\Debug\fr\System.Windows.Interactivity.resources.dll
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\Podręcznik MVVM 04 ZadaniaWPF\Podręcznik MVVM 04 ZadaniaWPF\bin\Debug\it\System.Windows.Interactivity.resources.dll
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\Podręcznik MVVM 04 ZadaniaWPF\Podręcznik MVVM 04 ZadaniaWPF\bin\Debug\ja\System.Windows.Interactivity.resources.dll
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\Podręcznik MVVM 04 ZadaniaWPF\Podręcznik MVVM 04 ZadaniaWPF\bin\Debug\ko\System.Windows.Interactivity.resources.dll
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\Podręcznik MVVM 04 ZadaniaWPF\Podręcznik MVVM 04 ZadaniaWPF\bin\Debug\ru\System.Windows.Interactivity.resources.dll
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\Podręcznik MVVM 04 ZadaniaWPF\Podręcznik MVVM 04 ZadaniaWPF\bin\Debug\zh-Hans\System.Windows.Interactivity.resources.dll
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\Podręcznik MVVM 04 ZadaniaWPF\Podręcznik MVVM 04 ZadaniaWPF\bin\Debug\zh-Hant\System.Windows.Interactivity.resources.dll
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\Podręcznik MVVM 04 ZadaniaWPF\Podręcznik MVVM 04 ZadaniaWPF\obj\Debug\Podręcznik MVVM 04 ZadaniaWPF.csprojAssemblyReference.cache
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\Podręcznik MVVM 04 ZadaniaWPF\Podręcznik MVVM 04 ZadaniaWPF\obj\Debug\MainWindow.g.cs
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\Podręcznik MVVM 04 ZadaniaWPF\Podręcznik MVVM 04 ZadaniaWPF\obj\Debug\App.g.cs
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\Podręcznik MVVM 04 ZadaniaWPF\Podręcznik MVVM 04 ZadaniaWPF\obj\Debug\GeneratedInternalTypeHelper.g.cs
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\Podręcznik MVVM 04 ZadaniaWPF\Podręcznik MVVM 04 ZadaniaWPF\obj\Debug\Podręcznik MVVM 04 ZadaniaWPF_MarkupCompile.cache
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\Podręcznik MVVM 04 ZadaniaWPF\Podręcznik MVVM 04 ZadaniaWPF\obj\Debug\Podręcznik MVVM 04 ZadaniaWPF_MarkupCompile.lref
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\Podręcznik MVVM 04 ZadaniaWPF\Podręcznik MVVM 04 ZadaniaWPF\obj\Debug\MainWindow.baml
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\Podręcznik MVVM 04 ZadaniaWPF\Podręcznik MVVM 04 ZadaniaWPF\obj\Debug\Podręcznik MVVM 04 ZadaniaWPF.g.resources
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\Podręcznik MVVM 04 ZadaniaWPF\Podręcznik MVVM 04 ZadaniaWPF\obj\Debug\Podręcznik_MVVM_04_ZadaniaWPF.Properties.Resources.resources
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\Podręcznik MVVM 04 ZadaniaWPF\Podręcznik MVVM 04 ZadaniaWPF\obj\Debug\Podręcznik MVVM 04 ZadaniaWPF.csproj.GenerateResource.cache
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\Podręcznik MVVM 04 ZadaniaWPF\Podręcznik MVVM 04 ZadaniaWPF\obj\Debug\Podręcznik MVVM 04 ZadaniaWPF.csproj.CoreCompileInputs.cache
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\Podręcznik MVVM 04 ZadaniaWPF\Podręcznik MVVM 04 ZadaniaWPF\obj\Debug\Podręcznik MVVM 04 ZadaniaWPF.csproj.CopyComplete
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\Podręcznik MVVM 04 ZadaniaWPF\Podręcznik MVVM 04 ZadaniaWPF\obj\Debug\Podręcznik MVVM 04 ZadaniaWPF.exe
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\Podręcznik MVVM 04 ZadaniaWPF\Podręcznik MVVM 04 ZadaniaWPF\obj\Debug\Podręcznik MVVM 04 ZadaniaWPF.pdb

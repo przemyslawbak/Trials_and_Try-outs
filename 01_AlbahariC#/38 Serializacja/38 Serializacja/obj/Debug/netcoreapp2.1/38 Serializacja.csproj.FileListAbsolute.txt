@@ -1,0 +1,11 @@
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\Albahari C# 6.0\38 Serializacja\38 Serializacja\bin\Debug\netcoreapp2.1\38 Serializacja.deps.json
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\Albahari C# 6.0\38 Serializacja\38 Serializacja\bin\Debug\netcoreapp2.1\38 Serializacja.runtimeconfig.json
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\Albahari C# 6.0\38 Serializacja\38 Serializacja\bin\Debug\netcoreapp2.1\38 Serializacja.runtimeconfig.dev.json
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\Albahari C# 6.0\38 Serializacja\38 Serializacja\bin\Debug\netcoreapp2.1\38 Serializacja.dll
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\Albahari C# 6.0\38 Serializacja\38 Serializacja\bin\Debug\netcoreapp2.1\38 Serializacja.pdb
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\Albahari C# 6.0\38 Serializacja\38 Serializacja\obj\Debug\netcoreapp2.1\38 Serializacja.csprojAssemblyReference.cache
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\Albahari C# 6.0\38 Serializacja\38 Serializacja\obj\Debug\netcoreapp2.1\38 Serializacja.csproj.CoreCompileInputs.cache
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\Albahari C# 6.0\38 Serializacja\38 Serializacja\obj\Debug\netcoreapp2.1\38 Serializacja.AssemblyInfoInputs.cache
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\Albahari C# 6.0\38 Serializacja\38 Serializacja\obj\Debug\netcoreapp2.1\38 Serializacja.AssemblyInfo.cs
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\Albahari C# 6.0\38 Serializacja\38 Serializacja\obj\Debug\netcoreapp2.1\38 Serializacja.dll
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\Albahari C# 6.0\38 Serializacja\38 Serializacja\obj\Debug\netcoreapp2.1\38 Serializacja.pdb

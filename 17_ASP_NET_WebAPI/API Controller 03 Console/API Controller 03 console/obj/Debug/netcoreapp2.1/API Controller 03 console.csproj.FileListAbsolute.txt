@@ -1,0 +1,40 @@
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\!!Trials!!\API Controller 03 console\API Controller 03 console\bin\Debug\netcoreapp2.1\API Controller 03 console.deps.json
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\!!Trials!!\API Controller 03 console\API Controller 03 console\bin\Debug\netcoreapp2.1\API Controller 03 console.runtimeconfig.json
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\!!Trials!!\API Controller 03 console\API Controller 03 console\bin\Debug\netcoreapp2.1\API Controller 03 console.runtimeconfig.dev.json
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\!!Trials!!\API Controller 03 console\API Controller 03 console\bin\Debug\netcoreapp2.1\API Controller 03 console.dll
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\!!Trials!!\API Controller 03 console\API Controller 03 console\bin\Debug\netcoreapp2.1\API Controller 03 console.pdb
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\!!Trials!!\API Controller 03 console\API Controller 03 console\bin\Debug\netcoreapp2.1\System.Net.Http.Formatting.dll
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\!!Trials!!\API Controller 03 console\API Controller 03 console\obj\Debug\netcoreapp2.1\API Controller 03 console.csprojAssemblyReference.cache
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\!!Trials!!\API Controller 03 console\API Controller 03 console\obj\Debug\netcoreapp2.1\API Controller 03 console.csproj.CoreCompileInputs.cache
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\!!Trials!!\API Controller 03 console\API Controller 03 console\obj\Debug\netcoreapp2.1\API Controller 03 console.AssemblyInfoInputs.cache
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\!!Trials!!\API Controller 03 console\API Controller 03 console\obj\Debug\netcoreapp2.1\API Controller 03 console.AssemblyInfo.cs
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\!!Trials!!\API Controller 03 console\API Controller 03 console\obj\Debug\netcoreapp2.1\API Controller 03 console.csproj.CopyComplete
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\!!Trials!!\API Controller 03 console\API Controller 03 console\obj\Debug\netcoreapp2.1\API Controller 03 console.dll
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\!!Trials!!\API Controller 03 console\API Controller 03 console\obj\Debug\netcoreapp2.1\API Controller 03 console.pdb
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\!!Trials!!\API Controller 03 console\API Controller 03 console\bin\Debug\netcoreapp2.1\API Controller 03 console.dll.config
+C:\Users\asus\Desktop\zadanie\API Controller 03 console\API Controller 03 console\bin\Debug\netcoreapp2.1\API Controller 03 console.dll.config
+C:\Users\asus\Desktop\zadanie\API Controller 03 console\API Controller 03 console\bin\Debug\netcoreapp2.1\API Controller 03 console.deps.json
+C:\Users\asus\Desktop\zadanie\API Controller 03 console\API Controller 03 console\bin\Debug\netcoreapp2.1\API Controller 03 console.runtimeconfig.json
+C:\Users\asus\Desktop\zadanie\API Controller 03 console\API Controller 03 console\bin\Debug\netcoreapp2.1\API Controller 03 console.runtimeconfig.dev.json
+C:\Users\asus\Desktop\zadanie\API Controller 03 console\API Controller 03 console\bin\Debug\netcoreapp2.1\API Controller 03 console.dll
+C:\Users\asus\Desktop\zadanie\API Controller 03 console\API Controller 03 console\bin\Debug\netcoreapp2.1\API Controller 03 console.pdb
+C:\Users\asus\Desktop\zadanie\API Controller 03 console\API Controller 03 console\bin\Debug\netcoreapp2.1\System.Net.Http.Formatting.dll
+C:\Users\asus\Desktop\zadanie\API Controller 03 console\API Controller 03 console\obj\Debug\netcoreapp2.1\API Controller 03 console.csprojAssemblyReference.cache
+C:\Users\asus\Desktop\zadanie\API Controller 03 console\API Controller 03 console\obj\Debug\netcoreapp2.1\API Controller 03 console.csproj.CoreCompileInputs.cache
+C:\Users\asus\Desktop\zadanie\API Controller 03 console\API Controller 03 console\obj\Debug\netcoreapp2.1\API Controller 03 console.AssemblyInfoInputs.cache
+C:\Users\asus\Desktop\zadanie\API Controller 03 console\API Controller 03 console\obj\Debug\netcoreapp2.1\API Controller 03 console.AssemblyInfo.cs
+C:\Users\asus\Desktop\zadanie\API Controller 03 console\API Controller 03 console\obj\Debug\netcoreapp2.1\API Controller 03 console.csproj.CopyComplete
+C:\Users\asus\Desktop\zadanie\API Controller 03 console\API Controller 03 console\obj\Debug\netcoreapp2.1\API Controller 03 console.dll
+C:\Users\asus\Desktop\zadanie\API Controller 03 console\API Controller 03 console\obj\Debug\netcoreapp2.1\API Controller 03 console.pdb
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\API Controller 03 Console\API Controller 03 console\bin\Debug\netcoreapp2.1\API Controller 03 console.dll.config
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\API Controller 03 Console\API Controller 03 console\bin\Debug\netcoreapp2.1\API Controller 03 console.deps.json
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\API Controller 03 Console\API Controller 03 console\bin\Debug\netcoreapp2.1\API Controller 03 console.runtimeconfig.json
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\API Controller 03 Console\API Controller 03 console\bin\Debug\netcoreapp2.1\API Controller 03 console.runtimeconfig.dev.json
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\API Controller 03 Console\API Controller 03 console\bin\Debug\netcoreapp2.1\API Controller 03 console.dll
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\API Controller 03 Console\API Controller 03 console\bin\Debug\netcoreapp2.1\API Controller 03 console.pdb
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\API Controller 03 Console\API Controller 03 console\obj\Debug\netcoreapp2.1\API Controller 03 console.csprojAssemblyReference.cache
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\API Controller 03 Console\API Controller 03 console\obj\Debug\netcoreapp2.1\API Controller 03 console.csproj.CoreCompileInputs.cache
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\API Controller 03 Console\API Controller 03 console\obj\Debug\netcoreapp2.1\API Controller 03 console.AssemblyInfoInputs.cache
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\API Controller 03 Console\API Controller 03 console\obj\Debug\netcoreapp2.1\API Controller 03 console.AssemblyInfo.cs
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\API Controller 03 Console\API Controller 03 console\obj\Debug\netcoreapp2.1\API Controller 03 console.dll
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\API Controller 03 Console\API Controller 03 console\obj\Debug\netcoreapp2.1\API Controller 03 console.pdb

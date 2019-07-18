@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Candidate xmlns:i="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://oreilly.com/nutshell">
+  <HomeAddress xmlns:d2p1="http://schemas.datacontract.org/2004/07/_38_Serializacja" i:type="d2p1:USAddress">
+    <d2p1:Postcode>02138</d2p1:Postcode>
+    <d2p1:Street>Fawcett St</d2p1:Street>
+  </HomeAddress>
+  <ClaimedAge>30</ClaimedAge>
+  <FirstName>Staszek</FirstName>
+</Candidate>

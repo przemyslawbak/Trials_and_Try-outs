@@ -1,0 +1,99 @@
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\React 01 Podrecznik\React 01 Podrecznik\bin\Debug\netcoreapp2.0\React_01_Podrecznik.deps.json
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\React 01 Podrecznik\React 01 Podrecznik\bin\Debug\netcoreapp2.0\React_01_Podrecznik.runtimeconfig.json
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\React 01 Podrecznik\React 01 Podrecznik\bin\Debug\netcoreapp2.0\React_01_Podrecznik.runtimeconfig.dev.json
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\React 01 Podrecznik\React 01 Podrecznik\bin\Debug\netcoreapp2.0\React_01_Podrecznik.dll
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\React 01 Podrecznik\React 01 Podrecznik\bin\Debug\netcoreapp2.0\React_01_Podrecznik.pdb
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\React 01 Podrecznik\React 01 Podrecznik\obj\Debug\netcoreapp2.0\React_01_Podrecznik.csprojAssemblyReference.cache
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\React 01 Podrecznik\React 01 Podrecznik\obj\Debug\netcoreapp2.0\React_01_Podrecznik.csproj.CoreCompileInputs.cache
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\React 01 Podrecznik\React 01 Podrecznik\obj\Debug\netcoreapp2.0\React_01_Podrecznik.AssemblyInfoInputs.cache
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\React 01 Podrecznik\React 01 Podrecznik\obj\Debug\netcoreapp2.0\React_01_Podrecznik.AssemblyInfo.cs
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\React 01 Podrecznik\React 01 Podrecznik\obj\Debug\netcoreapp2.0\React_01_Podrecznik.dll
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\React 01 Podrecznik\React 01 Podrecznik\obj\Debug\netcoreapp2.0\React_01_Podrecznik.pdb
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\React 04 Podrecznik Konfiguracja\React 01 Podrecznik\bin\Debug\netcoreapp2.0\React_01_Podrecznik.deps.json
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\React 04 Podrecznik Konfiguracja\React 01 Podrecznik\bin\Debug\netcoreapp2.0\React_01_Podrecznik.runtimeconfig.json
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\React 04 Podrecznik Konfiguracja\React 01 Podrecznik\bin\Debug\netcoreapp2.0\React_01_Podrecznik.runtimeconfig.dev.json
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\React 04 Podrecznik Konfiguracja\React 01 Podrecznik\bin\Debug\netcoreapp2.0\React_01_Podrecznik.dll
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\React 04 Podrecznik Konfiguracja\React 01 Podrecznik\bin\Debug\netcoreapp2.0\React_01_Podrecznik.pdb
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\React 04 Podrecznik Konfiguracja\React 01 Podrecznik\obj\Debug\netcoreapp2.0\React_01_Podrecznik.csprojAssemblyReference.cache
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\React 04 Podrecznik Konfiguracja\React 01 Podrecznik\obj\Debug\netcoreapp2.0\React_01_Podrecznik.csproj.CoreCompileInputs.cache
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\React 04 Podrecznik Konfiguracja\React 01 Podrecznik\obj\Debug\netcoreapp2.0\React_01_Podrecznik.AssemblyInfoInputs.cache
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\React 04 Podrecznik Konfiguracja\React 01 Podrecznik\obj\Debug\netcoreapp2.0\React_01_Podrecznik.AssemblyInfo.cs
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\React 04 Podrecznik Konfiguracja\React 01 Podrecznik\obj\Debug\netcoreapp2.0\React_01_Podrecznik.dll
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\React 04 Podrecznik Konfiguracja\React 01 Podrecznik\obj\Debug\netcoreapp2.0\React_01_Podrecznik.pdb
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\React 05 Podrecznik Konfiguracja i Webpack\React 01 Podrecznik\bin\Debug\netcoreapp2.0\React_01_Podrecznik.deps.json
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\React 05 Podrecznik Konfiguracja i Webpack\React 01 Podrecznik\bin\Debug\netcoreapp2.0\React_01_Podrecznik.runtimeconfig.json
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\React 05 Podrecznik Konfiguracja i Webpack\React 01 Podrecznik\bin\Debug\netcoreapp2.0\React_01_Podrecznik.runtimeconfig.dev.json
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\React 05 Podrecznik Konfiguracja i Webpack\React 01 Podrecznik\bin\Debug\netcoreapp2.0\React_01_Podrecznik.dll
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\React 05 Podrecznik Konfiguracja i Webpack\React 01 Podrecznik\bin\Debug\netcoreapp2.0\React_01_Podrecznik.pdb
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\React 05 Podrecznik Konfiguracja i Webpack\React 01 Podrecznik\obj\Debug\netcoreapp2.0\React_01_Podrecznik.csprojAssemblyReference.cache
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\React 05 Podrecznik Konfiguracja i Webpack\React 01 Podrecznik\obj\Debug\netcoreapp2.0\React_01_Podrecznik.csproj.CoreCompileInputs.cache
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\React 05 Podrecznik Konfiguracja i Webpack\React 01 Podrecznik\obj\Debug\netcoreapp2.0\React_01_Podrecznik.AssemblyInfoInputs.cache
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\React 05 Podrecznik Konfiguracja i Webpack\React 01 Podrecznik\obj\Debug\netcoreapp2.0\React_01_Podrecznik.AssemblyInfo.cs
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\React 05 Podrecznik Konfiguracja i Webpack\React 01 Podrecznik\obj\Debug\netcoreapp2.0\React_01_Podrecznik.dll
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\React 05 Podrecznik Konfiguracja i Webpack\React 01 Podrecznik\obj\Debug\netcoreapp2.0\React_01_Podrecznik.pdb
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\React 06 Podrecznik Wineshop + Webpack\React 01 Podrecznik\bin\Debug\netcoreapp2.0\React_01_Podrecznik.deps.json
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\React 06 Podrecznik Wineshop + Webpack\React 01 Podrecznik\bin\Debug\netcoreapp2.0\React_01_Podrecznik.runtimeconfig.json
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\React 06 Podrecznik Wineshop + Webpack\React 01 Podrecznik\bin\Debug\netcoreapp2.0\React_01_Podrecznik.runtimeconfig.dev.json
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\React 06 Podrecznik Wineshop + Webpack\React 01 Podrecznik\bin\Debug\netcoreapp2.0\React_01_Podrecznik.dll
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\React 06 Podrecznik Wineshop + Webpack\React 01 Podrecznik\bin\Debug\netcoreapp2.0\React_01_Podrecznik.pdb
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\React 06 Podrecznik Wineshop + Webpack\React 01 Podrecznik\obj\Debug\netcoreapp2.0\React_01_Podrecznik.csprojAssemblyReference.cache
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\React 06 Podrecznik Wineshop + Webpack\React 01 Podrecznik\obj\Debug\netcoreapp2.0\React_01_Podrecznik.csproj.CoreCompileInputs.cache
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\React 06 Podrecznik Wineshop + Webpack\React 01 Podrecznik\obj\Debug\netcoreapp2.0\React_01_Podrecznik.AssemblyInfoInputs.cache
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\React 06 Podrecznik Wineshop + Webpack\React 01 Podrecznik\obj\Debug\netcoreapp2.0\React_01_Podrecznik.AssemblyInfo.cs
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\React 06 Podrecznik Wineshop + Webpack\React 01 Podrecznik\obj\Debug\netcoreapp2.0\React_01_Podrecznik.dll
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\React 06 Podrecznik Wineshop + Webpack\React 01 Podrecznik\obj\Debug\netcoreapp2.0\React_01_Podrecznik.pdb
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\React 06 Video JS Crash\React 01 Podrecznik\bin\Debug\netcoreapp2.0\React_01_Podrecznik.deps.json
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\React 06 Video JS Crash\React 01 Podrecznik\bin\Debug\netcoreapp2.0\React_01_Podrecznik.runtimeconfig.json
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\React 06 Video JS Crash\React 01 Podrecznik\bin\Debug\netcoreapp2.0\React_01_Podrecznik.runtimeconfig.dev.json
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\React 06 Video JS Crash\React 01 Podrecznik\bin\Debug\netcoreapp2.0\React_01_Podrecznik.dll
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\React 06 Video JS Crash\React 01 Podrecznik\bin\Debug\netcoreapp2.0\React_01_Podrecznik.pdb
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\React 06 Video JS Crash\React 01 Podrecznik\obj\Debug\netcoreapp2.0\React_01_Podrecznik.csprojAssemblyReference.cache
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\React 06 Video JS Crash\React 01 Podrecznik\obj\Debug\netcoreapp2.0\React_01_Podrecznik.csproj.CoreCompileInputs.cache
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\React 06 Video JS Crash\React 01 Podrecznik\obj\Debug\netcoreapp2.0\React_01_Podrecznik.AssemblyInfoInputs.cache
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\React 06 Video JS Crash\React 01 Podrecznik\obj\Debug\netcoreapp2.0\React_01_Podrecznik.AssemblyInfo.cs
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\React 06 Video JS Crash\React 01 Podrecznik\obj\Debug\netcoreapp2.0\React_01_Podrecznik.dll
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\React 06 Video JS Crash\React 01 Podrecznik\obj\Debug\netcoreapp2.0\React_01_Podrecznik.pdb
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\React 06 Video JS Crash+styling\React 01 Podrecznik\bin\Debug\netcoreapp2.0\React_01_Podrecznik.deps.json
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\React 06 Video JS Crash+styling\React 01 Podrecznik\bin\Debug\netcoreapp2.0\React_01_Podrecznik.runtimeconfig.json
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\React 06 Video JS Crash+styling\React 01 Podrecznik\bin\Debug\netcoreapp2.0\React_01_Podrecznik.runtimeconfig.dev.json
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\React 06 Video JS Crash+styling\React 01 Podrecznik\bin\Debug\netcoreapp2.0\React_01_Podrecznik.dll
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\React 06 Video JS Crash+styling\React 01 Podrecznik\bin\Debug\netcoreapp2.0\React_01_Podrecznik.pdb
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\React 06 Video JS Crash+styling\React 01 Podrecznik\obj\Debug\netcoreapp2.0\React_01_Podrecznik.csprojAssemblyReference.cache
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\React 06 Video JS Crash+styling\React 01 Podrecznik\obj\Debug\netcoreapp2.0\React_01_Podrecznik.csproj.CoreCompileInputs.cache
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\React 06 Video JS Crash+styling\React 01 Podrecznik\obj\Debug\netcoreapp2.0\React_01_Podrecznik.AssemblyInfoInputs.cache
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\React 06 Video JS Crash+styling\React 01 Podrecznik\obj\Debug\netcoreapp2.0\React_01_Podrecznik.AssemblyInfo.cs
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\React 06 Video JS Crash+styling\React 01 Podrecznik\obj\Debug\netcoreapp2.0\React_01_Podrecznik.dll
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\React 06 Video JS Crash+styling\React 01 Podrecznik\obj\Debug\netcoreapp2.0\React_01_Podrecznik.pdb
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\React 06 Video JS Crash+styling+EF\React 01 Podrecznik\bin\Debug\netcoreapp2.0\React_01_Podrecznik.deps.json
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\React 06 Video JS Crash+styling+EF\React 01 Podrecznik\bin\Debug\netcoreapp2.0\React_01_Podrecznik.runtimeconfig.json
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\React 06 Video JS Crash+styling+EF\React 01 Podrecznik\bin\Debug\netcoreapp2.0\React_01_Podrecznik.runtimeconfig.dev.json
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\React 06 Video JS Crash+styling+EF\React 01 Podrecznik\bin\Debug\netcoreapp2.0\React_01_Podrecznik.dll
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\React 06 Video JS Crash+styling+EF\React 01 Podrecznik\bin\Debug\netcoreapp2.0\React_01_Podrecznik.pdb
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\React 06 Video JS Crash+styling+EF\React 01 Podrecznik\obj\Debug\netcoreapp2.0\React_01_Podrecznik.csprojAssemblyReference.cache
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\React 06 Video JS Crash+styling+EF\React 01 Podrecznik\obj\Debug\netcoreapp2.0\React_01_Podrecznik.csproj.CoreCompileInputs.cache
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\React 06 Video JS Crash+styling+EF\React 01 Podrecznik\obj\Debug\netcoreapp2.0\React_01_Podrecznik.AssemblyInfoInputs.cache
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\React 06 Video JS Crash+styling+EF\React 01 Podrecznik\obj\Debug\netcoreapp2.0\React_01_Podrecznik.AssemblyInfo.cs
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\React 06 Video JS Crash+styling+EF\React 01 Podrecznik\obj\Debug\netcoreapp2.0\React_01_Podrecznik.dll
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\React 06 Video JS Crash+styling+EF\React 01 Podrecznik\obj\Debug\netcoreapp2.0\React_01_Podrecznik.pdb
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\React 06 Chat\React 01 Podrecznik\bin\Debug\netcoreapp2.0\React_01_Podrecznik.deps.json
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\React 06 Chat\React 01 Podrecznik\bin\Debug\netcoreapp2.0\React_01_Podrecznik.runtimeconfig.json
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\React 06 Chat\React 01 Podrecznik\bin\Debug\netcoreapp2.0\React_01_Podrecznik.runtimeconfig.dev.json
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\React 06 Chat\React 01 Podrecznik\bin\Debug\netcoreapp2.0\React_01_Podrecznik.dll
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\React 06 Chat\React 01 Podrecznik\bin\Debug\netcoreapp2.0\React_01_Podrecznik.pdb
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\React 06 Chat\React 01 Podrecznik\obj\Debug\netcoreapp2.0\React_01_Podrecznik.csprojAssemblyReference.cache
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\React 06 Chat\React 01 Podrecznik\obj\Debug\netcoreapp2.0\React_01_Podrecznik.csproj.CoreCompileInputs.cache
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\React 06 Chat\React 01 Podrecznik\obj\Debug\netcoreapp2.0\React_01_Podrecznik.AssemblyInfoInputs.cache
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\React 06 Chat\React 01 Podrecznik\obj\Debug\netcoreapp2.0\React_01_Podrecznik.AssemblyInfo.cs
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\React 06 Chat\React 01 Podrecznik\obj\Debug\netcoreapp2.0\React_01_Podrecznik.dll
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\React 06 Chat\React 01 Podrecznik\obj\Debug\netcoreapp2.0\React_01_Podrecznik.pdb
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\React 07 Chat\React 01 Podrecznik\bin\Debug\netcoreapp2.0\React_01_Podrecznik.deps.json
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\React 07 Chat\React 01 Podrecznik\bin\Debug\netcoreapp2.0\React_01_Podrecznik.runtimeconfig.json
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\React 07 Chat\React 01 Podrecznik\bin\Debug\netcoreapp2.0\React_01_Podrecznik.runtimeconfig.dev.json
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\React 07 Chat\React 01 Podrecznik\bin\Debug\netcoreapp2.0\React_01_Podrecznik.dll
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\React 07 Chat\React 01 Podrecznik\bin\Debug\netcoreapp2.0\React_01_Podrecznik.pdb
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\React 07 Chat\React 01 Podrecznik\obj\Debug\netcoreapp2.0\React_01_Podrecznik.csprojAssemblyReference.cache
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\React 07 Chat\React 01 Podrecznik\obj\Debug\netcoreapp2.0\React_01_Podrecznik.csproj.CoreCompileInputs.cache
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\React 07 Chat\React 01 Podrecznik\obj\Debug\netcoreapp2.0\React_01_Podrecznik.AssemblyInfoInputs.cache
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\React 07 Chat\React 01 Podrecznik\obj\Debug\netcoreapp2.0\React_01_Podrecznik.AssemblyInfo.cs
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\React 07 Chat\React 01 Podrecznik\obj\Debug\netcoreapp2.0\React_01_Podrecznik.dll
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\React 07 Chat\React 01 Podrecznik\obj\Debug\netcoreapp2.0\React_01_Podrecznik.pdb

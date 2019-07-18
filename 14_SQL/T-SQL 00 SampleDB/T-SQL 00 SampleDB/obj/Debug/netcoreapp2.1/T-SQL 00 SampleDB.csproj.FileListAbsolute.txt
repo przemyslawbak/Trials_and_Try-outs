@@ -1,0 +1,11 @@
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\T-SQL 00 SampleDB\T-SQL 00 SampleDB\bin\Debug\netcoreapp2.1\T-SQL 00 SampleDB.deps.json
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\T-SQL 00 SampleDB\T-SQL 00 SampleDB\bin\Debug\netcoreapp2.1\T-SQL 00 SampleDB.runtimeconfig.json
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\T-SQL 00 SampleDB\T-SQL 00 SampleDB\bin\Debug\netcoreapp2.1\T-SQL 00 SampleDB.runtimeconfig.dev.json
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\T-SQL 00 SampleDB\T-SQL 00 SampleDB\bin\Debug\netcoreapp2.1\T-SQL 00 SampleDB.dll
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\T-SQL 00 SampleDB\T-SQL 00 SampleDB\obj\Debug\netcoreapp2.1\T-SQL 00 SampleDB.csprojAssemblyReference.cache
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\T-SQL 00 SampleDB\T-SQL 00 SampleDB\obj\Debug\netcoreapp2.1\T-SQL 00 SampleDB.csproj.CoreCompileInputs.cache
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\T-SQL 00 SampleDB\T-SQL 00 SampleDB\obj\Debug\netcoreapp2.1\T-SQL 00 SampleDB.AssemblyInfoInputs.cache
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\T-SQL 00 SampleDB\T-SQL 00 SampleDB\obj\Debug\netcoreapp2.1\T-SQL 00 SampleDB.AssemblyInfo.cs
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\T-SQL 00 SampleDB\T-SQL 00 SampleDB\bin\Debug\netcoreapp2.1\T-SQL 00 SampleDB.pdb
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\T-SQL 00 SampleDB\T-SQL 00 SampleDB\obj\Debug\netcoreapp2.1\T-SQL 00 SampleDB.dll
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\T-SQL 00 SampleDB\T-SQL 00 SampleDB\obj\Debug\netcoreapp2.1\T-SQL 00 SampleDB.pdb

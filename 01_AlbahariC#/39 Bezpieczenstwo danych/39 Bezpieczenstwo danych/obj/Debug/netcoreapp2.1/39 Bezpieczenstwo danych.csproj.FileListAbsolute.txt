@@ -1,0 +1,11 @@
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\Albahari C# 6.0\39 Bezpieczenstwo danych\39 Bezpieczenstwo danych\bin\Debug\netcoreapp2.1\39 Bezpieczenstwo danych.deps.json
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\Albahari C# 6.0\39 Bezpieczenstwo danych\39 Bezpieczenstwo danych\bin\Debug\netcoreapp2.1\39 Bezpieczenstwo danych.runtimeconfig.json
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\Albahari C# 6.0\39 Bezpieczenstwo danych\39 Bezpieczenstwo danych\bin\Debug\netcoreapp2.1\39 Bezpieczenstwo danych.runtimeconfig.dev.json
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\Albahari C# 6.0\39 Bezpieczenstwo danych\39 Bezpieczenstwo danych\bin\Debug\netcoreapp2.1\39 Bezpieczenstwo danych.dll
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\Albahari C# 6.0\39 Bezpieczenstwo danych\39 Bezpieczenstwo danych\bin\Debug\netcoreapp2.1\39 Bezpieczenstwo danych.pdb
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\Albahari C# 6.0\39 Bezpieczenstwo danych\39 Bezpieczenstwo danych\obj\Debug\netcoreapp2.1\39 Bezpieczenstwo danych.csprojAssemblyReference.cache
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\Albahari C# 6.0\39 Bezpieczenstwo danych\39 Bezpieczenstwo danych\obj\Debug\netcoreapp2.1\39 Bezpieczenstwo danych.csproj.CoreCompileInputs.cache
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\Albahari C# 6.0\39 Bezpieczenstwo danych\39 Bezpieczenstwo danych\obj\Debug\netcoreapp2.1\39 Bezpieczenstwo danych.AssemblyInfoInputs.cache
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\Albahari C# 6.0\39 Bezpieczenstwo danych\39 Bezpieczenstwo danych\obj\Debug\netcoreapp2.1\39 Bezpieczenstwo danych.AssemblyInfo.cs
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\Albahari C# 6.0\39 Bezpieczenstwo danych\39 Bezpieczenstwo danych\obj\Debug\netcoreapp2.1\39 Bezpieczenstwo danych.dll
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\Albahari C# 6.0\39 Bezpieczenstwo danych\39 Bezpieczenstwo danych\obj\Debug\netcoreapp2.1\39 Bezpieczenstwo danych.pdb

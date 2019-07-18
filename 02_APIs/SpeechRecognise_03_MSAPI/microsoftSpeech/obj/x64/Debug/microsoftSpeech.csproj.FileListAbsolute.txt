@@ -1,0 +1,11 @@
+C:\Users\asus\Desktop\microsoftSpeech\microsoftSpeech\bin\x64\Debug\Microsoft.CognitiveServices.Speech.core.dll
+C:\Users\asus\Desktop\microsoftSpeech\microsoftSpeech\bin\x64\Debug\microsoftSpeech.exe.config
+C:\Users\asus\Desktop\microsoftSpeech\microsoftSpeech\bin\x64\Debug\microsoftSpeech.exe
+C:\Users\asus\Desktop\microsoftSpeech\microsoftSpeech\bin\x64\Debug\microsoftSpeech.pdb
+C:\Users\asus\Desktop\microsoftSpeech\microsoftSpeech\bin\x64\Debug\Microsoft.CognitiveServices.Speech.csharp.dll
+C:\Users\asus\Desktop\microsoftSpeech\microsoftSpeech\bin\x64\Debug\Microsoft.CognitiveServices.Speech.csharp.xml
+C:\Users\asus\Desktop\microsoftSpeech\microsoftSpeech\obj\x64\Debug\microsoftSpeech.csprojAssemblyReference.cache
+C:\Users\asus\Desktop\microsoftSpeech\microsoftSpeech\obj\x64\Debug\microsoftSpeech.csproj.CoreCompileInputs.cache
+C:\Users\asus\Desktop\microsoftSpeech\microsoftSpeech\obj\x64\Debug\microsoftSpeech.csproj.CopyComplete
+C:\Users\asus\Desktop\microsoftSpeech\microsoftSpeech\obj\x64\Debug\microsoftSpeech.exe
+C:\Users\asus\Desktop\microsoftSpeech\microsoftSpeech\obj\x64\Debug\microsoftSpeech.pdb

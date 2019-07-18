@@ -1,0 +1,15 @@
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\Testy 08 Lambda Expressions\Testy 08 Lambda Expressions\bin\Debug\Testy 08 Lambda Expressions.exe.config
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\Testy 08 Lambda Expressions\Testy 08 Lambda Expressions\bin\Debug\Testy 08 Lambda Expressions.exe
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\Testy 08 Lambda Expressions\Testy 08 Lambda Expressions\bin\Debug\Testy 08 Lambda Expressions.pdb
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\Testy 08 Lambda Expressions\Testy 08 Lambda Expressions\obj\Debug\Testy 08 Lambda Expressions.csprojAssemblyReference.cache
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\Testy 08 Lambda Expressions\Testy 08 Lambda Expressions\obj\Debug\MainWindow.g.cs
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\Testy 08 Lambda Expressions\Testy 08 Lambda Expressions\obj\Debug\App.g.cs
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\Testy 08 Lambda Expressions\Testy 08 Lambda Expressions\obj\Debug\Testy 08 Lambda Expressions_MarkupCompile.cache
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\Testy 08 Lambda Expressions\Testy 08 Lambda Expressions\obj\Debug\Testy 08 Lambda Expressions_MarkupCompile.lref
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\Testy 08 Lambda Expressions\Testy 08 Lambda Expressions\obj\Debug\MainWindow.baml
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\Testy 08 Lambda Expressions\Testy 08 Lambda Expressions\obj\Debug\Testy 08 Lambda Expressions.g.resources
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\Testy 08 Lambda Expressions\Testy 08 Lambda Expressions\obj\Debug\Testy_08_Lambda_Expressions.Properties.Resources.resources
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\Testy 08 Lambda Expressions\Testy 08 Lambda Expressions\obj\Debug\Testy 08 Lambda Expressions.csproj.GenerateResource.cache
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\Testy 08 Lambda Expressions\Testy 08 Lambda Expressions\obj\Debug\Testy 08 Lambda Expressions.csproj.CoreCompileInputs.cache
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\Testy 08 Lambda Expressions\Testy 08 Lambda Expressions\obj\Debug\Testy 08 Lambda Expressions.exe
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\Testy 08 Lambda Expressions\Testy 08 Lambda Expressions\obj\Debug\Testy 08 Lambda Expressions.pdb

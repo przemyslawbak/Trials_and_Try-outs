@@ -1,0 +1,11 @@
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\Delegates 01 Kudvenkat\Delegates 01 Kudvenkat\bin\Debug\netcoreapp2.1\Delegates 01 Kudvenkat.deps.json
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\Delegates 01 Kudvenkat\Delegates 01 Kudvenkat\bin\Debug\netcoreapp2.1\Delegates 01 Kudvenkat.runtimeconfig.json
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\Delegates 01 Kudvenkat\Delegates 01 Kudvenkat\bin\Debug\netcoreapp2.1\Delegates 01 Kudvenkat.runtimeconfig.dev.json
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\Delegates 01 Kudvenkat\Delegates 01 Kudvenkat\bin\Debug\netcoreapp2.1\Delegates 01 Kudvenkat.dll
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\Delegates 01 Kudvenkat\Delegates 01 Kudvenkat\bin\Debug\netcoreapp2.1\Delegates 01 Kudvenkat.pdb
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\Delegates 01 Kudvenkat\Delegates 01 Kudvenkat\obj\Debug\netcoreapp2.1\Delegates 01 Kudvenkat.csprojAssemblyReference.cache
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\Delegates 01 Kudvenkat\Delegates 01 Kudvenkat\obj\Debug\netcoreapp2.1\Delegates 01 Kudvenkat.csproj.CoreCompileInputs.cache
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\Delegates 01 Kudvenkat\Delegates 01 Kudvenkat\obj\Debug\netcoreapp2.1\Delegates 01 Kudvenkat.AssemblyInfoInputs.cache
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\Delegates 01 Kudvenkat\Delegates 01 Kudvenkat\obj\Debug\netcoreapp2.1\Delegates 01 Kudvenkat.AssemblyInfo.cs
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\Delegates 01 Kudvenkat\Delegates 01 Kudvenkat\obj\Debug\netcoreapp2.1\Delegates 01 Kudvenkat.dll
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\Delegates 01 Kudvenkat\Delegates 01 Kudvenkat\obj\Debug\netcoreapp2.1\Delegates 01 Kudvenkat.pdb

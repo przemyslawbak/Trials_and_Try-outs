@@ -1,0 +1,14 @@
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\TPt 03 System.Collections.ObjectModel\TPt 03 System.Collections.ObjectModel\bin\Debug\TPt 03 System.Collections.ObjectModel.exe.config
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\TPt 03 System.Collections.ObjectModel\TPt 03 System.Collections.ObjectModel\bin\Debug\TPt 03 System.Collections.ObjectModel.exe
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\TPt 03 System.Collections.ObjectModel\TPt 03 System.Collections.ObjectModel\bin\Debug\TPt 03 System.Collections.ObjectModel.pdb
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\TPt 03 System.Collections.ObjectModel\TPt 03 System.Collections.ObjectModel\obj\Debug\TPt 03 System.Collections.ObjectModel.csprojResolveAssemblyReference.cache
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\TPt 03 System.Collections.ObjectModel\TPt 03 System.Collections.ObjectModel\obj\Debug\MainWindow.g.cs
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\TPt 03 System.Collections.ObjectModel\TPt 03 System.Collections.ObjectModel\obj\Debug\App.g.cs
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\TPt 03 System.Collections.ObjectModel\TPt 03 System.Collections.ObjectModel\obj\Debug\TPt 03 System.Collections.ObjectModel_MarkupCompile.cache
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\TPt 03 System.Collections.ObjectModel\TPt 03 System.Collections.ObjectModel\obj\Debug\TPt 03 System.Collections.ObjectModel_MarkupCompile.lref
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\TPt 03 System.Collections.ObjectModel\TPt 03 System.Collections.ObjectModel\obj\Debug\MainWindow.baml
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\TPt 03 System.Collections.ObjectModel\TPt 03 System.Collections.ObjectModel\obj\Debug\TPt 03 System.Collections.ObjectModel.g.resources
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\TPt 03 System.Collections.ObjectModel\TPt 03 System.Collections.ObjectModel\obj\Debug\TPt_03_System.Collections.ObjectModel.Properties.Resources.resources
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\TPt 03 System.Collections.ObjectModel\TPt 03 System.Collections.ObjectModel\obj\Debug\TPt 03 System.Collections.ObjectModel.csproj.GenerateResource.Cache
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\TPt 03 System.Collections.ObjectModel\TPt 03 System.Collections.ObjectModel\obj\Debug\TPt 03 System.Collections.ObjectModel.exe
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\TPt 03 System.Collections.ObjectModel\TPt 03 System.Collections.ObjectModel\obj\Debug\TPt 03 System.Collections.ObjectModel.pdb

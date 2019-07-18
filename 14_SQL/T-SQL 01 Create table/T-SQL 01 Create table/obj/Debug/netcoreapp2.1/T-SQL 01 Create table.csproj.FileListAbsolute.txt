@@ -1,0 +1,11 @@
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\T-SQL 01 Create table\T-SQL 01 Create table\bin\Debug\netcoreapp2.1\T-SQL 01 Create table.deps.json
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\T-SQL 01 Create table\T-SQL 01 Create table\bin\Debug\netcoreapp2.1\T-SQL 01 Create table.runtimeconfig.json
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\T-SQL 01 Create table\T-SQL 01 Create table\bin\Debug\netcoreapp2.1\T-SQL 01 Create table.runtimeconfig.dev.json
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\T-SQL 01 Create table\T-SQL 01 Create table\bin\Debug\netcoreapp2.1\T-SQL 01 Create table.dll
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\T-SQL 01 Create table\T-SQL 01 Create table\obj\Debug\netcoreapp2.1\T-SQL 01 Create table.csprojAssemblyReference.cache
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\T-SQL 01 Create table\T-SQL 01 Create table\obj\Debug\netcoreapp2.1\T-SQL 01 Create table.csproj.CoreCompileInputs.cache
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\T-SQL 01 Create table\T-SQL 01 Create table\obj\Debug\netcoreapp2.1\T-SQL 01 Create table.AssemblyInfoInputs.cache
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\T-SQL 01 Create table\T-SQL 01 Create table\obj\Debug\netcoreapp2.1\T-SQL 01 Create table.AssemblyInfo.cs
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\T-SQL 01 Create table\T-SQL 01 Create table\bin\Debug\netcoreapp2.1\T-SQL 01 Create table.pdb
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\T-SQL 01 Create table\T-SQL 01 Create table\obj\Debug\netcoreapp2.1\T-SQL 01 Create table.dll
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\T-SQL 01 Create table\T-SQL 01 Create table\obj\Debug\netcoreapp2.1\T-SQL 01 Create table.pdb

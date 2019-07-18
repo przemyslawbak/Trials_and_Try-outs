@@ -1,0 +1,6 @@
+C:\Users\asus\Desktop\Programowanie\Tutoriale i Testy\Testy 06 XmlLoad console\Testy 06 XmlLoad console\bin\Debug\Testy 06 XmlLoad console.exe.config
+C:\Users\asus\Desktop\Programowanie\Tutoriale i Testy\Testy 06 XmlLoad console\Testy 06 XmlLoad console\bin\Debug\Testy 06 XmlLoad console.exe
+C:\Users\asus\Desktop\Programowanie\Tutoriale i Testy\Testy 06 XmlLoad console\Testy 06 XmlLoad console\bin\Debug\Testy 06 XmlLoad console.pdb
+C:\Users\asus\Desktop\Programowanie\Tutoriale i Testy\Testy 06 XmlLoad console\Testy 06 XmlLoad console\obj\Debug\Testy 06 XmlLoad console.csprojResolveAssemblyReference.cache
+C:\Users\asus\Desktop\Programowanie\Tutoriale i Testy\Testy 06 XmlLoad console\Testy 06 XmlLoad console\obj\Debug\Testy 06 XmlLoad console.exe
+C:\Users\asus\Desktop\Programowanie\Tutoriale i Testy\Testy 06 XmlLoad console\Testy 06 XmlLoad console\obj\Debug\Testy 06 XmlLoad console.pdb

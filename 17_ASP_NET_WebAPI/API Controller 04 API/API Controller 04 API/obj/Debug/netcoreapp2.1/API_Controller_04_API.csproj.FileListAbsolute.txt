@@ -1,0 +1,54 @@
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\!!Trials!!\API Controller 04 API\API Controller 04 API\obj\Debug\netcoreapp2.1\API_Controller_04_API.csprojAssemblyReference.cache
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\!!Trials!!\API Controller 04 API\API Controller 04 API\obj\Debug\netcoreapp2.1\API_Controller_04_API.csproj.CoreCompileInputs.cache
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\!!Trials!!\API Controller 04 API\API Controller 04 API\obj\Debug\netcoreapp2.1\API_Controller_04_API.RazorAssemblyInfo.cache
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\!!Trials!!\API Controller 04 API\API Controller 04 API\obj\Debug\netcoreapp2.1\API_Controller_04_API.RazorAssemblyInfo.cs
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\!!Trials!!\API Controller 04 API\API Controller 04 API\obj\Debug\netcoreapp2.1\API_Controller_04_API.AssemblyInfoInputs.cache
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\!!Trials!!\API Controller 04 API\API Controller 04 API\obj\Debug\netcoreapp2.1\API_Controller_04_API.AssemblyInfo.cs
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\!!Trials!!\API Controller 04 API\API Controller 04 API\bin\Debug\netcoreapp2.1\API_Controller_04_API.deps.json
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\!!Trials!!\API Controller 04 API\API Controller 04 API\bin\Debug\netcoreapp2.1\API_Controller_04_API.runtimeconfig.json
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\!!Trials!!\API Controller 04 API\API Controller 04 API\bin\Debug\netcoreapp2.1\API_Controller_04_API.runtimeconfig.dev.json
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\!!Trials!!\API Controller 04 API\API Controller 04 API\bin\Debug\netcoreapp2.1\API_Controller_04_API.dll
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\!!Trials!!\API Controller 04 API\API Controller 04 API\bin\Debug\netcoreapp2.1\API_Controller_04_API.pdb
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\!!Trials!!\API Controller 04 API\API Controller 04 API\bin\Debug\netcoreapp2.1\API_Controller_04_API.Views.dll
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\!!Trials!!\API Controller 04 API\API Controller 04 API\bin\Debug\netcoreapp2.1\API_Controller_04_API.Views.pdb
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\!!Trials!!\API Controller 04 API\API Controller 04 API\obj\Debug\netcoreapp2.1\API_Controller_04_API.TagHelpers.input.cache
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\!!Trials!!\API Controller 04 API\API Controller 04 API\obj\Debug\netcoreapp2.1\API_Controller_04_API.TagHelpers.output.cache
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\!!Trials!!\API Controller 04 API\API Controller 04 API\obj\Debug\netcoreapp2.1\API_Controller_04_API.RazorCoreGenerate.cache
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\!!Trials!!\API Controller 04 API\API Controller 04 API\obj\Debug\netcoreapp2.1\Razor\Views\Home\Index.g.cshtml.cs
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\!!Trials!!\API Controller 04 API\API Controller 04 API\obj\Debug\netcoreapp2.1\Razor\Views\Shared\_Layout.g.cshtml.cs
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\!!Trials!!\API Controller 04 API\API Controller 04 API\obj\Debug\netcoreapp2.1\Razor\Views\_ViewImports.g.cshtml.cs
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\!!Trials!!\API Controller 04 API\API Controller 04 API\obj\Debug\netcoreapp2.1\API_Controller_04_API.RazorTargetAssemblyInfo.cache
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\!!Trials!!\API Controller 04 API\API Controller 04 API\obj\Debug\netcoreapp2.1\API_Controller_04_API.RazorTargetAssemblyInfo.cs
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\!!Trials!!\API Controller 04 API\API Controller 04 API\obj\Debug\netcoreapp2.1\API_Controller_04_API.Views.pdb
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\!!Trials!!\API Controller 04 API\API Controller 04 API\obj\Debug\netcoreapp2.1\API_Controller_04_API.dll
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\!!Trials!!\API Controller 04 API\API Controller 04 API\obj\Debug\netcoreapp2.1\API_Controller_04_API.pdb
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\!!Trials!!\API Controller 04 API\API Controller 04 API\obj\Debug\netcoreapp2.1\API_Controller_04_API.csproj.CopyComplete
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\!!Trials!!\API Controller 04 API\API Controller 04 API\bin\Debug\netcoreapp2.1\API_Controller_04_API.xml
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\!!Trials!!\API Controller 04 API\API Controller 04 API\obj\Debug\netcoreapp2.1\Razor\Views\Error\Error.g.cshtml.cs
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\API Controller 04 API\API Controller 04 API\bin\Debug\netcoreapp2.1\API_Controller_04_API.deps.json
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\API Controller 04 API\API Controller 04 API\bin\Debug\netcoreapp2.1\API_Controller_04_API.runtimeconfig.json
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\API Controller 04 API\API Controller 04 API\bin\Debug\netcoreapp2.1\API_Controller_04_API.runtimeconfig.dev.json
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\API Controller 04 API\API Controller 04 API\bin\Debug\netcoreapp2.1\API_Controller_04_API.dll
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\API Controller 04 API\API Controller 04 API\bin\Debug\netcoreapp2.1\API_Controller_04_API.pdb
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\API Controller 04 API\API Controller 04 API\bin\Debug\netcoreapp2.1\API_Controller_04_API.xml
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\API Controller 04 API\API Controller 04 API\bin\Debug\netcoreapp2.1\API_Controller_04_API.Views.dll
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\API Controller 04 API\API Controller 04 API\bin\Debug\netcoreapp2.1\API_Controller_04_API.Views.pdb
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\API Controller 04 API\API Controller 04 API\obj\Debug\netcoreapp2.1\API_Controller_04_API.csprojAssemblyReference.cache
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\API Controller 04 API\API Controller 04 API\obj\Debug\netcoreapp2.1\API_Controller_04_API.csproj.CoreCompileInputs.cache
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\API Controller 04 API\API Controller 04 API\obj\Debug\netcoreapp2.1\API_Controller_04_API.RazorAssemblyInfo.cache
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\API Controller 04 API\API Controller 04 API\obj\Debug\netcoreapp2.1\API_Controller_04_API.RazorAssemblyInfo.cs
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\API Controller 04 API\API Controller 04 API\obj\Debug\netcoreapp2.1\API_Controller_04_API.AssemblyInfoInputs.cache
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\API Controller 04 API\API Controller 04 API\obj\Debug\netcoreapp2.1\API_Controller_04_API.AssemblyInfo.cs
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\API Controller 04 API\API Controller 04 API\obj\Debug\netcoreapp2.1\API_Controller_04_API.TagHelpers.input.cache
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\API Controller 04 API\API Controller 04 API\obj\Debug\netcoreapp2.1\API_Controller_04_API.TagHelpers.output.cache
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\API Controller 04 API\API Controller 04 API\obj\Debug\netcoreapp2.1\API_Controller_04_API.RazorCoreGenerate.cache
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\API Controller 04 API\API Controller 04 API\obj\Debug\netcoreapp2.1\Razor\Views\Error\Error.g.cshtml.cs
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\API Controller 04 API\API Controller 04 API\obj\Debug\netcoreapp2.1\Razor\Views\Home\Index.g.cshtml.cs
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\API Controller 04 API\API Controller 04 API\obj\Debug\netcoreapp2.1\Razor\Views\Shared\_Layout.g.cshtml.cs
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\API Controller 04 API\API Controller 04 API\obj\Debug\netcoreapp2.1\Razor\Views\_ViewImports.g.cshtml.cs
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\API Controller 04 API\API Controller 04 API\obj\Debug\netcoreapp2.1\API_Controller_04_API.RazorTargetAssemblyInfo.cache
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\API Controller 04 API\API Controller 04 API\obj\Debug\netcoreapp2.1\API_Controller_04_API.RazorTargetAssemblyInfo.cs
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\API Controller 04 API\API Controller 04 API\obj\Debug\netcoreapp2.1\API_Controller_04_API.Views.pdb
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\API Controller 04 API\API Controller 04 API\obj\Debug\netcoreapp2.1\API_Controller_04_API.dll
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\API Controller 04 API\API Controller 04 API\obj\Debug\netcoreapp2.1\API_Controller_04_API.pdb
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\API Controller 04 API\API Controller 04 API\obj\Debug\netcoreapp2.1\API_Controller_04_API.csproj.CopyComplete

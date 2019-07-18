@@ -1,0 +1,7 @@
+C:\Users\asus\Desktop\Threading\Threading\bin\Debug\Threading.exe.config
+C:\Users\asus\Desktop\Threading\Threading\bin\Debug\Threading.exe
+C:\Users\asus\Desktop\Threading\Threading\bin\Debug\Threading.pdb
+C:\Users\asus\Desktop\Threading\Threading\obj\Debug\Threading.csprojAssemblyReference.cache
+C:\Users\asus\Desktop\Threading\Threading\obj\Debug\Threading.csproj.CoreCompileInputs.cache
+C:\Users\asus\Desktop\Threading\Threading\obj\Debug\Threading.exe
+C:\Users\asus\Desktop\Threading\Threading\obj\Debug\Threading.pdb

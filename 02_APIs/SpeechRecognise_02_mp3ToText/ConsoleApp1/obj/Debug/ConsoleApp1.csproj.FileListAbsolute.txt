@@ -1,0 +1,33 @@
+C:\Users\asus\Desktop\ConsoleApp1\ConsoleApp1\bin\Debug\ConsoleApp1.exe.config
+C:\Users\asus\Desktop\ConsoleApp1\ConsoleApp1\bin\Debug\ConsoleApp1.exe
+C:\Users\asus\Desktop\ConsoleApp1\ConsoleApp1\bin\Debug\ConsoleApp1.pdb
+C:\Users\asus\Desktop\ConsoleApp1\ConsoleApp1\obj\Debug\ConsoleApp1.csprojAssemblyReference.cache
+C:\Users\asus\Desktop\ConsoleApp1\ConsoleApp1\obj\Debug\ConsoleApp1.csproj.CoreCompileInputs.cache
+C:\Users\asus\Desktop\ConsoleApp1\ConsoleApp1\obj\Debug\ConsoleApp1.exe
+C:\Users\asus\Desktop\ConsoleApp1\ConsoleApp1\obj\Debug\ConsoleApp1.pdb
+C:\Users\asus\Desktop\ConsoleApp1\ConsoleApp1\obj\Debug\Interop.SpeechLib.dll
+C:\Users\asus\Desktop\ConsoleApp1\ConsoleApp1\obj\Debug\ConsoleApp1.csproj.ResolveComReference.cache
+C:\Users\asus\Desktop\ConsoleApp1\ConsoleApp1\bin\Debug\Microsoft.Speech.dll
+C:\Users\asus\Desktop\ConsoleApp1\ConsoleApp1\obj\Debug\ConsoleApp1.csproj.CopyComplete
+C:\Users\asus\Desktop\SpeechRecognise\ConsoleApp1\bin\Debug\ConsoleApp1.exe.config
+C:\Users\asus\Desktop\SpeechRecognise\ConsoleApp1\bin\Debug\ConsoleApp1.exe
+C:\Users\asus\Desktop\SpeechRecognise\ConsoleApp1\bin\Debug\ConsoleApp1.pdb
+C:\Users\asus\Desktop\SpeechRecognise\ConsoleApp1\bin\Debug\Microsoft.Speech.dll
+C:\Users\asus\Desktop\SpeechRecognise\ConsoleApp1\obj\Debug\ConsoleApp1.csprojAssemblyReference.cache
+C:\Users\asus\Desktop\SpeechRecognise\ConsoleApp1\obj\Debug\Interop.SpeechLib.dll
+C:\Users\asus\Desktop\SpeechRecognise\ConsoleApp1\obj\Debug\ConsoleApp1.csproj.ResolveComReference.cache
+C:\Users\asus\Desktop\SpeechRecognise\ConsoleApp1\obj\Debug\ConsoleApp1.csproj.CoreCompileInputs.cache
+C:\Users\asus\Desktop\SpeechRecognise\ConsoleApp1\obj\Debug\ConsoleApp1.csproj.CopyComplete
+C:\Users\asus\Desktop\SpeechRecognise\ConsoleApp1\obj\Debug\ConsoleApp1.exe
+C:\Users\asus\Desktop\SpeechRecognise\ConsoleApp1\obj\Debug\ConsoleApp1.pdb
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\SpeechRecognise_02_mp3ToText\ConsoleApp1\obj\Debug\ConsoleApp1.csprojAssemblyReference.cache
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\SpeechRecognise_02_mp3ToText\ConsoleApp1\obj\Debug\Interop.SpeechLib.dll
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\SpeechRecognise_02_mp3ToText\ConsoleApp1\obj\Debug\ConsoleApp1.csproj.ResolveComReference.cache
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\SpeechRecognise_02_mp3ToText\ConsoleApp1\obj\Debug\ConsoleApp1.csproj.CoreCompileInputs.cache
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\SpeechRecognise_02_mp3ToText\ConsoleApp1\obj\Debug\ConsoleApp1.exe
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\SpeechRecognise_02_mp3ToText\ConsoleApp1\obj\Debug\ConsoleApp1.pdb
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\SpeechRecognise_02_mp3ToText\ConsoleApp1\bin\Debug\ConsoleApp1.exe.config
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\SpeechRecognise_02_mp3ToText\ConsoleApp1\bin\Debug\ConsoleApp1.exe
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\SpeechRecognise_02_mp3ToText\ConsoleApp1\bin\Debug\ConsoleApp1.pdb
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\SpeechRecognise_02_mp3ToText\ConsoleApp1\bin\Debug\Microsoft.Speech.dll
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\SpeechRecognise_02_mp3ToText\ConsoleApp1\obj\Debug\ConsoleApp1.csproj.CopyComplete

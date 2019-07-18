@@ -1,0 +1,11 @@
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\!!Trials!!\Albahari C# 6.0\09 Typ object\09 Typ object\bin\Debug\netcoreapp2.1\09 Typ object.deps.json
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\!!Trials!!\Albahari C# 6.0\09 Typ object\09 Typ object\bin\Debug\netcoreapp2.1\09 Typ object.runtimeconfig.json
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\!!Trials!!\Albahari C# 6.0\09 Typ object\09 Typ object\bin\Debug\netcoreapp2.1\09 Typ object.runtimeconfig.dev.json
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\!!Trials!!\Albahari C# 6.0\09 Typ object\09 Typ object\bin\Debug\netcoreapp2.1\09 Typ object.dll
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\!!Trials!!\Albahari C# 6.0\09 Typ object\09 Typ object\bin\Debug\netcoreapp2.1\09 Typ object.pdb
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\!!Trials!!\Albahari C# 6.0\09 Typ object\09 Typ object\obj\Debug\netcoreapp2.1\09 Typ object.csprojAssemblyReference.cache
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\!!Trials!!\Albahari C# 6.0\09 Typ object\09 Typ object\obj\Debug\netcoreapp2.1\09 Typ object.csproj.CoreCompileInputs.cache
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\!!Trials!!\Albahari C# 6.0\09 Typ object\09 Typ object\obj\Debug\netcoreapp2.1\09 Typ object.AssemblyInfoInputs.cache
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\!!Trials!!\Albahari C# 6.0\09 Typ object\09 Typ object\obj\Debug\netcoreapp2.1\09 Typ object.AssemblyInfo.cs
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\!!Trials!!\Albahari C# 6.0\09 Typ object\09 Typ object\obj\Debug\netcoreapp2.1\09 Typ object.dll
+C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\!!Trials!!\Albahari C# 6.0\09 Typ object\09 Typ object\obj\Debug\netcoreapp2.1\09 Typ object.pdb

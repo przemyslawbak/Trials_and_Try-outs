@@ -1,0 +1,22 @@
+C:\Users\asus\Desktop\CSVdeserializer\CSVdeserializer\bin\Debug\netcoreapp2.1\CSVdeserializer.deps.json
+C:\Users\asus\Desktop\CSVdeserializer\CSVdeserializer\bin\Debug\netcoreapp2.1\CSVdeserializer.runtimeconfig.json
+C:\Users\asus\Desktop\CSVdeserializer\CSVdeserializer\bin\Debug\netcoreapp2.1\CSVdeserializer.runtimeconfig.dev.json
+C:\Users\asus\Desktop\CSVdeserializer\CSVdeserializer\bin\Debug\netcoreapp2.1\CSVdeserializer.dll
+C:\Users\asus\Desktop\CSVdeserializer\CSVdeserializer\obj\Debug\netcoreapp2.1\CSVdeserializer.csprojAssemblyReference.cache
+C:\Users\asus\Desktop\CSVdeserializer\CSVdeserializer\obj\Debug\netcoreapp2.1\CSVdeserializer.csproj.CoreCompileInputs.cache
+C:\Users\asus\Desktop\CSVdeserializer\CSVdeserializer\obj\Debug\netcoreapp2.1\CSVdeserializer.AssemblyInfoInputs.cache
+C:\Users\asus\Desktop\CSVdeserializer\CSVdeserializer\obj\Debug\netcoreapp2.1\CSVdeserializer.AssemblyInfo.cs
+C:\Users\asus\Desktop\CSVdeserializer\CSVdeserializer\bin\Debug\netcoreapp2.1\CSVdeserializer.pdb
+C:\Users\asus\Desktop\CSVdeserializer\CSVdeserializer\obj\Debug\netcoreapp2.1\CSVdeserializer.dll
+C:\Users\asus\Desktop\CSVdeserializer\CSVdeserializer\obj\Debug\netcoreapp2.1\CSVdeserializer.pdb
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\CSVdeserializer_ 01_Trial\CSVdeserializer\bin\Debug\netcoreapp2.1\CSVdeserializer.deps.json
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\CSVdeserializer_ 01_Trial\CSVdeserializer\bin\Debug\netcoreapp2.1\CSVdeserializer.runtimeconfig.json
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\CSVdeserializer_ 01_Trial\CSVdeserializer\bin\Debug\netcoreapp2.1\CSVdeserializer.runtimeconfig.dev.json
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\CSVdeserializer_ 01_Trial\CSVdeserializer\bin\Debug\netcoreapp2.1\CSVdeserializer.dll
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\CSVdeserializer_ 01_Trial\CSVdeserializer\bin\Debug\netcoreapp2.1\CSVdeserializer.pdb
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\CSVdeserializer_ 01_Trial\CSVdeserializer\obj\Debug\netcoreapp2.1\CSVdeserializer.csprojAssemblyReference.cache
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\CSVdeserializer_ 01_Trial\CSVdeserializer\obj\Debug\netcoreapp2.1\CSVdeserializer.csproj.CoreCompileInputs.cache
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\CSVdeserializer_ 01_Trial\CSVdeserializer\obj\Debug\netcoreapp2.1\CSVdeserializer.AssemblyInfoInputs.cache
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\CSVdeserializer_ 01_Trial\CSVdeserializer\obj\Debug\netcoreapp2.1\CSVdeserializer.AssemblyInfo.cs
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\CSVdeserializer_ 01_Trial\CSVdeserializer\obj\Debug\netcoreapp2.1\CSVdeserializer.dll
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\!!Trials!!\CSVdeserializer_ 01_Trial\CSVdeserializer\obj\Debug\netcoreapp2.1\CSVdeserializer.pdb

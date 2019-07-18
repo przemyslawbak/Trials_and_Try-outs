@@ -1,0 +1,8 @@
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\wpf-mvvm-test-driven-development-viewmodels\1-wpf-mvvm-test-driven-development-viewmodels-m1-exercise-files\FriendStorage\FriendStorage.Model\obj\Debug\FriendStorage.Model.csprojAssemblyReference.cache
+C:\Users\asus\Desktop\IT\Programowanie\Tutoriale i Testy\wpf-mvvm-test-driven-development-viewmodels\1-wpf-mvvm-test-driven-development-viewmodels-m1-exercise-files\FriendStorage\FriendStorage.Model\obj\Debug\FriendStorage.Model.csproj.CoreCompileInputs.cache
+C:\Users\asus\Desktop\TDD_MVVM_WPF\FriendStorage\FriendStorage.Model\bin\Debug\FriendStorage.Model.dll
+C:\Users\asus\Desktop\TDD_MVVM_WPF\FriendStorage\FriendStorage.Model\bin\Debug\FriendStorage.Model.pdb
+C:\Users\asus\Desktop\TDD_MVVM_WPF\FriendStorage\FriendStorage.Model\obj\Debug\FriendStorage.Model.csprojAssemblyReference.cache
+C:\Users\asus\Desktop\TDD_MVVM_WPF\FriendStorage\FriendStorage.Model\obj\Debug\FriendStorage.Model.csproj.CoreCompileInputs.cache
+C:\Users\asus\Desktop\TDD_MVVM_WPF\FriendStorage\FriendStorage.Model\obj\Debug\FriendStorage.Model.dll
+C:\Users\asus\Desktop\TDD_MVVM_WPF\FriendStorage\FriendStorage.Model\obj\Debug\FriendStorage.Model.pdb

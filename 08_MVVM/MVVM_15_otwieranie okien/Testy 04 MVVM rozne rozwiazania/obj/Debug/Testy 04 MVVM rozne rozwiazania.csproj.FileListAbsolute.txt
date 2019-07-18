@@ -1,0 +1,18 @@
+C:\Users\asus\Desktop\Programowanie\Tutoriale i Testy\Testy 04 MVVM rozne rozwiazania\Testy 04 MVVM rozne rozwiazania\bin\Debug\Testy 04 MVVM rozne rozwiazania.exe.config
+C:\Users\asus\Desktop\Programowanie\Tutoriale i Testy\Testy 04 MVVM rozne rozwiazania\Testy 04 MVVM rozne rozwiazania\bin\Debug\Testy 04 MVVM rozne rozwiazania.exe
+C:\Users\asus\Desktop\Programowanie\Tutoriale i Testy\Testy 04 MVVM rozne rozwiazania\Testy 04 MVVM rozne rozwiazania\bin\Debug\Testy 04 MVVM rozne rozwiazania.pdb
+C:\Users\asus\Desktop\Programowanie\Tutoriale i Testy\Testy 04 MVVM rozne rozwiazania\Testy 04 MVVM rozne rozwiazania\obj\Debug\Testy 04 MVVM rozne rozwiazania.csprojResolveAssemblyReference.cache
+C:\Users\asus\Desktop\Programowanie\Tutoriale i Testy\Testy 04 MVVM rozne rozwiazania\Testy 04 MVVM rozne rozwiazania\obj\Debug\MainWindow.g.cs
+C:\Users\asus\Desktop\Programowanie\Tutoriale i Testy\Testy 04 MVVM rozne rozwiazania\Testy 04 MVVM rozne rozwiazania\obj\Debug\Views\PersonWindow.g.cs
+C:\Users\asus\Desktop\Programowanie\Tutoriale i Testy\Testy 04 MVVM rozne rozwiazania\Testy 04 MVVM rozne rozwiazania\obj\Debug\App.g.cs
+C:\Users\asus\Desktop\Programowanie\Tutoriale i Testy\Testy 04 MVVM rozne rozwiazania\Testy 04 MVVM rozne rozwiazania\obj\Debug\Testy 04 MVVM rozne rozwiazania_MarkupCompile.cache
+C:\Users\asus\Desktop\Programowanie\Tutoriale i Testy\Testy 04 MVVM rozne rozwiazania\Testy 04 MVVM rozne rozwiazania\obj\Debug\Testy 04 MVVM rozne rozwiazania_MarkupCompile.lref
+C:\Users\asus\Desktop\Programowanie\Tutoriale i Testy\Testy 04 MVVM rozne rozwiazania\Testy 04 MVVM rozne rozwiazania\obj\Debug\MainWindow.baml
+C:\Users\asus\Desktop\Programowanie\Tutoriale i Testy\Testy 04 MVVM rozne rozwiazania\Testy 04 MVVM rozne rozwiazania\obj\Debug\Views\PersonWindow.baml
+C:\Users\asus\Desktop\Programowanie\Tutoriale i Testy\Testy 04 MVVM rozne rozwiazania\Testy 04 MVVM rozne rozwiazania\obj\Debug\Testy 04 MVVM rozne rozwiazania.g.resources
+C:\Users\asus\Desktop\Programowanie\Tutoriale i Testy\Testy 04 MVVM rozne rozwiazania\Testy 04 MVVM rozne rozwiazania\obj\Debug\Testy_04_MVVM_rozne_rozwiazania.Properties.Resources.resources
+C:\Users\asus\Desktop\Programowanie\Tutoriale i Testy\Testy 04 MVVM rozne rozwiazania\Testy 04 MVVM rozne rozwiazania\obj\Debug\Testy 04 MVVM rozne rozwiazania.csproj.GenerateResource.Cache
+C:\Users\asus\Desktop\Programowanie\Tutoriale i Testy\Testy 04 MVVM rozne rozwiazania\Testy 04 MVVM rozne rozwiazania\obj\Debug\Testy 04 MVVM rozne rozwiazania.exe
+C:\Users\asus\Desktop\Programowanie\Tutoriale i Testy\Testy 04 MVVM rozne rozwiazania\Testy 04 MVVM rozne rozwiazania\obj\Debug\Testy 04 MVVM rozne rozwiazania.pdb
+C:\Users\asus\Desktop\Programowanie\Tutoriale i Testy\Testy 04 MVVM rozne rozwiazania\Testy 04 MVVM rozne rozwiazania\obj\Debug\GeneratedInternalTypeHelper.g.cs
+C:\Users\asus\Desktop\Programowanie\Tutoriale i Testy\Testy 04 MVVM rozne rozwiazania\Testy 04 MVVM rozne rozwiazania\obj\Debug\App.baml
