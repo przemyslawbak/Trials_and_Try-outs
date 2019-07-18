@@ -1,0 +1,1 @@
+https://www.codeproject.com/Articles/1052346/ICommand-Interface-in-WPF

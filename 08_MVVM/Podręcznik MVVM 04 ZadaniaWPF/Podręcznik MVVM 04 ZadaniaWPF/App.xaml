@@ -1,0 +1,9 @@
+﻿<Application x:Class="Podręcznik_MVVM_04_ZadaniaWPF.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:Podręcznik_MVVM_04_ZadaniaWPF"
+             StartupUri="MainWindow.xaml">
+    <Application.Resources>
+         
+    </Application.Resources>
+</Application>

@@ -1,0 +1,13 @@
+﻿<Window x:Class="WpfApplication1.Views.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:df="clr-namespace:WpfApplication1.Dialogs.DialogFacade"
+        Title="MainWindow" Height="200" Width="200">
+    <Grid>
+        <df:DialogFacade x:Name="df"></df:DialogFacade>
+        <Button Content="Button" Width="100"
+                Height="100"
+                Command="{Binding OpenDialogCommand}"
+                CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}"/>
+    </Grid>
+</Window>

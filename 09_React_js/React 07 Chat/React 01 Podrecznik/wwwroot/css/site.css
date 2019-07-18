@@ -1,0 +1,30 @@
+﻿#app {
+    border: 3px solid black;
+    width: 33%;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    background-color: #333;
+}
+
+.text {
+    font-size: 80px;
+    font-weight: bold;
+    color: #fff;
+    position: relative;
+}
+
+.shadow-container {
+    position: absolute;
+    z-index: -1;
+    top: 0;
+    left: 0;
+}
+
+.shadow {
+    position: relative;
+    color: transparent;
+    text-shadow: -10px 20px 6px #111;
+}

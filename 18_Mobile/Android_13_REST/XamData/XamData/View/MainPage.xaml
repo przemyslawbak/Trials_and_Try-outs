@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+  xmlns="http://xamarin.com/schemas/2014/forms"
+  xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+  x:Class="XamData.MainPage">
+    <ContentPage.Content>
+        <StackLayout
+      Padding="30">
+            <StackLayout
+        Orientation="Horizontal">
+                <Label
+          Text="Latitude"
+          WidthRequest="130" />
+                <Entry
+          x:Name="Lat"
+          WidthRequest="150" />
+            </StackLayout>
+            <StackLayout
+        Orientation="Horizontal">
+                <Label
+          Text="Longitude"
+          WidthRequest="130" />
+                <Entry
+          x:Name="Lon"
+          WidthRequest="150" />
+            </StackLayout>
+            <Button
+        x:Name="Search"
+        Clicked="OnClicked"
+        WidthRequest="75"
+        Text="Search"
+        TextColor="White"
+        BackgroundColor="Blue" />
+            <StackLayout
+        Orientation="Horizontal">
+                <Label
+          Text="Location: "
+          TextColor="Green"
+          WidthRequest="130" />
+                <Label
+          Text="{Binding StationName}" />
+            </StackLayout>
+            <StackLayout
+        Orientation="Horizontal">
+                <Label
+          Text="Elevation: "
+          TextColor="Green"
+          WidthRequest="130" />
+                <Label
+          Text="{Binding Elevation}" />
+            </StackLayout>
+            <StackLayout
+        Orientation="Horizontal">
+                <Label
+          Text="Temperature: "
+          TextColor="Green"
+          WidthRequest="130" />
+                <Label
+          Text="{Binding Temperature}" />
+            </StackLayout>
+            <StackLayout
+        Orientation="Horizontal">
+                <Label
+          Text="Humidity: "
+          TextColor="Green"
+          WidthRequest="130" />
+                <Label
+          Text="{Binding Humidity}" />
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
