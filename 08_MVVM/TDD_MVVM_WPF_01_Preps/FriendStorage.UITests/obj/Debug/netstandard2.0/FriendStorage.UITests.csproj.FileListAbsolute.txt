@@ -1,6 +1,0 @@
-C:\Users\asus\Desktop\TDD_MVVM_WPF\FriendStorage\FriendStorage.UITests\bin\Debug\netstandard2.0\FriendStorage.UITests.deps.json
-C:\Users\asus\Desktop\TDD_MVVM_WPF\FriendStorage\FriendStorage.UITests\bin\Debug\netstandard2.0\FriendStorage.UITests.dll
-C:\Users\asus\Desktop\TDD_MVVM_WPF\FriendStorage\FriendStorage.UITests\obj\Debug\netstandard2.0\FriendStorage.UITests.csprojAssemblyReference.cache
-C:\Users\asus\Desktop\TDD_MVVM_WPF\FriendStorage\FriendStorage.UITests\obj\Debug\netstandard2.0\FriendStorage.UITests.csproj.CoreCompileInputs.cache
-C:\Users\asus\Desktop\TDD_MVVM_WPF\FriendStorage\FriendStorage.UITests\obj\Debug\netstandard2.0\FriendStorage.UITests.AssemblyInfoInputs.cache
-C:\Users\asus\Desktop\TDD_MVVM_WPF\FriendStorage\FriendStorage.UITests\obj\Debug\netstandard2.0\FriendStorage.UITests.AssemblyInfo.cs

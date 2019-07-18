@@ -1,8 +1,0 @@
-2019-07-13 09:37:09,191 [1] DEBUG main - test message from example app
-2019-07-13 09:37:09,206 [1] INFO main - This is an info message
-2019-07-13 09:37:09,206 [1] ERROR main - Oops, here's an error
-2019-07-13 09:37:09,206 [1] ERROR main - parsing test error
-2019-07-13 09:39:37,757 [1] DEBUG main - test message from example app
-2019-07-13 09:39:37,773 [1] INFO main - This is an info message
-2019-07-13 09:39:37,773 [1] ERROR main - Oops, here's an error
-2019-07-13 09:39:37,773 [1] ERROR main - parsing test error

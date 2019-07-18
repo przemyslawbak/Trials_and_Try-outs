@@ -1,7 +1,0 @@
-OK - wybraæ port powy¿ej 49152 (niezarezerwowany)
-
-OK - https://code-maze.com/aspnetcore-webapi-best-practices/
-
-.net core -> ILogger DI
-
-app.UseExceptionHandler(config => ...)

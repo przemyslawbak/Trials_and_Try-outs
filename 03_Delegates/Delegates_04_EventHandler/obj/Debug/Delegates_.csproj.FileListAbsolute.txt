@@ -1,7 +1,0 @@
-C:\Users\asus\Desktop\Delegates_\bin\Debug\Delegates_.exe.config
-C:\Users\asus\Desktop\Delegates_\bin\Debug\Delegates_.exe
-C:\Users\asus\Desktop\Delegates_\bin\Debug\Delegates_.pdb
-C:\Users\asus\Desktop\Delegates_\obj\Debug\Delegates_.csprojAssemblyReference.cache
-C:\Users\asus\Desktop\Delegates_\obj\Debug\Delegates_.csproj.CoreCompileInputs.cache
-C:\Users\asus\Desktop\Delegates_\obj\Debug\Delegates_.exe
-C:\Users\asus\Desktop\Delegates_\obj\Debug\Delegates_.pdb

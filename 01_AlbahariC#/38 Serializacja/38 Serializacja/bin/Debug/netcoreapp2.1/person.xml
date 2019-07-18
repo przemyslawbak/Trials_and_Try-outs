@@ -1,1 +1,0 @@
-<Candidate xmlns="http://oreilly.com/nutshell" xmlns:i="http://www.w3.org/2001/XMLSchema-instance"><HomeAddress i:type="a:USAddress" xmlns:a="http://schemas.datacontract.org/2004/07/_38_Serializacja"><a:Postcode>02138</a:Postcode><a:Street>Fawcett St</a:Street></HomeAddress><ClaimedAge>30</ClaimedAge><FirstName>Staszek</FirstName></Candidate>

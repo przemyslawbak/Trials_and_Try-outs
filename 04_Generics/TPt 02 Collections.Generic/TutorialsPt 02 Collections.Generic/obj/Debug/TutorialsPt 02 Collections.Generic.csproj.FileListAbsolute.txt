@@ -1,6 +1,0 @@
-C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\TutorialsPt 02 Collections.Generic\TutorialsPt 02 Collections.Generic\bin\Debug\TutorialsPt 02 Collections.Generic.exe.config
-C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\TutorialsPt 02 Collections.Generic\TutorialsPt 02 Collections.Generic\obj\Debug\TutorialsPt 02 Collections.Generic.csprojResolveAssemblyReference.cache
-C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\TutorialsPt 02 Collections.Generic\TutorialsPt 02 Collections.Generic\bin\Debug\TutorialsPt 02 Collections.Generic.exe
-C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\TutorialsPt 02 Collections.Generic\TutorialsPt 02 Collections.Generic\bin\Debug\TutorialsPt 02 Collections.Generic.pdb
-C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\TutorialsPt 02 Collections.Generic\TutorialsPt 02 Collections.Generic\obj\Debug\TutorialsPt 02 Collections.Generic.exe
-C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\TutorialsPt 02 Collections.Generic\TutorialsPt 02 Collections.Generic\obj\Debug\TutorialsPt 02 Collections.Generic.pdb

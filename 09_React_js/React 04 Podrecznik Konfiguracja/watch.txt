@@ -1,6 +1,0 @@
-Git Bash
-
-cd Users/asus/Desktop/Praca\ IT/Programowanie/Tutoriale\ i\ Testy/React\ 04\ Podrecznik\ Konfiguracja/React\ 01\ Podr
-ecznik
-
-watch "sh wwwroot/scripts/build.sh" wwwroot/js/source wwwroot/css

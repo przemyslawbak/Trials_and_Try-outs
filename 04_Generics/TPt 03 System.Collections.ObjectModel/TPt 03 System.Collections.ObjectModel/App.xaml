@@ -1,9 +1,0 @@
-﻿<Application x:Class="TPt_03_System.Collections.ObjectModel.App"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="clr-namespace:TPt_03_System.Collections.ObjectModel"
-             StartupUri="MainWindow.xaml">
-    <Application.Resources>
-         
-    </Application.Resources>
-</Application>

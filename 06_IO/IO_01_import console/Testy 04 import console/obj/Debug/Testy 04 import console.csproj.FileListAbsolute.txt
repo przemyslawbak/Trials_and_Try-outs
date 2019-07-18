@@ -1,6 +1,0 @@
-C:\Users\asus\Desktop\Programowanie\Tutoriale i Testy\Testy 04 import console\Testy 04 import console\bin\Debug\Testy 04 import console.exe.config
-C:\Users\asus\Desktop\Programowanie\Tutoriale i Testy\Testy 04 import console\Testy 04 import console\obj\Debug\Testy 04 import console.csprojResolveAssemblyReference.cache
-C:\Users\asus\Desktop\Programowanie\Tutoriale i Testy\Testy 04 import console\Testy 04 import console\bin\Debug\Testy 04 import console.exe
-C:\Users\asus\Desktop\Programowanie\Tutoriale i Testy\Testy 04 import console\Testy 04 import console\bin\Debug\Testy 04 import console.pdb
-C:\Users\asus\Desktop\Programowanie\Tutoriale i Testy\Testy 04 import console\Testy 04 import console\obj\Debug\Testy 04 import console.exe
-C:\Users\asus\Desktop\Programowanie\Tutoriale i Testy\Testy 04 import console\Testy 04 import console\obj\Debug\Testy 04 import console.pdb

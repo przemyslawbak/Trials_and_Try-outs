@@ -1,7 +1,0 @@
-C:\Users\asus\Desktop\ToList\ToList\bin\Debug\ToList.exe.config
-C:\Users\asus\Desktop\ToList\ToList\bin\Debug\ToList.exe
-C:\Users\asus\Desktop\ToList\ToList\bin\Debug\ToList.pdb
-C:\Users\asus\Desktop\ToList\ToList\obj\Debug\ToList.csprojAssemblyReference.cache
-C:\Users\asus\Desktop\ToList\ToList\obj\Debug\ToList.csproj.CoreCompileInputs.cache
-C:\Users\asus\Desktop\ToList\ToList\obj\Debug\ToList.exe
-C:\Users\asus\Desktop\ToList\ToList\obj\Debug\ToList.pdb

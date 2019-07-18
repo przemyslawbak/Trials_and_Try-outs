@@ -1,7 +1,0 @@
-C:\Users\asus\Desktop\TaskCancellation\TaskCancellation\bin\Debug\TaskCancellation.exe.config
-C:\Users\asus\Desktop\TaskCancellation\TaskCancellation\bin\Debug\TaskCancellation.exe
-C:\Users\asus\Desktop\TaskCancellation\TaskCancellation\bin\Debug\TaskCancellation.pdb
-C:\Users\asus\Desktop\TaskCancellation\TaskCancellation\obj\Debug\TaskCancellation.csprojAssemblyReference.cache
-C:\Users\asus\Desktop\TaskCancellation\TaskCancellation\obj\Debug\TaskCancellation.csproj.CoreCompileInputs.cache
-C:\Users\asus\Desktop\TaskCancellation\TaskCancellation\obj\Debug\TaskCancellation.exe
-C:\Users\asus\Desktop\TaskCancellation\TaskCancellation\obj\Debug\TaskCancellation.pdb

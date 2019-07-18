@@ -1,7 +1,0 @@
-C:\Users\asus\Desktop\List_Comparer\List_Comparer\bin\Debug\List_Comparer.exe.config
-C:\Users\asus\Desktop\List_Comparer\List_Comparer\bin\Debug\List_Comparer.exe
-C:\Users\asus\Desktop\List_Comparer\List_Comparer\bin\Debug\List_Comparer.pdb
-C:\Users\asus\Desktop\List_Comparer\List_Comparer\obj\Debug\List_Comparer.csprojAssemblyReference.cache
-C:\Users\asus\Desktop\List_Comparer\List_Comparer\obj\Debug\List_Comparer.csproj.CoreCompileInputs.cache
-C:\Users\asus\Desktop\List_Comparer\List_Comparer\obj\Debug\List_Comparer.exe
-C:\Users\asus\Desktop\List_Comparer\List_Comparer\obj\Debug\List_Comparer.pdb

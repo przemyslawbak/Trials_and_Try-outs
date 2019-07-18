@@ -1,6 +1,0 @@
-C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\TutorialsPt 01c System.Collections\TutorialsPt 01c System.Collections\bin\Debug\TutorialsPt 01c System.Collections.exe.config
-C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\TutorialsPt 01c System.Collections\TutorialsPt 01c System.Collections\bin\Debug\TutorialsPt 01c System.Collections.exe
-C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\TutorialsPt 01c System.Collections\TutorialsPt 01c System.Collections\bin\Debug\TutorialsPt 01c System.Collections.pdb
-C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\TutorialsPt 01c System.Collections\TutorialsPt 01c System.Collections\obj\Debug\TutorialsPt 01c System.Collections.csprojResolveAssemblyReference.cache
-C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\TutorialsPt 01c System.Collections\TutorialsPt 01c System.Collections\obj\Debug\TutorialsPt 01c System.Collections.exe
-C:\Users\asus\Desktop\Praca IT\Programowanie\Tutoriale i Testy\TutorialsPt 01c System.Collections\TutorialsPt 01c System.Collections\obj\Debug\TutorialsPt 01c System.Collections.pdb

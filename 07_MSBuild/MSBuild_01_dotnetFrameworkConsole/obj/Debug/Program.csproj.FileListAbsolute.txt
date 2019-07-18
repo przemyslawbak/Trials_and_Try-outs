@@ -1,9 +1,0 @@
-C:\Users\asus\Desktop\IT\Programowanie\Notepad++\First_Sample\bin\Debug\First_Sample.exe.config
-C:\Users\asus\Desktop\IT\Programowanie\Notepad++\First_Sample\bin\Debug\First_Sample.exe
-C:\Users\asus\Desktop\IT\Programowanie\Notepad++\First_Sample\bin\Debug\First_Sample.pdb
-C:\Users\asus\Desktop\IT\Programowanie\Notepad++\First_Sample\bin\Debug\log4net.dll
-C:\Users\asus\Desktop\IT\Programowanie\Notepad++\First_Sample\bin\Debug\log4net.pdb
-C:\Users\asus\Desktop\IT\Programowanie\Notepad++\First_Sample\bin\Debug\log4net.xml
-C:\Users\asus\Desktop\IT\Programowanie\Notepad++\First_Sample\obj\Debug\Program.csprojResolveAssemblyReference.cache
-C:\Users\asus\Desktop\IT\Programowanie\Notepad++\First_Sample\obj\Debug\First_Sample.exe
-C:\Users\asus\Desktop\IT\Programowanie\Notepad++\First_Sample\obj\Debug\First_Sample.pdb
