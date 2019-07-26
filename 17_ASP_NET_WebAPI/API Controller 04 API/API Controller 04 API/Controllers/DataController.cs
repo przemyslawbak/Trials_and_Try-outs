@@ -10,7 +10,7 @@ namespace API_Controller_04_API.Controllers
     //https://code-maze.com/aspnetcore-webapi-best-practices/
     //receives collection
     [Route("api/[controller]")]
-    public class DataController : Controller //zamienić na ApiController
+    public class DataController : Controller
     {
         //repository
         private IDataRepository _repository;

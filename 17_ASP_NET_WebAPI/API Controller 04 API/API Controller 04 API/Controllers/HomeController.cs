@@ -3,11 +3,10 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace API_Controller_04_API.Controllers
 {
-    //https://code-maze.com/aspnetcore-webapi-best-practices/
     /// <summary>
     /// Home controller displaying simple View
     /// </summary>
-    public class HomeController : Controller //zamienić na ApiController
+    public class HomeController : Controller
     {
         private ApplicationDbContext _context { get; set; }
         public HomeController(ApplicationDbContext context) => _context = context;

@@ -20,6 +20,10 @@ namespace API_Controller_04_API.Models
         public ContentXMLModel Content { get; set; }
 
     }
+
+    /// <summary>
+    /// content element model
+    /// </summary>
     [XmlRoot(ElementName = "content")]
     public class ContentXMLModel
     {

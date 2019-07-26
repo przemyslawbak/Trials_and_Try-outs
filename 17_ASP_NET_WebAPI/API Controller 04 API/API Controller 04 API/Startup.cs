@@ -80,11 +80,7 @@ namespace API_Controller_04_API
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "Swagger XML Api Demo v1");
             });
             app.UseMvc(routes => {
-                routes.MapRoute(name: "Error", template: "Error",
-                defaults: new { controller = "Error", action = "Error" });
-                routes.MapRoute(
-                name: "default", template: "{controller}/{action}/{id?}",
-                defaults: new { controller = "MyProjects", action = "Index" });
+                routes.MapRoute(name: "default", template: "api/{controller}/{id}");
             });
         }
     }

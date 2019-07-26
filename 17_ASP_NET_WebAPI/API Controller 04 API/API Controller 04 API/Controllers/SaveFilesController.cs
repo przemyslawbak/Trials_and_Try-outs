@@ -6,11 +6,13 @@ using System.Text;
 using System.Xml;
 using System.Xml.Serialization;
 
+//utf8 creds https://stackoverflow.com/questions/6198744/convert-string-utf-16-to-utf-8-in-c-sharp
+
 namespace API_Controller_04_API.Controllers
 {
     //https://code-maze.com/aspnetcore-webapi-best-practices/
     //encoding in UTF8
-    public class Utf8StringWriter : StringWriter //zamienić na ApiController
+    public class Utf8StringWriter : StringWriter
     {
         public override Encoding Encoding => Encoding.UTF8;
     }
@@ -25,6 +27,9 @@ namespace API_Controller_04_API.Controllers
             //instance repo
             _repository = repo;
         }
+
+        //TODO: NotFound() https://www.tutorialsteacher.com/webapi/action-method-return-type-in-web-api
+
         /// <summary>
         /// Gets some models from the DB
         /// </summary>
@@ -70,7 +75,7 @@ namespace API_Controller_04_API.Controllers
                 XmlSerializerNamespaces ns = new XmlSerializerNamespaces();
                 ns.Add("", "");
                 //use writer
-                using (StringWriter writer = new Utf8StringWriter())
+                using (StringWriter writer = new Utf8StringWriter()) // UTF8??????????????????????????????????????????
                 {
                     //serializes it
                     xmlSerializer.Serialize(writer, xmlModel, ns);
