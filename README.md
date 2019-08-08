@@ -1,3 +1,5 @@
+# Trials_and_Try-outs
+
 ## Purpose
 
 This repository contains loads of small trial projects based on tutorials, solutions found in the internet, books, articles, publications and own ideas. They are divided into various main categories that I worked on and was studying studying.
@@ -21,3 +23,7 @@ This repository contains loads of small trial projects based on tutorials, solut
   - WPF,
 
 and still growing...
+
+## Production
+
+Feb 2018
