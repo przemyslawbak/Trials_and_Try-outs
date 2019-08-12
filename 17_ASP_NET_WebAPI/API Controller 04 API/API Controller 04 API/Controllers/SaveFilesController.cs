@@ -83,6 +83,9 @@ namespace API_Controller_04_API.Controllers
                 }
                 //clear \r\n
                 serializedItem = serializedItem.Replace("\r\n", string.Empty);
+
+
+
                 //creates new XML document
                 XmlDocument xmlFile = new XmlDocument();
                 //loads string into the document
