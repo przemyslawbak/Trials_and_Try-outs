@@ -23,7 +23,7 @@ namespace Wpf_.ViewModels
         private readonly IObserverService _observer2;
         private ArrayList _observers;
 
-        public MainWindowViewModel(IControlsService controlsService)
+        public MainWindowViewModel(IControlsService controlsService, IObserver1 observer1, IObserver2 observer2)
         {
             _controlsService = controlsService;
             _observer1 = new Observer1("name1");
