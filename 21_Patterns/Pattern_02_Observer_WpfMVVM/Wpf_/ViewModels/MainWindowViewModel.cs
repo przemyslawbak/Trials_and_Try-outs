@@ -19,13 +19,15 @@ namespace Wpf_.ViewModels
     public class MainWindowViewModel : ViewModelBase, ISubject
     {
         private readonly IControlsService _controlsService;
-        private readonly IObserverService _observerService;
+        private readonly IObserverService _observer1;
+        private readonly IObserverService _observer2;
         private ArrayList _observers;
 
-        public MainWindowViewModel(IControlsService controlsService, IObserverService observerService)
+        public MainWindowViewModel(IControlsService controlsService)
         {
             _controlsService = controlsService;
-            _observerService = observerService;
+            _observer1 = new Observer1("name1");
+            _observer2 = new Observer2("name2");
 
             SwitchCommnad = new DelegateCommand(OnSwitchCommand);
             ObserverCommand = new DelegateCommand(OnObserverCommand);
@@ -37,11 +39,8 @@ namespace Wpf_.ViewModels
         {
             _observers = new ArrayList();
 
-            IObserverService observer1 = new ObserverService("Observer 1");
-            IObserverService observer2 = new ObserverService("Observer 2");
-
-            _observers.Add(observer1);
-            _observers.Add(observer2);
+            _observers.Add(_observer1);
+            _observers.Add(_observer2);
         }
 
         public List<IObserverService> Observers { get; set; }

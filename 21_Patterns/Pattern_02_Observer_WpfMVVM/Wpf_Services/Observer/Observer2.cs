@@ -1,11 +1,16 @@
-﻿using System.Windows;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows;
 
 namespace Wpf_Services.Observer
 {
-    public class ObserverService : IObserverService
+    public class Observer2 : IObserver2, IObserverService
     {
         public string ObserverName { get; private set; }
-        public ObserverService(string name)
+        public Observer2(string name)
         {
             this.ObserverName = name;
         }

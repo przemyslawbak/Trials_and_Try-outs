@@ -44,8 +44,11 @@
   <ItemGroup>
     <Compile Include="Controls\ControlsService.cs" />
     <Compile Include="Controls\IControlsService.cs" />
+    <Compile Include="Observer\IObserver1.cs" />
+    <Compile Include="Observer\IObserver2.cs" />
     <Compile Include="Observer\IObserverService.cs" />
-    <Compile Include="Observer\ObserverService.cs" />
+    <Compile Include="Observer\Observer1.cs" />
+    <Compile Include="Observer\Observer2.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

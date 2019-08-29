@@ -19,8 +19,11 @@ namespace Wpf_.Startup
             builder.RegisterType<ControlsService>()
               .As<IControlsService>().SingleInstance();
 
-            builder.RegisterType<ObserverService>()
-              .As<IObserverService>().WithParameter(new NamedParameter("name", ""));
+            builder.RegisterType<Observer1>()
+              .As<IObserver1>().WithParameter(new NamedParameter("name", ""));
+
+            builder.RegisterType<Observer2>()
+              .As<IObserver2>().WithParameter(new NamedParameter("name", ""));
 
             builder.RegisterType<MainWindow>().AsSelf();
             builder.RegisterType<MainWindowViewModel>().AsSelf().SingleInstance();
