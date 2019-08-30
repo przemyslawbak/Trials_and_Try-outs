@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using Params_Logger;
+using System.Threading.Tasks;
 using System.Windows.Input;
 using Wpf_.Commands;
 using Wpf_Models;
@@ -23,10 +24,12 @@ namespace Wpf_.ViewModels
     public class MainWindowViewModel : ViewModelBase, IAsyncInitialization
     {
         IControlsService _controlsService;
+        ILogService _log;
 
-        public MainWindowViewModel(IControlsService controlsService)
+        public MainWindowViewModel(IControlsService controlsService, ILogService log)
         {
             _controlsService = controlsService;
+            _log = log;
 
             SwitchCommnad = new DelegateCommand(OnSwitchCommand);
 
@@ -75,6 +78,7 @@ namespace Wpf_.ViewModels
             {
                 _jeden = value;
                 OnPropertyChanged();
+                _log.Prop(_jeden);
             }
         }
 
@@ -86,6 +90,7 @@ namespace Wpf_.ViewModels
             {
                 _dwa = value;
                 OnPropertyChanged();
+                _log.Prop(_dwa);
             }
         }
 
@@ -97,6 +102,7 @@ namespace Wpf_.ViewModels
             {
                 _trzy = value;
                 OnPropertyChanged();
+                _log.Prop(_trzy);
             }
         }
     }

@@ -1,0 +1,3 @@
+11:09:31.296|PROP|MainWindowViewModel|set_Jeden(True)
+11:09:31.300|PROP|MainWindowViewModel|set_Dwa(True)
+11:09:31.300|PROP|MainWindowViewModel|set_Trzy(True)

@@ -1,4 +1,5 @@
 ﻿using Autofac;
+using Params_Logger;
 using Wpf_.ViewModels;
 using Wpf_.Views;
 using Wpf_Services.Controls;
@@ -17,6 +18,9 @@ namespace Wpf_.Startup
 
             builder.RegisterType<ControlsService>()
               .As<IControlsService>().SingleInstance();
+
+            builder.RegisterType<LogService>()
+              .As<ILogService>().SingleInstance();
 
             builder.RegisterType<MainWindow>().AsSelf();
             builder.RegisterType<MainWindowViewModel>().AsSelf().SingleInstance();
