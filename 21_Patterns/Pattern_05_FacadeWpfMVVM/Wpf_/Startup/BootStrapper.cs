@@ -1,8 +1,7 @@
 ﻿using Autofac;
-using Params_Logger;
 using Wpf_.ViewModels;
 using Wpf_.Views;
-using Wpf_Services.Controls;
+using Wpf_Services.Main;
 
 namespace Wpf_.Startup
 {
@@ -16,11 +15,8 @@ namespace Wpf_.Startup
         {
             var builder = new ContainerBuilder();
 
-            builder.RegisterType<ControlsService>()
-              .As<IControlsService>().SingleInstance();
-
-            builder.RegisterType<ParamsLogger>()
-              .As<IParamsLogger>().SingleInstance();
+            builder.RegisterType<MainService>()
+              .As<IMainService>().SingleInstance();
 
             builder.RegisterType<MainWindow>().AsSelf();
             builder.RegisterType<MainWindowViewModel>().AsSelf().SingleInstance();

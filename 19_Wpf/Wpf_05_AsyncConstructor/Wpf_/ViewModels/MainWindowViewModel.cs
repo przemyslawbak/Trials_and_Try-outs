@@ -24,9 +24,9 @@ namespace Wpf_.ViewModels
     public class MainWindowViewModel : ViewModelBase, IAsyncInitialization
     {
         IControlsService _controlsService;
-        ILogService _log;
+        IParamsLogger _log;
 
-        public MainWindowViewModel(IControlsService controlsService, ILogService log)
+        public MainWindowViewModel(IControlsService controlsService, IParamsLogger log)
         {
             _controlsService = controlsService;
             _log = log;
