@@ -5,15 +5,10 @@ namespace Wpf_Services.Main
 {
     public class Facade
     {
-        IFilesService _fileService;
-        IControlsService _controlsService;
         public Facade(IFilesService filesService, IControlsService controlsService)
         {
-            _fileService = filesService;
-            _controlsService = controlsService;
-
-            FilesService = _fileService;
-            ControlsService = _controlsService;
+            FilesService = filesService;
+            ControlsService = controlsService;
         }
 
         public IFilesService FilesService { get; }
