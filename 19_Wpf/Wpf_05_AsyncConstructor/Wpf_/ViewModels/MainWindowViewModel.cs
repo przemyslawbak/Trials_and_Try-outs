@@ -23,13 +23,13 @@ namespace Wpf_.ViewModels
 
     public class MainWindowViewModel : ViewModelBase, IAsyncInitialization
     {
+        ParamsLogger _log;
         IControlsService _controlsService;
-        IParamsLogger _log;
 
-        public MainWindowViewModel(IControlsService controlsService, IParamsLogger log)
+        public MainWindowViewModel(IControlsService controlsService)
         {
             _controlsService = controlsService;
-            _log = log;
+            _log = new ParamsLogger();
 
             SwitchCommnad = new DelegateCommand(OnSwitchCommand);
 
@@ -40,6 +40,8 @@ namespace Wpf_.ViewModels
 
         private async Task InitializeAsync()
         {
+            await _log.GetLogger;
+
             await Task.Delay(100000);
         }
 
@@ -53,6 +55,8 @@ namespace Wpf_.ViewModels
             {
                 UiModel = _controlsService.SwitchOn();
             }
+
+            var dupa = _log.LogList;
         }
 
         public ICommand SwitchCommnad { get; private set; }
