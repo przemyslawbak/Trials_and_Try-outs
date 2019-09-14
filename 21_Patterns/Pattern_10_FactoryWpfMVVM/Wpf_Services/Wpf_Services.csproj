@@ -43,10 +43,14 @@
   <ItemGroup>
     <Compile Include="Controls\ControlsService.cs" />
     <Compile Include="Controls\IControlsService.cs" />
+    <Compile Include="Object\IObjectFactory.cs" />
+    <Compile Include="Object\IObjectModel.cs" />
     <Compile Include="Object\IObjectService.cs" />
+    <Compile Include="Object\ISomeService.cs" />
     <Compile Include="Object\ObjectFactory.cs" />
+    <Compile Include="Object\ObjectModel.cs" />
     <Compile Include="Object\ObjectService.cs" />
-    <Compile Include="Object\SecondNameProvider.cs" />
+    <Compile Include="Object\SomeService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

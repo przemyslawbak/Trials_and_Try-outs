@@ -1,5 +1,4 @@
-﻿using System;
-using System.Windows.Input;
+﻿using System.Windows.Input;
 using Wpf_.Commands;
 using Wpf_Models;
 using Wpf_Services.Controls;
@@ -23,7 +22,7 @@ namespace Wpf_.ViewModels
             TrzyCommand = new DelegateCommand(OnTrzyCommnad);
         }
 
-        public ObjectModel NewObject { get; set; }
+        public IObjectModel NewObject { get; set; }
 
         private void OnDwaCommnad(object obj)
         {

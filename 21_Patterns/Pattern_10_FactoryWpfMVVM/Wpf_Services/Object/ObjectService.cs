@@ -1,19 +1,19 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Wpf_Models;
 
 namespace Wpf_Services.Object
 {
     public class ObjectService : IObjectService
     {
-        public ObjectModel GetObject(string firstName)
+        public ObjectService()
         {
-            ObjectFactory factory = new ObjectFactory();
+            Factory = new ObjectFactory();
+        }
 
-            return factory.GetObject(firstName);
+        public IObjectFactory Factory { get; set; }
+
+        public IObjectModel GetObject(string firstName)
+        {
+            return Factory.GetObject(firstName);
         }
     }
 }

@@ -6,11 +6,13 @@ using System.Threading.Tasks;
 
 namespace Wpf_Services.Object
 {
-    public class ObjectFactory : IObjectFactory
+    public class SomeService : ISomeService
     {
-        public IObjectModel GetObject(string firstName)
+        public SomeService()
         {
-            return new ObjectModel(firstName, new SomeService());
+            SecondName = "SecondService";
         }
+
+        public string SecondName { get; set; }
     }
 }
