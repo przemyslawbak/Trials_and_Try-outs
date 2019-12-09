@@ -32,7 +32,7 @@ namespace _05_Znaki
             string u = $@"ten łańcuch zajmuje {
             w} wierszy";
             Console.WriteLine(u);
-            Console.ReadKey();
+            Console.ReadKey(); 
 
 
         }
