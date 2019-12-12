@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Authentication_01_.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.AspNetCore.Authentication.Cookies;
 
 namespace Authentication_01_
 {
@@ -29,14 +30,19 @@ namespace Authentication_01_
                 options.CheckConsentNeeded = context => true;
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
-            services.AddAuthentication().AddFacebook(facebookOptions =>
+            services.AddAuthentication(options => {
+                options.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+                options.DefaultSignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+            })
+            .AddFacebook(facebookOptions =>
             {
                 //https://docs.microsoft.com/en-us/aspnet/core/security/authentication/social/facebook-logins?view=aspnetcore-3.1
                 //https://developers.facebook.com/apps/532568044266344/settings/basic/
                 facebookOptions.AppId = "xxx";
                 facebookOptions.AppSecret = "xxx";
-            });
-            services.AddAuthentication().AddGoogle(options =>
+            })
+            .AddGoogle(options =>
             {
                 //https://docs.microsoft.com/en-us/aspnet/core/security/authentication/social/google-logins?view=aspnetcore-3.1
                 //https://developers.google.com/identity/sign-in/web/sign-in#before_you_begin
@@ -76,7 +82,7 @@ namespace Authentication_01_
             app.UseStaticFiles();
             app.UseCookiePolicy();
 
-            app.UseAuthentication();
+            app.UseAuthentication(); //!!!!!!!!!!!!!!!!!!!!!!!!!
 
             app.UseMvc();
         }
