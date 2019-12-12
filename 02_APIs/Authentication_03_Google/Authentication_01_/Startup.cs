@@ -33,8 +33,18 @@ namespace Authentication_01_
             {
                 //https://docs.microsoft.com/en-us/aspnet/core/security/authentication/social/facebook-logins?view=aspnetcore-3.1
                 //https://developers.facebook.com/apps/532568044266344/settings/basic/
-                facebookOptions.AppId = "id";
-                facebookOptions.AppSecret = "secret";
+                facebookOptions.AppId = "xxx";
+                facebookOptions.AppSecret = "xxx";
+            });
+            services.AddAuthentication().AddGoogle(options =>
+            {
+                //https://docs.microsoft.com/en-us/aspnet/core/security/authentication/social/google-logins?view=aspnetcore-3.1
+                //https://developers.google.com/identity/sign-in/web/sign-in#before_you_begin
+                IConfigurationSection googleAuthNSection =
+                    Configuration.GetSection("Authentication:Google");
+
+                options.ClientId = "xxx";
+                options.ClientSecret = "xxx";
             });
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
