@@ -12,8 +12,7 @@ namespace Users.Controllers
     {
         private UserManager<AppUser> userManager;
         private SignInManager<AppUser> signInManager;
-        public AccountController(UserManager<AppUser> userMgr,
-        SignInManager<AppUser> signinMgr)
+        public AccountController(UserManager<AppUser> userMgr, SignInManager<AppUser> signinMgr)
         {
             userManager = userMgr;
             signInManager = signinMgr;
@@ -27,8 +26,7 @@ namespace Users.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Login(LoginModel details,
-string returnUrl)
+        public async Task<IActionResult> Login(LoginModel details, string returnUrl)
         {
             if (ModelState.IsValid)
             {
