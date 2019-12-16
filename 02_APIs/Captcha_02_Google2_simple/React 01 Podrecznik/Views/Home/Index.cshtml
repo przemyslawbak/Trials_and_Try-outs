@@ -1,9 +1,11 @@
-﻿@model React_01_Podrecznik.Models.Comment
-@using Microsoft.Extensions.Configuration
-@inject IConfiguration Configuration
+﻿@model Comment
 @{
     Layout = null;
 }
+<ul>
+    <li>API Key: @Configuration["SecretValues:SecretApiKey"]</li>
+    <li>Other Key: @Configuration["SecretValues:SecretOtherKey"]</li>
+</ul>
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
@@ -11,7 +13,7 @@
     <title>Sample comment page</title>
 </head>
 <body>
-    <form name="contactForm" asp-controller="Home" asp-action="Index" method="post" class="searchBox" enctype="multipart/form-data">
+    <form asp-action="Index" method="post">
         <div>
             <label for="Title">Title</label>
             <input type="text" name="Title" id="Title" />
@@ -21,7 +23,7 @@
             <textarea type="text" name="Content" id="Content" rows="8" cols="20"></textarea>
         </div>
         <div>
-            <div class="g-recaptcha" data-sitekey="@(Configuration.GetValue<String>("GoogleReCaptcha:ClientKey"))"></div>
+            <div class="g-recaptcha" data-sitekey="@Configuration["ReCaptcha:ClientKey"]"></div>
         </div>
         <div>
             <button type="submit">Send comment</button>

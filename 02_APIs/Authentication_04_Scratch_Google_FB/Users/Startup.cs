@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -53,13 +54,25 @@ namespace Users
             .AddDefaultTokenProviders();
             services.AddMvc();
         }
-        public void Configure(IApplicationBuilder app)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
-            app.UseStatusCodePages();
-            app.UseDeveloperExceptionPage();
+            if (env.IsDevelopment())
+            {
+                app.UseDeveloperExceptionPage();
+                app.UseStatusCodePages();
+            }
+            else
+            {
+                app.UseExceptionHandler("/Error");
+            }
             app.UseStaticFiles();
             app.UseAuthentication();
-            app.UseMvcWithDefaultRoute();
+            app.UseMvc(routes => {
+                routes.MapRoute(name: "Error", template: "Error",
+                defaults: new { controller = "Error", action = "Error" });
+                routes.MapRoute(name: "default", template: "{controller}/{action}/{id?}",
+                defaults: new { controller = "Home", action = "Index" });
+            });
         }
     }
 }

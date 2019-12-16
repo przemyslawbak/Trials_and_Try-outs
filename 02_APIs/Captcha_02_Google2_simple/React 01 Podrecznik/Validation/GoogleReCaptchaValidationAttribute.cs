@@ -2,18 +2,15 @@
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json.Linq;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
 using System.Net;
 using System.Net.Http;
-using System.Threading.Tasks;
 
 namespace React_01_Podrecznik.Validation
 {
     public class GoogleReCaptchaValidationAttribute : ValidationAttribute
     {
-
+        public IConfiguration Configuration { get; }
         protected override ValidationResult IsValid(object value, ValidationContext validationContext)
         {
             Lazy<ValidationResult> errorResult = new Lazy<ValidationResult>(() => new ValidationResult("Google reCAPTCHA validation failed", new string[] { validationContext.MemberName }));
@@ -22,10 +19,8 @@ namespace React_01_Podrecznik.Validation
             {
                 return errorResult.Value;
             }
-
-            IConfiguration configuration = (IConfiguration)validationContext.GetService(typeof(IConfiguration));
             string reCaptchResponse = value.ToString();
-            string reCaptchaSecret = configuration.GetValue<string>("GoogleReCaptcha:SecretKey");
+            string reCaptchaSecret = Configuration["ReCaptcha:SecretKey"];
 
 
             HttpClient httpClient = new HttpClient();
