@@ -1,33 +1,57 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using Users.Models;
+using Users.Services.Email;
 
 namespace Users.Controllers
 {
     //[Authorize(Roles = "Administratorzy")]
     public class AdminController : Controller
     {
-        private UserManager<AppUser> userManager;
+        private UserManager<AppUser> _userManager;
         private IUserValidator<AppUser> userValidator;
         private IPasswordValidator<AppUser> passwordValidator;
         private IPasswordHasher<AppUser> passwordHasher;
-        public AdminController(UserManager<AppUser> usrMgr, IUserValidator<AppUser> userValid, IPasswordValidator<AppUser> passValid, IPasswordHasher<AppUser> passwordHash)
+        private readonly IEmailSender _emailSender;
+        public AdminController(UserManager<AppUser> usrMgr, IUserValidator<AppUser> userValid, IPasswordValidator<AppUser> passValid, IPasswordHasher<AppUser> passwordHash, IEmailSender emailSender)
         {
-            userManager = usrMgr;
+            _userManager = usrMgr;
             userValidator = userValid;
             passwordValidator = passValid;
             passwordHasher = passwordHash;
+            _emailSender = emailSender;
         }
+
         public ViewResult Index()
         {
-            return View(userManager.Users);
+            return View(_userManager.Users);
         }
 
         public ViewResult Create()
         {
             return View();
+        }
+
+        public IActionResult Confirmation()
+        {
+            return View("Confirmation");
+        }
+
+        public IActionResult ConfirmEmail(string userid, string token) //!!!!!!!!!!!!!!!!!!!!!!!!
+        {
+            AppUser user = _userManager.FindByIdAsync(userid).Result;
+            IdentityResult result = _userManager.ConfirmEmailAsync(user, token).Result;
+            if (result.Succeeded)
+            {
+                ViewBag.Message = "Email confirmed successfully!";
+                return View("Success");
+            }
+            else
+            {
+                ViewBag.Message = "Error while confirming your email!";
+                return View("Error");
+            }
         }
 
         [HttpPost]
@@ -40,10 +64,23 @@ namespace Users.Controllers
                     UserName = model.Name,
                     Email = model.Email
                 };
-            IdentityResult result = await userManager.CreateAsync(user, model.Password);
+
+                IdentityResult result = await _userManager.CreateAsync(user, model.Password);
+
                 if (result.Succeeded)
                 {
-                    return RedirectToAction("Index");
+                    string confirmationToken = _userManager.GenerateEmailConfirmationTokenAsync(user).Result; //!!!!!!!!!!!!!!!!!!!!!!!!
+                    string confirmationLink = Url.Action("ConfirmEmail", "Admin", new //!!!!!!!!!!!!!!!!!!!!!!!!
+                    {
+                        userid = user.Id,
+                        token = confirmationToken
+                    },
+
+                    protocol: HttpContext.Request.Scheme); //!!!!!!!!!!!!!!!!!!!!!!!!
+
+                    await _emailSender.SendEmailAsync(user.Email, "Confirmation email", confirmationLink); //!!!!!!!!!!!!!!!!!!!!!!!!
+
+                    return RedirectToAction("Confirmation"); //!!!!!!!!!!!!!!!!!!!!!!!!
                 }
                 else
                 {
@@ -58,10 +95,10 @@ namespace Users.Controllers
         [HttpPost]
         public async Task<IActionResult> Delete(string id)
         {
-            AppUser user = await userManager.FindByIdAsync(id);
+            AppUser user = await _userManager.FindByIdAsync(id);
             if (user != null)
             {
-                IdentityResult result = await userManager.DeleteAsync(user);
+                IdentityResult result = await _userManager.DeleteAsync(user);
                 if (result.Succeeded)
                 {
                     return RedirectToAction("Index");
@@ -75,11 +112,11 @@ namespace Users.Controllers
             {
                 ModelState.AddModelError("", "Nie znaleziono użytkownika.");
             }
-            return View("Index", userManager.Users);
+            return View("Index", _userManager.Users);
         }
         public async Task<IActionResult> Edit(string id)
         {
-            AppUser user = await userManager.FindByIdAsync(id);
+            AppUser user = await _userManager.FindByIdAsync(id);
             if (user != null)
             {
                 return View(user);
@@ -93,12 +130,12 @@ namespace Users.Controllers
         public async Task<IActionResult> Edit(string id, string email,
         string password)
         {
-            AppUser user = await userManager.FindByIdAsync(id);
+            AppUser user = await _userManager.FindByIdAsync(id);
             if (user != null)
             {
                 user.Email = email;
                 IdentityResult validEmail
-                = await userValidator.ValidateAsync(userManager, user);
+                = await userValidator.ValidateAsync(_userManager, user);
                 if (!validEmail.Succeeded)
                 {
                     AddErrorsFromResult(validEmail);
@@ -106,7 +143,7 @@ namespace Users.Controllers
                 IdentityResult validPass = null;
                 if (!string.IsNullOrEmpty(password))
                 {
-                    validPass = await passwordValidator.ValidateAsync(userManager,
+                    validPass = await passwordValidator.ValidateAsync(_userManager,
                     user, password);
                     if (validPass.Succeeded)
                     {
@@ -122,7 +159,7 @@ namespace Users.Controllers
                 || (validEmail.Succeeded
                 && password != string.Empty && validPass.Succeeded))
             {
-                    IdentityResult result = await userManager.UpdateAsync(user);
+                    IdentityResult result = await _userManager.UpdateAsync(user);
                     if (result.Succeeded)
                     {
                         return RedirectToAction("Index");
