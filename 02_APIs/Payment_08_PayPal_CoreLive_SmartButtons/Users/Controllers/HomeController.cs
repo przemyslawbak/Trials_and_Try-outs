@@ -32,11 +32,10 @@ namespace Users.Controllers
             return View();
         }
 
-        [HttpPost]
         [AllowAnonymous]
         public IActionResult Success(string orderID)
         {
-            return Ok();
+            return View();
         }
 
         public IActionResult Error()

@@ -163,7 +163,7 @@
                     .then(function () {
                         console.log(`payment ok`);
                         resolve({ transactionState: 'SUCCESS' });
-                        redirect: window.location.replace("https://localhost:44339/Home/Completed")
+                        redirect: window.location.replace("https://localhost:44339/Home/Completed");
                     })
                     .catch(function () {
                         console.log(`payment error`);
