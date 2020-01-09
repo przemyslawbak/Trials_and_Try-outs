@@ -1,4 +1,128 @@
-﻿option {
+﻿html {
+    min-height: 100vh;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif !important;
+    text-align: center;
+    background-color: #4A629E;
+    display: block;
+}
+
+body {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/*body 100% height credits: https://stackoverflow.com/a/20352949*/
+footer {
+    margin-top: auto;
+    clear: both;
+    width: 100%;
+    height: 110px;
+    background-color: #d3d3d3;
+    overflow: hidden;
+    width: 100%;
+}
+
+input[type="text"]:disabled {
+    background: #dddddd;
+}
+
+textarea {
+    font-family: inherit;
+    font-size: 20px;
+    color: black !important;
+    resize: none;
+}
+
+/*alternatively::after https://stackoverflow.com/a/2812830/12603542*/
+hr {
+    width: 30%;
+    color: white;
+    margin-top: 30px;
+}
+
+/*placeholder gray color*/
+::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: gray;
+}
+
+:-ms-input-placeholder { /* Internet Explorer 10-11 */
+    color: gray;
+}
+
+::-ms-input-placeholder { /* Microsoft Edge */
+    color: gray;
+}
+
+.displayRedText {
+    color: #E24941;
+}
+
+.bar {
+    max-height: 100%;
+}
+.column33 {
+    float: left;
+    width: 33.2%;
+    margin-bottom: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+
+
+.leftDivider {
+    border-right: 1px solid white;
+}
+
+.barItem {
+    color: white;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    margin-bottom: 15px;
+    display: block !important;
+    height: 30px;
+    width: 29vw;
+}
+
+.fromtoLabel {
+    display: inline-block;
+    font-size: 18px;
+    max-height: 30px;
+    width: 25%;
+}
+
+.searchRangeLeft, .searchRangeRight {
+    display: inline-block;
+    font-size: 18px;
+    height: 30px;
+    width: 35%;
+}
+
+.searchRangeLeft {
+    float: left;
+}
+
+.searchRangeRight {
+    float: right;
+}
+
+.inputTextBox {
+    color: black;
+    font-size: 18px;
+    height: 30px;
+}
+
+
+
+
+
+select {
+    z-index: 1;
+}
+
+option {
     visibility: hidden;
 }
 
@@ -11,7 +135,7 @@
     position: relative;
     float: right;
     margin-right: 15px;
-    top: 24px;
+    top: 20px;
     display: inline-block;
     width: 20px;
     height: 20px;
@@ -20,33 +144,26 @@
 .inputSelect {
     color: black;
     font-size: 18px;
-    height: 25px;
-    width: 29.4vw;
-}
-
-.barItem {
-    color: white;
-    margin-left: auto !important;
-    margin-right: auto !important;
-    margin-bottom: 20px;
-    display: block !important;
-}
-
-.multiselect {
-    width: 200px;
-    margin: 10px;
+    height: 30px;
+    width: 29vw;
+    position: relative;
+    top: -15px;
 }
 
 .selectBox {
-    position: relative;
 }
 
-    .selectBox span {
+    .selectBox div {
+        width: 80%;
+        text-align: left;
+        height: 30px;
+        font-size: 20px;
         position: relative;
-        top: 23px;
-        left: 10px;
-        font-size: 18px;
-        color: darkgray;
+        top: 18px;
+        left: 2px;
+        float: left;
+        color: #bbbbbb;
+        z-index: 2;
     }
 
     .selectBox select {
@@ -54,30 +171,36 @@
         font-weight: bold;
     }
 
-.overSelect {
-    position: absolute;
-    left: 0;
-    right: 0;
-    top: 0;
-    bottom: 0;
-}
-
 .checkboxes {
+    position: relative;
+    top: 45px;
     width: inherit;
     background-color: white;
     position: absolute;
-    z-index: 1;
+    z-index: 3;
     display: none;
     border: 1px #dadada solid;
-    max-height: 80px;
+    max-height: 160px;
     overflow-y: auto;
     overflow-x: hidden;
 }
 
     .checkboxes label {
+        font-size: 22px;
         display: block;
+        text-align: left;
+        color: black;
     }
 
         .checkboxes label:hover {
-            background-color: #1e90ff;
+            background-color: green;
         }
+
+
+
+
+
+
+
+
+
