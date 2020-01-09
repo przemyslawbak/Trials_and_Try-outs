@@ -1,0 +1,108 @@
+﻿@model MultiselectViewModel
+@{
+    Layout = null;
+}
+
+<!--good, but only for one select in the view-->
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Multiselect</title>
+    <link rel="stylesheet" href="~/css/site.css" />
+</head>
+<body>
+    <form asp-action="Index">
+        <div class="multiselect" id="selOne">
+            <div class="selectBox">
+                <select asp-for="Selections" class="inputSelect" id="selectionOne" multiple>
+                    <option>Select an option</option>
+                    <option>one</option>
+                    <option>two</option>
+                    <option>three</option>
+                    <option>four</option>
+                    <option>five</option>
+                </select>
+                <div class="overSelect"></div>
+            </div>
+            <div class="checkboxes" id="checkboxesselOne">
+                <label for="one">
+                    <input type="checkbox" id="one" onchange="addSelection(this, 'selectionOne')" />one
+                </label>
+                <label for="two">
+                    <input type="checkbox" id="two" onchange="addSelection(this, 'selectionOne')"/>two
+                </label>
+                <label for="three">
+                    <input type="checkbox" id="three" onchange="addSelection(this, 'selectionOne')"/>three
+                </label>
+                <label for="four">
+                    <input type="checkbox" id="four" onchange="addSelection(this, 'selectionOne')"/>four
+                </label>
+                <label for="five">
+                    <input type="checkbox" id="five" onchange="addSelection(this, 'selectionOne')"/>five
+                </label>
+            </div>
+        </div>
+        <input type="submit" value="Send" />
+    </form>
+
+
+
+
+
+    <script>
+        function select(selection, checkboxId, selectionId) {
+            var sel = document.getElementById(selectionId);
+            var opts = sel.options;
+            for (var opt, j = 0; opt = opts[j]; j++) {
+                if (opt.value == checkboxId.id) {
+                    opt.selected = selection;
+                    break;
+                }
+            }
+        }
+
+        function addSelection(checkbox, selectionId) {
+            if (checkbox.checked) {
+                select(true, checkbox, selectionId);
+            }
+            else {
+                select(false, checkbox, selectionId);
+            }
+        }
+
+        var elementId = '';
+
+        let expanded = false;
+        const multiSelections = document.getElementsByClassName('multiselect');
+
+        for (var multiSelect, j = 0; multiSelect = multiSelections[j]; j++) {
+
+            elementId = multiSelect.id;
+
+            multiSelect.addEventListener('click', function (e) {
+                const checkboxes = document.getElementById("checkboxes" + elementId);
+                if (!expanded) {
+                    checkboxes.style.display = "block";
+                    expanded = true;
+                } else {
+                    checkboxes.style.display = "none";
+                    expanded = false;
+                }
+                e.stopPropagation();
+            }, true)
+
+            document.addEventListener('click', function (e) {
+                if (expanded) {
+                    checkboxes.style.display = "none";
+                    expanded = false;
+                }
+            }, false)
+        }
+
+
+
+
+
+    </script>
+</body>
+</html>
