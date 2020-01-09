@@ -1,0 +1,83 @@
+﻿option {
+    visibility: hidden;
+}
+
+.oryginalText {
+    display: none;
+}
+
+#arrowSel {
+    background: url(data:image/gif;base64,R0lGODlhCwALAJEAAAAAAP///xUVFf///yH5BAEAAAMALAAAAAALAAsAAAIUnC2nKLnT4or00PvyrQwrPzUZshQAOw==) no-repeat center right !important;
+    position: relative;
+    float: right;
+    margin-right: 15px;
+    top: 24px;
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+}
+
+.inputSelect {
+    color: black;
+    font-size: 18px;
+    height: 25px;
+    width: 29.4vw;
+}
+
+.barItem {
+    color: white;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    margin-bottom: 20px;
+    display: block !important;
+}
+
+.multiselect {
+    width: 200px;
+    margin: 10px;
+}
+
+.selectBox {
+    position: relative;
+}
+
+    .selectBox span {
+        position: relative;
+        top: 23px;
+        left: 10px;
+        font-size: 18px;
+        color: darkgray;
+    }
+
+    .selectBox select {
+        width: 100%;
+        font-weight: bold;
+    }
+
+.overSelect {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+}
+
+.checkboxes {
+    width: inherit;
+    background-color: white;
+    position: absolute;
+    z-index: 1;
+    display: none;
+    border: 1px #dadada solid;
+    max-height: 80px;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+    .checkboxes label {
+        display: block;
+    }
+
+        .checkboxes label:hover {
+            background-color: #1e90ff;
+        }
