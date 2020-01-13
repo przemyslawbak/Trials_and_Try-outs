@@ -1,0 +1,14 @@
+﻿@model PagingList<ColorPanel>
+
+<nav aria-label="Colors navigation example">
+    @await this.Component.InvokeAsync("Pager", new { pagingList = this.Model })
+</nav>
+
+@foreach (var item in Model)
+{
+    <div>@item.Element1BackgroundColor, @item.Element2BackgroundColor, @item.Element3BackgroundColor</div>
+}
+
+<nav aria-label="Suppliers navigation example">
+    <vc:pager paging-list="@Model" />
+</nav>

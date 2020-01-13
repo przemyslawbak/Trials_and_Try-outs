@@ -9,5 +9,6 @@ namespace React_01_Podrecznik.Models
     {
         public string[] Flags { get; set; }
         public string[] Types { get; set; }
+        public string[] Dupa { get; set; }
     }
 }

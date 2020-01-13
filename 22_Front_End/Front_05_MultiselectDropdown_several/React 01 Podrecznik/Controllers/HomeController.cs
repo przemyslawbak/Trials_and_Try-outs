@@ -14,6 +14,7 @@ namespace React_01_Podrecznik.Controllers
 
             ViewBag.VesselTypes = vesselTypes;
             ViewBag.VesselFlags = vesselFlags;
+            ViewBag.Dupa = vesselFlags;
 
             return View(model);
         }

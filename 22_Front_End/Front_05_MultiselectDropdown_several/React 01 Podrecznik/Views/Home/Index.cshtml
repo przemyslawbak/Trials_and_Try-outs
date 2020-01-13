@@ -69,6 +69,29 @@
                     }
                 </div>
             </div>
+            <!--multiple select-->
+            <div class="multiselect inputSelect barItem" id="dupa">
+                <div class="selectBox">
+                    <div id="arrowSel"></div>
+                    <span class="oryginalText">Dupa</span>
+                    <div>Dupa</div>
+                    <select asp-for="Dupa" class="inputSelect" id="selectdupa" multiple>
+                        @foreach (string item in ViewBag.Dupa)
+                        {
+                            <option>@item</option>
+                        }
+                    </select>
+                </div>
+                <div class="checkboxes" id="checkboxesdupa">
+
+                    @foreach (string item in ViewBag.Dupa)
+                    {
+                        <label for="@item">
+                            <input type="checkbox" id="@item" onchange="addSelection(this)" />@item
+                        </label>
+                    }
+                </div>
+            </div>
             <div class="barItem"><input class="searchRangeLeft lock" type="text" placeholder="from"> <label class="fromtoLabel">DWT</label> <input class="searchRangeRight lock" type="text" placeholder="to"></div>
             <input class="inputTextBox barItem lock" type="text" placeholder="Call Sign">
         </div>
