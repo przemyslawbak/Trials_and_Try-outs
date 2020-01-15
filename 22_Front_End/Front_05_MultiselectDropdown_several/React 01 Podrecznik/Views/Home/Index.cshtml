@@ -17,12 +17,8 @@
             const checkbox = sibling.previousElementSibling.children[0];
             const parent = sibling.parentNode;
 
-            console.log(label.tagName + ' ' + checkbox.tagName);
-            console.log(label.htmlFor + ' ' + checkbox.id);
             checkbox.id = label.htmlFor + parent.id;
             label.setAttribute("for", label.htmlFor + parent.id);
-            console.log(label.tagName + ' ' + checkbox.tagName);
-            console.log(label.htmlFor + ' ' + checkbox.id);
         }
     </script>
     <!--todo: onload checkboxes check-->
@@ -132,7 +128,6 @@
             else {
                 select(false, checkbox, selectionId);
             }
-            console.log(checkbox.id);
         }
 
         //on checkbox check or uncheck, called by: addSelection
@@ -140,9 +135,6 @@
             var sel = document.getElementById(selectionId);
             var opts = sel.options;
             for (var opt, j = 0; opt = opts[j]; j++) {
-                console.log(checkbox.text);
-                console.log(checkbox.id);
-                console.log(opt.value);
                 if (opt.value === checkbox.id) {
                     opt.selected = selection;
                     break;
