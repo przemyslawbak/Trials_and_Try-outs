@@ -11,6 +11,20 @@
     <link rel="stylesheet" href="~/css/site.css" />
 </head>
 <body>
+    <script>
+        function changeAttributes(sibling) {
+            const label = sibling.previousElementSibling;
+            const checkbox = sibling.previousElementSibling.children[0];
+            const parent = sibling.parentNode;
+
+            console.log(label.tagName + ' ' + checkbox.tagName);
+            console.log(label.htmlFor + ' ' + checkbox.id);
+            checkbox.id = label.htmlFor + parent.id;
+            label.setAttribute("for", label.htmlFor + parent.id);
+            console.log(label.tagName + ' ' + checkbox.tagName);
+            console.log(label.htmlFor + ' ' + checkbox.id);
+        }
+    </script>
     <!--todo: onload checkboxes check-->
     <form asp-action="Index">
         <div class="column33 leftDivider">
@@ -35,6 +49,7 @@
                         <label for="@item">
                             <input type="checkbox" id="@item" onchange="addSelection(this)" />@item
                         </label>
+                        <img src onerror="changeAttributes(this)" />
                     }
                 </div>
             </div>
@@ -66,6 +81,7 @@
                         <label for="@item">
                             <input type="checkbox" id="@item" onchange="addSelection(this)" />@item
                         </label>
+                        <img src onerror="changeAttributes(this)" />
                     }
                 </div>
             </div>
@@ -89,6 +105,7 @@
                         <label for="@item">
                             <input type="checkbox" id="@item" onchange="addSelection(this)" />@item
                         </label>
+                        <img src onerror="changeAttributes(this)" />
                     }
                 </div>
             </div>
@@ -101,10 +118,31 @@
 
 
     <script>
+
+
+
+        //on checkbox change
+        function addSelection(checkbox) {
+            const checkboxes = checkbox.parentNode.parentNode.id;
+            const selectionId = checkboxes.replace('checkboxes', 'select');
+            checkbox.id = checkbox.id.replace(checkboxes, '');
+            if (checkbox.checked) {
+                select(true, checkbox, selectionId);
+            }
+            else {
+                select(false, checkbox, selectionId);
+            }
+            console.log(checkbox.id);
+        }
+
+        //on checkbox check or uncheck, called by: addSelection
         function select(selection, checkbox, selectionId) {
             var sel = document.getElementById(selectionId);
             var opts = sel.options;
             for (var opt, j = 0; opt = opts[j]; j++) {
+                console.log(checkbox.text);
+                console.log(checkbox.id);
+                console.log(opt.value);
                 if (opt.value === checkbox.id) {
                     opt.selected = selection;
                     break;
@@ -130,19 +168,6 @@
             else {
                 sel.previousElementSibling.style.color = 'black';
                 sel.previousElementSibling.innerHTML = 'Selected: ' + counter;
-            }
-        }
-
-        //on checkbox change
-        function addSelection(checkbox) {
-            const checkboxes = checkbox.parentNode.parentNode.id;
-            const selectionId = checkboxes.replace('checkboxes', 'select');
-
-            if (checkbox.checked) {
-                select(true, checkbox, selectionId);
-            }
-            else {
-                select(false, checkbox, selectionId);
             }
         }
 
