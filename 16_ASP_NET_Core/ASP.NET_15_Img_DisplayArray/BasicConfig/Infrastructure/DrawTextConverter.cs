@@ -34,7 +34,6 @@ namespace BasicConfig.Infrastructure
                 sf.Trimming = StringTrimming.Word;
             }
 
-
             //create a new image of the right size
             using (img = new Bitmap((int)textSize.Width, (int)textSize.Height))
             {
@@ -58,15 +57,11 @@ namespace BasicConfig.Infrastructure
                     }
                 }
 
+                //stream closed in controller after taking value
                 MemoryStream ms = new MemoryStream();
                 img.Save(ms, ImageFormat.Png);
                 return ms;
             }
-
-
-
-
-
         }
     }
 }
