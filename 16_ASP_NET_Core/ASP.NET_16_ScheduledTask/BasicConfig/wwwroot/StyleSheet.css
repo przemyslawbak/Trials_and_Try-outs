@@ -1,0 +1,35 @@
+﻿html {
+    display: block;
+}
+
+#some-context {
+    border-collapse: collapse;
+}
+
+    #some-context div {
+        margin: 10px;
+        display: block;
+        -webkit-user-select: none;
+        -khtml-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        -o-user-select: none;
+        user-select: none;
+    }
+
+        #some-context div img {
+            display: inline-block;
+            float: left;
+        }
+
+    #some-context td {
+        min-width: 300px;
+        border: 1px solid black;
+    }
+
+@media print {
+    html, body {
+        display: none;
+        /* hide whole page */
+    }
+}
