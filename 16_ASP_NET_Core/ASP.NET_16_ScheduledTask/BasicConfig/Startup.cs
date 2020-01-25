@@ -1,9 +1,7 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
-using BasicConfig.Models;
 using Microsoft.Extensions.Configuration;
-using Microsoft.EntityFrameworkCore;
 using BasicConfig.Infrastructure;
 using System;
 

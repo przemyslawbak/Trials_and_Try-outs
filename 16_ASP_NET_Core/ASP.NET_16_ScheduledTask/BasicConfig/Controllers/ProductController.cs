@@ -10,6 +10,8 @@ namespace BasicConfig.Controllers
         {
             ViewBag.Integer = Number.Current.Integer.ToString();
 
+
+
             return View();
         }
     }
