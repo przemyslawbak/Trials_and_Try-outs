@@ -1,0 +1,49 @@
+﻿@model MultiselectViewModel
+@{
+    Layout = null;
+}
+
+<!--creds: https://www.stevejgordon.co.uk/loading-pin-on-bing-maps-from-asp-net-core-mvc-data -->
+<!--NIE TRYBI-->
+<!DOCTYPE html>
+<html>
+<head>
+    <!--credits: https://www.bing.com/api/maps/sdkrelease/mapcontrol/isdk/pushpinlabels -->
+    <title>loadmapsyncHTML</title>
+    <meta http-equiv='Content-Type' content='text/html; charset=utf-8' />
+    <style type='text/css'>
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            font-family: 'Segoe UI',Helvetica,Arial,Sans-Serif
+        }
+    </style>
+</head>
+<body>
+    <div id='printoutPanel'></div>
+
+    <div id='myMap' style='width: 300px; height: 300px;'></div>
+    <script type='text/javascript'>
+        function loadMapScenario() {
+            var navigationBarMode = Microsoft.Maps.NavigationBarMode;
+            var map = new Microsoft.Maps.Map(document.getElementById('myMap'), {
+                center: new Microsoft.Maps.Location(31.50632, -30.12714),
+                zoom: 7,
+                navigationBarMode: navigationBarMode.compact,
+                supportedMapTypes: [Microsoft.Maps.MapTypeId.road, Microsoft.Maps.MapTypeId.aerial, Microsoft.Maps.MapTypeId.grayscale, Microsoft.Maps.MapTypeId.canvasLight]
+            });
+            var pushpin = new Microsoft.Maps.Pushpin(map.getCenter(), {
+                color: 'blue',
+                title: 'ARCTIC SUNRISE',
+                subTitle: 'SOG: 10 kn COG: 205 °',
+                icon: 'http://localhost:53801/src/img/position_icon.png'
+            });
+            map.entities.push(pushpin);
+
+        }
+    </script>
+    <script type='text/javascript' src='https://www.bing.com/api/maps/mapcontrol?key=Ajxaqs8eqUaDkhB9gUwJ0btqKifRmdEYbONenKu7DSYpKhjfVsfMRAA9cQjDr12-&callback=loadMapScenario' async defer></script>
+
+</body>
+</html>
