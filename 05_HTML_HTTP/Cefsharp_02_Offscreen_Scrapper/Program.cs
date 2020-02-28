@@ -15,6 +15,7 @@ namespace CefSharp.MinimalExample.OffScreen
     /// Will not work because in CefSharp.OffScreen JS is disabled
     /// Possible fix:
     /// https://stackoverflow.com/a/53453064
+    /// xxx - replace with correct strings
     /// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     /// </summary>
     public class Program
