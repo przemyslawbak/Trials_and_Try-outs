@@ -13,8 +13,6 @@ namespace Wpf_.ViewModels
         {
             _main = main;
 
-            //_main.Initialize();
-
             SwitchCommnad = new DelegateCommand(OnSwitchCommand);
         }
 
