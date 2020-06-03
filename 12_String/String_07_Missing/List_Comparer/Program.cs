@@ -9,8 +9,8 @@ namespace List_Comparer
     {
         static void Main(string[] args)
         {
-            string[] one = File.ReadAllLines("1.txt");
-            string[] two = File.ReadAllLines("2.txt");
+            string[] one = File.ReadAllLines("1.txt"); //do wykluczenia
+            string[] two = File.ReadAllLines("2.txt"); //podstawa
 
             List<string> second = two.ToList();
             List<string> first = new List<string>();

@@ -1,6 +1,8 @@
 ﻿using MailKit.Net.Pop3;
 using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Text.RegularExpressions;
 
 namespace EmailCrawler_01_Trial
 {
@@ -16,9 +18,9 @@ namespace EmailCrawler_01_Trial
         {
             using (Pop3Client client = new Pop3Client())
             {
-                List<ModelDanych> ListaAdresow = new List<ModelDanych>();
-                client.Connect("pop.pro-emailing.com", 110, MailKit.Security.SecureSocketOptions.None);
-                client.Authenticate("gerald.argarin@pro-emailing.com", "xDt6!ksY6");
+                List<string> adresy = new List<string>();
+                client.Connect("pop.simple-sender.com", 110, MailKit.Security.SecureSocketOptions.None);
+                client.Authenticate("przemyslaw-bak-job@simple-sender.com", "!1Pandemonium!1");
                 var count = client.GetMessageCount();
                 for (int i = 0; i < client.Count; i++)
                 {
@@ -36,15 +38,18 @@ namespace EmailCrawler_01_Trial
                             {
                                 if (word.Contains("@"))
                                 {
-                                    dane.AdresEmail = word;
-                                    Console.Write(dane.AdresEmail);
+                                    string replacement = Regex.Replace(word, @"\t|\n|\r", "");
+                                    dane.AdresEmail = replacement;
+                                    Console.WriteLine(dane.AdresEmail);
+                                    adresy.Add(dane.AdresEmail);
                                     break;
                                 }
                             }
-                            ListaAdresow.Add(dane);
                         }
                     }
                 }
+
+                File.AppendAllLines("savedlist.txt", adresy);
 
                 client.Disconnect(true);
                 Console.WriteLine("koniec");
