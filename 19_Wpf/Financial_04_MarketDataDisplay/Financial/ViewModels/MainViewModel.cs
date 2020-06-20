@@ -26,7 +26,7 @@ namespace Financial.ViewModels
         private async System.Threading.Tasks.Task GetFromApiAsync()
         {
             Ticker = "AAPL";
-            string page = "https://finnhub.io/api/v1/quote?symbol=" + Ticker;
+            string page = "https://finnhub.io/api/v1/quote?symbol=" + Ticker + "&token=xxx";
 
             using (HttpClient client = new HttpClient())
             {
