@@ -1,0 +1,40 @@
+﻿<Window x:Class="Financial.Views.MainView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:Financial.Views"
+             mc:Ignorable="d"
+        DataContext="{Binding MainViewModel, Source={StaticResource ViewModelLocator}}"
+             d:DesignHeight="300" d:DesignWidth="500">
+    <Grid Margin="10">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="150"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <StackPanel>
+            <Button x:Name="BarChart" Content="Bar Chart" Width="120" Margin="0 10 0 0" Command="{Binding BarChart}"/>
+            <Button x:Name="LineChart" Content="Line Chart" Width="120" Margin="0 10 0 0" Command="{Binding LineChart}"/>
+
+            <Button x:Name="PieChart" Content="Pie Chart" Width="120" Margin="0 10 0 0" Command="{Binding PieChart}"/>
+            <Button x:Name="PolarChart" Content="Polar Chart" Width="120" Margin="0 10 0 0" Command="{Binding PolarChart}"/>
+        </StackPanel>
+
+        <Grid Grid.Column="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <local:MsChart SeriesCollection="{Binding BarSeriesCollection}" ChartBackground="Blue" Title="Bar Chart"/>
+            <local:MsChart SeriesCollection="{Binding LineSeriesCollection}" ChartBackground="Red" Title="Line Chart" Grid.Column="1"/>
+            <local:MsChart SeriesCollection="{Binding PieSeriesCollection}" ChartBackground="Green" Title="Pie Chart" Grid.Row="1" IsArea3D="True"/>
+            <local:MsChart SeriesCollection="{Binding PolarSeriesCollection}" ChartBackground="White" Title="Polar Chart"
+                           XLabel="" YLabel="" Grid.Row="1" Grid.Column="1"/>
+        </Grid>
+    </Grid>
+</Window>
