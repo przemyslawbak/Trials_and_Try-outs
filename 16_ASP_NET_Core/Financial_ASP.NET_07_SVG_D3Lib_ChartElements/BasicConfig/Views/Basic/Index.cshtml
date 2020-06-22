@@ -1,0 +1,306 @@
+﻿<script src="~/lib/d3/d3.min.js"></script>
+<script src="~/js/site.js"></script>
+
+<div class="container">
+    <div class="row">
+        <p>Basic Axes</p>
+        <svg id="svg"></svg>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">
+        <p>Time Axes</p>
+        <svg id="svg0"></svg>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-4">
+            <p>Bottom time axis</p>
+            <br />
+            <div id="svg1"></div>
+        </div>
+        <div class="col-sm-4">
+            <p>Top time axis</p>
+            <br />
+            <div id="svg2"></div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-4">
+            <p>Bottom time axis with fewer ticks</p>
+            <br />
+            <div id="svg3"></div>
+        </div>
+        <div class="col-sm-4">
+            <p>Top time axis with fewer ticks</p>
+            <br />
+            <div id="svg4"></div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-4">
+            <p>Bottom axis: ticks with %</p>
+            <br />
+            <div id="svg5"></div>
+        </div>
+        <div class="col-sm-4">
+            <p>Top axis: ticks with unicode character</p>
+            <br />
+            <div id="svg6"></div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-4">
+            <p style="margin-top:30px">X-Y axes with grid lines</p>
+            <svg id="svg7"></svg>
+        </div>
+        <div class="col-sm-4">
+            <p style="margin-top:30px">Time axes with grid lines</p>
+            <svg id="svg8"></svg>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-5">
+            <p style="margin-top:30px">X-Y axes with grid lines</p>
+            <svg id="svg9"></svg>
+        </div>
+        <div class="col-sm-5">
+            <p style="margin-top:30px">Time axes with grid lines</p>
+            <svg id="svg10"></svg>
+        </div>
+    </div>
+</div>
+
+<!--TITLES-->
+<script type="text/javascript">
+    var options = {
+        width: 450,
+        height: 400,
+        xdomain: [0, 10],
+        ydomain: [-5, 20],
+        margin: { top: 40, right: 20, bottom: 60, left: 50 },
+        title: "Chart One"
+    };
+    var grid = setAxesGridlines("#svg9", options);
+    addTitleLabel(grid.svg, grid.w, grid.h, options);
+    options = {
+        width: 450,
+        height: 400,
+        margin: { top: 40, right: 20, bottom: 100, left: 50 },
+        xdomain: [new Date(2016, 1, 1), new Date(2016, 12, 31)],
+        ydomain: [0, 100],
+        isTimeAxis: true,
+        title: "Chart Two",
+        xlabel: "Date"
+    };
+    grid = setAxesGridlines("#svg10", options);
+    addTitleLabel(grid.svg, grid.w, grid.h, options);
+</script>
+
+            <!--GRIDLINES-->
+<script type="text/javascript">
+    //nie działa?
+    var options = {
+        xdomain: [0, 10],
+        ydomain: [-5, 20],
+        margin: { top: 20, right: 20, bottom: 40, left: 50 }
+    }
+    setAxesGridlines("#svg7", options);
+    options = {
+        xdomain: [new Date(2016, 1, 1), new Date(2016, 12, 31)],
+        margin: { top: 20, right: 20, bottom: 60, left: 50 },
+        isTimeAxis: true
+    }
+    setAxesGridlines("#svg8", options);
+</script>
+
+<!--BASIC AXES-->
+<script type="text/javascript">
+    var width = 600;
+    var height = 450;
+    var margin = { top: 50, right: 50, bottom: 50, left: 50 };
+    var w = width - margin.left - margin.right;
+    var h = height - margin.top - margin.bottom;
+    var g = d3.select("#svg")
+        .attr("width", width)
+        .attr("height", height)
+        .append("g")
+        .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+    // horizontal bottom axis
+    var scale = d3.scaleLinear().domain([-1, 1]).range([0, w]);
+    var axis = d3.axisBottom().scale(scale);
+    g.append("g")
+        .attr("transform", "translate(0," + h + ")")
+        .call(axis);
+    // horizontal top axis
+    scale = d3.scaleLinear().domain([0, 100]).range([0, w]);
+    axis = d3.axisTop().scale(scale);
+    g.append("g").call(axis);
+    // vertical left axis
+    scale = d3.scaleLinear().domain([-0.02, 0.04]).range([h, 0]);
+    axis = d3.axisLeft().scale(scale);
+    g.append("g").call(axis);
+    // vertical right axis
+    scale = d3.scaleLinear().domain([500, 1000]).range([h, 0]);
+    axis = d3.axisRight().scale(scale);
+    g.append("g")
+        .attr("transform", "translate(" + w + ",0)")
+        .call(axis);
+</script>
+
+<!--TimeAxes-->
+<script type="text/javascript">
+    var width = 1000;
+    var height = 350;
+    var margin = { top: 50, right: 50, bottom: 50, left: 50 };
+    var w = width - margin.left - margin.right;
+    var h = height - margin.top - margin.bottom;
+    var g = d3.select("#svg0")
+        .attr("width", width)
+        .attr("height", height)
+        .append("g")
+        .attr("transform", "translate(" + margin.left + "," +
+            margin.top + ")");
+    // horizontal bottom axis
+    var scale = d3.scaleTime().domain([new Date(2016, 1, 1),
+    new Date(2016, 12, 31)]).range([0, w]);
+    var axis = d3.axisBottom().scale(scale);
+    g.append("g")
+        .attr("transform", "translate(0," + h + ")")
+        .call(axis);
+    // horizontal top axis
+    scale = d3.scaleTime().domain([new Date(2016, 1, 1),
+    new Date(2016, 1, 31)]).range([0, w]);
+    axis = d3.axisTop().scale(scale);
+    g.append("g").call(axis);
+    // vertical left axis
+    scale = d3.scaleTime().domain([new Date(2010, 1, 1),
+    new Date(2017, 1, 1)]).range([h, 0]);
+    axis = d3.axisLeft().scale(scale);
+    g.append("g").call(axis);
+    // vertical right axis
+    scale = d3.scaleTime().domain([new Date(2017, 1, 1, 5, 0, 0),
+    new Date(2017, 1, 1, 10, 10, 0)]).range([h, 0]);
+    axis = d3.axisRight().scale(scale);
+    g.append("g")
+        .attr("transform", "translate(" + w + ",0)")
+        .call(axis);
+</script>
+
+<!--Custom Axes-->
+<script type="text/javascript">
+    var width = 340;
+    var height = 150;
+    var margin = { top: 50, right: 20, bottom: 20, left: 30 }
+    var w = width - margin.left - margin.right;
+    var h = height - margin.top - margin.bottom;
+    var svg = d3.select("#svg1")
+        .append("svg")
+        .attr("width", width)
+        .attr("height", height)
+        .append("g")
+        .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+    var scale = d3.scaleTime().domain([new Date(2016, 1, 1),
+    new Date(2016, 12, 31)]).range([0, w]);
+    var axis = d3.axisBottom()
+        .scale(scale)
+        .tickFormat(d3.timeFormat("%Y-%m-%d"));
+    svg.append("g")
+        .call(axis)
+        .selectAll("text")
+        .style("text-anchor", "end")
+        .attr("dx", "-0.8em")
+        .attr("dy", "0.15em")
+        .attr("transform", "rotate(-60)");
+    svg = d3.select("#svg2")
+        .append("svg")
+        .attr("width", width)
+        .attr("height", height)
+        .append("g")
+        .attr("transform", "translate(0," + margin.top + ")");
+    scale = d3.scaleTime().domain([new Date(2016, 1, 1),
+    new Date(2016, 1, 31)]).range([0, w]);
+    axis = d3.axisTop()
+        .scale(scale)
+        .tickFormat(d3.timeFormat("%m-%d"));
+    svg.append("g")
+        .call(axis)
+        .selectAll("text")
+        .style("text-anchor", "start")
+        .attr("dx", "1.0em")
+        .attr("dy", "-0.1em")
+        .attr("transform", "rotate(-60)");
+    svg = d3.select("#svg3")
+        .append("svg")
+        .attr("width", width)
+        .attr("height", height)
+        .append("g")
+        .attr("transform", "translate(0," + margin.top + ")");
+    scale = d3.scaleTime().domain([new Date(2016, 1, 1),
+    new Date(2016, 12, 31)]).range([0, w]);
+    axis = d3.axisBottom()
+        .scale(scale)
+        .ticks(6)
+        .tickFormat(d3.timeFormat("%Y-%m-%d"));
+    svg.append("g")
+        .call(axis)
+        .selectAll("text")
+        .style("text-anchor", "end")
+        .attr("dx", "-0.8em")
+        .attr("dy", "0.15em")
+        .attr("transform", "rotate(-60)");
+    svg = d3.select("#svg4")
+        .append("svg")
+        .attr("width", width)
+        .attr("height", height)
+        .append("g")
+        .attr("transform", "translate(0," + margin.top + ")");
+    scale = d3.scaleTime().domain([new Date(2016, 1, 1),
+    new Date(2016, 1, 31)]).range([0, w]);
+    axis = d3.axisTop()
+        .scale(scale)
+        .ticks(6)
+        .tickFormat(d3.timeFormat("%m-%d"));
+    svg.append("g")
+        .call(axis)
+        .selectAll("text")
+        .style("text-anchor", "start")
+        .attr("dx", "1.0em")
+        .attr("dy", "-0.1em")
+        .attr("transform", "rotate(-60)");
+    svg = d3.select("#svg5")
+        .append("svg")
+        .attr("width", width)
+        .attr("height", height)
+        .append("g")
+        .attr("transform", "translate(0," + margin.top + ")");
+    scale = d3.scaleLinear().domain([0, 100]).range([0, w]);
+    axis = d3.axisBottom()
+        .scale(scale)
+        .ticks(6)
+        .tickFormat(function (d) { return d + "%" });
+    svg.append("g")
+        .call(axis);
+    svg = d3.select("#svg6")
+        .append("svg")
+        .attr("width", width)
+        .attr("height", height)
+        .append("g")
+        .attr("transform", "translate(0," + margin.top + ")");
+    scale = d3.scaleLinear().domain([0, 40]).range([0, w]);
+    axis = d3.axisTop()
+        .scale(scale)
+        .ticks(8)
+        .tickFormat(function (d) { return d + "\u00B0F" });
+    svg.append("g")
+        .call(axis);
+</script>

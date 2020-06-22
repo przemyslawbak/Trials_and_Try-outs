@@ -1,131 +1,97 @@
-﻿@Html.Partial("_Links")
-
-<!--też był przykład z matrycą w milimetrach zamiast pikseli-->
-<div class="container">
+﻿<div class="container">
     <div class="row">
         <div class="col-sm-3">
-            <p>Grid units: pixels</p>
-            <svg width="500" height="200">
-                <defs>
-                    <pattern id="minorGrid" width="10" height="10"
-                             patternUnits="userSpaceOnUse">
-                        <path d="M 10 0 L 0 0 0 10" fill="none" stroke="gray"
-                              stroke-width="0.5" />
-                    </pattern>
-                    <pattern id="pxGrid" width="50" height="50"
-                             patternUnits="userSpaceOnUse">
-                        <rect width="50" height="50" fill="url(#minorGrid)" />
-                        <path d="M 50 0 L 0 0 0 60" fill="none" stroke="gray"
-                              stroke-width="1" />
-                    </pattern>
-                </defs>
+            <p>The g and use elements</p>
+            <svg width="200" height="200">
+
                 <rect width="100%" height="100%" fill="url(#pxGrid)"
                       stroke="gray" stroke-width="1" />
-                <line x1="0" y1="0" x2="100" y2="100" stroke="red"
-                      stroke-width="3" />
-                <line x1="100" y1="100" x2="200" y2="150" stroke="red"
-                      stroke-width="3" />
+
+                <!--grupowanie-->
+                <g id="house" stroke="black" stroke-width="2" fill="red"
+                   fill-opacity="0.5">
+                    <path d="M50 10 90 40 H10 Z" />
+                    <rect x="10" y="40" width="80" height="50" />
+                    <rect x="60" y="60" width="20" height="30" fill="none" />
+                </g>
+
+                <!--duplikacja-->
+                <use xlink:href="#house" x="100" y="0" />
+                <use xlink:href="#house" x="0" y="100" />
+                <use xlink:href="#house" x="100" y="100" />
             </svg>
         </div>
-    </div>
-</div>
-
-<div class="container">
-    <div class="row">
         <div class="col-sm-3">
-            <p>Various lines and shapes</p>
-            <svg width="1200" height="200">
-                <defs>
-                    <pattern id="minorGrid" width="10" height="10"
-                             patternUnits="userSpaceOnUse">
-                        <path d="M 10 0 L 0 0 0 10" fill="none" stroke="gray"
-                              stroke-width="0.5" />
-                    </pattern>
-                    <pattern id="pxGrid" width="50" height="50"
-                             patternUnits="userSpaceOnUse">
-                        <rect width="50" height="50" fill="url(#minorGrid)" />
-                        <path d="M 50 0 L 0 0 0 50" fill="none" stroke="gray"
-                              stroke-width="1" />
-                    </pattern>
-                </defs>
+            <p>Translate in x</p>
+            <svg width="200" height="200">
                 <rect width="100%" height="100%" fill="url(#pxGrid)"
                       stroke="gray" stroke-width="1" />
-                <line x1="30" y1="70" x2="170" y2="70" stroke="red" stroke-width="5"
-                      stroke-opacity="0.3" />
-                <line x1="0" y1="100" x2="200" y2="100" stroke="black" stroke-width="2"
-                      stroke-dasharray="10,5" />
-                <line x1="50" y1="20" x2="150" y2="20" stroke="black"
-                      stroke-width="1" />
-                <line x1="0.5cm" y1="0.5cm" x2="0.5cm" y2="2cm" stroke="red"
-                      stroke-width="2" />
-                <line x1="30" y1="175" x2="170" y2="175" stroke="blue"
-                      stroke-width="5" />
-                <rect x="1110" y="110" width="80" height="50" fill="none"
-                      stroke="black" />
-                <rect x="910" y="10" width="80" height="80" fill="green"
-                      stroke="red" stroke-width="10" stroke-opacity="0.5" />
-                <rect x="810" y="10" width="80" height="50" fill="none" stroke="black"
-                      stroke-width="3" rx="5" ry="5" />
-                <circle cx="750" cy="50" r="40" fill="red" fill-opacity="0.5" />
-                <ellipse cx="750" cy="150" rx="40" ry="20" fill="none" stroke="black" />
-                <polygon points="50,10 150,10 110,60 10,60" fill="red"
-                         fill-opacity="0.5" stroke="black" />
-                <polyline points="20,50 60,0 100,40 140,0 180,50" stroke="black"
-                          stroke-width="3" fill="none" transform="translate(0,10)" />
+                <use xlink:href="#house">
+                    <!--animacja-->
+                    <animateTransform attributeName="transform"
+                                      type="translate"
+                                      from="0 0"
+                                      to="100 0"
+                                      begin="0s"
+                                      dur="5s"
+                                      repeatCount="indefinite" />
+                </use>
             </svg>
         </div>
-    </div>
-</div>
-
-<!--
-    For the first path, we have the d attribute:
-    We can examine this path more closely:
- M10 10: Move pen to (10, 10).
- H90: H stands for horizontal. Starting from last point (10, 10), it draws a horizontal line to the x-coordinate 90. This puts you at coordinates (90, 10).
- V90: V stands for vertical. Start from the last line drawn and draw a vertical line to y-coordinate 90. This puts you at coordinates (90, 90).
- H10: Start from the last coordinates (90, 90) and draw a horizontal line x-coordinate 10. This puts you at coordinate (10, 90).
--->
-
-<div class="container">
-    <div class="row">
         <div class="col-sm-3">
-            <p>Paths and curves</p>
-            <svg width="1200" height="200">
-                <defs>
-                    <pattern id="minorGrid" width="10" height="10"
-                             patternUnits="userSpaceOnUse">
-                        <path d="M 10 0 L 0 0 0 10" fill="none" stroke="gray"
-                              stroke-width="0.5" />
-                    </pattern>
-                    <pattern id="pxGrid" width="50" height="50"
-                             patternUnits="userSpaceOnUse">
-                        <rect width="50" height="50" fill="url(#minorGrid)" />
-                        <path d="M 50 0 L 0 0 0 60" fill="none" stroke="gray"
-                              stroke-width="1" />
-                    </pattern>
-                </defs>
+            <p>Scale in x,y</p>
+            <svg width="200" height="200">
                 <rect width="100%" height="100%" fill="url(#pxGrid)"
                       stroke="gray" stroke-width="1" />
-                <path d="M10 10 H90 V90 H10" stroke="red" stroke-width="3"
-                      fill="none" />
-                <path d="M10 10 H90 V90 H10 Z" stroke="red" stroke-width="3"
-                      fill="none" transform="translate(100,0)" />
-                <path d="M50 10 L90 90 H10 Z" stroke="red" stroke-width="3"
-                      fill="none" transform="translate(0,100)" />
-                <path d="M50 0 L79.4 90.5 L2.4 34.5 L97.6 34.5 L20.6 90.5 Z"
-                      stroke="red" stroke-width="3" fill="none"
-                      transform="translate(100,105)" />
-                <path d="M30 130 C30 10,300 10,300 130" stroke="red" stroke-width="3"
-                      fill="none" transform="translate(-10,-15) scale(0.68)" />
-                <path d="M30 80 C70 30,120 30,160 80 S250 100,290 80" stroke="red"
-                      stroke-width="3" fill="none" transform="translate(-10,100)
-scale(0.7)" />
-                <path d="M0 100 A100 100 0 0 1 100 0 L100 100 Z" stroke="blue"
-                      stroke-width="3" fill="none"
-                      transform="translate(10,10) scale(0.8)" />
-                <path d="M0 100 A100 100 0 1 0 100 0 L100 100 Z" stroke="blue"
-                      stroke-width="3" fill="none"
-                      transform="translate(30,30) scale(0.8)" />
+                <use xlink:href="#house">
+                    <!--animacja-->
+                    <animateTransform attributeName="transform"
+                                      type="scale"
+                                      from="1,1"
+                                      to="2,2"
+                                      begin="0s"
+                                      dur="5s"
+                                      repeatCount="indefinite" />
+                </use>
+            </svg>
+        </div>
+        <div class="col-sm-3">
+            <p>Scale in x,y</p>
+            <svg width="200" height="200">
+                <rect width="100%" height="100%" fill="url(#pxGrid)"
+                      stroke="gray" stroke-width="1" />
+                <use xlink:href="#house">
+                    <animateTransform attributeName="transform"
+                                      type="rotate"
+                                      from="-45"
+                                      to="45"
+                                      begin="0s"
+                                      dur="5s"
+                                      repeatCount="indefinite" />
+                </use>
+            </svg>
+        </div>
+        <div class="col-sm-3">
+            <p>skewX(45)</p>
+            <svg width="200" height="200" viewBox="0,0,200,200">
+                <rect width="100%" height="100%" fill="url(#pxGrid)"
+                      stroke="gray" stroke-width="1" />
+                <use xlink:href="#house">
+                    <animateTransform attributeName="transform"
+                                      type="skewY"
+                                      from="0"
+                                      to="45"
+                                      begin="0s"
+                                      dur="5s"
+                                      repeatCount="indefinite" additive="sum" />
+                    <animateTransform attributeName="transform"
+                                      type="skewX"
+                                      from="0"
+                                      to="45"
+                                      begin="0s"
+                                      dur="5s"
+                                      repeatCount="indefinite" additive="sum" />
+                </use>
             </svg>
         </div>
     </div>

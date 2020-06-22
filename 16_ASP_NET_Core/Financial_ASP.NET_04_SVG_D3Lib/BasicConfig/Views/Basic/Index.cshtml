@@ -1,0 +1,41 @@
+﻿<script src="~/lib/d3/d3.min.js"></script>
+<script src="~/js/site.js"></script>
+
+<div class="container">
+    <div class="col-sm-2">
+        <svg width="150" height="150" id="svg1" />
+    </div>
+    <div class="col-sm4">
+        <svg width="550" height="550" id="svg2" />
+    </div>
+</div>
+
+<script type="text/javascript">
+    //circle
+    var svg = d3.select("#svg1");
+    svg.append("circle")
+        .attr("cx", 55)
+        .attr("cy", 55)
+        .attr("r", 50)
+        .style("fill", "lightgray")
+        .style("stroke", "black")
+        .style("stroke-width", "2");
+</script>
+
+<script type="text/javascript">
+    // house objects
+    var svg2 = d3.select("#svg2");
+    creatHouse(svg2);
+    var w = 100;
+    var h = 100;
+    for (var i = 0; i < 5; i++) {
+        for (var j = 0; j < 3; j++) {
+            svg2.append("g")
+                .attr("class", "house")
+                .append("use")
+                .attr("xlink:href", "#house")
+                .attr("x", i * w)
+                .attr("y", j * h);
+        }
+    }
+</script>

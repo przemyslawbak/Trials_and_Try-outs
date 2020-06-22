@@ -1,0 +1,121 @@
+﻿@model List<List<object>>
+
+
+<script src="~/js/site.js"></script>
+<script src="~/lib/d3/d3.js"></script>
+
+<!--paskowych, schodowych, kołowych, polarnych wykresów nie wrzucałem, ale też są przykłady-->
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-5">
+            <svg id="svg1"></svg>
+        </div>
+        <div class="col-sm-5">
+            <svg id="svg2"></svg>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-5">
+            <svg id="svg3"></svg>
+        </div>
+        <div class="col-sm-5">
+            <svg id="svg4"></svg>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-6">
+            <svg id="svg5"></svg>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-6">
+            <svg id="svg6"></svg>
+        </div>
+        <div class="col-sm-6">
+            <svg id="svg7"></svg>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    d3.json("Basic/JsonY2MultiLineData")
+        .then(function (data) {
+        var options = {
+            width: 500,
+            height: 450,
+            margin: { top: 50, right: 10, bottom: 60, left: 50 },
+            title: "Mutiple-Line Chart"
+        };
+        var chart = drawMultiLineChart("#svg6", data, options);
+        addTitleLabel(chart.svg, chart.w, chart.h, options);
+    });
+    d3.json("Basic/JsonY2Data")
+        .then(function (data) {
+        var options = {
+            width: 500,
+            height: 450,
+            margin: { top: 30, right: 55, bottom: 60, left: 50 },
+            title: "Y2 Chart"
+        };
+        var chart = drawY2LineChart("#svg7", data, options);
+        addTitleLabel(chart.svg, chart.w, chart.h, options);
+        addY2Label(chart.svg, chart.w, chart.h, options);
+    });
+</script>
+
+<script type="text/javascript">
+    d3.json("Basic/JsonMultiLineData")
+        .then(function (data) {
+            var options = {
+                width: 600,
+                height: 500,
+                margin: { top: 50, right: 10, bottom: 60, left: 50 },
+                title: "Mutiple-Line Chart",
+                xlabel: "X Value",
+                ylabel: "Y Value"
+            };
+            chart = drawMultiLineChart("#svg5", data, options);
+            addTitleLabel(chart.svg, chart.w, chart.h, options);
+        });
+</script>
+
+<script type="text/javascript">
+    //D3v5 https://stackoverflow.com/a/49769027
+    d3.json("Basic/JsonData")
+        .then(function (data) {
+            var options = {
+                width: 450,
+                height: 400,
+                margin: { top: 30, right: 10, bottom: 60, left: 60 },
+                xlabel: "X Value",
+                ylabel: "Y Value"
+            };
+
+            console.log(data);
+
+            options.title = "1/(x^2+1)"
+            var chart = drawLineChart("#svg1", data.data1, options);
+            addTitleLabel(chart.svg, chart.w, chart.h, options);
+
+            options.title = "sin(x)"
+            var chart = drawLineChart("#svg2", data.data2, options);
+            addTitleLabel(chart.svg, chart.w, chart.h, options);
+
+            options.title = "sqrt(x)"
+            var chart = drawLineChart("#svg3", data.data3, options);
+            addTitleLabel(chart.svg, chart.w, chart.h, options);
+
+            options.title = "x*sin(x^2)+1"
+            var chart = drawLineChart("#svg4", data.data4, options);
+            addTitleLabel(chart.svg, chart.w, chart.h, options);
+        });
+
+
+</script>
