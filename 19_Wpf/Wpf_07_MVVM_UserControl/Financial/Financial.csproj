@@ -70,6 +70,7 @@
     </ApplicationDefinition>
     <Compile Include="Commands\DelegateCommand.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="ViewModels\InputViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
@@ -77,6 +78,9 @@
     </Compile>
     <Compile Include="ViewModels\ViewModelBase.cs" />
     <Compile Include="ViewModels\ViewModelLocator.cs" />
+    <Compile Include="Views\InputView.xaml.cs">
+      <DependentUpon>InputView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\MainView.xaml.cs">
       <DependentUpon>MainView.xaml</DependentUpon>
     </Compile>
@@ -110,6 +114,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Page Include="Views\InputView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\MainView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

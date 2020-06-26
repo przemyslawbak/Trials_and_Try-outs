@@ -1,10 +1,16 @@
 ﻿using Financial.Commands;
 using Financial.Models;
 using System;
+using System.Collections.ObjectModel;
 using System.Windows.Input;
 
 namespace Financial.ViewModels
 {
+    public sealed class TabViewModel
+    {
+        public string Header { get; set; }
+        public string Content { get; set; }
+    }
     public class MainViewModel : ViewModelBase
     {
         public MainViewModel()
@@ -21,6 +27,22 @@ namespace Financial.ViewModels
         }
 
         public ICommand UpdateStock { get; private set; }
+        private string _input;
+        public string InputText
+        {
+            get => _input;
+            set
+            {
+                _input = value;
+                OnPropertyChanged();
+                InputChanged();
+            }
+        }
+
+        private void InputChanged()
+        {
+            //
+        }
 
         private string _ticker;
         public string Ticker
