@@ -27,22 +27,6 @@ namespace Financial.ViewModels
         }
 
         public ICommand UpdateStock { get; private set; }
-        private string _input;
-        public string InputText
-        {
-            get => _input;
-            set
-            {
-                _input = value;
-                OnPropertyChanged();
-                InputChanged();
-            }
-        }
-
-        private void InputChanged()
-        {
-            //
-        }
 
         private string _ticker;
         public string Ticker

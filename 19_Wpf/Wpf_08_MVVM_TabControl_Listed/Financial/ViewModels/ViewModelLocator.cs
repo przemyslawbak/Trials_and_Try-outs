@@ -18,5 +18,21 @@ namespace Financial.ViewModels
                 return _container.Resolve<MainViewModel>();
             }
         }
+
+        public OtherViewModel OtherViewModel
+        {
+            get
+            {
+                return _container.Resolve<OtherViewModel>();
+            }
+        }
+
+        public InputViewModel InputViewModel
+        {
+            get
+            {
+                return _container.Resolve<InputViewModel>();
+            }
+        }
     }
 }

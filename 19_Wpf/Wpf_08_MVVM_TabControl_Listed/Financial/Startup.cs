@@ -17,6 +17,12 @@ namespace Financial
             builder.RegisterType<MainView>().AsSelf();
             builder.RegisterType<MainViewModel>().AsSelf().SingleInstance();
 
+            builder.RegisterType<InputUserControl>().AsSelf();
+            builder.RegisterType<InputViewModel>().AsSelf().SingleInstance();
+
+            builder.RegisterType<OtherUserControl>().AsSelf();
+            builder.RegisterType<OtherViewModel>().AsSelf().SingleInstance();
+
             return builder.Build();
         }
     }
