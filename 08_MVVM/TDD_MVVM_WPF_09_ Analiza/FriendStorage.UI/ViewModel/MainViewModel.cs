@@ -15,9 +15,7 @@ namespace FriendStorage.UI.ViewModel
     private IFriendEditViewModel _selectedFriendEditViewModel;
     private Func<IFriendEditViewModel> _friendEditVmCreator;
 
-    public MainViewModel(INavigationViewModel navigationViewModel,
-      Func<IFriendEditViewModel> friendEditVmCreator,
-      IEventAggregator eventAggregator)
+    public MainViewModel(INavigationViewModel navigationViewModel, Func<IFriendEditViewModel> friendEditVmCreator, IEventAggregator eventAggregator)
     {
       NavigationViewModel = navigationViewModel;
       FriendEditViewModels = new ObservableCollection<IFriendEditViewModel>();

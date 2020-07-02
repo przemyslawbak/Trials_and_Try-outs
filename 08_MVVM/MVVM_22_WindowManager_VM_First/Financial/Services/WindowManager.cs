@@ -11,7 +11,7 @@ namespace Financial.Services
     public class WindowManager : IWindowManager
     {
         /// <summary>
-        /// Manages opened views.
+        /// Constructor, creates instance of OpenedViews list if not created yet.
         /// </summary>
         public WindowManager()
         {
@@ -75,15 +75,15 @@ namespace Financial.Services
         }
 
         /// <summary>
-        /// Creates new ModelWindow for modal dialog Window of type T that returns object
+        /// Opens new window for specific view model using name convention. Window may return object. Attaches event handler for Window.Closed.
         /// </summary>
-        /// <typeparam name="T">Window type</typeparam>
-        /// <returns>Object type</returns>
-        public async Task<object> OpenResultWindow<T>() where T : Window
+        /// <param name="viewModel">View model name</param>
+        /// <returns>Object</returns>
+        public async Task<object> OpenResultWindow(object viewModel)
         {
-            if (!CheckIfAlreadyOpened(typeof(T)))
+            if (!CheckIfAlreadyOpened(viewModel))
             {
-                WindowModel model = CreateWindoModelAndShow<T>();
+                WindowModel model = CreateWindoModel(viewModel);
 
                 model.OpenedWindow.Closed += new EventHandler((s, e) => ResultWindowClosed(s, e, model));
                 model.OpenedWindow.ShowDialog();
@@ -98,15 +98,15 @@ namespace Financial.Services
         }
 
         /// <summary>
-        /// Creates new ModelWindow for modal dialog Window of type T that returns nullable bool
+        /// Opens new modal dialog window for specific view model using name convention. Window may return nullable bool. Attaches event handler for Window.Closed.
         /// </summary>
-        /// <typeparam name="T">Window type</typeparam>
-        /// <returns>Nullable bool type</returns>
-        public async Task<bool?> OpenModalDialogWindow<T>() where T : Window
+        /// <param name="viewModel">View model name</param>
+        /// <returns>Nullable bool</returns>
+        public async Task<bool?> OpenModalDialogWindow(object viewModel)
         {
-            if (!CheckIfAlreadyOpened(typeof(T)))
+            if (!CheckIfAlreadyOpened(viewModel))
             {
-                WindowModel model = CreateWindoModelAndShow<T>();
+                WindowModel model = CreateWindoModel(viewModel);
 
                 model.OpenedWindow.Closed += new EventHandler((s, e) => DialogWindowClosed(s, e, model));
                 model.OpenedWindow.ShowDialog();
@@ -121,18 +121,118 @@ namespace Financial.Services
         }
 
         /// <summary>
-        /// Creates new ModelWindow for Window of type T
+        /// Opens window for specific view model using name convention. Attaches event handler for Window.Closed.
         /// </summary>
-        /// <typeparam name="T">Window type</typeparam>
-        public void OpenWindow<T>() where T : Window
+        /// <param name="viewModel">View model name</param>
+        public void OpenWindow(object viewModel)
         {
-            if (!CheckIfAlreadyOpened(typeof(T)))
+            if (!CheckIfAlreadyOpened(viewModel))
             {
-                WindowModel model = CreateWindoModelAndShow<T>();
+                WindowModel model = CreateWindoModel(viewModel);
 
                 model.OpenedWindow.Closed += new EventHandler((s, e) => WindowClosed(s, e, model));
                 model.OpenedWindow.Show();
             }
+        }
+
+        /// <summary>
+        /// Extracts window name from passed view model object and adds new WindowModel to OpenedViews list.
+        /// </summary>
+        /// <param name="viewModel">View model object</param>
+        /// <returns>WindowModel object</returns>
+        private WindowModel CreateWindoModel(object viewModel)
+        {
+            var modelType = viewModel.GetType();
+            var windowTypeName = modelType.Name.Replace("ViewModel", "View");
+            var windowTypes = from t in modelType.Assembly.GetTypes()
+                              where t.IsClass && t.Name == windowTypeName
+                              select t;
+
+            WindowModel model = GetWindowModelFromWindowName(windowTypes.Single(), viewModel);
+            OpenedViews.Add(model);
+
+            return model;
+        }
+
+        /// <summary>
+        /// Creates instance of new window basing on window type, returns new instance of WindowModel object.
+        /// </summary>
+        /// <param name="type">Window type</param>
+        /// <param name="viewModel">View model related to the window</param>
+        /// <returns>WindowModel object</returns>
+        private WindowModel GetWindowModelFromWindowName(Type type, object viewModel)
+        {
+            Window window = (Window)Activator.CreateInstance(type);
+            window.DataContext = viewModel;
+
+            WindowModel model = new WindowModel()
+            {
+                OpenedWindow = window,
+                AssignedViewModel = viewModel,
+                IsValueReturned = false,
+                ReturnedDialogResult = null,
+                ReturnedObjectResult = null,
+                ReturnedFilePathResult = null
+            };
+
+            return model;
+        }
+
+        /// <summary>
+        /// Verify if WindowModel can be found in OpenedViews.
+        /// </summary>
+        /// <param name="viewModel">View model related to the window</param>
+        /// <returns>Bool type, if the window is opened already or not</returns>
+        private bool CheckIfAlreadyOpened(object viewModel)
+        {
+            return OpenedViews.Select(model => model.AssignedViewModel.GetType() == viewModel.GetType()).FirstOrDefault();
+        }
+
+        /// <summary>
+        /// Handler for Closed event, triggered when window is about to close.
+        /// </summary>
+        /// <param name="sender">Window object</param>
+        /// <param name="model">Window model object related to the window</param>
+        private void WindowClosed(object sender, EventArgs args, WindowModel model)
+        {
+            Window window = (Window)sender;
+            window.Closed -= new EventHandler((s, e) => WindowClosed(s, e, model));
+
+            OpenedViews.Remove(model);
+        }
+
+        /// <summary>
+        /// Handler for modal dialog window Closed event, triggered when dialog window is about to close.
+        /// </summary>
+        /// <param name="sender">Window object</param>
+        /// <param name="model">Window model object related to the window</param>
+        private void DialogWindowClosed(object sender, EventArgs args, WindowModel model)
+        {
+            Window window = (Window)sender;
+            window.Closed -= new EventHandler((s, e) => DialogWindowClosed(s, e, model));
+
+            OpenedViews.Remove(model);
+
+            var vm = window.DataContext as IModalDialogViewModel;
+            model.ReturnedDialogResult = vm.DialogResult;
+            model.IsValueReturned = true;
+        }
+
+        /// <summary>
+        /// Handler  for modal dialog window Closed event, triggered when dialog window is about to close.
+        /// </summary>
+        /// <param name="sender">Window object</param>
+        /// <param name="model">>Window model object related to the window</param>
+        private void ResultWindowClosed(object sender, EventArgs args, WindowModel model)
+        {
+            Window window = (Window)sender;
+            window.Closed -= new EventHandler((s, e) => ResultWindowClosed(s, e, model));
+
+            OpenedViews.Remove(model);
+
+            var vm = window.DataContext as IResultViewModel;
+            model.ReturnedObjectResult = vm.ObjectResult;
+            model.IsValueReturned = true;
         }
 
         /// <summary>
@@ -151,87 +251,6 @@ namespace Financial.Services
                     window.Close();
                 }
             }
-        }
-
-        /// <summary>
-        /// Verify if window can be found in OpenedViews.
-        /// </summary>
-        /// <param name="windowType">Window type</param>
-        /// <returns>Bool type, if the window is opened already or not</returns>
-        private bool CheckIfAlreadyOpened(Type windowType)
-        {
-            return OpenedViews.Select(model => model.OpenedWindow.GetType() == windowType).FirstOrDefault();
-        }
-
-        /// <summary>
-        /// Handler for Closed event, triggered when window is about to close.
-        /// </summary>
-        /// <param name="sender">Window object</param>
-        /// <param name="model">Window model object related to the window</param>
-        private void WindowClosed(object sender, EventArgs args, WindowModel model)
-        {
-            Window window = (Window)sender;
-            window.Closed -= new EventHandler((s, e) => WindowClosed(s, e, model));
-
-            OpenedViews.Remove(model);
-        }
-
-        /// <summary>
-        /// Handler for Closed event, triggered when dialog window is about to close.
-        /// </summary>
-        /// <param name="sender">Window object</param>
-        /// <param name="model">Window model object related to the window</param>
-        private void DialogWindowClosed(object sender, EventArgs args, WindowModel model)
-        {
-            Window window = (Window)sender;
-            window.Closed -= new EventHandler((s, e) => DialogWindowClosed(s, e, model));
-
-            OpenedViews.Remove(model);
-
-            var vm = window.DataContext as IDialogViewModel;
-            model.ReturnedDialogResult = vm.DialogResult;
-            model.IsValueReturned = true;
-        }
-
-        /// <summary>
-        ///
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="args"></param>
-        /// <param name="model"></param>
-        private void ResultWindowClosed(object sender, EventArgs args, WindowModel model)
-        {
-            Window window = (Window)sender;
-            window.Closed -= new EventHandler((s, e) => ResultWindowClosed(s, e, model));
-
-            OpenedViews.Remove(model);
-
-            var vm = window.DataContext as IResultViewModel;
-            model.ReturnedObjectResult = vm.ObjectResult;
-            model.IsValueReturned = true;
-        }
-
-        /// <summary>
-        /// Creates new WindowModel based on Window type.
-        /// </summary>
-        /// <typeparam name="T">Window type</typeparam>
-        /// <returns>WindowModel</returns>
-        private WindowModel CreateWindoModelAndShow<T>() where T : Window
-        {
-            Window window = (T)Activator.CreateInstance(typeof(T));
-            WindowModel model = new WindowModel()
-            {
-                OpenedWindow = window,
-                AssignedViewModel = window.DataContext,
-                IsValueReturned = false,
-                ReturnedDialogResult = null,
-                ReturnedObjectResult = null,
-                ReturnedFilePathResult = null
-            };
-
-            OpenedViews.Add(model);
-
-            return model;
         }
     }
 }

@@ -12,13 +12,15 @@ namespace Financial.ViewModels
     {
         private readonly IEventAggregator _eventAggregator;
         private readonly IWindowManager _winService;
+        private Func<DialogViewModel> _dialogVMCreator;
 
-        public MainViewModel(IEventAggregator eventAggregator, IWindowManager winService)
+        public MainViewModel(IEventAggregator eventAggregator, IWindowManager winService, Func<DialogViewModel> dialogVMCreator)
         {
             Ticker = "dupa";
             InitModel();
             _eventAggregator = eventAggregator;
             _winService = winService;
+            _dialogVMCreator = dialogVMCreator;
 
             UpdateStock = new AsyncCommand(async () => await OnUpdateStockAsync());
         }
@@ -27,11 +29,11 @@ namespace Financial.ViewModels
         {
             Change();
 
-            //_winService.OpenWindow<DialogView>();
-            //bool? dialogResult = await _winService.OpenModalDialogWindow<DialogView>();
-            //Stock newStock = await _winService.OpenResultWindow<DialogView>() as Stock;
+            //_winService.OpenWindow(_dialogVMCreator());
+            //bool? dialogResult = await _winService.OpenModalDialogWindow(_dialogVMCreator());
+            object newStock = await _winService.OpenResultWindow(_dialogVMCreator());
             //string res = _winService.OpenFileDialogWindow("Some title");
-            bool? dialogResult = _winService.OpenDialogWindow("Some msg", "Some title");
+            //bool? dialogResult = _winService.OpenDialogWindow("Some msg", "Some title");
 
             _eventAggregator.SendMessage<SelectionChangedEvent>(new SelectionChangedEvent("dupa"));
         }
