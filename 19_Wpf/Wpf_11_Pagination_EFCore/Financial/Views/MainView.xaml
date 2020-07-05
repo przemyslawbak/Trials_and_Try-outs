@@ -19,14 +19,24 @@
                     </Binding>
                 </Label.Content>
             </Label>
-            <Button Content="Next" Command="{Binding NextClickCommand}" Margin="2"/>
+            <Label Grid.Row="0" Margin="2">
+                <Label.Content>
+                    <Binding Path="PageCount">
+                        <Binding.StringFormat> of {0}</Binding.StringFormat>
+                    </Binding>
+                </Label.Content>
+            </Label>
             <Button Content="Prev" Command="{Binding PrevClickCommand}" Margin="2"/>
+            <Button Content="Next" Command="{Binding NextClickCommand}" Margin="2"/>
+            <TextBlock Text="filter technologies:"/>
+            <TextBox Text="{Binding FilterTechPhrase, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="200" Height="20"/>
         </StackPanel>
         <DataGrid ItemsSource="{Binding Path=Display}" Grid.Row="1" AutoGenerateColumns="False" CanUserAddRows="false">
             <DataGrid.Columns>
                 <DataGridCheckBoxColumn Header="Choosed" Binding="{Binding Checked}" IsReadOnly="False"/>
                 <DataGridTextColumn Header="Name" Width="*" Binding="{Binding Name}" IsReadOnly="True"/>
-                <DataGridTextColumn Header="Comments" Width="*" Binding="{Binding Comments}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Comments" Width="*" Binding="{Binding Comment}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Techs" Width="*" Binding="{Binding Techs}" IsReadOnly="True"/>
             </DataGrid.Columns>
         </DataGrid>
     </Grid>

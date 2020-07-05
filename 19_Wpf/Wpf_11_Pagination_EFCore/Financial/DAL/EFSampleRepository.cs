@@ -14,15 +14,17 @@ namespace Financial.DAL
             _context = context;
         }
 
-        public List<PickedViewModel> GetViewModels()
+        public List<PickedUp> GetViewModels()
         {
-            return (from q in _context.Projects.Include(i => i.TechnologiesProjects)
-                   select new PickedViewModel
-                   {
-                       ProjectID = q.ProjectID,
-                       Checked = false,
-                       Name = q.Name
-                   }).ToList();
+            return (from q in _context.Projects.Include(i => i.TechnologiesProjects).ThenInclude(techproj => techproj.Technology)
+                    select new PickedUp
+                    {
+                        ProjectID = q.ProjectID,
+                        Checked = false,
+                        Name = q.Name,
+                        Comment = q.Comments,
+                        Techs = string.Join(", ", q.TechnologiesProjects.Select(sn => sn.Technology.Name).ToArray())
+                    }).ToList();
         }
 
         public int GetPageCount(int itemsPerPage)
@@ -30,19 +32,20 @@ namespace Financial.DAL
             return (_context.Projects.Count() + itemsPerPage - 1) / itemsPerPage;
         }
 
-        public ObservableCollection<PickedViewModel> GetResults(int itemsPerPage, int currentPage)
+        public ObservableCollection<PickedUp> GetResults(int itemsPerPage, int currentPage)
         {
             int skip = (currentPage - 1) * itemsPerPage;
 
-            var query = from q in _context.Projects.Include(i => i.TechnologiesProjects).Skip(skip).Take(itemsPerPage)
-                        select new PickedViewModel
+            var query = from q in _context.Projects.Include(project => project.TechnologiesProjects).ThenInclude(techproj => techproj.Technology).Skip(skip).Take(itemsPerPage)
+                        select new PickedUp
                         {
                             ProjectID = q.ProjectID,
                             Checked = false,
-                            Name = q.Name
+                            Name = q.Name,
+                            Comment = q.Comments,
                         };
 
-            return new ObservableCollection<PickedViewModel>(query);
+            return new ObservableCollection<PickedUp>(query);
         }
     }
 }

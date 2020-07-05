@@ -7,7 +7,7 @@ namespace Financial.DAL
     public interface ISampleRepository
     {
         int GetPageCount(int itemsPerPage);
-        ObservableCollection<PickedViewModel> GetResults(int itemsPerPage, int currentPage);
-        List<PickedViewModel> GetViewModels();
+        ObservableCollection<PickedUp> GetResults(int itemsPerPage, int currentPage);
+        List<PickedUp> GetViewModels();
     }
 }

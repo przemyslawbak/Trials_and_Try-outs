@@ -13,17 +13,18 @@ namespace Financial.ViewModels
     {
         private readonly ISampleRepository _repo;
         private readonly int _itemsPerPage = 2;
-        private List<PickedViewModel> _all;
+        private List<PickedUp> _all;
+        private List<PickedUp> _displayCollection;
 
         public MainViewModel(ISampleRepository repo)
         {
             //PageCount = _repo.GetPageCount(_itemsPerPage); //paging repo
-            //Display = _repo.GetResults(_itemsPerPage,  CurrentPage);
+            //Display = _repo.GetResults(_itemsPerPage,  CurrentPage); //paging repo
 
             _repo = repo;
             CurrentPage = 1;
-            _all = _repo.GetViewModels(); //?
-
+            _all = _repo.GetViewModels();
+            _displayCollection = _all;
             PageCount = GetPagesCount();
             Display = GetResults();
 
@@ -31,19 +32,28 @@ namespace Financial.ViewModels
             PrevClickCommand = new DelegateCommand(OnPrevClick);
         }
 
-        private int GetPagesCount()
+        private string _filterTechPhrase;
+        public string FilterTechPhrase
         {
-            return (_all.Count() + _itemsPerPage - 1) / _itemsPerPage;
+            get => _filterTechPhrase;
+            set
+            {
+                _filterTechPhrase = value;
+                OnPropertyChanged();
+                FilterDisplayCollection();
+            }
         }
 
-        private ObservableCollection<PickedViewModel> GetResults()
+        private int _pageCount;
+        public int PageCount
         {
-            int skip = (CurrentPage - 1) * _itemsPerPage;
-
-            return new ObservableCollection<PickedViewModel>(_all.Skip(skip).Take(_itemsPerPage));
+            get => _pageCount;
+            set
+            {
+                _pageCount = value;
+                OnPropertyChanged();
+            }
         }
-
-        public int PageCount { get; set; }
 
         private int _currentPage;
         public int CurrentPage
@@ -56,8 +66,8 @@ namespace Financial.ViewModels
             }
         }
 
-        private ObservableCollection<PickedViewModel> _display;
-        public ObservableCollection<PickedViewModel> Display
+        private ObservableCollection<PickedUp> _display;
+        public ObservableCollection<PickedUp> Display
         {
             get => _display;
             set
@@ -65,6 +75,34 @@ namespace Financial.ViewModels
                 _display = value;
                 OnPropertyChanged();
             }
+        }
+
+        private void FilterDisplayCollection()
+        {
+            CurrentPage = 1;
+            if (!string.IsNullOrEmpty(FilterTechPhrase))
+            {
+                _displayCollection = _all.Where(a => a.Techs.ToLower().Contains(FilterTechPhrase.ToLower())).ToList();
+            }
+            else
+            {
+                _displayCollection = _all;
+            }
+
+            Display = GetResults();
+        }
+
+        private int GetPagesCount()
+        {
+            return (_displayCollection.Count() + _itemsPerPage - 1) / _itemsPerPage;
+        }
+
+        private ObservableCollection<PickedUp> GetResults()
+        {
+            PageCount = GetPagesCount();
+            int skip = (CurrentPage - 1) * _itemsPerPage;
+
+            return new ObservableCollection<PickedUp>(_displayCollection.Skip(skip).Take(_itemsPerPage));
         }
 
         public ICommand NextClickCommand { get; private set; }
@@ -87,11 +125,5 @@ namespace Financial.ViewModels
                 Display = GetResults();
             }
         }
-    }
-
-    public interface IPagingCollectionView
-    {
-        void MoveToNextPage(int currPage);
-        void MoveToPreviousPage(int currPage);
     }
 }
