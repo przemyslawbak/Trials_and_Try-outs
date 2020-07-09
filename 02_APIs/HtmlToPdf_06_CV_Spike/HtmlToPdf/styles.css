@@ -1,0 +1,134 @@
+﻿@font-face {
+    font-family: 'Helvetica';
+    font-style: normal;
+    font-weight: 400;
+    src: local('Helvetica LT Pro'), local('HelveticaLTPro-Roman'), url(https://fonts.gstatic.com/l/font?kit=JIAxUVNqfH9WuVQQRM4zVxOn&skey=22efecd2bc0e2cb0&v=v3) format('woff2');
+}
+
+.body {
+}
+
+/*HEADER*/
+
+.aboutMainContainer {
+    font-family: Helvetica;
+    height: 240px;
+    width: 100%;
+    background-color: #557da8;
+    color: white;
+}
+
+    .aboutMainContainer img {
+        border-radius: 50%;
+        height: 200px;
+        width: 200px;
+        margin-top: 20px;
+        margin-left: 40px;
+        float: left;
+    }
+
+.personalData {
+    height: 200px;
+    font-size: 30px;
+    float: left;
+    margin-top: 40px;
+    margin-left: 40px;
+    width: 33%;
+}
+
+.name {
+    font-size: 40px;
+}
+
+.sideInfo {
+    float: right;
+}
+
+.sideText {
+    margin-top: 50px;
+    margin-bottom: 25px;
+    margin-right: -20px;
+    display: inline-block;
+    width: 240px;
+}
+
+    .sideText div {
+        margin-bottom: 12px;
+        display: block;
+        float: right;
+    }
+
+.sideImages {
+    margin-top: -205px;
+    margin-right: 90px;
+    width: 18px;
+    display: inline-block;
+    float: right;
+}
+
+    .sideImages img {
+        margin-bottom: -15px;
+        display: block;
+        height: 25px;
+        width: 25px;
+    }
+
+/*PROJECT*/
+.projectContainer {
+    border-right: solid 2px #557da8;
+    border-top: solid 2px #557da8;
+    font-family: Helvetica;
+    height: 255px;
+    width: 48%;
+    color: black;
+    margin: 0.5%;
+    float: right;
+}
+
+.projectName {
+    font-size: 30px;
+    margin-top: 10px;
+    margin-left: 20px;
+    overflow: hidden;
+    font-weight: bold;
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.projectComments {
+    width: 90%;
+    background-color: #f0f0f0;
+    font-size: 18px;
+    margin-left: 20px;
+    text-align: justify;
+    margin-top: 10px;
+    height: 90px;
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.projectTech {
+    width: 90%;
+    font-size: 18px;
+    margin-left: 20px;
+    margin-top: 10px;
+    height: 45px;
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.sectionTitle {
+    font-family: Helvetica;
+    font-size: 30px;
+    margin: 20px;
+    margin-left: 80px;
+}

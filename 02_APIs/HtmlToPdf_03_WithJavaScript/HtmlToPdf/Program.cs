@@ -26,8 +26,8 @@ namespace HtmlToPdf
                 Objects = {
                     new ObjectSettings() {
                         PagesCount = true,
-                        HtmlContent = @"<html style='background-color:gray;'><dir style='color:orange;'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In consectetur mauris eget ultrices  iaculis. Ut odio viverra, molestie lectus nec, venenatis turpis.</div></html>",
-                        WebSettings = { DefaultEncoding = "utf-8" },
+                        HtmlContent = GetHtml(),
+                        WebSettings = { DefaultEncoding = "utf-8", EnableJavascript = true,  },
                         FooterSettings = { FontSize = 9, Right = "Przemyslaw Bak - Page [page] of [toPage]", Line = true}
                     }
                 }
@@ -36,6 +36,24 @@ namespace HtmlToPdf
             byte[] pdf = converter.Convert(doc);
 
             ByteArrayToFile("dupa.pdf", pdf);
+        }
+
+        private static string GetHtml()
+        {
+            return @"<html style='background-color:gray;'>
+                        <div id='stepsId'>
+  <ol>
+    <li id='li1' style='color: red;'><b>Step 1</b></li>
+      <li id='li2'><b>Step 2</b></li>
+    <li id='li3'><b>Step 3</b></li>
+  </ol>
+</div>
+</html>
+
+<script>
+var lis = document.getElementById('li1')
+lis.style.color = 'pink';
+</script>";
         }
 
         public static void ByteArrayToFile(string fileName, byte[] byteArray)
