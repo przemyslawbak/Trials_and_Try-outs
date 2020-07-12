@@ -8,6 +8,13 @@
 .body {
 }
 
+.sectionTitle {
+    font-family: Helvetica;
+    font-size: 30px;
+    margin: 10px;
+    margin-left: 80px;
+}
+
 /*HEADER*/
 
 .aboutMainContainer {
@@ -75,27 +82,22 @@
 
 /*PROJECT*/
 .projectContainer {
-    border-right: solid 2px #557da8;
-    border-top: solid 2px #557da8;
+    border-right: solid 1px #557da8;
+    border-top: solid 1px #557da8;
     font-family: Helvetica;
-    height: 255px;
-    width: 48%;
+    height: 325px;
+    width: 46%;
     color: black;
-    margin: 0.5%;
+    margin: 1%;
     float: right;
 }
 
 .projectName {
+    color: #5C451C;
     font-size: 30px;
     margin-top: 10px;
     margin-left: 20px;
     overflow: hidden;
-    font-weight: bold;
-    display: -webkit-box;
-    -webkit-line-clamp: 4;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-    text-overflow: ellipsis;
 }
 
 .projectComments {
@@ -106,11 +108,6 @@
     text-align: justify;
     margin-top: 10px;
     height: 90px;
-    display: -webkit-box;
-    -webkit-line-clamp: 4;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-    text-overflow: ellipsis;
 }
 
 .projectTech {
@@ -118,17 +115,113 @@
     font-size: 18px;
     margin-left: 20px;
     margin-top: 10px;
-    height: 45px;
-    display: -webkit-box;
-    -webkit-line-clamp: 4;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    height: 67.5px;
 }
 
-.sectionTitle {
+.projImages {
+    margin-top: 10px;
+    width: 26px;
+    display: inline-block;
+    float: left;
+    margin-left: 40px;
+}
+
+    .projImages img {
+        margin-bottom: 5px;
+        display: block;
+        height: 25px;
+        width: 25px;
+    }
+
+.projText {
+    font-size: 16px;
+    margin-top: 10px;
+    margin-left: 10px;
+    display: inline-block;
+}
+
+    .projText div {
+        margin-bottom: 10px;
+        display: block;
+    }
+
+.projectLink {
+    text-decoration: none;
+    color: #557da8;
+}
+
+/*TECH STACK*/
+
+.techContainer {
+    border: solid 1px #557da8;
+    width: 95%;
+    margin-left: auto;
+    margin-right: auto;
+    height: 200px;
+}
+
+.singleTech {
     font-family: Helvetica;
+    font-size: 18px;
+    height: 40px;
+    width: 175px;
+    margin: 5px;
+    margin-top: 15px;
+    float: left;
+}
+
+.techPic {
+    vertical-align: middle;
+    display: inline-block;
+    height: 35px;
+    width: 35px;
+    filter: sepia(100%);
+}
+
+.techName {
+    vertical-align: middle;
+    display: inline-block;
+    margin: 5px;
+    margin-top: auto;
+    margin-bottom: auto;
+    overflow-x: auto;
+}
+
+/*WORK HISTORY*/
+
+.historyContainer {
+    margin-left: 40px;
+}
+
+.workHistory {
+    font-family: Helvetica;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.workTitle {
+    color: #5C451C;
     font-size: 30px;
-    margin: 20px;
-    margin-left: 80px;
+    margin-top: 10px;
+    overflow: hidden;
+    width: 60%;
+    display: inline-block;
+}
+
+.workDescription {
+    background-color: #f0f0f0;
+    font-size: 18px;
+    text-align: justify;
+    margin-top: 10px;
+    width: 95%;
+    padding-right: 10px;
+}
+
+.workPeriod {
+    margin-right: 20px;
+    font-size: 30px;
+    width: 29%;
+    text-align: center;
+    float: right;
+    display: inline-block;
 }
