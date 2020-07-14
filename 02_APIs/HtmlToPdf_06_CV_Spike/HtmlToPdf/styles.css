@@ -11,7 +11,8 @@
 .sectionTitle {
     font-family: Helvetica;
     font-size: 30px;
-    margin: 10px;
+    margin-top: 40px;
+    margin-bottom: 10px;
     margin-left: 80px;
 }
 
@@ -19,17 +20,17 @@
 
 .aboutMainContainer {
     font-family: Helvetica;
-    height: 240px;
-    width: 100%;
     background-color: #557da8;
     color: white;
+    height: 220px;
+    width: 100%;
 }
 
     .aboutMainContainer img {
         border-radius: 50%;
         height: 200px;
         width: 200px;
-        margin-top: 20px;
+        margin-top: 10px;
         margin-left: 40px;
         float: left;
     }
@@ -52,7 +53,7 @@
 }
 
 .sideText {
-    margin-top: 50px;
+    margin-top: 40px;
     margin-bottom: 25px;
     margin-right: -20px;
     display: inline-block;
@@ -66,7 +67,7 @@
     }
 
 .sideImages {
-    margin-top: -205px;
+    margin-top: -195px;
     margin-right: 90px;
     width: 18px;
     display: inline-block;
@@ -74,7 +75,7 @@
 }
 
     .sideImages img {
-        margin-bottom: -15px;
+        margin-bottom: -5px;
         display: block;
         height: 25px;
         width: 25px;
@@ -85,10 +86,11 @@
     border-right: solid 1px #557da8;
     border-top: solid 1px #557da8;
     font-family: Helvetica;
-    height: 325px;
-    width: 46%;
+    height: 320px;
+    width: 48%;
     color: black;
     margin: 1%;
+    margin-top: 0.5%;
     float: right;
 }
 
@@ -96,7 +98,7 @@
     color: #5C451C;
     font-size: 30px;
     margin-top: 10px;
-    margin-left: 20px;
+    margin-left: 10px;
     overflow: hidden;
 }
 
@@ -104,17 +106,18 @@
     width: 90%;
     background-color: #f0f0f0;
     font-size: 18px;
-    margin-left: 20px;
-    text-align: justify;
     margin-top: 10px;
+    margin-left: 10px;
+    padding-right: 5px;
+    text-align: justify;
     height: 90px;
 }
 
 .projectTech {
     width: 90%;
     font-size: 18px;
-    margin-left: 20px;
     margin-top: 10px;
+    margin-left: 10px;
     height: 67.5px;
 }
 
@@ -155,9 +158,8 @@
 .techContainer {
     border: solid 1px #557da8;
     width: 95%;
-    margin-left: auto;
-    margin-right: auto;
     height: 200px;
+    margin-left: 20px;
 }
 
 .singleTech {
@@ -191,6 +193,8 @@
 
 .historyContainer {
     margin-left: 40px;
+    border-top: solid 1px #557da8;
+    width: 93%;
 }
 
 .workHistory {
@@ -224,4 +228,59 @@
     text-align: center;
     float: right;
     display: inline-block;
+}
+
+/*INTERESTS*/
+
+.interestsContainer {
+    font-family: Helvetica;
+    font-size: 18px;
+    margin-left: 40px;
+    border-top: solid 1px #557da8;
+    width: 93%;
+}
+
+.interestsImages {
+    margin-top: 20px;
+    width: 26px;
+    display: inline-block;
+    float: left;
+    margin-left: 40px;
+}
+
+    .interestsImages img {
+        margin-bottom: 5px;
+        display: block;
+        height: 25px;
+        width: 25px;
+    }
+
+.interestsText {
+    font-size: 16px;
+    margin-top: 20px;
+    margin-left: 10px;
+    display: inline-block;
+}
+
+    .interestsText div {
+        margin-bottom: 10px;
+        display: block;
+    }
+
+/*FOTER*/
+
+.footerContainer {
+    margin-top: 70px;
+    width: 100%;
+    font-family: Helvetica;
+    background-color: #557da8;
+    color: white;
+    font-size: 14px;
+    text-align: justify;
+}
+
+.footerText {
+    margin: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
 }
