@@ -182,7 +182,7 @@ namespace HtmlToPdf
                     {
                         Right = 1,
                         Left = 1,
-                        Top = 1
+                        Top = 5
                     }
                 },
                 Objects = {
@@ -223,13 +223,13 @@ namespace HtmlToPdf
             sb.Append(@"<body>");
             sb.Append(CreateCvHeader(name, company, position));
             sb.Append(CreateCvProjects(projects));
-            //sb.Append(CreateTechStack(technologies));
-            //sb.Append(CreateCvEmploymentHistory());
-            //sb.Append(CreateCvEducation());
-            //sb.Append(CreateCvInterests());
-            //sb.Append(CreateHtmlFooter(company));
-            //sb.Append(@"</body>");
-            //sb.Append(@"</html>");
+            sb.Append(CreateTechStack(technologies));
+            sb.Append(CreateCvEmploymentHistory());
+            sb.Append(CreateCvEducation());
+            sb.Append(CreateCvInterests());
+            sb.Append(CreateHtmlFooter(company));
+            sb.Append(@"</body>");
+            sb.Append(@"</html>");
 
             return sb.ToString();
         }
@@ -273,9 +273,9 @@ namespace HtmlToPdf
         <img src='file:///C:\Users\asus\Desktop\IT\!!Trials!!\02_APIs\HtmlToPdf_08_TuesPechkin_CV_Spike\HtmlToPdf\bin\Debug\book.png' />
     </div>
     <div class='interestsText'>
-        <div>I have been interested in financial markets for many years, I observe the situation on global markets.</div>
-        <div>For many years I am training calisthenics, as time allows, with breaks matrial arts, and running at a medium distances.</div>
-        <div>I am interested in social psychology, I listen to SWPS lectures, if time permits, I sometimes read publications.</div>
+        <div>Interested in global financial markets, observing them for many years.</div>
+        <div>Training calisthenics, as time allows matrial arts, and running at a medium distances.</div>
+        <div>Interested in social psychology, listening to SWPS lectures, if time permits reading publications.</div>
     </div>
 </div>
 ");
@@ -285,7 +285,7 @@ namespace HtmlToPdf
         private static string CreateCvEmploymentHistory()
         {
             StringBuilder sb = new StringBuilder();
-            sb.Append(@"<div class='sectionTitle'>Work history:</div>");
+            sb.Append(@"<div class='sectionTitle'>Employment history:</div>");
             sb.Append(@"
 <div class='historyContainer'>
     <div class='workHistory'>
