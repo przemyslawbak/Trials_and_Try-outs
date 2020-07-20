@@ -1,0 +1,9 @@
+reference: https://www.syncfusion.com/blogs/post/a-complete-guide-to-running-a-full-stack-angular-application-in-a-monorepo.aspx
+
+-install nude.js
+-install CLI: npm install -g @angular/cli
+-type: ng new my-app
+-Would you like to add Angular routing? (chyba tak)
+-Which stylesheet format would you like to use? (najczesciej CSS)
+-po zainstalowaniu: cd my-app
+-ng serve --open
