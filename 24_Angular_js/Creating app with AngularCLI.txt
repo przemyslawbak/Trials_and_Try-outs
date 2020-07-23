@@ -5,5 +5,9 @@ reference: https://www.syncfusion.com/blogs/post/a-complete-guide-to-running-a-f
 -type: ng new my-app
 -Would you like to add Angular routing? (chyba tak)
 -Which stylesheet format would you like to use? (najczesciej CSS)
--po zainstalowaniu: cd my-app
+-after install: cd my-app
 -ng serve --open
+
+for ASP.NET Core -> Angular:
+in app.nodule.ts: import { APP_BASE_HREF } from '@angular/common'; providers: [{ provide: APP_BASE_HREF, useValue: '/' }],
+in Startup.cs: services.AddCors(...), app.UseCors(...)
