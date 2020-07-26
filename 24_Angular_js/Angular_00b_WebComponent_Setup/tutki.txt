@@ -1,0 +1,4 @@
+https://www.infoq.com/articles/Angular-Core-3/
+https://indepth.dev/angular-web-components-a-complete-guide/
+https://myview.rahulnivi.net/web-components-angular-angular-elements/
+https://www.grapecity.com/blogs/using-web-components-in-angular

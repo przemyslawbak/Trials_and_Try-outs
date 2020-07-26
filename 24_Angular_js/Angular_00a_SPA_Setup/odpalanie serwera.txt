@@ -1,3 +1,1 @@
-tutek: https://www.infoq.com/articles/Angular-Core-3/
-
 ng serve App1 --port 4201 --servePath / --baseHref /apps/app1/ --publicHost http://localhost:4201
