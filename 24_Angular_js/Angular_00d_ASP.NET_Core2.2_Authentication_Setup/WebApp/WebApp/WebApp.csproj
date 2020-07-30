@@ -8,14 +8,19 @@
 
   <ItemGroup>
     <None Remove="App1\src\app\login\login.component.ts" />
+    <None Remove="App1\src\app\login\login.externalproviders.component.ts" />
+    <None Remove="App1\src\app\login\login.facebook.component.ts" />
+    <None Remove="App1\src\app\register\register.component.ts" />
     <None Remove="App1\src\app\services\auth.interceptor.ts" />
     <None Remove="App1\src\app\services\auth.service.ts" />
     <None Remove="App1\src\app\services\token.response.ts" />
+    <None Remove="App1\src\app\services\user.ts" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="EPPlus" Version="4.5.3.2" />
     <PackageReference Include="Microsoft.AspNetCore.App" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.Facebook" Version="2.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="2.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.2.6" />
@@ -24,10 +29,14 @@
   </ItemGroup>
 
   <ItemGroup>
+    <TypeScriptCompile Include="App1\src\app\login\login.externalproviders.component.ts" />
+    <TypeScriptCompile Include="App1\src\app\login\login.facebook.component.ts" />
+    <TypeScriptCompile Include="App1\src\app\register\register.component.ts" />
     <TypeScriptCompile Include="App1\src\app\login\login.component.ts" />
     <TypeScriptCompile Include="App1\src\app\services\auth.interceptor.ts" />
     <TypeScriptCompile Include="App1\src\app\services\auth.service.ts" />
     <TypeScriptCompile Include="App1\src\app\services\token.response.ts" />
+    <TypeScriptCompile Include="App1\src\app\services\user.ts" />
   </ItemGroup>
 
 </Project>

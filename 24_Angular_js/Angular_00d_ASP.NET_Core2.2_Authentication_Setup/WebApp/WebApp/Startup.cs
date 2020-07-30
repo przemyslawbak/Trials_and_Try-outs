@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using System;
 using WebApp.Data;
 
 namespace WebApp
@@ -14,6 +15,20 @@ namespace WebApp
         public IConfiguration Configuration { get; }
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddAuthentication()
+            .AddFacebook(options =>
+            {
+                options.AppId = Configuration["Authentication:Facebook:AppId"];
+                options.AppSecret = Configuration["Authentication:Facebook:AppSecret"];
+            })
+            //just for identity
+            .Services.ConfigureApplicationCookie(options =>
+            {
+                //previous cookies not valid
+                options.SlidingExpiration = true;
+                options.ExpireTimeSpan = TimeSpan.FromMinutes(1);
+            });
+
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration["Data:WorldCities:ConnectionString"]));
@@ -23,19 +38,19 @@ namespace WebApp
                     Configuration["Data:Portfolio_StronaIdentity:ConnectionString"]));
 
             services.AddIdentity<IdentityUser, IdentityRole>()
-           .AddEntityFrameworkStores<AppIdentityDbContext>()
-           .AddDefaultTokenProviders();
-
+               .AddEntityFrameworkStores<AppIdentityDbContext>()
+               .AddDefaultTokenProviders();
 
             services.AddCors(options =>
             {
                 options.AddPolicy("CorsPolicy",
                     builder => builder.WithOrigins("http://localhost:4200")
                     .AllowAnyHeader()
-        .AllowAnyMethod()
-        .AllowCredentials()
-        .SetIsOriginAllowed((host) => true));
+                    .AllowAnyMethod()
+                    .AllowCredentials()
+                    .SetIsOriginAllowed((host) => true));
             });
+
             services.AddMvc();
         }
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
