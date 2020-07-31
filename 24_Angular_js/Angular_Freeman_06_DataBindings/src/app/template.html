@@ -1,0 +1,25 @@
+<div class="text-white m-2">
+    <div class="p-2" [ngClass]="getClassMap(1)">
+        The first product is {{model.getProduct(1).name}}.
+    </div>
+    <div class="p-2" [ngClass]="getClassMap(2)">
+        The second product is {{model.getProduct(2).name}}.
+    </div>
+    <div class="p-2" [ngClass]="{'bg-success': model.getProduct(3).price < 50,
+'bg-info': model.getProduct(3).price >= 50}">
+        The third product is {{model.getProduct(3).name}}
+    </div>
+</div>
+
+<div class="text-white m-2">
+    <div class="p-2 bg-warning">
+        The <span [ngStyle]="getStyles(1)">first</span>
+        product is {{model.getProduct(1).name}}.
+    </div>
+    Chapter 12 ■ Using Data Bindings
+    261
+    <div class="p-2 bg-info">
+        The <span [ngStyle]="getStyles(2)">second</span>
+        product is {{model.getProduct(2).name}}
+    </div>
+</div>
