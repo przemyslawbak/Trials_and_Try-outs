@@ -1,0 +1,71 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Aplikacja</title>
+    <meta charset="utf-8">
+</head>
+<body class="container">
+    <div>
+        TEST
+    </div>
+    <script>
+        //abstractions
+        function repeatLog(n) {
+            for (let i = 0; i < n; i++) {
+                console.log(i);
+            }
+        }
+
+        function greaterThan(n) {
+            return m => m > n;
+        }
+        let greaterThan10 = greaterThan(10);
+        console.log(greaterThan10(11));
+// → true
+
+        function map(array, transform) {
+            let mapped = [];
+            for (let element of array) {
+                mapped.push(transform(element));
+            }
+            return mapped;
+        }
+        let rtlScripts = SCRIPTS.filter(s => s.direction == "rtl");
+        console.log(map(rtlScripts, s => s.name));
+// → ["Adlam", "Arabic", "Imperial Aramaic", …]
+
+        let biggest = null;
+        for (let script of SCRIPTS) {
+            if (biggest == null ||
+                characterCount(biggest) < characterCount(script)) {
+                biggest = script;
+            }
+        }
+        console.log(biggest);
+// → {name: "Han", …}
+
+        function average(array) {
+            return array.reduce((a, b) => a + b) / array.length;
+        }
+        console.log(Math.round(average(
+            SCRIPTS.filter(s => s.living).map(s => s.year))));
+        // → 1165
+        console.log(Math.round(average(
+            SCRIPTS.filter(s => !s.living).map(s => s.year))));
+// → 204
+
+        let total = 0, count = 0;
+        for (let script of SCRIPTS) {
+            if (script.living) {
+                total += script.year;
+                count += 1;
+            }
+        }
+        console.log(Math.round(total / count));
+// → 1165
+
+
+
+    </script>
+</body>
+</html>
