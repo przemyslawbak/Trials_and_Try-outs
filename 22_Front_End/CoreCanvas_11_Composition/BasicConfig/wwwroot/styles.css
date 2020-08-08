@@ -1,0 +1,12 @@
+﻿#canvas {
+    border: 1px solid cornflowerblue;
+    position: absolute;
+    left: 150px;
+    top: 10px;
+    background: #eeeeee;
+    border: thin solid #aaaaaa;
+    cursor: pointer;
+    -webkit-box-shadow: rgba(200,200,255,0.9) 5px 5px 10px;
+    -moz-box-shadow: rgba(200,200,255,0.9) 5px 5px 10px;
+    box-shadow: rgba(200,200,255,0.9) 5px 5px 10px;
+}

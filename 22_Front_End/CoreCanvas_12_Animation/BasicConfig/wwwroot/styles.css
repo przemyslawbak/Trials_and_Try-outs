@@ -1,0 +1,18 @@
+﻿body {
+    background: #dddddd;
+}
+
+#canvas {
+    background: #ffffff;
+    cursor: pointer;
+    margin-left: 10px;
+    margin-top: 10px;
+    -webkit-box-shadow: 3px 3px 6px rgba(0,0,0,0.5);
+    -moz-box-shadow: 3px 3px 6px rgba(0,0,0,0.5);
+    box-shadow: 3px 3px 6px rgba(0,0,0,0.5);
+}
+
+#controls {
+    margin-top: 10px;
+    margin-left: 15px;
+}
