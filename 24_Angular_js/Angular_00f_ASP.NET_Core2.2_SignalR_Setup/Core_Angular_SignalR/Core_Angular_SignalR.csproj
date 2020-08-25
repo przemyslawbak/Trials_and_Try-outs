@@ -1,0 +1,33 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+    <AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
+    <AssemblyName>Core_Angular_SignalR</AssemblyName>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="signal-monitoring-ui\src\models\**" />
+    <Compile Remove="signal-monitoring-ui\src\services\**" />
+    <Content Remove="signal-monitoring-ui\src\models\**" />
+    <Content Remove="signal-monitoring-ui\src\services\**" />
+    <EmbeddedResource Remove="signal-monitoring-ui\src\models\**" />
+    <EmbeddedResource Remove="signal-monitoring-ui\src\services\**" />
+    <None Remove="signal-monitoring-ui\src\models\**" />
+    <None Remove="signal-monitoring-ui\src\services\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNet.SignalR" Version="2.4.1" />
+    <PackageReference Include="Microsoft.AspNetCore.App" />
+    <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.AspNetCore.SpaServices.Extensions" Version="2.2.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="2.2.6" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Presistance\" />
+    <Folder Include="Services\" />
+  </ItemGroup>
+
+</Project>

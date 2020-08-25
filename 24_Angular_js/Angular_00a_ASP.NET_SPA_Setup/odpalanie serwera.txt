@@ -1,1 +1,0 @@
-ng serve App1 --port 4201 --servePath / --baseHref /apps/app1/ --publicHost http://localhost:4201

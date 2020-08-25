@@ -30,8 +30,7 @@ namespace WebApp.Controllers
         }
 
         [HttpPost("Auth")]
-        public async Task<IActionResult>
-        Jwt([FromBody]TokenRequestViewModel model)
+        public async Task<IActionResult> Jwt([FromBody]TokenRequestViewModel model)
         {
             // return a generic HTTP Status 500 (Server Error)
             // if the client payload is invalid.
@@ -45,8 +44,7 @@ namespace WebApp.Controllers
                     return new UnauthorizedResult();
             }
         }
-        private async Task<IActionResult>
-        GetToken(TokenRequestViewModel model)
+        private async Task<IActionResult> GetToken(TokenRequestViewModel model)
         {
             try
             {
