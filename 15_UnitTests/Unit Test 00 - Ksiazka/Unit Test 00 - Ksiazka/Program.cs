@@ -11,7 +11,7 @@ namespace Unit_Test_00___Ksiazka
         }
         public int ParseAndSum(string numbers)
         {
-            if (numbers.Length == 0)
+            if (numbers.Length == 0) 
             {
                 return 0;
             }
