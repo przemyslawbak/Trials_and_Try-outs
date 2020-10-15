@@ -1,0 +1,56 @@
+﻿@model List<StatsViewModel>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Aplikacja</title>
+    <meta charset="utf-8">
+    <style>
+        .container {
+            width: 50%;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        #myChart {
+            height: 500px !important;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        TEST
+    </div>
+    <div class="container">
+        <canvas id="myChart" width="400" height="400"></canvas>
+    </div>
+
+    <script type='text/javascript' src="~/src/lib/Chart.bundle.min.js"></script>
+    <script>
+        //https://www.chartjs.org/docs/latest/getting-started/usage.html
+        var ctx = document.getElementById('myChart').getContext('2d');
+        var data = [0, 59, 75, 20, 20, 55, 40];
+        var labels = ["0s", "10s", "20s", "30s", "40s", "50s", "60s"];
+        var myChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Car Speed',
+                    data: data
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
+                }
+            }
+        });
+    </script>
+</body>
+</html>
