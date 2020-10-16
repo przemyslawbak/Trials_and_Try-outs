@@ -1,0 +1,100 @@
+﻿@model List<StatsViewModel>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Aplikacja</title>
+    <meta charset="utf-8">
+    <style>
+        .container {
+            width: 50%;
+            margin-left: auto;
+            margin-right: auto;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        TEST
+    </div>
+    <div class="container">
+        <canvas id="myChart" width="400" height="400"></canvas>
+    </div>
+    <script type='text/javascript' src="~/src/lib/Chart.bundle.min.js"></script>
+    <script>
+        var moving = [];
+        var notmoving = [];
+        var missing = [];
+        var labels = [];
+
+        @{
+            for (int i = 0; i < Model.Count(); i ++)
+            {
+                @:moving.push(@Model[i].Moving);
+            }
+        }
+        @{
+            for (int i = 0; i < Model.Count(); i ++)
+            {
+                @:notmoving.push(@Model[i].NotMoving);
+            }
+        }
+        @{
+            for (int i = 0; i < Model.Count(); i ++)
+            {
+                @:missing.push(@Model[i].Missing);
+            }
+        }
+        @{
+            for (int i = 0; i < Model.Count(); i ++)
+            {
+                @:labels.push("@Model[i].Date.ToString("yyyy-MM-dd")");
+            }
+        }
+
+        var ctx = document.getElementById('myChart').getContext('2d');
+        var myChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: labels,
+                datasets: [
+                    {
+                        label: 'Under way',
+                        data: moving,
+                        showLine: true,
+                        fill: false,
+                        borderColor: 'rgba(30, 130, 76, 1)'
+                    },
+                    {
+                        label: 'Not under way',
+                        data: notmoving,
+                        showLine: true,
+                        fill: false,
+                        borderColor: 'rgba(44, 130, 201, 1)'
+                    },
+                    {
+                        label: 'Undefined status',
+                        data: missing,
+                        showLine: true,
+                        fill: false,
+                        hidden: true,
+                        borderColor: 'rgba(191, 191, 191, 1)'
+                    }
+                ]
+            },
+            options: {
+                maintainAspectRatio: false,
+                responsive: true,
+                scales: {
+                    xAxes: [{
+                        type: 'time',
+                        time: {
+                            unit: 'day'
+                        }
+                    }]
+                }
+            }
+        });
+    </script>
+</body>
+</html>
