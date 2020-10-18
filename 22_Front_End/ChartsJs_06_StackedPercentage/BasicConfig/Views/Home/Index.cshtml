@@ -36,7 +36,7 @@
 
                 var pMove = (int)Math.Round((double)(100 * Model[i].Moving) / total);
                 var pMoor = (int)Math.Round((double)(100 * Model[i].NotMoving) / total);
-                var pAnch = (int)Math.Round((double)(100 * Model[i].Anchored) / total);
+                var pAnch = 100 - pMoor - pMove;
 
                 @:moving.push(@pMove);
                 @:moored.push(@pMoor);
@@ -76,6 +76,10 @@
                 responsive: true,
                 scales: {
                     yAxes: [{
+                        scaleLabel: {
+                            display: true,
+                            labelString: '% of found vessels'
+                        },
                         stacked: true,
                         ticks: {
                             min: 0,
@@ -83,6 +87,10 @@
                         }
                     }],
                     xAxes: [{
+                        scaleLabel: {
+                            display: true,
+                            labelString: 'Date'
+                        },
                         type: 'time',
                         time: {
                             unit: 'day'
