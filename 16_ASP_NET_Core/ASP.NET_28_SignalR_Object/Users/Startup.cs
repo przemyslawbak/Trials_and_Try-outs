@@ -36,7 +36,7 @@ namespace Users
             app.UseAuthentication();
             app.UseSignalR(routes =>
             {
-                routes.MapHub<ChatHub>("/chathub");
+                routes.MapHub<ChatHub>("/messageHub");
             });
             app.UseMvcWithDefaultRoute();
         }
