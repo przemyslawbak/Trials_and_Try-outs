@@ -1,0 +1,62 @@
+<div class="container">
+  <div class="ships">
+    <h2>Available ships</h2>
+    <div
+      cdkDropList
+      #cdkShips="cdkDropList"
+      [cdkDropListData]="player1Fleet"
+      class="ship-list"
+      [cdkDropListConnectedTo]="[cdkBoard]"
+      (cdkDropListDropped)="drop($event)"
+      cdkDropListSortingDisabled="true"
+    >
+      <ng-container *ngFor="let ship of player1Fleet">
+        <div cdkDrag [style.size]="50 * ship.length + 'px'">
+          <app-ship [name]="ship.name" [size]="ship.size"></app-ship>
+          <div *cdkDragPlaceholder></div>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+</div>
+
+<div class="example-boundary">
+  <div
+    id="boardP1"
+    cdkDropList
+    #cdkBoard="cdkDropList"
+    [cdkDropListData]="shipsInBoard"
+    [cdkDropListConnectedTo]="[cdkShips]"
+    style="position: relative"
+    (cdkDropListDropped)="drop($event)"
+    cdkDropListSortingDisabled="true"
+  >
+    <ng-container *ngFor="let ship of shipsInBoard">
+      <div
+        style="position: absolute"
+        [style.top]="ship.top + 'px'"
+        [style.left]="ship.left + 'px'"
+        cdkDrag
+      >
+        <app-ship [name]="ship.name" [size]="ship.size"></app-ship>
+        <div *cdkDragPlaceholder></div>
+      </div>
+    </ng-container>
+    <table>
+      <tr *ngFor="let row of boardP1; let j = index" id="rows">
+        <td
+          id="columns"
+          *ngFor="let col of row; let k = index"
+          class="battleship-tile"
+          cdkDropList
+          #bt
+          mat-button
+          (mouseover)="position = bt.getBoundingClientRect()"
+        >
+          >
+          {{ "💀" }}
+        </td>
+      </tr>
+    </table>
+  </div>
+</div>
