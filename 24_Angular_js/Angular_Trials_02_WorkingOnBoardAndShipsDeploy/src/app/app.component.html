@@ -1,0 +1,59 @@
+<div class="container">
+  <div class="ships">
+    <h2>Available ships: {{ this.player1Fleet.length }}</h2>
+    <div
+      cdkDropList
+      #cdkShips="cdkDropList"
+      [cdkDropListData]="player1Fleet"
+      class="ship-list"
+      [cdkDropListConnectedTo]="[cdkBoard]"
+      (cdkDropListDropped)="drop($event)"
+      cdkDropListSortingDisabled="true"
+    >
+      Next:
+
+      <ng-container>
+        <div cdkDrag [style.size]="50 * player1Fleet[0].length + 'px'">
+          <app-ship [size]="player1Fleet[0].size"></app-ship>
+          <div *cdkDragPlaceholder></div>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+</div>
+
+<div class="example-boundary">
+  <div
+    cdkDropList
+    #cdkBoard="cdkDropList"
+    [cdkDropListData]="shipsInBoard"
+    [cdkDropListConnectedTo]="[cdkShips]"
+    style="position: relative"
+    (cdkDropListDropped)="drop($event)"
+    cdkDropListSortingDisabled="true"
+  >
+    <ng-container *ngFor="let ship of shipsInBoard">
+      <div
+        style="position: absolute"
+        [style.top]="ship.top + 'px'"
+        [style.left]="ship.left + 'px'"
+        cdkDrag
+      >
+        <app-ship [name]="ship.name" [size]="ship.size"></app-ship>
+        <div *cdkDragPlaceholder></div>
+      </div>
+    </ng-container>
+    <div class="board">
+      <div class="row" *ngFor="let row of boardP1; let i = index">
+        <div class="cell" *ngFor="let box of row; let j = index" id="columns">
+          <button
+            #bt
+            mat-button
+            class="bt-cell"
+            (mouseover)="position = bt.getBoundingClientRect()"
+          ></button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
