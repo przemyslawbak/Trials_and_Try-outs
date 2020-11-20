@@ -1,0 +1,57 @@
+<div class="container">
+  <div class="ships">
+    <h2>Available ships: {{ this.list1.length }}</h2>
+    <div
+      class="droplist"
+      cdkDropList
+      #one="cdkDropList"
+      [cdkDropListData]="list1"
+      [cdkDropListConnectedTo]="[two]"
+      (cdkDropListDropped)="drop($event)"
+      cdkDropListSortingDisabled="true"
+    >
+      Next:
+
+      <ng-container *ngIf="list1.length > 0">
+        <div cdkDrag [style.size]="50 * list1[0].size + 'px'">
+          <app-ship [size]="list1[0].size"></app-ship>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+</div>
+
+<div class="example-boundary">
+  <div
+    class="droplist"
+    cdkDropList
+    #two="cdkDropList"
+    [cdkDropListData]="list2"
+    [cdkDropListConnectedTo]="[one]"
+    (cdkDropListDropped)="drop($event)"
+    cdkDropListSortingDisabled="true"
+  >
+    <ng-container *ngFor="let ship of list2">
+      <div
+        class="aShip"
+        [style.top]="ship.top + 'px'"
+        [style.left]="ship.left + 'px'"
+        cdkDrag
+      >
+        <app-ship [size]="ship.size"></app-ship>
+      </div>
+    </ng-container>
+    <div class="board">
+      <div class="row" *ngFor="let row of boardP1">
+        <div class="cell" *ngFor="let box of row" id="columns">
+          <button
+            #bt
+            mat-button
+            class="bt-cell"
+            (mouseover)="position = bt.getBoundingClientRect()"
+          ></button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
