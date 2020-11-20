@@ -16,6 +16,8 @@ export class AppComponent {
   public hoverPlace: DragModel = {} as DragModel;
   public dragStart: DragModel = {} as DragModel;
   public dragEnd: DragModel = {} as DragModel;
+  public xInitial: number = 0;
+  public yInitial: number = 0;
 
   constructor() {
     this.boardP1 = this.getEmptyBoard();
@@ -23,23 +25,34 @@ export class AppComponent {
     this.list2 = [];
   }
 
-  dragEnded(event: CdkDragEnd) {
+  public dragEnded(event: CdkDragEnd) {
     console.clear();
-    console.log(event.source);
+
+    console.log(event.source.element.nativeElement.style.top);
     this.dragEnd = this.hoverPlace;
 
     if (this.dragEnd.type === "cell" && this.dragStart.type !== "cell") {
       this.moveFromList1To2(event.source.element.nativeElement.id);
+      event.source._dragRef.reset();
     }
   }
 
-  moveFromList1To2(id: string) {
+  private moveFromList1To2(id: string) {
     let index: number = +id;
-    let item = this.list1[index];
+    let item = this.updateShip(this.list1[index]);
     this.list2.push(item);
     this.list1.splice(index, 1);
     console.log("1: " + this.list1.length);
     console.log("1: " + this.list2.length);
+  }
+
+  private updateShip(ship: ShipComponent): ShipComponent {
+    ship.left = this.dragEnd.cellX;
+    ship.top = this.dragEnd.cellY;
+    console.log(this.dragEnd.cellX);
+    console.log(this.dragEnd.cellY);
+
+    return ship;
   }
 
   public hoveredElement(
@@ -57,11 +70,13 @@ export class AppComponent {
     this.hoverPlace = dropPlace;
   }
 
-  dragStarted(event: CdkDragStart) {
+    public dragStarted(event: CdkDragStart) {
     this.dragStart = this.hoverPlace;
+    console.log(this.dragStart.cellY);
+    console.log(this.dragStart.cellX);
   }
 
-  dragMoved(event: CdkDragMove) {
+    public dragMoved(event: CdkDragMove) {
     //
   }
 
