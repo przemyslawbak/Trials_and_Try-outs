@@ -11,6 +11,8 @@ import { ShipComponent } from "./ship.component";
   templateUrl: "./app.component.html",
   styleUrls: ["./app.component.css"],
 })
+
+//https://stackblitz.com/edit/angular-salbpl?file=src%2Fapp%2Fapp.component.html
 export class AppComponent {
   public list1: Array<ShipComponent>;
   public list2: Array<ShipComponent>;
@@ -24,27 +26,17 @@ export class AppComponent {
   }
 
   @ViewChild("two", { read: ElementRef, static: false }) boardElement: any;
+  @ViewChild("ships", { read: ElementRef, static: false }) shipsElement: any;
 
-  drop(event: CdkDragDrop<Array<ShipComponent>>) {
+  onDrop(event: CdkDragDrop<Array<ShipComponent>>) {
     console.clear();
     console.log(this.position);
-    console.log(
-      "el x: " + this.boardElement.nativeElement.getBoundingClientRect().x
-    );
-    console.log(
-      "el y: " + this.boardElement.nativeElement.getBoundingClientRect().y
-    );
-    event.previousContainer.data[event.previousIndex].top = this.position
-      ? this.position.y -
-        this.boardElement.nativeElement.getBoundingClientRect().y
-      : 0;
-    event.previousContainer.data[event.previousIndex].left = this.position
-      ? this.position.x -
-        this.boardElement.nativeElement.getBoundingClientRect().x
-      : 0;
-
-    console.log("t: " + event.previousContainer.data[event.previousIndex].top);
-    console.log("l: " + event.previousContainer.data[event.previousIndex].left);
+    event.previousContainer.data[event.previousIndex].top =
+      this.position.y -
+      this.boardElement.nativeElement.getBoundingClientRect().y;
+    event.previousContainer.data[event.previousIndex].left =
+      this.position.x -
+      this.boardElement.nativeElement.getBoundingClientRect().x;
 
     if (event.previousContainer === event.container) {
       moveItemInArray(
@@ -59,6 +51,14 @@ export class AppComponent {
         event.previousIndex,
         event.currentIndex
       );
+    }
+
+    console.log("t: " + event.container.data[event.previousIndex].top);
+    console.log("l: " + event.container.data[event.previousIndex].left);
+    console.log("s: " + event.container.data[event.previousIndex].size);
+    if (this.shipsElement.nativeElement) {
+      console.log("top: " + this.shipsElement.nativeElement.style.top);
+      console.log("left: " + this.shipsElement.nativeElement.style.left);
     }
   }
 

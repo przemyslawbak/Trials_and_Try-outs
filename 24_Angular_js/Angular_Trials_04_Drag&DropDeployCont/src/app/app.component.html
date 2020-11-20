@@ -7,7 +7,7 @@
       #one="cdkDropList"
       [cdkDropListData]="list1"
       [cdkDropListConnectedTo]="[two]"
-      (cdkDropListDropped)="drop($event)"
+      (cdkDropListDropped)="onDrop($event)"
       cdkDropListSortingDisabled="true"
     >
       Next:
@@ -28,18 +28,18 @@
     #two="cdkDropList"
     [cdkDropListData]="list2"
     [cdkDropListConnectedTo]="[one]"
-    (cdkDropListDropped)="drop($event)"
+    (cdkDropListDropped)="onDrop($event)"
     cdkDropListSortingDisabled="true"
   >
     <ng-container *ngFor="let ship of list2">
-      <div
-        class="aShip"
-        [style.top]="ship.top + 'px'"
-        [style.left]="ship.left + 'px'"
+      <app-ship
+        #ships
+        [size]="ship.size"
         cdkDrag
+        [style.top.px]="ship.top"
+        [style.left.px]="ship.left"
       >
-        <app-ship [size]="ship.size"></app-ship>
-      </div>
+      </app-ship>
     </ng-container>
     <div class="board">
       <div class="row" *ngFor="let row of boardP1">
