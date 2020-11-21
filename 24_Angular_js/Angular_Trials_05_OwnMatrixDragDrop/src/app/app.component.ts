@@ -1,5 +1,4 @@
-import { element } from "protractor";
-import { Component } from "@angular/core";
+import { Component, ElementRef, ViewChild } from "@angular/core";
 import { CdkDragEnd, CdkDragMove, CdkDragStart } from "@angular/cdk/drag-drop";
 import { ShipComponent } from "./ship.component";
 import { DragModel } from "./drop.model";
@@ -25,33 +24,67 @@ export class AppComponent {
     this.list2 = [];
   }
 
-  public dragEnded(event: CdkDragEnd) {
-    console.clear();
+  @ViewChild("board", { read: ElementRef, static: false }) boardElement: any;
 
-    console.log(event.source.element.nativeElement.style.top);
+  public dragEnded(event: CdkDragEnd): void {
     this.dragEnd = this.hoverPlace;
+    this.increaseZIndex(event.source.element);
 
     if (this.dragEnd.type === "cell" && this.dragStart.type !== "cell") {
       this.moveFromList1To2(event.source.element.nativeElement.id);
       event.source._dragRef.reset();
     }
+
+    if (this.dragEnd.type !== "cell" && this.dragStart.type !== "list") {
+      this.moveFromList2To1(event.source.element.nativeElement.id);
+      event.source._dragRef.reset();
+    }
+
+    if (this.dragEnd.type === "list" && this.dragStart.type === "list") {
+      event.source._dragRef.reset();
+    }
+
+    if (this.dragEnd.type === "cell" && this.dragStart.type === "cell") {
+      let index: number = +event.source.element.nativeElement.id;
+      let item = this.list2[index];
+      item = this.updateShipsCss(item);
+      this.list2.splice(index, 1);
+      this.list2.push(item);
+      event.source._dragRef.reset();
+    }
   }
 
-  private moveFromList1To2(id: string) {
+  private moveFromList2To1(id: string): void {
     let index: number = +id;
-    let item = this.updateShip(this.list1[index]);
+    let item = this.list2[index];
+    let temp = [item].concat(this.list1);
+    this.list1 = temp;
+    this.list2.splice(index, 1);
+  }
+
+  private moveFromList1To2(id: string): void {
+    let index: number = +id;
+    let item = this.updateShipsCss(this.list1[index]);
     this.list2.push(item);
     this.list1.splice(index, 1);
-    console.log("1: " + this.list1.length);
-    console.log("1: " + this.list2.length);
   }
 
-  private updateShip(ship: ShipComponent): ShipComponent {
-    ship.left = this.dragEnd.cellX;
-    ship.top = this.dragEnd.cellY;
+  public updateOnBoardCss(ship: ShipComponent): ShipComponent {
+    console.clear();
     console.log(this.dragEnd.cellX);
     console.log(this.dragEnd.cellY);
+    ship.left = this.dragEnd.cellX;
+    ship.top = this.dragEnd.cellY;
+    return ship;
+  }
 
+  public updateShipsCss(ship: ShipComponent): ShipComponent {
+    ship.left =
+      this.dragEnd.cellX -
+      this.boardElement.nativeElement.getBoundingClientRect().x;
+    ship.top =
+      this.dragEnd.cellY -
+      this.boardElement.nativeElement.getBoundingClientRect().y;
     return ship;
   }
 
@@ -60,7 +93,7 @@ export class AppComponent {
     elementType: string,
     row: number,
     col: number
-  ) {
+  ): void {
     let dropPlace = {} as DragModel;
     dropPlace.cellX = position.x;
     dropPlace.cellY = position.y;
@@ -70,14 +103,24 @@ export class AppComponent {
     this.hoverPlace = dropPlace;
   }
 
-    public dragStarted(event: CdkDragStart) {
+  public dragStarted(event: CdkDragStart): void {
     this.dragStart = this.hoverPlace;
-    console.log(this.dragStart.cellY);
-    console.log(this.dragStart.cellX);
   }
 
-    public dragMoved(event: CdkDragMove) {
-    //
+  public dragMoved(event: CdkDragMove): void {
+    this.decreaseZIndex(event.source.element);
+  }
+
+  private decreaseZIndex(element: ElementRef): void {
+    element.nativeElement.style.zIndex = "-1";
+    let el = element.nativeElement.children[0] as HTMLElement;
+    el.style.zIndex = "-1";
+  }
+
+  private increaseZIndex(element: ElementRef): void {
+    element.nativeElement.style.zIndex = "100";
+    let el = element.nativeElement.children[0] as HTMLElement;
+    el.style.zIndex = "100";
   }
 
   private createFleet(): Array<ShipComponent> {

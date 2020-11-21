@@ -6,7 +6,6 @@
       #list
       (mouseover)="hoveredElement(list.getBoundingClientRect(), 'list', -1, -1)"
     >
-      Next:
       <div *ngIf="list1.length > 0">
         <div [style.size]="50 * list1[0].size + 'px'">
           <app-ship
@@ -27,16 +26,20 @@
 
 <div class="example-boundary">
   <div class="droplist">
-    <div *ngFor="let ship of list2">
+    <div *ngFor="let ship of list2; let i = index">
       <app-ship
+        cdkDrag
+        id="{{ i }}"
         [style.top.px]="ship.top"
         [style.left.px]="ship.left"
         [size]="ship.size"
-        cdkDrag
+        (cdkDragStarted)="dragStarted($event)"
+        (cdkDragEnded)="dragEnded($event)"
+        (cdkDragMoved)="dragMoved($event)"
       >
       </app-ship>
     </div>
-    <div class="board">
+    <div class="board" #board>
       <div class="row" *ngFor="let row of boardP1; let i = index">
         <div *ngFor="let box of row; let j = index" id="columns">
           <div
