@@ -6,15 +6,12 @@ import { Component, Input } from "@angular/core";
   styleUrls: ["./ship.component.css"],
 })
 export class ShipComponent {
-  @Input() size: number;
-  @Input() rotate: boolean;
-  @Input() top: number;
-  @Input() left: number;
+  @Input() size: number = 0;
+  @Input() rotate: boolean = false;
+  @Input() deployed: boolean = false;
+  @Input() top: number = 0;
+  @Input() left: number = 0;
+  @Input() rotation: number = 0;
 
-  constructor() {
-    this.size = 0;
-    this.rotate = false;
-    this.top = 0;
-    this.left = 0;
-  }
+  constructor() {}
 }

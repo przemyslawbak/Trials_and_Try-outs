@@ -3,53 +3,66 @@
     <h2>Available ships: {{ this.list1.length }}</h2>
     <div
       class="droplist"
-      cdkDropList
-      #one="cdkDropList"
-      [cdkDropListData]="list1"
-      [cdkDropListConnectedTo]="[two]"
-      (cdkDropListDropped)="onDrop($event)"
-      cdkDropListSortingDisabled="true"
+      #list
+      (mouseover)="hoveredElement(list.getBoundingClientRect(), 'list', -1, -1)"
     >
-      Next:
-
-      <ng-container *ngIf="list1.length > 0">
-        <div cdkDrag [style.size]="50 * list1[0].size + 'px'">
-          <app-ship [size]="list1[0].size"></app-ship>
+      <div *ngIf="list1.length > 0">
+        <div [style.size]="50 * list1[0].size + 'px'">
+          <app-ship
+            cdkDrag
+            id="0"
+            [ngStyle]="{
+              transform:
+                list1[0].rotation === 90
+                  ? 'translateX(50px) rotate(90deg)'
+                  : 'translateX(0px) rotate(0deg)'
+            }"
+            [style.left.px]="xInitial"
+            [style.top.px]="yInitial"
+            [size]="list1[0].size"
+            (click)="rotate(0)"
+            (cdkDragStarted)="dragStarted($event)"
+            (cdkDragEnded)="dragEnded($event)"
+            (cdkDragMoved)="dragMoved($event)"
+          ></app-ship>
         </div>
-      </ng-container>
+      </div>
     </div>
   </div>
 </div>
 
 <div class="example-boundary">
-  <div
-    class="droplist"
-    cdkDropList
-    #two="cdkDropList"
-    [cdkDropListData]="list2"
-    [cdkDropListConnectedTo]="[one]"
-    (cdkDropListDropped)="onDrop($event)"
-    cdkDropListSortingDisabled="true"
-  >
-    <ng-container *ngFor="let ship of list2">
+  <div class="droplist">
+    <div *ngFor="let ship of list2; let i = index">
       <app-ship
-        #ships
-        [size]="ship.size"
         cdkDrag
+        id="{{ i }}"
+        [ngStyle]="{
+          transform:
+            ship.rotation === 90
+              ? 'translateX(50px) rotate(90deg)'
+              : 'translateX(0px) rotate(0deg)'
+        }"
         [style.top.px]="ship.top"
         [style.left.px]="ship.left"
+        [size]="ship.size"
+        (click)="rotate(i)"
+        (cdkDragStarted)="dragStarted($event)"
+        (cdkDragEnded)="dragEnded($event)"
+        (cdkDragMoved)="dragMoved($event)"
       >
       </app-ship>
-    </ng-container>
-    <div class="board">
-      <div class="row" *ngFor="let row of boardP1">
-        <div class="cell" *ngFor="let box of row" id="columns">
-          <button
-            #bt
-            mat-button
-            class="bt-cell"
-            (mouseover)="position = bt.getBoundingClientRect()"
-          ></button>
+    </div>
+    <div class="board" #board>
+      <div class="row" *ngFor="let row of boardP1; let i = index">
+        <div *ngFor="let box of row; let j = index" id="columns">
+          <div
+            class="cell"
+            #cell
+            (mouseover)="
+              hoveredElement(cell.getBoundingClientRect(), 'cell', j, i)
+            "
+          ></div>
         </div>
       </div>
     </div>
