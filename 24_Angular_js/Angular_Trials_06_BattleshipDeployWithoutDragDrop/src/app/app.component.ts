@@ -1,5 +1,4 @@
 import { Component, ElementRef, ViewChild } from "@angular/core";
-import { CdkDragEnd } from "@angular/cdk/drag-drop";
 import { ShipComponent } from "./ship.component";
 import { DragModel } from "./drop.model";
 import { BoardCellModel } from "./board-cell.model";
@@ -16,6 +15,8 @@ export class AppComponent {
   public hoverPlace: DragModel = {} as DragModel;
   public dragStart: DragModel = {} as DragModel;
   public dragEnd: DragModel = {} as DragModel;
+  public isDropAllowed: boolean = false;
+  public lastDropCells: Array<BoardCellModel> = [];
 
   constructor() {
     this.boardP1 = this.getEmptyBoard();
@@ -32,12 +33,23 @@ export class AppComponent {
     item.rotation = item.rotation === 0 ? 90 : 0;
   }
 
-  public deployShip(): void {
-    //todo: on board cell click
+  public deployShip(row: number, col: number): void {
+    if (this.isDropAllowed) {
+      let dropCells: Array<BoardCellModel> = this.getDropCells(row, col);
+      this.dragEnd = this.hoverPlace;
+      this.moveFromList1To2();
+      for (let i = 0; i < dropCells.length; i++) {
+        this.boardP1[dropCells[i].col][dropCells[i].row].value = 1;
+      }
+    }
   }
 
   public resetElement(element: HTMLElement) {
     element.style.backgroundColor = "rgba(0, 162, 255, 0.2)";
+    for (let i = 0; i < this.lastDropCells.length; i++) {
+      this.boardP1[this.lastDropCells[i].col][this.lastDropCells[i].row].color =
+        "rgba(0, 162, 255, 0.2)";
+    }
   }
 
   public hoveredElement(
@@ -55,19 +67,29 @@ export class AppComponent {
     dropPlace.col = col;
 
     let dropCells: Array<BoardCellModel> = this.getDropCells(row, col);
+    this.lastDropCells = dropCells;
 
     if (elementType == "cell") {
-      let isDropAllowed: boolean = this.validateDropPlace(dropCells);
+      let allow: boolean = this.validateDropPlace(dropCells);
 
-      if (isDropAllowed) {
+      if (allow) {
+        this.isDropAllowed = true;
         this.hoverPlace = dropPlace;
-        //todo: get cells to color from: dropCells
-        element.style.backgroundColor = "rgb(0, 162, 255)";
+        for (let i = 0; i < dropCells.length; i++) {
+          this.boardP1[dropCells[i].col][dropCells[i].row].color =
+            "rgb(0, 162, 255)";
+        }
       } else {
-        //todo: colour cell red
+        this.isDropAllowed = false;
         element.style.backgroundColor = "red";
       }
     }
+  }
+
+  private moveFromList1To2(): void {
+    const item = this.updateShipsCss(this.list1[0]);
+    this.list2.push(item);
+    this.list1.splice(0, 1);
   }
 
   private updateShipsCss(ship: ShipComponent): ShipComponent {
@@ -86,13 +108,6 @@ export class AppComponent {
     const temp = [item].concat(this.list1);
     this.list1 = temp;
     this.list2.splice(index, 1);
-  }
-
-  private moveFromList1To2(id: string): void {
-    const index: number = +id;
-    const item = this.updateShipsCss(this.list1[index]);
-    this.list2.push(item);
-    this.list1.splice(index, 1);
   }
 
   private createFleet(): Array<ShipComponent> {
@@ -115,7 +130,12 @@ export class AppComponent {
     for (let i = 0; i < 10; i++) {
       board[i] = [];
       for (let j = 0; j < 10; j++) {
-        board[i][j] = { row: j, col: i, value: 0 } as BoardCellModel;
+        board[i][j] = {
+          row: j,
+          col: i,
+          value: 0,
+          color: "rgba(0, 162, 255, 0.2)",
+        } as BoardCellModel;
       }
     }
 
@@ -137,18 +157,25 @@ export class AppComponent {
   private validateDropPlace(dropPlace: Array<BoardCellModel>): boolean {
     let result: boolean = true;
 
-    result = dropPlace.length != this.list1[0].size ? false : true;
-
-    result = this.isShipTouchingOther(dropPlace) ? false : true;
+    if (dropPlace.length !== this.list1[0].size) {
+      result = false;
+    }
+    if (!this.isShipNotTouchingOther(dropPlace)) {
+      result = false;
+    }
 
     return result;
   }
 
-  private isShipTouchingOther(dropPlace: BoardCellModel[]): boolean {
+  private isShipNotTouchingOther(dropPlace: BoardCellModel[]): boolean {
+    let result: boolean = true;
+    //todo: based on requirements create list of forbidden cells
+    //todo: compare list of forbidden cells with dropPlace list
+
     //todo: avoid ship deploy touching corners
     //todo: avoid ship deploy touching sides
     //todo: avoid ship deploy on top of eachother
-    throw new Error("Method not implemented.");
+    return result;
   }
 
   private getDropCells(row: number, col: number): Array<BoardCellModel> {
@@ -185,32 +212,5 @@ export class AppComponent {
     );
 
     return exists ? item : ({ row: -1, col: -1, value: -1 } as BoardCellModel);
-  }
-
-  private deployEnded(event: CdkDragEnd): void {
-    this.dragEnd = this.hoverPlace;
-
-    if (this.dragEnd.type === "cell" && this.dragStart.type !== "cell") {
-      this.moveFromList1To2(event.source.element.nativeElement.id);
-      event.source._dragRef.reset();
-    }
-
-    if (this.dragEnd.type !== "cell" && this.dragStart.type !== "list") {
-      this.moveFromList2To1(event.source.element.nativeElement.id);
-      event.source._dragRef.reset();
-    }
-
-    if (this.dragEnd.type === "list" && this.dragStart.type === "list") {
-      event.source._dragRef.reset();
-    }
-
-    if (this.dragEnd.type === "cell" && this.dragStart.type === "cell") {
-      const index: number = +event.source.element.nativeElement.id;
-      let item = this.list2[index];
-      item = this.updateShipsCss(item);
-      this.list2.splice(index, 1);
-      this.list2.push(item);
-      event.source._dragRef.reset();
-    }
   }
 }

@@ -62,12 +62,7 @@ app-ship {
   width: 50px;
   height: 50px;
   border: solid 1px #ccc;
-  background-color: rgba(0, 162, 255, 0.2);
-}
-
-.bt-cell {
-  width: 50px;
-  height: 100%;
+  cursor: pointer;
 }
 
 .ship-box {
