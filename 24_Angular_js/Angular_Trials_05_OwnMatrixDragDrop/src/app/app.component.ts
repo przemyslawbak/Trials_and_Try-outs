@@ -25,14 +25,39 @@ export class AppComponent {
   }
 
   @ViewChild("board", { read: ElementRef, static: false }) boardElement: any;
+  @ViewChild("nextItem", { read: ElementRef, static: false }) nextItem: any;
+
+  public setRotation(name: string): void {
+    const id = name.split("-")[0];
+    let item: ShipComponent =
+      name.split("-")[1] === "list1" ? this.list1[+id] : this.list2[+id];
+
+    item.rotation = item.rotation === 0 ? 90 : 0;
+  }
+
+  //todo: remove?
+  public getTransform(name: string) {
+    const id = name.split("-")[0];
+    let list: Array<ShipComponent>;
+    list = name.split("-")[1] === "list1" ? this.list1 : this.list2;
+
+    return list[+id].rotation === 90
+      ? "translateX(50px) rotate(90deg)"
+      : "translateX(0px) rotate(0deg)";
+  }
 
   public dragEnded(event: CdkDragEnd): void {
+    //remove rotation from list1[0], todo below
     this.dragEnd = this.hoverPlace;
     this.increaseZIndex(event.source.element);
+    this.removeDragRotation(event);
 
     if (this.dragEnd.type === "cell" && this.dragStart.type !== "cell") {
       this.moveFromList1To2(event.source.element.nativeElement.id);
       event.source._dragRef.reset();
+      if (this.list1.length > 0) {
+        this.nextItem.nativeElement.style.transform = "";
+      }
     }
 
     if (this.dragEnd.type !== "cell" && this.dragStart.type !== "list") {
@@ -45,7 +70,7 @@ export class AppComponent {
     }
 
     if (this.dragEnd.type === "cell" && this.dragStart.type === "cell") {
-      let index: number = +event.source.element.nativeElement.id;
+      const index: number = +event.source.element.nativeElement.id;
       let item = this.list2[index];
       item = this.updateShipsCss(item);
       this.list2.splice(index, 1);
@@ -55,24 +80,21 @@ export class AppComponent {
   }
 
   private moveFromList2To1(id: string): void {
-    let index: number = +id;
-    let item = this.list2[index];
-    let temp = [item].concat(this.list1);
+    const index: number = +id;
+    const item = this.list2[index];
+    const temp = [item].concat(this.list1);
     this.list1 = temp;
     this.list2.splice(index, 1);
   }
 
   private moveFromList1To2(id: string): void {
-    let index: number = +id;
-    let item = this.updateShipsCss(this.list1[index]);
+    const index: number = +id;
+    const item = this.updateShipsCss(this.list1[index]);
     this.list2.push(item);
     this.list1.splice(index, 1);
   }
 
   public updateOnBoardCss(ship: ShipComponent): ShipComponent {
-    console.clear();
-    console.log(this.dragEnd.cellX);
-    console.log(this.dragEnd.cellY);
     ship.left = this.dragEnd.cellX;
     ship.top = this.dragEnd.cellY;
     return ship;
@@ -103,8 +125,27 @@ export class AppComponent {
     this.hoverPlace = dropPlace;
   }
 
-  public dragStarted(event: CdkDragStart): void {
+  public dragStarted(event: CdkDragStart, name: string): void {
     this.dragStart = this.hoverPlace;
+    this.addDragRotation(name, event);
+  }
+
+  private addDragRotation(name: string, event: CdkDragStart): void {
+    const id = name.split("-")[0];
+    let list: Array<ShipComponent>;
+    list = name.split("-")[1] === "list1" ? this.list1 : this.list2;
+    if (list[+id].rotation === 90) {
+      event.source.element.nativeElement.style.transform =
+        "translateX(50px) rotate(90deg)";
+    } else {
+      event.source.element.nativeElement.style.transform =
+        "translateX(0px) rotate(0deg)";
+    }
+  }
+
+  private removeDragRotation(event: CdkDragStart): void {
+    event.source.element.nativeElement.style.transform =
+      "translateX(0px) rotate(0deg)";
   }
 
   public dragMoved(event: CdkDragMove): void {
@@ -125,16 +166,16 @@ export class AppComponent {
 
   private createFleet(): Array<ShipComponent> {
     return [
-      { size: 4, rotate: false, top: 0, left: 0, deployed: false },
-      { size: 3, rotate: false, top: 0, left: 0, deployed: false },
-      { size: 3, rotate: false, top: 0, left: 0, deployed: false },
-      { size: 2, rotate: false, top: 0, left: 0, deployed: false },
-      { size: 2, rotate: false, top: 0, left: 0, deployed: false },
-      { size: 2, rotate: false, top: 0, left: 0, deployed: false },
-      { size: 1, rotate: false, top: 0, left: 0, deployed: false },
-      { size: 1, rotate: false, top: 0, left: 0, deployed: false },
-      { size: 1, rotate: false, top: 0, left: 0, deployed: false },
-      { size: 1, rotate: false, top: 0, left: 0, deployed: false },
+      { size: 4, top: 0, left: 0, deployed: false, rotation: 0 },
+      { size: 3, top: 0, left: 0, deployed: false, rotation: 0 },
+      { size: 3, top: 0, left: 0, deployed: false, rotation: 0 },
+      { size: 2, top: 0, left: 0, deployed: false, rotation: 0 },
+      { size: 2, top: 0, left: 0, deployed: false, rotation: 0 },
+      { size: 2, top: 0, left: 0, deployed: false, rotation: 0 },
+      { size: 1, top: 0, left: 0, deployed: false, rotation: 0 },
+      { size: 1, top: 0, left: 0, deployed: false, rotation: 0 },
+      { size: 1, top: 0, left: 0, deployed: false, rotation: 0 },
+      { size: 1, top: 0, left: 0, deployed: false, rotation: 0 },
     ];
   }
 

@@ -9,12 +9,14 @@
       <div *ngIf="list1.length > 0">
         <div [style.size]="50 * list1[0].size + 'px'">
           <app-ship
+            #nextItem
             cdkDrag
-            id="0"
+            [ngClass]="list1[0].rotation === 90 ? 'rotate' : 'rotateNot'"
             [style.left.px]="xInitial"
             [style.top.px]="yInitial"
             [size]="list1[0].size"
-            (cdkDragStarted)="dragStarted($event)"
+            (click)="setRotation(0 + '-list1')"
+            (cdkDragStarted)="dragStarted($event, 0 + '-list1')"
             (cdkDragEnded)="dragEnded($event)"
             (cdkDragMoved)="dragMoved($event)"
           ></app-ship>
@@ -30,10 +32,12 @@
       <app-ship
         cdkDrag
         id="{{ i }}"
+        [ngClass]="ship.rotation === 90 ? 'rotate' : 'rotateNot'"
         [style.top.px]="ship.top"
         [style.left.px]="ship.left"
         [size]="ship.size"
-        (cdkDragStarted)="dragStarted($event)"
+        (click)="setRotation(i + '-list2')"
+        (cdkDragStarted)="dragStarted($event, i + '-list2')"
         (cdkDragEnded)="dragEnded($event)"
         (cdkDragMoved)="dragMoved($event)"
       >
