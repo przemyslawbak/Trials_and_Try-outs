@@ -28,22 +28,49 @@ export class AppComponent {
   @ViewChild("nextItem", { read: ElementRef, static: false }) nextItem: any;
 
   public setRotation(name: string): void {
-    const id = name.split("-")[0];
-    let item: ShipComponent =
-      name.split("-")[1] === "list1" ? this.list1[+id] : this.list2[+id];
-
+    const id: string = this.getIdFromElementName(name);
+    let item: ShipComponent = this.getArrayItem(name, id);
     item.rotation = item.rotation === 0 ? 90 : 0;
   }
 
-  //todo: remove?
-  public getTransform(name: string) {
-    const id = name.split("-")[0];
-    let list: Array<ShipComponent>;
-    list = name.split("-")[1] === "list1" ? this.list1 : this.list2;
+  public updateOnBoardCss(ship: ShipComponent): ShipComponent {
+    ship.left = this.dragEnd.cellX;
+    ship.top = this.dragEnd.cellY;
+    return ship;
+  }
 
-    return list[+id].rotation === 90
-      ? "translateX(50px) rotate(90deg)"
-      : "translateX(0px) rotate(0deg)";
+  public updateShipsCss(ship: ShipComponent): ShipComponent {
+    ship.left =
+      this.dragEnd.cellX -
+      this.boardElement.nativeElement.getBoundingClientRect().x;
+    ship.top =
+      this.dragEnd.cellY -
+      this.boardElement.nativeElement.getBoundingClientRect().y;
+    return ship;
+  }
+
+  public hoveredElement(
+    position: any,
+    elementType: string,
+    row: number,
+    col: number
+  ): void {
+    let dropPlace = {} as DragModel;
+    dropPlace.cellX = position.x;
+    dropPlace.cellY = position.y;
+    dropPlace.type = elementType;
+    dropPlace.row = row;
+    dropPlace.col = col;
+    this.hoverPlace = dropPlace;
+  }
+
+  public dragStarted(event: CdkDragStart, name: string): void {
+    this.dragStart = this.hoverPlace;
+    this.addDragRotation(name, event);
+  }
+
+  public dragMoved(event: CdkDragMove): void {
+    this.decreaseZIndex(event.source.element);
   }
 
   public dragEnded(event: CdkDragEnd): void {
@@ -94,46 +121,11 @@ export class AppComponent {
     this.list1.splice(index, 1);
   }
 
-  public updateOnBoardCss(ship: ShipComponent): ShipComponent {
-    ship.left = this.dragEnd.cellX;
-    ship.top = this.dragEnd.cellY;
-    return ship;
-  }
-
-  public updateShipsCss(ship: ShipComponent): ShipComponent {
-    ship.left =
-      this.dragEnd.cellX -
-      this.boardElement.nativeElement.getBoundingClientRect().x;
-    ship.top =
-      this.dragEnd.cellY -
-      this.boardElement.nativeElement.getBoundingClientRect().y;
-    return ship;
-  }
-
-  public hoveredElement(
-    position: any,
-    elementType: string,
-    row: number,
-    col: number
-  ): void {
-    let dropPlace = {} as DragModel;
-    dropPlace.cellX = position.x;
-    dropPlace.cellY = position.y;
-    dropPlace.type = elementType;
-    dropPlace.row = row;
-    dropPlace.col = col;
-    this.hoverPlace = dropPlace;
-  }
-
-  public dragStarted(event: CdkDragStart, name: string): void {
-    this.dragStart = this.hoverPlace;
-    this.addDragRotation(name, event);
-  }
-
   private addDragRotation(name: string, event: CdkDragStart): void {
-    const id = name.split("-")[0];
+    const id: string = this.getIdFromElementName(name);
     let list: Array<ShipComponent>;
-    list = name.split("-")[1] === "list1" ? this.list1 : this.list2;
+    list = this.getListFromName(name);
+
     if (list[+id].rotation === 90) {
       event.source.element.nativeElement.style.transform =
         "translateX(50px) rotate(90deg)";
@@ -146,10 +138,6 @@ export class AppComponent {
   private removeDragRotation(event: CdkDragStart): void {
     event.source.element.nativeElement.style.transform =
       "translateX(0px) rotate(0deg)";
-  }
-
-  public dragMoved(event: CdkDragMove): void {
-    this.decreaseZIndex(event.source.element);
   }
 
   private decreaseZIndex(element: ElementRef): void {
@@ -181,5 +169,17 @@ export class AppComponent {
 
   private getEmptyBoard(): number[][] {
     return Array.from({ length: 10 }, () => Array(10).fill(0));
+  }
+
+  private getArrayItem(name: string, id: string): ShipComponent {
+    return name.split("-")[1] === "list1" ? this.list1[+id] : this.list2[+id];
+  }
+
+  private getIdFromElementName(name: string): string {
+    return name.split("-")[0];
+  }
+
+  private getListFromName(name: string): Array<ShipComponent> {
+    return name.split("-")[1] === "list1" ? this.list1 : this.list2;
   }
 }
