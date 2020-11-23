@@ -87,12 +87,12 @@ export class AppComponent {
   }
 
   private moveFromList1To2(): void {
-    const item = this.updateShipsCss(this.list1[0]);
+    const item = this.updateShipsTopLeft(this.list1[0]);
     this.list2.push(item);
     this.list1.splice(0, 1);
   }
 
-  private updateShipsCss(ship: ShipComponent): ShipComponent {
+  private updateShipsTopLeft(ship: ShipComponent): ShipComponent {
     ship.left =
       this.dragEnd.cellX -
       this.boardElement.nativeElement.getBoundingClientRect().x;
@@ -100,14 +100,6 @@ export class AppComponent {
       this.dragEnd.cellY -
       this.boardElement.nativeElement.getBoundingClientRect().y;
     return ship;
-  }
-
-  private moveFromList2To1(id: string): void {
-    const index: number = +id;
-    const item = this.list2[index];
-    const temp = [item].concat(this.list1);
-    this.list1 = temp;
-    this.list2.splice(index, 1);
   }
 
   private createFleet(): Array<ShipComponent> {
@@ -150,10 +142,6 @@ export class AppComponent {
     return name.split("-")[0];
   }
 
-  private getListFromName(name: string): Array<ShipComponent> {
-    return name.split("-")[1] === "list1" ? this.list1 : this.list2;
-  }
-
   private validateDropPlace(dropPlace: Array<BoardCellModel>): boolean {
     let result: boolean = true;
 
@@ -169,13 +157,89 @@ export class AppComponent {
 
   private isShipNotTouchingOther(dropPlace: BoardCellModel[]): boolean {
     let result: boolean = true;
-    //todo: based on requirements create list of forbidden cells
-    //todo: compare list of forbidden cells with dropPlace list
+    let forbiddenCells: Array<BoardCellModel> = this.GetForbiddenCells(
+      dropPlace
+    );
 
-    //todo: avoid ship deploy touching corners
-    //todo: avoid ship deploy touching sides
-    //todo: avoid ship deploy on top of eachother
+    if (!this.compareBoardWithForbiddenCells(forbiddenCells)) {
+      result = false;
+    }
+
     return result;
+  }
+
+  private compareBoardWithForbiddenCells(
+    forbiddenCells: Array<BoardCellModel>
+  ): boolean {
+    for (let i = 0; i < 10; i++) {
+      for (let j = 0; j < 10; j++) {
+        for (let f = 0; f < forbiddenCells.length; f++) {
+          if (
+            this.boardP1[i][j].col == forbiddenCells[f].col &&
+            this.boardP1[i][j].row == forbiddenCells[f].row &&
+            this.boardP1[i][j].value == 1
+          ) {
+            return false;
+          }
+        }
+      }
+    }
+
+    return true;
+  }
+
+  private GetForbiddenCells(dropPlace: BoardCellModel[]): BoardCellModel[] {
+    let list: BoardCellModel[] = [];
+
+    for (let i = 0; i < dropPlace.length; i++) {
+      list.push({
+        row: dropPlace[i].row,
+        col: dropPlace[i].col,
+        value: 0,
+      } as BoardCellModel);
+      list.push({
+        row: dropPlace[i].row,
+        col: dropPlace[i].col + 1,
+        value: 0,
+      } as BoardCellModel);
+      list.push({
+        row: dropPlace[i].row + 1,
+        col: dropPlace[i].col + 1,
+        value: 0,
+      } as BoardCellModel);
+      list.push({
+        row: dropPlace[i].row + 1,
+        col: dropPlace[i].col,
+        value: 0,
+      } as BoardCellModel);
+      list.push({
+        row: dropPlace[i].row,
+        col: dropPlace[i].col - 1,
+        value: 0,
+      } as BoardCellModel);
+      list.push({
+        row: dropPlace[i].row - 1,
+        col: dropPlace[i].col - 1,
+        value: 0,
+      } as BoardCellModel);
+      list.push({
+        row: dropPlace[i].row - 1,
+        col: dropPlace[i].col,
+        value: 0,
+      } as BoardCellModel);
+      list.push({
+        row: dropPlace[i].row - 1,
+        col: dropPlace[i].col + 1,
+        value: 0,
+      } as BoardCellModel);
+      list.push({
+        row: dropPlace[i].row + 1,
+        col: dropPlace[i].col - 1,
+        value: 0,
+      } as BoardCellModel);
+    }
+
+    return list;
   }
 
   private getDropCells(row: number, col: number): Array<BoardCellModel> {
