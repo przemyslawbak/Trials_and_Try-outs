@@ -16,45 +16,58 @@ namespace EmailCrawler_01_Trial
     {
         static void Main(string[] args)
         {
-            using (Pop3Client client = new Pop3Client())
+            List<string> adresy = new List<string>();
+            List<string> konta = new List<string>(File.ReadAllLines("konta.txt"));
+            foreach (string konto in konta)
             {
-                List<string> adresy = new List<string>();
-                client.Connect("pop.simple-sender.com", 110, MailKit.Security.SecureSocketOptions.None);
-                client.Authenticate("przemyslaw-bak-job@simple-sender.com", "!1Pandemonium!1");
-                var count = client.GetMessageCount();
-                for (int i = 0; i < client.Count; i++)
+                try
                 {
-                    var wiadomosc = client.GetMessage(i);
-                    string temat = wiadomosc.Subject.ToString();
-                    string tresc = wiadomosc.Body.ToString();
-                    if (temat.Contains("Mail delivery failed"))
+                    using (Pop3Client client = new Pop3Client())
                     {
-                        if (tresc.Contains("@"))
+                        client.Connect("pop.simple-sending.com", 110, MailKit.Security.SecureSocketOptions.None);
+                        client.Authenticate(konto, "xxx");
+                        var count = client.GetMessageCount();
+                        for (int i = 0; i < client.Count; i++)
                         {
-                            ModelDanych dane = new ModelDanych();
-                            dane.Tytul = temat;
-                            string[] words = tresc.Split(" ");
-                            foreach (var word in words)
+                            var wiadomosc = client.GetMessage(i);
+                            string temat = wiadomosc.Subject.ToString();
+                            string tresc = wiadomosc.Body.ToString();
+                            if (temat.Contains("Mail delivery failed"))
                             {
-                                if (word.Contains("@"))
+                                if (tresc.Contains("@"))
                                 {
-                                    string replacement = Regex.Replace(word, @"\t|\n|\r", "");
-                                    dane.AdresEmail = replacement;
-                                    Console.WriteLine(dane.AdresEmail);
-                                    adresy.Add(dane.AdresEmail);
-                                    break;
+                                    ModelDanych dane = new ModelDanych();
+                                    dane.Tytul = temat;
+                                    string[] words = tresc.Split(" ");
+                                    foreach (var word in words)
+                                    {
+                                        if (word.Contains("@"))
+                                        {
+                                            string replacement = Regex.Replace(word, @"\t|\n|\r", "");
+                                            dane.AdresEmail = replacement;
+                                            Console.WriteLine(dane.AdresEmail);
+                                            adresy.Add(dane.AdresEmail);
+                                            break;
+                                        }
+                                    }
                                 }
                             }
                         }
+
+                        client.Disconnect(true);
+                        Console.WriteLine("opening next...");
                     }
                 }
-
-                File.AppendAllLines("savedlist.txt", adresy);
-
-                client.Disconnect(true);
-                Console.WriteLine("koniec");
-                Console.ReadKey();
+                catch(Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                }
             }
+
+            File.AppendAllLines("savedlist.txt", adresy);
+            Console.WriteLine("koniec");
+
+
         }
     }
 }
