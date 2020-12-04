@@ -11,7 +11,7 @@ namespace List_Comparer
         static void Main(string[] args)
         {
             string[] keywords = new string[] { "info", "office", "conta", "admission", "agen", "career", "appl", "crew", "email", "enquir", "general", "hr@", "cv@", "jobs", "mail@", "recruit", "general", "marine", "offshore", "personnel", "resume" };
-            string[] blacklist = new string[] { "ir@", "admin", "corporate", "spam", "account", "invoice", "charter", "book", "business", "cruise", "customer", "protection", "invest", "financ", "firstname", "lastname", "freight", "hotel", "airport", "it@", "library", "marketing", "media", "privacy", "proxy", "purchasing", "reservations", "sales"};
+            string[] blacklist = new string[] { "ir@", "admin", "corporate", "spam", "account", "invoice", "charter", "book", "business", "cruise", "customer", "protection", "invest", "financ", "firstname", "lastname", "freight", "hotel", "airport", "it@", "library", "marketing", "media", "privacy", "proxy", "purchasing", "reservations", "sales", "webmaster"};
             List<string> items = new List<string>();
             CsvReader csv = new CsvReader(File.OpenText("all.txt"), System.Globalization.CultureInfo.CurrentCulture);
             List<EmailModel> myCustomObjects = csv.GetRecords<EmailModel>().ToList();
@@ -21,10 +21,10 @@ namespace List_Comparer
                 .Select(e => e.First())
                 .ToList();
 
-            List<EmailModel> containBlacklisted = distEmail.Where(e => blacklist.Any(k => e.Email.Contains(k))).ToList();
+            List<EmailModel> containBlacklisted = distEmail.Where(e => blacklist.Any(k => e.Email.ToLower().Contains(k.ToLower()))).ToList();
             var withNoBlacklisted = distEmail.Except(containBlacklisted).ToList();
 
-            List<EmailModel> containKeys = withNoBlacklisted.Where(e => keywords.Any(k => e.Email.Contains(k))).ToList();
+            List<EmailModel> containKeys = withNoBlacklisted.Where(e => keywords.Any(k => e.Email.ToLower().Contains(k.ToLower()))).ToList();
 
             List<EmailModel> notContainKeysFirst = withNoBlacklisted.Except(containKeys).GroupBy(c => c.Company).Select(c => c.ElementAt(0)).ToList();
             List<EmailModel> notContainKeysSecond = withNoBlacklisted.Except(containKeys).GroupBy(c => c.Company).Where(x => x.Count() > 1).Select(c => c.ElementAt(1)).ToList();
