@@ -12,7 +12,7 @@ namespace List_Comparer
         {
             List<string> failedEmails = new List<string>(File.ReadAllLines("failed.txt"));
             string[] keywords = new string[] { "info", "office", "conta", "admission", "agen", "career", "appl", "crew", "email", "enquir", "general", "hr@", "cv@", "jobs", "mail@", "recruit", "general", "marine", "offshore", "personnel", "resume" };
-            string[] blacklist = new string[] { "ir@", "admin", "corporate", "spam", "account", "invoice", "charter", "book", "business", "cruise", "customer", "protection", "invest", "financ", "firstname", "lastname", "freight", "hotel", "airport", "it@", "library", "marketing", "media", "privacy", "proxy", "purchasing", "reservations", "sales", "webmaster"};
+            string[] blacklist = new string[] { "ir@", "admin", "corporate", "spam", "account", "invoice", "charter", "book", "business", "cruise", "customer", "protection", "invest", "financ", "firstname", "lastname", "freight", "hotel", "airport", "it@", "library", "marketing", "media", "privacy", "proxy", "purchasing", "reservations", "sales", "webmaster", "customer"};
             List<string> items = new List<string>();
             CsvReader csv = new CsvReader(File.OpenText("all.txt"), System.Globalization.CultureInfo.CurrentCulture);
             List<EmailModel> myCustomObjects = csv.GetRecords<EmailModel>().ToList();
