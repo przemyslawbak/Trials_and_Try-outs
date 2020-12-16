@@ -1,0 +1,9 @@
+<div class="flex-container">
+
+
+	<app-animated-sprite *ngFor="let ani of animationArray" [url]="newurl" [frameRate]="ani.frameRate" [totalRows]=6.67
+		[totalcols]=10 [totalFrames]=51 [isLoop]=true #aniDiv2>
+		FPS=>{{ani.frameRate}} id {{ani.id}}
+	</app-animated-sprite>
+
+</div>
