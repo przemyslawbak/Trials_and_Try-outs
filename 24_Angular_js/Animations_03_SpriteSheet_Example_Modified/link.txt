@@ -1,2 +1,2 @@
-https://stackblitz.com/edit/angular-ivy-rwvimx?file=src%2Fapp%2Fapp.component.html
-splash - ??
+https://stackblitz.com/edit/angular-ivy-s9vmmn?file=src%2Fapp%2Fanimated-sprite%2Fanimated-sprite.component.ts
+splash - https://i.ibb.co/nzng7cn/splash.png
