@@ -18,4 +18,8 @@ export class AppComponent {
   submit() {
     console.log(this.form.value);
   }
+
+  changeGender(e: any) {
+    console.log(e.target.value);
+  }
 }

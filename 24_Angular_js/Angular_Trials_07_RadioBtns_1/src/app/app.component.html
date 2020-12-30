@@ -1,5 +1,5 @@
 <div class="container">
-  <h1>Angular Radio Button Example</h1>
+  <h1>Angular Radio Button Example - ItSolutionStuff.com</h1>
 
   <form [formGroup]="form" (ngSubmit)="submit()">
     <div class="form-group">
@@ -12,6 +12,7 @@
           value="male"
           name="gender"
           formControlName="gender"
+          (change)="changeGender($event)"
         />
 
         <label for="male">Male</label>
@@ -24,6 +25,7 @@
           value="female"
           name="gender"
           formControlName="gender"
+          (change)="changeGender($event)"
         />
 
         <label for="female">Female</label>
