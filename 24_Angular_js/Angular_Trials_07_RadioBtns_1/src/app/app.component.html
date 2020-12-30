@@ -1,0 +1,44 @@
+<div class="container">
+  <h1>Angular Radio Button Example</h1>
+
+  <form [formGroup]="form" (ngSubmit)="submit()">
+    <div class="form-group">
+      <label for="gender">Gender:</label>
+
+      <div>
+        <input
+          id="male"
+          type="radio"
+          value="male"
+          name="gender"
+          formControlName="gender"
+        />
+
+        <label for="male">Male</label>
+      </div>
+
+      <div>
+        <input
+          id="female"
+          type="radio"
+          value="female"
+          name="gender"
+          formControlName="gender"
+        />
+
+        <label for="female">Female</label>
+      </div>
+
+      <div
+        *ngIf="f.gender.touched && f.gender.invalid"
+        class="alert alert-danger"
+      >
+        <div *ngIf="f.gender.errors?.required">Name is required.</div>
+      </div>
+    </div>
+
+    <button class="btn btn-primary" type="submit" [disabled]="!form.valid">
+      Submit
+    </button>
+  </form>
+</div>
