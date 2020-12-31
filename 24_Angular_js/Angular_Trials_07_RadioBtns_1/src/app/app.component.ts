@@ -8,12 +8,16 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 })
 export class AppComponent {
   form = new FormGroup({
-    gameMode: new FormControl('', Validators.required),
-    gameSpeed: new FormControl('', Validators.required),
+    gameMode: new FormControl('single', Validators.required),
+    gameSpeed: new FormControl('slow', Validators.required),
   });
 
   get f() {
     return this.form.controls;
+  }
+
+  ngAfterViewInit() {
+    //
   }
 
   submit() {

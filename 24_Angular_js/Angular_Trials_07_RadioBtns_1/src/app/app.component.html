@@ -11,6 +11,7 @@
 
             <div class="custom-control custom-radio custom-control-inline">
               <input
+                [checked]="true"
                 class="custom-control-input"
                 id="single"
                 type="radio"
@@ -52,10 +53,11 @@
 
             <div class="custom-control custom-radio custom-control-inline">
               <input
+                checked
                 class="custom-control-input"
                 id="slow"
                 type="radio"
-                value="multi"
+                value="slow"
                 name="gameSpeed"
                 formControlName="gameSpeed"
                 (change)="changeSpeed($event)"
