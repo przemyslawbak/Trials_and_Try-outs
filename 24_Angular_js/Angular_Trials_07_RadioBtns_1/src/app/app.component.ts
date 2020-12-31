@@ -8,7 +8,8 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 })
 export class AppComponent {
   form = new FormGroup({
-    gender: new FormControl('', Validators.required),
+    gameMode: new FormControl('', Validators.required),
+    gameSpeed: new FormControl('', Validators.required),
   });
 
   get f() {
@@ -19,7 +20,11 @@ export class AppComponent {
     console.log(this.form.value);
   }
 
-  changeGender(e: any) {
+  changeMode(e: any) {
+    console.log(e.target.value);
+  }
+
+  changeSpeed(e: any) {
     console.log(e.target.value);
   }
 }

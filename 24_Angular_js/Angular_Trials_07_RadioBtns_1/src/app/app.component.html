@@ -6,41 +6,101 @@
 
       <form [formGroup]="form" (ngSubmit)="submit()">
         <div class="form-group">
-          <label for="gender">Gender:</label>
+          <div class="row">
+            <label class="titleLabel" for="gameMode">Game mode:</label>
 
-          <div class="custom-control custom-radio custom-control-inline">
-            <input
-              class="custom-control-input"
-              id="male"
-              type="radio"
-              value="male"
-              name="gender"
-              formControlName="gender"
-              (change)="changeGender($event)"
-            />
+            <div class="custom-control custom-radio custom-control-inline">
+              <input
+                class="custom-control-input"
+                id="single"
+                type="radio"
+                value="single"
+                name="gameMode"
+                formControlName="gameMode"
+                (change)="changeMode($event)"
+              />
+              <label class="custom-control-label" for="single"
+                >Single player</label
+              >
+            </div>
 
-            <label class="custom-control-label" for="male">Male</label>
+            <div class="custom-control custom-radio custom-control-inline">
+              <input
+                class="custom-control-input"
+                id="multi"
+                type="radio"
+                value="multi"
+                name="gameMode"
+                formControlName="gameMode"
+                (change)="changeMode($event)"
+              />
+              <label class="custom-control-label" for="multi"
+                >Multi player</label
+              >
+            </div>
+            <div
+              *ngIf="f.gameMode.touched && f.gameMode.invalid"
+              class="alert alert-danger"
+            >
+              <div *ngIf="f.gameMode.errors?.required">
+                Game mode is required.
+              </div>
+            </div>
           </div>
+          <div class="row">
+            <label class="titleLabel" for="gameSpeed">Game speed:</label>
 
-          <div class="custom-control custom-radio custom-control-inline">
-            <input
-              class="custom-control-input"
-              id="female"
-              type="radio"
-              value="female"
-              name="gender"
-              formControlName="gender"
-              (change)="changeGender($event)"
-            />
+            <div class="custom-control custom-radio custom-control-inline">
+              <input
+                class="custom-control-input"
+                id="slow"
+                type="radio"
+                value="multi"
+                name="gameSpeed"
+                formControlName="gameSpeed"
+                (change)="changeSpeed($event)"
+              />
+              <label class="custom-control-label" for="slow">Slow</label>
+            </div>
 
-            <label class="custom-control-label" for="female">Female</label>
-          </div>
+            <div class="custom-control custom-radio custom-control-inline">
+              <input
+                class="custom-control-input"
+                id="moderate"
+                type="radio"
+                value="moderate"
+                name="gameSpeed"
+                formControlName="gameSpeed"
+                (change)="changeSpeed($event)"
+              />
 
-          <div
-            *ngIf="f.gender.touched && f.gender.invalid"
-            class="alert alert-danger"
-          >
-            <div *ngIf="f.gender.errors?.required">Name is required.</div>
+              <label class="custom-control-label" for="moderate"
+                >Moderate</label
+              >
+            </div>
+
+            <div class="custom-control custom-radio custom-control-inline">
+              <input
+                class="custom-control-input"
+                id="fast"
+                type="radio"
+                value="fast"
+                name="gameSpeed"
+                formControlName="gameSpeed"
+                (change)="changeSpeed($event)"
+              />
+
+              <label class="custom-control-label" for="fast">Fast</label>
+            </div>
+
+            <div
+              *ngIf="f.gameSpeed.touched && f.gameSpeed.invalid"
+              class="alert alert-danger"
+            >
+              <div *ngIf="f.gameSpeed.errors?.required">
+                Game mode is required.
+              </div>
+            </div>
           </div>
         </div>
 
