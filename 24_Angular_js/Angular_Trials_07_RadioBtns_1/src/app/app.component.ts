@@ -7,28 +7,25 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent {
-  multiplayer: boolean = false;
-  gamespeed: number = 30;
+  public multiplayer: boolean = false;
+  private speed: number = 30;
 
   form = new FormGroup({
     gameMode: new FormControl('single', Validators.required),
     gameSpeed: new FormControl('slow', Validators.required),
     gameOpen: new FormControl('open'),
+    gameDifficulty: new FormControl('easy'),
   });
 
   get f() {
     return this.form.controls;
   }
 
-  ngAfterViewInit() {
-    //no need?
-  }
-
-  submit() {
+  public submit() {
     console.log(this.form.value);
   }
 
-  changeMode(e: any) {
+  public changeMode(e: any): void {
     if (e.target.value == 'multi') {
       this.multiplayer = true;
     } else {
@@ -36,11 +33,15 @@ export class AppComponent {
     }
   }
 
-  changeSpeed(e: any) {
-    console.log(e.target.value);
+  public changeSpeed(e: any): void {
+    console.log(e.target.value); //todo:
   }
 
-  isMultiDisabled(): boolean {
-    return true;
+  public changeDifficulty(e: any): void {
+    console.log(e.target.value); //todo:
+  }
+
+  public changeJoining(e: any): void {
+    console.log(e.target.value); //todo:
   }
 }
