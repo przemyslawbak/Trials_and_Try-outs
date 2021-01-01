@@ -11,7 +11,6 @@
 
             <div class="custom-control custom-radio custom-control-inline">
               <input
-                [checked]="true"
                 class="custom-control-input"
                 id="single"
                 type="radio"
@@ -53,7 +52,6 @@
 
             <div class="custom-control custom-radio custom-control-inline">
               <input
-                checked
                 class="custom-control-input"
                 id="slow"
                 type="radio"
@@ -100,8 +98,43 @@
               class="alert alert-danger"
             >
               <div *ngIf="f.gameSpeed.errors?.required">
-                Game mode is required.
+                Game speed is required.
               </div>
+            </div>
+          </div>
+          <div class="row">
+            <label class="titleLabel" for="gameOpen">Game joining:</label>
+
+            <div class="custom-control custom-radio custom-control-inline">
+              <input
+                [attr.disabled]="!multiplayer || null"
+                class="custom-control-input"
+                id="open"
+                type="radio"
+                value="open"
+                name="gameOpen"
+                formControlName="gameOpen"
+                (change)="changeMode($event)"
+              />
+              <label class="custom-control-label" for="open"
+                >Game open for all</label
+              >
+            </div>
+
+            <div class="custom-control custom-radio custom-control-inline">
+              <input
+                [attr.disabled]="!multiplayer || null"
+                class="custom-control-input"
+                id="link"
+                type="radio"
+                value="link"
+                name="gameOpen"
+                formControlName="gameOpen"
+                (change)="changeMode($event)"
+              />
+              <label class="custom-control-label" for="link"
+                >Join only by link</label
+              >
             </div>
           </div>
         </div>
