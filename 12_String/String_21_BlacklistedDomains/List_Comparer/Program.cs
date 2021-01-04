@@ -11,7 +11,7 @@ namespace List_Comparer
         static void Main(string[] args)
         {
             List<string> lista = new List<string>(File.ReadAllLines("1.txt"));
-            List<string> blacklisted = new List<string>(File.ReadAllLines("blacklisted.txt"));
+            List<string> blacklisted = new List<string>(File.ReadAllLines("2.txt"));
 
             lista.RemoveAll(x => blacklisted.Any(d => x.Contains(d)));
             File.WriteAllLines("output.txt", lista);
