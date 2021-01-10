@@ -36,3 +36,11 @@ it('should raise selected event when clicked (triggerEventHandler)', () => {
   heroDe.triggerEventHandler('click', null);
   expect(selectedHero).toBe(expectedHero);
 });
+
+it('should raise selected event when clicked (element.click)', () => {
+  let selectedHero: Hero = {} as Hero;
+  component.selected.subscribe((hero: Hero) => (selectedHero = hero));
+
+  heroEl.click(); //alternative
+  expect(selectedHero).toBe(expectedHero);
+});
