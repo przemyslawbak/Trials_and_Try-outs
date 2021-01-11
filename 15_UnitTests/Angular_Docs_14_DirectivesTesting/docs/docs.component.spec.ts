@@ -6,6 +6,8 @@ import { DocsComponent } from './docs.component';
 import { HighlightDirective } from './highlight.directive';
 import { RouterTestingModule } from '@angular/router/testing';
 
+//https://angular.io/guide/testing-attribute-directives
+
 let fixture: ComponentFixture<DocsComponent>;
 let des: DebugElement[];
 let bareH2: DebugElement;
