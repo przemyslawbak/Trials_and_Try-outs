@@ -4,11 +4,14 @@ import {
   HttpTestingController,
 } from '@angular/common/http/testing';
 import { Todo, TodoService } from './todo.service';
-
+import { HttpErrorResponse } from '@angular/common/http';
+//https://dev.to/qarunqb/tdd-in-angular-further-http-testing-3mf2
 let service: TodoService;
 let httpMock: HttpTestingController;
-//https://dev.to/qarunqb/tdd-in-angular-basics-of-http-testing-5a52
+//let displayErrorSpy: jasmine.Spy;
+
 beforeEach(() => {
+  //displayErrorSpy = spyOn(service, 'displayError');
   TestBed.configureTestingModule({
     imports: [HttpClientTestingModule],
   });
@@ -72,4 +75,26 @@ it('createTodo should send a POST request and return the newly created item', (d
   );
   expect(testRequest.request.method).toBe('POST');
   testRequest.flush(item);
+});
+
+it('should display an error message if the request is unauthorized', (done) => {
+  service
+    .updateTodo(1, { userId: 1, title: 'Walk dog', completed: true } as Todo)
+    .subscribe(
+      (data) => {
+        expect(data).toBeNull();
+        //expect(displayErrorSpy).toHaveBeenCalledWith('Unauthorized request');
+        done();
+      },
+      (error: HttpErrorResponse) => {
+        console.log(error);
+        done();
+      }
+    );
+
+  const testRequest = httpMock.expectOne(
+    'https://jsonplaceholder.typicode.com/todos/1'
+  );
+  expect(testRequest.request.method).toBe('PUT');
+  testRequest.flush(null, { status: 401, statusText: 'Unauthorized request' });
 });
