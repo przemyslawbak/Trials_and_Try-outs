@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h1>JavaScript console.log() Method</h1>
+
+<p>Press F12 on your keyboard to view the message in the console view.</p>
+
+<script>
+console.clear();
+let arr = [];
+for (let i = 0; i < 10; i++) {
+      arr[i] = [];
+      for (let j = 0; j < 10; j++) {
+        arr[i][j] = {
+          row: j,
+          col: i,
+          value: 0,
+          color: 'rgba(0, 162, 255, 0.2)',
+          elX: -1,
+          elY: -1,
+        };
+      }
+    };
+arr[4][3].value = 2;
+arr[3][4].value = 2;
+arr[2][5].value = 2;
+    
+let filteredServices = arr.flat().filter(({ value }) => value === 2);
+console.log(filteredServices);
+
+
+</script>
+
+</body>
+</html>
