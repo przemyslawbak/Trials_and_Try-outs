@@ -1,4 +1,5 @@
 ﻿using BasicConfig.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BasicConfig.Controllers
@@ -15,12 +16,12 @@ namespace BasicConfig.Controllers
         public ViewResult Other()
         {
             int x = 0;
-            if (TempData["Counter"] != null)
+            if (HttpContext.Session.GetInt32("Counter").HasValue)
             {
-                x = int.Parse(TempData["Counter"] as string);
+                x = HttpContext.Session.GetInt32("Counter").Value;
             }
             x++;
-            TempData["Counter"] = x.ToString();
+            HttpContext.Session.SetInt32("Counter", x);
 
             return View(x);
         }
