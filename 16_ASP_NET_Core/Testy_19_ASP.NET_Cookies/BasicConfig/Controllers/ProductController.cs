@@ -1,6 +1,7 @@
 ﻿using BasicConfig.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System.Threading.Tasks;
+using System;
 
 namespace BasicConfig.Controllers
 {
@@ -13,15 +14,18 @@ namespace BasicConfig.Controllers
         }
 
         public ViewResult Index() => View(_context.Products);
-        public IActionResult Other()
+        public ViewResult Other()
         {
+            CookieOptions option = new CookieOptions();
+            option.Expires = DateTime.Now.AddMinutes(10);
+
             int x = 0;
-            if (TempData["Counter"] != null)
+            if (Request.Cookies["Counter"] != null)
             {
-                x = int.Parse(TempData["Counter"] as string);
+                x = int.Parse(Request.Cookies["Counter"]);
             }
             x++;
-            TempData["Counter"] = x.ToString();
+            Response.Cookies.Append("Counter", x.ToString(), option);
 
             return View(x);
         }
