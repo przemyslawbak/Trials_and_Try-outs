@@ -15,11 +15,6 @@ namespace BasicConfig.Controllers
             _context = context;
         }
 
-        public static class CacheKeys
-        {
-            public static string UserClicks { get { return "_UserClicks"; } }
-        }
-
         public int GetUserClicks()
         {
             int result;
@@ -35,7 +30,8 @@ namespace BasicConfig.Controllers
 
         public void SetUserClicks(int value)
         {
-            _cache.Set(CacheKeys.UserClicks, value, TimeSpan.FromSeconds(5));
+            var cacheEntryOptions = new MemoryCacheEntryOptions().SetSlidingExpiration(TimeSpan.FromMinutes(60));
+            _cache.Set(CacheKeys.UserClicks, value, cacheEntryOptions);
         }
 
         public ViewResult Index() => View(_context.Products);

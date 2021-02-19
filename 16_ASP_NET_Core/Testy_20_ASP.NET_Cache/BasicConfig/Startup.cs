@@ -4,6 +4,7 @@ using Microsoft.Extensions.DependencyInjection;
 using BasicConfig.Models;
 using Microsoft.Extensions.Configuration;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Hosting;
 
 namespace BasicConfig
 {
@@ -21,6 +22,7 @@ namespace BasicConfig
                 Configuration["Data:BasicConfigApp:ConnectionString"]));
             services.AddSession();
             services.AddTransient<IProductRepository, EFProductRepository>();
+            services.AddTransient<IHostedService, TimeHostedTrigger>();
             services.AddMvc().AddSessionStateTempDataProvider();
             services.AddMemoryCache();
         }
