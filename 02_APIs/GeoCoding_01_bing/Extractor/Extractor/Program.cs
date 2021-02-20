@@ -37,13 +37,16 @@ namespace Extractor
                 int counter = 0;
                 while (!reader.EndOfStream)
                 {
+                    string type = string.Empty;
+                    string lat = string.Empty;
+                    string lon = string.Empty;
                     counter++;
                     string line = reader.ReadLine();
                     string[] input = line.Split(_sep.ToCharArray());
                     string placeName = input[0];
                     string countryCode = input[1];
                     Console.Write(counter + " Finding for: Country-" + countryCode + " Name-" + placeName + " Result-");
-                    string endpoint = @"http://dev.virtualearth.net/REST/v1/Locations?locality=" + placeName + "&countryRegion=" + countryCode + "&maxResults=10&key=<KEY>";
+                    string endpoint = @"http://dev.virtualearth.net/REST/v1/Locations?locality=" + placeName + "&countryRegion=" + countryCode + "&maxResults=10&key=<KEY>-";
 
                     using (HttpClient client = new HttpClient())
                     {
@@ -52,15 +55,16 @@ namespace Extractor
                             using (HttpResponseMessage response = await client.GetAsync(endpoint))
                             using (HttpContent content = response.Content)
                             {
-                                string lat = string.Empty;
-                                string lon = string.Empty;
 
                                 string result = await content.ReadAsStringAsync();
 
                                 JObject joResponse = JObject.Parse(result);
-                                JToken resourceSets = joResponse.SelectToken("resourceSets[0].resources[0].point.coordinates[0]");
-                                lat = joResponse.SelectToken("resourceSets[0].resources[0].point.coordinates[0]").ToString();
-                                lon = joResponse.SelectToken("resourceSets[0].resources[0].point.coordinates[1]").ToString();
+                                type = joResponse.SelectToken("resourceSets[0].resources[0].entityType").ToString();
+                                if (type == "PopulatedPlace")
+                                {
+                                    lat = joResponse.SelectToken("resourceSets[0].resources[0].point.coordinates[0]").ToString();
+                                    lon = joResponse.SelectToken("resourceSets[0].resources[0].point.coordinates[1]").ToString();
+                                }
 
                                 if (!string.IsNullOrEmpty(lat) && !string.IsNullOrEmpty(lat))
                                 {
@@ -70,16 +74,16 @@ namespace Extractor
                                 {
                                     Console.WriteLine("WRONG");
                                 }
-
-                                string coordinate = lat + "|" + lon;
-                                coordinates.Add(coordinate);
                             }
                         }
                         catch (Exception ex)
                         {
-                            Console.WriteLine("Exception-" + ex.Message);
+                            Console.WriteLine("EXCEPTION-" + ex.Message);
                         }
                     }
+
+                    string coordinate = lat + "|" + lon;
+                    coordinates.Add(coordinate);
                 }
 
                 return coordinates;
