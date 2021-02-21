@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Text.RegularExpressions;
 
 namespace List_Comparer
@@ -34,7 +35,7 @@ namespace List_Comparer
 
 
             }
-            File.WriteAllLines("output.txt", output);
+            File.WriteAllLines("output.txt", output.OrderBy(q => q).ToList());
             Console.WriteLine("saved");
             Console.ReadKey();
 
