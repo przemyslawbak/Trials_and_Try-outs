@@ -13,7 +13,7 @@ namespace List_Comparer
     {
         private static LookupClient client;
         private static int _degreeOfParallelism = 40;
-        List<string> lista = new List<string>(File.ReadAllLines("1.txt"));
+        List<string> lista = new List<string>(File.ReadAllLines("_1.txt"));
         List<string> output = new List<string>();
         List<Task> tasks = new List<Task>();
         SemaphoreSlim throttler = new SemaphoreSlim(_degreeOfParallelism);
@@ -81,7 +81,7 @@ namespace List_Comparer
             }
             finally
             {
-                File.WriteAllLines("output.txt", output);
+                File.WriteAllLines("_output.txt", output);
                 Console.WriteLine("saved");
             }
 
