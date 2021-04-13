@@ -13,20 +13,13 @@ namespace List_Comparer
             string[] two = File.ReadAllLines("2.txt"); //podstawa
 
             List<string> second = two.ToList();
-            List<string> first = new List<string>();
+            List<string> first = one.ToList();
 
-            foreach (string item in one)
-            {
-                first.Add(item.Split('|')[0]);
-            }
+            List<string> missing = second.Except(first).ToList();
 
-            List<string> missingTables = second.Except(first).ToList();
-
-
-            System.IO.File.WriteAllLines("missing.txt", missingTables);
+            System.IO.File.WriteAllLines("missing.txt", missing);
             Console.WriteLine("saved");
             Console.ReadKey();
-
         }
     }
 }

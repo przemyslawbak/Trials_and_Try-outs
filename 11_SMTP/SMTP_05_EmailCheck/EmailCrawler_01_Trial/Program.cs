@@ -17,7 +17,7 @@ namespace EmailCrawler_01_Trial
         static void Main(string[] args)
         {
             List<string> adresy = new List<string>();
-            List<string> konta = new List<string>(File.ReadAllLines("konta.txt"));
+            List<string> konta = new List<string>(File.ReadAllLines("1.txt"));
             foreach (string konto in konta)
             {
                 try
