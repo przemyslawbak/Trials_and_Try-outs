@@ -46,13 +46,27 @@ namespace List_Comparer
             ShipModel ship = new ShipModel();
             List<string> cells = new List<string>();
             List<KeyValuePair<int, string>> pairs = new List<KeyValuePair<int, string>>();
-
+            int count = 0;
             foreach (string line in shipLines)
             {
-                cells.AddRange(line.Split(';'));
+                var rowCells = line.Split(';');
+                if (count == 2)
+                {
+                    rowCells[10] = "12";
+                }
+                if (count == 4)
+                {
+                    rowCells[10] = "12";
+                }
+                if (count == 5)
+                {
+                    rowCells[14] = "12";
+                }
+                cells.AddRange(rowCells);
+                count++;
             }
 
-            string[] cellHeads = new string[] { "1", "2", "3", "4", "5", "6", "7", "8", "11" };
+            string[] cellHeads = new string[] { "1", "2", "3", "4", "5", "6", "7", "8", "11", "12" };
             for (int i = 0; i < cells.Count; i++)
             {
                 if (cellHeads.Any(cells[i].Equals))
@@ -95,7 +109,6 @@ namespace List_Comparer
             //3
             ship.Flag = pairs.Where(kvp => kvp.Key == 3).ToList()[0].Value.Trim();
             ship.DWT = pairs.Where(kvp => kvp.Key == 3).ToList()[1].Value.Trim();
-            ship.Type = pairs.Where(kvp => kvp.Key == 3).ToList()[1].Value.Trim(); //???????????????????
             ship.Manager = pairs.Where(kvp => kvp.Key == 3).ToList()[4].Value.Trim();
 
             //4
@@ -110,13 +123,11 @@ namespace List_Comparer
 
             //5
             ship.LOA = pairs.Where(kvp => kvp.Key == 5).ToList()[0].Value.Trim();
-            ship.DecksNo = pairs.Where(kvp => kvp.Key == 5).ToList()[0].Value.Trim(); //???????????????????
             ship.Boilers = pairs.Where(kvp => kvp.Key == 5).ToList()[3].Value.Trim();
             ship.PortOfRegistry = pairs.Where(kvp => kvp.Key == 5).ToList()[4].Value.Trim();
 
             //6
             ship.Breadth = pairs.Where(kvp => kvp.Key == 6).ToList()[0].Value.Trim();
-            ship.Speed = pairs.Where(kvp => kvp.Key == 6).ToList()[1].Value.Trim(); //???????????????????
             ship.Mmsi = pairs.Where(kvp => kvp.Key == 6).ToList()[2].Value.Trim();
             ship.Generators = pairs.Where(kvp => kvp.Key == 6).ToList()[3].Value.Trim();
 
@@ -129,6 +140,11 @@ namespace List_Comparer
 
             //11
             ship.CargoHandlingEquipment = pairs.Where(kvp => kvp.Key == 11).ToList()[0].Value.Trim();
+
+            //12
+            ship.Type = pairs.Where(kvp => kvp.Key == 12).ToList()[0].Value.Trim();
+            ship.DecksNo = pairs.Where(kvp => kvp.Key == 12).ToList()[1].Value.Trim();
+            ship.Speed = pairs.Where(kvp => kvp.Key == 12).ToList()[2].Value.Trim();
 
             string shipsLine = GenerateLine(ship);
             Console.WriteLine(shipsLine);
