@@ -50,15 +50,15 @@ namespace List_Comparer
             foreach (string line in shipLines)
             {
                 var rowCells = line.Split(';');
-                if (count == 2)
+                if (count == 2 && rowCells.Length > 10)
                 {
                     rowCells[10] = "12";
                 }
-                if (count == 4)
+                if (count == 4 && rowCells.Length > 10)
                 {
                     rowCells[10] = "12";
                 }
-                if (count == 5)
+                if (count == 5 && rowCells.Length > 14)
                 {
                     rowCells[14] = "12";
                 }
@@ -122,9 +122,13 @@ namespace List_Comparer
             ship.Owner = pairs.Where(kvp => kvp.Key == 4).ToList()[4].Value.Trim();
 
             //5
-            ship.LOA = pairs.Where(kvp => kvp.Key == 5).ToList()[0].Value.Trim();
-            ship.Boilers = pairs.Where(kvp => kvp.Key == 5).ToList()[3].Value.Trim();
-            ship.PortOfRegistry = pairs.Where(kvp => kvp.Key == 5).ToList()[4].Value.Trim();
+            List<KeyValuePair<int, string>> fives = pairs.Where(kvp => kvp.Key == 5).ToList();
+            if (fives.Count > 4)
+            {
+                ship.LOA = fives[0].Value.Trim();
+                ship.Boilers = fives[3].Value.Trim();
+                ship.PortOfRegistry = fives[4].Value.Trim();
+            }
 
             //6
             ship.Breadth = pairs.Where(kvp => kvp.Key == 6).ToList()[0].Value.Trim();
@@ -139,12 +143,18 @@ namespace List_Comparer
             ship.Draught = pairs.Where(kvp => kvp.Key == 8).ToList()[0].Value.Trim();
 
             //11
+            if (pairs.Any(kvp => kvp.Key == 11))
             ship.CargoHandlingEquipment = pairs.Where(kvp => kvp.Key == 11).ToList()[0].Value.Trim();
 
             //12
-            ship.Type = pairs.Where(kvp => kvp.Key == 12).ToList()[0].Value.Trim();
-            ship.DecksNo = pairs.Where(kvp => kvp.Key == 12).ToList()[1].Value.Trim();
-            ship.Speed = pairs.Where(kvp => kvp.Key == 12).ToList()[2].Value.Trim();
+
+            List<KeyValuePair<int, string>> extras = pairs.Where(kvp => kvp.Key == 12).ToList();
+            if (extras.Count > 2)
+            {
+                ship.Type = extras[0].Value.Trim();
+                ship.DecksNo = extras[1].Value.Trim();
+                ship.Speed = extras[2].Value.Trim();
+            }
 
             string shipsLine = GenerateLine(ship);
             Console.WriteLine(shipsLine);
