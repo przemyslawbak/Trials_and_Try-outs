@@ -1,6 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Text;
 
 namespace List_Comparer
 {
@@ -8,8 +10,10 @@ namespace List_Comparer
     {
         static void Main(string[] args)
         {
-            List<string> inputLines = new List<string>(File.ReadAllLines("_input.csv"));
+            string shipsHeader = GenerateHeader();
+            SaveShip(shipsHeader);
 
+            List<string> inputLines = new List<string>(File.ReadAllLines("_input.csv"));
             for (int i = 0; i < inputLines.Count; i++)
             {
                 if (inputLines[i][0] == '1')
@@ -102,6 +106,221 @@ namespace List_Comparer
 
             //11
             ship.CargoHandlingEquipment = pairs.Where(kvp => kvp.Key == 11).ToList()[0].Value;
+
+            string shipsLine = GenerateLine(ship);
+            SaveShip(shipsLine);
+        }
+
+        private static void SaveShip(string shipsLine)
+        {
+            File.AppendAllText("_results.txt", shipsLine + Environment.NewLine);
+        }
+
+        private static string GenerateHeader()
+        {
+            ShipModel shipdata = new ShipModel();
+
+            StringBuilder sb = new StringBuilder();
+            sb.Append(nameof(shipdata.Name));
+            sb.Append("|");
+            sb.Append(nameof(shipdata.Type));
+            sb.Append("|");
+            sb.Append(nameof(shipdata.RegisterNo));
+            sb.Append("|");
+            sb.Append(nameof(shipdata.Imo));
+            sb.Append("|");
+            sb.Append(nameof(shipdata.CallSign));
+            sb.Append("|");
+            sb.Append(nameof(shipdata.Flag));
+            sb.Append("|");
+            sb.Append(nameof(shipdata.PortOfRegistry));
+            sb.Append("|");
+            sb.Append(nameof(shipdata.Owner));
+            sb.Append("|");
+            sb.Append(nameof(shipdata.Manager));
+            sb.Append("|");
+            sb.Append(nameof(shipdata.Propulsion));
+            sb.Append("|");
+            sb.Append(nameof(shipdata.Hull));
+            sb.Append("|");
+            sb.Append(nameof(shipdata.Machinery));
+            sb.Append("|");
+            sb.Append(nameof(shipdata.AnchorEquipment));
+            sb.Append("|");
+            sb.Append(nameof(shipdata.GRT));
+            sb.Append("|");
+            sb.Append(nameof(shipdata.NET));
+            sb.Append("|");
+            sb.Append(nameof(shipdata.DWT));
+            sb.Append("|");
+            sb.Append(nameof(shipdata.LOA));
+            sb.Append("|");
+            sb.Append(nameof(shipdata.LBP));
+            sb.Append("|");
+            sb.Append(nameof(shipdata.Breadth));
+            sb.Append("|");
+            sb.Append(nameof(shipdata.Depth));
+            sb.Append("|");
+            sb.Append(nameof(shipdata.Draught));
+            sb.Append("|");
+            sb.Append(nameof(shipdata.SFB));
+            sb.Append("|");
+            sb.Append(nameof(shipdata.Shipbuilder));
+            sb.Append("|");
+            sb.Append(nameof(shipdata.BuilderCountry));
+            sb.Append("|");
+            sb.Append(nameof(shipdata.YOB));
+            sb.Append("|");
+            sb.Append(nameof(shipdata.HullMaterial));
+            sb.Append("|");
+            sb.Append(nameof(shipdata.DecksNo));
+            sb.Append("|");
+            sb.Append(nameof(shipdata.HoldsNo));
+            sb.Append("|");
+            sb.Append(nameof(shipdata.MePower));
+            sb.Append("|");
+            sb.Append(nameof(shipdata.MeType));
+            sb.Append("|");
+            sb.Append(nameof(shipdata.MeMaker));
+            sb.Append("|");
+            sb.Append(nameof(shipdata.PropsNo));
+            sb.Append("|");
+            sb.Append(nameof(shipdata.Generators));
+            sb.Append("|");
+            sb.Append(nameof(shipdata.Boilers));
+            sb.Append("|");
+            sb.Append(nameof(shipdata.AirCompressor));
+            sb.Append("|");
+            sb.Append(nameof(shipdata.Speed));
+            sb.Append("|");
+            sb.Append(nameof(shipdata.DeckErections));
+            sb.Append("|");
+            sb.Append(nameof(shipdata.Bulkheads));
+            sb.Append("|");
+            sb.Append(nameof(shipdata.Ballast));
+            sb.Append("|");
+            sb.Append(nameof(shipdata.BoilerMaker));
+            sb.Append("|");
+            sb.Append(nameof(shipdata.CargoHandlingEquipment));
+            sb.Append("|");
+            sb.Append(nameof(shipdata.CargoSpaceVolume));
+            sb.Append("|");
+            //
+            sb.Append(nameof(shipdata.RadioEquipment));
+            sb.Append("|");
+            sb.Append(nameof(shipdata.TechManager));
+            sb.Append("|");
+            sb.Append(nameof(shipdata.Status));
+            sb.Append("|");
+            sb.Append(nameof(shipdata.Mmsi));
+            sb.Append("|");
+            sb.Append(nameof(shipdata.OwnerAddress));
+            sb.Append("|");
+            sb.Append(nameof(shipdata.ManagerAddress));
+
+            return sb.ToString();
+        }
+
+        private static string GenerateLine(ShipModel shipdata)
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.Append(shipdata.Name);
+            sb.Append("|");
+            sb.Append(shipdata.Type);
+            sb.Append("|");
+            sb.Append(shipdata.RegisterNo);
+            sb.Append("|");
+            sb.Append(shipdata.Imo);
+            sb.Append("|");
+            sb.Append(shipdata.CallSign);
+            sb.Append("|");
+            sb.Append(shipdata.Flag);
+            sb.Append("|");
+            sb.Append(shipdata.PortOfRegistry);
+            sb.Append("|");
+            sb.Append(shipdata.Owner);
+            sb.Append("|");
+            sb.Append(shipdata.Manager);
+            sb.Append("|");
+            sb.Append(shipdata.Propulsion);
+            sb.Append("|");
+            sb.Append(shipdata.Hull);
+            sb.Append("|");
+            sb.Append(shipdata.Machinery);
+            sb.Append("|");
+            sb.Append(shipdata.AnchorEquipment);
+            sb.Append("|");
+            sb.Append(shipdata.GRT);
+            sb.Append("|");
+            sb.Append(shipdata.NET);
+            sb.Append("|");
+            sb.Append(shipdata.DWT);
+            sb.Append("|");
+            sb.Append(shipdata.LOA);
+            sb.Append("|");
+            sb.Append(shipdata.LBP);
+            sb.Append("|");
+            sb.Append(shipdata.Breadth);
+            sb.Append("|");
+            sb.Append(shipdata.Depth);
+            sb.Append("|");
+            sb.Append(shipdata.Draught);
+            sb.Append("|");
+            sb.Append(shipdata.SFB);
+            sb.Append("|");
+            sb.Append(shipdata.Shipbuilder);
+            sb.Append("|");
+            sb.Append(shipdata.BuilderCountry);
+            sb.Append("|");
+            sb.Append(shipdata.YOB);
+            sb.Append("|");
+            sb.Append(shipdata.HullMaterial);
+            sb.Append("|");
+            sb.Append(shipdata.DecksNo);
+            sb.Append("|");
+            sb.Append(shipdata.HoldsNo);
+            sb.Append("|");
+            sb.Append(shipdata.MePower);
+            sb.Append("|");
+            sb.Append(shipdata.MeType);
+            sb.Append("|");
+            sb.Append(shipdata.MeMaker);
+            sb.Append("|");
+            sb.Append(shipdata.PropsNo);
+            sb.Append("|");
+            sb.Append(shipdata.Generators);
+            sb.Append("|");
+            sb.Append(shipdata.Boilers);
+            sb.Append("|");
+            sb.Append(shipdata.AirCompressor);
+            sb.Append("|");
+            sb.Append(shipdata.Speed);
+            sb.Append("|");
+            sb.Append(shipdata.DeckErections);
+            sb.Append("|");
+            sb.Append(shipdata.Bulkheads);
+            sb.Append("|");
+            sb.Append(shipdata.Ballast);
+            sb.Append("|");
+            sb.Append(shipdata.BoilerMaker);
+            sb.Append("|");
+            sb.Append(shipdata.CargoHandlingEquipment);
+            sb.Append("|");
+            sb.Append(shipdata.CargoSpaceVolume);
+            sb.Append("|");
+            sb.Append(shipdata.RadioEquipment);
+            sb.Append("|");
+            sb.Append(shipdata.TechManager);
+            sb.Append("|");
+            sb.Append(shipdata.Status);
+            sb.Append("|");
+            sb.Append(shipdata.Mmsi);
+            sb.Append("|");
+            sb.Append(shipdata.OwnerAddress);
+            sb.Append("|");
+            sb.Append(shipdata.ManagerAddress);
+
+            return sb.ToString();
         }
     }
 }
