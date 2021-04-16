@@ -37,6 +37,8 @@ namespace List_Comparer
                 }
             }
 
+            Console.WriteLine("FINITO");
+            Console.ReadKey();
         }
 
         private static void ParseShipAndSave(string[] shipLines)
@@ -50,7 +52,7 @@ namespace List_Comparer
                 cells.AddRange(line.Split(';'));
             }
 
-            string[] cellHeads = new string[] { "1", "2", "3", "4", "5", "6", "11" };
+            string[] cellHeads = new string[] { "1", "2", "3", "4", "5", "6", "7", "8", "11" };
             for (int i = 0; i < cells.Count; i++)
             {
                 if (cellHeads.Any(cells[i].Equals))
@@ -60,54 +62,76 @@ namespace List_Comparer
             }
 
             //1
-            ship.RegisterNo = pairs.Where(kvp => kvp.Key == 1).ToList()[0].Value;
-            ship.Name = pairs.Where(kvp => kvp.Key == 1).ToList()[1].Value;
-            ship.GRT = pairs.Where(kvp => kvp.Key == 1).ToList()[2].Value;
-            ship.Hull = pairs.Where(kvp => kvp.Key == 1).ToList()[3].Value;
-            ship.YOB = pairs.Where(kvp => kvp.Key == 1).ToList()[4].Value.Split('-')[0];
-            ship.Shipbuilder = pairs.Where(kvp => kvp.Key == 1).ToList()[5].Value.Split(',')[0];
-            ship.BuilderCountry = pairs.Where(kvp => kvp.Key == 1).ToList()[5].Value.Split(',')[1];
+            ship.RegisterNo = pairs.Where(kvp => kvp.Key == 1).ToList()[0].Value.Trim();
+            ship.Name = pairs.Where(kvp => kvp.Key == 1).ToList()[1].Value.Trim();
+            ship.GRT = pairs.Where(kvp => kvp.Key == 1).ToList()[2].Value.Trim();
+            ship.Hull = pairs.Where(kvp => kvp.Key == 1).ToList()[3].Value.Trim();
+            string dob = pairs.Where(kvp => kvp.Key == 1).ToList()[4].Value.Trim();
+            if (dob.Contains('-'))
+            {
+                ship.YOB = dob.Split('-')[0];
+            }
+            else
+            {
+                ship.YOB = dob;
+            }
+            ship.Shipbuilder = pairs.Where(kvp => kvp.Key == 1).ToList()[5].Value.Trim();
+            string builder = pairs.Where(kvp => kvp.Key == 1).ToList()[5].Value.Trim();
+            if (builder.Contains(','))
+            {
+                ship.Shipbuilder = builder.Split(',')[0];
+                ship.BuilderCountry = builder.Split(',')[1];
+            }
+            else
+            {
+                ship.Shipbuilder = builder;
+            }
 
             //2
-            ship.Imo = pairs.Where(kvp => kvp.Key == 2).ToList()[0].Value;
-            ship.NET = pairs.Where(kvp => kvp.Key == 2).ToList()[2].Value;
-            ship.MeType = pairs.Where(kvp => kvp.Key == 2).ToList()[3].Value;
+            ship.Imo = pairs.Where(kvp => kvp.Key == 2).ToList()[0].Value.Trim();
+            ship.NET = pairs.Where(kvp => kvp.Key == 2).ToList()[2].Value.Trim();
+            ship.MeType = pairs.Where(kvp => kvp.Key == 2).ToList()[3].Value.Trim();
 
             //3
-            ship.Flag = pairs.Where(kvp => kvp.Key == 3).ToList()[0].Value;
-            ship.DWT = pairs.Where(kvp => kvp.Key == 3).ToList()[1].Value;
-            ship.Type = pairs.Where(kvp => kvp.Key == 3).ToList()[1].Value; //???????????????????
-            ship.Manager = pairs.Where(kvp => kvp.Key == 3).ToList()[4].Value;
+            ship.Flag = pairs.Where(kvp => kvp.Key == 3).ToList()[0].Value.Trim();
+            ship.DWT = pairs.Where(kvp => kvp.Key == 3).ToList()[1].Value.Trim();
+            ship.Type = pairs.Where(kvp => kvp.Key == 3).ToList()[1].Value.Trim(); //???????????????????
+            ship.Manager = pairs.Where(kvp => kvp.Key == 3).ToList()[4].Value.Trim();
 
             //4
-            ship.LBP = pairs.Where(kvp => kvp.Key == 4).ToList()[0].Value;
-            ship.CallSign = pairs.Where(kvp => kvp.Key == 4).ToList()[2].Value;
-            ship.MePower = pairs.Where(kvp => kvp.Key == 4).ToList()[3].Value;
-            ship.Owner = pairs.Where(kvp => kvp.Key == 4).ToList()[4].Value;
+            ship.LBP = pairs.Where(kvp => kvp.Key == 4).ToList()[0].Value.Trim();
+            ship.CallSign = pairs.Where(kvp => kvp.Key == 4).ToList()[2].Value.Trim();
+            ship.MePower = pairs.Where(kvp => kvp.Key == 4).ToList()[3].Value.Trim();
+            if (ship.MePower.Contains('('))
+            {
+                ship.MePower = ship.MePower.Split('(')[0];
+            }
+            ship.Owner = pairs.Where(kvp => kvp.Key == 4).ToList()[4].Value.Trim();
 
             //5
-            ship.LOA = pairs.Where(kvp => kvp.Key == 5).ToList()[0].Value;
-            ship.DecksNo = pairs.Where(kvp => kvp.Key == 5).ToList()[0].Value; //???????????????????
-            ship.Boilers = pairs.Where(kvp => kvp.Key == 5).ToList()[3].Value;
-            ship.PortOfRegistry = pairs.Where(kvp => kvp.Key == 5).ToList()[4].Value;
+            ship.LOA = pairs.Where(kvp => kvp.Key == 5).ToList()[0].Value.Trim();
+            ship.DecksNo = pairs.Where(kvp => kvp.Key == 5).ToList()[0].Value.Trim(); //???????????????????
+            ship.Boilers = pairs.Where(kvp => kvp.Key == 5).ToList()[3].Value.Trim();
+            ship.PortOfRegistry = pairs.Where(kvp => kvp.Key == 5).ToList()[4].Value.Trim();
 
             //6
-            ship.Breadth = pairs.Where(kvp => kvp.Key == 6).ToList()[0].Value;
-            ship.Speed = pairs.Where(kvp => kvp.Key == 6).ToList()[1].Value; //???????????????????
-            ship.Mmsi = pairs.Where(kvp => kvp.Key == 6).ToList()[2].Value;
-            ship.Generators = pairs.Where(kvp => kvp.Key == 6).ToList()[3].Value;
+            ship.Breadth = pairs.Where(kvp => kvp.Key == 6).ToList()[0].Value.Trim();
+            ship.Speed = pairs.Where(kvp => kvp.Key == 6).ToList()[1].Value.Trim(); //???????????????????
+            ship.Mmsi = pairs.Where(kvp => kvp.Key == 6).ToList()[2].Value.Trim();
+            ship.Generators = pairs.Where(kvp => kvp.Key == 6).ToList()[3].Value.Trim();
 
             //7
-            ship.Depth = pairs.Where(kvp => kvp.Key == 7).ToList()[0].Value;
-            ship.HoldsNo = pairs.Where(kvp => kvp.Key == 7).ToList()[1].Value;
+            ship.Depth = pairs.Where(kvp => kvp.Key == 7).ToList()[0].Value.Trim();
+            ship.HoldsNo = pairs.Where(kvp => kvp.Key == 7).ToList()[1].Value.Trim();
 
             //8
-            ship.Draught = pairs.Where(kvp => kvp.Key == 8).ToList()[0].Value;
+            ship.Draught = pairs.Where(kvp => kvp.Key == 8).ToList()[0].Value.Trim();
 
             //11
-            ship.CargoHandlingEquipment = pairs.Where(kvp => kvp.Key == 11).ToList()[0].Value;
+            ship.CargoHandlingEquipment = pairs.Where(kvp => kvp.Key == 11).ToList()[0].Value.Trim();
 
             string shipsLine = GenerateLine(ship);
+            Console.WriteLine(shipsLine);
             SaveShip(shipsLine);
         }
 
