@@ -29,6 +29,9 @@ namespace HandsOn_Book
                     Console.WriteLine($"{args[0]} is an invalid option");
                     break;
             }
+
+            Console.WriteLine("Press any key...");
+            Console.ReadKey();
         }
     }
 }

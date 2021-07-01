@@ -13,6 +13,9 @@ namespace HandsOn_Book.ML.Base
 
         protected BaseML()
         {
+            //Initializing the object with a specific seed value is needed to create more
+            //consistent results during the testing component. Once a model is loaded, the seed value (or
+            //lack thereof) does not affect the output.
             MlContext = new MLContext(2020);
         }
     }
