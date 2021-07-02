@@ -20,11 +20,12 @@ namespace chapter03.ML
                 return;
             }
 
-            var trainingDataView = MlContext.Data.LoadFromTextFile<EmploymentHistory>(trainingFileName, ',');
+            //The first change is the use of a comma to separate the data
+            IDataView trainingDataView = MlContext.Data.LoadFromTextFile<EmploymentHistory>(trainingFileName, ',');
 
-            var dataSplit = MlContext.Data.TrainTestSplit(trainingDataView, testFraction: 0.4);
+            DataOperationsCatalog.TrainTestData dataSplit = MlContext.Data.TrainTestSplit(trainingDataView, testFraction: 0.4);
 
-            var dataProcessPipeline = MlContext.Transforms.CopyColumns("Label", nameof(EmploymentHistory.DurationInMonths))
+            Microsoft.ML.Data.EstimatorChain<Microsoft.ML.Data.TransformerChain<Microsoft.ML.Data.ColumnConcatenatingTransformer>> dataProcessPipeline = MlContext.Transforms.CopyColumns("Label", nameof(EmploymentHistory.DurationInMonths))
                 .Append(MlContext.Transforms.NormalizeMeanVariance(nameof(EmploymentHistory.IsMarried)))
                 .Append(MlContext.Transforms.NormalizeMeanVariance(nameof(EmploymentHistory.BSDegree)))
                 .Append(MlContext.Transforms.NormalizeMeanVariance(nameof(EmploymentHistory.MSDegree)))
@@ -37,16 +38,18 @@ namespace chapter03.ML
                 .Append(MlContext.Transforms.Concatenate("Features",
                     typeof(EmploymentHistory).ToPropertyList<EmploymentHistory>(nameof(EmploymentHistory.DurationInMonths)))));
 
-            var trainer = MlContext.Regression.Trainers.Sdca(labelColumnName: "Label", featureColumnName: "Features");
+            //We can then create the Sdca trainer using the default parameters
+            Microsoft.ML.Trainers.SdcaRegressionTrainer trainer = MlContext.Regression.Trainers.Sdca(labelColumnName: "Label", featureColumnName: "Features");
 
-            var trainingPipeline = dataProcessPipeline.Append(trainer);
+            Microsoft.ML.Data.EstimatorChain<Microsoft.ML.Data.RegressionPredictionTransformer<Microsoft.ML.Trainers.LinearRegressionModelParameters>> trainingPipeline = dataProcessPipeline.Append(trainer);
 
             ITransformer trainedModel = trainingPipeline.Fit(dataSplit.TrainSet);
             MlContext.Model.Save(trainedModel, dataSplit.TrainSet.Schema, ModelPath);
 
-            var testSetTransform = trainedModel.Transform(dataSplit.TestSet);
+            IDataView testSetTransform = trainedModel.Transform(dataSplit.TestSet);
 
-            var modelMetrics = MlContext.Regression.Evaluate(testSetTransform);
+            //Lastly, we call the Regression.Evaluate method to provide regression specific metrics
+            Microsoft.ML.Data.RegressionMetrics modelMetrics = MlContext.Regression.Evaluate(testSetTransform);
 
             Console.WriteLine($"Loss Function: {modelMetrics.LossFunction:0.##}{Environment.NewLine}" +
                               $"Mean Absolute Error: {modelMetrics.MeanAbsoluteError:#.##}{Environment.NewLine}" +

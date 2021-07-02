@@ -8,6 +8,8 @@ namespace chapter03
     {
         static void Main(string[] args)
         {
+            //The only change in the Program class was the help text to indicate usage for predict
+            //requires a filename, not a string
             if (args.Length != 2)
             {
                 Console.WriteLine($"Invalid arguments passed in, exiting.{Environment.NewLine}{Environment.NewLine}Usage:{Environment.NewLine}" +

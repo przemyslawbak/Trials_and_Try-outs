@@ -2,6 +2,7 @@
 
 namespace chapter03.ML.Objects
 {
+    //The EmploymentHistory class is the container class that contains the data to both predict and train our model
     public class EmploymentHistory
     {
         [LoadColumn(0)]

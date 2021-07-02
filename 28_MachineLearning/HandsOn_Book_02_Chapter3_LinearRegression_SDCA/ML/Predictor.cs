@@ -14,6 +14,7 @@ namespace chapter03.ML
     {
         public void Predict(string inputDataFile)
         {
+            //1. First, validate that the input file exists before making a prediction on it
             if (!File.Exists(ModelPath))
             {
                 Console.WriteLine($"Failed to find model at {ModelPath}");
@@ -42,11 +43,19 @@ namespace chapter03.ML
                 return;
             }
 
-            var predictionEngine = MlContext.Model.CreatePredictionEngine<EmploymentHistory, EmploymentHistoryPrediction>(mlModel);
+            //2. The other change is in the prediction call itself. As you probably guessed, the
+            //TSrc and TDst arguments need to be adjusted to utilize both of the new classes
+            //we created, EmploymentHistory and EmploymentHistoryPrediction
+            PredictionEngine<EmploymentHistory, EmploymentHistoryPrediction> predictionEngine = MlContext.Model.CreatePredictionEngine<EmploymentHistory, EmploymentHistoryPrediction>(mlModel);
 
-            var json = File.ReadAllText(inputDataFile);
+            //3. Given that we are no longer simply passing in the string and building an object
+            //on the fly, we need to first read in the file as text.We then deserialize the JSON
+            //into our EmploymentHistory object
+            string json = File.ReadAllText(inputDataFile);
 
-            var prediction = predictionEngine.Predict(JsonConvert.DeserializeObject<EmploymentHistory>(json));
+            //4. Lastly, we need to adjust the output of our prediction to match our new
+            //EmploymentHistoryPrediction properties
+            //EmploymentHistoryPrediction prediction = predictionEngine.Predict(JsonConvert.DeserializeObject<EmploymentHistory>(json));
 
             Console.WriteLine(
                                 $"Based on input json:{System.Environment.NewLine}" +
