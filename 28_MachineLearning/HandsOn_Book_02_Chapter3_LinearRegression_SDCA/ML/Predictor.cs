@@ -55,7 +55,7 @@ namespace chapter03.ML
 
             //4. Lastly, we need to adjust the output of our prediction to match our new
             //EmploymentHistoryPrediction properties
-            //EmploymentHistoryPrediction prediction = predictionEngine.Predict(JsonConvert.DeserializeObject<EmploymentHistory>(json));
+            EmploymentHistoryPrediction prediction = predictionEngine.Predict(JsonConvert.DeserializeObject<EmploymentHistory>(json));
 
             Console.WriteLine(
                                 $"Based on input json:{System.Environment.NewLine}" +
