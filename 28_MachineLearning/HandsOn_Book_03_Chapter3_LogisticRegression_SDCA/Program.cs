@@ -8,6 +8,8 @@ namespace chapter03_logistic_regression
     {
         static void Main(string[] args)
         {
+            //1. To begin, we modify the help text to indicate the new extract option that takes a
+            //path to the training folder
             if (args.Length != 2)
             {
                 Console.WriteLine($"Invalid arguments passed in, exiting.{Environment.NewLine}{Environment.NewLine}Usage:{Environment.NewLine}" +
@@ -20,6 +22,8 @@ namespace chapter03_logistic_regression
                 return;
             }
 
+            //2. In addition, we also need to modify the main switch/case to support the extract
+            //argument
             switch (args[0])
             {
                 case "extract":

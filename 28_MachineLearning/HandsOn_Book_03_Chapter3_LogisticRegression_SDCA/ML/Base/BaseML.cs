@@ -22,28 +22,39 @@ namespace chapter03_logistic_regression.ML.Base
         {
             MlContext = new MLContext(2020);
 
+            //Encoding.RegisterProvider is critical to utilize the Windows-1252
+            //encoding.This encoding is the encoding Windows Executables utilize
             Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
 
             _stringRex = new Regex(@"[ -~\t]{8,}", RegexOptions.Compiled);
         }
 
+        //1. To begin, we define the method definition and initialize the stringLines
+        //variable to hold the strings
         protected string GetStrings(byte[] data)
         {
-            var stringLines = new StringBuilder();
+            StringBuilder stringLines = new StringBuilder();
 
+            //2. Next, we will sanity check the input data is not null or empty
             if (data == null || data.Length == 0)
             {
                 return stringLines.ToString();
             }
 
-            using (var ms = new MemoryStream(data, false))
+            //3. The next block of code we open a MemoryStream object and then a
+            //StreamReader object
+            using (MemoryStream ms = new MemoryStream(data, false))
             {
-                using (var streamReader = new StreamReader(ms, Encoding.GetEncoding(1252), false, 2048, false))
+                using (StreamReader streamReader = new StreamReader(ms, Encoding.GetEncoding(1252), false, 2048, false))
                 {
+                    //4. We will then loop through the streamReader object until an EndOfStream
+                    //condition is reached, reading line by line
                     while (!streamReader.EndOfStream)
                     {
-                        var line = streamReader.ReadLine();
+                        string line = streamReader.ReadLine();
 
+                        //5. We then will apply some string clean up of the data and handle whether the line
+                        //is empty or not gracefully
                         if (string.IsNullOrEmpty(line))
                         {
                             continue;
@@ -51,12 +62,16 @@ namespace chapter03_logistic_regression.ML.Base
 
                         line = line.Replace("^", "").Replace(")", "").Replace("-", "");
 
+                        //6. Then, we will append the regular expression matches and append those matches
+                        //to the previously defined stringLines variable
                         stringLines.Append(string.Join(string.Empty,
                             _stringRex.Matches(line).Where(a => !string.IsNullOrEmpty(a.Value) && !string.IsNullOrWhiteSpace(a.Value)).ToList()));
                     }
                 }
             }
 
+            //7. Lastly, we will return the stringLines variable converted into a single string
+            //using the string.Join method:
             return string.Join(string.Empty, stringLines);
         }
     }
