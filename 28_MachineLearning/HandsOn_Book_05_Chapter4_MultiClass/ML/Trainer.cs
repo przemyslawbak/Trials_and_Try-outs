@@ -8,6 +8,7 @@ using Microsoft.ML;
 
 namespace chapter04_multiclass.ML
 {
+    //The SdcaMaximumEntropy class, as the name implies, is based on the SDCA
     public class Trainer : BaseML
     {
         public void Train(string trainingFileName, string testFileName)
@@ -26,23 +27,29 @@ namespace chapter04_multiclass.ML
                 return;
             }
 
-            var trainingDataView = MlContext.Data.LoadFromTextFile<Email>(trainingFileName, ',', hasHeader: false);
+            //1. First, we read in the trainingFileName string and typecast it to an Email
+            //object, like this
+            IDataView trainingDataView = MlContext.Data.LoadFromTextFile<Email>(trainingFileName, ',', hasHeader: false);
 
-            var dataProcessPipeline = MlContext.Transforms.Conversion.MapValueToKey(inputColumnName: nameof(Email.Category), outputColumnName: "Label")
+            //2. Next, we will create our pipeline mapping our input properties to
+            //FeaturizeText transformations before appending our SDCA trainer, as follows
+            Microsoft.ML.Data.EstimatorChain<Microsoft.ML.Data.ColumnConcatenatingTransformer> dataProcessPipeline = MlContext.Transforms.Conversion.MapValueToKey(inputColumnName: nameof(Email.Category), outputColumnName: "Label")
                 .Append(MlContext.Transforms.Text.FeaturizeText(inputColumnName: nameof(Email.Subject), outputColumnName: "SubjectFeaturized"))
                 .Append(MlContext.Transforms.Text.FeaturizeText(inputColumnName: nameof(Email.Body), outputColumnName: "BodyFeaturized"))
                 .Append(MlContext.Transforms.Text.FeaturizeText(inputColumnName: nameof(Email.Sender), outputColumnName: "SenderFeaturized"))
                 .Append(MlContext.Transforms.Concatenate("Features", "SubjectFeaturized", "BodyFeaturized", "SenderFeaturized"))
                 .AppendCacheCheckpoint(MlContext);
 
-            var trainingPipeline = dataProcessPipeline
+            Microsoft.ML.Data.EstimatorChain<Microsoft.ML.Transforms.KeyToValueMappingTransformer> trainingPipeline = dataProcessPipeline
                 .Append(MlContext.MulticlassClassification.Trainers.SdcaMaximumEntropy("Label", "Features"))
                 .Append(MlContext.Transforms.Conversion.MapKeyToValue("PredictedLabel"));
 
-            var trainedModel = trainingPipeline.Fit(trainingDataView);
+            Microsoft.ML.Data.TransformerChain<Microsoft.ML.Transforms.KeyToValueMappingTransformer> trainedModel = trainingPipeline.Fit(trainingDataView);
             MlContext.Model.Save(trainedModel, trainingDataView.Schema, ModelPath);
 
-            var testDataView = MlContext.Data.LoadFromTextFile<Email>(testFileName, ',', hasHeader: false);
+            //3. Lastly, we load in our test data, run the MultiClassClassification
+            //evaluation, and then output the four model evaluation properties, like this
+            IDataView testDataView = MlContext.Data.LoadFromTextFile<Email>(testFileName, ',', hasHeader: false);
 
             var modelMetrics = MlContext.MulticlassClassification.Evaluate(trainedModel.Transform(testDataView));
 
