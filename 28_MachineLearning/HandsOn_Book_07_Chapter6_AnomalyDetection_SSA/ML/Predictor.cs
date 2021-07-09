@@ -36,13 +36,20 @@ namespace chapter06.ML
                 return;
             }
 
-            var predictionEngine = mlModel.CreateTimeSeriesEngine<NetworkTrafficHistory, NetworkTrafficPrediction>(MlContext);
+            //1. First, we create our prediction engine
+            //with the NetworkTrafficHistory and NetworkHistoryPrediction types
+            TimeSeriesPredictionEngine<NetworkTrafficHistory, NetworkTrafficPrediction> predictionEngine = mlModel.CreateTimeSeriesEngine<NetworkTrafficHistory, NetworkTrafficPrediction>(MlContext);
 
-            var inputData =
+            //2. Next, we read the input file into an IDataView variable (note the override to use
+            //a comma as separatorChar)
+            IDataView inputData =
                 MlContext.Data.LoadFromTextFile<NetworkTrafficHistory>(inputDataFile, separatorChar: ',');
 
-            var rows = MlContext.Data.CreateEnumerable<NetworkTrafficHistory>(inputData, false);
+            //3. Next, we take the newly created IDataView variable and get an enumerable
+            //based off of that data view
+            System.Collections.Generic.IEnumerable<NetworkTrafficHistory> rows = MlContext.Data.CreateEnumerable<NetworkTrafficHistory>(inputData, false);
 
+            //4. Lastly, we need to run the prediction and then output the results of the model run
             Console.WriteLine($"Based on input file ({inputDataFile}):");
 
             foreach (var row in rows)
