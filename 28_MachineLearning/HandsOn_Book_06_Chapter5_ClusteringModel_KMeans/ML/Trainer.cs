@@ -10,6 +10,9 @@ namespace chapter05.ML
 {
     public class Trainer : BaseML
     {
+        //1. The first change is the addition of a GetDataView helper method, which builds
+        //the IDataView object from the columns previously defined in the FileData
+        //class
         private IDataView GetDataView(string fileName)
         {
             return MlContext.Data.LoadFromTextFile(path: fileName,
@@ -40,21 +43,26 @@ namespace chapter05.ML
                 return;
             }
 
-            var trainingDataView = GetDataView(trainingFileName);
+            //2. We then build the data process pipeline, transforming the columns into a single
+            //Features column
+            IDataView trainingDataView = GetDataView(trainingFileName);
 
-            var dataProcessPipeline = MlContext.Transforms.Concatenate(
+            Microsoft.ML.Transforms.ColumnConcatenatingEstimator dataProcessPipeline = MlContext.Transforms.Concatenate(
                 FEATURES,
                 nameof(FileData.IsBinary),
                 nameof(FileData.IsMZHeader),
                 nameof(FileData.IsPKHeader));
-            
-            var trainer = MlContext.Clustering.Trainers.KMeans(featureColumnName: FEATURES, numberOfClusters: 3);
-            var trainingPipeline = dataProcessPipeline.Append(trainer);
-            var trainedModel = trainingPipeline.Fit(trainingDataView);
+
+            //3. We can then create the k-means trainer with a cluster size of 3 and create the
+            //model. The default value for the number of clusters is 5.
+            Microsoft.ML.Trainers.KMeansTrainer trainer = MlContext.Clustering.Trainers.KMeans(featureColumnName: FEATURES, numberOfClusters: 3);
+            EstimatorChain<ClusteringPredictionTransformer<Microsoft.ML.Trainers.KMeansModelParameters>> trainingPipeline = dataProcessPipeline.Append(trainer);
+            TransformerChain<ClusteringPredictionTransformer<Microsoft.ML.Trainers.KMeansModelParameters>> trainedModel = trainingPipeline.Fit(trainingDataView);
 
             MlContext.Model.Save(trainedModel, trainingDataView.Schema, ModelPath);
 
-            var testingDataView = GetDataView(testingFileName);
+            //4. Now we evaluate the model we just trained using the testing dataset
+            IDataView testingDataView = GetDataView(testingFileName);
 
             IDataView testDataView = trainedModel.Transform(testingDataView);
 
@@ -64,6 +72,7 @@ namespace chapter05.ML
                 scoreColumnName: "Score",
                 featureColumnName: FEATURES);
 
+            //5. Finally, we output all of the classification metrics
             Console.WriteLine($"Average Distance: {modelMetrics.AverageDistance}");
             Console.WriteLine($"Davies Bould Index: {modelMetrics.DaviesBouldinIndex}");
             Console.WriteLine($"Normalized Mutual Information: {modelMetrics.NormalizedMutualInformation}");

@@ -9,6 +9,9 @@ namespace chapter05.ML
 {
     public class FeatureExtractor : BaseML
     {
+        //1. First, we generalize the extraction to take the folder path and the output file. As
+        //noted earlier, we also pass in the filename, providing the Labeling to occur
+        //cleanly inside the FileData class
         private void ExtractFolder(string folderPath, string outputFile)
         {
             if (!Directory.Exists(folderPath))
@@ -18,7 +21,7 @@ namespace chapter05.ML
                 return;
             }
 
-            var files = Directory.GetFiles(folderPath);
+            string[] files = Directory.GetFiles(folderPath);
 
             using (var streamWriter =
                 new StreamWriter(Path.Combine(AppContext.BaseDirectory, $"../../../Data/{outputFile}")))
@@ -34,6 +37,8 @@ namespace chapter05.ML
             Console.WriteLine($"Extracted {files.Length} to {outputFile}");
         }
 
+        //2. Lastly, we take the two parameters from the command line (called from the
+        //Program class) and simply call the preceding method a second time
         public void Extract(string trainingPath, string testPath)
         {
             ExtractFolder(trainingPath, Constants.SAMPLE_DATA);

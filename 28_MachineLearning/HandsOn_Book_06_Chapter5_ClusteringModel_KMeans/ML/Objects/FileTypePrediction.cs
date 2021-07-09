@@ -2,6 +2,7 @@
 
 namespace chapter05.ML.Objects
 {
+    //The FileTypePrediction class contains the properties mapped to our prediction output
     public class FileTypePrediction
     {
         [ColumnName("PredictedLabel")]

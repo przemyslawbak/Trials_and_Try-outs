@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-
 using chapter05.Enums;
 using chapter05.ML.Base;
 using chapter05.ML.Objects;
@@ -13,6 +12,9 @@ namespace chapter05.ML
 {
     public class Predictor : BaseML
     {
+        //1. First, we add a helper method, GetClusterToMap, which maps known values to
+        //the prediction clusters.Note the use of Enum.GetValues here; as you add more
+       //file types, this method does not need to be modified
         private Dictionary<uint, FileTypes> GetClusterToMap(PredictionEngineBase<FileData, FileTypePrediction> predictionEngine)
         {
             var map = new Dictionary<uint, FileTypes>();
@@ -61,14 +63,20 @@ namespace chapter05.ML
                 return;
             }
 
-            var predictionEngine = MlContext.Model.CreatePredictionEngine<FileData, FileTypePrediction>(mlModel);
+            //2. Next, we pass in the FileData and FileTypePrediction types into the
+            //CreatePredictionEngine method to create our prediction engine.Then, we
+            //read the file in as a binary file and pass these bytes into the constructor of
+            //FileData prior to running the prediction and mapping initialization
+            PredictionEngine<FileData, FileTypePrediction> predictionEngine = MlContext.Model.CreatePredictionEngine<FileData, FileTypePrediction>(mlModel);
 
-            var fileData = new FileData(File.ReadAllBytes(inputDataFile));
+            FileData fileData = new FileData(File.ReadAllBytes(inputDataFile));
 
-            var prediction = predictionEngine.Predict(fileData);
+            FileTypePrediction prediction = predictionEngine.Predict(fileData);
 
-            var mapping = GetClusterToMap(predictionEngine);
+            Dictionary<uint, FileTypes> mapping = GetClusterToMap(predictionEngine);
 
+            //3. Lastly, we need to adjust the output to match the output that a k-means
+            //prediction returns, including the Euclidean distances
             Console.WriteLine(
                 $"Based on input file: {inputDataFile}{Environment.NewLine}{Environment.NewLine}" +
                 $"Feature Extraction: {fileData}{Environment.NewLine}{Environment.NewLine}" +
