@@ -42,11 +42,14 @@ namespace chapter06.ML
                 return;
             }
 
-            var predictionEngine = MlContext.Model.CreatePredictionEngine<LoginHistory, LoginPrediction>(mlModel);
+            //1. First, we create our prediction engine with
+            PredictionEngine<LoginHistory, LoginPrediction> predictionEngine = MlContext.Model.CreatePredictionEngine<LoginHistory, LoginPrediction>(mlModel);
 
-            var json = File.ReadAllText(inputDataFile);
+            //2. Next, we read the input file into a string variable
+            string json = File.ReadAllText(inputDataFile);
 
-            var prediction = predictionEngine.Predict(JsonConvert.DeserializeObject<LoginHistory>(json));
+            //3. Lastly, we run the prediction and then output the results of the model run
+            LoginPrediction prediction = predictionEngine.Predict(JsonConvert.DeserializeObject<LoginHistory>(json));
 
             Console.WriteLine(
                                 $"Based on input json:{System.Environment.NewLine}" +

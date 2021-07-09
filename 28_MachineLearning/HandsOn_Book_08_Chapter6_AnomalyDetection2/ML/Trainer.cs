@@ -13,9 +13,12 @@ namespace chapter06.ML
 {
     public class Trainer : BaseML
     {
+        //1. The first change is the addition of a GetDataView helper method, which builds
+        //the IDataView data view from the columns previously defined in
+        //the LoginHistory class
         private (IDataView DataView, IEstimator<ITransformer> Transformer) GetDataView(string fileName, bool training = true)
         {
-            var trainingDataView = MlContext.Data.LoadFromTextFile<LoginHistory>(fileName, ',');
+            IDataView trainingDataView = MlContext.Data.LoadFromTextFile<LoginHistory>(fileName, ',');
 
             if (!training)
             {
@@ -45,9 +48,11 @@ namespace chapter06.ML
                 return;
             }
 
-            var trainingDataView = GetDataView(trainingFileName);
+            //2. We then build the training data view and the
+            //RandomizedPcaTrainer.Options object
+            (IDataView DataView, IEstimator<ITransformer> Transformer) trainingDataView = GetDataView(trainingFileName);
 
-            var options = new RandomizedPcaTrainer.Options
+            RandomizedPcaTrainer.Options options = new RandomizedPcaTrainer.Options
             {
                 FeatureColumnName = FEATURES,
                 ExampleWeightColumnName = null,
@@ -57,6 +62,8 @@ namespace chapter06.ML
                 Seed = 1
             };
 
+            //3. We can then create the randomized PCA trainer, append it to the training data
+            //view, fit our model, and then save it
             IEstimator<ITransformer> trainer = MlContext.AnomalyDetection.Trainers.RandomizedPca(options: options);
 
             EstimatorChain<ITransformer> trainingPipeline = trainingDataView.Transformer.Append(trainer);
@@ -65,12 +72,15 @@ namespace chapter06.ML
 
             MlContext.Model.Save(trainedModel, trainingDataView.DataView.Schema, ModelPath);
 
-            var testingDataView = GetDataView(testingFileName, true);
+            //4. Now we evaluate the model we just trained using the testing dataset
+            (IDataView DataView, IEstimator<ITransformer> Transformer) testingDataView = GetDataView(testingFileName, true);
 
-            var testSetTransform = trainedModel.Transform(testingDataView.DataView);
+            IDataView testSetTransform = trainedModel.Transform(testingDataView.DataView);
 
-            var modelMetrics = MlContext.AnomalyDetection.Evaluate(testSetTransform);
+            AnomalyDetectionMetrics modelMetrics = MlContext.AnomalyDetection.Evaluate(testSetTransform);
 
+            //5. Finally, we output all of the classification metrics. Each of these will be detailed
+            //in the next section
             Console.WriteLine($"Area Under Curve: {modelMetrics.AreaUnderRocCurve:P2}{Environment.NewLine}" +
                               $"Detection at FP Count: {modelMetrics.DetectionRateAtFalsePositiveCount}");
         }
