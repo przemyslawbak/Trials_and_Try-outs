@@ -11,8 +11,8 @@ namespace chapter07.ML
 {
     public class Trainer : BaseML
     {
+        //1. The first addition is the two constant variables for the variable encoding
         private const string UserIDEncoding = "UserIDEncoding";
-
         private const string MusicIDEncoding = "MusicIDEncoding";
 
         private (IDataView DataView, IEstimator<ITransformer> Transformer) GetDataView(string fileName, bool training = true)
@@ -49,9 +49,10 @@ namespace chapter07.ML
                 return;
             }
 
-            var trainingDataView = GetDataView(trainingFileName);
+            (IDataView DataView, IEstimator<ITransformer> Transformer) trainingDataView = GetDataView(trainingFileName);
 
-            var options = new MatrixFactorizationTrainer.Options
+            //2. Set up trainers options
+            MatrixFactorizationTrainer.Options options = new MatrixFactorizationTrainer.Options
             {
                 MatrixColumnIndexColumnName = UserIDEncoding,
                 MatrixRowIndexColumnName = MusicIDEncoding,
@@ -61,19 +62,23 @@ namespace chapter07.ML
                 Quiet = false
             };
 
-            var trainingPipeLine = trainingDataView.Transformer.Append(MlContext.Recommendation().Trainers.MatrixFactorization(options));
+            //3. We can then create the matrix factorization trainer, as follows
+            Microsoft.ML.Data.EstimatorChain<Microsoft.ML.Trainers.Recommender.MatrixFactorizationPredictionTransformer> trainingPipeLine = trainingDataView.Transformer.Append(MlContext.Recommendation().Trainers.MatrixFactorization(options));
 
+            //4. Now, we fit the model on the training data and save the model, as follows
             ITransformer trainedModel = trainingPipeLine.Fit(trainingDataView.DataView);
 
             MlContext.Model.Save(trainedModel, trainingDataView.DataView.Schema, ModelPath);
 
             Console.WriteLine($"Model saved to {ModelPath}{Environment.NewLine}");
 
-            var testingDataView = GetDataView(testingFileName, true);
+            //5. Lastly, we load the testing data and pass the data to the matrix factorization
+            //evaluator, like this
+            (IDataView DataView, IEstimator<ITransformer> Transformer) testingDataView = GetDataView(testingFileName, true);
 
-            var testSetTransform = trainedModel.Transform(testingDataView.DataView);
+            IDataView testSetTransform = trainedModel.Transform(testingDataView.DataView);
 
-            var modelMetrics = MlContext.Recommendation().Evaluate(testSetTransform);
+            Microsoft.ML.Data.RegressionMetrics modelMetrics = MlContext.Recommendation().Evaluate(testSetTransform);
 
             Console.WriteLine($"Matrix Factorization Evaluation:{Environment.NewLine}{Environment.NewLine}" +
                               $"Loss Function: {modelMetrics.LossFunction:F3}{Environment.NewLine}" +
