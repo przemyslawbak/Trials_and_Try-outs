@@ -11,6 +11,9 @@ namespace chapter09.lib.ML
 {
     public class FileClassificationPredictor : BaseML
     {
+        //1. The first Predict method is for our command-line application that simply takes
+        //in the filename and is called into the overload in Step 2 after loading in the bytes,
+        //as follows
         public FileClassificationResponseItem Predict(string fileName)
         {
             var bytes = File.ReadAllBytes(fileName);
@@ -18,6 +21,9 @@ namespace chapter09.lib.ML
             return Predict(new FileClassificationResponseItem(bytes));
         }
 
+        //2. The second implementation is for our web application that takes the
+        //FileClassificationResponseItem object, creates our prediction engine, and
+        //returns the prediction data, as follows
         public FileClassificationResponseItem Predict(FileClassificationResponseItem file)
         {
             if (!File.Exists(Common.Constants.MODEL_PATH))

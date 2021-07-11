@@ -26,9 +26,12 @@ namespace chapter09.lib.ML
                 return;
             }
 
-            var dataView = MlContext.Data.LoadFromTextFile<FileData>(trainingFileName, hasHeader: false);
+            //1. The first change is the use of the FileData class to read the CSV file into the
+            //dataView property, as shown in the following code block
+            IDataView dataView = MlContext.Data.LoadFromTextFile<FileData>(trainingFileName, hasHeader: false);
 
-            var dataProcessPipeline = MlContext.Transforms.NormalizeMeanVariance(nameof(FileData.FileSize))
+            //2. Next, we map our FileData features to create our pipeline, as follows
+            Microsoft.ML.Data.EstimatorChain<Microsoft.ML.Data.ColumnConcatenatingTransformer> dataProcessPipeline = MlContext.Transforms.NormalizeMeanVariance(nameof(FileData.FileSize))
                 .Append(MlContext.Transforms.NormalizeMeanVariance(nameof(FileData.Is64Bit)))
                 .Append(MlContext.Transforms.NormalizeMeanVariance(nameof(FileData.IsSigned)))
                 .Append(MlContext.Transforms.NormalizeMeanVariance(nameof(FileData.NumberImportFunctions)))
@@ -39,23 +42,24 @@ namespace chapter09.lib.ML
                     nameof(FileData.IsSigned), nameof(FileData.NumberImportFunctions), nameof(FileData.NumberExportFunctions),
                     nameof(FileData.NumberImports), "FeaturizeText"));
 
-            var trainer = MlContext.BinaryClassification.Trainers.FastTree(labelColumnName: nameof(FileData.Label),
+            //3. Lastly, we initialize our FastTree algorithm, as follows
+            Microsoft.ML.Trainers.FastTree.FastTreeBinaryTrainer trainer = MlContext.BinaryClassification.Trainers.FastTree(labelColumnName: nameof(FileData.Label),
                 featureColumnName: FEATURES,
                 numberOfLeaves: 2,
                 numberOfTrees: 1000,
                 minimumExampleCountPerLeaf: 1,
                 learningRate: 0.2);
 
-            var trainingPipeline = dataProcessPipeline.Append(trainer);
-            var trainedModel = trainingPipeline.Fit(dataView);
+            Microsoft.ML.Data.EstimatorChain<Microsoft.ML.Data.BinaryPredictionTransformer<Microsoft.ML.Calibrators.CalibratedModelParametersBase<Microsoft.ML.Trainers.FastTree.FastTreeBinaryModelParameters, Microsoft.ML.Calibrators.PlattCalibrator>>> trainingPipeline = dataProcessPipeline.Append(trainer);
+            Microsoft.ML.Data.TransformerChain<Microsoft.ML.Data.BinaryPredictionTransformer<Microsoft.ML.Calibrators.CalibratedModelParametersBase<Microsoft.ML.Trainers.FastTree.FastTreeBinaryModelParameters, Microsoft.ML.Calibrators.PlattCalibrator>>> trainedModel = trainingPipeline.Fit(dataView);
 
             MlContext.Model.Save(trainedModel, dataView.Schema, Constants.MODEL_PATH);
 
-            var testingDataView = MlContext.Data.LoadFromTextFile<FileData>(testingFileName, hasHeader: false);
+            IDataView testingDataView = MlContext.Data.LoadFromTextFile<FileData>(testingFileName, hasHeader: false);
 
             IDataView testDataView = trainedModel.Transform(testingDataView);
 
-            var modelMetrics = MlContext.BinaryClassification.Evaluate(
+            Microsoft.ML.Data.CalibratedBinaryClassificationMetrics modelMetrics = MlContext.BinaryClassification.Evaluate(
                 data: testDataView,
                 labelColumnName: nameof(FileDataPrediction.Label),
                 scoreColumnName: nameof(FileDataPrediction.Score));

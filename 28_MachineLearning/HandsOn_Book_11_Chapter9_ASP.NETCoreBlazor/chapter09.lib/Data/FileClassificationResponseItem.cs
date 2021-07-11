@@ -6,9 +6,12 @@ namespace chapter09.lib.Data
 {
     public class FileClassificationResponseItem
     {
+        //1. First, we define the TRUE and FALSE mapping to 1.0f and 0.0f respectively
         private const float TRUE = 1.0f;
         private const float FALSE = 0.0f;
 
+        //2. Next, we add all of the properties to be used to feed our model and display it
+        //back to the end user in the web application
         public string SHA1Sum { get; set; }
 
         public double Confidence { get; set; }
@@ -35,6 +38,7 @@ namespace chapter09.lib.Data
         {
         }
 
+        //3. Next, we have the constructor method
         public FileClassificationResponseItem(byte[] fileBytes)
         {
             SHA1Sum = fileBytes.ToSHA1();
