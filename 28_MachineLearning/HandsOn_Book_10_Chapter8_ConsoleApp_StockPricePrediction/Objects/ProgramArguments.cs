@@ -2,8 +2,11 @@
 
 namespace chapter08.Objects
 {
+    //This new class, as referred to earlier in this section, provides the one-to-one mapping of
+    //arguments to properties used throughout the application
     public class ProgramArguments
     {
+        //1. First, we define the properties that map directly to the command-line arguments
         public ProgramActions Action { get; set; }
 
         public string TrainingFileName { get; set; }
@@ -14,6 +17,7 @@ namespace chapter08.Objects
 
         public string ModelFileName { get; set; }
 
+        //2. Lastly, we populate default values for the properties
         public ProgramArguments()
         {
             ModelFileName = "chapter8.mdl";
