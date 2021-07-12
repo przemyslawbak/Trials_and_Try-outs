@@ -13,12 +13,17 @@ namespace chapter09.trainer
     {
         public static void Main(string[] args)
         {
+            //1. First, we need to register the CodePages encoder instance to properly read the
+            //Windows - 1252 encoding from the files as we did in the web application, as
+            //follows
             Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
 
             Console.Clear();
 
             var arguments = CommandLineParser.ParseArguments<ProgramArguments>(args);
 
+            //2. We then can use a simplified and strongly typed switch case to handle our three
+            //actions, as follows
             switch (arguments.Action)
             {
                 case ProgramActions.FEATURE_EXTRACTOR:
