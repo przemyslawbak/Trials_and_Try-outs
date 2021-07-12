@@ -5,7 +5,9 @@
 @using chapter09.lib.Data
 
 @inject HttpClient client
-
+<!--The Index.razor file contains the frontend to our file classification web application. In
+addition, it contains the REST call to our UploadController class described earlier in this
+section-->
 <div class="container">
     <div class="row h-100">
         <div class="col-sm-12 my-auto">
@@ -16,42 +18,44 @@
 
                 <InputFile OnChange="HandleSelection" />
 
-                @if (_classificationResponseItem != null) 
+                @if (_classificationResponseItem != null)
                 {
-                    @if (!string.IsNullOrEmpty(_classificationResponseItem.ErrorMessage))
-                    {
-                        <p>@_classificationResponseItem.ErrorMessage</p>
-                    }
-                    else
-                    {
-                        <h3 style="margin-top: 20px">File Prediction Results:</h3>
+    @if (!string.IsNullOrEmpty(_classificationResponseItem.ErrorMessage))
+    {
+<p>@_classificationResponseItem.ErrorMessage</p> }
+else
+{
+<h3 style="margin-top: 20px">File Prediction Results:</h3>
 
-                        <table class="table" style="margin: 0 auto; color: white">
-                            <tr>
-                                <td class="tableLabel">SHA1 Hash</td>
-                                <td>@_classificationResponseItem.SHA1Sum</td>
-                            </tr>
-                            <tr>
-                                <td class="tableLabel">Is Malicious?</td>
-                                <td>@_classificationResponseItem.IsMalicious</td>
-                            </tr>
-                            <tr>
-                                <td class="tableLabel">Confidence</td>
-                                <td>@_classificationResponseItem.Confidence.ToString("P1")</td>
-                            </tr>
-                        </table>
-                    }
-                }
+                    <table class="table" style="margin: 0 auto; color: white">
+                        <tr>
+                            <td class="tableLabel">SHA1 Hash</td>
+                            <td>@_classificationResponseItem.SHA1Sum</td>
+                        </tr>
+                        <tr>
+                            <td class="tableLabel">Is Malicious?</td>
+                            <td>@_classificationResponseItem.IsMalicious</td>
+                        </tr>
+                        <tr>
+                            <td class="tableLabel">Confidence</td>
+                            <td>@_classificationResponseItem.Confidence.ToString("P1")</td>
+                        </tr>
+                    </table>}}
             </div>
         </div>
     </div>
 </div>
-
-@code {
-    FileClassificationResponseItem _classificationResponseItem;
+<!--The first thing to note is the declaration of our
+FileClassificationResponseItem class. We define the variable in this block,
+as it will allow access throughout the page. The second element is the declaration
+of our HandleSelection method, as illustrated in the following code block-->
+@code { FileClassificationResponseItem _classificationResponseItem;
 
     async Task HandleSelection(IEnumerable<IFileListEntry> files)
     {
+        //2. Next, we take the first file, convert it to an array of bytes, and create the
+        //MultipartFormdataContent object to POST to the previously described Post
+        //method, as follows
         var file = files.FirstOrDefault();
 
         if (file != null)
@@ -65,6 +69,9 @@
                 }
             };
 
+            //3. Lastly, we POST the file to our UploadController endpoint and
+            //asynchronously await the response from our ML.NET prediction, before
+            //assigning the response to our response variable
             var response = await client.PostAsync("http://localhost:5000/upload/", content);
 
             var jsonResponse = await response.Content.ReadAsStringAsync();
@@ -74,5 +81,4 @@
                 PropertyNameCaseInsensitive = true
             });
         }
-    }
-}
+    } }

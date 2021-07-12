@@ -2,7 +2,6 @@ using System.Net.Http;
 using System.Text;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -22,6 +21,7 @@ namespace chapter09
 
         public void ConfigureServices(IServiceCollection services)
         {
+            //1. Combined ASP.NET Core and Blazor
             services.AddRazorPages();
             services.AddControllers();
             services.AddServerSideBlazor();
@@ -32,6 +32,9 @@ namespace chapter09
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            //2. The second change comes in the Configure method. The first thing is to register
+            //the CodePages instance.Without this call, the feature extraction call to reference
+            //the Windows-1252 encoding will cause an exception
             Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
 
             if (env.IsDevelopment())

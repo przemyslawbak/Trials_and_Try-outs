@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace chapter09.Controllers
 {
+    //regular controller stuff, comments skipped
     [ApiController]
     [Route("[controller]")]
     public class UploadController : ControllerBase
