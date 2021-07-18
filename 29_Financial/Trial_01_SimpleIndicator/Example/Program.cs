@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
+using System.Linq;
 
 namespace Example
 {
@@ -11,11 +12,17 @@ namespace Example
         private static readonly string _dataFilename = "jsw_d.csv";
         static void Main(string[] args)
         {
-            IEnumerable<Quote> quotes = GetHistory();
-            IEnumerable<SmaResult> results = quotes.GetSma(10);
+            List<Quote> quotes = GetHistory();
+            List<SmaResult> results = quotes.GetSma(10).ToList();
+            SmaResult result = results.LastOrDefault();
+            for (int i = 0; i < quotes.Count(); i++)
+            {
+                Console.WriteLine("SMA on {0} was PLN{1}", quotes[i].Close, results[i].Sma);
+            }
+            
         }
 
-        private static IEnumerable<Quote> GetHistory()
+        private static List<Quote> GetHistory()
         {
             string dataPath = Path.Combine(AppContext.BaseDirectory, "Data", _dataFilename);
             List<Quote> quotes = new List<Quote>();
