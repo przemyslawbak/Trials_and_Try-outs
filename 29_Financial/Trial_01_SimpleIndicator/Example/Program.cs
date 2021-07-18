@@ -1,6 +1,7 @@
 ﻿using Skender.Stock.Indicators;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 
 namespace Example
@@ -25,22 +26,14 @@ namespace Example
                 {
                     string line = reader.ReadLine();
                     string[] values = line.Split(';');
-                    try
-                    {
-                        quotes.Add(new Quote()
-                        {
-                            Date = DateTime.Parse(values[0]),
-                            Open = decimal.Parse(values[1]),
-                            High = decimal.Parse(values[2]),
-                            Low = decimal.Parse(values[3]),
-                            Close = decimal.Parse(values[4]),
-                            Volume = decimal.Parse(values[5]),
-                        });
-                    }
-                    catch (Exception ex)
-                    {
-                        //
-                    }
+                    Quote q = new Quote();
+                    q.Date = DateTime.ParseExact(values[0], "yyyy-MM-dd", CultureInfo.InvariantCulture);
+                    q.Open = decimal.Parse(values[1], CultureInfo.InvariantCulture);
+                    q.High = decimal.Parse(values[2], CultureInfo.InvariantCulture);
+                    q.Low = decimal.Parse(values[3], CultureInfo.InvariantCulture);
+                    q.Close = decimal.Parse(values[4], CultureInfo.InvariantCulture);
+                    q.Volume = decimal.Parse(values[5], CultureInfo.InvariantCulture);
+                    quotes.Add(q);
                 }
             }
 
