@@ -6,6 +6,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Skender.Stock.Indicators" Version="1.14.0" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Update="Data\jsw_d.csv">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
