@@ -10,7 +10,25 @@ namespace Trial.Services
     {
         private static readonly string _dataFilename = "jsw_d.csv";
 
-        public List<Quote> GetQuotes(List<Quote> history)
+        public List<decimal> GetPrices()
+        {
+            List<decimal> prices = new List<decimal>();
+            string dataPath = Path.Combine(AppContext.BaseDirectory, "Data", _dataFilename);
+
+            using (StreamReader reader = new StreamReader(dataPath))
+            {
+                while (!reader.EndOfStream)
+                {
+                    string line = reader.ReadLine();
+                    string[] values = line.Split(';');
+                    prices.Add(decimal.Parse(values[4], CultureInfo.InvariantCulture));
+                }
+            }
+
+            return prices;
+        }
+
+        public List<Quote> GetQuotes()
         {
             string dataPath = Path.Combine(AppContext.BaseDirectory, "Data", _dataFilename);
             List<Quote> quotes = new List<Quote>();

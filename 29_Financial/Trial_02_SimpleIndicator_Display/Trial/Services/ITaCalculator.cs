@@ -5,6 +5,7 @@ namespace Trial.Services
 {
     public interface ITaCalculator
     {
-        List<Quote> GetQuotes(List<Quote> history);
+        List<Quote> GetQuotes();
+        List<decimal> GetPrices();
     }
 }

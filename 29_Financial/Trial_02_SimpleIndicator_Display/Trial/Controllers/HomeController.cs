@@ -2,6 +2,7 @@
 using Skender.Stock.Indicators;
 using System.Collections.Generic;
 using System.Linq;
+using Trial.Models;
 using Trial.Services;
 
 namespace Trial.Controllers
@@ -15,12 +16,14 @@ namespace Trial.Controllers
             _taCalculator = taCalculator;
         }
 
-        public IActionResult Index()
+        public IActionResult Index() //TODO: refactor for DRY
         {
-            List<Quote> quotes = _taCalculator.GetQuotes(history);
-            List<SmaResult> results = quotes.GetSma(10).ToList();
+            DisplayViewModel model = new DisplayViewModel();
+            List<Quote> quotes = _taCalculator.GetQuotes();
+            model.SmaResults = quotes.GetSma(10).ToList();
+            model.StockPrices = _taCalculator.GetPrices();
 
-            return View();
+            return View(model);
         }
     }
 }
