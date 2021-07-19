@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Skender.Stock.Indicators;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Trial.Models;
@@ -18,10 +19,12 @@ namespace Trial.Controllers
 
         public IActionResult Index() //TODO: refactor for DRY
         {
-            DisplayViewModel model = new DisplayViewModel();
             List<Quote> quotes = _taCalculator.GetQuotes();
-            model.SmaResults = quotes.GetSma(10).ToList();
-            model.StockPrices = _taCalculator.GetPrices();
+            DisplayViewModel model = new DisplayViewModel();
+            List<SmaResult> smaResults = quotes.GetSma(10).ToList();
+            List<decimal> stockPrices = _taCalculator.GetPrices();
+            model.SmaResults = smaResults.Skip(Math.Max(0, smaResults.Count - 50)).ToList();
+            model.StockPrices = stockPrices.Skip(Math.Max(0, stockPrices.Count - 50)).ToList();
 
             return View(model);
         }
