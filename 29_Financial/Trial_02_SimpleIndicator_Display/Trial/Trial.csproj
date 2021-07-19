@@ -8,4 +8,8 @@
     <Folder Include="Models\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Skender.Stock.Indicators" Version="1.14.0" />
+  </ItemGroup>
+
 </Project>
