@@ -19,7 +19,6 @@ namespace Example
             {
                 Console.WriteLine("SMA on {0} was PLN{1}", quotes[i].Close, results[i].Sma);
             }
-            
         }
 
         private static List<Quote> GetHistory()
