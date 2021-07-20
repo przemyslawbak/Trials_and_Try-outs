@@ -7,5 +7,6 @@ namespace Trial.Services
     {
         List<Quote> GetQuotes();
         List<decimal> GetPrices();
+        List<string> GetDates();
     }
 }

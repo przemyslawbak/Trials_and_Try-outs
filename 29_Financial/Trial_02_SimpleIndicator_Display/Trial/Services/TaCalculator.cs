@@ -10,6 +10,24 @@ namespace Trial.Services
     {
         private static readonly string _dataFilename = "jsw_d.csv";
 
+        public List<string> GetDates()
+        {
+            List<string> dates = new List<string>();
+            string dataPath = Path.Combine(AppContext.BaseDirectory, "Data", _dataFilename);
+
+            using (StreamReader reader = new StreamReader(dataPath))
+            {
+                while (!reader.EndOfStream)
+                {
+                    string line = reader.ReadLine();
+                    string[] values = line.Split(';');
+                    dates.Add(values[4]);
+                }
+            }
+
+            return dates;
+        }
+
         public List<decimal> GetPrices()
         {
             List<decimal> prices = new List<decimal>();

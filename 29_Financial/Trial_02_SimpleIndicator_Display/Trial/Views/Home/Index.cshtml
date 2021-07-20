@@ -2,93 +2,41 @@
     Layout = "_Layout";
 }
 
-<canvas id="myChart" height="400"></canvas>
+
+<canvas id="myChart" style="width:100%;max-width:700px"></canvas>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js">
+</script>
 
 <script>
-    var price = [];
-    var sma = [];
-    var ctx = document.getElementById('myChart').getContext('2d');
-    var myChart = new Chart(ctx, {
-            type: 'line',
-            data: {
-                labels: labels,
-                datasets: [
-                    {
-                        label: 'Price',
-                        data: price,
-                        borderColor: 'rgb(255, 159, 64)',
-                        backgroundColor: 'rgba(255, 159, 64, 0.2)'
-                    },
-                    {
-                        label: 'SMA',
-                        data: sma,
-                        borderColor: 'rgb(255, 99, 132)',
-                        backgroundColor: 'rgba(255, 99, 132, 0.2)'
-                    },
-                ]
-            },
-            options: {
-                tooltips: {
-                    callbacks:
-                    {
-                        label: function (tooltipItem, data) {
-                            var _data = data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index];
-                            var data = /\./.test(_data) ? _data.toFixed(2) : _data;
-                            return data + '%';
-                        }
-                    }
-                },
-                legend: {
-                    labels: {
-                        fontColor: "white"
-                    }
-                },
-                maintainAspectRatio: false,
-                responsive: true,
-                scales: {
-                    yAxes: [{
-                        scaleLabel: {
-                            display: true,
-                            labelString: 'label A',
-                            fontColor: "white"
-                        },
-                        stacked: true,
-                        ticks: {
-                            fontColor: "white",
-                            min: 0,
-                            max: 100
-                        }
-                    }],
-                    xAxes: [{
-                        scaleLabel: {
-                            display: true,
-                            labelString: 'label B',
-                            fontColor: "white"
-                        },
-                        type: 'time',
-                        time: {
-                            unit: 'day'
-                        },
-                        ticks: {
-                            fontColor: "white"
-                        }
-                    }]
-                },
-                animation: {
-                    duration: 750,
-                }
-            }
-    });
+    var xyValues = [
+        { x: 50, y: 7 },
+        { x: 60, y: 8 },
+        { x: 70, y: 8 },
+        { x: 80, y: 9 },
+        { x: 90, y: 9 },
+        { x: 100, y: 9 },
+        { x: 110, y: 10 },
+        { x: 120, y: 11 },
+        { x: 130, y: 14 },
+        { x: 140, y: 14 },
+        { x: 150, y: 15 }
+    ];
 
-    var hiddenDatasets = [];
-    for (var i = 0; i < myChart.data.datasets.length; i++) {
-        // It seems some value updated in metadata, but there is a method available.
-        // var metaDatasets = myChart.getDatasetMeta(i);
-        if (!myChart.isDatasetVisible(i)) {
-            // or myChart.getDatasetMeta(i);
-            hiddenDatasets.push(myChart.data.datasets[i].label);
+    new Chart("myChart", {
+        type: "scatter",
+        data: {
+            datasets: [{
+                pointRadius: 4,
+                pointBackgroundColor: "rgb(0,0,255)",
+                data: xyValues
+            }]
+        },
+        options: {
+            legend: { display: false },
+            scales: {
+            }
         }
-    }
-    // See console.
-    console.log(hiddenDatasets);
+    });
 </script>

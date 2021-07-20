@@ -25,6 +25,7 @@ namespace Trial.Controllers
             List<decimal> stockPrices = _taCalculator.GetPrices();
             model.SmaResults = smaResults.Skip(Math.Max(0, smaResults.Count - 50)).ToList();
             model.StockPrices = stockPrices.Skip(Math.Max(0, stockPrices.Count - 50)).ToList();
+            model.Dates = _taCalculator.GetDates();
 
             return View(model);
         }

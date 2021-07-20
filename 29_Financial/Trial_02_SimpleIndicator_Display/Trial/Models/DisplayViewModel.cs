@@ -7,5 +7,6 @@ namespace Trial.Models
     {
         public List<SmaResult> SmaResults { get; set; }
         public List<decimal> StockPrices { get; set; }
+        public List<string> Dates { get; set; }
     }
 }
