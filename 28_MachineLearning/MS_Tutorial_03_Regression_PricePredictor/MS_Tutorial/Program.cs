@@ -34,7 +34,7 @@ namespace MS_Tutorial
                 .Append(mlContext.Transforms.Categorical.OneHotEncoding(outputColumnName: "RateCodeEncoded", inputColumnName: "RateCode"))
                 .Append(mlContext.Transforms.Categorical.OneHotEncoding(outputColumnName: "PaymentTypeEncoded", inputColumnName: "PaymentType"))
                 .Append(mlContext.Transforms.Concatenate("Features", "VendorIdEncoded", "RateCodeEncoded", "PassengerCount", "TripDistance", "PaymentTypeEncoded"))
-                .Append(mlContext.Regression.Trainers.FastTree()); //??
+                .Append(mlContext.Regression.Trainers.LbfgsPoissonRegression());
             Microsoft.ML.Data.TransformerChain<Microsoft.ML.Data.RegressionPredictionTransformer<Microsoft.ML.Trainers.PoissonRegressionModelParameters>> model = pipeline.Fit(dataView);
 
             return model;
