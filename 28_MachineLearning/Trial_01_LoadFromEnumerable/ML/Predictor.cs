@@ -48,7 +48,7 @@ namespace chapter03_logistic_regression.ML
             //return value of the GetStrings method we wrote earlier
             FilePrediction prediction = predictionEngine.Predict(new FileInput
             {
-                Strings = GetStrings(File.ReadAllBytes(inputDataFile))
+                //Strings = GetStrings(File.ReadAllBytes(inputDataFile))
             });
 
             //3. Finally, we update the output call to the Console object with our file
