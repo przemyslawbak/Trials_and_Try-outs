@@ -17,9 +17,9 @@ namespace chapter03_logistic_regression.ML
         {
             IEnumerable<FileInput> input = new FileInput[]
             {
-                new FileInput { Date = DateTime.Now, CloseBrent = 111.34M, CloseDax = 15674.38M, SmaBrent = 112.23M, SmaDax = 15632.13M, SmaDeltaBrent = true, SmaDeltaDax = false },
-                new FileInput { Date = DateTime.Now.AddDays(1), CloseBrent = 111.35M, CloseDax = 15374.38M, SmaBrent = 111.23M, SmaDax = 15642.13M, SmaDeltaBrent = true, SmaDeltaDax = true },
-                new FileInput { Date = DateTime.Now.AddDays(2), CloseBrent = 112.35M, CloseDax = 15474.38M, SmaBrent = 110.23M, SmaDax = 15242.13M, SmaDeltaBrent = false, SmaDeltaDax = true },
+                new FileInput { Date = DateTime.Now, CloseBrent = 111.34F, CloseDax = 15674.38F, SmaBrent = 112.23F, SmaDax = 15632.13F, SmaDeltaBrent = true, SmaDeltaDax = false },
+                new FileInput { Date = DateTime.Now.AddDays(1), CloseBrent = 111.35F, CloseDax = 15374.38F, SmaBrent = 111.23F, SmaDax = 15642.13F, SmaDeltaBrent = true, SmaDeltaDax = true },
+                new FileInput { Date = DateTime.Now.AddDays(2), CloseBrent = 112.35F, CloseDax = 15474.38F, SmaBrent = 110.23F, SmaDax = 15242.13F, SmaDeltaBrent = false, SmaDeltaDax = true },
             };
 
             IDataView trainingDataView = MlContext.Data.LoadFromEnumerable(input);
