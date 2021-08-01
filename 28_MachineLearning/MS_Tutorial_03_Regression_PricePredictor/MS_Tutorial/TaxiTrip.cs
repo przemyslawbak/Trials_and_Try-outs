@@ -30,5 +30,7 @@ namespace MS_Tutorial
     {
         [ColumnName("Score")]
         public float FareAmount;
+        [ColumnName("Probability")]
+        public float Probability { get; set; }
     }
 }

@@ -16,6 +16,7 @@ namespace MS_Tutorial
             MLContext mlContext = new MLContext(seed: 0);
             ITransformer model = Train(mlContext, _trainDataPath);
             Evaluate(mlContext, model);
+            TestSinglePrediction(mlContext, model);
         }
 
         /// <summary>
@@ -86,6 +87,7 @@ namespace MS_Tutorial
             var prediction = predictionFunction.Predict(taxiTripSample);
             Console.WriteLine($"**********************************************************************");
             Console.WriteLine($"Predicted fare: {prediction.FareAmount:0.####}, actual fare: 15.5");
+            Console.WriteLine($"Predicted probability: {prediction.Probability:0.####}");
             Console.WriteLine($"**********************************************************************");
         }
     }
