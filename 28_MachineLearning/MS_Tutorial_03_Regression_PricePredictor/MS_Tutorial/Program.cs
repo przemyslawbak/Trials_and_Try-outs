@@ -72,7 +72,6 @@ namespace MS_Tutorial
         /// </summary>
         private static void TestSinglePrediction(MLContext mlContext, ITransformer model)
         {
-            TestSinglePrediction(mlContext, model);
             PredictionEngine<TaxiTrip, TaxiTripFarePrediction> predictionFunction = mlContext.Model.CreatePredictionEngine<TaxiTrip, TaxiTripFarePrediction>(model);
             TaxiTrip taxiTripSample = new TaxiTrip()
             {

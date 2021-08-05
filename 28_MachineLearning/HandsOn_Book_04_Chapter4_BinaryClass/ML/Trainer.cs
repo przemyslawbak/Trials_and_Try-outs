@@ -6,6 +6,10 @@ using chapter04.ML.Base;
 using chapter04.ML.Objects;
 
 using Microsoft.ML;
+using Microsoft.ML.Calibrators;
+using Microsoft.ML.Data;
+using Microsoft.ML.Trainers.FastTree;
+using Microsoft.ML.Transforms;
 
 namespace chapter04.ML
 {
@@ -45,7 +49,7 @@ namespace chapter04.ML
 
             //3. We can then create the FastTree trainer with the label from the CarInventory
             //class and the normalized mean variance, as follows
-            Microsoft.ML.Trainers.FastTree.FastTreeBinaryTrainer trainer = MlContext.BinaryClassification.Trainers.FastTree(labelColumnName: nameof(CarInventory.Label),
+            FastTreeBinaryTrainer trainer = MlContext.BinaryClassification.Trainers.FastTree(labelColumnName: nameof(CarInventory.Label),
                 featureColumnName: "FeaturesNormalizedByMeanVar",
                 numberOfLeaves: 2,
                 numberOfTrees: 1000,
@@ -56,17 +60,17 @@ namespace chapter04.ML
             //metrics, followed by a Console.WriteLine call to provide these metrics to your
             //console output. We will go into detail about what each of these means in the last
             //section of the chapter, but for now, the code can be seen here
-            Microsoft.ML.Data.EstimatorChain<Microsoft.ML.Data.BinaryPredictionTransformer<Microsoft.ML.Calibrators.CalibratedModelParametersBase<Microsoft.ML.Trainers.FastTree.FastTreeBinaryModelParameters, Microsoft.ML.Calibrators.PlattCalibrator>>> trainingPipeline = dataProcessPipeline.Append(trainer);
-            Microsoft.ML.Data.TransformerChain<Microsoft.ML.Data.BinaryPredictionTransformer<Microsoft.ML.Calibrators.CalibratedModelParametersBase<Microsoft.ML.Trainers.FastTree.FastTreeBinaryModelParameters, Microsoft.ML.Calibrators.PlattCalibrator>>> trainedModel = trainingPipeline.Fit(trainingDataView);
+            EstimatorChain<BinaryPredictionTransformer<CalibratedModelParametersBase<FastTreeBinaryModelParameters, PlattCalibrator>>> trainingPipeline = dataProcessPipeline.Append(trainer);
+            TransformerChain<BinaryPredictionTransformer<CalibratedModelParametersBase<FastTreeBinaryModelParameters, PlattCalibrator>>> trainedModel = trainingPipeline.Fit(trainingDataView);
             MlContext.Model.Save(trainedModel, trainingDataView.Schema, ModelPath);
 
             //Now, we evaluate the model we just trained
-            Microsoft.ML.Data.TransformerChain<Microsoft.ML.Transforms.FeatureContributionCalculatingTransformer> evaluationPipeline = trainedModel.Append(MlContext.Transforms
+            TransformerChain<FeatureContributionCalculatingTransformer> evaluationPipeline = trainedModel.Append(MlContext.Transforms
                 .CalculateFeatureContribution(trainedModel.LastTransformer)
                 .Fit(dataProcessPipeline.Fit(trainingDataView).Transform(trainingDataView)));
             IDataView testDataView = MlContext.Data.LoadFromTextFile<CarInventory>(testFileName, ',', hasHeader: false);
             IDataView testSetTransform = evaluationPipeline.Transform(testDataView);
-            Microsoft.ML.Data.CalibratedBinaryClassificationMetrics modelMetrics = MlContext.BinaryClassification.Evaluate(data: testSetTransform,
+            CalibratedBinaryClassificationMetrics modelMetrics = MlContext.BinaryClassification.Evaluate(data: testSetTransform,
                 labelColumnName: nameof(CarInventory.Label),
                 scoreColumnName: "Score");
 
