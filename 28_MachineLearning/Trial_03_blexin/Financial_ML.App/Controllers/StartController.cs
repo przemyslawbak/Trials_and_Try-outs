@@ -18,15 +18,13 @@ namespace Financial_ML.App.Controllers
         private readonly IDataProvider _dataProvider;
         private readonly IDataTrimmer _dataTrimmer;
         private readonly IMlRegression _mlRegression;
-        private readonly IMlBinary _mlBinary;
         private readonly IMlBase _mlBase;
 
-        public StartController(IDataProvider dataProvider, IDataTrimmer dataTrimmer, IMlRegression mlRegression, IMlBase mlBase, IMlBinary mlBinary)
+        public StartController(IDataProvider dataProvider, IDataTrimmer dataTrimmer, IMlRegression mlRegression, IMlBase mlBase)
         {
             _dataProvider = dataProvider;
             _dataTrimmer = dataTrimmer;
             _mlRegression = mlRegression;
-            _mlBinary = mlBinary;
             _mlBase = mlBase;
         }
 
