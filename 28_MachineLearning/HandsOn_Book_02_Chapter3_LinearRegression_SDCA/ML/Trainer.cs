@@ -6,6 +6,7 @@ using chapter03.ML.Base;
 using chapter03.ML.Objects;
 
 using Microsoft.ML;
+using Microsoft.ML.Trainers;
 
 namespace chapter03.ML
 {
@@ -39,7 +40,7 @@ namespace chapter03.ML
                     typeof(EmploymentHistory).ToPropertyList<EmploymentHistory>(nameof(EmploymentHistory.DurationInMonths)))));
 
             //We can then create the Sdca trainer using the default parameters
-            Microsoft.ML.Trainers.SdcaRegressionTrainer trainer = MlContext.Regression.Trainers.Sdca(labelColumnName: "Label", featureColumnName: "Features");
+            SdcaRegressionTrainer trainer = MlContext.Regression.Trainers.Sdca(labelColumnName: "Label", featureColumnName: "Features");
 
             Microsoft.ML.Data.EstimatorChain<Microsoft.ML.Data.RegressionPredictionTransformer<Microsoft.ML.Trainers.LinearRegressionModelParameters>> trainingPipeline = dataProcessPipeline.Append(trainer);
 
