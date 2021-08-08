@@ -13,7 +13,7 @@ namespace Financial_ML.MachineLearning
             return context.Regression.Evaluate(predictionsRegresion, "Label", "NextDayCloseDax");
         }
 
-        public EstimatorChain<RegressionPredictionTransformer<PoissonRegressionModelParameters>> GetRegressionPipeline(MLContext context)
+        public EstimatorChain<RegressionPredictionTransformer<PoissonRegressionModelParameters>> GetLbfgRegressionPipeline(MLContext context)
         {
             return context.Transforms.CopyColumns(outputColumnName: "Label", inputColumnName: "CloseDax")
                 .Append(context.Transforms.Concatenate("Features", "CloseDax", "SmaDax", "SmaBrent", "CloseBrent", "SmaDeltaDax", "SmaDeltaBrent", "NextDayCloseDax"))
