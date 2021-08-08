@@ -89,6 +89,7 @@ namespace Financial_ML.Services
                 if (allQuotes.Count() > 2)
                 {
                     allQuotes[count - 2].NextDayCloseDax = lastDaxClose;
+                    allQuotes[count - 2].NextDayCloseDaxBoolean = allQuotes[count - 2].NextDayCloseDax - allQuotes[count - 2].CloseDax > 0 ? true : false;
                 }
             }
 

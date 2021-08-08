@@ -21,5 +21,6 @@ namespace Financial_ML.Models
         public float CloseBrent { get; set; }
         [LoadColumn(7)]
         public float NextDayCloseDax { get; set; }
+        public bool NextDayCloseDaxBoolean { get; set; }
     }
 }
