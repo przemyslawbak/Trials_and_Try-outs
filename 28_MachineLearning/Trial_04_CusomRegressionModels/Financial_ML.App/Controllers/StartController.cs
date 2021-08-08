@@ -4,8 +4,10 @@ using Financial_ML.Services;
 using Financial_ML.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.ML;
+using Microsoft.ML.Calibrators;
 using Microsoft.ML.Data;
 using Microsoft.ML.Trainers;
+using Microsoft.ML.Trainers.LightGbm;
 using System;
 
 namespace Financial_ML.App.Controllers
@@ -30,19 +32,8 @@ namespace Financial_ML.App.Controllers
             ResultsDisplay display = _dataProvider.GetResultsDisplayViewModel();
             MLContext context = _mlBase.GetMlContext();
             IDataView data = _mlBase.GetDataViewFromEnumerable(display.AllTotalQuotes, context);
-
-            //train
             DataOperationsCatalog.TrainTestData trainTestData = _mlBase.GetTestData(context, data);
-
-            //LbfgsPoissonRegression
-            EstimatorChain<RegressionPredictionTransformer<PoissonRegressionModelParameters>> pipelineLbfgRegression = _mlRegression.GetLbfgRegressionPipeline(context);
-            TransformerChain<RegressionPredictionTransformer<PoissonRegressionModelParameters>> modelRegression = pipelineLbfgRegression.Fit(trainTestData.TrainSet);
-            //evaluate
-            RegressionMetrics metricsLbfgRegresion = _mlRegression.GetRegressionMetrix(modelRegression, context, trainTestData);
-            //prediction
-            TransformerChain<RegressionPredictionTransformer<PoissonRegressionModelParameters>> modelLbfg = pipelineLbfgRegression.Fit(trainTestData.TrainSet);
-            PredictionEngine<TotalQuote, DaxChangeRegressionPrediction> predictionFunction = context.Model.CreatePredictionEngine<TotalQuote, DaxChangeRegressionPrediction>(modelLbfg);
-            TotalQuote sample = new TotalQuote()
+            TotalQuote sampleForPrediction = new TotalQuote()
             {
                 CloseBrent = 118.56F,
                 CloseDax = 15216.27F,
@@ -52,12 +43,35 @@ namespace Financial_ML.App.Controllers
                 SmaDeltaBrent = 1,
                 SmaDeltaDax = 1
             };
-            DaxChangeRegressionPrediction predictionRegression = predictionFunction.Predict(sample);
+            DaxChangeRegressionPrediction prediction = new DaxChangeRegressionPrediction();
+
+            //LbfgsPoissonRegression
+            EstimatorChain<RegressionPredictionTransformer<PoissonRegressionModelParameters>> pipelineLbfgRegression = _mlRegression.GetLbfgRegressionPipeline(context);
+            TransformerChain<RegressionPredictionTransformer<PoissonRegressionModelParameters>> modelRegression = pipelineLbfgRegression.Fit(trainTestData.TrainSet);
+            //evaluate
+            RegressionMetrics metricsLbfgRegresion = _mlRegression.GetRegressionMetrix(modelRegression, context, trainTestData);
+            //prediction
+            TransformerChain<RegressionPredictionTransformer<PoissonRegressionModelParameters>> modelLbfg = pipelineLbfgRegression.Fit(trainTestData.TrainSet);
+            PredictionEngine<TotalQuote, DaxChangeRegressionPrediction> predictionA = context.Model.CreatePredictionEngine<TotalQuote, DaxChangeRegressionPrediction>(modelLbfg);
+            prediction = predictionA.Predict(sampleForPrediction);
 
             //LightGbmBinaryTrainer
+            LightGbmBinaryTrainer.Options options = new LightGbmBinaryTrainer.Options
+            {
+                Booster = new GossBooster.Options
+                {
+                    TopRate = 0.3,
+                    OtherRate = 0.2
+                }
+            };
+            LightGbmBinaryTrainer pipeline = context.BinaryClassification.Trainers.LightGbm(options);
+            //evaluate
+            CalibratedBinaryClassificationMetrics metrics = context.BinaryClassification.Evaluate(trainTestData.TestSet);
+            //prediction
+            BinaryPredictionTransformer<CalibratedModelParametersBase<LightGbmBinaryModelParameters,PlattCalibrator>> modelBinaryLightGmb = pipeline.Fit(trainTestData.TrainSet);
+            PredictionEngine<TotalQuote, DaxChangeRegressionPrediction> predictionB = context.Model.CreatePredictionEngine<TotalQuote, DaxChangeRegressionPrediction>(modelLbfg);
+            prediction = predictionB.Predict(sampleForPrediction);
 
-            
-            
 
             display = _dataTrimmer.TrimList(display, 50);
 
