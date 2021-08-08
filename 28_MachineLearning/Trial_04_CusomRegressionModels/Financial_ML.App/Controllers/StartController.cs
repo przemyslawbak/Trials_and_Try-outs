@@ -64,12 +64,14 @@ namespace Financial_ML.App.Controllers
                     OtherRate = 0.2
                 }
             };
-            LightGbmBinaryTrainer pipeline = context.BinaryClassification.Trainers.LightGbm(options);
+            var pipeline = context.Transforms.CopyColumns(outputColumnName: "Label", inputColumnName: "CloseDax")
+                .Append(context.Transforms.Concatenate("Features", "CloseDax", "SmaDax", "SmaBrent", "CloseBrent", "SmaDeltaDax", "SmaDeltaBrent", "NextDayCloseDax"))
+                .Append(context.BinaryClassification.Trainers.LightGbm(options));
             //evaluate
             CalibratedBinaryClassificationMetrics metrics = context.BinaryClassification.Evaluate(trainTestData.TestSet);
             //prediction
-            BinaryPredictionTransformer<CalibratedModelParametersBase<LightGbmBinaryModelParameters,PlattCalibrator>> modelBinaryLightGmb = pipeline.Fit(trainTestData.TrainSet);
-            PredictionEngine<TotalQuote, DaxChangeRegressionPrediction> predictionB = context.Model.CreatePredictionEngine<TotalQuote, DaxChangeRegressionPrediction>(modelLbfg);
+            BinaryPredictionTransformer<CalibratedModelParametersBase<LightGbmBinaryModelParameters,PlattCalibrator>> modelBinaryLightGmb = pipeline.Fit(data);
+            PredictionEngine<TotalQuote, DaxChangeRegressionPrediction> predictionB = context.Model.CreatePredictionEngine<TotalQuote, DaxChangeRegressionPrediction>(modelBinaryLightGmb);
             prediction = predictionB.Predict(sampleForPrediction);
 
 
