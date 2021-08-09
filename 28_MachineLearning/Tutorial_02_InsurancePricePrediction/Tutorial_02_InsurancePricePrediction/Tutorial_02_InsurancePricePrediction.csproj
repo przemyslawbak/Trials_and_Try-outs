@@ -10,4 +10,10 @@
     <PackageReference Include="Microsoft.ML.AutoML" Version="0.18.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="insurance.csv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>

@@ -10,8 +10,8 @@ namespace Tutorial_02_InsurancePricePrediction
     //https://www.red-gate.com/simple-talk/cloud/data-science/insurance-price-prediction-using-machine-learning-ml-net/
     class Program
     {
-        private static string TRAIN_DATA_FILEPATH = @"C:\Chandra\1\Articles\Redgate\Practice\Ins-Price-Prediction\insurance.csv";
-        private static string MODEL_FILEPATH = @"C:\Chandra\1\Articles\Redgate\Practice\Ins-Price-Prediction\MLModel.zip";
+        private static string TRAIN_DATA_FILEPATH = "insurance.csv";
+        private static string MODEL_FILEPATH = "MLModel.zip";
         static void Main(string[] args)
         {
             //Create ML Context and set a random seed for repeatable/deterministic results across multiple trainings.
