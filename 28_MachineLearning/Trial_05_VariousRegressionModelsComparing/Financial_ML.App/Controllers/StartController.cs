@@ -7,6 +7,7 @@ using Microsoft.ML;
 using Microsoft.ML.Data;
 using Microsoft.ML.Trainers;
 using System;
+using System.Collections.Generic;
 
 namespace Financial_ML.App.Controllers
 {
@@ -30,6 +31,15 @@ namespace Financial_ML.App.Controllers
             ResultsDisplay display = _dataProvider.GetResultsDisplayViewModel();
             MLContext context = _mlBase.GetMlContext();
             IDataView data = _mlBase.GetDataViewFromEnumerable(display.AllTotalQuotes, context);
+
+            List<object> regressors = new List<object>();
+            regressors.Add(context.Regression.Trainers.FastForest(labelColumnName: "Count", featureColumnName: "Features"));
+            regressors.Add(context.Regression.Trainers.FastTree(labelColumnName: "Count", featureColumnName: "Features"));
+            regressors.Add(context.Regression.Trainers.FastTreeTweedie(labelColumnName: "Count", featureColumnName: "Features"));
+            regressors.Add(context.Regression.Trainers.Gam(labelColumnName: "Count", featureColumnName: "Features"));
+            regressors.Add(context.Regression.Trainers.OnlineGradientDescent(labelColumnName: "Count", featureColumnName: "Features"));
+            regressors.Add(context.Regression.Trainers.LbfgsPoissonRegression(labelColumnName: "Count", featureColumnName: "Features"));
+            regressors.Add(context.Regression.Trainers.Sdca(labelColumnName: "Count", featureColumnName: "Features"));
 
             //train
             DataOperationsCatalog.TrainTestData trainTestData = _mlBase.GetTestData(context, data);

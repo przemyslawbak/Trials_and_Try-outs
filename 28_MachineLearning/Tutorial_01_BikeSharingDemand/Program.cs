@@ -1,6 +1,7 @@
 ﻿using BikeSharingDemand.Helpers;
 using BikeSharingDemand.ModelNamespace;
 using Microsoft.ML;
+using Microsoft.ML.Trainers;
 using Microsoft.ML.Training;
 using System;
 using System.Collections.Generic;
