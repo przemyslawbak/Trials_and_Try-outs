@@ -42,7 +42,7 @@ namespace BikeSharingDemand
 
         private static void RunAlgorythm(ITrainerEstimator<ISingleFeaturePredictionTransformer<IPredictor>, IPredictor> algorythm)
         {
-            var model = new Model(_mlContext, algorythm);
+            Model model = new Model(_mlContext, algorythm);
             model.BuildAndFit(_trainingDataLocation);
             PrintAndStoreMetrics(model);
         }

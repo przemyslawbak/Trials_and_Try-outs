@@ -6,7 +6,7 @@ namespace Financial_ML.MachineLearning
 {
     public interface IMlRegression
     {
-        EstimatorChain<RegressionPredictionTransformer<PoissonRegressionModelParameters>> GetRegressionPipeline(MLContext context);
+        EstimatorChain<RegressionPredictionTransformer<PoissonRegressionModelParameters>> GetRegressionPipeline(MLContext context, object algorythim);
         RegressionMetrics GetRegressionMetrix(TransformerChain<RegressionPredictionTransformer<PoissonRegressionModelParameters>> modelRegression, MLContext context, DataOperationsCatalog.TrainTestData trainTestData);
     }
 }

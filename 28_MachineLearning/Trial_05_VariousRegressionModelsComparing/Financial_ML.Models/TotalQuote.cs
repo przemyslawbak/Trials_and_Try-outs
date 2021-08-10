@@ -5,6 +5,7 @@ namespace Financial_ML.Models
 {
     public class TotalQuote
     {
+        public string ModelName { get; private set; }
         [LoadColumn(0)]
         public DateTime Date { get; set; }
         [LoadColumn(1)]

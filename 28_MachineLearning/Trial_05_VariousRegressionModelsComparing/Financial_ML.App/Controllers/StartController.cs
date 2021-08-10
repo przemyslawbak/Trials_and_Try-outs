@@ -32,6 +32,9 @@ namespace Financial_ML.App.Controllers
             MLContext context = _mlBase.GetMlContext();
             IDataView data = _mlBase.GetDataViewFromEnumerable(display.AllTotalQuotes, context);
 
+            //train
+            DataOperationsCatalog.TrainTestData trainTestData = _mlBase.GetTestData(context, data);
+
             List<object> regressors = new List<object>();
             regressors.Add(context.Regression.Trainers.FastForest(labelColumnName: "Count", featureColumnName: "Features"));
             regressors.Add(context.Regression.Trainers.FastTree(labelColumnName: "Count", featureColumnName: "Features"));
@@ -41,18 +44,11 @@ namespace Financial_ML.App.Controllers
             regressors.Add(context.Regression.Trainers.LbfgsPoissonRegression(labelColumnName: "Count", featureColumnName: "Features"));
             regressors.Add(context.Regression.Trainers.Sdca(labelColumnName: "Count", featureColumnName: "Features"));
 
-            //train
-            DataOperationsCatalog.TrainTestData trainTestData = _mlBase.GetTestData(context, data);
+            foreach (object algorithm in regressors)
+            {
+                RunAlgorithm(trainTestData, context, algorithm);
+            }
 
-            //regression pipeline
-            EstimatorChain<RegressionPredictionTransformer<PoissonRegressionModelParameters>> pipelineRegression = _mlRegression.GetRegressionPipeline(context);
-            TransformerChain<RegressionPredictionTransformer<PoissonRegressionModelParameters>> modelRegression = pipelineRegression.Fit(trainTestData.TrainSet);
-
-            //evaluate
-            RegressionMetrics metricsRegresion = _mlRegression.GetRegressionMetrix(modelRegression, context, trainTestData);
-            //prediction
-            TransformerChain<RegressionPredictionTransformer<PoissonRegressionModelParameters>> model = pipelineRegression.Fit(trainTestData.TrainSet);
-            PredictionEngine<TotalQuote, DaxChangeRegressionPrediction> predictionFunction = context.Model.CreatePredictionEngine<TotalQuote, DaxChangeRegressionPrediction>(model);
             TotalQuote sample = new TotalQuote()
             {
                 CloseBrent = 118.56F,
@@ -63,11 +59,15 @@ namespace Financial_ML.App.Controllers
                 SmaDeltaBrent = 1,
                 SmaDeltaDax = 1
             };
-            DaxChangeRegressionPrediction predictionRegression = predictionFunction.Predict(sample); //shitty result
 
             display = _dataTrimmer.TrimList(display, 50);
 
             return View(display);
+        }
+
+        private void RunAlgorithm(DataOperationsCatalog.TrainTestData trainTestData, MLContext context, object algorithm)
+        {
+            var pipeline = _mlRegression.GetRegressionPipeline(context, algorithm);
         }
     }
 }
