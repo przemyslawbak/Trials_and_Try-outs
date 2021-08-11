@@ -4,6 +4,7 @@ using Microsoft.ML.Trainers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 
 namespace Financial_ML.MachineLearning
 {
@@ -15,13 +16,15 @@ namespace Financial_ML.MachineLearning
             return context.Regression.Evaluate(predictionsRegresion, "Label", "NextDayCloseDax");
         }
 
-        public EstimatorChain<RegressionPredictionTransformer<PoissonRegressionModelParameters>> GetRegressionPipeline(MLContext context, KeyValuePair<Type, object> algorythim)
+        public EstimatorChain<RegressionPredictionTransformer<PoissonRegressionModelParameters>> GetRegressionPipeline(MLContext context, KeyValuePair<Type, object> algorithm)
         {
-            Type t = algorythim.Key;
+            Type t = algorithm.Key;
+            Assembly info = typeof(int).Assembly;
+            var dupa = algorithm.Value as t.GetType();
             return context.Transforms.CopyColumns(outputColumnName: "Label", inputColumnName: "CloseDax")
                 .Append(context.Transforms.Concatenate("Features", "CloseDax", "SmaDax", "SmaBrent", "CloseBrent", "SmaDeltaDax", "SmaDeltaBrent", "NextDayCloseDax"))
                 .AppendCacheCheckpoint(context)
-                .Append(algorythim.Value as (t));
+                .Append((algorithm.Key)algorithm.Value);
         }
     }
 }

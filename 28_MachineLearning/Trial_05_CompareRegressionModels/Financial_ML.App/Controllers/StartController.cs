@@ -4,7 +4,6 @@ using Financial_ML.Services;
 using Financial_ML.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.ML;
-using Microsoft.ML.Data;
 using Microsoft.ML.Trainers;
 using System;
 using System.Collections.Generic;
