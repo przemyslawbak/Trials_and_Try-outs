@@ -19,6 +19,7 @@ namespace Financial_ML.App.Controllers
         private readonly IMlRegression _mlRegression;
         private readonly IMlBase _mlBase;
         private readonly List<RegressionMetrics> _metrixList;
+        private readonly List<PredictionModel> _predictionList;
 
         public StartController(IDataProvider dataProvider, IDataTrimmer dataTrimmer, IMlRegression mlRegression, IMlBase mlBase)
         {
@@ -26,6 +27,7 @@ namespace Financial_ML.App.Controllers
             _dataTrimmer = dataTrimmer;
             _mlRegression = mlRegression;
             _mlBase = mlBase;
+            _predictionList = new List<PredictionModel>();
             _metrixList = new List<RegressionMetrics>();
         }
 
@@ -34,6 +36,18 @@ namespace Financial_ML.App.Controllers
             ResultsDisplay display = _dataProvider.GetResultsDisplayViewModel();
             MLContext context = _mlBase.GetMlContext();
             IDataView data = _mlBase.GetDataViewFromEnumerable(display.AllTotalQuotes, context);
+
+
+            TotalQuote sample = new TotalQuote()
+            {
+                CloseBrent = 118.56F,
+                CloseDax = 15216.27F,
+                Date = DateTime.Now.AddDays(-12),
+                SmaBrent = 71.956F,
+                SmaDax = 15461.68F,
+                SmaDeltaBrent = 1,
+                SmaDeltaDax = 1
+            };
 
             //train
             DataOperationsCatalog.TrainTestData trainTestData = _mlBase.GetTestData(context, data);
@@ -49,30 +63,21 @@ namespace Financial_ML.App.Controllers
 
             foreach (KeyValuePair<Type, object> algorithm in regressors)
             {
-                RunAlgorithm(trainTestData, context, algorithm);
+                RunAlgorithm(trainTestData, context, algorithm, sample);
             }
-
-            TotalQuote sample = new TotalQuote()
-            {
-                CloseBrent = 118.56F,
-                CloseDax = 15216.27F,
-                Date = DateTime.Now.AddDays(-12),
-                SmaBrent = 71.956F,
-                SmaDax = 15461.68F,
-                SmaDeltaBrent = 1,
-                SmaDeltaDax = 1
-            };
 
             display = _dataTrimmer.TrimList(display, 50);
 
             return View(display);
         }
 
-        private void RunAlgorithm(DataOperationsCatalog.TrainTestData trainTestData, MLContext context, KeyValuePair<Type, object> algorithm)
+        private void RunAlgorithm(DataOperationsCatalog.TrainTestData trainTestData, MLContext context, KeyValuePair<Type, object> algorithm, TotalQuote sample)
         {
-            var pipeline = _mlRegression.GetRegressionPipeline(context, algorithm);
+            EstimatorChain<RegressionPredictionTransformer<PoissonRegressionModelParameters>> pipeline = _mlRegression.GetRegressionPipeline(context, algorithm);
             ITransformer trainedModel = pipeline.Fit(trainTestData.TrainSet);
             _metrixList.Add(context.Regression.Evaluate(trainTestData.TestSet));
+            PredictionEngine<TotalQuote, DaxChangeRegressionPrediction> predictionFunction = context.Model.CreatePredictionEngine<TotalQuote, DaxChangeRegressionPrediction>(trainedModel);
+            _predictionList.Add(new PredictionModel() { Result = predictionFunction.Predict(sample), ModelName = nameof(algorithm.Key) });
         }
     }
 }

@@ -21,7 +21,7 @@ namespace Financial_ML.MachineLearning
             return context.Transforms.CopyColumns(outputColumnName: "Label", inputColumnName: "CloseDax")
                 .Append(context.Transforms.Concatenate("Features", "CloseDax", "SmaDax", "SmaBrent", "CloseBrent", "SmaDeltaDax", "SmaDeltaBrent", "NextDayCloseDax"))
                 .AppendCacheCheckpoint(context)
-                .Append((dynamic)Convert.ChangeType(algorithm.Value, algorithm.Key));
+                .Append((IEstimator<RegressionPredictionTransformer<PoissonRegressionModelParameters>>)algorithm.Value);
         }
     }
 }
