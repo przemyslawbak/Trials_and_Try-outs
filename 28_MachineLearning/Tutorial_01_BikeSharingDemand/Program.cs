@@ -1,7 +1,6 @@
 ﻿using BikeSharingDemand.Helpers;
 using BikeSharingDemand.ModelNamespace;
 using Microsoft.ML;
-using Microsoft.ML.Trainers;
 using Microsoft.ML.Training;
 using System;
 using System.Collections.Generic;
@@ -49,7 +48,7 @@ namespace BikeSharingDemand
 
         private static void PrintAndStoreMetrics(Model model)
         {
-            var metrics = model.Evaluate(_testDataLocation);
+            Microsoft.ML.Data.RegressionMetrics metrics = model.Evaluate(_testDataLocation);
 
             Console.WriteLine($"*************************************************");
             Console.WriteLine($"*       Metrics for {model.Name}          ");

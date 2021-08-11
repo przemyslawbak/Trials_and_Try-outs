@@ -4,6 +4,7 @@ using Financial_ML.Services;
 using Financial_ML.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.ML;
+using Microsoft.ML.Data;
 using Microsoft.ML.Trainers;
 using Microsoft.ML.Trainers.FastTree;
 using System;
@@ -17,6 +18,7 @@ namespace Financial_ML.App.Controllers
         private readonly IDataTrimmer _dataTrimmer;
         private readonly IMlRegression _mlRegression;
         private readonly IMlBase _mlBase;
+        private readonly List<RegressionMetrics> _metrixList;
 
         public StartController(IDataProvider dataProvider, IDataTrimmer dataTrimmer, IMlRegression mlRegression, IMlBase mlBase)
         {
@@ -24,6 +26,7 @@ namespace Financial_ML.App.Controllers
             _dataTrimmer = dataTrimmer;
             _mlRegression = mlRegression;
             _mlBase = mlBase;
+            _metrixList = new List<RegressionMetrics>();
         }
 
         public IActionResult Index()
@@ -68,6 +71,8 @@ namespace Financial_ML.App.Controllers
         private void RunAlgorithm(DataOperationsCatalog.TrainTestData trainTestData, MLContext context, KeyValuePair<Type, object> algorithm)
         {
             var pipeline = _mlRegression.GetRegressionPipeline(context, algorithm);
+            ITransformer trainedModel = pipeline.Fit(trainTestData.TrainSet);
+            _metrixList.Add(context.Regression.Evaluate(trainTestData.TestSet));
         }
     }
 }
