@@ -29,9 +29,8 @@ namespace Activator
         {
             foreach (var item in someDict)
             {
-                object obj = System.Activator.CreateInstance(item.Key);
-                var dupa = obj.GetType();
+                var value = Convert.ChangeType(item.Value, item.Key);
             }
         }
-    }
+    }   
 }
