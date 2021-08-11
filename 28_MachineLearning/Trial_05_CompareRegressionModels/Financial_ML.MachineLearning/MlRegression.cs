@@ -18,13 +18,10 @@ namespace Financial_ML.MachineLearning
 
         public EstimatorChain<RegressionPredictionTransformer<PoissonRegressionModelParameters>> GetRegressionPipeline(MLContext context, KeyValuePair<Type, object> algorithm)
         {
-            Type t = algorithm.Key;
-            Assembly info = typeof(int).Assembly;
-            var dupa = algorithm.Value as t.GetType();
             return context.Transforms.CopyColumns(outputColumnName: "Label", inputColumnName: "CloseDax")
                 .Append(context.Transforms.Concatenate("Features", "CloseDax", "SmaDax", "SmaBrent", "CloseBrent", "SmaDeltaDax", "SmaDeltaBrent", "NextDayCloseDax"))
                 .AppendCacheCheckpoint(context)
-                .Append((algorithm.Key)algorithm.Value);
+                .Append((IEstimator<RegressionPredictionTransformer<PoissonRegressionModelParameters>>)algorithm.Value);
         }
     }
 }

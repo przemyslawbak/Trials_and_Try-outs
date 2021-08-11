@@ -5,6 +5,7 @@ using Financial_ML.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.ML;
 using Microsoft.ML.Trainers;
+using Microsoft.ML.Trainers.FastTree;
 using System;
 using System.Collections.Generic;
 
@@ -35,13 +36,13 @@ namespace Financial_ML.App.Controllers
             DataOperationsCatalog.TrainTestData trainTestData = _mlBase.GetTestData(context, data);
             //todo: move to ML service
             var regressors = new Dictionary<Type ,object>();
-            regressors.Add(typeof(LbfgsPoissonRegressionTrainer), context.Regression.Trainers.FastForest());
-            regressors.Add(typeof(LbfgsPoissonRegressionTrainer), context.Regression.Trainers.FastTree());
-            regressors.Add(typeof(LbfgsPoissonRegressionTrainer), context.Regression.Trainers.FastTreeTweedie());
-            regressors.Add(typeof(LbfgsPoissonRegressionTrainer), context.Regression.Trainers.Gam());
-            regressors.Add(typeof(LbfgsPoissonRegressionTrainer), context.Regression.Trainers.OnlineGradientDescent());
+            regressors.Add(typeof(FastForestRegressionTrainer), context.Regression.Trainers.FastForest());
+            regressors.Add(typeof(FastTreeRegressionTrainer), context.Regression.Trainers.FastTree());
+            regressors.Add(typeof(FastTreeTweedieTrainer), context.Regression.Trainers.FastTreeTweedie());
+            regressors.Add(typeof(GamRegressionTrainer), context.Regression.Trainers.Gam());
+            regressors.Add(typeof(OnlineGradientDescentTrainer), context.Regression.Trainers.OnlineGradientDescent());
             regressors.Add(typeof(LbfgsPoissonRegressionTrainer), context.Regression.Trainers.LbfgsPoissonRegression());
-            regressors.Add(typeof(LbfgsPoissonRegressionTrainer), context.Regression.Trainers.Sdca());
+            regressors.Add(typeof(SdcaRegressionTrainer), context.Regression.Trainers.Sdca());
 
             foreach (KeyValuePair<Type, object> algorithm in regressors)
             {
