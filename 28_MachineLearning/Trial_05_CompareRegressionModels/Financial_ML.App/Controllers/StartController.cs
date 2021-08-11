@@ -34,17 +34,17 @@ namespace Financial_ML.App.Controllers
 
             //train
             DataOperationsCatalog.TrainTestData trainTestData = _mlBase.GetTestData(context, data);
+            //todo: move to ML service
+            var regressors = new Dictionary<Type ,object>();
+            regressors.Add(typeof(LbfgsPoissonRegressionTrainer), context.Regression.Trainers.FastForest());
+            regressors.Add(typeof(LbfgsPoissonRegressionTrainer), context.Regression.Trainers.FastTree());
+            regressors.Add(typeof(LbfgsPoissonRegressionTrainer), context.Regression.Trainers.FastTreeTweedie());
+            regressors.Add(typeof(LbfgsPoissonRegressionTrainer), context.Regression.Trainers.Gam());
+            regressors.Add(typeof(LbfgsPoissonRegressionTrainer), context.Regression.Trainers.OnlineGradientDescent());
+            regressors.Add(typeof(LbfgsPoissonRegressionTrainer), context.Regression.Trainers.LbfgsPoissonRegression());
+            regressors.Add(typeof(LbfgsPoissonRegressionTrainer), context.Regression.Trainers.Sdca());
 
-            List<object> regressors = new List<object>();
-            regressors.Add(context.Regression.Trainers.FastForest(labelColumnName: "Count", featureColumnName: "Features"));
-            regressors.Add(context.Regression.Trainers.FastTree(labelColumnName: "Count", featureColumnName: "Features"));
-            regressors.Add(context.Regression.Trainers.FastTreeTweedie(labelColumnName: "Count", featureColumnName: "Features"));
-            regressors.Add(context.Regression.Trainers.Gam(labelColumnName: "Count", featureColumnName: "Features"));
-            regressors.Add(context.Regression.Trainers.OnlineGradientDescent(labelColumnName: "Count", featureColumnName: "Features"));
-            regressors.Add(context.Regression.Trainers.LbfgsPoissonRegression(labelColumnName: "Count", featureColumnName: "Features"));
-            regressors.Add(context.Regression.Trainers.Sdca(labelColumnName: "Count", featureColumnName: "Features"));
-
-            foreach (object algorithm in regressors)
+            foreach (KeyValuePair<Type, object> algorithm in regressors)
             {
                 RunAlgorithm(trainTestData, context, algorithm);
             }
@@ -65,7 +65,7 @@ namespace Financial_ML.App.Controllers
             return View(display);
         }
 
-        private void RunAlgorithm(DataOperationsCatalog.TrainTestData trainTestData, MLContext context, object algorithm)
+        private void RunAlgorithm(DataOperationsCatalog.TrainTestData trainTestData, MLContext context, KeyValuePair<Type, object> algorithm)
         {
             var pipeline = _mlRegression.GetRegressionPipeline(context, algorithm);
         }

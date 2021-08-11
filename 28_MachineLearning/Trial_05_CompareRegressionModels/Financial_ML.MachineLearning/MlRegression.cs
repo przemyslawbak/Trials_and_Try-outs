@@ -1,6 +1,8 @@
 ﻿using Microsoft.ML;
 using Microsoft.ML.Data;
 using Microsoft.ML.Trainers;
+using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace Financial_ML.MachineLearning
@@ -13,12 +15,13 @@ namespace Financial_ML.MachineLearning
             return context.Regression.Evaluate(predictionsRegresion, "Label", "NextDayCloseDax");
         }
 
-        public EstimatorChain<RegressionPredictionTransformer<PoissonRegressionModelParameters>> GetRegressionPipeline(MLContext context, object algorythim)
+        public EstimatorChain<RegressionPredictionTransformer<PoissonRegressionModelParameters>> GetRegressionPipeline(MLContext context, KeyValuePair<Type, object> algorythim)
         {
+            Type t = algorythim.Key;
             return context.Transforms.CopyColumns(outputColumnName: "Label", inputColumnName: "CloseDax")
                 .Append(context.Transforms.Concatenate("Features", "CloseDax", "SmaDax", "SmaBrent", "CloseBrent", "SmaDeltaDax", "SmaDeltaBrent", "NextDayCloseDax"))
                 .AppendCacheCheckpoint(context)
-                .Append();
+                .Append(algorythim.Value as (t));
         }
     }
 }
