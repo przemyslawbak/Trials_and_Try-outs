@@ -4,6 +4,7 @@ using Financial_ML.Services;
 using Financial_ML.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.ML;
+using Microsoft.ML.AutoML;
 using Microsoft.ML.Data;
 using Microsoft.ML.Trainers;
 using Microsoft.ML.Trainers.FastTree;
@@ -36,6 +37,23 @@ namespace Financial_ML.App.Controllers
             ResultsDisplay display = _dataProvider.GetResultsDisplayViewModel();
             MLContext context = _mlBase.GetMlContext();
             IDataView data = _mlBase.GetDataViewFromEnumerable(display.AllTotalQuotes, context);
+            DataOperationsCatalog.TrainTestData trainTestData = _mlBase.GetTestData(context, data);
+            RegressionExperimentSettings settings = new RegressionExperimentSettings
+            {
+                MaxExperimentTimeInSeconds = 60
+            };
+            RegressionExperiment experiment = context.Auto().CreateRegressionExperiment(settings);
+            Progress<RunDetail<RegressionMetrics>> progress = new Progress<RunDetail<RegressionMetrics>>(p =>
+            {
+                if (p.ValidationMetrics != null)
+                {
+                    Console.Write($"Current result : {p.TrainerName}");
+                    Console.Write($"      {p.ValidationMetrics.RSquared}");
+                    Console.Write($"      {p.ValidationMetrics.MeanAbsoluteError}");
+                    Console.WriteLine();
+                }
+            });
+            ExperimentResult<RegressionMetrics> result = experiment.Execute(trainTestData.TrainSet, labelColumnName: "CloseDax", progressHandler: progress);
 
 
             TotalQuote sample = new TotalQuote()
@@ -50,7 +68,6 @@ namespace Financial_ML.App.Controllers
             };
 
             //train
-            DataOperationsCatalog.TrainTestData trainTestData = _mlBase.GetTestData(context, data);
             //todo: move to ML service
             var regressors = new Dictionary<Type ,object>();
             regressors.Add(typeof(FastForestRegressionTrainer), context.Regression.Trainers.FastForest());
