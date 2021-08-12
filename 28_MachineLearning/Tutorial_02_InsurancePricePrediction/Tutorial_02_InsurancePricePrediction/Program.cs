@@ -32,7 +32,7 @@ namespace Tutorial_02_InsurancePricePrediction
             //Set the experiement time in sec
             var settings = new RegressionExperimentSettings
             {
-                MaxExperimentTimeInSeconds = 10
+                MaxExperimentTimeInSeconds = 60
             };
 
             var experiment = mlContext.Auto().CreateRegressionExperiment(settings);
