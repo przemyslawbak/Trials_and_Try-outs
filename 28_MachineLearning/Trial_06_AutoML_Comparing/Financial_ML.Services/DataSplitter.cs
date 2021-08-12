@@ -73,8 +73,7 @@ namespace Financial_ML.Services
                         lastBrentClose,
                     CloseDax = closeDax.HasValue ?
                         closeDax.Value :
-                        lastDaxClose,
-                    Date = date
+                        lastDaxClose
                 });
 
                 lastSmaBrent = allQuotes.Last().SmaBrent;
