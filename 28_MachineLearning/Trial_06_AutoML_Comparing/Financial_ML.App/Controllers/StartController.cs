@@ -6,8 +6,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.ML;
 using Microsoft.ML.AutoML;
 using Microsoft.ML.Data;
-using Microsoft.ML.Trainers;
-using Microsoft.ML.Trainers.FastTree;
 using System;
 using System.Collections.Generic;
 
@@ -53,7 +51,7 @@ namespace Financial_ML.App.Controllers
                     System.Diagnostics.Debug.WriteLine("");
                 }
             });
-            ExperimentResult<RegressionMetrics> result = experiment.Execute(trainTestData.TrainSet, labelColumnName: "CloseDax", progressHandler: progress);
+            ExperimentResult<RegressionMetrics> result = experiment.Execute(trainTestData.TrainSet, labelColumnName: "NextDayCloseDax", progressHandler: progress);
 
             TotalQuote sample = new TotalQuote()
             {
@@ -65,32 +63,7 @@ namespace Financial_ML.App.Controllers
                 SmaDeltaDax = 1
             };
 
-            //train
-            //todo: move to ML service
-            var regressors = new Dictionary<Type, object>();
-            regressors.Add(typeof(FastForestRegressionTrainer), context.Regression.Trainers.FastForest());
-            regressors.Add(typeof(FastTreeRegressionTrainer), context.Regression.Trainers.FastTree());
-            regressors.Add(typeof(FastTreeTweedieTrainer), context.Regression.Trainers.FastTreeTweedie());
-            regressors.Add(typeof(GamRegressionTrainer), context.Regression.Trainers.Gam());
-            regressors.Add(typeof(OnlineGradientDescentTrainer), context.Regression.Trainers.OnlineGradientDescent());
-            regressors.Add(typeof(LbfgsPoissonRegressionTrainer), context.Regression.Trainers.LbfgsPoissonRegression());
-            regressors.Add(typeof(SdcaRegressionTrainer), context.Regression.Trainers.Sdca());
-
-            foreach (KeyValuePair<Type, object> algorithm in regressors)
-            {
-                RunAlgorithm(trainTestData, context, algorithm, sample);
-            }
-
             return View();
-        }
-
-        private void RunAlgorithm(DataOperationsCatalog.TrainTestData trainTestData, MLContext context, KeyValuePair<Type, object> algorithm, TotalQuote sample)
-        {
-            EstimatorChain<RegressionPredictionTransformer<PoissonRegressionModelParameters>> pipeline = _mlRegression.GetRegressionPipeline(context, algorithm);
-            ITransformer trainedModel = pipeline.Fit(trainTestData.TrainSet);
-            _metrixList.Add(context.Regression.Evaluate(trainTestData.TestSet));
-            PredictionEngine<TotalQuote, DaxChangeRegressionPrediction> predictionFunction = context.Model.CreatePredictionEngine<TotalQuote, DaxChangeRegressionPrediction>(trainedModel);
-            _predictionList.Add(new PredictionModel() { Result = predictionFunction.Predict(sample), ModelName = nameof(algorithm.Key) });
         }
     }
 }
