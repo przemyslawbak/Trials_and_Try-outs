@@ -39,21 +39,20 @@ namespace Tutorial_04_NeuralNetworks2
             IDataView imageDataShuffle = context.Data.ShuffleRows(imageData);
 
             DataOperationsCatalog.TrainTestData testTrainData = context.Data.TrainTestSplit(imageDataShuffle, testFraction: 0.2);
-            IDataView validateData = context.Transforms.Conversion.MapValueToKey("LabelKey", "Label", keyOrdinality: Microsoft.ML.Transforms.ValueToKeyMappingEstimator.KeyOrdinality.ByValue)
-                .Fit(testTrainData.TestSet).Transform(testTrainData.TestSet);
-            ImageClassificationTrainer.Options options = new ImageClassificationTrainer.Options()
-            {
-                FeatureColumnName = "ImagePath",
-                LabelColumnName = "LaelKey",
-                Arch = ImageClassificationTrainer.Architecture.ResnetV2101,
-                Epoch = 100,
-                BatchSize = 10,
-                LearningRate = 0.01f,
-                MetricsCallback = (metrics) => System.Console.WriteLine(metrics),
-                ValidationSet = validateData
-            };
+            var validationData = context.Transforms.Conversion.MapValueToKey("LabelKey", "Label", keyOrdinality: Microsoft.ML.Transforms.ValueToKeyMappingEstimator.KeyOrdinality.ByValue)
+                .Fit(testTrainData.TestSet)
+                .Transform(testTrainData.TestSet);
+
             var pipeline = context.Transforms.Conversion.MapValueToKey("LabelKey", "Label", keyOrdinality: Microsoft.ML.Transforms.ValueToKeyMappingEstimator.KeyOrdinality.ByValue)
-                .Append(context.MulticlassClassification.Trainers.ImageClassification(options));
+                .Append(context.MulticlassClassification.Trainers.ImageClassification(
+                    "ImagePath",
+                    "LabelKey",
+                    arch: ImageClassificationTrainer.Architecture.ResnetV2101,
+                    epoch: 100,
+                    batchSize: 10,
+                    metricsCallback: Console.WriteLine,
+                    validationSet: validationData));
+
             var model = pipeline.Fit(testTrainData.TrainSet);
             IDataView predictions = model.Transform(testTrainData.TestSet);
             MulticlassClassificationMetrics metrics = context.MulticlassClassification.Evaluate(predictions, labelColumnName: "LabelKey", predictedLabelColumnName: "PredictedLabel");
