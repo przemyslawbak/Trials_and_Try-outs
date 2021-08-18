@@ -2,11 +2,13 @@
 using Microsoft.ML;
 using Microsoft.ML.Data;
 using Microsoft.ML.Transforms;
-using System;
+using Microsoft.ML.Vision;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using Tensorflow;
+using XPlot.Plotly;
 
 namespace Tutorial_03_NeuralNetworks
 {
@@ -55,7 +57,29 @@ namespace Tutorial_03_NeuralNetworks
                 .Fit(dataView)
                 .Transform(dataView);
 
+            //data exploration
             IEnumerable<string> categories = shuffledFullImagesDataset.GetColumn<string>("Label");
+
+            //split data
+            DataOperationsCatalog.TrainTestData trainTestSplit = mlContext.Data.TrainTestSplit(shuffledFullImagesDataset);
+            IDataView testSet = trainTestSplit.TestSet;
+            IDataView trainSet = trainTestSplit.TrainSet;
+
+            //data transformation
+            ImageClassificationTrainer.Options options = new ImageClassificationTrainer.Options()
+            {
+                FeatureColumnName = "Image",
+                LabelColumnName = "LaelAsKey",
+                Arch = ImageClassificationTrainer.Architecture.ResnetV250,
+                Epoch = 5,
+                BatchSize = 10,
+                LearningRate = 0.01f,
+                MetricsCallback = (metrics) => System.Console.WriteLine(metrics),
+                ValidationSet = testSet
+            };
+
+            EstimatorChain<KeyToValueMappingTransformer> trainingPipeline = MLContext.MulticlassClassification.Trainers.ImageClassification(options)
+                .Append(mlContext.Transforms.Conversion.MapKeyToValue(outputColumnName: "PredictedLabel", inputColumnName: "PredictedLabel"));
         }
 
         public static IEnumerable<ImageData> GetImages(string path)
