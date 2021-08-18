@@ -5,4 +5,9 @@
     <TargetFramework>net5.0</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="AWSSDK.SimpleSystemsManagement" Version="3.7.4.11" />
+    <PackageReference Include="CNTK.GPU" Version="2.7.0" />
+  </ItemGroup>
+
 </Project>
