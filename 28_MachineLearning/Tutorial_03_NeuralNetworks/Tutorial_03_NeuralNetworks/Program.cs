@@ -41,7 +41,7 @@ namespace Tutorial_03_NeuralNetworks
         {
             IEnumerable<ImageData> images = GetImages(csvPath);
             MLContext mlContext = new MLContext(seed: 1);
-            var dataView = mlContext.Data.LoadFromEnumerable(images);
+            IDataView dataView = mlContext.Data.LoadFromEnumerable(images);
             dataView = mlContext.Data.ShuffleRows(dataView);
 
             IDataView shuffledFullImagesDataset = mlContext.Transforms.Conversion.MapValueToKey(
