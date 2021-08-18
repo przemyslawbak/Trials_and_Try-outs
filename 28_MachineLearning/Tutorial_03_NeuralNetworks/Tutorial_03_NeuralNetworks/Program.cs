@@ -7,8 +7,6 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Linq;
-using Tensorflow;
-using XPlot.Plotly;
 
 namespace Tutorial_03_NeuralNetworks
 {
@@ -68,18 +66,28 @@ namespace Tutorial_03_NeuralNetworks
             //data transformation
             ImageClassificationTrainer.Options options = new ImageClassificationTrainer.Options()
             {
-                FeatureColumnName = "Image",
+                FeatureColumnName = "Image", //feature type
                 LabelColumnName = "LaelAsKey",
-                Arch = ImageClassificationTrainer.Architecture.ResnetV250,
-                Epoch = 5,
-                BatchSize = 10,
-                LearningRate = 0.01f,
+                Arch = ImageClassificationTrainer.Architecture.ResnetV250, //architecture type
+                Epoch = 5, //pass all images 5 times
+                BatchSize = 10, //each time passing 10 images
+                LearningRate = 0.01f, //optimizing, defaults should be fine
                 MetricsCallback = (metrics) => System.Console.WriteLine(metrics),
                 ValidationSet = testSet
             };
 
-            EstimatorChain<KeyToValueMappingTransformer> trainingPipeline = MLContext.MulticlassClassification.Trainers.ImageClassification(options)
+            EstimatorChain<KeyToValueMappingTransformer> trainingPipeline = mlContext.MulticlassClassification.Trainers.ImageClassification(options)
                 .Append(mlContext.Transforms.Conversion.MapKeyToValue(outputColumnName: "PredictedLabel", inputColumnName: "PredictedLabel"));
+
+            //training model
+            ITransformer model = trainingPipeline.Fit(trainSet);
+
+            //evaluate the model
+            IDataView predictions = model.Transform(testSet);
+            MulticlassClassificationMetrics metrics = mlContext.MulticlassClassification.Evaluate(predictions, labelColumnName: "LabelAsKey", predictedLabelColumnName: "PredictedLabel");
+
+            //display evaluation
+            //can use XPlot
         }
 
         public static IEnumerable<ImageData> GetImages(string path)
