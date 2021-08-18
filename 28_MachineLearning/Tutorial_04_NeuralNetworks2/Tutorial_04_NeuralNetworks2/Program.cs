@@ -52,21 +52,35 @@ namespace Tutorial_04_NeuralNetworks2
                 MetricsCallback = (metrics) => System.Console.WriteLine(metrics),
                 ValidationSet = validateData
             };
-            EstimatorChain<Microsoft.ML.Transforms.ValueToKeyMappingTransformer> pipeline = context.MulticlassClassification.Trainers.ImageClassification(options)
-                .Append(context.Transforms.Conversion.MapValueToKey("LabelToKey", "Label", keyOrdinality: Microsoft.ML.Transforms.ValueToKeyMappingEstimator.KeyOrdinality.ByValue));
-            TransformerChain<Microsoft.ML.Transforms.ValueToKeyMappingTransformer> model = pipeline.Fit(testTrainData.TrainSet);
-            var predictions = model.Transform(testTrainData.TestSet);
-            var metrics = context.MulticlassClassification.Evaluate(predictions, labelColumnName: "LabelKey", predictedLabelColumnName: "PredictedLabel");
+            var pipeline = context.Transforms.Conversion.MapValueToKey("LabelKey", "Label", keyOrdinality: Microsoft.ML.Transforms.ValueToKeyMappingEstimator.KeyOrdinality.ByValue)
+                .Append(context.MulticlassClassification.Trainers.ImageClassification(options));
+            var model = pipeline.Fit(testTrainData.TrainSet);
+            IDataView predictions = model.Transform(testTrainData.TestSet);
+            MulticlassClassificationMetrics metrics = context.MulticlassClassification.Evaluate(predictions, labelColumnName: "LabelKey", predictedLabelColumnName: "PredictedLabel");
 
             Console.WriteLine($"Log loss - {metrics.LogLoss}");
 
-            var predictionEngine = context.Model.CreatePredictionEngine<ImageData, ImagePrediction>(model);
-            var testImagesFolder = Path.Combine(Environment.CurrentDirectory, "..", "..", "..", "test");
-            var testFiles = Directory.GetFiles(imagesFolder, "*", SearchOption.AllDirectories);
-            var testImages = testFiles.Select(f => new ImageData()
+            PredictionEngine<ImageData, ImagePrediction> predictionEngine = context.Model.CreatePredictionEngine<ImageData, ImagePrediction>(model);
+            string testImagesFolder = Path.Combine(Environment.CurrentDirectory, "..", "..", "..", "test");
+            string[] testFiles = Directory.GetFiles(imagesFolder, "*", SearchOption.AllDirectories);
+            IEnumerable<ImageData> testImages = testFiles.Select(f => new ImageData()
             {
                 ImagePath = f
             });
+            VBuffer<ReadOnlyMemory<char>> keys = default;
+            predictionEngine.OutputSchema["LabelKey"].GetKeyValues(ref keys);
+
+            ReadOnlyMemory<char>[] originalLabels = keys.DenseValues().ToArray();
+
+            foreach (var image in testImages)
+            {
+                ImagePrediction prediction = predictionEngine.Predict(image);
+                uint labelIndex = prediction.PredictedLabel;
+
+                Console.WriteLine($"Image: { Path.GetFileName(image.ImagePath)}, Score: {prediction.Score.Max()}" + $"Predicted Label: {originalLabels[labelIndex]}");
+            }
+
+            Console.ReadLine();
         }
     }
 }

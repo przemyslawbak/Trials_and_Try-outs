@@ -8,6 +8,7 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.ML" Version="1.6.0" />
     <PackageReference Include="Microsoft.ML.Vision" Version="1.6.0" />
+    <PackageReference Include="SciSharp.TensorFlow.Redist" Version="2.6.0" />
   </ItemGroup>
 
 </Project>
