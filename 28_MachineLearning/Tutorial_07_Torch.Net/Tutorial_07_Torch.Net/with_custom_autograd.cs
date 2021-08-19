@@ -12,24 +12,6 @@ namespace SimpleNeuralNetworkExample
     partial class Program
     {
         /// <summary>
-        /// We can implement our own custom autograd Functions by subclassing
-        /// torch.autograd.Function and implementing the forward and backward passes
-        /// which operate on Tensors.
-        /// </summary>
-        class MyReLU : torch.autograd.Function
-        {
-            public override Tensor forward(Context ctx, Tensor input)
-            {
-
-            }
-
-            public override Tensor backward(Context ctx, Tensor input)
-            {
-
-            }
-        }
-
-        /// <summary>
         /// A fully-connected ReLU network with one hidden layer and no biases, trained to
         /// predict y from x by minimizing squared Euclidean distance.
         /// 
@@ -58,11 +40,11 @@ namespace SimpleNeuralNetworkExample
             for (int t = 0; t <= 500; t++)
             {
                 // To apply our Function, we use Function.apply method. We alias this as 'relu'.
-                var relu = new MyReLU().apply;
+                var relu = new torch.nn.ReLU();
 
                 // Forward pass: compute predicted y using operations; we compute
                 // ReLU using our custom autograd operation.
-                var y_pred = relu(x.mm(w1)).mm(w2);
+                var y_pred = new torch.nn.ReLU(x.mm(w1)).mm(w2);
 
                 // Compute and print loss. 
                 var loss = (y_pred - y).pow(2).sum();
