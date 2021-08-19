@@ -10,4 +10,10 @@
     <PackageReference Include="Microsoft.ML.TimeSeries" Version="1.6.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="energy_hourly.csv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>
