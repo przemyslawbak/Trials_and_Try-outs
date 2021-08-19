@@ -40,11 +40,11 @@ namespace SimpleNeuralNetworkExample
             for (int t = 0; t <= 500; t++)
             {
                 // To apply our Function, we use Function.apply method. We alias this as 'relu'.
-                var relu = new torch.nn.ReLU();
+                //var relu = new torch.nn.ReLU(true);
 
                 // Forward pass: compute predicted y using operations; we compute
                 // ReLU using our custom autograd operation.
-                var y_pred = new torch.nn.ReLU(x.mm(w1)).mm(w2);
+                var y_pred = (x.mm(w1)).mm(w2);
 
                 // Compute and print loss. 
                 var loss = (y_pred - y).pow(2).sum();

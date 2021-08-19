@@ -34,7 +34,7 @@ namespace SimpleNeuralNetworkExample
 
             LearnWithCustomAutoGrad(dtype, device, x, y);
 
-            LearnWithOptimizer(x, y);
+            //LearnWithOptimizer(x, y);
 
             Console.Write("Hit any key to exit: ");
             Console.ReadKey();
