@@ -87,3 +87,13 @@ prior = get_prior(label_indices)
 print('Prior:', prior)
 smoothing = 1
 likelihood = get_likelihood(X_train, label_indices, smoothing)
+
+#Implementing Naïve Bayes with scikit-learn:
+
+from sklearn.naive_bayes import BernoulliNB
+clf = BernoulliNB(alpha=1.0, fit_prior=True)
+clf.fit(X_train, Y_train)
+pred_prob = clf.predict_proba(X_test)
+print('[scikit-learn] Predicted probabilities:\n', pred_prob)
+pred = clf.predict(X_test)
+print('[scikit-learn] Prediction:', pred)
