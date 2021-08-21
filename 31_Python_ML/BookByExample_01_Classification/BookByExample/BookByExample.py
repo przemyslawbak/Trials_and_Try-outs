@@ -81,10 +81,9 @@ def get_posterior(X, prior, likelihood):
         posteriors.append(posterior.copy())
     return posteriors
 
-"""
-run: 
-posterior = get_posterior(X_test, prior, likelihood)
-print('Posterior:\n', posterior)
-Posterior:
-[{'Y': 0.9210360075805433, 'N': 0.07896399241945673}]
-"""
+label_indices = get_label_indices(Y_train)
+print('label_indices:\n', label_indices)
+prior = get_prior(label_indices)
+print('Prior:', prior)
+smoothing = 1
+likelihood = get_likelihood(X_train, label_indices, smoothing)
