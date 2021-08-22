@@ -24,7 +24,10 @@
     <Compile Include="BookByExample.py" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="ratings.dat" />
+    <Content Include="ml-1m\ratings.dat" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="ml-1m\" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
   <!-- Uncomment the CoreCompile target to enable the Build command in

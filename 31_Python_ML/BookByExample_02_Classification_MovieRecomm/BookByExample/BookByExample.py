@@ -33,3 +33,14 @@ def load_rating_data(data_path, n_users, n_movies):
 
 data, movie_n_rating, movie_id_mapping = load_rating_data(data_path, n_users, n_movies)
 
+def display_distribution(data):
+    values, counts = np.unique(data, return_counts=True)
+    for value, count in zip(values, counts):
+        print(f'Number of rating {int(value)}: {count}')
+display_distribution(data)
+
+movie_id_most, n_rating_most = sorted(movie_n_rating.items(), key=lambda d: d[1], reverse=True)[0]
+print(f'Movie ID {movie_id_most} has {n_rating_most} ratings.')
+X_raw = np.delete(data, movie_id_mapping[movie_id_most], axis=1)
+Y_raw = data[:, movie_id_mapping[movie_id_most]]
+
