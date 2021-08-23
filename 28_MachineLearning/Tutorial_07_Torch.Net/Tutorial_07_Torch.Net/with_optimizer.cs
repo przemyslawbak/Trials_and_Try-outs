@@ -50,7 +50,7 @@ namespace SimpleNeuralNetworkExample
             loss_fn.cuda(0);
 
             var learning_rate = 1.0e-4;
-            var optimizer = torch.optim.Adam(model.parameters(), lr: learning_rate);
+            var optimizer = torch.optim.Adam(model.parameters(), lr: learning_rate); //NOT IMPLEMENTED YET: https://github.com/SciSharp/Torch.NET/issues/6
             for (int t = 0; t <= 500; t++)
             {
                 // Forward pass: compute predicted y by passing x to the model.
