@@ -43,4 +43,7 @@ movie_id_most, n_rating_most = sorted(movie_n_rating.items(), key=lambda d: d[1]
 print(f'Movie ID {movie_id_most} has {n_rating_most} ratings.')
 X_raw = np.delete(data, movie_id_mapping[movie_id_most], axis=1)
 Y_raw = data[:, movie_id_mapping[movie_id_most]]
+X = X_raw[Y_raw > 0]
+Y = Y_raw[Y_raw > 0]
+display_distribution(Y)
 
