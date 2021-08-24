@@ -64,3 +64,34 @@ print(x)
 # array of five ones. Default dtype is float
 x = np.ones(5) 
 print(x)
+
+#how to create an array from existing data
+#https://www.tutorialspoint.com/numpy/numpy_array_from_existing_data.htm
+
+# convert list to ndarray 
+x = [1,2,3]
+#[1, 2, 3]
+print(x)
+a = np.asarray(x) 
+#[1 2 3]
+print(a)
+
+# dtype is set
+x = [1,2,3]
+a = np.asarray(x, dtype = float) 
+print(a)
+
+# ndarray from tuple
+x = (1,2,3) 
+a = np.asarray(x) 
+print(a)
+
+# ndarray from list of tuples 
+x = [(1,2,3),(4,5)] 
+a = np.asarray(x) 
+print(a)
+
+#The following examples demonstrate the use of frombuffer function.
+s = 'Hello World' 
+a = np.frombuffer(s, dtype = 'S1') 
+print(a)
