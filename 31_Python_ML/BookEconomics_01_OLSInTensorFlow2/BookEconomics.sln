@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31112.23
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "Sample", "Sample\Sample.pyproj", "{B28481C2-4CD2-495E-9BE9-4F174F939742}"
+Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "BookEconomics", "BookEconomics\BookEconomics.pyproj", "{8174D86C-8B33-4DE3-8A5A-B63A403D03B0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,13 +11,13 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{B28481C2-4CD2-495E-9BE9-4F174F939742}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B28481C2-4CD2-495E-9BE9-4F174F939742}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8174D86C-8B33-4DE3-8A5A-B63A403D03B0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8174D86C-8B33-4DE3-8A5A-B63A403D03B0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {1F148482-D8B4-424A-BF08-91EE1ADB905E}
+		SolutionGuid = {29C28D8B-B360-460B-BF53-3FF9F3E3CCC9}
 	EndGlobalSection
 EndGlobal

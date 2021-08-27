@@ -2,15 +2,15 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>b28481c2-4cd2-495e-9be9-4f174f939742</ProjectGuid>
+    <ProjectGuid>8174d86c-8b33-4de3-8a5a-b63a403d03b0</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>Sample.py</StartupFile>
+    <StartupFile>BookEconomics.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
     <OutputPath>.</OutputPath>
-    <Name>Sample</Name>
-    <RootNamespace>Sample</RootNamespace>
+    <Name>BookEconomics</Name>
+    <RootNamespace>BookEconomics</RootNamespace>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <DebugSymbols>true</DebugSymbols>
@@ -21,11 +21,7 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Sample.py" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="gdp_per_capita.csv" />
-    <Content Include="oecd_bli_2015.csv" />
+    <Compile Include="BookEconomics.py" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
   <!-- Uncomment the CoreCompile target to enable the Build command in
