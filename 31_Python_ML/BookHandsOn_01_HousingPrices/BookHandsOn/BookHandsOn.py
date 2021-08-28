@@ -15,6 +15,9 @@ from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import StandardScaler
 from sklearn.compose import ColumnTransformer
 from sklearn.compose import ColumnTransformer
+from sklearn.linear_model import LinearRegression
+from sklearn.preprocessing import OneHotEncoder
+from sklearn.metrics import mean_squared_error
 
 #1. RETREIVING AND SORTING
 
@@ -138,7 +141,6 @@ housing_labels = strat_train_set["median_house_value"].copy()
 
 #We saw earlier that the total_bedrooms attribute has some missing values, so let’s fix this. Get rid of the whole attribute
 data.drop("total_bedrooms", axis=1)
-data["total_bedrooms"].fillna(median, inplace=True)
 
 #Scikit-Learn provides a handy class to take care of missing values
 imputer = SimpleImputer(strategy="median")
@@ -164,7 +166,7 @@ class CombinedAttributesAdder(BaseEstimator, TransformerMixin):
             return np.c_[X, rooms_per_household, population_per_household]
 
 attr_adder = CombinedAttributesAdder(add_bedrooms_per_room=False)
-housing_extra_attribs = attr_adder.transform(housing.values)
+housing_extra_attribs = attr_adder.transform(data.values)
 
 #Feature Scaling, Transformation Pipelines
 #pipeline for the numerical attributes
@@ -186,8 +188,24 @@ housing_prepared = full_pipeline.fit_transform(data)
 
 #3. SELECT AND TRAIN MODEL
 
-
-
+#3.1 LinearRegression example
+lin_reg = LinearRegression()
+lin_reg.fit(housing_prepared, housing_labels)
+some_data = data.iloc[:5]
+some_labels = housing_labels.iloc[:5]
+some_data_prepared = full_pipeline.transform(some_data)
+print("Predictions:", lin_reg.predict(some_data_prepared))
+print("Labels:", list(some_labels))
+#mean squared error
+housing_predictions = lin_reg.predict(housing_prepared)
+lin_mse = mean_squared_error(housing_labels, housing_predictions)
+lin_rmse = np.sqrt(lin_mse)
+"""
+This is better than nothing, but clearly not a great score: most districts’ median_hous
+ing_values range between $120,000 and $265,000, so a typical prediction error of
+$68,628 is not very satisfying.
+"""
+print("mean squared error:", lin_rmse)
 
 
 
