@@ -19,6 +19,8 @@ from sklearn.linear_model import LinearRegression
 from sklearn.preprocessing import OneHotEncoder
 from sklearn.metrics import mean_squared_error
 from sklearn.tree import DecisionTreeRegressor
+from sklearn.model_selection import GridSearchCV
+from scipy import stats
 
 #1. RETREIVING AND SORTING
 
@@ -192,7 +194,7 @@ housing_prepared = full_pipeline.fit_transform(data)
 #3.1 LinearRegression example
 lin_reg = LinearRegression()
 lin_reg.fit(housing_prepared, housing_labels)
-#test
+#evaluate
 some_data = data.iloc[:5]
 some_labels = housing_labels.iloc[:5]
 some_data_prepared = full_pipeline.transform(some_data)
@@ -212,7 +214,7 @@ print("mean squared error:", lin_rmse)
 #3.2 DecisionTreeRegressor example
 tree_reg = DecisionTreeRegressor()
 tree_reg.fit(housing_prepared, housing_labels)
-#test
+#evaluate
 housing_predictions = tree_reg.predict(housing_prepared)
 tree_mse = mean_squared_error(housing_labels, housing_predictions)
 tree_rmse = np.sqrt(tree_mse)
@@ -225,8 +227,52 @@ model you are confident about, so you need to use part of the training set for t
 and part of it for model validation.
 """
 
+#3.3 RandomForestRegressor model with Hyperparameters
+param_grid = [
+    {'n_estimators': [3, 10, 30], 'max_features': [2, 4, 6, 8]},
+    {'bootstrap': [False], 'n_estimators': [3, 10], 'max_features': [2, 3, 4]},
+]
+forest_reg = RandomForestRegressor()
+grid_search = GridSearchCV(forest_reg, param_grid, cv=5,
+scoring='neg_mean_squared_error',
+return_train_score=True)
+grid_search.fit(housing_prepared, housing_labels)
+"""
+The grid search will explore 12 + 6 = 18 combinations of RandomForestRegressor
+hyperparameter values, and it will train each model 5 times (since we are using fivefold
+cross validation). In other words, all in all, there will be 18 × 5 = 90 rounds of
+training! It may take quite a long time, but when it is done you can get the best combination
+of parameters
+"""
+print(grid_search.best_params_) #best params
+print(grid_search.best_estimator_) #best estimator
 
+#4 EVALUATION
+"""
+After tweaking your models for a while, you eventually have a system that performs
+sufficiently well. Now is the time to evaluate the final model on the test set.
+"""
 
-
+final_model = grid_search.best_estimator_
+X_test = strat_test_set.drop("median_house_value", axis=1)
+y_test = strat_test_set["median_house_value"].copy()
+X_test_prepared = full_pipeline.transform(X_test)
+final_predictions = final_model.predict(X_test_prepared)
+final_mse = mean_squared_error(y_test, final_predictions)
+final_rmse = np.sqrt(final_mse)
+print(final_rmse)
+"""
+In some cases, such a point estimate of the generalization error will not be quite
+enough to convince you to launch: what if it is just 0.1% better than the model currently
+in production? You might want to have an idea of how precise this estimate is.
+For this, you can compute a 95% confidence interval for the generalization error using
+scipy.stats.t.interval():
+"""
+confidence = 0.95
+squared_errors = (final_predictions - y_test) ** 2
+np.sqrt(stats.t.interval(confidence, len(squared_errors) - 1,
+loc=squared_errors.mean(),
+scale=stats.sem(squared_errors)))
+array([45685.10470776, 49691.25001878])
 
 #plt.show()
