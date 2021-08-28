@@ -18,6 +18,7 @@ from sklearn.compose import ColumnTransformer
 from sklearn.linear_model import LinearRegression
 from sklearn.preprocessing import OneHotEncoder
 from sklearn.metrics import mean_squared_error
+from sklearn.tree import DecisionTreeRegressor
 
 #1. RETREIVING AND SORTING
 
@@ -191,6 +192,7 @@ housing_prepared = full_pipeline.fit_transform(data)
 #3.1 LinearRegression example
 lin_reg = LinearRegression()
 lin_reg.fit(housing_prepared, housing_labels)
+#test
 some_data = data.iloc[:5]
 some_labels = housing_labels.iloc[:5]
 some_data_prepared = full_pipeline.transform(some_data)
@@ -207,6 +209,21 @@ $68,628 is not very satisfying.
 """
 print("mean squared error:", lin_rmse)
 
+#3.2 DecisionTreeRegressor example
+tree_reg = DecisionTreeRegressor()
+tree_reg.fit(housing_prepared, housing_labels)
+#test
+housing_predictions = tree_reg.predict(housing_prepared)
+tree_mse = mean_squared_error(housing_labels, housing_predictions)
+tree_rmse = np.sqrt(tree_mse)
+print("mean squared error:", tree_rmse)
+"""
+Wait, what!? No error at all? Could this model really be absolutely perfect? Of course,
+it is much more likely that the model has badly overfit the data. How can you be sure?
+As we saw earlier, you don’t want to touch the test set until you are ready to launch a
+model you are confident about, so you need to use part of the training set for training
+and part of it for model validation.
+"""
 
 
 
