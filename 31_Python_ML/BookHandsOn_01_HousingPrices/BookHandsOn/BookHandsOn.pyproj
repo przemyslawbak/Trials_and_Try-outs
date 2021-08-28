@@ -23,6 +23,13 @@
   <ItemGroup>
     <Compile Include="BookHandsOn.py" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="datasets\housing\housing.tgz" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="datasets\" />
+    <Folder Include="datasets\housing\" />
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
   <!-- Uncomment the CoreCompile target to enable the Build command in
        Visual Studio and specify your pre- and post-build commands in
