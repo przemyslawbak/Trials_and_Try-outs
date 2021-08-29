@@ -14,6 +14,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 from matplotlib.ticker import FuncFormatter
 import seaborn as sns
+import ftpClient as client
 
 sns.set_style('whitegrid')
 
@@ -28,10 +29,11 @@ data_path = Path('data') # set to e.g. external harddrive
 itch_store = str(data_path / 'itch.h5')
 order_book_store = data_path / 'order_book.h5'
 
-FTP_URL = 'ftp://emi.nasdaq.com/ITCH/'
-SOURCE_FILE = '08272021.NASDAQ_ITCH50.gz'
+FTP_URL = 'emi.nasdaq.com'
+FTP_DIR = '/ITCH/Nasdaq ITCH'
+SOURCE_FILE = '10302019.NASDAQ_ITCH50.gz'
 
-def may_be_download(url):
+def may_be_download(url, file, dir):
     """Download & unzip ITCH data if not yet available"""
     if not data_path.exists():
         print('Creating directory')
@@ -39,10 +41,11 @@ def may_be_download(url):
     else: 
         print('Directory exists')
 
-    filename = data_path / url.split('/')[-1]        
+    filename = data_path / file      
     if not filename.exists():
         print('Downloading...', url)
-        urlretrieve(url, filename)
+        obj = client.PyFTPclient(url)
+        obj.DownloadFile(dir + '/' + file, filename)
     else: 
         print('File exists')        
 
@@ -56,5 +59,5 @@ def may_be_download(url):
         print('File already unpacked')
     return unzipped
 
-file_name = may_be_download(urljoin(FTP_URL, SOURCE_FILE))
+file_name = may_be_download(FTP_URL, SOURCE_FILE, FTP_DIR)
 date = file_name.name.split('.')[0]
