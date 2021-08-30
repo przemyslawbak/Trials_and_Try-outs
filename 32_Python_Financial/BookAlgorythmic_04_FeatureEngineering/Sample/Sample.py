@@ -22,19 +22,15 @@ pd.set_option('display.expand_frame_repr', False)
 
 DATA_STORE = 'data/assets.h5'
 
-if not Path('data', 'assets.h5').exists():
-    print('fetching data...')
-    #Quandl makes available a dataset with stock prices
-    df = pd.read_csv('wiki_prices.csv')
-    # no longer needed
-    # df = pd.concat([df.loc[:, 'code'].str.strip(),
-    #                 df.loc[:, 'name'].str.split('(', expand=True)[0].str.strip().to_frame('name')], axis=1)
-    print(df.info(null_counts=True))
-    with pd.HDFStore(DATA_STORE) as store:
-        store.put('quandl/wiki/prices', df)
-else:
-    print('data exists...')
-
+print('fetching data...')
+#Quandl makes available a dataset with stock prices
+df = pd.read_csv('wiki_prices.csv')
+# no longer needed
+# df = pd.concat([df.loc[:, 'code'].str.strip(),
+#                 df.loc[:, 'name'].str.split('(', expand=True)[0].str.strip().to_frame('name')], axis=1)
+print(df.info(null_counts=True))
+with pd.HDFStore(DATA_STORE) as store:
+    store.put('quandl/wiki/prices', df)
 #Set data store location
 START = 2000
 END = 2018
@@ -190,6 +186,7 @@ data.sector = data.sector.fillna('Unknown')
 data.info()
 
 #Store data
+print('storing data...')
 with pd.HDFStore(DATA_STORE) as store:
     store.put('engineered_features', data.sort_index().loc[idx[:, :datetime(2018, 3, 1)], :])
     print(store.info())
