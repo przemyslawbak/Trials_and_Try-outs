@@ -12,6 +12,7 @@
 *.zip
 *.bin
 *.gz
+*.csv
 *.user
 *.userosscache
 *.sln.docstates
