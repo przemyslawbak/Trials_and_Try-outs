@@ -12,6 +12,7 @@
 *.zip
 *.bin
 *.gz
+*.h5
 *.csv
 *.user
 *.userosscache
