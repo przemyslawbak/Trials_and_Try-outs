@@ -1,25 +1,45 @@
 import warnings
 warnings.filterwarnings('ignore')
-
+from datetime import datetime
+import pandas as pd
+import pandas_datareader.data as web
+# replaces pyfinance.ols.PandasRollingOLS (no longer maintained)
+from statsmodels.regression.rolling import RollingOLS
+import statsmodels.api as sm
+import matplotlib.pyplot as plt
+import seaborn as sns
 from pathlib import Path
-from datetime import date
-import json
+import requests
 from io import BytesIO
 from zipfile import ZipFile, BadZipFile
-from tqdm import tqdm
-import requests
+import numpy as np
+from sklearn.datasets import fetch_openml
 
-import pandas_datareader.data as web
-import pandas as pd
+#settings
+sns.set_style('whitegrid')
+idx = pd.IndexSlice
+pd.set_option('display.expand_frame_repr', False)
 
-from pprint import pprint
+DATA_STORE = 'data/assets.h5'
 
-import seaborn as sns
-import matplotlib.pyplot as plt
-import matplotlib.ticker as mticker
+#Quandl makes available a dataset with stock prices
+df = pd.read_csv('wiki_stocks.csv')
+# no longer needed
+# df = pd.concat([df.loc[:, 'code'].str.strip(),
+#                 df.loc[:, 'name'].str.split('(', expand=True)[0].str.strip().to_frame('name')], axis=1)
 
-data_path = Path('data') # perhaps set to external harddrive to accomodate large amount of data
-if not data_path.exists():
-    data_path.mkdir()
+print(df.info(null_counts=True))
+with pd.HDFStore(DATA_STORE) as store:
+    store.put('quandl/wiki/prices', df)
 
-#downloads 40GB of data!! cancel
+
+#Set data store location
+START = 2000
+END = 2018
+with pd.HDFStore(DATA_STORE) as store:
+    prices = (store['quandl/wiki/prices']
+              .loc[idx[str(START):str(END), :], 'adj_close']
+              .unstack('ticker'))
+    stocks = store['us_equities/stocks'].loc[:, ['marketcap', 'ipoyear', 'sector']]
+
+prices.info()
