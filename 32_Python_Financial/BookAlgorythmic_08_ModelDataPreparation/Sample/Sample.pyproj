@@ -24,10 +24,12 @@
     <Compile Include="Sample.py" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="kc_house_data.csv" />
+    <Folder Include="data\" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="data\" />
+    <Content Include="us_equities_meta_data.csv" />
+    <Content Include="wiki_prices.csv" />
+    <Content Include="wiki_stocks.csv" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
   <!-- Uncomment the CoreCompile target to enable the Build command in
