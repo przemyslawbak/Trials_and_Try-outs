@@ -10,8 +10,8 @@ from talib import RSI, BBANDS, MACD, ATR
 #settings
 MONTH = 21
 YEAR = 12 * MONTH
-START = 2000
-END = 2018
+START = '2013-01-01'
+END = '2017-12-31'
 sns.set_style('whitegrid')
 idx = pd.IndexSlice
 print('fetching data...')
@@ -41,14 +41,14 @@ with pd.HDFStore(DATA_STORE) as store:
               .loc[:, ['marketcap', 'ipoyear', 'sector']])
 
 print('ok...')
-print(prices)
-print(stocks)
+prices.info()
+stocks.info()
 
 # want at least 2 years of data
 min_obs = 2 * YEAR
 
 # have this much per ticker 
-nobs = prices.groupby(level='ticker').size()
+nobs = prices.groupby(level='ticker').size() #bug, missing 'ticker'?
 
 # keep those that exceed the limit
 keep = nobs[nobs > min_obs].index
