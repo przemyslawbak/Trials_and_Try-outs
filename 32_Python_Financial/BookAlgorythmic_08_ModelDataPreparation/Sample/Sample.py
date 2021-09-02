@@ -16,7 +16,7 @@ sns.set_style('whitegrid')
 idx = pd.IndexSlice
 print('fetching data...')
 #Loading Quandl Wiki Stock Prices & Meta Data
-ohlcv = ['adj_open', 'adj_close', 'adj_low', 'adj_high', 'adj_volume']
+ohlcv = ['adj_open', 'adj_close', 'adj_low', 'adj_high', 'adj_volume', 'ticker']
 DATA_STORE = 'data/assets.h5'
 print('next...')
 df = pd.read_csv('wiki_prices.csv')
@@ -48,7 +48,7 @@ stocks.info()
 min_obs = 2 * YEAR
 
 # have this much per ticker 
-nobs = prices.groupby(level='ticker').size() #bug, missing 'ticker'?
+nobs = prices.groupby(['ticker']).size() #bug, missing 'ticker'?
 
 # keep those that exceed the limit
 keep = nobs[nobs > min_obs].index
