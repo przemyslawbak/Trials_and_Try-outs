@@ -12,8 +12,8 @@ pd.set_option('display.expand_frame_repr', False)
 
 DATA_STORE = Path('assets.h5')
 
-#Quandl Wiki Prices
-df = pd.read_csv('wiki_stocks.csv')
+#Quandl
+df = pd.read_csv('sources/wiki_stocks.csv')
 # no longer needed
 # df = pd.concat([df.loc[:, 'code'].str.strip(),
 #                 df.loc[:, 'name'].str.split('(', expand=True)[0].str.strip().to_frame('name')], axis=1)
@@ -23,7 +23,7 @@ with pd.HDFStore(DATA_STORE) as store:
     store.put('quandl/', df)
 
 #FRED
-df = pd.read_csv('fredSP500.csv')
+df = pd.read_csv('sources/fredSP500.csv')
 # no longer needed
 # df = pd.concat([df.loc[:, 'code'].str.strip(),
 #                 df.loc[:, 'name'].str.split('(', expand=True)[0].str.strip().to_frame('name')], axis=1)
@@ -31,3 +31,13 @@ df = pd.read_csv('fredSP500.csv')
 print(df.info(null_counts=True))
 with pd.HDFStore(DATA_STORE) as store:
     store.put('fred/', df)
+
+#Stooq
+df = pd.read_csv('sources/stooq^spx_d.csv')
+# no longer needed
+# df = pd.concat([df.loc[:, 'code'].str.strip(),
+#                 df.loc[:, 'name'].str.split('(', expand=True)[0].str.strip().to_frame('name')], axis=1)
+
+print(df.info(null_counts=True))
+with pd.HDFStore(DATA_STORE) as store:
+    store.put('stooq/', df)
