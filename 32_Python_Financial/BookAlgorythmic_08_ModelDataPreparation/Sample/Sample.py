@@ -40,7 +40,8 @@ with pd.HDFStore(DATA_STORE) as store:
     stocks = (store['us_equities/stocks']
               .loc[:, ['marketcap', 'ipoyear', 'sector']])
 
-print('ok...')
+print('before')
+print(prices)
 prices.info()
 stocks.info()
 
@@ -53,4 +54,19 @@ nobs = prices.groupby(['ticker']).size() #bug, missing 'ticker'?
 # keep those that exceed the limit
 keep = nobs[nobs > min_obs].index
 
-prices = prices.loc[idx[keep, :], :]
+prices = prices.loc[idx[keep], :] #changed, not working
+print('after')
+print(prices)
+
+#Align price and meta data, count results
+stocks = stocks[~stocks.index.duplicated() & stocks.sector.notnull()]
+stocks.sector = stocks.sector.str.lower().str.replace(' ', '_')
+stocks.index.name = 'ticker'
+
+shared = (prices.index.get_level_values('ticker').unique()
+          .intersection(stocks.index))
+stocks = stocks.loc[shared, :]
+prices = prices.loc[idx[shared], :]
+prices.info(show_counts=True)
+stocks.info(show_counts=True)
+stocks.sector.value_counts()
