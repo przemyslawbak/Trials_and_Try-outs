@@ -10,9 +10,10 @@ import pandas_datareader.data as web
 from sklearn.datasets import fetch_openml
 pd.set_option('display.expand_frame_repr', False)
 
-DATA_STORE = Path('assets.h5')
+DATA_STORE = Path('data/assets.h5')
 
 #Quandl
+print('Quandl')
 df = pd.read_csv('sources/wiki_stocks.csv')
 # no longer needed
 # df = pd.concat([df.loc[:, 'code'].str.strip(),
@@ -23,6 +24,7 @@ with pd.HDFStore(DATA_STORE) as store:
     store.put('quandl/', df)
 
 #FRED
+print('FRED')
 df = pd.read_csv('sources/fredSP500.csv')
 # no longer needed
 # df = pd.concat([df.loc[:, 'code'].str.strip(),
@@ -33,6 +35,7 @@ with pd.HDFStore(DATA_STORE) as store:
     store.put('fred/', df)
 
 #Stooq
+print('Stooq')
 df = pd.read_csv('sources/stooq^spx_d.csv')
 # no longer needed
 # df = pd.concat([df.loc[:, 'code'].str.strip(),
@@ -41,3 +44,24 @@ df = pd.read_csv('sources/stooq^spx_d.csv')
 print(df.info(null_counts=True))
 with pd.HDFStore(DATA_STORE) as store:
     store.put('stooq/', df)
+
+#Wikipedia
+print('Wikipedia')
+url = 'https://en.wikipedia.org/wiki/List_of_S%26P_500_companies'
+df = pd.read_html(url, header=0)[0]
+df.head()
+df.columns = ['ticker', 'name', 'sec_filings', 'gics_sector', 'gics_sub_industry',
+              'location', 'first_added', 'cik', 'founded']
+df = df.drop('sec_filings', axis=1).set_index('ticker')
+print(df.info())
+with pd.HDFStore(DATA_STORE) as store:
+    store.put('wikipedia/', df)
+
+#US equities
+print('US equities')
+df = pd.read_csv('sources/us_equities_meta_data.csv')
+df.info()
+with pd.HDFStore(DATA_STORE) as store:
+    store.put('us_equities/', df.set_index('ticker'))
+
+###################################################################################
