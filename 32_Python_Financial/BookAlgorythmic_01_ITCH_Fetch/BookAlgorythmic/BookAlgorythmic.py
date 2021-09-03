@@ -59,8 +59,9 @@ def may_be_download(url, file, dir):
         print('File already unpacked')
     return unzipped
 
-file_name = may_be_download(FTP_URL, SOURCE_FILE, FTP_DIR)
-date = file_name.name.split('.')[0]
+#file_name = may_be_download(FTP_URL, SOURCE_FILE, FTP_DIR)
+#date = file_name.name.split('.')[0]
+file_name = Path(data_path, '10302019.NASDAQ_ITCH50.bin')
 
 #Defining format strings
 event_codes = {'O': 'Start of Messages',
