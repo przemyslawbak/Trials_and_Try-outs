@@ -1,4 +1,3 @@
-
 import warnings
 warnings.filterwarnings('ignore')
 import gzip
@@ -16,6 +15,10 @@ from matplotlib.ticker import FuncFormatter
 import seaborn as sns
 import ftpClient as client
 
+FTP_URL = 'emi.nasdaq.com'
+FTP_DIR = '/ITCH/Nasdaq ITCH'
+SOURCE_FILE = '10302019.NASDAQ_ITCH50.gz'
+
 sns.set_style('whitegrid')
 
 def format_time(t):
@@ -29,10 +32,7 @@ data_path = Path('data') # set to e.g. external harddrive
 itch_store = str(data_path / 'itch.h5')
 order_book_store = data_path / 'order_book.h5'
 
-FTP_URL = 'emi.nasdaq.com'
-FTP_DIR = '/ITCH/Nasdaq ITCH'
-SOURCE_FILE = '10302019.NASDAQ_ITCH50.gz'
-
+#Download & unzip
 def may_be_download(url, file, dir):
     """Download & unzip ITCH data if not yet available"""
     if not data_path.exists():
@@ -59,64 +59,21 @@ def may_be_download(url, file, dir):
         print('File already unpacked')
     return unzipped
 
-#The function clean_message_types() just runs a few basic string cleaning steps.
-def clean_message_types(df):
-    df.columns = [c.lower().strip() for c in df.columns]
-    df.value = df.value.str.strip()
-    df.name = (df.name
-               .str.strip() # remove whitespace
-               .str.lower()
-               .str.replace(' ', '_')
-               .str.replace('-', '_')
-               .str.replace('/', '_'))
-    df.notes = df.notes.str.strip()
-    df['message_type'] = df.loc[df.name == 'message_type', 'value']
-    return df
-
 file_name = may_be_download(FTP_URL, SOURCE_FILE, FTP_DIR)
 date = file_name.name.split('.')[0]
-message_data = (pd.read_excel('data/message_types.xlsx',
-                              sheet_name='messages')
-                .sort_values('id')
-                .drop('id', axis=1))
-print(message_data.head())
-message_types = clean_message_types(message_data)
 
-#We extract message type codes and names so we can later make the results more readable.
-message_labels = (message_types.loc[:, ['message_type', 'notes']]
-                  .dropna()
-                  .rename(columns={'notes': 'name'}))
-message_labels.name = (message_labels.name
-                       .str.lower()
-                       .str.replace('message', '')
-                       .str.replace('.', '')
-                       .str.strip().str.replace(' ', '_'))
-# message_labels.to_csv('message_labels.csv', index=False)
-print(message_labels.head())
-
-#Each message consists of several fields that are defined by offset, length and type of value. The struct module will use this format information to parse the binary source data.
-message_types.message_type = message_types.message_type.ffill()
-message_types = message_types[message_types.name != 'message_type']
-message_types.value = (message_types.value
-                       .str.lower()
-                       .str.replace(' ', '_')
-                       .str.replace('(', '')
-                       .str.replace(')', ''))
-message_types.info()
-
+#Defining format strings
 event_codes = {'O': 'Start of Messages',
                'S': 'Start of System Hours',
                'Q': 'Start of Market Hours',
                'M': 'End of Market Hours',
                'E': 'End of System Hours',
                'C': 'End of Messages'}
-
 encoding = {'primary_market_maker': {'Y': 1, 'N': 0},
             'printable'           : {'Y': 1, 'N': 0},
             'buy_sell_indicator'  : {'B': 1, 'S': -1},
             'cross_type'          : {'O': 0, 'C': 1, 'H': 2},
             'imbalance_direction' : {'B': 0, 'S': 1, 'N': 0, 'O': -1}}
-
 formats = {
     ('integer', 2): 'H', # int of length 2 => format string 'H'
     ('integer', 4): 'I',
@@ -131,24 +88,68 @@ formats = {
     ('price_8', 8): 'Q',
 }
 
-#The parser translates the message specs into format strings and namedtuples that capture the message content. First, we create (type, length) formatting tuples from ITCH spec
+#Load Message Types 
+message_data = (pd.read_excel('message_types.xlsx', sheet_name='messages')
+                .sort_values('id')
+                .drop('id', axis=1))
+message_data.head()
+
+#Basic Cleaning
+def clean_message_types(df):
+    df.columns = [c.lower().strip() for c in df.columns]
+    df.value = df.value.str.strip()
+    df.name = (df.name
+               .str.strip() # remove whitespace
+               .str.lower()
+               .str.replace(' ', '_')
+               .str.replace('-', '_')
+               .str.replace('/', '_'))
+    df.notes = df.notes.str.strip()
+    df['message_type'] = df.loc[df.name == 'message_type', 'value']
+    return df
+message_types = clean_message_types(message_data)
+
+#Get Message Labels
+message_labels = (message_types.loc[:, ['message_type', 'notes']]
+                  .dropna()
+                  .rename(columns={'notes': 'name'}))
+message_labels.name = (message_labels.name
+                       .str.lower()
+                       .str.replace('message', '')
+                       .str.replace('.', '')
+                       .str.strip().str.replace(' ', '_'))
+# message_labels.to_csv('message_labels.csv', index=False)
+message_labels.head()
+
+#Finalize specification details
+message_types.message_type = message_types.message_type.ffill()
+message_types = message_types[message_types.name != 'message_type']
+message_types.value = (message_types.value
+                       .str.lower()
+                       .str.replace(' ', '_')
+                       .str.replace('(', '')
+                       .str.replace(')', ''))
+message_types.info()
+message_types.head()
+
+message_types.to_csv('message_types.csv', index=False)
+message_types = pd.read_csv('message_types.csv')
 message_types.loc[:, 'formats'] = (message_types[['value', 'length']]
                             .apply(tuple, axis=1).map(formats))
 
-#Then, we extract formatting details for alphanumerical fields
 alpha_fields = message_types[message_types.value == 'alpha'].set_index('name')
 alpha_msgs = alpha_fields.groupby('message_type')
 alpha_formats = {k: v.to_dict() for k, v in alpha_msgs.formats}
 alpha_length = {k: v.add(5).to_dict() for k, v in alpha_msgs.length}
 
-#We generate message classes as named tuples and format strings
 message_fields, fstring = {}, {}
 for t, message in message_types.groupby('message_type'):
     message_fields[t] = namedtuple(typename=t, field_names=message.name.tolist())
     fstring[t] = '>' + ''.join(message.formats.tolist())
-alpha_fields.info()
 
-#Fields of alpha type (alphanumeric) require post-processing as defined in the format_alpha function
+alpha_fields.info()
+alpha_fields.head()
+
 def format_alpha(mtype, data):
     """Process byte strings of type alpha"""
 
@@ -242,7 +243,7 @@ print('Duration:', format_time(time() - start))
 counter = pd.Series(message_type_counter).to_frame('# Trades')
 counter['Message Type'] = counter.index.map(message_labels.set_index('message_type').name.to_dict())
 counter = counter[['Message Type', '# Trades']].sort_values('# Trades', ascending=False)
-print(counter)
+counter
 
 with pd.HDFStore(itch_store) as store:
     store.put('summary', counter)
@@ -274,3 +275,4 @@ trade_summary.iloc[:50].plot.bar(figsize=(14, 6), color='darkblue', title='Share
 plt.gca().yaxis.set_major_formatter(FuncFormatter(lambda y, _: '{:.0%}'.format(y)))
 sns.despine()
 plt.tight_layout()
+
