@@ -20,6 +20,7 @@ stock = 'AAPL'
 date = '20191030'
 title = '{} | {}'.format(stock, pd.to_datetime(date).date())
 
+#Load system event data
 with pd.HDFStore(itch_store) as store:
     sys_events = store['S'].set_index('event_code').drop_duplicates()
     sys_events.timestamp = sys_events.timestamp.add(pd.to_datetime(date)).dt.time
@@ -35,13 +36,34 @@ with pd.HDFStore(itch_store) as store:
     stocks = store['R'].loc[:, ['stock_locate', 'stock']]
     trades = store['P'].append(store['Q'].rename(columns={'cross_price': 'price'}), sort=False).merge(stocks)
 
-trades['value'] = trades.shares.mul(trades.price)    
+
+trades['value'] = trades.shares.mul(trades.price)
 trades['value_share'] = trades.value.div(trades.value.sum())
 trade_summary = trades.groupby('stock').value_share.sum().sort_values(ascending=False)
 trade_summary.iloc[:50].plot.bar(figsize=(14, 6), color='darkblue', title='% of Traded Value')
 plt.gca().yaxis.set_major_formatter(FuncFormatter(lambda y, _: '{:.0%}'.format(y)))
 
+#AAPL Trade Summary
+with pd.HDFStore(order_book_store) as store:
+    columns = ['A','B', 'C']
+    df_ = pd.DataFrame(columns=columns)
+    store.put('{}/trades', df_)
 
+with pd.HDFStore(order_book_store) as store:
+    trades = store['{}/trades'.format(stock)] #exception: lack of data
+
+trades.price = trades.price.mul(1e-4) # format price
+trades = trades[trades.cross == 0]
+trades = trades.between_time(market_open, market_close).drop('cross', axis=1)
+trades.info()
+
+#Tick Bars
+tick_bars = trades.copy()
+tick_bars.index = tick_bars.index.time
+tick_bars.price.plot(figsize=(10, 5), 
+                     title='Tick Bars | {} | {}'.format(stock, pd.to_datetime(date).date()), lw=1)
+plt.xlabel('')
+plt.tight_layout();
 
 
 plt.show()
