@@ -65,12 +65,14 @@ def get_messages(date, stock=stock):
 
 messages = get_messages(date=date)
 messages.info(null_counts=True)
+print(messages)
 
 with pd.HDFStore(order_book_store) as store:
     key = f'{stock}/messages'
     store.put(key, messages)
     print(store.info())
 
+#Combine Trading Records
 def get_trades(m):
     """Combine C, E, P and Q messages into trading records"""
     trade_dict = {'executed_shares': 'shares', 'execution_price': 'price'}
@@ -81,3 +83,203 @@ def get_trades(m):
                         m.loc[m.type == 'Q', ['timestamp', 'price', 'shares']].assign(cross=1),
                         ], sort=False).dropna(subset=['price']).fillna(0)
     return trades.set_index('timestamp').sort_index().astype(int)
+
+trades = get_trades(messages)
+print(trades.info())
+print(trades)
+
+with pd.HDFStore(order_book_store) as store:
+    store.put(f'{stock}/trades', trades)
+
+#Create Orders
+def add_orders(orders, buysell, nlevels):
+    """Add orders up to desired depth given by nlevels;
+        sell in ascending, buy in descending order
+    """
+    new_order = []
+    items = sorted(orders.copy().items())
+    if buysell == 1:
+        items = reversed(items)  
+    for i, (p, s) in enumerate(items, 1):
+        new_order.append((p, s))
+        if i == nlevels:
+            break
+    return orders, new_order
+
+def save_orders(orders, append=False):
+    cols = ['price', 'shares']
+    for buysell, book in orders.items():
+        df = (pd.concat([pd.DataFrame(data=data,
+                                     columns=cols)
+                         .assign(timestamp=t) 
+                         for t, data in book.items()]))
+        key = f'{stock}/{order_dict[buysell]}'
+        df.loc[:, ['price', 'shares']] = df.loc[:, ['price', 'shares']].astype(int)
+        with pd.HDFStore(order_book_store) as store:
+            if append:
+                store.append(key, df.set_index('timestamp'), format='t')
+            else:
+                store.put(key, df.set_index('timestamp'))
+
+order_book = {-1: {}, 1: {}}
+current_orders = {-1: Counter(), 1: Counter()}
+message_counter = Counter()
+nlevels = 100
+
+start = time()
+for message in messages.itertuples():
+    i = message[0]
+    if i % 1e5 == 0 and i > 0:
+        print(f'{i:,.0f}\t\t{format_time(time() - start)}')
+        save_orders(order_book, append=True)
+        order_book = {-1: {}, 1: {}}
+        start = time()
+    if np.isnan(message.buy_sell_indicator):
+        continue
+    message_counter.update(message.type)
+
+    buysell = message.buy_sell_indicator
+    price, shares = None, None
+
+    if message.type in ['A', 'F', 'U']:
+        price = int(message.price)
+        shares = int(message.shares)
+
+        current_orders[buysell].update({price: shares})
+        current_orders[buysell], new_order = add_orders(current_orders[buysell], buysell, nlevels)
+        order_book[buysell][message.timestamp] = new_order
+
+    if message.type in ['E', 'C', 'X', 'D', 'U']:
+        if message.type == 'U':
+            if not np.isnan(message.shares_replaced):
+                price = int(message.price_replaced)
+                shares = -int(message.shares_replaced)
+        else:
+            if not np.isnan(message.price):
+                price = int(message.price)
+                shares = -int(message.shares)
+
+        if price is not None:
+            current_orders[buysell].update({price: shares})
+            if current_orders[buysell][price] <= 0:
+                current_orders[buysell].pop(price)
+            current_orders[buysell], new_order = add_orders(current_orders[buysell], buysell, nlevels)
+            order_book[buysell][message.timestamp] = new_order
+
+message_counter = pd.Series(message_counter)
+print(message_counter)
+
+with pd.HDFStore(order_book_store) as store:
+    print(store.info())
+
+#Order Book Depth
+with pd.HDFStore(order_book_store) as store:
+    buy = store[f'{stock}/buy'].reset_index().drop_duplicates()
+    sell = store[f'{stock}/sell'].reset_index().drop_duplicates()
+
+#Price to Decimals
+buy.price = buy.price.mul(1e-4)
+sell.price = sell.price.mul(1e-4)
+
+#Remove outliers
+percentiles = [.01, .02, .1, .25, .75, .9, .98, .99]
+pd.concat([buy.price.describe(percentiles=percentiles).to_frame('buy'),
+           sell.price.describe(percentiles=percentiles).to_frame('sell')], axis=1)
+
+#Buy-Sell Order Distribution
+market_open='0930'
+market_close = '1600'
+fig, ax = plt.subplots(figsize=(7,5))
+hist_kws = {'linewidth': 1, 'alpha': .5}
+sns.distplot(buy[buy.price.between(240, 250)].set_index('timestamp').between_time(market_open, market_close).price, 
+             ax=ax, label='Buy', kde=False, hist_kws=hist_kws)
+sns.distplot(sell[sell.price.between(240, 250)].set_index('timestamp').between_time(market_open, market_close).price, 
+             ax=ax, label='Sell', kde=False, hist_kws=hist_kws)
+
+ax.legend(fontsize=10)
+ax.set_title('Limit Order Price Distribution')
+ax.set_yticklabels([f'{int(y/1000):,}' for y in ax.get_yticks().tolist()])
+ax.set_xticklabels([f'${int(x):,}' for x in ax.get_xticks().tolist()])
+ax.set_xlabel('Price')
+ax.set_ylabel('Shares (\'000)')
+sns.despine()
+fig.tight_layout();
+
+#Order Book Depth
+utc_offset = timedelta(hours=4)
+depth = 100
+buy_per_min = (buy
+               .groupby([pd.Grouper(key='timestamp', freq='Min'), 'price'])
+               .shares
+               .sum()
+               .apply(np.log)
+               .to_frame('shares')
+               .reset_index('price')
+               .between_time(market_open, market_close)
+               .groupby(level='timestamp', as_index=False, group_keys=False)
+               .apply(lambda x: x.nlargest(columns='price', n=depth))
+               .reset_index())
+buy_per_min.timestamp = buy_per_min.timestamp.add(utc_offset).astype(int)
+buy_per_min.info()
+sell_per_min = (sell
+                .groupby([pd.Grouper(key='timestamp', freq='Min'), 'price'])
+                .shares
+                .sum()
+                .apply(np.log)
+                .to_frame('shares')
+                .reset_index('price')
+                .between_time(market_open, market_close)
+                .groupby(level='timestamp', as_index=False, group_keys=False)
+                .apply(lambda x: x.nsmallest(columns='price', n=depth))
+                .reset_index())
+
+sell_per_min.timestamp = sell_per_min.timestamp.add(utc_offset).astype(int)
+sell_per_min.info()
+with pd.HDFStore(order_book_store) as store:
+    trades = store[f'{stock}/trades']
+trades.price = trades.price.mul(1e-4)
+trades = trades[trades.cross == 0].between_time(market_open, market_close)
+
+trades_per_min = (trades
+                  .resample('Min')
+                  .agg({'price': 'mean', 'shares': 'sum'}))
+trades_per_min.index = trades_per_min.index.to_series().add(utc_offset).astype(int)
+trades_per_min.info()
+sns.set_style('white')
+fig, ax = plt.subplots(figsize=(14, 6))
+
+buy_per_min.plot.scatter(x='timestamp',
+                         y='price', 
+                         c='shares', 
+                         ax=ax, 
+                         colormap='Blues', 
+                         colorbar=False, 
+                         alpha=.25)
+
+sell_per_min.plot.scatter(x='timestamp',
+                          y='price', 
+                          c='shares', 
+                          ax=ax, 
+                          colormap='Reds', 
+                          colorbar=False, 
+                          alpha=.25)
+
+title = f'AAPL | {date} | Buy & Sell Limit Order Book | Depth = {depth}'
+trades_per_min.price.plot(figsize=(14, 8), 
+                          c='k', 
+                          ax=ax, 
+                          lw=2, 
+                          title=title)
+
+xticks = [datetime.fromtimestamp(ts / 1e9).strftime('%H:%M') for ts in ax.get_xticks()]
+ax.set_xticklabels(xticks)
+
+ax.set_xlabel('')
+ax.set_ylabel('Price', fontsize=12)
+
+red_patch = mpatches.Patch(color='red', label='Sell')
+blue_patch = mpatches.Patch(color='royalblue', label='Buy')
+
+plt.legend(handles=[red_patch, blue_patch])
+sns.despine()
+fig.tight_layout()
