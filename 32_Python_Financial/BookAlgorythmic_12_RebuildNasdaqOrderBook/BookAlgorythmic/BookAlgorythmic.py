@@ -73,6 +73,7 @@ with pd.HDFStore(order_book_store) as store:
     print(store.info())
 
 #Combine Trading Records
+print('Combine Trading Records')
 def get_trades(m):
     """Combine C, E, P and Q messages into trading records"""
     trade_dict = {'executed_shares': 'shares', 'execution_price': 'price'}
@@ -92,6 +93,7 @@ with pd.HDFStore(order_book_store) as store:
     store.put(f'{stock}/trades', trades)
 
 #Create Orders
+print('Create Orders')
 def add_orders(orders, buysell, nlevels):
     """Add orders up to desired depth given by nlevels;
         sell in ascending, buy in descending order
@@ -173,20 +175,24 @@ with pd.HDFStore(order_book_store) as store:
     print(store.info())
 
 #Order Book Depth
+print('Order Book Depth')
 with pd.HDFStore(order_book_store) as store:
     buy = store[f'{stock}/buy'].reset_index().drop_duplicates()
     sell = store[f'{stock}/sell'].reset_index().drop_duplicates()
 
 #Price to Decimals
+print('Price to Decimals')
 buy.price = buy.price.mul(1e-4)
 sell.price = sell.price.mul(1e-4)
 
 #Remove outliers
+print('Remove outliers')
 percentiles = [.01, .02, .1, .25, .75, .9, .98, .99]
 pd.concat([buy.price.describe(percentiles=percentiles).to_frame('buy'),
            sell.price.describe(percentiles=percentiles).to_frame('sell')], axis=1)
 
 #Buy-Sell Order Distribution
+print('Buy-Sell Order Distribution')
 market_open='0930'
 market_close = '1600'
 fig, ax = plt.subplots(figsize=(7,5))
@@ -206,6 +212,7 @@ sns.despine()
 fig.tight_layout();
 
 #Order Book Depth
+print('Order Book Depth')
 utc_offset = timedelta(hours=4)
 depth = 100
 buy_per_min = (buy
@@ -219,7 +226,7 @@ buy_per_min = (buy
                .groupby(level='timestamp', as_index=False, group_keys=False)
                .apply(lambda x: x.nlargest(columns='price', n=depth))
                .reset_index())
-buy_per_min.timestamp = buy_per_min.timestamp.add(utc_offset).astype(int)
+buy_per_min.timestamp = buy_per_min.timestamp.add(utc_offset).astype(int) #cannot astype a datetimelike from [datetime64[ns]] to [int32]
 buy_per_min.info()
 sell_per_min = (sell
                 .groupby([pd.Grouper(key='timestamp', freq='Min'), 'price'])
