@@ -23,6 +23,14 @@
   <ItemGroup>
     <Compile Include="BookAlgorythmic.py" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="data\" />
+    <Folder Include="data\nasdaq100\" />
+    <Folder Include="data\nasdaq100\1min_taq\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="data\nasdaq100\1min_taq\Algoseek_equity_trade_and_quotes_1min.csv" />
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
   <!-- Uncomment the CoreCompile target to enable the Build command in
        Visual Studio and specify your pre- and post-build commands in
