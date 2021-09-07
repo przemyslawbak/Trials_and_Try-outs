@@ -37,3 +37,5 @@ parquet_file.unlink()
 write = _
 #Results Parquet
 results['Parquet'] = {'read': np.mean(read.all_runs), 'write': np.mean(write.all_runs), 'size': size}
+
+#exception: _ not defined, can not continue
