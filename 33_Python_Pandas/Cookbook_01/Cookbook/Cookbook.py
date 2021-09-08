@@ -44,3 +44,53 @@ imdb_score = movies["imdb_score"]
 print(imdb_score)
 print(imdb_score + 1) #also other arithmetic operators
 print(imdb_score > 7) #True/False
+#Chaining Series methods examples
+director.value_counts().head(3)
+fb_likes.isna().sum()
+fb_likes.fillna(0).astype(int).head()
+#Renaming column names
+col_map = {
+"director_name": "director",
+"num_critic_for_reviews": "critic_reviews",
+}
+print(movies.rename(columns=col_map).head())
+
+idx_map = {
+"Avatar": "Ratava",
+"Spectre": "Ertceps",
+"Pirates of the Caribbean: At World's End": "POC",
+}
+col_map = {
+"aspect_ratio": "aspect",
+"movie_facebook_likes": "fblikes",
+}
+print(movies.set_index("movie_title").rename(index=idx_map, columns=col_map).head(3))
+#create column
+movies["has_seen"] = 0 #mutates existing df
+idx_map = {
+"Avatar": "Ratava",
+"Spectre": "Ertceps",
+"Pirates of the Caribbean: At World's End": "POC",
+}
+col_map = {
+"aspect_ratio": "aspect",
+"movie_facebook_likes": "fblikes",
+}
+movies.rename(
+index=idx_map, columns=col_map
+).assign(has_seen=0) #creates new df
+movies.assign(total_likes=sum_col).head(5)
+movies.assign(total_likes=total
+              .fillna(0))[ #fills missing values
+"total_likes"
+]
+#inserting column
+profit_index = movies.columns.get_loc("gross") + 1 #9
+movies.insert( #mutates existing df
+loc=profit_index,
+column="profit",
+value=movies["gross"] - movies["budget"],
+)
+#deleting column
+df2 = df2.drop(columns="total_likes")
+del movies["director_name"]
