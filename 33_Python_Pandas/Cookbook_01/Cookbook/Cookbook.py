@@ -19,3 +19,28 @@ print(movies.info())
 print(movies["director_name"]) # = movies.director_name
 #.loc / .iloc - to pull out a Series
 print(movies.loc[:, "director_name"]) # = movies.iloc[:, 1]
+#column attributes
+print( movies.director_name.index)
+print( movies.director_name.dtype)
+print( movies.director_name.size)
+print( movies.director_name.name)
+#series methods
+director = movies["director_name"]
+fb_likes = movies["actor_1_facebook_likes"]
+print(director.dtype)
+print(fb_likes.dtype)
+#printing series
+print(director.head())
+print(director.sample(n=5, random_state=42))
+print(director.value_counts())
+print(fb_likes.describe())
+print(director.describe())
+#missing values
+directors_na = director.isna()
+fb_likes_filled = fb_likes.fillna(0)
+fb_likes_dropped = fb_likes.dropna()
+#series operations
+imdb_score = movies["imdb_score"]
+print(imdb_score)
+print(imdb_score + 1) #also other arithmetic operators
+print(imdb_score > 7) #True/False
