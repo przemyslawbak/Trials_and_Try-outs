@@ -2,6 +2,7 @@
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
+import seaborn as sns
 #Summary statistics (mean, quartiles, and standard deviation)
 fueleco = pd.read_csv("data/vehicles.csv.zip")
 print(fueleco.mean())
@@ -47,5 +48,24 @@ top_n = fueleco.make.value_counts().index[:6]
    .value_counts()
    .plot.bar(ax=ax)
 )
-plt.show() #window
-fig.savefig("data/c5-catpan.png", dpi=300) #file
+#plt.show() #window
+#fig.savefig("data/c5-catpan.png", dpi=300) #file
+#Visualize the correlations in a heatmap
+fig, ax = plt.subplots(figsize=(8, 8))
+corr = fueleco[
+["city08", "highway08", "cylinders"]
+].corr()
+mask = np.zeros_like(corr, dtype=np.bool)
+mask[np.triu_indices_from(mask)] = True
+sns.heatmap(
+corr,
+mask=mask,
+fmt=".2f",
+annot=True,
+ax=ax,
+cmap="RdBu",
+vmin=-1,
+vmax=1,
+square=True,
+)
+plt.show()
