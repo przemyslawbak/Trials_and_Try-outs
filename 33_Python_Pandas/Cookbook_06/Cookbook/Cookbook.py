@@ -45,3 +45,6 @@ college.loc[:"Amridge University", :"MENONLY"] #alternative
 college.iloc[[100, 200], [7, 15]]
 #Single scalar value
 college.iloc[5, -4]
+#Slicing lexicographically (need to sort index first)
+college = college.sort_index()
+college.loc["Sp":"Su"]
