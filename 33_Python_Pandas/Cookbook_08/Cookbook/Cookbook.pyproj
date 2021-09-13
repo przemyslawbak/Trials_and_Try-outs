@@ -26,6 +26,12 @@
   <ItemGroup>
     <Folder Include="data\" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="data\baseball14.csv" />
+    <Content Include="data\baseball15.csv" />
+    <Content Include="data\baseball16.csv" />
+    <Content Include="data\college.csv" />
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
   <!-- Uncomment the CoreCompile target to enable the Build command in
        Visual Studio and specify your pre- and post-build commands in
