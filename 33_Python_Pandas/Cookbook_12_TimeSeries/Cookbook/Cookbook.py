@@ -55,4 +55,39 @@ crime.loc['2016-05-12 03'].shape
 crime.loc['2016 Sep, 15'].shape
 crime.loc['21st October 2014 05'].shape
 print(crime.loc['2016-05-12 16:45:00'])
-#!!!!!!!Sorting the index will lead to large gains in performance!!!!!!!
+#!!!!!!!NOTE:Sorting the index will lead to large gains in performance!!!!!!!
+#Filtering columns with time data
+#Using methods that only work with a DatetimeIndex
+crime.between_time('2:00', '5:00', include_end=False)
+crime.at_time('5:47')
+crime_sort = crime.sort_index()
+crime_sort.first(pd.offsets.MonthBegin(6))
+crime_sort.first(pd.offsets.MonthEnd(6))
+crime_sort.loc[:'2012-06']
+crime_sort.first('5B') # 5 business days
+crime_sort.first('5D') # 5 days
+crime_sort.first('7W') # 7 weeks, with weeks ending on Sunday
+crime_sort.first('3QS') # 3rd quarter start
+crime_sort.first('A') # one year end
+#Counting the number of weekly crimes
+crime_sort = (pd.read_hdf('data/crime.h5', 'crime')
+.set_index('REPORTED_DATE')
+.sort_index()
+)
+crime_sort.resample('W') #we need to form a group for each week
+print(crime_sort
+.resample('W')
+.size()
+)
+weekly_crimes = (crime_sort
+.groupby(pd.Grouper(freq='W'))
+.size()
+) #alternative
+len(crime_sort.loc[:'2012-1-8']) #see first day
+len(crime_sort.loc['2012-1-9':'2012-1-15']) #see several days between
+#Aggregating weekly crime and traffic accidents separately
+(crime
+.resample('Q')
+[['IS_CRIME', 'IS_TRAFFIC']]
+.sum()
+)
