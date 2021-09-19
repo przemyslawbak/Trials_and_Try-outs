@@ -91,3 +91,31 @@ len(crime_sort.loc['2012-1-9':'2012-1-15']) #see several days between
 [['IS_CRIME', 'IS_TRAFFIC']]
 .sum()
 )
+#Measuring crime by weekday and year with the .dt attribute
+(crime
+['REPORTED_DATE']
+.dt.day_name()
+.value_counts()
+)
+#sorting by year and day of the week
+(crime
+.groupby([crime['REPORTED_DATE'].dt.year.rename('year'),
+crime['REPORTED_DATE'].dt.day_name().
+rename('day')])
+.size()
+.unstack('day')
+)
+#loading Denver population data
+denver_pop = pd.read_csv('data/denver_pop.csv', index_col='Year')
+den_100k = denver_pop.div(100_000).squeeze() #display data per 100 000 population
+normalized = (crime
+.groupby([crime['REPORTED_DATE'].dt.year.rename('year'),
+crime['REPORTED_DATE'].dt.day_name().
+rename('day')])
+.size()
+.unstack('day')
+.pipe(update_2017)
+.reindex(columns=days)
+.div(den_100k, axis='index')
+.astype(int)
+)
