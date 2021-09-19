@@ -5,7 +5,6 @@ import matplotlib.pyplot as plt
 from matplotlib.figure import Figure
 from matplotlib.backends.backend_agg import FigureCanvasAgg as FigureCanvas
 import matplotlib.pyplot as plt
-from IPython.core.display import display #???
 
 #Getting started with matplotlib
 #making a line
@@ -30,7 +29,6 @@ ax.set_xlabel('X axis')
 ax.set_ylabel('Y axis')
 ax.set_title('Line Plot')
 fig.suptitle('Figure Title', size=20, y=1.03)
-display(fig)
 #combination of two approaches
 fig, ax = plt.subplots(figsize=(15,3))
 ax.plot(x, y)
@@ -39,10 +37,41 @@ xlabel='X axis', ylabel='Y axis',
 title='Line Plot')
 fig.suptitle('Figure Title', size=20, y=1.03)
 fig, ax = plt.subplots(nrows=1, ncols=1)
-
-
-
-
+#we can give each one a unique facecolor
+fig.set_facecolor('.7')
+ax.set_facecolor('.5')
+fig
+#change spine position
+spines = ax.spines
+spine_left = spines['left']
+spine_left.set_position(('outward', -100))
+spine_left.set_linewidth(5)
+spine_bottom = spines['bottom']
+spine_bottom.set_visible(False)
+#Visualizing data with matplotlib
+alta = pd.read_csv('data/alta-noaa-1980-2019.csv')
+print(alta)
+data = (alta
+.assign(DATE=pd.to_datetime(alta.DATE))
+.set_index('DATE')
+.loc['2018-09':'2019-08'] #Get the data for the 2018-2019 season
+.SNWD
+)
+blue = '#99ddee'
+white = '#ffffff'
+fig, ax = plt.subplots(figsize=(12,4),
+linewidth=5, facecolor=blue)
+ax.set_facecolor(blue)
+ax.spines['top'].set_visible(False)
+ax.spines['right'].set_visible(False)
+ax.spines['bottom'].set_visible(False)
+ax.spines['left'].set_visible(False)
+ax.tick_params(axis='x', colors=white)
+ax.tick_params(axis='y', colors=white)
+ax.set_ylabel('Snow Depth (in)', color=white)
+ax.set_title('2009-2010', color=white, fontweight='bold')
+ax.fill_between(data.index, data, color=white)
+#also possible to plot several charts
 
 
 plt.show()
