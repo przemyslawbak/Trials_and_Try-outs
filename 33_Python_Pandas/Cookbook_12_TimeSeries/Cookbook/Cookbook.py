@@ -21,7 +21,6 @@ print(td)
 datetime.timedelta(days=19, seconds=37206, microseconds=829008)
 print(f'new date is {date+td}')
 print(f'new datetime is {dt+td}')
-print(time + td)
 #timestamp
 pd.Timestamp(year=2012, month=12, day=21, hour=5, minute=10, second=8, microsecond=99)
 pd.Timestamp('2016/1/10')
@@ -45,3 +44,15 @@ td.round('min')
 td.components #Components(days=5, hours=5, minutes=52, seconds=20, milliseconds=280, microseconds=0, nanoseconds=0)
 td.total_seconds()
 #Slicing time series intelligently
+crime = pd.read_hdf('data/crime.h5', 'crime')
+print(crime.dtypes)
+crime = crime.set_index('REPORTED_DATE')
+print('test')
+#selecting examples
+crime.loc['2016-05'].shape
+crime.loc['2016'].shape
+crime.loc['2016-05-12 03'].shape
+crime.loc['2016 Sep, 15'].shape
+crime.loc['21st October 2014 05'].shape
+print(crime.loc['2016-05-12 16:45:00'])
+#!!!!!!!Sorting the index will lead to large gains in performance!!!!!!!
