@@ -18,8 +18,9 @@ with pd.HDFStore(DATA_STORE) as store:
 ohlcv = ['adj_open', 'adj_close', 'adj_low', 'adj_high', 'adj_volume', 'ticker']
 with pd.HDFStore(DATA_STORE) as store:
     data = (store['quandl/wiki/prices']
-            .loc[idx[START:END], ohlcv]
-            .unstack('ticker') #exception...
+            .loc[idx['2007':'2010', 'AAPL'],
+                 ['adj_open', 'adj_high', 'adj_low', 'adj_close', 'adj_volume']]
+            .unstack('ticker')
             .swaplevel(axis=1)
             .loc[:, 'AAPL']
             .rename(columns=lambda x: x.replace('adj_', '')))
