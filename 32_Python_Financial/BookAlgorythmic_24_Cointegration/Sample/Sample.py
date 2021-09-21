@@ -20,6 +20,34 @@ pd.set_option('display.float_format', lambda x: f'{x:,.2f}')
 DATA_PATH = Path('data')
 STORE = DATA_PATH / 'assets.h5'
 
+def get_backtest_data():
+    """Combine chapter 7 lasso regression predictions
+        with adjusted OHLCV Quandl Wiki data"""
+    with pd.HDFStore(STORE) as store:
+        prices = (store['quandl/wiki/prices']
+                  .filter(like='adj')
+                  .rename(columns=lambda x: x.replace('adj_', ''))
+                  )
+
+    with pd.HDFStore(PROJECT_DIR / '07_linear_models/data.h5') as store:
+        predictions = store['lasso/predictions']
+
+    best_alpha = predictions.groupby('alpha').apply(lambda x: spearmanr(x.actuals, x.predicted)[0]).idxmax()
+    predictions = predictions[predictions.alpha == best_alpha]
+    predictions.index.names = ['ticker', 'date']
+    tickers = predictions.index.get_level_values('ticker').unique()
+    start = predictions.index.get_level_values('date').min().strftime('%Y-%m-%d')
+    stop = (predictions.index.get_level_values('date').max() + pd.DateOffset(1)).strftime('%Y-%m-%d')
+    idx = pd.IndexSlice
+    prices = prices.sort_index().loc[idx[tickers, start:stop], :]
+    predictions = predictions.loc[predictions.alpha == best_alpha, ['predicted']]
+    return predictions.join(prices, how='right')
+
+
+df = get_backtest_data()
+print(df.info())
+df.to_hdf('backtest.h5', 'data')
+
 #Johansen Test Critical Values (??)
 critical_values = {0: {.9: 13.4294, .95: 15.4943, .99: 19.9349},
                    1: {.9: 2.7055, .95: 3.8415, .99: 6.6349}}
