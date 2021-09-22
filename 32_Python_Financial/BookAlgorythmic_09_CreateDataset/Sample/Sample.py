@@ -14,6 +14,17 @@ DATA_STORE = Path('data/assets.h5')
 
 #Quandl
 print('Quandl')
+df = pd.read_csv('sources/wiki_prices.csv')
+# no longer needed
+# df = pd.concat([df.loc[:, 'code'].str.strip(),
+#                 df.loc[:, 'name'].str.split('(', expand=True)[0].str.strip().to_frame('name')], axis=1)
+
+print(df.info(null_counts=True))
+with pd.HDFStore(DATA_STORE) as store:
+    store.put('quandl/wiki/prices', df)
+
+#Quandl
+print('Quandl')
 df = pd.read_csv('sources/wiki_stocks.csv')
 # no longer needed
 # df = pd.concat([df.loc[:, 'code'].str.strip(),
@@ -21,7 +32,7 @@ df = pd.read_csv('sources/wiki_stocks.csv')
 
 print(df.info(null_counts=True))
 with pd.HDFStore(DATA_STORE) as store:
-    store.put('quandl/', df)
+    store.put('quandl/wiki/stocks', df)
 
 #FRED
 print('FRED')
@@ -32,7 +43,7 @@ df = pd.read_csv('sources/fredSP500.csv')
 
 print(df.info(null_counts=True))
 with pd.HDFStore(DATA_STORE) as store:
-    store.put('fred/', df)
+    store.put('sp500/fred', df)
 
 #Stooq
 print('Stooq')
@@ -43,7 +54,7 @@ df = pd.read_csv('sources/stooq^spx_d.csv')
 
 print(df.info(null_counts=True))
 with pd.HDFStore(DATA_STORE) as store:
-    store.put('stooq/', df)
+    store.put('sp500/stooq', df)
 
 #Wikipedia
 print('Wikipedia')
@@ -55,13 +66,13 @@ df.columns = ['ticker', 'name', 'sec_filings', 'gics_sector', 'gics_sub_industry
 df = df.drop('sec_filings', axis=1).set_index('ticker')
 print(df.info())
 with pd.HDFStore(DATA_STORE) as store:
-    store.put('wikipedia/', df)
+    store.put('sp500/stocks', df)
 
 #US equities
 print('US equities')
 df = pd.read_csv('sources/us_equities_meta_data.csv')
 df.info()
 with pd.HDFStore(DATA_STORE) as store:
-    store.put('us_equities/', df.set_index('ticker'))
+    store.put('us_equities/stocks', df.set_index('ticker'))
 
 ###################################################################################

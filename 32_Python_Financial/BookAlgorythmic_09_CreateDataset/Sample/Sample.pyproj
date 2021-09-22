@@ -27,6 +27,7 @@
     <Content Include="sources\fredSP500.csv" />
     <Content Include="sources\stooq^spx_d.csv" />
     <Content Include="sources\us_equities_meta_data.csv" />
+    <Content Include="sources\wiki_prices.csv" />
     <Content Include="sources\wiki_stocks.csv" />
   </ItemGroup>
   <ItemGroup>
