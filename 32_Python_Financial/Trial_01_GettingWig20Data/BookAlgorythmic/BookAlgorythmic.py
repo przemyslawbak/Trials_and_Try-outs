@@ -9,7 +9,7 @@ DATA_STORE = 'data/assets.h5'
 pd.set_option('display.max_columns', 500)
 pd.set_option('display.width', 1000)
 
-udzial_dictionary = {'pko': 0.14514,
+weight_dictionary = {'pko': 0.14514,
           'ale': 0.0948,
           'kgh': 0.08804,
           'pkn': 0.08767,
@@ -18,6 +18,7 @@ udzial_dictionary = {'pko': 0.14514,
           'dnp': 0.06627,
           'lpp': 0.06076,
           'cdr': 0.05405,
+          'pgn': 0.03975,
           'spl': 0.03879,
           'cps': 0.03515,
           'pge': 0.02887,
@@ -48,7 +49,7 @@ def verifyPeakDirection(open, close, size):
 def processWig20Csv(df, file):
     global peaks
     name = os.path.basename(file).split('.', 1)[0] .split('_', 1)[0]
-    df['Waga'] = 0.0187
+    df['Waga'] = weight_dictionary[name]
     df['Sredni_wolumen_10'] = df['Wolumen'].rolling(min_periods=1, window=10).sum() / 10
     for i, row in df.iterrows():
         peak = verifyPeak(row['Wolumen'], row['Sredni_wolumen_10'])
@@ -71,5 +72,6 @@ files = g.glob("../../data/wig20/*.csv")
 for f in files:
     df = pd.read_csv(f)
     processWig20Csv(df, f)
+peaks['sum'] = peaks['acp_peak'] + peaks['ale_peak'] + peaks['ccc_peak'] + peaks['cdr_peak'] + peaks['cps_peak'] + peaks['dnp_peak'] + peaks['jsw_peak'] + peaks['kgh_peak'] + peaks['lpp_peak'] + peaks['lts_peak'] + peaks['mrc_peak'] + peaks['opl_peak'] + peaks['peo_peak'] + peaks['pge_peak'] + peaks['pgn_peak'] + peaks['pkn_peak'] + peaks['pko_peak'] + peaks['pzu_peak'] + peaks['spl_peak'] + peaks['tpe_peak']
 
 print(peaks)
