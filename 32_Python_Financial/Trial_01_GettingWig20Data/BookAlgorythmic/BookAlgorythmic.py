@@ -9,7 +9,7 @@ DATA_STORE = 'data/assets.h5'
 pd.set_option('display.max_columns', 500)
 pd.set_option('display.width', 1000)
 
-udzial = {'pko': 0.14514,
+udzial_dictionary = {'pko': 0.14514,
           'ale': 0.0948,
           'kgh': 0.08804,
           'pkn': 0.08767,
@@ -34,16 +34,16 @@ wig20_d = pd.read_csv('../../data/wig20_d.csv')
 peaks = pd.DataFrame();
 peaks['Data'] = wig20_d['Data']
 
-def verifyPeak(wolumen, sredni):
-    if wolumen > int(sredni):
+def verifyPeak(volumen, averange):
+    if volumen > int(averange):
         return True
     return False
 
-def verifyPeakDirection(otwarcie, zamkniecie, rozmiar):
-    if otwarcie > zamkniecie:
-        return rozmiar * -1
+def verifyPeakDirection(open, close, size):
+    if open > close:
+        return size * -1
     else:
-        return rozmiar * 1
+        return size * 1
 
 def processWig20Csv(df, file):
     global peaks
@@ -52,10 +52,10 @@ def processWig20Csv(df, file):
     df['Sredni_wolumen_10'] = df['Wolumen'].rolling(min_periods=1, window=10).sum() / 10
     for i, row in df.iterrows():
         peak = verifyPeak(row['Wolumen'], row['Sredni_wolumen_10'])
-        wielkosc_peak = (row['Wolumen'] - row['Sredni_wolumen_10']) / row['Sredni_wolumen_10']
+        size_peak = (row['Wolumen'] - row['Sredni_wolumen_10']) / row['Sredni_wolumen_10']
         if peak == True and i > 10:
             df.at[i,'Peak'] = peak
-            df.at[i,'Peak_rozmiar'] = wielkosc_peak
+            df.at[i,'Peak_rozmiar'] = size_peak
         else:
             df.at[i,'Peak'] = False
             df.at[i,'Peak_rozmiar'] = 0
