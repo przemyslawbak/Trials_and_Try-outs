@@ -1,11 +1,17 @@
 import warnings
 warnings.filterwarnings('ignore')
 import pandas as pd
+import glob as g
+import os
 
 START = '2020-01-01'
 DATA_STORE = 'data/assets.h5'
 pd.set_option('display.max_columns', 500)
 pd.set_option('display.width', 1000)
+
+wig20_d = pd.read_csv('../../data/wig20_d.csv')
+peaks = pd.DataFrame();
+peaks['Data'] = wig20_d['Data']
 
 def verifyPeak(wolumen, sredni):
     if wolumen > int(sredni):
@@ -18,28 +24,31 @@ def verifyPeakDirection(otwarcie, zamkniecie, rozmiar):
     else:
         return rozmiar * 1
 
-acp_d = pd.read_csv('../../data/wig20/acp_d.csv')
-acp_d['Waga'] = 0.0187
-acp_d['Sredni_wolumen_10'] = acp_d['Wolumen'].rolling(min_periods=1, window=10).sum() / 10
-for i, row in acp_d.iterrows():
-    peak = verifyPeak(row['Wolumen'], row['Sredni_wolumen_10'])
-    wielkosc_peak = (row['Wolumen'] - row['Sredni_wolumen_10']) / row['Sredni_wolumen_10']
-    if peak == True and i > 10:
-        acp_d.at[i,'Peak'] = peak
-        acp_d.at[i,'Peak_rozmiar'] = wielkosc_peak
-    else:
-        acp_d.at[i,'Peak'] = False
-        acp_d.at[i,'Peak_rozmiar'] = 0
+def processWig20Csv(df, file):
+    global peaks
+    name = os.path.basename(file)
+    df['Waga'] = 0.0187
+    df['Sredni_wolumen_10'] = df['Wolumen'].rolling(min_periods=1, window=10).sum() / 10
+    for i, row in df.iterrows():
+        peak = verifyPeak(row['Wolumen'], row['Sredni_wolumen_10'])
+        wielkosc_peak = (row['Wolumen'] - row['Sredni_wolumen_10']) / row['Sredni_wolumen_10']
+        if peak == True and i > 10:
+            df.at[i,'Peak'] = peak
+            df.at[i,'Peak_rozmiar'] = wielkosc_peak
+        else:
+            df.at[i,'Peak'] = False
+            df.at[i,'Peak_rozmiar'] = 0
 
-    if i - 5 >= 0 and peak == True:
-        acp_d.at[i,'Peak_rozmiar'] = verifyPeakDirection(acp_d.loc[i, 'Otwarcie'], acp_d.loc[i - 5, 'Zamkniecie'], acp_d.at[i,'Peak_rozmiar']) * acp_d.at[i,'Waga']
+        if i - 5 >= 0 and peak == True:
+            df.at[i,'Peak_rozmiar'] = verifyPeakDirection(df.loc[i, 'Otwarcie'], df.loc[i - 5, 'Zamkniecie'], df.at[i,'Peak_rozmiar']) * df.at[i,'Waga']
 
-print(acp_d)
+    peaks = peaks.merge(df[['Peak_rozmiar', 'Data']], on='Data', how='left')
+    peaks = peaks.rename(columns = {'Peak_rozmiar' : name + '_peak'})
 
-wig20_d = pd.read_csv('../../data/wig20/wig20_d.csv')
-peaks = pd.DataFrame();
-peaks['Data'] = wig20_d['Data']
+#load wig20 files
+files = g.glob("../../data/wig20/*.csv")
+for f in files:
+    df = pd.read_csv(f)
+    processWig20Csv(df, f)
 
-newa = peaks.merge(acp_d[['Peak_rozmiar', 'Data']], on='Data', how='left')
-
-print(newa)
+print(peaks)
