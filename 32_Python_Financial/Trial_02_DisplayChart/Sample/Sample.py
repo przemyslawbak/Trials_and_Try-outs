@@ -4,6 +4,9 @@ import pandas as pd
 import matplotlib.dates as mpl_dates
 
 plt.style.use('ggplot')
+START = 2019
+END = 2021
+idx = pd.IndexSlice
 
 #https://saralgyaan.com/posts/python-candlestick-chart-matplotlib-tutorial-chapter-11/
 # Load a numpy structured array from yahoo csv data with fields date, open,
@@ -12,8 +15,9 @@ plt.style.use('ggplot')
 # column.
 #data1 = cbook.get_sample_data('goog.npz', np_load=True)['price_data']
 data = pd.read_csv('../../data/wig20_d.csv')
+data.set_index('Date', inplace=True, drop=False)
 
-ohlc = data.loc[:, ['Date', 'Open', 'High', 'Low', 'Close']]
+ohlc = data.loc['2017-09-06':, ['Date', 'Open', 'High', 'Low', 'Close']]
 ohlc['Date'] = pd.to_datetime(ohlc['Date'])
 ohlc['Date'] = ohlc['Date'].apply(mpl_dates.date2num)
 ohlc = ohlc.astype(float)
