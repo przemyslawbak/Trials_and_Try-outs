@@ -7,7 +7,7 @@ import os
 START = '2020-01-01'
 DATA_STORE = 'data/assets.h5'
 #pd.set_option('display.max_columns', 500)
-pd.set_option('display.max_rows', 500)
+pd.set_option('display.max_rows', 1000)
 #pd.set_option('display.width', 1000)
 
 weight_dictionary = {'pko': 0.14514,
@@ -58,13 +58,14 @@ def processWig20Csv(df, file):
         size_peak = (row['Wolumen'] - row['Sredni_wolumen_10']) / row['Sredni_wolumen_10']
         if peak == True and i > 10:
             df.at[i,'Peak'] = peak
-            df.at[i,'Peak_rozmiar'] = size_peak * df.loc[i, 'Otwarcie']
+            df.at[i,'Peak_rozmiar'] = size_peak * df.loc[i, 'Zamkniecie']
         else:
             df.at[i,'Peak'] = False
             df.at[i,'Peak_rozmiar'] = 0
 
-        if i - 5 >= 0 and peak == True:
-            df.at[i,'Peak_rozmiar'] = verifyPeakDirection(df.loc[i, 'Otwarcie'], df.loc[i - 5, 'Zamkniecie'], df.at[i,'Peak_rozmiar']) * df.at[i,'Waga']
+        if i + 5 < len(df.index) and peak == True:
+            #df.at[i,'Peak_rozmiar'] = verifyPeakDirection(df.loc[i, 'Otwarcie'], df.loc[i + 5, 'Zamkniecie'], df.at[i,'Peak_rozmiar']) * df.at[i,'Waga']
+            #print('obecny: ' + df.loc[i, 'Data'] + ' nastepne: ' + df.loc[i - 1, 'Data']) #remove later on
 
     peaks = peaks.merge(df[['Peak_rozmiar', 'Data']], on='Data', how='left')
     peaks = peaks.rename(columns = {'Peak_rozmiar' : name + '_peak'})
@@ -76,4 +77,4 @@ for f in files:
     processWig20Csv(df, f)
 peaks['sum'] = peaks['acp_peak'] + peaks['ale_peak'] + peaks['ccc_peak'] + peaks['cdr_peak'] + peaks['cps_peak'] + peaks['dnp_peak'] + peaks['jsw_peak'] + peaks['kgh_peak'] + peaks['lpp_peak'] + peaks['lts_peak'] + peaks['mrc_peak'] + peaks['opl_peak'] + peaks['peo_peak'] + peaks['pge_peak'] + peaks['pgn_peak'] + peaks['pkn_peak'] + peaks['pko_peak'] + peaks['pzu_peak'] + peaks['spl_peak'] + peaks['tpe_peak']
 
-print(peaks.tail(100))
+print(peaks.tail(1000))
