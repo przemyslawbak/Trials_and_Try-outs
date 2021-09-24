@@ -6,8 +6,9 @@ import os
 
 START = '2020-01-01'
 DATA_STORE = 'data/assets.h5'
-pd.set_option('display.max_columns', 500)
-pd.set_option('display.width', 1000)
+#pd.set_option('display.max_columns', 500)
+pd.set_option('display.max_rows', 500)
+#pd.set_option('display.width', 1000)
 
 weight_dictionary = {'pko': 0.14514,
           'ale': 0.0948,
@@ -31,9 +32,10 @@ weight_dictionary = {'pko': 0.14514,
           'mrc': 0.00239,
           }
 
-wig20_d = pd.read_csv('../../data/wig20_d.csv')
+wig20_d = pd.read_csv('../../data/wig20_d_1.csv')
 peaks = pd.DataFrame();
 peaks['Data'] = wig20_d['Data']
+peaks['Zamkniecie'] = wig20_d['Zamkniecie']
 
 def verifyPeak(volumen, averange):
     if volumen > int(averange):
@@ -56,7 +58,7 @@ def processWig20Csv(df, file):
         size_peak = (row['Wolumen'] - row['Sredni_wolumen_10']) / row['Sredni_wolumen_10']
         if peak == True and i > 10:
             df.at[i,'Peak'] = peak
-            df.at[i,'Peak_rozmiar'] = size_peak
+            df.at[i,'Peak_rozmiar'] = size_peak * df.loc[i, 'Otwarcie']
         else:
             df.at[i,'Peak'] = False
             df.at[i,'Peak_rozmiar'] = 0
@@ -74,4 +76,4 @@ for f in files:
     processWig20Csv(df, f)
 peaks['sum'] = peaks['acp_peak'] + peaks['ale_peak'] + peaks['ccc_peak'] + peaks['cdr_peak'] + peaks['cps_peak'] + peaks['dnp_peak'] + peaks['jsw_peak'] + peaks['kgh_peak'] + peaks['lpp_peak'] + peaks['lts_peak'] + peaks['mrc_peak'] + peaks['opl_peak'] + peaks['peo_peak'] + peaks['pge_peak'] + peaks['pgn_peak'] + peaks['pkn_peak'] + peaks['pko_peak'] + peaks['pzu_peak'] + peaks['spl_peak'] + peaks['tpe_peak']
 
-print(peaks)
+print(peaks.tail(100))
