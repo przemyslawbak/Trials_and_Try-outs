@@ -64,7 +64,7 @@ def processWig20Csv(df, file):
             df.at[i,'Peak_rozmiar'] = 0
 
         if i + 5 < len(df.index) and peak == True:
-            #df.at[i,'Peak_rozmiar'] = verifyPeakDirection(df.loc[i, 'Otwarcie'], df.loc[i + 5, 'Zamkniecie'], df.at[i,'Peak_rozmiar']) * df.at[i,'Waga']
+            df.at[i,'Peak_rozmiar'] = verifyPeakDirection(df.loc[i, 'Otwarcie'], (df.loc[i + 5, 'Zamkniecie'] + df.loc[i + 4, 'Zamkniecie'] + df.loc[i + 3, 'Zamkniecie'] + df.loc[i + 2, 'Zamkniecie'] + df.loc[i + 1, 'Zamkniecie']) / 5 , df.at[i,'Peak_rozmiar']) * df.at[i,'Waga']
             #print('obecny: ' + df.loc[i, 'Data'] + ' nastepne: ' + df.loc[i - 1, 'Data']) #remove later on
 
     peaks = peaks.merge(df[['Peak_rozmiar', 'Data']], on='Data', how='left')
@@ -75,6 +75,7 @@ files = g.glob("../../data/wig20/*.csv")
 for f in files:
     df = pd.read_csv(f)
     processWig20Csv(df, f)
-peaks['sum'] = peaks['acp_peak'] + peaks['ale_peak'] + peaks['ccc_peak'] + peaks['cdr_peak'] + peaks['cps_peak'] + peaks['dnp_peak'] + peaks['jsw_peak'] + peaks['kgh_peak'] + peaks['lpp_peak'] + peaks['lts_peak'] + peaks['mrc_peak'] + peaks['opl_peak'] + peaks['peo_peak'] + peaks['pge_peak'] + peaks['pgn_peak'] + peaks['pkn_peak'] + peaks['pko_peak'] + peaks['pzu_peak'] + peaks['spl_peak'] + peaks['tpe_peak']
+
+peaks['sum'] = peaks['acp_peak'].fillna(0) + peaks['ale_peak'].fillna(0) + peaks['ccc_peak'].fillna(0) + peaks['cdr_peak'].fillna(0) + peaks['cps_peak'].fillna(0) + peaks['dnp_peak'].fillna(0) + peaks['jsw_peak'].fillna(0) + peaks['kgh_peak'].fillna(0) + peaks['lpp_peak'].fillna(0) + peaks['lts_peak'].fillna(0) + peaks['mrc_peak'].fillna(0) + peaks['opl_peak'].fillna(0) + peaks['peo_peak'].fillna(0) + peaks['pge_peak'].fillna(0) + peaks['pgn_peak'].fillna(0) + peaks['pkn_peak'].fillna(0) + peaks['pko_peak'].fillna(0) + peaks['pzu_peak'].fillna(0) + peaks['spl_peak'].fillna(0) + peaks['tpe_peak'].fillna(0)
 
 print(peaks.tail(1000))
