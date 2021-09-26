@@ -8,8 +8,8 @@ ticker = yf.Ticker(symbol)
 print(ticker.info)
 
 #Get market data
-data = ticker.history(period='5d',
-                      interval='1m',
+data = ticker.history(period='150d',
+                      interval='5m', #max 60 days
                       start=None,
                       end=None,
                       actions=True,
