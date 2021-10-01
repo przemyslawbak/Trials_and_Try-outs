@@ -2,6 +2,12 @@ import matplotlib.pyplot as plt
 from mplfinance.original_flavor import candlestick_ohlc #fixed
 import pandas as pd
 import matplotlib.dates as mpl_dates
+import pandas_datareader.stooq
+
+df = pandas_datareader.stooq.StooqDailyReader('pge.pl')
+df = df.read()
+print(df.head())
+
 
 plt.style.use('ggplot')
 START = 2019
