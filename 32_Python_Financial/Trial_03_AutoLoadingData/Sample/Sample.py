@@ -17,13 +17,19 @@ reqst_sample = requests.get(stooq_sample)
 st = reqst_sample.content
 splitted = st.decode().split("~~")[1]
 df = pd.read_csv(StringIO(splitted))
-print(df.head())
 
 new_df = pd.DataFrame()
 new_df['time'] = (df['Date'].astype(str) + df['Time'].astype(str).str[:-2])
-new_df['time2'] = pd.to_datetime(new_df['time'], format='%Y%m%d%H%M')
-print(new_df.dtypes)
+new_df['time'] = pd.to_datetime(new_df['time'], format='%Y%m%d%H%M')
+new_df = pd.merge(new_df, df['Open'], left_index=True, right_index=True)
+new_df = pd.merge(new_df, df['High'], left_index=True, right_index=True)
+new_df = pd.merge(new_df, df['Low'], left_index=True, right_index=True)
+new_df = pd.merge(new_df, df['Close'], left_index=True, right_index=True)
+new_df = pd.merge(new_df, df['Vol'], left_index=True, right_index=True)
 print(new_df)
+file_df = pd.read_csv('GPW_DLY CDR, 15.csv')
+print(df.dtypes)
+print(file_df.dtypes)
 
 
 plt.style.use('ggplot')
