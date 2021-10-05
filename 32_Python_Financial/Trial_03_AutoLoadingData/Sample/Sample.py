@@ -19,6 +19,13 @@ splitted = st.decode().split("~~")[1]
 df = pd.read_csv(StringIO(splitted))
 print(df.head())
 
+new_df = pd.DataFrame()
+new_df['time'] = (df['Date'].astype(str) + df['Time'].astype(str).str[:-2])
+new_df['time2'] = pd.to_datetime(new_df['time'], format='%Y%m%d%H%M')
+print(new_df.dtypes)
+print(new_df)
+
+
 plt.style.use('ggplot')
 START = 2019
 END = 2021
