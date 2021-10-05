@@ -6,6 +6,7 @@ import pandas_datareader.stooq
 import requests
 import re
 from bs4 import BeautifulSoup as bs
+from io import StringIO
 
 df = pandas_datareader.stooq.StooqDailyReader('pge.pl')
 df = df.read()
@@ -14,9 +15,8 @@ df = df.read()
 stooq_sample = ('https://stooq.com/q/a2/d/?s=cdr&i=15')
 reqst_sample = requests.get(stooq_sample)
 st = reqst_sample.content
-soupst = bs(st)
-tbls = soupst.table
-df = pd.read_html(str(tbls))
+splitted = st.decode().split("~~")[1]
+df = pd.read_csv(StringIO(splitted))
 print(df.head())
 
 plt.style.use('ggplot')
