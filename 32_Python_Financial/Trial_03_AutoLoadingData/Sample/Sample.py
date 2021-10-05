@@ -3,11 +3,21 @@ from mplfinance.original_flavor import candlestick_ohlc #fixed
 import pandas as pd
 import matplotlib.dates as mpl_dates
 import pandas_datareader.stooq
+import requests
+import re
+from bs4 import BeautifulSoup as bs
 
 df = pandas_datareader.stooq.StooqDailyReader('pge.pl')
 df = df.read()
-print(df.head())
+#print(df.head())
 
+stooq_sample = ('https://stooq.com/q/a2/d/?s=cdr&i=15')
+reqst_sample = requests.get(stooq_sample)
+st = reqst_sample.content
+soupst = bs(st)
+tbls = soupst.table
+df = pd.read_html(str(tbls))
+print(df.head())
 
 plt.style.use('ggplot')
 START = 2019
