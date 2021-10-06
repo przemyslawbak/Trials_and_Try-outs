@@ -14,7 +14,7 @@ df_all = pd.DataFrame()
 df = pandas_datareader.stooq.StooqDailyReader('pge.pl')
 df = df.read()
 #print(df.head())
-
+FILE_NAME = 'GPW_DLY CDR, 15.csv'
 stooq_sample = ('https://stooq.com/q/a2/d/?s=cdr&i=15')
 reqst_sample = requests.get(stooq_sample)
 st = reqst_sample.content
@@ -28,18 +28,19 @@ new_df = pd.merge(new_df, df['High'], left_index=True, right_index=True)
 new_df = pd.merge(new_df, df['Low'], left_index=True, right_index=True)
 new_df = pd.merge(new_df, df['Close'], left_index=True, right_index=True)
 new_df = pd.merge(new_df, df['Vol'], left_index=True, right_index=True)
-new_df = new_df.rename(columns={'Open': 'open', 'High': 'high', 'Low': 'low', 'Close': 'close', 'Vol': 'volume'})
-file_df = pd.read_csv('GPW_DLY CDR, 15.csv')
+new_df = new_df.rename(columns={'Open': 'open', 'High': 'high', 'Low': 'low', 'Close': 'close', 'Vol': 'Volume'})
+file_df = pd.read_csv(FILE_NAME)
 new_df_fromfile['time'] = pd.to_datetime(file_df['time']).dt.tz_localize(None)
 new_df_fromfile = pd.merge(new_df_fromfile, file_df['open'], left_index=True, right_index=True)
 new_df_fromfile = pd.merge(new_df_fromfile, file_df['high'], left_index=True, right_index=True)
 new_df_fromfile = pd.merge(new_df_fromfile, file_df['low'], left_index=True, right_index=True)
 new_df_fromfile = pd.merge(new_df_fromfile, file_df['close'], left_index=True, right_index=True)
 new_df_fromfile = pd.merge(new_df_fromfile, file_df['Volume'], left_index=True, right_index=True)
-new_df_fromfile = new_df_fromfile.rename(columns={'Volume': 'volume'})
 
 df_all = pd.concat([new_df_fromfile, new_df]).fillna(0).drop_duplicates(subset=['time'], keep='first')
 
 print(new_df)
 print(new_df_fromfile)
 print(df_all)
+
+df_all.to_csv(FILE_NAME, sep=',', encoding='utf-8')
