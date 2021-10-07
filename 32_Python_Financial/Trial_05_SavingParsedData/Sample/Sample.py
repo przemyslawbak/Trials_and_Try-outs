@@ -4,8 +4,6 @@ import pandas as pd
 import matplotlib.dates as mpl_dates
 import pandas_datareader.stooq
 import requests
-import re
-from bs4 import BeautifulSoup as bs
 from io import StringIO
 
 new_df = pd.DataFrame()
