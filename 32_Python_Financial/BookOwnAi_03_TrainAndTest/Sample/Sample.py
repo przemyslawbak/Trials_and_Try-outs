@@ -54,6 +54,38 @@ X['MktValEquity/Debt'][Y==True], "rx")
 plt.xlabel('EBIT/Total Assets')
 plt.ylabel('MktValEquity/Debt')
 
+# Test/train splitting
+from sklearn.model_selection import train_test_split # need to import
+X_train, X_test, y_train, y_test = train_test_split(X, Y, test_size=0.33, random_state=42)
+# Have a look at the train and test sets.
+print('X_train:', X_train.shape)
+print('X_test:', X_test.shape)
+print('y_train:', y_train.shape)
+print('y_test:', y_test.shape)
+
+# Cross validation
+from sklearn.model_selection import cross_val_score
+scores = cross_val_score(tree_clf2, X, Y, cv=3, scoring="accuracy")
+print('Accuracy scores for the 3 models are:', scores)
+
+from sklearn.model_selection import ShuffleSplit
+from sklearn.model_selection import cross_val_score
+scores = cross_val_score(tree_clf2,
+X, Y,
+cv=ShuffleSplit(n_splits=5,
+random_state=42,
+test_size=0.25,
+train_size=None),
+scoring="accuracy")
+print(scores) # See scores
+
+from sklearn.model_selection import cross_val_predict
+# First get the predictions of Trues and Falses
+scores = cross_val_predict(tree_clf2, X, Y, cv=3)
+from sklearn.metrics import confusion_matrix
+# Compare these predictions with the known correct answers
+confusion_matrix(scores, Y)
+
 
 
 
