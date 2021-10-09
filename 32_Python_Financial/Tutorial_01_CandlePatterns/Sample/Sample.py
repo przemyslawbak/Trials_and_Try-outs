@@ -7,7 +7,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 
-
+#OBTAINING DATA
 def obtain_data(ticker,start,end):
 # Enter the start and end dates using the method date(yyyy,m,dd)    
     stock=get_history(symbol=ticker,start=start,end=end)
@@ -118,3 +118,52 @@ for equity in equities :
         except :
             print(i)
             pass
+
+#MODEL TRAINING
+from fastai.vision import *
+from fastai.metrics import error_rate
+
+#bs = 64
+bs = 16
+# bs = 16   # uncomment this line if you run out of memory even after clicking Kernel->Restart
+
+path=Path('data/Candle Sticks/CandleData')
+path_save=Path('data/Candle Sticks/Processed')
+path.ls()
+np.random.seed(42)
+data = ImageDataBunch.from_folder(path, train=".", valid_pct=0.2,
+        ds_tfms=get_transforms(flip_vert=False, max_lighting=0.1, max_zoom=1.05, max_warp=0.,max_rotate=3), size=224, num_workers=4).normalize(imagenet_stats)
+data.classes
+learn = cnn_learner(data, models.resnet34, metrics=error_rate)
+learn.fit_one_cycle(4)
+learn.unfreeze()
+learn.lr_find()
+learn.recorder.plot()
+learn.fit_one_cycle(10, max_lr=slice(1e-6,1e-4))
+learn.lr_find()
+learn.recorder.plot()
+learn.fit_one_cycle(5, max_lr=slice(1e-6,1e-4))
+learn.lr_find()
+learn.recorder.plot()
+learn.fit_one_cycle(5,max_lr=slice(1e-5,1e-4))
+learn.save('First Model')
+data = ImageDataBunch.from_folder(path, train=".", valid_pct=0.2,
+        ds_tfms=get_transforms(flip_vert=False, max_lighting=0.1, max_zoom=1.05, max_warp=0.,max_rotate=3), size=352, num_workers=4).normalize(imagenet_stats)
+learn.data=data
+gc.collect()
+learn.lr_find()
+learn.recorder.plot()
+learn.fit_one_cycle(5,max_lr=slice(1e-5,1e-4))
+learn.lr_find()
+learn.recorder.plot()
+learn.fit_one_cycle(5,max_lr=slice(1e-6,1e-5))
+learn.save('Model 2')
+def show_heatmap(hm):
+    fig,ax = plt.subplots()
+    xb_im.show(ax)
+    ax.imshow(hm, alpha=0.6, extent=(0,352,352,0),
+              interpolation='bilinear', cmap='magma');
+    return fig
+answer=show_heatmap(avg_acts)
+answer.savefig(path/'trial.png')
+
