@@ -1,0 +1,2 @@
+08_predicting_price_movements_with_logistic_regression.ipynb
+04_vector_autoregressive_model.ipynb
