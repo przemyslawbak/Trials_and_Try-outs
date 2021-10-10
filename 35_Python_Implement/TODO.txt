@@ -1,1 +1,3 @@
-04_vector_autoregressive_model.ipynb
+test wig20 future
+09_backtesting_with_zipline
+10_intraday_features.ipynb

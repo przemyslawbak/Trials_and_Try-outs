@@ -7,7 +7,7 @@ from statsmodels.tsa.stattools import acf
 #https://www.machinelearningplus.com/time-series/arima-model-time-series-forecasting-python/
 plt.rcParams.update({'figure.figsize':(9,3), 'figure.dpi':120})
 # Import data
-df = pd.read_csv('GPW_DLY CDR, 15.csv', usecols=["close"])
+df = pd.read_csv('GPW_DLY WIG20, 15.csv', usecols=["close"])
 
 fig, axes = plt.subplots(1, 2, sharex=True)
 axes[0].plot(df.close.diff()); axes[0].set_title('1st Differencing')
