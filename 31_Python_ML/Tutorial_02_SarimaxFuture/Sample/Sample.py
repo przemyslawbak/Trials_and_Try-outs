@@ -26,7 +26,7 @@ adfuller_test(df['close'])
 
 # For non-seasonal data
 #p=1, d=1, q=0 or 1
-model=sm.tsa.statespace.SARIMAX(df['close'],order=(3,2,1))
+model=sm.tsa.statespace.ARIMA(df['close'],order=(3,2,1))
 model_fit=model.fit()
 model_fit.summary()
 
