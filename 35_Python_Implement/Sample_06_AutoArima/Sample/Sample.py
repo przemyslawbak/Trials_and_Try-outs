@@ -20,17 +20,14 @@ print(model)
 model_fit=model.fit()
 print(model_fit.summary())
 
-arima_model = auto_arima(df.close, start_p=1, start_q=1,
-                      max_p=3, max_q=3, # maximum p and q
-                      m=1,              # frequency of series
-                      d=None,           # let model determine 'd'
-                      seasonal=False,   # No Seasonality
-                      start_P=0, 
-                      D=0, 
-                      trace=True,
-                      error_action='ignore',  
-                      suppress_warnings=True, 
-                      stepwise=True)
+#best 1,1,4
+arima_model = auto_arima(df, start_p=1, start_q=1,
+                           max_p=4, max_d=5, max_q=5, m=1,
+                           start_P=0, seasonal=False,
+                           d=1, D=1, trace=True,
+                           error_action='ignore',  
+                           suppress_warnings=True, 
+                           stepwise=False)
 
 #future
 future_dates=[df.index[-1]+ x for x in range(0,futures)]
