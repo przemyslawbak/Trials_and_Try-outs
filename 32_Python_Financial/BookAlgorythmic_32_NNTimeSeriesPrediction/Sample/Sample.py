@@ -30,7 +30,7 @@ else:
     print('Using CPU')
 
 sys.path.insert(1, Path(sys.path[0], '..').as_posix())
-from utils import MultipleTimeSeriesCV, format_time
+from utils import MultipleTimeSeriesCV, format_time #cuda not working, need install: https://developer.nvidia.com/cuda-10.1-download-archive-base?target_os=Windows&target_arch=x86_64&target_version=10&target_type=exelocal
 
 np.random.seed(1)
 tf.random.set_seed(1)
@@ -42,3 +42,5 @@ if not results_path.exists():
     results_path.mkdir(parents=True)
 
 prices = pd.read_csv('GPW_DLY WIG20, 15.csv', usecols=["close", "time"]).unstack().loc['2000':]
+prices.info()
+
