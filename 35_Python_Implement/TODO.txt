@@ -1,4 +1,6 @@
 https://towardsai.net/p/machine-learning/stock-price-change-forecasting-with-time-series-sarimax
+https://towardsdatascience.com/time-series-forecasting-using-auto-arima-in-python-bb83e49210cd
+https://www.machinelearningplus.com/time-series/arima-model-time-series-forecasting-python/
 test wig20 future
 09_backtesting_with_zipline
 10_intraday_features.ipynb
