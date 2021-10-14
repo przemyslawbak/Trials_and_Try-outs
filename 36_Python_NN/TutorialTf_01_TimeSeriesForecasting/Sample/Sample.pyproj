@@ -24,7 +24,7 @@
     <Compile Include="Sample.py" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="GPW_DLY WIG20, 15.csv" />
+    <Content Include="jena_climate_2009_2016.csv" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
   <!-- Uncomment the CoreCompile target to enable the Build command in
