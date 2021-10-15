@@ -31,7 +31,7 @@ plt.figure(figsize=(10, 6))
 plot_series(time, series)
 
 #preparing dataset
-split_time = 3000
+split_time = 2000
 time_train = time[:split_time]
 x_train = series[:split_time]
 time_valid = time[split_time:]
@@ -134,5 +134,29 @@ plot_series(time_valid, x_valid)
 plot_series(time_valid, rnn_forecast)
 
 tf.keras.metrics.mean_absolute_error(x_valid, rnn_forecast).numpy()
+
+#https://stackoverflow.com/a/61684124/12603542
+#predict ahead
+n_ahead=int(40)
+# Making the prediction list 
+def predict_ahead(n_ahead):
+   yhat = []
+   for _ in range(n_ahead):
+   # Making the prediction
+       fc = regressor.predict(x_train)
+       yhat.append(fc)
+
+   # Creating a new input matrix for forecasting
+       x_train = np.append(x_train, fc)
+
+   # Ommitting the first variable
+       x_train = np.delete(x_train, 0)
+
+   # Reshaping for the next iteration
+       x_train = np.reshape(x_train, (1, len(x_train), 1))
+
+   return yhat 
+p=predict_ahead(n_ahead)
+print(p)
 
 plt.show()
