@@ -8,21 +8,21 @@ import csv
 
 def plot_series(time, series, format="-", start=0, end=None):
     plt.plot(time[start:end], series[start:end], format)
-    plt.xlabel("Time")
-    plt.ylabel("Value")
+    plt.xlabel("time")
+    plt.ylabel("close")
     plt.grid(True)
 
 time_step = []
-sunspots = []
+closes = []
 
-with open('Sunspots.csv') as csvfile:
+with open('GPW_DLY WIG20, 15.csv') as csvfile:
   reader = csv.reader(csvfile, delimiter=',')
   next(reader)
   for row in reader:
-    sunspots.append(float(row[2]))
+    closes.append(float(row[2]))
     time_step.append(int(row[0]))
 
-series = np.array(sunspots)
+series = np.array(closes)
 time = np.array(time_step)
 print('series: {}'.format(series[:5]))
 print('time: {}'.format(time[:5]))
@@ -31,7 +31,7 @@ plt.figure(figsize=(10, 6))
 plot_series(time, series)
 
 #preparing dataset
-split_time = 3000
+split_time = 19000
 time_train = time[:split_time]
 x_train = series[:split_time]
 time_valid = time[split_time:]
