@@ -33,7 +33,7 @@ plt.figure(figsize=(10, 6))
 plot_series(time, series)
 
 #preparing dataset
-split_time = 19000
+split_time = 2000
 time_train = time[:split_time]
 x_train = series[:split_time]
 time_valid = time[split_time:]

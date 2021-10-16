@@ -135,28 +135,32 @@ plot_series(time_valid, rnn_forecast)
 
 tf.keras.metrics.mean_absolute_error(x_valid, rnn_forecast).numpy()
 
-#https://stackoverflow.com/a/61684124/12603542
-#predict ahead
-n_ahead=int(40)
-# Making the prediction list 
-def predict_ahead(n_ahead):
-   yhat = []
-   for _ in range(n_ahead):
-   # Making the prediction
-       fc = regressor.predict(x_train)
-       yhat.append(fc)
+#https://stackoverflow.com/a/62070746/12603542
+def multivariate_data(dataset, target, start_index, end_index, history_size,
+                      target_size):
+  data = []
+  labels = []
 
-   # Creating a new input matrix for forecasting
-       x_train = np.append(x_train, fc)
+  start_index = start_index + history_size
+  if end_index is None:
+    end_index = len(dataset) - target_size
 
-   # Ommitting the first variable
-       x_train = np.delete(x_train, 0)
+  for i in range(start_index, end_index):
+    indices = range(i-history_size, i)
+    data.append(dataset[indices])
 
-   # Reshaping for the next iteration
-       x_train = np.reshape(x_train, (1, len(x_train), 1))
+    labels.append(target[i:i+target_size])
 
-   return yhat 
-p=predict_ahead(n_ahead)
-print(p)
+  return np.array(data), np.array(labels)
+
+past_history = 60
+future_target = 1
+
+x_train, y_train = multivariate_data(dataset, dataset[:, 0], 0,
+                                                   training_data_len, past_history,
+                                                   future_target)
+x_val_single, y_val_single = multivariate_data(dataset, dataset[:, 0],
+                                               training_data_len, None, past_history,
+                                               future_target)
 
 plt.show()
