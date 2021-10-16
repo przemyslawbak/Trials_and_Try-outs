@@ -32,7 +32,6 @@ plot_series(time, series)
 
 #preparing dataset
 split_time = 2000
-time_train = time[:split_time]
 x_train = series[:split_time]
 time_valid = time[split_time:]
 x_valid = series[split_time:]
@@ -63,8 +62,8 @@ model = tf.keras.models.Sequential([
                       strides=1, padding="causal",
                       activation="relu",
                       input_shape=[None, 1]),
-  tf.keras.layers.LSTM(60, return_sequences=True),
-  tf.keras.layers.LSTM(60, return_sequences=True),
+  tf.keras.layers.LSTM(60, return_sequences=True, stateful=True),
+  tf.keras.layers.LSTM(60, return_sequences=True, stateful=True),
   tf.keras.layers.Dense(30, activation="relu"),
   tf.keras.layers.Dense(10, activation="relu"),
   tf.keras.layers.Dense(1),
@@ -135,32 +134,6 @@ plot_series(time_valid, rnn_forecast)
 
 tf.keras.metrics.mean_absolute_error(x_valid, rnn_forecast).numpy()
 
-#https://stackoverflow.com/a/62070746/12603542
-def multivariate_data(dataset, target, start_index, end_index, history_size,
-                      target_size):
-  data = []
-  labels = []
 
-  start_index = start_index + history_size
-  if end_index is None:
-    end_index = len(dataset) - target_size
-
-  for i in range(start_index, end_index):
-    indices = range(i-history_size, i)
-    data.append(dataset[indices])
-
-    labels.append(target[i:i+target_size])
-
-  return np.array(data), np.array(labels)
-
-past_history = 60
-future_target = 1
-
-x_train, y_train = multivariate_data(dataset, dataset[:, 0], 0,
-                                                   training_data_len, past_history,
-                                                   future_target)
-x_val_single, y_val_single = multivariate_data(dataset, dataset[:, 0],
-                                               training_data_len, None, past_history,
-                                               future_target)
 
 plt.show()
