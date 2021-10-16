@@ -74,8 +74,6 @@ class WindowGenerator():
         f'Label indices: {self.label_indices}',
         f'Label column name(s): {self.label_columns}'])
 
-
-
 #main
 def split_window(self, features):
   inputs = features[:, self.input_slice, :]
@@ -190,10 +188,8 @@ baseline = Baseline(label_index=column_indices['T (degC)'])
 baseline.compile(loss=tf.losses.MeanSquaredError(),
                  metrics=[tf.metrics.MeanAbsoluteError()])
 
-
-
 wide_window = WindowGenerator(
-    input_width=24, label_width=24, shift=1,
+    input_width=24, label_width=24, shift=2,
     label_columns=['T (degC)'])
 
 print('Input shape:', wide_window.example[0].shape)
