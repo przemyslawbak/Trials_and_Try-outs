@@ -12,30 +12,39 @@ import tensorflow as tf
 mpl.rcParams['figure.figsize'] = (8, 6)
 mpl.rcParams['axes.grid'] = False
 
+#path to the data file
 csv_path = 'jena_climate_2009_2016.csv'
+#reading data file
 df = pd.read_csv(csv_path)
 
 # Slice [start:stop:step], starting from index 5 take every 6th record.
 df = df[5::6]
 
+#set date variable
 date_time = pd.to_datetime(df.pop('Date Time'), format='%d.%m.%Y %H:%M:%S')
-print(df.head())
 
+#???
 column_indices = {name: i for i, name in enumerate(df.columns)}
 
+#legth of the dataframe
 n = len(df)
+
+#split dataframe
 train_df = df[0:int(n*0.7)]
 val_df = df[int(n*0.7):int(n*0.9)]
 test_df = df[int(n*0.9):]
+
+#???
 num_features = df.shape[1]
 
+#set some variables
 train_mean = train_df.mean()
 train_std = train_df.std()
 train_df = (train_df - train_mean) / train_std
 val_df = (val_df - train_mean) / train_std
 test_df = (test_df - train_mean) / train_std
 
-
+#creates a window
 class WindowGenerator():
   def __init__(self, input_width, label_width, shift,
                train_df=train_df, val_df=val_df, test_df=test_df,
