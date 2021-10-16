@@ -91,24 +91,8 @@ def split_window(self, features):
   labels.set_shape([None, self.label_width, None])
   return inputs, labels
 
-w1 = WindowGenerator(input_width=24, label_width=1, shift=24,
-                     label_columns=['T (degC)'])
-w2 = WindowGenerator(input_width=6, label_width=1, shift=1,
-                     label_columns=['T (degC)'])
 WindowGenerator.split_window = split_window
-# Stack three slices, the length of the total window.
-example_window = tf.stack([np.array(train_df[:w2.total_window_size]),
-                           np.array(train_df[100:100+w2.total_window_size]),
-                           np.array(train_df[200:200+w2.total_window_size])])
 
-example_inputs, example_labels = w2.split_window(example_window)
-
-print('All shapes are: (batch, time, features)')
-print(f'Window shape: {example_window.shape}')
-print(f'Inputs shape: {example_inputs.shape}')
-print(f'Labels shape: {example_labels.shape}')
-
-w2.example = example_inputs, example_labels
 def plot(self, model=None, plot_col='T (degC)', max_subplots=3):
   inputs, labels = self.example
   plt.figure(figsize=(12, 8))
@@ -142,5 +126,81 @@ def plot(self, model=None, plot_col='T (degC)', max_subplots=3):
   plt.xlabel('Time [h]')
 
 WindowGenerator.plot = plot
+
+#---------------------------------
+
+def make_dataset(self, data):
+  data = np.array(data, dtype=np.float32)
+  ds = tf.keras.preprocessing.timeseries_dataset_from_array(
+      data=data,
+      targets=None,
+      sequence_length=self.total_window_size,
+      sequence_stride=1,
+      shuffle=True,
+      batch_size=32,)
+
+  ds = ds.map(self.split_window)
+
+  return ds
+
+WindowGenerator.make_dataset = make_dataset
+
+@property
+def train(self):
+  return self.make_dataset(self.train_df)
+
+@property
+def val(self):
+  return self.make_dataset(self.val_df)
+
+@property
+def test(self):
+  return self.make_dataset(self.test_df)
+
+@property
+def example(self):
+  """Get and cache an example batch of `inputs, labels` for plotting."""
+  result = getattr(self, '_example', None)
+  if result is None:
+    # No example batch was found, so get one from the `.train` dataset
+    result = next(iter(self.train))
+    # And cache it for next time
+    self._example = result
+  return result
+
+WindowGenerator.train = train
+WindowGenerator.val = val
+WindowGenerator.test = test
+WindowGenerator.example = example
+
+class Baseline(tf.keras.Model):
+  def __init__(self, label_index=None):
+    super().__init__()
+    self.label_index = label_index
+
+  def call(self, inputs):
+    if self.label_index is None:
+      return inputs
+    result = inputs[:, :, self.label_index]
+    return result[:, :, tf.newaxis]
+
+
+baseline = Baseline(label_index=column_indices['T (degC)'])
+
+baseline.compile(loss=tf.losses.MeanSquaredError(),
+                 metrics=[tf.metrics.MeanAbsoluteError()])
+
+
+
+wide_window = WindowGenerator(
+    input_width=24, label_width=24, shift=1,
+    label_columns=['T (degC)'])
+
+print('Input shape:', wide_window.example[0].shape)
+print('Output shape:', baseline(wide_window.example[0]).shape)
+
+wide_window.plot(baseline)
+
+
 
 plt.show()
