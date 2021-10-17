@@ -243,6 +243,17 @@ dense = tf.keras.Sequential([
     tf.keras.layers.Dense(units=1)
 ])
 
+#multi-step dense
+multi_step_dense = tf.keras.Sequential([
+    # Shape: (time, features) => (time*features)
+    tf.keras.layers.Flatten(),
+    tf.keras.layers.Dense(units=32, activation='relu'),
+    tf.keras.layers.Dense(units=32, activation='relu'),
+    tf.keras.layers.Dense(units=1),
+    # Add back the time dimension.
+    # Shape: (outputs) => (1, outputs)
+    tf.keras.layers.Reshape([1, -1]),
+])
 
 def compile_and_fit(model, window, patience=2):
   early_stopping = tf.keras.callbacks.EarlyStopping(monitor='val_loss',
@@ -260,6 +271,8 @@ Train the model and evaluate its performance
 """
 history_linear = compile_and_fit(linear, single_step_window)
 history_dense = compile_and_fit(dense, single_step_window)
+history_multidense = compile_and_fit(multi_step_dense, conv_window)
+
 
 val_performance['Dense'] = dense.evaluate(single_step_window.val)
 performance['Dense'] = dense.evaluate(single_step_window.test, verbose=0)
@@ -276,6 +289,7 @@ performance['Baseline'] = baseline.evaluate(single_step_window.test, verbose=0)
 #single_step_window.plot(baseline)
 #wide_window.plot(baseline)
 #wide_window.plot(linear)
+#wide_window.plot(multi_step_dense)
 wide_window.plot(dense)
 
 
