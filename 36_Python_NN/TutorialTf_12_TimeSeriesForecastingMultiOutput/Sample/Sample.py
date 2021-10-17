@@ -203,13 +203,11 @@ class Baseline(tf.keras.Model):
 
 #baseline, 1 step window
 single_step_window = WindowGenerator(
-    input_width=1, label_width=1, shift=1,
-    label_columns=['T (degC)'])  
+    input_width=1, label_width=1, shift=1)  
 
 #Generates windows 24 hours of consecutive inputs and labels at a time
 wide_window = WindowGenerator(
-    input_width=24, label_width=24, shift=1,
-    label_columns=['T (degC)'])
+    input_width=24, label_width=24, shift=1)
 
 #Here the model will take multiple time steps as input to produce a single output
 conv_window = WindowGenerator(
@@ -230,7 +228,7 @@ val_performance = {}
 performance = {}
 
 #baseline model
-baseline = Baseline(label_index=column_indices['T (degC)'])
+baseline = Baseline()
 baseline.compile(loss=tf.losses.MeanSquaredError(),
                  metrics=[tf.metrics.MeanAbsoluteError()])
 
