@@ -14,6 +14,8 @@ mpl.rcParams['axes.grid'] = False
 
 MAX_EPOCHS = 20
 CONV_WIDTH = 3
+LABEL_WIDTH = 24
+INPUT_WIDTH = LABEL_WIDTH + (CONV_WIDTH - 1)
 
 #path to the data file
 csv_path = 'jena_climate_2009_2016.csv'
@@ -216,13 +218,19 @@ conv_window = WindowGenerator(
     shift=1,
     label_columns=['T (degC)'])
 
+#To make training or plotting work, you need the labels, and prediction to have the same length
+wide_conv_window = WindowGenerator(
+    input_width=INPUT_WIDTH,
+    label_width=LABEL_WIDTH,
+    shift=1,
+    label_columns=['T (degC)'])
+
 #performance evaluation
 val_performance = {}
 performance = {}
 
 #baseline model
 baseline = Baseline(label_index=column_indices['T (degC)'])
-
 baseline.compile(loss=tf.losses.MeanSquaredError(),
                  metrics=[tf.metrics.MeanAbsoluteError()])
 
@@ -255,6 +263,24 @@ multi_step_dense = tf.keras.Sequential([
     tf.keras.layers.Reshape([1, -1]),
 ])
 
+#Convolution neural network
+conv_model = tf.keras.Sequential([
+    tf.keras.layers.Conv1D(filters=32,
+                           kernel_size=(CONV_WIDTH,),
+                           activation='relu'),
+    tf.keras.layers.Dense(units=32, activation='relu'),
+    tf.keras.layers.Dense(units=1),
+])
+
+#LSTM
+lstm_model = tf.keras.models.Sequential([
+    # Shape [batch, time, features] => [batch, time, lstm_units]
+    tf.keras.layers.LSTM(32, return_sequences=True),
+    # Shape => [batch, time, features]
+    tf.keras.layers.Dense(units=1)
+])
+
+
 def compile_and_fit(model, window, patience=2):
   early_stopping = tf.keras.callbacks.EarlyStopping(monitor='val_loss',
                                                     patience=patience,
@@ -272,6 +298,8 @@ Train the model and evaluate its performance
 history_linear = compile_and_fit(linear, single_step_window)
 history_dense = compile_and_fit(dense, single_step_window)
 history_multidense = compile_and_fit(multi_step_dense, conv_window)
+history_conv = compile_and_fit(conv_model, conv_window)
+history_lstm = compile_and_fit(lstm_model, wide_window)
 
 
 val_performance['Dense'] = dense.evaluate(single_step_window.val)
@@ -290,8 +318,9 @@ performance['Baseline'] = baseline.evaluate(single_step_window.test, verbose=0)
 #wide_window.plot(baseline)
 #wide_window.plot(linear)
 #wide_window.plot(multi_step_dense)
-wide_window.plot(dense)
-
+#wide_window.plot(dense)
+#wide_conv_window.plot(conv_model)
+wide_window.plot(lstm_model)
 
 
 
