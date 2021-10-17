@@ -24,7 +24,6 @@
     <Compile Include="Sample.py" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="jena_climate_2009_2016 - Copy.csv" />
     <Content Include="jena_climate_2009_2016.csv" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
