@@ -18,7 +18,7 @@ csv_path = 'jena_climate_2009_2016.csv'
 df = pd.read_csv(csv_path)
 
 # Slice [start:stop:step], starting from index 5 take every 6th record.
-df = df[5::6]
+#df = df[5::6]
 
 #set date variable
 date_time = pd.to_datetime(df.pop('Date Time'), format='%d.%m.%Y %H:%M:%S')
@@ -198,8 +198,8 @@ baseline.compile(loss=tf.losses.MeanSquaredError(),
                  metrics=[tf.metrics.MeanAbsoluteError()])
 
 wide_window = WindowGenerator(
-    input_width=24, label_width=24, shift=2,
-    label_columns=['T (degC)'])
+    input_width=68, label_width=68, shift=1,
+    label_columns=['T (degC)']) #not predicing future yet
 
 print('Input shape:', wide_window.example[0].shape)
 print('Output shape:', baseline(wide_window.example[0]).shape)
