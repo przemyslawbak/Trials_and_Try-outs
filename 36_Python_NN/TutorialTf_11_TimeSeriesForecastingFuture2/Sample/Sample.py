@@ -12,6 +12,9 @@ import tensorflow as tf
 mpl.rcParams['figure.figsize'] = (8, 6)
 mpl.rcParams['axes.grid'] = False
 
+MAX_EPOCHS = 20
+CONV_WIDTH = 3
+
 #path to the data file
 csv_path = 'jena_climate_2009_2016.csv'
 #reading data file
@@ -179,6 +182,11 @@ WindowGenerator.val = val
 WindowGenerator.test = test
 WindowGenerator.example = example
 
+"""
+So, start with a model that just returns the current temperature as the prediction, predicting "No change". 
+This is a reasonable baseline since temperature changes slowly. 
+Of course, this baseline will work less well if you make a prediction further in the future.
+"""
 class Baseline(tf.keras.Model):
   def __init__(self, label_index=None):
     super().__init__()
@@ -191,19 +199,85 @@ class Baseline(tf.keras.Model):
     return result[:, :, tf.newaxis]
 
 
+#baseline, 1 step window
+single_step_window = WindowGenerator(
+    input_width=1, label_width=1, shift=1,
+    label_columns=['T (degC)'])  
+
+#Generates windows 24 hours of consecutive inputs and labels at a time
+wide_window = WindowGenerator(
+    input_width=24, label_width=24, shift=1,
+    label_columns=['T (degC)'])
+
+#Here the model will take multiple time steps as input to produce a single output
+conv_window = WindowGenerator(
+    input_width=CONV_WIDTH,
+    label_width=1,
+    shift=1,
+    label_columns=['T (degC)'])
+
+#performance evaluation
+val_performance = {}
+performance = {}
+
+#baseline model
 baseline = Baseline(label_index=column_indices['T (degC)'])
 
 baseline.compile(loss=tf.losses.MeanSquaredError(),
                  metrics=[tf.metrics.MeanAbsoluteError()])
 
-wide_window = WindowGenerator(
-    input_width=68, label_width=68, shift=1,
-    label_columns=['T (degC)']) #not predicing future yet
+#linear model
+"""
+A tf.keras.layers.Dense layer with no activation set is a linear model. 
+The layer only transforms the last axis of the data from (batch, time, inputs) to (batch, time, units); 
+it is applied independently to every item across the batch and time axes.
+"""
+linear = tf.keras.Sequential([
+    tf.keras.layers.Dense(units=1)
+])
 
-print('Input shape:', wide_window.example[0].shape)
-print('Output shape:', baseline(wide_window.example[0]).shape)
+#dense model
+dense = tf.keras.Sequential([
+    tf.keras.layers.Dense(units=64, activation='relu'),
+    tf.keras.layers.Dense(units=64, activation='relu'),
+    tf.keras.layers.Dense(units=1)
+])
 
-wide_window.plot(baseline)
+
+def compile_and_fit(model, window, patience=2):
+  early_stopping = tf.keras.callbacks.EarlyStopping(monitor='val_loss',
+                                                    patience=patience,
+                                                    mode='min')
+  model.compile(loss=tf.losses.MeanSquaredError(),
+                optimizer=tf.optimizers.Adam(),
+                metrics=[tf.metrics.MeanAbsoluteError()])
+  history = model.fit(window.train, epochs=MAX_EPOCHS,
+                      validation_data=window.val,
+                      callbacks=[early_stopping])
+  return history
+"""
+Train the model and evaluate its performance
+"""
+history_linear = compile_and_fit(linear, single_step_window)
+history_dense = compile_and_fit(dense, single_step_window)
+
+val_performance['Dense'] = dense.evaluate(single_step_window.val)
+performance['Dense'] = dense.evaluate(single_step_window.test, verbose=0)
+
+
+val_performance['Linear'] = linear.evaluate(single_step_window.val)
+performance['Linear'] = linear.evaluate(single_step_window.test, verbose=0)
+
+  
+val_performance['Baseline'] = baseline.evaluate(single_step_window.val)
+performance['Baseline'] = baseline.evaluate(single_step_window.test, verbose=0)
+
+
+#single_step_window.plot(baseline)
+#wide_window.plot(baseline)
+#wide_window.plot(linear)
+wide_window.plot(dense)
+
 
 
 
