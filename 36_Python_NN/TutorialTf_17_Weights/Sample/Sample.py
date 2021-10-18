@@ -331,12 +331,12 @@ performance['Baseline'] = baseline.evaluate(single_step_window.test, verbose=0)
 multi_lstm_model = tf.keras.Sequential([
     # Shape [batch, time, features] => [batch, lstm_units].
     # Adding more `lstm_units` just overfits more quickly.
-    tf.keras.layers.LSTM(32, return_sequences=False),
-    # Shape => [batch, out_steps*features].
-    tf.keras.layers.Dense(OUT_STEPS*num_features,
+    tf.keras.layers.LSTM(60, return_sequences=False),
+  tf.keras.layers.Dense(30),
+  tf.keras.layers.Dense(OUT_STEPS*num_features,
                           kernel_initializer=tf.initializers.zeros()),
-    # Shape => [batch, out_steps, features].
-    tf.keras.layers.Reshape([OUT_STEPS, num_features])
+  tf.keras.layers.Lambda(lambda x: x * 400),
+  tf.keras.layers.Reshape([OUT_STEPS, num_features])
 ])
 
 history = compile_and_fit(multi_lstm_model, multi_window)
