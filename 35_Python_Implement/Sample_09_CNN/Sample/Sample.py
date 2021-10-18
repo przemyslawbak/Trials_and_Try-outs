@@ -117,7 +117,7 @@ def plot(self, model=None, plot_col='close', max_subplots=1):
     plt.scatter(self.label_indices, labels[n, :, label_col_index],
                 edgecolors='k', label='Labels', c='#2ca02c', s=64)
     if model is not None:
-      predictions = model(inputs)
+      predictions = model(inputs) #nan
       plt.scatter(self.label_indices, predictions[n, :, label_col_index],
                   marker='X', edgecolors='k', label='Predictions',
                   c='#ff7f0e', s=64)
@@ -175,31 +175,33 @@ WindowGenerator.example = example
 
 #-----------------------------------------
 
-class Baseline(tf.keras.Model):
-  def __init__(self, label_index=None):
-    super().__init__()
-    self.label_index = label_index
-
-  def call(self, inputs):
-    if self.label_index is None:
-      return inputs
-    result = inputs[:, :, self.label_index]
-    return result[:, :, tf.newaxis]
-
-#baseline, 1 step window
-single_step_window = WindowGenerator(
-    input_width=1, label_width=1, shift=1)  
-
-#baseline model
-baseline = Baseline()
-baseline.compile(loss=tf.losses.MeanSquaredError(),
-                 metrics=[tf.metrics.MeanAbsoluteError()])
-
 #Generates windows 24 hours of consecutive inputs and labels at a time
 wide_window = WindowGenerator(
-    input_width=100, label_width=100, shift=1)
+    input_width=24, label_width=24, shift=1)
 
-#single_step_window.plot(baseline)
-wide_window.plot(baseline)
+
+#LSTM
+lstm_model = tf.keras.models.Sequential([
+    # Shape [batch, time, features] => [batch, time, lstm_units]
+    tf.keras.layers.LSTM(32, return_sequences=True),
+    # Shape => [batch, time, features]
+    tf.keras.layers.Dense(units=1)
+])
+
+def compile_and_fit(model, window, patience=2):
+  early_stopping = tf.keras.callbacks.EarlyStopping(monitor='val_loss',
+                                                    patience=patience,
+                                                    mode='min')
+  model.compile(loss=tf.losses.MeanSquaredError(),
+                optimizer=tf.optimizers.Adam(),
+                metrics=[tf.metrics.MeanAbsoluteError()])
+  history = model.fit(window.train, epochs=MAX_EPOCHS,
+                      validation_data=window.val,
+                      callbacks=[early_stopping])
+  return history
+
+history_lstm = compile_and_fit(lstm_model, wide_window)
+
+wide_window.plot(lstm_model)
 
 plt.show()
