@@ -12,9 +12,9 @@ import tensorflow as tf
 mpl.rcParams['figure.figsize'] = (8, 6)
 mpl.rcParams['axes.grid'] = False
 
-MAX_EPOCHS = 20
-CONV_WIDTH = 3
-LABEL_WIDTH = 24
+MAX_EPOCHS = 20 #more ok
+CONV_WIDTH = 30
+LABEL_WIDTH = 100
 INPUT_WIDTH = LABEL_WIDTH + (CONV_WIDTH - 1)
 
 #path to the data file
