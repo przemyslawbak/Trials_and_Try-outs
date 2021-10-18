@@ -19,7 +19,7 @@ INPUT_WIDTH = LABEL_WIDTH + (CONV_WIDTH - 1)
 OUT_STEPS = 24 #multi-step model
 
 #path to the data file
-csv_path = 'jena_climate_2009_2016.csv'
+csv_path = 'jena_climate_2009_2016_small.csv'
 #reading data file
 df = pd.read_csv(csv_path)
 
@@ -147,7 +147,7 @@ def make_dataset(self, data):
       targets=None,
       sequence_length=self.total_window_size,
       sequence_stride=1,
-      shuffle=True,
+      shuffle=False,
       batch_size=32,)
 
   ds = ds.map(self.split_window)
