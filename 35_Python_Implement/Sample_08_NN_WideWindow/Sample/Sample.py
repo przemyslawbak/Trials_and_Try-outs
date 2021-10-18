@@ -197,7 +197,7 @@ baseline.compile(loss=tf.losses.MeanSquaredError(),
 
 #Generates windows 24 hours of consecutive inputs and labels at a time
 wide_window = WindowGenerator(
-    input_width=24, label_width=24, shift=1)
+    input_width=100, label_width=100, shift=1)
 
 #single_step_window.plot(baseline)
 wide_window.plot(baseline)
