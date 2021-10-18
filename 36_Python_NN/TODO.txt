@@ -1,0 +1,4 @@
+- weights
+- remove randomness
+- optimization
+- post from 4p - requirements
