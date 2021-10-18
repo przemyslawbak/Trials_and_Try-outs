@@ -1,6 +1,6 @@
 OK - weights
 OK - remove randomness
-- one window display
-- verify Dense/LSTM OUT_STEPS in TutorialTf_16_TimeSeriesMultiStepRNN
+OK - one window display
+OK - verify Dense/LSTM OUT_STEPS in TutorialTf_16_TimeSeriesMultiStepRNN
 - optimization
 - post from 4p - requirements
