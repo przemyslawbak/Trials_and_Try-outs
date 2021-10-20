@@ -8,6 +8,8 @@ namespace List_Comparer
     class Program
     {
         private static List<EmailModel> _listFromFiles = new List<EmailModel>();
+        private static List<string> _results = new List<string>();
+        private static List<string> _missing = new List<string>();
 
         static void Main(string[] args)
         {
@@ -21,20 +23,29 @@ namespace List_Comparer
                 _listFromFiles.AddRange(items);
             }
 
-            string[] lista = File.ReadAllLines("1.txt");
+            string[] lista = File.ReadAllLines("1.csv");
             List<string> listOfFirms = new List<string>(lista);
 
+            foreach (string firm in listOfFirms)
+            {
+                List<string> emails = _listFromFiles.Where(l => l.Company.ToLower() == firm.ToLower()).Select(l => l.Address.ToLower()).ToList();
+                if (emails != null)
+                {
+                    foreach (string email in emails)
+                    {
+                        string res = email.ToLower() + "|" + firm.ToLower();
+                        Console.WriteLine(res);
+                        _results.Add(res);
+                    }
+                }
+                else
+                {
+                    _missing.Add(firm);
+                }
+            }
 
-
-
-            //var lll = pierwotnaLista.Where(x => int.TryParse(x, out int ww)).Select(int.Parse).ToList();
-
-            //List<string> output = pierwotnaLista.Distinct().ToList();
-            //var output = lll.Distinct().ToList();
-            //List<string> grouping = pierwotnaLista.GroupBy(email => email).Select(grp => grp.First()).ToList();
-            //var result = grouping.Where(i => i.Contains("@")).Select(i => ";www." + i.Split('@')[1] + ";;;;;;;;;;;").Distinct();
-
-            //System.IO.File.WriteAllLines("output2.txt", result);
+            System.IO.File.WriteAllLines("output2.txt", _results.Distinct());
+            System.IO.File.WriteAllLines("missing.txt", _missing.Distinct());
             Console.WriteLine("saved");
             Console.ReadKey();
 
