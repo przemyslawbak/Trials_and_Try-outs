@@ -25,22 +25,24 @@ namespace List_Comparer
 
             string[] lista = File.ReadAllLines("1.csv");
             List<string> listOfFirms = new List<string>(lista);
-
+            int counter = 0;
             foreach (string firm in listOfFirms)
             {
-                List<string> emails = _listFromFiles.Where(l => l.Company.ToLower() == firm.ToLower()).Select(l => l.Address.ToLower()).ToList();
-                if (emails != null)
+                counter++;
+                Console.WriteLine(counter + " of " + listOfFirms.Count());
+                string newfirm = firm.Replace(".", "");
+                List<string> emails = _listFromFiles.Where(l => l.Company.ToLower() == newfirm.ToLower()).Select(l => l.Address.ToLower()).ToList();
+                if (emails.Count() > 0)
                 {
                     foreach (string email in emails)
                     {
-                        string res = email.ToLower() + "|" + firm.ToLower();
-                        Console.WriteLine(res);
+                        string res = email.ToLower() + "|" + newfirm.ToLower();
                         _results.Add(res);
                     }
                 }
                 else
                 {
-                    _missing.Add(firm);
+                    _missing.Add(newfirm);
                 }
             }
 
