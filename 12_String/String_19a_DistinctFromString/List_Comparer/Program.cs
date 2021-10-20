@@ -21,24 +21,20 @@ namespace List_Comparer
             emails = emails.Except(containBlacklisted).ToList();
             emails = emails.Except(containFailed).ToList();
 
-            List<string> domains = emails.Where(e => e.Contains("@")).Select(e => e.Split('@')[1]).ToList();
+            List<EmailModel> emailObjects = emails.Where(e => e.Contains("@")).Select(e => new EmailModel() { Address = e, Domain = e.Split('@')[1] }).ToList();
+            List<EmailModel> containKeys = emailObjects.Where(e => keywords.Any(k => e.Address.ToLower().Contains(k.ToLower()))).ToList();
 
 
-
-
-            List<EmailModel> containKeys = distEmail.Where(e => keywords.Any(k => e.Email.ToLower().Contains(k.ToLower()))).ToList();
-
-            List<EmailModel> notContainKeysFirst = distEmail.Except(containKeys).GroupBy(c => c.Company).Select(c => c.ElementAt(0)).ToList();
-            List<EmailModel> notContainKeysSecond = distEmail.Except(containKeys).GroupBy(c => c.Company).Where(x => x.Count() > 1).Select(c => c.ElementAt(1)).ToList();
-            List<EmailModel> notContainKeysThird = distEmail.Except(containKeys).GroupBy(c => c.Company).Where(x => x.Count() > 2).Select(c => c.ElementAt(2)).ToList();
+            List<EmailModel> notContainKeysFirst = emailObjects.Except(containKeys).GroupBy(c => c.Domain).Select(c => c.ElementAt(0)).ToList();
+            List<EmailModel> notContainKeysSecond = emailObjects.Except(containKeys).GroupBy(c => c.Domain).Where(x => x.Count() > 1).Select(c => c.ElementAt(1)).ToList();
+            List<EmailModel> notContainKeysThird = emailObjects.Except(containKeys).GroupBy(c => c.Domain).Where(x => x.Count() > 2).Select(c => c.ElementAt(2)).ToList();
 
             List<string> final = new List<string>();
-            final.AddRange(containKeys.Select(l => l.Email));
-            final.AddRange(notContainKeysFirst.Select(l => l.Email));
-            final.AddRange(notContainKeysSecond.Select(l => l.Email));
-            final.AddRange(notContainKeysThird.Select(l => l.Email));
+            final.AddRange(containKeys.Select(l => l.Address));
+            final.AddRange(notContainKeysFirst.Select(l => l.Address));
+            final.AddRange(notContainKeysSecond.Select(l => l.Address));
+            final.AddRange(notContainKeysThird.Select(l => l.Address));
 
-            
             System.IO.File.WriteAllLines("output.txt", final);
             Console.WriteLine("saved");
             Console.ReadKey();
