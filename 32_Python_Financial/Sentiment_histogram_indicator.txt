@@ -1,0 +1,103 @@
+// This source code is subject to the terms of the Mozilla Public License 2.0 at https://mozilla.org/MPL/2.0/
+// © Mango2Juice
+// MT4 ported
+// I am not sure if this one have been ported to tv or not.
+// Added multiple MA. Default is LWMA
+
+//@version=4
+study("Sentiment Histogram")
+
+// ————————————————————————————————————————————————————————————
+// >>>>>>>>>>>>>>>>>>>>>>>>  Inputs  <<<<<<<<<<<<<<<<<<<<<<<<<<
+// ————————————————————————————————————————————————————————————
+
+period  = input(14,"Length",minval=1)
+mode    = input("Fast","Calculation Mode", options=["Balanced","Fast","Slow"])
+ma_type = input(title="MA Type", type=input.string, defval="WMA", options=["EMA", "DEMA", "TEMA", "WMA", "VWMA", "SMA", "SMMA", "HMA", "LSMA", "McGinley"])
+
+// ————————————————————————————————————————————————————————————
+// >>>>>>>>>>>>>>>>>>>>  Helper Function  <<<<<<<<<<<<<<<<<<<<<
+// ————————————————————————————————————————————————————————————
+// Thanks to @jiehonglim
+
+ma(type, src, len) =>
+    float result = 0
+    if type=="SMA" // Simple
+        result := sma(src, len)
+    if type=="EMA" // Exponential
+        result := ema(src, len)
+    if type=="DEMA" // Double Exponential
+        e = ema(src, len)
+        result := 2 * e - ema(e, len)
+    if type=="TEMA" // Triple Exponential
+        e = ema(src, len)
+        result := 3 * (e - ema(e, len)) + ema(ema(e, len), len)
+    if type=="WMA" // Weighted
+        result := wma(src, len)
+    if type=="VWMA" // Volume Weighted
+        result := vwma(src, len) 
+    if type=="SMMA" // Smoothed
+        w = wma(src, len)
+        result := na(w[1]) ? sma(src, len) : (w[1] * (len - 1) + src) / len
+    if type == "RMA"
+        result := rma(src, len)
+    if type=="HMA" // Hull
+        result := wma(2 * wma(src, len / 2) - wma(src, len), round(sqrt(len)))
+    if type=="LSMA" // Least Squares
+        result := linreg(src, len, 0)
+    if type=="McGinley"
+        mg = 0.0
+        mg := na(mg[1]) ? ema(src, len) : mg[1] + (src - mg[1]) / (len * pow(src/mg[1], 4))
+        result :=mg
+    result
+
+// ————————————————————————————————————————————————————————————
+// >>>>>>>>>>>>>>>>>>>>>>>>  Calculations  <<<<<<<<<<<<<<<<<<<<<<<<<<
+// ————————————————————————————————————————————————————————————
+
+length = ceil(period/4)
+
+BarHigh   = ma(ma_type,high, length)
+BarLow    = ma(ma_type,low,  length)
+BarOpen   = ma(ma_type,open, length)
+BarClose  = ma(ma_type,close,length)
+Bar_Range = BarHigh - BarLow
+
+Group_High  = highest(high,period)
+Group_Low   = lowest(low,period)
+Group_Open  = open[period-1]
+Group_Range = Group_High - Group_Low
+
+if Bar_Range == 0.0
+    Bar_Range := 1.0
+    
+if Group_Range == 0.0
+    Group_Range := 1.0
+    
+BarBull   = (((BarClose - BarLow) + (BarHigh - BarOpen))/2) / Bar_Range
+BarBear   = (((BarHigh - BarClose) + (BarOpen - BarLow))/2) / Bar_Range
+
+GroupBull = (((BarClose - Group_Low) + (Group_High - Group_Open)) / 2) / Group_Range
+GroupBear = (((Group_High - BarClose) + (Group_Open - Group_Low)) / 2) / Group_Range
+
+calcBull = mode == "Balanced" ? (BarBull + GroupBull) / 2 : mode == "Fast" ? BarBull : GroupBull
+calcBear = mode == "Balanced" ? (BarBear + GroupBear) / 2 : mode == "Fast" ? BarBear : GroupBear
+
+Bull = sma(calcBull,period)
+Bear = sma(calcBear,period)
+diff = Bull - Bear
+
+
+// ————————————————————————————————————————————————————————————
+// >>>>>>>>>>>>>>>>>>>>>>>>  Plots  <<<<<<<<<<<<<<<<<<<<<<<<<<
+// ————————————————————————————————————————————————————————————
+
+_color = 
+ Bull >= Bull[1] and Bull > Bear ? color.teal : 
+ Bull <  Bull[1] and Bull > Bear ? color.lime : 
+ Bear >= Bear[1] and Bear > Bull ? color.maroon : 
+ Bear <  Bear[1] and Bear > Bull ? color.red : color.silver
+
+plot(diff,"Sentiment",_color,2,plot.style_columns)
+
+// >>>>>>>>>>>>>>>>>>>>>>>>  End of Script  <<<<<<<<<<<<<<<<<<<<<<<<<<
