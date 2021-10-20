@@ -16,7 +16,8 @@ namespace List_Comparer
 
             //List<string> output = pierwotnaLista.Distinct().ToList();
             //var output = lll.Distinct().ToList();
-            var result = pierwotnaLista.GroupBy(email => email).Select(grp => grp.First().Split('@')[1]).ToList();
+            List<string> grouping = pierwotnaLista.GroupBy(email => email).Select(grp => grp.First()).ToList();
+            var result = grouping.Where(i => i.Contains("@")).Select(i => ";www." + i.Split('@')[1] + ";;;;;;;;;;;").Distinct();
 
             System.IO.File.WriteAllLines("output2.txt", result);
             Console.WriteLine("saved");
