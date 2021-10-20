@@ -343,5 +343,4 @@ multi_conv_model = tf.keras.Sequential([
 history = compile_and_fit(multi_conv_model, multi_window)
 multi_window.plot(multi_conv_model)
 
-
 plt.show()
