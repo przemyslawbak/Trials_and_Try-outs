@@ -52,6 +52,7 @@ namespace List_Comparer
                         www = "http://" + address.Host;
                     }
                     await throttler.WaitAsync();
+                    //should be in 'if' block
                     try
                     {
                         status = await CheckAddressAsync(www);
