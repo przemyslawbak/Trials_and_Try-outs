@@ -20,8 +20,8 @@ df = pd.read_csv(csv_path)
 
 #https://www.tradingview.com/script/RlRxtEuQ-Sentiment-Histogram/
 print('reading inputs...')
-period  = 14
-mode    = "Fast"
+period = 14
+mode = "Fast"
 ma_type = "WMA"
 
 def ma(typ, src, len):
@@ -31,6 +31,7 @@ def ma(typ, src, len):
         result = wma(src, len)
     return result
 
+#https://www.askpython.com/python/weighted-moving-average
 def wma(Data, period):
     weighted = []
     for i in range(len(Data)):
@@ -45,4 +46,49 @@ def wma(Data, period):
                 pass
     return weighted
 
+#https://www.alpharithms.com/calculating-moving-averages-in-python-585117/
+def sma(Data, period):
+    return Data.rolling(period).mean()
+
 length = math.ceil(period/4)
+
+#loop it?
+BarHigh = ma(ma_type,high, length)
+BarLow = ma(ma_type,low,  length)
+BarOpen = ma(ma_type,open, length)
+BarClose = ma(ma_type,close,length)
+Bar_Range = BarHigh - BarLow
+
+#https://kodify.net/tradingview/bar-data/highest-high-lowest-low/
+Group_High = highest(high, period)
+Group_Low = lowest(low, period)
+Group_Open = open[period - 1]
+Group_Range = Group_High - Group_Low
+
+if Bar_Range == 0.0:
+    Bar_Range = 1.0
+    
+if Group_Range == 0.0:
+    Group_Range = 1.0
+
+BarBull = (((BarClose - BarLow) + (BarHigh - BarOpen))/2)
+BarBear = (((BarHigh - BarClose) + (BarOpen - BarLow))/2) 
+
+GroupBull = (((BarClose - Group_Low) + (Group_High - Group_Open)) / 2)
+GroupBear = (((Group_High - BarClose) + (Group_Open - Group_Low)) / 2)
+
+calcBull = (BarBull + GroupBull) / 2
+calcBear = (BarBear + GroupBear) / 2
+
+Bull = sma(calcBull, period)
+Bear = sma(calcBear, period)
+diff = Bull - Bear
+
+#todo
+_color = 
+ Bull >= Bull[1] and Bull > Bear ? color.teal : 
+ Bull <  Bull[1] and Bull > Bear ? color.lime : 
+ Bear >= Bear[1] and Bear > Bull ? color.maroon : 
+ Bear <  Bear[1] and Bear > Bull ? color.red : color.silver
+
+plot(diff,"Sentiment",_color,2,plot.style_columns)
