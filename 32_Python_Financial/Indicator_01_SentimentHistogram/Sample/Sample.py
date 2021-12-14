@@ -50,9 +50,16 @@ def wma(Data, period):
 def sma(Data, period):
     return Data.rolling(period).mean()
 
+def highest(Data, period):
+    list = Data.rolling(period).sort()
+    return list1[-1]
+
+def lowest(Data, period):
+    list = Data.rolling(period).sort()
+    return list1[0]
+
 length = math.ceil(period/4)
 
-#loop it?
 BarHigh = ma(ma_type,high, length)
 BarLow = ma(ma_type,low,  length)
 BarOpen = ma(ma_type,open, length)
