@@ -24,40 +24,6 @@ period = 14
 mode = "Fast"
 ma_type = "WMA"
 
-def ma(typ, src, len):
-    result = 0
-    #more to be chosen in the link
-    if typ=="WMA":
-        result = wma(src, len)
-    return result
-
-#https://www.askpython.com/python/weighted-moving-average
-def wma(Data, period):
-    weighted = []
-    for i in range(len(Data)):
-            try:
-                total = numpy.arange(1, period + 1, 1)
-                matrix = Data[i - period + 1: i + 1, 3:4]
-                matrix = numpy.ndarray.flatten(matrix)
-                matrix = total * matrix
-                wma = (matrix.sum()) / (total.sum()) # WMA
-                weighted = numpy.append(weighted, wma) 
-            except ValueError:
-                pass
-    return weighted
-
-#https://www.alpharithms.com/calculating-moving-averages-in-python-585117/
-def sma(Data, period):
-    return Data.rolling(period).mean()
-
-def highest(Data, period):
-    list = Data.rolling(period).sort()
-    return list1[-1]
-
-def lowest(Data, period):
-    list = Data.rolling(period).sort()
-    return list1[0]
-
 length = math.ceil(period/4)
 
 BarHigh = ma(ma_type,high, length)
@@ -102,5 +68,38 @@ if (Bear <  Bear[1] and Bear > Bull):
     color = 'red'
 
 #todo
-
 plot(diff,"Sentiment",_color,2,plot.style_columns)
+
+def ma(typ, src, len):
+    result = 0
+    #more to be chosen in the link
+    if typ=="WMA":
+        result = wma(src, len)
+    return result
+
+#https://www.askpython.com/python/weighted-moving-average
+def wma(Data, period):
+    weighted = []
+    for i in range(len(Data)):
+            try:
+                total = numpy.arange(1, period + 1, 1)
+                matrix = Data[i - period + 1: i + 1, 3:4]
+                matrix = numpy.ndarray.flatten(matrix)
+                matrix = total * matrix
+                wma = (matrix.sum()) / (total.sum()) # WMA
+                weighted = numpy.append(weighted, wma) 
+            except ValueError:
+                pass
+    return weighted
+
+#https://www.alpharithms.com/calculating-moving-averages-in-python-585117/
+def sma(Data, period):
+    return Data.rolling(period).mean()
+
+def highest(Data, period):
+    list = Data.rolling(period).sort()
+    return list1[-1]
+
+def lowest(Data, period):
+    list = Data.rolling(period).sort()
+    return list1[0]
