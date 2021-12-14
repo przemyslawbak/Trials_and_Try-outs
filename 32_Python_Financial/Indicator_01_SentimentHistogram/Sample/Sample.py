@@ -91,11 +91,16 @@ Bull = sma(calcBull, period)
 Bear = sma(calcBear, period)
 diff = Bull - Bear
 
+color = ''
+if (Bull >= Bull[1] and Bull > Bear):
+    color = 'teal'
+if (Bull <  Bull[1] and Bull > Bear):
+    color = 'lime'
+if (Bear >= Bear[1] and Bear > Bull):
+    color = 'maroon'
+if (Bear <  Bear[1] and Bear > Bull):
+    color = 'red'
+
 #todo
-_color = 
- Bull >= Bull[1] and Bull > Bear ? color.teal : 
- Bull <  Bull[1] and Bull > Bear ? color.lime : 
- Bear >= Bear[1] and Bear > Bull ? color.maroon : 
- Bear <  Bear[1] and Bear > Bull ? color.red : color.silver
 
 plot(diff,"Sentiment",_color,2,plot.style_columns)
