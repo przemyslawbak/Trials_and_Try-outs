@@ -21,24 +21,9 @@ df = pd.read_csv(csv_path)
 def ma(typ, src, len):
     result = 0
     #more to be chosen in the link
-    if typ=="WMA":
-        result = wma(src, len)
+    if typ=="SMA":
+        result = sma(src, len)
     return result
-
-#https://www.askpython.com/python/weighted-moving-average
-def wma(Data, period):
-    weighted = []
-    for i in range(len(Data)):
-            try:
-                total = numpy.arange(1, period + 1, 1)
-                matrix = Data[i - period + 1: i + 1, 3:4]
-                matrix = numpy.ndarray.flatten(matrix)
-                matrix = total * matrix
-                wma = (matrix.sum()) / (total.sum()) # WMA
-                weighted = numpy.append(weighted, wma) 
-            except ValueError:
-                pass
-    return weighted
 
 #https://www.alpharithms.com/calculating-moving-averages-in-python-585117/
 def sma(Data, period):
@@ -56,14 +41,19 @@ def lowest(Data, period):
 print('reading inputs...')
 period = 14
 mode = "Fast"
-ma_type = "WMA"
+ma_type = "SMA"
 
 length = math.ceil(period/4)
 
-BarHigh = ma(ma_type,high, length)
-BarLow = ma(ma_type,low,  length)
-BarOpen = ma(ma_type,open, length)
-BarClose = ma(ma_type,close,length)
+df["BarHigh"] = ma(ma_type, df['high'], length)
+
+print(df)
+
+
+BarHigh = ma(ma_type, high, length)
+BarLow = ma(ma_type, low,  length)
+BarOpen = ma(ma_type, open, length)
+BarClose = ma(ma_type, close,length)
 Bar_Range = BarHigh - BarLow
 
 #https://kodify.net/tradingview/bar-data/highest-high-lowest-low/
