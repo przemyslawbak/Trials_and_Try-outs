@@ -59,28 +59,23 @@ df["Group_Low"] = lowest(df['low'], period)
 df["Group_Open"] = df['open'][period - 1]
 df["Group_Range"] = df["Group_High"] - df["Group_Low"]
 
-pd.set_option('display.max_rows', None)
-pd.set_option('display.max_columns', 500)
-pd.set_option('display.width', 1000)
-print(df)
-
 df.loc[df['Bar_Range'] == 0, 'Bar_Range'] = 1.0
 df.loc[df['Group_Range'] == 0, 'Group_Range'] = 1.0
 
 df["BarBull"] = (((df["BarClose"] - df["BarLow"]) + (df["BarHigh"] - df["BarOpen"]))/2)
-df["BarBear"]= (((df["BarHigh"] - df["BarClose"]) + (df["BarOpen"] - df["BarLow"]))/2) 
+df["BarBear"]= (((df["BarHigh"] - df["BarClose"]) + (df["BarOpen"] - df["BarLow"]))/2)
 
-df["GroupBull"] = (((df["BarClose"] - df["Group_Low"]) + (df["Group_High"] - df["Group_Open"])) / 2)
-df["GroupBear"] = (((df["Group_High"] - df["BarClose"]) + (df["Group_Open"] - df["Group_Low"])) / 2)
-
-calcBull = (df["BarBull"] + df["GroupBull"]) / 2
-calcBear = (df["BarBear"] + df["GroupBear"]) / 2
+calcBull = df["BarBull"]
+calcBear = df["BarBear"]
 
 df["Bull"] = sma(calcBull, period)
 df["Bear"] = sma(calcBear, period)
 df["diff"] = df["Bull"] - df["Bear"]
 df['time'] = pd.to_datetime(df['time']).dt.tz_localize(None)
 df.index = pd.DatetimeIndex(df['time'])
+
+pd.set_option('display.max_rows', None)
+print(df)
 
 #todo: data display
 
