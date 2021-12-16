@@ -9,6 +9,7 @@ import pandas as pd
 import seaborn as sns
 import tensorflow as tf
 import math
+from mplfinance.original_flavor import candlestick_ohlc #fixed
 
 print('loading data...')
 mpl.rcParams['figure.figsize'] = (8, 6)
@@ -61,34 +62,23 @@ pd.set_option('display.max_columns', 500)
 pd.set_option('display.width', 1000)
 print(df)
 
-if Bar_Range == 0.0:
-    Bar_Range = 1.0
-    
-if Group_Range == 0.0:
-    Group_Range = 1.0
+df.loc[df['Bar_Range'] == 0, 'Bar_Range'] = 1.0
+df.loc[df['Group_Range'] == 0, 'Group_Range'] = 1.0
 
-BarBull = (((BarClose - BarLow) + (BarHigh - BarOpen))/2)
-BarBear = (((BarHigh - BarClose) + (BarOpen - BarLow))/2) 
+df["BarBull"] = (((df["BarClose"] - df["BarLow"]) + (df["BarHigh"] - df["BarOpen"]))/2)
+df["BarBear"]= (((df["BarHigh"] - df["BarClose"]) + (df["BarOpen"] - df["BarLow"]))/2) 
 
-GroupBull = (((BarClose - Group_Low) + (Group_High - Group_Open)) / 2)
-GroupBear = (((Group_High - BarClose) + (Group_Open - Group_Low)) / 2)
+df["GroupBull"] = (((df["BarClose"] - df["Group_Low"]) + (df["Group_High"] - df["Group_Open"])) / 2)
+df["GroupBear"] = (((df["Group_High"] - df["BarClose"]) + (df["Group_Open"] - df["Group_Low"])) / 2)
 
-calcBull = (BarBull + GroupBull) / 2
-calcBear = (BarBear + GroupBear) / 2
+calcBull = (df["BarBull"] + df["GroupBull"]) / 2
+calcBear = (df["(BarBear"] + df["GroupBear"]) / 2
 
-Bull = sma(calcBull, period)
-Bear = sma(calcBear, period)
+df["Bull"] = sma(calcBull, period)
+df["Bear"] = sma(calcBear, period)
 diff = Bull - Bear
 
-color = ''
-if (Bull >= Bull[1] and Bull > Bear):
-    color = 'teal'
-if (Bull <  Bull[1] and Bull > Bear):
-    color = 'lime'
-if (Bear >= Bear[1] and Bear > Bull):
-    color = 'maroon'
-if (Bear <  Bear[1] and Bear > Bull):
-    color = 'red'
+#todo: data display
 
-#todo
-plot(diff,"Sentiment",_color,2,plot.style_columns)
+apdict = [mpf.make_addplot(df['Bull'], panel=1, color='green'), mpf.make_addplot(display['Bear'], panel=0, color='red')]
+mpf.plot(df, type='candle', addplot=apdict, main_panel=0, title="WIG20 15M")
