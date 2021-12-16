@@ -18,24 +18,25 @@ mpl.rcParams['axes.grid'] = False
 csv_path = 'GPW_DLY WIG20, 15.csv'
 df = pd.read_csv(csv_path)
 
-def ma(typ, src, len):
+def ma(typ, src, len): #todo: test other types
     result = 0
     #more to be chosen in the link
     if typ=="SMA":
         result = sma(src, len)
     return result
 
-#https://www.alpharithms.com/calculating-moving-averages-in-python-585117/
 def sma(Data, period):
     return Data.rolling(period).mean()
 
 def highest(Data, period):
-    list = Data.rolling(period).sort()
-    return list1[-1]
+    list = Data.rolling(period)
+    res = list.max()
+    return res
 
 def lowest(Data, period):
-    list = Data.rolling(period).sort()
-    return list1[0]
+    list = Data.rolling(period)
+    res = list.min()
+    return res
 
 #https://www.tradingview.com/script/RlRxtEuQ-Sentiment-Histogram/
 print('reading inputs...')
@@ -46,21 +47,19 @@ ma_type = "SMA"
 length = math.ceil(period/4)
 
 df["BarHigh"] = ma(ma_type, df['high'], length)
+df["BarLow"] = ma(ma_type, df['low'], length)
+df["BarClose"] = ma(ma_type, df['close'], length)
+df["Bar_Range"] = df["BarHigh"] - df["BarLow"]
 
+df["Group_High"] = highest(df['high'], period)
+df["Group_Low"] = lowest(df['low'], period)
+df["Group_Open"] = df['open'][period - 1]
+df["Group_Range"] = df["Group_High"] - df["Group_Low"]
+
+pd.set_option('display.max_rows', None)
+pd.set_option('display.max_columns', 500)
+pd.set_option('display.width', 1000)
 print(df)
-
-
-BarHigh = ma(ma_type, high, length)
-BarLow = ma(ma_type, low,  length)
-BarOpen = ma(ma_type, open, length)
-BarClose = ma(ma_type, close,length)
-Bar_Range = BarHigh - BarLow
-
-#https://kodify.net/tradingview/bar-data/highest-high-lowest-low/
-Group_High = highest(high, period)
-Group_Low = lowest(low, period)
-Group_Open = open[period - 1]
-Group_Range = Group_High - Group_Low
 
 if Bar_Range == 0.0:
     Bar_Range = 1.0
