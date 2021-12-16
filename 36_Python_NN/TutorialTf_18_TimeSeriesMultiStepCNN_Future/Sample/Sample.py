@@ -15,8 +15,9 @@ mpl.rcParams['axes.grid'] = False
 MAX_EPOCHS = 20
 CONV_WIDTH = 3
 LABEL_WIDTH = 24
-INPUT_WIDTH = LABEL_WIDTH + (CONV_WIDTH - 1)
+INPUT_WIDTH = 24 + (CONV_WIDTH - 1)
 OUT_STEPS = 24 #multi-step model
+SHIFT = 0
 
 #path to the data file
 csv_path = 'jena_climate_2009_2016.csv'
@@ -50,8 +51,9 @@ train_df = (train_df - train_mean) / train_std
 val_df = (val_df - train_mean) / train_std
 test_df = (test_df - train_mean) / train_std
 
-LABEL_WIDTH = len(test_df)
-OUT_STEPS = LABEL_WIDTH + 15
+INPUT_WIDTH = len(df) + (CONV_WIDTH - 1)
+LABEL_WIDTH = 10
+OUT_STEPS = 1
 
 #creates a window
 class WindowGenerator():
@@ -191,9 +193,9 @@ WindowGenerator.test = test
 WindowGenerator.example = example
 
 #for multi-step model
-multi_window = WindowGenerator(input_width=INPUT_WIDTH,
-                               label_width=OUT_STEPS,
-                               shift=OUT_STEPS)
+multi_window = WindowGenerator(input_width=INPUT_WIDTH-LABEL_WIDTH,
+                               label_width=LABEL_WIDTH,
+                               shift=LABEL_WIDTH)
 
 def compile_and_fit(model, window, patience=2):
   early_stopping = tf.keras.callbacks.EarlyStopping(monitor='val_loss',
