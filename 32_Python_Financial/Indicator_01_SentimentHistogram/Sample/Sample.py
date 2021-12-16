@@ -50,6 +50,7 @@ length = math.ceil(period/4)
 df["BarHigh"] = ma(ma_type, df['high'], length)
 df["BarLow"] = ma(ma_type, df['low'], length)
 df["BarClose"] = ma(ma_type, df['close'], length)
+df["BarOpen"] = ma(ma_type, df['open'], length)
 df["Bar_Range"] = df["BarHigh"] - df["BarLow"]
 
 df["Group_High"] = highest(df['high'], period)
@@ -72,7 +73,7 @@ df["GroupBull"] = (((df["BarClose"] - df["Group_Low"]) + (df["Group_High"] - df[
 df["GroupBear"] = (((df["Group_High"] - df["BarClose"]) + (df["Group_Open"] - df["Group_Low"])) / 2)
 
 calcBull = (df["BarBull"] + df["GroupBull"]) / 2
-calcBear = (df["(BarBear"] + df["GroupBear"]) / 2
+calcBear = (df["BarBear"] + df["GroupBear"]) / 2
 
 df["Bull"] = sma(calcBull, period)
 df["Bear"] = sma(calcBear, period)
