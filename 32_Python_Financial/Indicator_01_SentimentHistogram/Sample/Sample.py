@@ -79,8 +79,10 @@ calcBear = (df["BarBear"] + df["GroupBear"]) / 2
 df["Bull"] = sma(calcBull, period)
 df["Bear"] = sma(calcBear, period)
 df["diff"] = df["Bull"] - df["Bear"]
+df['time'] = pd.to_datetime(df['time']).dt.tz_localize(None)
+df.index = pd.DatetimeIndex(df['time'])
 
 #todo: data display
 
-apdict = mpf.make_addplot(df['diff'], panel=0, color='blue')
+apdict = mpf.make_addplot(df['diff'], panel=1, color='blue')
 mpf.plot(df, type='candle', addplot=apdict, main_panel=0, title="WIG20 15M")
