@@ -148,7 +148,7 @@ def make_dataset(self, data):
       sequence_length=self.total_window_size,
       sequence_stride=1,
       shuffle=True,
-      batch_size=32,)
+      batch_size=32)
 
   ds = ds.map(self.split_window)
 
@@ -185,105 +185,10 @@ WindowGenerator.val = val
 WindowGenerator.test = test
 WindowGenerator.example = example
 
-"""
-So, start with a model that just returns the current temperature as the prediction, predicting "No change". 
-This is a reasonable baseline since temperature changes slowly. 
-Of course, this baseline will work less well if you make a prediction further in the future.
-"""
-class Baseline(tf.keras.Model):
-  def __init__(self, label_index=None):
-    super().__init__()
-    self.label_index = label_index
-
-  def call(self, inputs):
-    if self.label_index is None:
-      return inputs
-    result = inputs[:, :, self.label_index]
-    return result[:, :, tf.newaxis]
-
-
-#baseline, 1 step window
-single_step_window = WindowGenerator(
-    input_width=1, label_width=1, shift=1)  
-
-#Generates windows 24 hours of consecutive inputs and labels at a time
-wide_window = WindowGenerator(
-    input_width=24, label_width=24, shift=1)
-
-#Here the model will take multiple time steps as input to produce a single output
-conv_window = WindowGenerator(
-    input_width=CONV_WIDTH,
-    label_width=1,
-    shift=1,
-    label_columns=['T (degC)'])
-
-#To make training or plotting work, you need the labels, and prediction to have the same length
-wide_conv_window = WindowGenerator(
-    input_width=INPUT_WIDTH,
-    label_width=LABEL_WIDTH,
-    shift=1,
-    label_columns=['T (degC)'])
-
 #for multi-step model
 multi_window = WindowGenerator(input_width=24,
                                label_width=OUT_STEPS,
                                shift=OUT_STEPS)
-
-#performance evaluation
-val_performance = {}
-performance = {}
-
-#baseline model
-baseline = Baseline()
-baseline.compile(loss=tf.losses.MeanSquaredError(),
-                 metrics=[tf.metrics.MeanAbsoluteError()])
-
-#linear model
-"""
-A tf.keras.layers.Dense layer with no activation set is a linear model. 
-The layer only transforms the last axis of the data from (batch, time, inputs) to (batch, time, units); 
-it is applied independently to every item across the batch and time axes.
-"""
-linear = tf.keras.Sequential([
-    tf.keras.layers.Dense(units=1)
-])
-
-#dense model
-dense = tf.keras.Sequential([
-    tf.keras.layers.Dense(units=64, activation='relu'),
-    tf.keras.layers.Dense(units=64, activation='relu'),
-    tf.keras.layers.Dense(units=1)
-])
-
-#multi-step dense
-multi_step_dense = tf.keras.Sequential([
-    # Shape: (time, features) => (time*features)
-    tf.keras.layers.Flatten(),
-    tf.keras.layers.Dense(units=32, activation='relu'),
-    tf.keras.layers.Dense(units=32, activation='relu'),
-    tf.keras.layers.Dense(units=1),
-    # Add back the time dimension.
-    # Shape: (outputs) => (1, outputs)
-    tf.keras.layers.Reshape([1, -1]),
-])
-
-#Convolution neural network
-conv_model = tf.keras.Sequential([
-    tf.keras.layers.Conv1D(filters=32,
-                           kernel_size=(CONV_WIDTH,),
-                           activation='relu'),
-    tf.keras.layers.Dense(units=32, activation='relu'),
-    tf.keras.layers.Dense(units=1),
-])
-
-#LSTM
-lstm_model = tf.keras.models.Sequential([
-    # Shape [batch, time, features] => [batch, time, lstm_units]
-    tf.keras.layers.LSTM(32, return_sequences=True),
-    # Shape => [batch, time, features]
-    tf.keras.layers.Dense(units=1)
-])
-
 
 def compile_and_fit(model, window, patience=2):
   early_stopping = tf.keras.callbacks.EarlyStopping(monitor='val_loss',
@@ -296,36 +201,6 @@ def compile_and_fit(model, window, patience=2):
                       validation_data=window.val,
                       callbacks=[early_stopping])
   return history
-"""
-Train the model and evaluate its performance
-"""
-history_linear = compile_and_fit(linear, single_step_window)
-history_dense = compile_and_fit(dense, single_step_window)
-history_multidense = compile_and_fit(multi_step_dense, conv_window)
-history_conv = compile_and_fit(conv_model, conv_window)
-history_lstm = compile_and_fit(lstm_model, wide_window)
-
-
-val_performance['Dense'] = dense.evaluate(single_step_window.val)
-performance['Dense'] = dense.evaluate(single_step_window.test, verbose=0)
-
-
-val_performance['Linear'] = linear.evaluate(single_step_window.val)
-performance['Linear'] = linear.evaluate(single_step_window.test, verbose=0)
-
-  
-val_performance['Baseline'] = baseline.evaluate(single_step_window.val)
-performance['Baseline'] = baseline.evaluate(single_step_window.test, verbose=0)
-
-
-#single_step_window.plot(baseline)
-#wide_window.plot(baseline)
-#wide_window.plot(linear)
-#wide_window.plot(multi_step_dense)
-#wide_window.plot(dense)
-#wide_conv_window.plot(conv_model)
-#wide_window.plot(lstm_model)
-#multi_window.plot()
 
 #multi step CNN
 multi_conv_model = tf.keras.Sequential([
