@@ -9,6 +9,7 @@ import pandas as pd
 import seaborn as sns
 import tensorflow as tf
 import math
+import mplfinance as mpf
 from mplfinance.original_flavor import candlestick_ohlc #fixed
 
 print('loading data...')
@@ -77,9 +78,9 @@ calcBear = (df["BarBear"] + df["GroupBear"]) / 2
 
 df["Bull"] = sma(calcBull, period)
 df["Bear"] = sma(calcBear, period)
-diff = Bull - Bear
+df["diff"] = df["Bull"] - df["Bear"]
 
 #todo: data display
 
-apdict = [mpf.make_addplot(df['Bull'], panel=1, color='green'), mpf.make_addplot(display['Bear'], panel=0, color='red')]
+apdict = mpf.make_addplot(df['diff'], panel=0, color='blue')
 mpf.plot(df, type='candle', addplot=apdict, main_panel=0, title="WIG20 15M")
