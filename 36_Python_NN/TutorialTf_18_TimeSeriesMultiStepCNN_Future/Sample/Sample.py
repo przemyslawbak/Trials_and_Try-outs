@@ -17,6 +17,7 @@ CONV_WIDTH = 3
 LABEL_WIDTH = 24
 INPUT_WIDTH = 24 + (CONV_WIDTH - 1)
 OUT_STEPS = 24 #multi-step model
+SHIFT_STEPS = 24;
 FUTURE_PREDICTIONS = 10
 
 #path to the data file
@@ -187,9 +188,9 @@ WindowGenerator.test = test
 WindowGenerator.example = example
 
 #for multi-step model
-multi_window = WindowGenerator(input_width=24,
-                               label_width=OUT_STEPS,
-                               shift=OUT_STEPS)
+multi_window = WindowGenerator(input_width=INPUT_WIDTH,
+                               label_width=LABEL_WIDTH,
+                               shift=SHIFT_STEPS)
 
 def compile_and_fit(model, window, patience=2):
   early_stopping = tf.keras.callbacks.EarlyStopping(monitor='val_loss',
@@ -217,15 +218,6 @@ multi_conv_model = tf.keras.Sequential([
 ])
 
 history = compile_and_fit(multi_conv_model, multi_window)
-
-sample_arr = np.array(test_df, dtype=np.float32)
-
-futureElements = []
-singleElement = sample_arr[len(sample_arr) - 1]
-for x in range(FUTURE_PREDICTIONS):
-    singleElement = multi_conv_model.predict(singleElement)
-    print(singleElement)
-    futureElements.append(singleElement)
 
 multi_window.plot(multi_conv_model)
 
