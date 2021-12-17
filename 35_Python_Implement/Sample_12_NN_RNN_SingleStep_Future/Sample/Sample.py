@@ -12,52 +12,40 @@ import tensorflow as tf
 mpl.rcParams['figure.figsize'] = (8, 6)
 mpl.rcParams['axes.grid'] = False
 
-MAX_EPOCHS = 20
+MAX_EPOCHS = 5 #more ok
 CONV_WIDTH = 3
-LABEL_WIDTH = 24
-INPUT_WIDTH = 24 + (CONV_WIDTH - 1)
-OUT_STEPS = 24 #multi-step model
-SHIFT_STEPS = 24;
-FUTURE_PREDICTIONS = 10
+LABEL_WIDTH = 890 #LABEL_WIDTH + shift * 2 <- max 1787 total
+INPUT_WIDTH = 890
+SHIFT = 890
 
 #path to the data file
-csv_path = 'jena_climate_2009_2016.csv'
-#reading data file
+csv_path = 'GPW_DLY WIG20, 15.csv'
 df = pd.read_csv(csv_path)
 
-# Slice [start:stop:step], starting from index 5 take every 6th record.
-#df = df[5::6]
+print(df)
 
 #set date variable
-date_time = pd.to_datetime(df.pop('Date Time'), format='%d.%m.%Y %H:%M:%S')
+date_time = pd.to_datetime(df.pop('time'), format='%Y-%m-%d %H:%M:%S')
 
-#???
 column_indices = {name: i for i, name in enumerate(df.columns)}
 
-#legth of the dataframe
 n = len(df)
-
-#split dataframe
 train_df = df[0:int(n*0.7)]
 val_df = df[int(n*0.7):int(n*0.9)]
 test_df = df[int(n*0.9):]
 
-print('df len: ' + str(len(df))) #99
-print('train_df len: ' + str(len(train_df))) #69
-print('val_df len: ' + str(len(val_df))) #20
-print('test_df len: ' + str(len(test_df))) #10
+print('df len: ' + str(len(df))) #2554
+print('train_df len: ' + str(len(train_df))) #1787
+print('val_df len: ' + str(len(val_df))) #511
+print('test_df len: ' + str(len(test_df))) #256
 
-#???
-num_features = df.shape[1]
-
-#set some variables
+#set of df variables
 train_mean = train_df.mean()
 train_std = train_df.std()
-train_df = (train_df - train_mean) / train_std
-val_df = (val_df - train_mean) / train_std
-test_df = (test_df - train_mean) / train_std
+train_df = ((train_df - train_mean) / train_std).fillna(0)
+val_df = ((val_df - train_mean) / train_std).fillna(0)
+test_df = ((test_df - train_mean) / train_std).fillna(0)
 
-#creates a window
 class WindowGenerator():
   def __init__(self, input_width, label_width, shift,
                train_df=train_df, val_df=val_df, test_df=test_df,
@@ -96,7 +84,6 @@ class WindowGenerator():
         f'Label indices: {self.label_indices}',
         f'Label column name(s): {self.label_columns}'])
 
-#main
 def split_window(self, features):
   inputs = features[:, self.input_slice, :]
   labels = features[:, self.labels_slice, :]
@@ -113,16 +100,16 @@ def split_window(self, features):
 
 WindowGenerator.split_window = split_window
 
-def plot(self, model=None, plot_col='T (degC)', max_subplots=3):
+def plot(self, model=None, plot_col='close', max_subplots=1):
   inputs, labels = self.example
+  print(self.example)
   plt.figure(figsize=(12, 8))
   plot_col_index = self.column_indices[plot_col]
   max_n = min(max_subplots, len(inputs))
   for n in range(max_n):
     plt.subplot(max_n, 1, n+1)
     plt.ylabel(f'{plot_col} [normed]')
-    plt.plot(self.input_indices, inputs[n, :, plot_col_index],
-             label='Inputs', marker='.', zorder=-10)
+    plt.plot(self.input_indices, inputs[n, :, plot_col_index], label='Inputs', marker='.', zorder=-10)
 
     if self.label_columns:
       label_col_index = self.label_columns_indices.get(plot_col, None)
@@ -143,27 +130,26 @@ def plot(self, model=None, plot_col='T (degC)', max_subplots=3):
     if n == 0:
       plt.legend()
 
-  plt.xlabel('Time [h]')
+  plt.xlabel('Time')
 
 WindowGenerator.plot = plot
 
 def make_dataset(self, data):
-    data = np.array(data, dtype=np.float32)
-    ds = tf.keras.preprocessing.timeseries_dataset_from_array(
+  data = np.array(data, dtype=np.float32)
+  ds = tf.keras.preprocessing.timeseries_dataset_from_array(
       data=data,
       targets=None,
       sequence_length=self.total_window_size,
       sequence_stride=1,
-      shuffle=True,
-      batch_size=32)
+      shuffle=False,
+      batch_size=32,)
 
-    ds = ds.map(self.split_window)
+  ds = ds.map(self.split_window)
 
-    return ds
+  return ds
 
 WindowGenerator.make_dataset = make_dataset
 
-#Add properties for accessing them as tf.data.Datasets using the make_dataset method you defined earlier. Also, add a standard example batch for easy access and plotting
 @property
 def train(self):
   return self.make_dataset(self.train_df)
@@ -192,10 +178,19 @@ WindowGenerator.val = val
 WindowGenerator.test = test
 WindowGenerator.example = example
 
-#for multi-step model
-multi_window = WindowGenerator(input_width=69, #using entire train data set
-                               label_width=10, #seeking for 10 results from the future
-                               shift=1) #shifting 1 result fwd
+#-----------------------------------------
+
+wide_window = WindowGenerator(
+    input_width=INPUT_WIDTH, label_width=LABEL_WIDTH, shift=SHIFT,
+    label_columns=['close'])
+
+#LSTM
+lstm_model = tf.keras.models.Sequential([
+  tf.keras.layers.LSTM(60, return_sequences=True),
+  tf.keras.layers.LSTM(60, return_sequences=True),
+  tf.keras.layers.Dense(30, activation="relu"),
+  tf.keras.layers.Dense(1)
+])
 
 def compile_and_fit(model, window, patience=2):
   early_stopping = tf.keras.callbacks.EarlyStopping(monitor='val_loss',
@@ -209,21 +204,8 @@ def compile_and_fit(model, window, patience=2):
                       callbacks=[early_stopping])
   return history
 
-#multi step CNN
-multi_conv_model = tf.keras.Sequential([
-    # Shape [batch, time, features] => [batch, CONV_WIDTH, features]
-    tf.keras.layers.Lambda(lambda x: x[:, -CONV_WIDTH:, :]),
-    # Shape => [batch, 1, conv_units]
-    tf.keras.layers.Conv1D(256, activation='relu', kernel_size=(CONV_WIDTH)),
-    # Shape => [batch, 1,  out_steps*features]
-    tf.keras.layers.Dense(OUT_STEPS*num_features,
-                          kernel_initializer=tf.initializers.zeros()),
-    # Shape => [batch, out_steps, features]
-    tf.keras.layers.Reshape([OUT_STEPS, num_features])
-])
+history_lstm = compile_and_fit(lstm_model, wide_window)
 
-history = compile_and_fit(multi_conv_model, multi_window)
-
-multi_window.plot(multi_conv_model)
+wide_window.plot(lstm_model)
 
 plt.show()
