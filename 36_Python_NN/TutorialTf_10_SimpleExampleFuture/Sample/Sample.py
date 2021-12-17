@@ -42,8 +42,8 @@ def univariate_data(dataset, start_index, end_index, history_size, target_size):
     labels.append(dataset[i+target_size])
   return np.array(data), np.array(labels)
 
-univariate_past_history = 20
-univariate_future_target = 1
+univariate_past_history = 40
+univariate_future_target = 3
 TRAIN_SPLIT = 25
 
 x_train_uni, y_train_uni = univariate_data(items, 0, TRAIN_SPLIT,
@@ -52,12 +52,10 @@ x_train_uni, y_train_uni = univariate_data(items, 0, TRAIN_SPLIT,
 x_val_uni, y_val_uni = univariate_data(items, TRAIN_SPLIT, None,
                                        univariate_past_history,
                                        univariate_future_target)
-
+split_time = 30
 #preparing dataset
 x_train = items[:split_time]
-y_train = times[:split_time]
 x_valid = items[split_time:]
-y_valid = times[split_time:]
 
 def windowed_dataset(series, window_size, batch_size, shuffle_buffer):
     series = tf.expand_dims(series, axis=-1)
