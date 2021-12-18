@@ -14,6 +14,8 @@
 *.gz
 *.h5
 *.csv
+*.jpg
+*.bmp
 *.user
 *.userosscache
 *.sln.docstates
