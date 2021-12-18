@@ -19,3 +19,30 @@ def show_batch(image_batch, label_batch):
         plt.imshow(image_batch[n])
         plt.title(label_batch[n].title())
         plt.axis('off')
+        plt.show()
+
+image_batch, label_batch = next(training_set)
+show_batch(image_batch, label_batch)
+
+#Image augmentation
+datagenerator = ImageDataGenerator(rescale = 1./255,\
+    shear_range = 0.2,\
+    rotation_range= 180,\
+    zoom_range = 0.2,\
+    horizontal_flip = True)
+
+#exercise
+train_datagen = ImageDataGenerator(rescale = 1./255,\
+    shear_range = 0.2,\
+    rotation_range= 180,\
+    zoom_range = 0.2,\
+    horizontal_flip = True)
+
+training_set = train_datagen.flow_from_directory\
+    ('image_data',\
+    target_size = (64, 64),\
+    batch_size = 25,\
+    class_mode = 'binary')
+
+image_batch, label_batch = next(training_set)
+show_batch(image_batch, label_batch)
