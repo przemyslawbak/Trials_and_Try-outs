@@ -28,5 +28,16 @@ batch_size=32):
     return ds
 
 ds = prep_ds(df, batch_size=5)
+#for x in ds.take(1):\
+#    print(x)    
+
+#loading pretrained model
+print('embedding...')
+embedding = "https://tfhub.dev/google/tf2-preview/gnews-swivel-20dim/1"
+print('processing...')
+hub_layer = hub.KerasLayer(embedding, input_shape=[], \
+dtype=tf.string, \
+trainable=True)
+
 for x in ds.take(1):\
-    print(x)    
+    print(hub_layer(tf.reshape(x['review'],[-1])))      

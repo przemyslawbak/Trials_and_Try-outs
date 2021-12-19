@@ -26,7 +26,6 @@
   <ItemGroup>
     <Content Include="drugsComTest_raw.tsv" />
     <Content Include="drugsComTrain_raw.tsv" />
-    <Content Include="tf2-preview_gnews-swivel-20dim_1.tar.gz" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
   <!-- Uncomment the CoreCompile target to enable the Build command in
