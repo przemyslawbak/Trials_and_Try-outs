@@ -11,6 +11,7 @@
 *.suo
 *.zip
 *.bin
+*.wav
 *.gz
 *.h5
 *.csv
