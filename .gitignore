@@ -15,6 +15,7 @@
 *.h5
 *.csv
 *.jpg
+*.tsv
 *.bmp
 *.user
 *.userosscache
