@@ -29,9 +29,7 @@ model.add(tf.keras.layers.Dense(2, name='Output_layer'))
 
 model.compile(tf.optimizers.RMSprop(0.001), loss='mse')
 
-#NOT saving logs this time
-#tensorboard_callback = tf.keras.callbacks\
-#.TensorBoard(log_dir="./logs")
+tensorboard_callback = tf.keras.callbacks.TensorBoard(log_dir="./logs")
 
 model.fit(x=features.to_numpy(), y=target.to_numpy(),\
 epochs=50, callbacks=[tensorboard_callback] , \
