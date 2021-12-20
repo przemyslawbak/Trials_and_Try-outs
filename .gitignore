@@ -7,7 +7,7 @@
 *.AndroidManifest.xml
 
 # User-specific folders
-*/logs/train/*
+**/logs/train/
 
 # User-specific files
 *.rsuser
