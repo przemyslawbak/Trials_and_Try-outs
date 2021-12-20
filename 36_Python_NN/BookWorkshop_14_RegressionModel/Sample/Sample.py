@@ -24,3 +24,17 @@ model = tf.keras.Sequential()
 #Add layers
 model.add(tf.keras.layers.InputLayer(input_shape=(features.shape[1],), name='Input_layer'))
 model.add(tf.keras.layers.Dense(2, name='Output_layer'))
+
+#Compile the model with an RMSprop optimizer and a mean squared error loss
+model.compile(tf.optimizers.RMSprop(0.001), loss='mse')
+
+#Add a callback for TensorBoard
+tensorboard_callback = tf.keras.callbacks.TensorBoard(log_dir="./logs")
+
+#Fit the model to the training data
+model.fit(x=features.to_numpy(), y=target.to_numpy(), epochs=50, callbacks=[tensorboard_callback])
+
+#Evaluate the model on the training data
+loss = model.evaluate(features.to_numpy(), target.to_numpy())
+print('loss:', loss)
+
