@@ -23,6 +23,8 @@ model = tf.keras.Sequential()
 
 #Add layers
 model.add(tf.keras.layers.InputLayer(input_shape=(features.shape[1],), name='Input_layer'))
+
+#single hidden layer
 model.add(tf.keras.layers.Dense(2, name='Output_layer'))
 
 #Compile the model with an RMSprop optimizer and a mean squared error loss
