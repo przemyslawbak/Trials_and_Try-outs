@@ -27,6 +27,8 @@ model.add(tf.keras.layers.Dense(8, name='Dense_layer_2'))
 model.add(tf.keras.layers.Dense(4, name='Dense_layer_3'))
 model.add(tf.keras.layers.Dense(2, name='Output_layer'))
 
+#For linear regression, the most frequently used loss functions are mean squared
+#error and mean absolute error
 model.compile(tf.optimizers.RMSprop(0.001), loss='mse')
 
 tensorboard_callback = tf.keras.callbacks.TensorBoard(log_dir="./logs")

@@ -19,6 +19,8 @@ name='Input_layer'))
 model.add(tf.keras.layers.Dense(32, name='Hidden_layer_1'))
 model.add(tf.keras.layers.Dense(16, name='Hidden_layer_2'))
 model.add(tf.keras.layers.Dense(8, name='Hidden_layer_3'))
+#applying the sigmoid function on the output of a linear regression model turns
+#it into logistic regression
 model.add(tf.keras.layers.Dense(1, name='Output_layer', \
 activation='sigmoid'))
 

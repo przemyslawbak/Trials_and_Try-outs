@@ -28,6 +28,8 @@ model.add(tf.keras.layers.InputLayer(input_shape=(features.shape[1],), name='Inp
 model.add(tf.keras.layers.Dense(2, name='Output_layer'))
 
 #Compile the model with an RMSprop optimizer and a mean squared error loss
+#For linear regression, the most frequently used loss functions are mean squared
+#error and mean absolute error
 model.compile(tf.optimizers.RMSprop(0.001), loss='mse')
 
 #Add a callback for TensorBoard

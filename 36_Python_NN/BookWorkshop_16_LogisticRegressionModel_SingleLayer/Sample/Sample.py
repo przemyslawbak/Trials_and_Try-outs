@@ -10,6 +10,8 @@ features = df.drop('positive', axis=1)
 model = tf.keras.Sequential()
 model.add(tf.keras.layers.InputLayer(input_shape=(features.shape[1],), name='Input_layer'))
 
+#applying the sigmoid function on the output of a linear regression model turns
+#it into logistic regression
 model.add(tf.keras.layers.Dense(1, name='Output_layer', activation='sigmoid'))
 
 model.compile(tf.optimizers.RMSprop(0.0001), loss='binary_crossentropy', metrics=['accuracy'])
