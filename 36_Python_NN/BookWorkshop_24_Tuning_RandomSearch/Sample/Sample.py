@@ -47,6 +47,8 @@ def model_builder(hp):
 
 #Instantiate a RandomSearch tuner and assign val_accuracy to objective
 #and 10 to max_trials
+#Hyperband is another tuner available in the Keras Tuner package. Like random
+#search, it randomly picks candidates from the search space, but more efficiently.
 tuner = kt.RandomSearch(model_builder, objective='val_accuracy', \
 max_trials=10)
 
