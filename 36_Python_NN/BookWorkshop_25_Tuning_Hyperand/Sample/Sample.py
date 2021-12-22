@@ -45,6 +45,7 @@ def model_builder(hp):
     metrics = ['accuracy'])
     return model
 
+#Bayesian optimization is another very popular algorithm used for automatic hyperparameter tuning
 tuner = kt.Hyperband(model_builder, objective='val_accuracy', \
 max_epochs=5)
 tuner.search(X_train, y_train, validation_data=(X_test, y_test))
