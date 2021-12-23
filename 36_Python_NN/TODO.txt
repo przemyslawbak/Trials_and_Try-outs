@@ -4,5 +4,6 @@ OK - one window display
 OK - verify Dense/LSTM OUT_STEPS in TutorialTf_16_TimeSeriesMultiStepRNN
 OK - auto model evaluation for multiple models
 OK - optimization
+- train RNN on more than 1 data sets
 - future RNN prediction
 - post from 4p - requirements
