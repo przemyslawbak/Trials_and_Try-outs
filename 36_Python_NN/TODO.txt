@@ -2,6 +2,7 @@ OK - weights
 OK - remove randomness
 OK - one window display
 OK - verify Dense/LSTM OUT_STEPS in TutorialTf_16_TimeSeriesMultiStepRNN
-- auto model evaluation for multiple models
-- optimization
+OK - auto model evaluation for multiple models
+OK - optimization
+- future RNN prediction
 - post from 4p - requirements
