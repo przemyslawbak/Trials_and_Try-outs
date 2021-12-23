@@ -4,6 +4,7 @@ import datetime
 from sklearn.preprocessing import MinMaxScaler
 from tensorflow.keras import Sequential
 from tensorflow.keras.layers import Dense, LSTM, Dropout
+import matplotlib.pyplot as plt
 
 data = pd.read_csv("household_power_consumption.csv")
 
