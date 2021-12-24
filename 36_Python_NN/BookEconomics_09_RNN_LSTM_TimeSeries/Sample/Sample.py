@@ -29,14 +29,11 @@ length = 4, batch_size = 12)
 # Define sequential model.
 model = tf.keras.models.Sequential()
 
-# Define recurrent layer.
-model.add(tf.keras.layers.LSTM(2, input_shape=(4, 1)))
+# Define recurrent layer to return hidden states.
+model.add(tf.keras.layers.LSTM(3, return_sequences=True, input_shape=(4, 1)))
+
+# Define second recurrent layer.
+model.add(tf.keras.layers.LSTM(2))
 
 # Define output layer.
 model.add(tf.keras.layers.Dense(1, activation="linear"))
-
-# Compile the model.
-model.compile(loss="mse", optimizer="adam")
-
-# Train the model.
-model.fit_generator(train_generator, epochs=100)
