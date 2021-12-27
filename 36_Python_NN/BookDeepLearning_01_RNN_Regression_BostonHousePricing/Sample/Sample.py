@@ -16,6 +16,7 @@ test_data /= std
 #Building your model
 def build_model():
     model = tf.keras.Sequential([
+    #for time series and RNN should be LSTM in use
     tf.keras.layers.Dense(64, activation="relu"),
     tf.keras.layers.Dense(64, activation="relu"),
     tf.keras.layers.Dense(1)
