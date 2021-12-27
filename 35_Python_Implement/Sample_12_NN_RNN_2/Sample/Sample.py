@@ -46,9 +46,17 @@ activation = 'relu'))
 model.add(Dropout(0.5))
 model.add(Dense(units = 1))
 
+#TODO: futures from Sample_06_AutoArima
+
 model.compile(optimizer='adam', loss = 'mean_squared_error')
 model.fit(X_train, y_train, epochs=5, batch_size=32)
 y_pred = model.predict(X_test)
+
+#reverse scale resuts
+res_scaler = MinMaxScaler()
+res_scaler.min_, res_scaler.scale_ = scaler.min_[0], scaler.scale_[0]
+y_pred = res_scaler.inverse_transform(y_pred)
+y_test = res_scaler.inverse_transform(y_test.reshape(-1,1))
 
 plt.plot(y_test[-test:], color = 'black')
 plt.plot(y_pred[-test:], color = 'blue')
