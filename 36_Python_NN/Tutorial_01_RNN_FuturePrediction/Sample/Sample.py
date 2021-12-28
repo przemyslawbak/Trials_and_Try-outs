@@ -28,8 +28,8 @@ date_test = df['time'][split:]
 
 look_back = 15
 
-train_generator = TimeseriesGenerator(close_train, close_train, length=look_back, batch_size=32)     
-test_generator = TimeseriesGenerator(close_test, close_test, length=look_back, batch_size=1)
+train_generator = TimeseriesGenerator(close_train, close_train, length=look_back, batch_size=32) #targets missing 
+test_generator = TimeseriesGenerator(close_test, close_test, length=look_back, batch_size=1) #targets missing
 
 model = Sequential()
 model.add(LSTM(units= 80, activation = 'relu', input_shape=(look_back,1)))
