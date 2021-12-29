@@ -7,49 +7,60 @@ from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense
 from tensorflow.keras.layers import LSTM
 
+#variables
+LABEL_WIDTH = 100
+NUM_BATCH = 32
+MAX_EPOCHS = 20 #more ok
+
+#downloading data
 filename = "GPW_DLY WIG20, 15.csv"
 df = pd.read_csv(filename)
 df = df.drop(['time'], axis = 1)
 df.fillna(0)
 
-scaler=MinMaxScaler(feature_range=(0,1))
-df_scaled=scaler.fit_transform(np.array(df).reshape(-1,1))
+#splitting dataset into train and test split
+n = len(df)
+train_df = df[0:int(n*0.7)]
+target_df = train_df['close'].shift(-1).fillna(0)
+val_df = df[int(n*0.7):int(n*0.9)]
+test_df = df[int(n*0.9):]
 
-##splitting dataset into train and test split
-training_size=int(len(df_scaled)*0.65)
-test_size=len(df_scaled)-training_size
-train_data,test_data=df_scaled[0:training_size,:],df_scaled[training_size:len(df_scaled),:1]
+#creating data set
+def make_dataset(data):
+  data = np.array(data, dtype=np.float32)
+  ds = tf.keras.preprocessing.timeseries_dataset_from_array(
+      data=data,
+      targets=None,
+      sequence_stride=1,
+      sequence_length=LABEL_WIDTH,
+      shuffle=False,
+      batch_size=NUM_BATCH)
 
-def create_dataset(dataset, time_step=1):
-	dataX, dataY = [], []
-	for i in range(len(dataset)-time_step-1):
-		dataX.append(dataset[i:(i+time_step), 0])
-		dataY.append(dataset[i + time_step, 0])
-	return np.array(dataX), np.array(dataY)
+  return ds
 
-# reshape into X=t,t+1,t+2,t+3 and Y=t+4
-time_step = 100
-X_train, y_train = create_dataset(train_data, time_step)
-X_test, ytest = create_dataset(test_data, time_step)
-
-print('x train')
-print(X_train)
-print('y train')
-print(y_train)
-
-# reshape input to be [samples, time steps, features] which is required for LSTM
-X_train =X_train.reshape(X_train.shape[0],X_train.shape[1] , 1)
-X_test = X_test.reshape(X_test.shape[0],X_test.shape[1] , 1)
+train_data = make_dataset(train_df)
+target_data = make_dataset(target_df)
+val_data = make_dataset(val_df)
+test_data = make_dataset(test_df)
 
 # Create the Stacked LSTM model
 model=Sequential()
-model.add(LSTM(50,return_sequences=True,input_shape=(time_step,1)))
+model.add(LSTM(50,return_sequences=True))
 model.add(LSTM(50,return_sequences=True))
 model.add(LSTM(50))
 model.add(Dense(1))
 model.compile(loss='mean_squared_error',optimizer='adam')
 
-model.fit(X_train,y_train,validation_data=(X_test,ytest),epochs=10,batch_size=64,verbose=1)
+#compile and fit model
+def compile_and_fit(model, data, targets, validation, patience=2):
+  early_stopping = tf.keras.callbacks.EarlyStopping(monitor='val_loss',
+                                                    patience=patience,
+                                                    mode='min')
+  model.compile(loss=tf.losses.MeanSquaredError(), optimizer=tf.optimizers.Adam(), metrics=[tf.metrics.MeanAbsoluteError()])
+  history = model.fit(data, targets, epochs=MAX_EPOCHS, validation_data=validation, callbacks=[early_stopping])
+  return history
+
+history_lstm = compile_and_fit(model, train_data, target_data, val_data, 2)
 
 # Lets Do the prediction and check performance metrics
 train_predict=model.predict(X_train)
