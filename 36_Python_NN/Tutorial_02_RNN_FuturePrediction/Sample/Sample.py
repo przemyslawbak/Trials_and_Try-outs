@@ -41,7 +41,7 @@ X_test = X_test.reshape(X_test.shape[0],X_test.shape[1] , 1)
 
 # Create the Stacked LSTM model
 model=Sequential()
-model.add(LSTM(50,return_sequences=True,input_shape=(100,1)))
+model.add(LSTM(50,return_sequences=True,input_shape=(time_step,1)))
 model.add(LSTM(50,return_sequences=True))
 model.add(LSTM(50))
 model.add(Dense(1))
@@ -66,7 +66,7 @@ lst_output=[]
 n_steps=100
 i=0
 while(i<30):
-    if(len(temp_input)>100):
+    if(len(temp_input)>n_steps):
         x_input=np.array(temp_input[1:])
         x_input=x_input.reshape(1,-1)
         x_input = x_input.reshape((1, n_steps, 1))
