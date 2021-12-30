@@ -20,12 +20,14 @@ namespace EmailCrawler_01_Trial
             List<string> konta = new List<string>(File.ReadAllLines("1.txt"));
             foreach (string konto in konta)
             {
+                Console.WriteLine();
+                Console.WriteLine("Opening now: " + konto);
                 try
                 {
                     using (Pop3Client client = new Pop3Client())
                     {
-                        client.Connect("pop.email-you.com", 110, MailKit.Security.SecureSocketOptions.None);
-                        client.Authenticate(konto, "xxx");
+                        client.Connect("pop.private-sender.com", 110, MailKit.Security.SecureSocketOptions.None);
+                        client.Authenticate(konto, "!1Password!1");
                         var count = client.GetMessageCount();
                         for (int i = 0; i < client.Count; i++)
                         {
@@ -55,18 +57,21 @@ namespace EmailCrawler_01_Trial
                         }
 
                         client.Disconnect(true);
-                        Console.WriteLine("opening next...");
+                        Console.WriteLine("Opening next...");
                     }
                 }
                 catch(Exception ex)
                 {
-                    Console.WriteLine(ex.Message);
+                    Console.WriteLine(ex.Message + " in: " + konto);
+                    Console.WriteLine("Press any key...");
+					Console.ReadKey();
                 }
             }
 
-            File.AppendAllLines("savedlist.txt", adresy);
-            Console.WriteLine("koniec");
-
+            File.AppendAllLines("Savedlist.txt", adresy);
+            Console.WriteLine("Koniec");
+            Console.WriteLine("Press any key...");
+			Console.ReadKey();
 
         }
     }
