@@ -13,13 +13,13 @@ dataset_train = pd.read_csv(filename)
 training_set = dataset_train[['close', 'high', 'low', 'open', 'volume']]
 
 #Perform feature scaling to transform the data
-sc = MinMaxScaler(feature_range = (0, 1))
-training_set_scaled = sc.fit_transform(training_set)
+scaler = MinMaxScaler(feature_range = (0, 1))
+training_set_scaled = scaler.fit_transform(training_set)
 
 #Variables
 time_step = 60
 split_percent = 0.80
-split = int(split_percent*len(df))
+split = int(split_percent*len(training_set_scaled))
 
 #Create a data structure with 60-time steps and 1 output
 X = []
@@ -65,8 +65,23 @@ model.compile(optimizer='adam', loss = 'mean_squared_error')
 #Fit to the training set
 model.fit(X_train_splitted, y_train_splitted, epochs=10, batch_size=32)
 
+#Test results
+y_pred = model.predict(X_test_splitted)
+
+#Reverse scale resuts
+res_scaler = MinMaxScaler()
+res_scaler.min_, res_scaler.scale_ = scaler.min_[0], scaler.scale_[0]
+y_pred = res_scaler.inverse_transform(y_pred.reshape(-1,1))
+y_test_splitted = res_scaler.inverse_transform(y_test_splitted.reshape(-1,1))
+
 #plot
-plt.plot(day_new,sc.inverse_transform(df1[1158:]))
-plt.plot(day_pred,sc.inverse_transform(lst_output))
+plt.figure(figsize=(14,5))
+plt.plot(y_test_splitted[-60:], label = "Real values")
+plt.plot(y_pred[-60:], label = 'Predicted values')
+plt.title('AAPL prediction test')
+plt.xlabel('time')
+plt.ylabel('Close price')
+plt.legend()
+plt.show()
 
 #todo: future prediction
