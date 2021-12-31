@@ -6,6 +6,7 @@ OK - auto model evaluation for multiple models
 OK - optimization
 OK - https://towardsdatascience.com/time-series-forecasting-with-recurrent-neural-networks-74674e289816
 OK - https://github.com/krishnaik06/Stock-MArket-Forecasting/blob/master/Untitled.ipynb
+OK - https://www.simplilearn.com/tutorials/deep-learning-tutorial/rnn
 - train RNN on more than 1 data sets
 - future RNN prediction
 - post from 4p - requirements
