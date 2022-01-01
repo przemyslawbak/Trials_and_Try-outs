@@ -23,8 +23,8 @@ split = int(split_percent*len(training_set_scaled))
 #Create a data structure with n-time steps
 X = []
 y = []
-for i in range(time_step, len(training_set_scaled)):
-    X.append(training_set_scaled[i-time_step:i, 0:len(training_set.columns)]) #take all columns into the set
+for i in range(time_step + 1, len(training_set_scaled)):
+    X.append(training_set_scaled[i-time_step-1:i-1, 0:len(training_set.columns)]) #take all columns into the set
     y.append(training_set_scaled[i, 0:len(training_set.columns)]) #take all columns into the set
 
 X_train_arr, y_train_arr = np.array(X), np.array(y)
@@ -32,8 +32,8 @@ print(X_train_arr.shape) #(2494, 60, 5)
 print(y_train_arr.shape) #(2494, 5)
 
 #Reshaping to rows/time_step/columns
-X_train_arr = np.reshape(X_train_arr, (X_train_arr.shape[0], X_train_arr.shape[1], X_train_arr.shape[2])) #rows/time_step/columns
-#y_train_arr = np.reshape(y_train_arr, (y_train_arr.shape[0], y_train_arr.shape[2])) #rows/columns
+#X_train_arr = np.reshape(X_train_arr, (X_train_arr.shape[0], X_train_arr.shape[1], X_train_arr.shape[2])) #rows/time_step/columns
+#y_train_arr = np.reshape(y_train_arr, (y_train_arr.shape[0], y_train_arr.shape[1])) #rows/columns
 
 print(X_train_arr.shape) #(2494, 60, 5)
 print(y_train_arr.shape) #(2494, 5)
@@ -79,8 +79,8 @@ y_test_splitted = res_scaler.inverse_transform(y_test_splitted.reshape(-1,1)) #t
 
 #plot
 plt.figure(figsize=(14,5))
-plt.plot(y_test_splitted[-time_step:], label = "Real values")
-plt.plot(y_pred[-time_step:], label = 'Predicted values')
+plt.plot(y_test_splitted[-time_step:], label = "Real values") #time_step +/- 1
+plt.plot(y_pred[-time_step:], label = 'Predicted values') #time_step +/- 1
 plt.title('WIG20 prediction test')
 plt.xlabel('time')
 plt.ylabel('Close price')
