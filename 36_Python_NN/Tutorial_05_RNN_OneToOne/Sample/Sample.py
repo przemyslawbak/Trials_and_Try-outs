@@ -39,7 +39,7 @@ model.compile(optimizer='adam', loss='mse')
 print(model.summary())
 
 #Training model
-model.fit(X_train_arr, y_train_arr, epochs=1000, batch_size=5)
+model.fit(X_train_arr, y_train_arr, epochs=1000, validation_split=0.2, batch_size=5)
 
 #Predicting
 test_input = np.array([30])
