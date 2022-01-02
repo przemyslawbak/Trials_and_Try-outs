@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 from sklearn.preprocessing import MinMaxScaler
 from tensorflow.keras import Sequential
-from tensorflow.keras.layers import Dense, LSTM, Dropout, TimeDistributed, Activation
+from tensorflow.keras.layers import Dense, LSTM, Dropout, TimeDistributed, Activation, RepeatVector, Bidirectional
 
 #Import the training dataset
 filename = "GPW_DLY WIG20, 15.csv"
@@ -52,14 +52,12 @@ print(y_test_splitted.shape) #(2494, 1, 5)
 #Initialize the RNN
 model = Sequential()
 
-#Add Stacked LSTM
-model.add(LSTM(units= 200, activation = 'relu', return_sequences = True, input_shape = (X_train_splitted.shape[1], X_train_splitted.shape[2]))) #time_step/columns
-model.add(LSTM(100, activation='relu', return_sequences=True))
-model.add(LSTM(50, activation='relu', return_sequences=True))
-model.add(LSTM(25, activation='relu'))
-model.add(Dense(20, activation='relu'))
-model.add(Dense(10, activation='relu'))
-model.add(Dense(1))
+#Add Bidirectional LSTM
+model = Sequential()
+model.add(Bidirectional(LSTM(100, activation='relu', input_shape = (X_train_splitted.shape[1], X_train_splitted.shape[2]))))
+model.add(RepeatVector(5))
+model.add(Bidirectional(LSTM(100, activation='relu', return_sequences=True)))
+model.add(TimeDistributed(Dense(1)))
 
 #Compile the RNN
 model.compile(optimizer='adam', loss = 'mean_squared_error')
@@ -71,6 +69,8 @@ model.fit(X_train_splitted, y_train_splitted, epochs=3, batch_size=32, validatio
 y_pred = model.predict(X_test_splitted, verbose=1)
 
 #Reverse scale resuts and reshaping data to display
+y_test_splitted = np.reshape(y_test_splitted, (y_test_splitted.shape[0], 5))
+y_pred = np.reshape(y_pred, (y_pred.shape[0], 5))
 y_test_splitted = scaler.inverse_transform(y_test_splitted)
 y_pred = scaler.inverse_transform(y_pred)
 
