@@ -16,27 +16,27 @@ training_set_scaled = scaler.fit_transform(training_set)
 
 #Variables
 future_prediction = 30
-time_step = 60
-split_percent = 0.80
-split = int(split_percent*len(training_set_scaled))
+time_step = 60 #learning step
+split_percent = 0.80 #train/test daa split percent (80%)
+split = int(split_percent*len(training_set_scaled)) #split percent multiplying by data rows
 
 #Create a data structure with n-time steps
 X = []
 y = []
 for i in range(time_step + 1, len(training_set_scaled)):
-    X.append(training_set_scaled[i-time_step-1:i-1, 0:len(training_set.columns)]) #take all columns into the set
+    X.append(training_set_scaled[i-time_step-1:i-1, 0:len(training_set.columns)]) #take all columns into the set, including time_step legth
     y.append(training_set_scaled[i, 0:len(training_set.columns)]) #take all columns into the set
 
 X_train_arr, y_train_arr = np.array(X), np.array(y)
 
-print(X_train_arr.shape) #(2494, 60, 5)
-print(y_train_arr.shape) #(2494, 5)
+print(X_train_arr.shape) #(2494, 60, 5) <-- train data, having now 2494 rows, with 60 time steps, each row has 5 features (MANY)
+print(y_train_arr.shape) #(2494, 5) <-- target data, having now 2494 rows, with 1 time step, but 5 features (TO MANY)
 
 #Split data
-X_train_splitted = X_train_arr[:split]
-y_train_splitted = y_train_arr[:split]
-X_test_splitted = X_train_arr[split:]
-y_test_splitted = y_train_arr[split:]
+X_train_splitted = X_train_arr[:split] #(80%) model train input data
+y_train_splitted = y_train_arr[:split] #80%) model train target data
+X_test_splitted = X_train_arr[split:] #(20%) test prediction input data
+y_test_splitted = y_train_arr[split:] #(20%) test prediction compare data
 
 #Reshaping to rows/time_step/columns
 X_train_arr = np.reshape(X_train_arr, (X_train_arr.shape[0], X_train_arr.shape[1], X_train_arr.shape[2])) #(samples, time-steps, features)
@@ -46,16 +46,16 @@ y_test_splitted = np.reshape(y_test_splitted, (y_test_splitted.shape[0], 1, y_te
 
 print(X_train_arr.shape) #(2494, 60, 5)
 print(y_train_arr.shape) #(2494, 1, 5)
-print(X_test_splitted.shape) #(2494, 60, 5)
-print(y_test_splitted.shape) #(2494, 1, 5)
+print(X_test_splitted.shape) #(450, 60, 5)
+print(y_test_splitted.shape) #(450, 1, 5)
 
 #Initialize the RNN
 model = Sequential()
 
-#Add Bidirectional LSTM
+#Add Bidirectional LSTM, has better performance than stacked LSTM
 model = Sequential()
-model.add(Bidirectional(LSTM(100, activation='relu', input_shape = (X_train_splitted.shape[1], X_train_splitted.shape[2]))))
-model.add(RepeatVector(5))
+model.add(Bidirectional(LSTM(100, activation='relu', input_shape = (X_train_splitted.shape[1], X_train_splitted.shape[2])))) #input_shape will be (2494-size, 60-shape[1], 5-shape[2])
+model.add(RepeatVector(5)) #for 5 column of features in output, in other cases used for time_step in output
 model.add(Bidirectional(LSTM(100, activation='relu', return_sequences=True)))
 model.add(TimeDistributed(Dense(1)))
 
@@ -67,20 +67,23 @@ model.fit(X_train_splitted, y_train_splitted, epochs=3, batch_size=32, validatio
 
 #Test results
 y_pred = model.predict(X_test_splitted, verbose=1)
+print(y_pred.shape) #(450, 5, 1) - need to be reshaped for (450, 1, 5)
 
-#Reverse scale resuts and reshaping data to display
-y_test_splitted = np.reshape(y_test_splitted, (y_test_splitted.shape[0], 5))
-y_pred = np.reshape(y_pred, (y_pred.shape[0], 5))
+#Reshaping data for inverse transforming
+y_test_splitted = np.reshape(y_test_splitted, (y_test_splitted.shape[0], 5)) #reshaping for (450, 1, 5)
+y_pred = np.reshape(y_pred, (y_pred.shape[0], 5)) #reshaping for (450, 1, 5)
+
+#Reversing transform to get proper data values
 y_test_splitted = scaler.inverse_transform(y_test_splitted)
 y_pred = scaler.inverse_transform(y_pred)
 
-#plot
+#Plot data
 plt.figure(figsize=(14,5))
-plt.plot(y_test_splitted[-time_step:], label = "Real values") #time_step +/- 1
-plt.plot(y_pred[-time_step:], label = 'Predicted values') #time_step +/- 1
-plt.title('WIG20 prediction test')
-plt.xlabel('time')
-plt.ylabel('Close price')
+plt.plot(y_test_splitted[-time_step:, 3], label = "Real values") #I am interested only with display of column index 3
+plt.plot(y_pred[-time_step:, 3], label = 'Predicted values') # #I am interested only with display of column index 3
+plt.title('Prediction test')
+plt.xlabel('Time')
+plt.ylabel('Column index 3')
 plt.legend()
 plt.show()
 
