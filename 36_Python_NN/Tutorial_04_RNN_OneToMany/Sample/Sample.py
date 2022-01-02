@@ -47,20 +47,21 @@ print(y_test_splitted.shape)
 model = Sequential()
 
 #Add the LSTM layers and some dropout regularization
-model.add(LSTM(units= 50, activation = 'relu', input_shape = (15, 1)))
-model.add(Dropout(0.2))
+model.add(LSTM(units= 50, activation = 'relu', input_shape = (10, 1)))
 
 #Add the output layer.
-model.add(Dense(units = 1))
+model.add(Dense(units = 2))
 
 #Compile the RNN
 model.compile(optimizer='adam', loss = 'mean_squared_error')
 
 #Fit to the training set
-model.fit(X_train_splitted, y_train_splitted, epochs=100, batch_size=3)
+model.fit(X_train_splitted, y_train_splitted, epochs=1000, batch_size=3)
+
+aaa = np.array([77]).reshape(-1, 1, 1)
 
 #Test results
-y_pred = model.predict(X_test_splitted)
+y_pred = model.predict(aaa)
 print(y_pred.shape)
 print(y_pred)
 

@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 from sklearn.preprocessing import MinMaxScaler
 from tensorflow.keras import Sequential
-from tensorflow.keras.layers import Dense, LSTM, Dropout
+from tensorflow.keras.layers import Dense, LSTM, Dropout, TimeDistributed, Activation
 
 #Import the training dataset
 filename = "GPW_DLY WIG20, 15.csv"
@@ -50,15 +50,16 @@ print(y_train_splitted.shape)
 model = Sequential()
 
 #Add the LSTM layers and some dropout regularization
-model.add(LSTM(units= 50, activation = 'relu', return_sequences = True, input_shape = (X_train_arr.shape[1], X_train_arr.shape[2]))) #time_step/columns
+model.add(LSTM(units= 50, activation = 'relu', return_sequences = True, input_shape = (X_train_splitted.shape[1], X_train_splitted.shape[2]))) #time_step/columns
 model.add(Dropout(0.2))
-model.add(LSTM(units= 40, activation = 'relu', return_sequences = True))
-model.add(Dropout(0.2))
-model.add(LSTM(units= 80, activation = 'relu', return_sequences = True))
-model.add(Dropout(0.2))
+#model.add(LSTM(units= 40, activation = 'relu', return_sequences = True))
+#model.add(Dropout(0.2))
+#model.add(LSTM(units= 80, activation = 'relu', return_sequences = True))
+#model.add(Dropout(0.2))
 
 #Add the output layer.
-model.add(Dense(units = 1))
+model.add(TimeDistributed(Dense(1)))
+model.add(Activation('linear'))
 
 #Compile the RNN
 model.compile(optimizer='adam', loss = 'mean_squared_error')
