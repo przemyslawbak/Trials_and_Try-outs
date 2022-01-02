@@ -28,12 +28,6 @@ for i in range(time_step + 1, len(training_set_scaled)):
     y.append(training_set_scaled[i, 0:len(training_set.columns)]) #take all columns into the set
 
 X_train_arr, y_train_arr = np.array(X), np.array(y)
-print(X_train_arr.shape) #(2494, 60, 5)
-print(y_train_arr.shape) #(2494, 5)
-
-#Reshaping to rows/time_step/columns
-#X_train_arr = np.reshape(X_train_arr, (X_train_arr.shape[0], X_train_arr.shape[1], X_train_arr.shape[2])) #rows/time_step/columns
-#y_train_arr = np.reshape(y_train_arr, (y_train_arr.shape[0], y_train_arr.shape[1])) #rows/columns
 
 print(X_train_arr.shape) #(2494, 60, 5)
 print(y_train_arr.shape) #(2494, 5)
@@ -43,40 +37,42 @@ X_train_splitted = X_train_arr[:split]
 y_train_splitted = y_train_arr[:split]
 X_test_splitted = X_train_arr[split:]
 y_test_splitted = y_train_arr[split:]
-print(X_train_splitted.shape)
-print(y_train_splitted.shape)
+
+#Reshaping to rows/time_step/columns
+X_train_arr = np.reshape(X_train_arr, (X_train_arr.shape[0], X_train_arr.shape[1], X_train_arr.shape[2])) #(samples, time-steps, features)
+y_train_splitted = np.reshape(y_train_splitted, (y_train_splitted.shape[0], 1, y_train_splitted.shape[1]))  #(samples, time-steps, features)
+X_test_splitted = np.reshape(X_test_splitted, (X_test_splitted.shape[0], X_test_splitted.shape[1], X_test_splitted.shape[2])) #(samples, time-steps, features)
+y_test_splitted = np.reshape(y_test_splitted, (y_test_splitted.shape[0], 1, y_test_splitted.shape[1]))  #(samples, time-steps, features)
+
+print(X_train_arr.shape) #(2494, 60, 5)
+print(y_train_arr.shape) #(2494, 1, 5)
+print(X_test_splitted.shape) #(2494, 60, 5)
+print(y_test_splitted.shape) #(2494, 1, 5)
 
 #Initialize the RNN
 model = Sequential()
 
-#Add the LSTM layers and some dropout regularization
-model.add(LSTM(units= 50, activation = 'relu', return_sequences = True, input_shape = (X_train_splitted.shape[1], X_train_splitted.shape[2]))) #time_step/columns
-model.add(Dropout(0.2))
-#model.add(LSTM(units= 40, activation = 'relu', return_sequences = True))
-#model.add(Dropout(0.2))
-#model.add(LSTM(units= 80, activation = 'relu', return_sequences = True))
-#model.add(Dropout(0.2))
-
-#Add the output layer.
-model.add(TimeDistributed(Dense(1)))
-model.add(Activation('linear'))
+#Add Stacked LSTM
+model.add(LSTM(units= 200, activation = 'relu', return_sequences = True, input_shape = (X_train_splitted.shape[1], X_train_splitted.shape[2]))) #time_step/columns
+model.add(LSTM(100, activation='relu', return_sequences=True))
+model.add(LSTM(50, activation='relu', return_sequences=True))
+model.add(LSTM(25, activation='relu'))
+model.add(Dense(20, activation='relu'))
+model.add(Dense(10, activation='relu'))
+model.add(Dense(1))
 
 #Compile the RNN
 model.compile(optimizer='adam', loss = 'mean_squared_error')
 
 #Fit to the training set
-model.fit(X_train_splitted, y_train_splitted, epochs=3, batch_size=32)
+model.fit(X_train_splitted, y_train_splitted, epochs=3, batch_size=32, validation_split=0.2, verbose=1)
 
 #Test results
-y_pred = model.predict(X_test_splitted)
+y_pred = model.predict(X_test_splitted, verbose=1)
 
 #Reverse scale resuts and reshaping data to display
-res_scaler = MinMaxScaler()
-res_scaler.min_, res_scaler.scale_ = scaler.min_[0], scaler.scale_[0]
-print(y_pred.shape)
-print(y_test_splitted.shape)
-y_pred = res_scaler.inverse_transform(y_pred.reshape(-1,1)) #todo: verify if close data is displayed
-y_test_splitted = res_scaler.inverse_transform(y_test_splitted.reshape(-1,1)) #todo: verify if close data is displayed
+y_test_splitted = scaler.inverse_transform(y_test_splitted)
+y_pred = scaler.inverse_transform(y_pred)
 
 #plot
 plt.figure(figsize=(14,5))
