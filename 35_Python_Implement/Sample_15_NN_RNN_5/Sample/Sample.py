@@ -16,7 +16,7 @@ training_set_scaled = scaler.fit_transform(training_set)
 
 #Variables
 future_prediction = 30
-time_step = 60 #learning step
+time_step = 100 #learning step
 split_percent = 0.80 #train/test daa split percent (80%)
 split = int(split_percent*len(training_set_scaled)) #split percent multiplying by data rows
 
@@ -57,13 +57,13 @@ model = Sequential()
 model.add(Bidirectional(LSTM(100, activation='relu', input_shape = (X_train_splitted.shape[1], X_train_splitted.shape[2])))) #input_shape will be (2494-size, 60-shape[1], 5-shape[2])
 model.add(RepeatVector(5)) #for 5 column of features in output, in other cases used for time_step in output
 model.add(Bidirectional(LSTM(100, activation='relu', return_sequences=True)))
-model.add(TimeDistributed(Dense(1)))
+model.add(TimeDistributed(Dense(1,activation='sigmoid')))
 
 #Compile the RNN
-model.compile(optimizer='adam', loss = 'mean_squared_error')
+model.compile(optimizer='adam', loss = 'mean_squared_error', metrics=['accuracy'])
 
 #Fit to the training set
-model.fit(X_train_splitted, y_train_splitted, epochs=3, batch_size=32, validation_split=0.2, verbose=1)
+model.fit(X_train_splitted, y_train_splitted, epochs=50, batch_size=64, validation_split=0.2, verbose=1)
 
 #Test results
 y_pred = model.predict(X_test_splitted, verbose=1)
