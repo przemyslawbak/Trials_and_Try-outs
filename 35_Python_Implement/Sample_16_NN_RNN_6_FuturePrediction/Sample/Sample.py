@@ -8,13 +8,14 @@ from tensorflow.keras.layers import Dense, LSTM, Dropout, TimeDistributed, Activ
 #Import the training dataset
 filename = "GPW_DLY WIG20, 15.csv"
 dataset_train = pd.read_csv(filename)
-training_set = dataset_train[['close', 'high', 'low', 'open', 'Volume']]
+training_set = dataset_train[['close', 'high', 'low', 'open']]
 
 #Perform feature scaling to transform the data
 scaler = MinMaxScaler(feature_range = (0, 1))
 training_set_scaled = scaler.fit_transform(training_set)
 
 #Variables
+features = len(training_set.columns)
 future_steps = 33
 time_step = 100 #learning step
 split_percent = 0.80 #train/test daa split percent (80%)
@@ -24,8 +25,8 @@ split = int(split_percent*len(training_set_scaled)) #split percent multiplying b
 X = []
 y = []
 for i in range(time_step + 1, len(training_set_scaled)):
-    X.append(training_set_scaled[i-time_step-1:i-1, 0:len(training_set.columns)]) #take all columns into the set, including time_step legth
-    y.append(training_set_scaled[i, 0:len(training_set.columns)]) #take all columns into the set
+    X.append(training_set_scaled[i-time_step-1:i-1, 0:features]) #take all columns into the set, including time_step legth
+    y.append(training_set_scaled[i, 0:features]) #take all columns into the set
 
 X_train_arr, y_train_arr = np.array(X), np.array(y)
 
@@ -39,10 +40,10 @@ X_test_splitted = X_train_arr[split:] #(20%) test prediction input data
 y_test_splitted = y_train_arr[split:] #(20%) test prediction compare data
 
 #Reshaping to rows/time_step/columns
-X_train_splitted = np.reshape(X_train_splitted, (X_train_splitted.shape[0], X_train_splitted.shape[1], X_train_splitted.shape[2])) #(samples, time-steps, features), by default should be already
-y_train_splitted = np.reshape(y_train_splitted, (y_train_splitted.shape[0], 1, y_train_splitted.shape[1]))  #(samples, time-steps, features)
-X_test_splitted = np.reshape(X_test_splitted, (X_test_splitted.shape[0], X_test_splitted.shape[1], X_test_splitted.shape[2])) #(samples, time-steps, features), by default should be already
-y_test_splitted = np.reshape(y_test_splitted, (y_test_splitted.shape[0], 1, y_test_splitted.shape[1]))  #(samples, time-steps, features)
+X_train_splitted = np.reshape(X_train_splitted, (X_train_splitted.shape[0], time_step, features)) #(samples, time-steps, features), by default should be already
+y_train_splitted = np.reshape(y_train_splitted, (y_train_splitted.shape[0], 1, features))  #(samples, time-steps, features)
+X_test_splitted = np.reshape(X_test_splitted, (X_test_splitted.shape[0], time_step, features)) #(samples, time-steps, features), by default should be already
+y_test_splitted = np.reshape(y_test_splitted, (y_test_splitted.shape[0], 1, features))  #(samples, time-steps, features)
 
 print(X_train_arr.shape) #(2494, 60, 5)
 print(y_train_arr.shape) #(2494, 1, 5)
@@ -54,8 +55,8 @@ model = Sequential()
 
 #Add Bidirectional LSTM, has better performance than stacked LSTM
 model = Sequential()
-model.add(Bidirectional(LSTM(100, activation='relu', input_shape = (X_train_splitted.shape[1], X_train_splitted.shape[2])))) #input_shape will be (2494-size, 60-shape[1], 5-shape[2])
-model.add(RepeatVector(5)) #for 5 column of features in output, in other cases used for time_step in output
+model.add(Bidirectional(LSTM(100, activation='relu', input_shape = (time_step, features)))) #input_shape will be (2494-size, 60-shape[1], 5-shape[2])
+model.add(RepeatVector(features)) #for 5 column of features in output, in other cases used for time_step in output
 model.add(Bidirectional(LSTM(100, activation='relu', return_sequences=True)))
 model.add(TimeDistributed(Dense(1,activation='sigmoid')))
 
@@ -92,20 +93,20 @@ for next in range(future_steps):
 
 future_results = np.reshape(future_results, (future_steps, time_step, X_test_splitted.shape[2]))
 y_pred_future = future_results[:, -1:, :]
-y_pred_future = np.reshape(y_pred_future, (y_pred_future.shape[0], 5)) #reshaping for (450, 1, 5)
-y_pred = np.reshape(y_pred, (y_pred.shape[0], 5)) #reshaping for (450, 1, 5)
+y_pred_future = np.reshape(y_pred_future, (y_pred_future.shape[0], features)) #reshaping for (450, 1, 5)
+y_pred = np.reshape(y_pred, (y_pred.shape[0], features)) #reshaping for (450, 1, 5)
 y_pred = np.append(y_pred, y_pred_future)
 
 #Reshaping data for inverse transforming
-y_test_splitted = np.reshape(y_test_splitted, (y_test_splitted.shape[0], 5)) #reshaping for (450, 1, 5)
-y_pred = np.reshape(y_pred, (y_test_splitted.shape[0] + future_steps, 5)) #reshaping for (450, 1, 5)
+y_test_splitted = np.reshape(y_test_splitted, (y_test_splitted.shape[0], features)) #reshaping for (450, 1, 5)
+y_pred = np.reshape(y_pred, (y_test_splitted.shape[0] + future_steps, features)) #reshaping for (450, 1, 5)
 
 #Reversing transform to get proper data values
 y_test_splitted = scaler.inverse_transform(y_test_splitted)
 y_pred = scaler.inverse_transform(y_pred)
 
 #Plot data
-plt.figure(figsize=(14,5))
+plt.figure(figsize=(14,features))
 plt.plot(y_test_splitted[-time_step:, 3], label = "Real values") #I am interested only with display of column index 3
 plt.plot(y_pred[-time_step - future_steps:, 3], label = 'Predicted values') # #I am interested only with display of column index 3
 plt.title('Prediction test')
