@@ -69,7 +69,7 @@ model.fit(X_train_splitted, y_train_splitted, epochs=2, batch_size=64, validatio
 def predict_future():
     return model.predict(X_test_splitted, verbose=1)
 
-future_results = []
+future_results = np.array([])
 y_pred = predict_future()
 
 def nextFutureStep():
@@ -88,9 +88,9 @@ for next in range(future_prediction):
     new_item = np.reshape(new_item, (1, time_step, X_test_splitted.shape[2]))
     X_test_splitted = np.append(X_test_splitted, new_item)
     X_test_splitted = np.reshape(X_test_splitted, (y_test_splitted.shape[0] + next + 1, time_step, y_test_splitted.shape[2]))
-    future_results.append(new_item)
+    future_results = np.append(future_results, new_item)
 
-future_results = np.reshape(future_prediction, (future_prediction, X_test_splitted.shape[1], X_test_splitted.shape[2]))
+future_results = np.reshape(future_results, (future_prediction, time_step, X_test_splitted.shape[2]))
 y_pred = y_pred.append(future_results)
 
 #Reshaping data for inverse transforming
