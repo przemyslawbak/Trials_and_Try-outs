@@ -24,13 +24,13 @@ split = int(split_percent*len(training_set_scaled)) #split percent multiplying b
 X = []
 y = []
 for i in range(time_step + 1, len(training_set_scaled)):
-    X.append(training_set_scaled[i-time_step-1:i-1, 0:len(training_set.columns)]) #take all columns into the set, including time_step legth decreased by 1
-    y.append(training_set_scaled[i-time_step, 0:len(training_set.columns)]) #take all columns into the set, including time_step legth
+    X.append(training_set_scaled[i-time_step-1:i-1, 0:len(training_set.columns)]) #take all columns into the set, including time_step legth
+    y.append(training_set_scaled[i, 0:len(training_set.columns)]) #take all columns into the set
 
 X_train_arr, y_train_arr = np.array(X), np.array(y)
 
 print(X_train_arr.shape) #(2494, 60, 5) <-- train data, having now 2494 rows, with 60 time steps, each row has 5 features (MANY)
-print(y_train_arr.shape) #(2494, 60, 5) <-- target data, having now 2494 rows, with 1 time step, but 5 features (TO MANY)
+print(y_train_arr.shape) #(2494, 5) <-- target data, having now 2494 rows, with 1 time step, but 5 features (TO MANY)
 
 #Split data
 X_train_splitted = X_train_arr[:split] #(80%) model train input data
@@ -40,14 +40,14 @@ y_test_splitted = y_train_arr[split:] #(20%) test prediction compare data
 
 #Reshaping to rows/time_step/columns
 X_train_splitted = np.reshape(X_train_splitted, (X_train_splitted.shape[0], X_train_splitted.shape[1], X_train_splitted.shape[2])) #(samples, time-steps, features), by default should be already
-y_train_splitted = np.reshape(y_train_splitted, (y_train_splitted.shape[0], y_train_splitted.shape[1], y_train_splitted.shape[2]))  #(samples, time-steps, features), by default should be already
+y_train_splitted = np.reshape(y_train_splitted, (y_train_splitted.shape[0], 1, y_train_splitted.shape[1]))  #(samples, time-steps, features)
 X_test_splitted = np.reshape(X_test_splitted, (X_test_splitted.shape[0], X_test_splitted.shape[1], X_test_splitted.shape[2])) #(samples, time-steps, features), by default should be already
-y_test_splitted = np.reshape(y_test_splitted, (y_test_splitted.shape[0], y_test_splitted.shape[1], y_test_splitted.shape[2]))  #(samples, time-steps, features), by default should be already
+y_test_splitted = np.reshape(y_test_splitted, (y_test_splitted.shape[0], 1, y_test_splitted.shape[1]))  #(samples, time-steps, features)
 
 print(X_train_arr.shape) #(2494, 60, 5)
-print(y_train_arr.shape) #(2494, 60, 5)
+print(y_train_arr.shape) #(2494, 1, 5)
 print(X_test_splitted.shape) #(450, 60, 5)
-print(y_test_splitted.shape) #(450, 60, 5)
+print(y_test_splitted.shape) #(450, 1, 5)
 
 #Initialize the RNN
 model = Sequential()
@@ -63,7 +63,7 @@ model.add(TimeDistributed(Dense(1,activation='sigmoid')))
 model.compile(optimizer='adam', loss = 'mean_squared_error', metrics=['accuracy'])
 
 #Fit to the training set
-model.fit(X_train_splitted, y_train_splitted, epochs=5, batch_size=64, validation_split=0.2, verbose=1)
+model.fit(X_train_splitted, y_train_splitted, epochs=2, batch_size=64, validation_split=0.2, verbose=1)
 
 #Predicting future
 def predict_future():
@@ -74,6 +74,15 @@ y_pred = predict_future()
 
 def nextFutureStep():
     pred = predict_future()
+    last_test_item = X_test_splitted[-1]
+    last_pred_item = pred[-1]
+    last_pred_item = np.reshape(last_pred_item, (last_pred_item.shape[1], last_pred_item.shape[0]))
+    s1 = last_test_item[1:last_test_item.shape[0]]
+    s2 = last_pred_item
+    last_item = np.append(s1, s2)
+
+
+
     np.append(X_test_splitted, pred[-1], axis=0)
     return pred[-1]
 
@@ -82,7 +91,7 @@ for next in range(future_prediction):
 
 y_pred.append(future_results)
 
-#Reshaping data for inverse transforming #TODO RESHAPING TO 450,60,5
+#Reshaping data for inverse transforming
 y_test_splitted = np.reshape(y_test_splitted, (y_test_splitted.shape[0], 5)) #reshaping for (450, 1, 5)
 y_pred = np.reshape(y_pred, (y_pred.shape[0], 5)) #reshaping for (450, 1, 5)
 
