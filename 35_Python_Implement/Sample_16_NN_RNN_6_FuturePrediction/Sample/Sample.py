@@ -80,16 +80,18 @@ def nextFutureStep():
     s1 = last_test_item[1:last_test_item.shape[0]]
     s2 = last_pred_item
     last_item = np.append(s1, s2)
-
-
-
-    np.append(X_test_splitted, pred[-1], axis=0)
-    return pred[-1]
+    last_item = np.reshape(last_item, (1, last_test_item.shape[0], last_test_item.shape[1]))
+    return last_item
 
 for next in range(future_prediction):
-    future_results.append(nextFutureStep())
+    new_item = nextFutureStep()
+    new_item = np.reshape(new_item, (1, time_step, X_test_splitted.shape[2]))
+    X_test_splitted = np.append(X_test_splitted, new_item)
+    X_test_splitted = np.reshape(X_test_splitted, (y_test_splitted.shape[0] + next + 1, time_step, y_test_splitted.shape[2]))
+    future_results.append(new_item)
 
-y_pred.append(future_results)
+future_results = np.reshape(future_prediction, (future_prediction, X_test_splitted.shape[1], X_test_splitted.shape[2]))
+y_pred = y_pred.append(future_results)
 
 #Reshaping data for inverse transforming
 y_test_splitted = np.reshape(y_test_splitted, (y_test_splitted.shape[0], 5)) #reshaping for (450, 1, 5)
