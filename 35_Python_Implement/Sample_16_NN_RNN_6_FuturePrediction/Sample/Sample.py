@@ -15,8 +15,8 @@ scaler = MinMaxScaler(feature_range = (0, 1))
 training_set_scaled = scaler.fit_transform(training_set)
 
 #Variables
-future_prediction = 30
-time_step = 60 #learning step
+future_steps = 33
+time_step = 100 #learning step
 split_percent = 0.80 #train/test daa split percent (80%)
 split = int(split_percent*len(training_set_scaled)) #split percent multiplying by data rows
 
@@ -63,7 +63,7 @@ model.add(TimeDistributed(Dense(1,activation='sigmoid')))
 model.compile(optimizer='adam', loss = 'mean_squared_error', metrics=['accuracy'])
 
 #Fit to the training set
-model.fit(X_train_splitted, y_train_splitted, epochs=2, batch_size=64, validation_split=0.2, verbose=1)
+model.fit(X_train_splitted, y_train_splitted, epochs=50, batch_size=128, validation_split=0.2, verbose=1)
 
 #Predicting future
 def predict_future():
@@ -83,19 +83,22 @@ def nextFutureStep():
     last_item = np.reshape(last_item, (1, last_test_item.shape[0], last_test_item.shape[1]))
     return last_item
 
-for next in range(future_prediction):
+for next in range(future_steps):
     new_item = nextFutureStep()
     new_item = np.reshape(new_item, (1, time_step, X_test_splitted.shape[2]))
     X_test_splitted = np.append(X_test_splitted, new_item)
     X_test_splitted = np.reshape(X_test_splitted, (y_test_splitted.shape[0] + next + 1, time_step, y_test_splitted.shape[2]))
     future_results = np.append(future_results, new_item)
 
-future_results = np.reshape(future_results, (future_prediction, time_step, X_test_splitted.shape[2]))
-y_pred = y_pred.append(future_results)
+future_results = np.reshape(future_results, (future_steps, time_step, X_test_splitted.shape[2]))
+y_pred_future = future_results[:, -1:, :]
+y_pred_future = np.reshape(y_pred_future, (y_pred_future.shape[0], 5)) #reshaping for (450, 1, 5)
+y_pred = np.reshape(y_pred, (y_pred.shape[0], 5)) #reshaping for (450, 1, 5)
+y_pred = np.append(y_pred, y_pred_future)
 
 #Reshaping data for inverse transforming
 y_test_splitted = np.reshape(y_test_splitted, (y_test_splitted.shape[0], 5)) #reshaping for (450, 1, 5)
-y_pred = np.reshape(y_pred, (y_pred.shape[0], 5)) #reshaping for (450, 1, 5)
+y_pred = np.reshape(y_pred, (y_test_splitted.shape[0] + future_steps, 5)) #reshaping for (450, 1, 5)
 
 #Reversing transform to get proper data values
 y_test_splitted = scaler.inverse_transform(y_test_splitted)
@@ -104,7 +107,7 @@ y_pred = scaler.inverse_transform(y_pred)
 #Plot data
 plt.figure(figsize=(14,5))
 plt.plot(y_test_splitted[-time_step:, 3], label = "Real values") #I am interested only with display of column index 3
-plt.plot(y_pred[-time_step:, 3], label = 'Predicted values') # #I am interested only with display of column index 3
+plt.plot(y_pred[-time_step - future_steps:, 3], label = 'Predicted values') # #I am interested only with display of column index 3
 plt.title('Prediction test')
 plt.xlabel('Time')
 plt.ylabel('Column index 3')
