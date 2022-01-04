@@ -12,11 +12,12 @@ OK - future RNN prediction
 OK - test with attention
 OK - test with regularizers
 OK - test with dropout
-- test with Bidirectional
+OK - test with Bidirectional
 - test with Bidirectional and LSTM https://keras.io/api/layers/recurrent_layers/bidirectional/
 - test with recurrent_activation
 - test with bayesian optimization https://philipperemy.github.io/visualization/
 - test with Batch Normalization
+- test with sigmoid
 - train RNN on more than 1 data sets?
 - post from 4p - requirements
 
