@@ -14,7 +14,7 @@ OK - test with regularizers
 OK - test with dropout
 OK - test with Bidirectional
 - test with Bidirectional and LSTM https://keras.io/api/layers/recurrent_layers/bidirectional/
-- test with recurrent_activation
+NO - test with recurrent_activation=None
 - test with bayesian optimization https://philipperemy.github.io/visualization/
 - test with Batch Normalization
 OK - test with sigmoid
