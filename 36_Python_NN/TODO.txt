@@ -8,6 +8,10 @@ OK - https://towardsdatascience.com/time-series-forecasting-with-recurrent-neura
 OK - https://github.com/krishnaik06/Stock-MArket-Forecasting/blob/master/Untitled.ipynb
 OK - https://www.simplilearn.com/tutorials/deep-learning-tutorial/rnn
 NO - lstm many to many time series: https://wandb.ai/ayush-thakur/dl-question-bank/reports/One-to-Many-Many-to-One-and-Many-to-Many-LSTM-Examples-in-Keras--VmlldzoyMDIzOTM
+OK - future RNN prediction
+OK - test with attention
+OK - test with regularizers
+- test with dropout
+- test with bayesian optimization
 - train RNN on more than 1 data sets
-- future RNN prediction
 - post from 4p - requirements
