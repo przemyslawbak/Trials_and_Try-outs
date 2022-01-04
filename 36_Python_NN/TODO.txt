@@ -17,7 +17,7 @@ OK - test with Bidirectional
 - test with recurrent_activation
 - test with bayesian optimization https://philipperemy.github.io/visualization/
 - test with Batch Normalization
-- test with sigmoid
+OK - test with sigmoid
 - train RNN on more than 1 data sets?
 - post from 4p - requirements
 
