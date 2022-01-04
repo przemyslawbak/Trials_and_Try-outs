@@ -33,6 +33,11 @@ y_train_arr = np.array(Y).reshape(20, 3, 1) #(samples, time-steps, features)
 X_test_arr = np.array(Xt).reshape(20, 3, 1) #(samples, time-steps, features)
 y_test_arr = np.array(Yt).reshape(20, 3, 1) #(samples, time-steps, features)
 
+X_train_arr = tf.cast(X_train_arr, tf.float32)
+y_train_arr = tf.cast(y_train_arr, tf.float32)
+X_test_arr = tf.cast(X_test_arr, tf.float32)
+y_test_arr = tf.cast(y_test_arr, tf.float32)
+
 base_results = []
 update_results = []
 
@@ -49,8 +54,8 @@ for x in range(100):
 
     #model2 - with bidirectional
     model2 = Sequential()
-    model2.add(Bidirectional(LSTM(100, activation='relu', input_shape = (time_step, features))))
-    model2.add(RepeatVector(features))
+    model2.add(Bidirectional(LSTM(100, activation='relu', input_shape = (3, 1))))
+    model2.add(RepeatVector(3))
     model2.add(Bidirectional(LSTM(100, activation='relu', return_sequences=True)))
     model2.compile(optimizer='adam', loss='mse')
     model2.fit(X_train_arr, y_train_arr, epochs=100, validation_split=0.2, verbose=0, batch_size=64)
