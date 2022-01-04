@@ -1,5 +1,3 @@
-#https://stackabuse.com/solving-sequence-problems-with-lstm-in-keras-part-2/
-
 from keras.preprocessing.text import one_hot
 from keras.preprocessing.sequence import pad_sequences
 from keras.models import Sequential
@@ -15,6 +13,7 @@ from keras.layers.merge import Concatenate
 from keras.layers import Bidirectional
 import pandas as pd
 import numpy as np
+import tensorflow as tf
 import matplotlib.pyplot as plt
 from keras.layers import RepeatVector
 from keras.layers import TimeDistributed
@@ -50,9 +49,9 @@ for x in range(100):
 
     #model2 - with regularizer()
     model2 = Sequential()
-    model2.add(LSTM(100, activation='relu', input_shape=(3, 1), kernel_regularizer=tf.keras.regularizers.l2(l=0.1)))
+    model2.add(LSTM(100, activation='relu', input_shape=(3, 1), kernel_regularizer=tf.keras.regularizers.l1_l2(l1=0.01, l2=0.01)))
     model2.add(RepeatVector(3))
-    model2.add(LSTM(100, activation='relu', return_sequences=True, kernel_regularizer=tf.keras.regularizers.l2(l=0.1)))
+    model2.add(LSTM(100, activation='relu', return_sequences=True, kernel_regularizer=tf.keras.regularizers.l1_l2(l1=0.01, l2=0.01)))
     model2.add(TimeDistributed(Dense(1)))
     model2.compile(optimizer='adam', loss='mse')
     model2.fit(X_train_arr, y_train_arr, epochs=100, validation_split=0.2, verbose=0, batch_size=64)
@@ -67,7 +66,7 @@ for x in range(100):
 mean_res1 = sum(base_results)/len(base_results)
 mean_res2 = sum(update_results)/len(update_results)
 
-print('Mean of results 1: ' + str(mean_res1))
-print('Mean of results 2: ' + str(mean_res2))
+print('Mean of results 1: ' + str(mean_res1)) #2.6330019935965536
+print('Mean of results 2: ' + str(mean_res2)) #8.757792758941651
 
-#CONCLUSION:
+#CONCLUSION: regularizers do not improve predictions

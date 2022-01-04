@@ -11,7 +11,13 @@ NO - lstm many to many time series: https://wandb.ai/ayush-thakur/dl-question-ba
 OK - future RNN prediction
 OK - test with attention
 OK - test with regularizers
-- test with dropout
-- test with bayesian optimization
-- train RNN on more than 1 data sets
+OK - test with dropout
+- test with Bidirectional
+- test with Bidirectional and LSTM https://keras.io/api/layers/recurrent_layers/bidirectional/
+- test with recurrent_activation
+- test with bayesian optimization https://philipperemy.github.io/visualization/
+- test with Batch Normalization
+- train RNN on more than 1 data sets?
 - post from 4p - requirements
+
+https://stackoverflow.com/questions/48714407/rnn-regularization-which-component-to-regularize

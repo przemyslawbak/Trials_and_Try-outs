@@ -1,5 +1,3 @@
-#https://stackabuse.com/solving-sequence-problems-with-lstm-in-keras-part-2/
-
 from keras.preprocessing.text import one_hot
 from keras.preprocessing.sequence import pad_sequences
 from keras.models import Sequential
@@ -69,7 +67,7 @@ for x in range(100):
 mean_res1 = sum(base_results)/len(base_results)
 mean_res2 = sum(update_results)/len(update_results)
 
-print('Mean of results 1: ' + str(mean_res1))
-print('Mean of results 2: ' + str(mean_res2))
+print('Mean of results 1: ' + str(mean_res1)) #3.05502985984087
+print('Mean of results 2: ' + str(mean_res2)) #4.541839057207108
 
-#CONCLUSION:
+#CONCLUSION: Attention do not improve performance
