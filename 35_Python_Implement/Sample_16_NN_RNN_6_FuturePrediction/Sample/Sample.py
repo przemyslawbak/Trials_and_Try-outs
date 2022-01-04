@@ -86,9 +86,9 @@ def nextFutureStep():
     last_test_item = X_test_splitted[-1] #take last item from current X_test_splitted, shaped (60, 5)
     a1 = last_test_item[1:last_test_item.shape[0]] #slice last item from current X_test_splitted to get (59, 5), a2 will be added
     a2 = last_pred_item #assign item shaped (1, 5), to be added to a1
-    last_item = np.append(a1, a2) #combine (59, 5) with (1, 5)
-    last_item = np.reshape(last_item, (1, time_step, features)) #reshape further step element to (1, 60, 5)
-    return last_item
+    result_item = np.append(a1, a2) #combine (59, 5) with (1, 5)
+    result_item = np.reshape(result_item, (1, time_step, features)) #reshape further step element to (1, 60, 5)
+    return result_item
 
 for next in range(future_steps):
     print('future step ' + str(next) + ' of ' + str(future_steps)) #display info
@@ -98,10 +98,9 @@ for next in range(future_steps):
     X_test_splitted = np.reshape(X_test_splitted, (y_test_splitted.shape[0] + next + 1, time_step, features)) #reshape X_test_splitted to (450 + next, 60, 5)
     future_results = np.append(future_results, new_item) #add last step to future_results prediction array
 
+#Combine future time_step based prediction results with initial prediction based on test data
 future_results = np.reshape(future_results, (future_steps, time_step, features)) #reshaping to (33, 60, 5)
-y_pred_future = future_results[:, -1:, :] #from future_results copying an array
-y_pred_future = np.reshape(y_pred_future, (future_steps, features)) #reshaping to (33, 1, 5)
-y_pred = np.reshape(y_pred, (y_test_splitted.shape[0], features)) #reshaping to (450, 1, 5)
+y_pred_future = future_results[:, -1:, :] #from future_results copying an array, where we do not need 60 time_steps
 y_pred = np.append(y_pred, y_pred_future) #combine initial y_pred result array with predicted y_pred_future
 
 #Reshaping data for inverse transforming
