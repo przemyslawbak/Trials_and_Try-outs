@@ -68,7 +68,7 @@ for x in range(100):
 mean_res1 = sum(base_results)/len(base_results)
 mean_res2 = sum(update_results)/len(update_results)
 
-print('Mean of results 1: ' + str(mean_res1))
-print('Mean of results 2: ' + str(mean_res2))
+print('Mean of results 1: ' + str(mean_res1)) #2.79257463991642
+print('Mean of results 2: ' + str(mean_res2)) #91.93327758789063
 
-#CONCLUSION: 
+#CONCLUSION: Dropout does not help at all
