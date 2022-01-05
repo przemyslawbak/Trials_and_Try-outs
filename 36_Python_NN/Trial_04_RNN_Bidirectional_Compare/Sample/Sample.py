@@ -70,7 +70,7 @@ for x in range(100):
 mean_res1 = sum(base_results)/len(base_results)
 mean_res2 = sum(update_results)/len(update_results)
 
-print('Mean of results 1: ' + str(mean_res1)) #
-print('Mean of results 2: ' + str(mean_res2)) #
+print('Mean of results 1: ' + str(mean_res1)) #2.794566231369972
+print('Mean of results 2: ' + str(mean_res2)) #3474.925969238281
 
-#CONCLUSION:
+#CONCLUSION: Bidirectional sux?

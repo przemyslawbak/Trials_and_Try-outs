@@ -66,7 +66,7 @@ for x in range(100):
 mean_res1 = sum(base_results)/len(base_results)
 mean_res2 = sum(update_results)/len(update_results)
 
-print('Mean of results 1: ' + str(mean_res1)) #
-print('Mean of results 2: ' + str(mean_res2)) #
+print('Mean of results 1: ' + str(mean_res1)) #4.060427914559841
+print('Mean of results 2: ' + str(mean_res2)) #36910.16796875
 
-#CONCLUSION:
+#CONCLUSION: sigmoid sux?
