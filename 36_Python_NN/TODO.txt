@@ -15,7 +15,7 @@ OK - test with dropout
 OK - test with Bidirectional
 OK - test with Bidirectional and LSTM https://keras.io/api/layers/recurrent_layers/bidirectional/
 NO - test with recurrent_activation=None
-- test with bayesian optimization https://philipperemy.github.io/visualization/
+OK - test with bayesian optimization https://philipperemy.github.io/visualization/
 OK - test with Batch Normalization
 OK - test with sigmoid
 - train RNN on more than 1 data sets?
