@@ -68,7 +68,7 @@ for x in range(100):
 mean_res1 = sum(base_results)/len(base_results)
 mean_res2 = sum(update_results)/len(update_results)
 
-print('Mean of results 1: ' + str(mean_res1)) #
-print('Mean of results 2: ' + str(mean_res2)) #nan
+print('Mean of results 1: ' + str(mean_res1)) #2.93977687805891
+print('Mean of results 2: ' + str(mean_res2)) #3.083416835963726
 
-#CONCLUSION: does not work
+#CONCLUSION: no big difference
