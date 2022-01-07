@@ -3,6 +3,7 @@ from tensorflow import keras
 import keras_tuner as kt
 import numpy as np
 from tensorflow.keras.layers import Dense, LSTM, Dropout, TimeDistributed, Activation, RepeatVector, Bidirectional
+import os
 
 
 #Creating the Dataset
@@ -22,30 +23,24 @@ y_test_arr = np.array(Yt).reshape(20, 3, 1) #(samples, time-steps, features)
 
 def model_builder(hp):
     hp_units = hp.Int('units', min_value=32, max_value=512, step=32)
-
     model = tf.keras.Sequential()
     model.add(LSTM(units=hp_units, activation='relu', input_shape=(3, 1)))
     model.add(RepeatVector(3))
     model.add(LSTM(units=hp_units, activation='relu', return_sequences=True))
     model.add(TimeDistributed(Dense(1)))
-
-    # Tune the learning rate for the optimizer
-    # Choose an optimal value from 0.01, 0.001, or 0.0001
-    hp_learning_rate = hp.Choice('learning_rate', values=[1e-2, 1e-3, 1e-4])
-
-    model.compile(optimizer=tf.keras.optimizers.Adam(learning_rate=hp_learning_rate),
-                loss=tf.keras.losses.SparseCategoricalCrossentropy(from_logits=True),
-                metrics=['accuracy'])
-
+    model.compile(loss='mse', metrics=['mse'], optimizer=keras.optimizers.Adam(
+        hp.Choice('learning_rate',
+                  values=[1e-2, 1e-3, 1e-4])))
     return model
 
-#TUNE - Hyperband NOT BayesianOptimization 
+#TUNE - Hyperband
 tuner = kt.Hyperband(model_builder,
-                     objective='val_accuracy',
+                     objective='mse',
                      max_epochs=10,
                      factor=3,
-                     directory='my_dir',
-                     project_name='intro_to_kt')
+                     directory=os.path.normpath('C:/keras_tuning'),
+                     project_name='intro_to_kt',
+                     overwrite=True)
 
 stop_early = tf.keras.callbacks.EarlyStopping(monitor='val_loss', patience=5)
 
