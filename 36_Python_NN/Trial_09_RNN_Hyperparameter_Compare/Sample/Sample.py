@@ -49,7 +49,7 @@ tuner = kt.Hyperband(model_builder,
 
 stop_early = tf.keras.callbacks.EarlyStopping(monitor='val_loss', patience=5)
 
-tuner.search(X_train_arr, y_train_arr, epochs=50, validation_split=0.2, callbacks=[stop_early], verbose=2)
+tuner.search(X_train_arr, y_train_arr, epochs=50, validation_data=(X_test_arr, y_test_arr), callbacks=[stop_early], verbose=2)
 
 # Get the optimal hyperparameters
 best_hps=tuner.get_best_hyperparameters(num_trials=1)[0]
@@ -62,7 +62,7 @@ is {best_hps.get('learning_rate')}.
 
 # Build the model with the optimal hyperparameters and train it on the data for 50 epochs
 model = tuner.hypermodel.build(best_hps)
-history = model.fit(X_train_arr, y_train_arr, epochs=50, validation_split=0.2, verbose=2)
+history = model.fit(X_train_arr, y_train_arr, epochs=50, validation_data=(X_test_arr, y_test_arr), verbose=2)
 
 val_acc_per_epoch = history.history['val_accuracy']
 best_epoch = val_acc_per_epoch.index(max(val_acc_per_epoch)) + 1
@@ -71,7 +71,7 @@ print('Best epoch: %d' % (best_epoch,))
 hypermodel = tuner.hypermodel.build(best_hps)
 
 # Retrain the model
-hypermodel.fit(X_train_arr, y_train_arr, epochs=best_epoch, validation_split=0.2, verbose=2)
+hypermodel.fit(X_train_arr, y_train_arr, epochs=best_epoch, validation_data=(X_test_arr, y_test_arr), verbose=2)
 
 eval_result = hypermodel.evaluate(X_test_arr, y_test_arr)
 print("[test loss, test accuracy]:", eval_result)
