@@ -18,6 +18,7 @@ NO - test with recurrent_activation=None
 OK - test with bayesian optimization https://philipperemy.github.io/visualization/
 OK - test with Batch Normalization
 OK - test with sigmoid
+OK - mastering hyperparameters
 - train RNN on more than 1 data sets?
 - post from 4p - requirements
 
