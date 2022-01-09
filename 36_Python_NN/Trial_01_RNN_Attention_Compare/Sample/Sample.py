@@ -2,7 +2,7 @@ from keras.preprocessing.text import one_hot
 from keras.preprocessing.sequence import pad_sequences
 from keras.models import Sequential
 from keras.layers.core import Activation, Dropout, Dense
-from keras.layers import Flatten, LSTM, Attention
+from keras.layers import Flatten, LSTM, Attention, MultiHeadAttention, Layer
 from keras.layers import GlobalMaxPooling1D
 from keras.models import Model
 from keras.layers.embeddings import Embedding
@@ -13,9 +13,39 @@ from keras.layers.merge import Concatenate
 from keras.layers import Bidirectional
 import pandas as pd
 import numpy as np
+import tensorflow as tf
+import keras
 import matplotlib.pyplot as plt
 from keras.layers import RepeatVector
 from keras.layers import TimeDistributed
+from keras import backend as K
+from keras_self_attention import SeqSelfAttention, SeqWeightedAttention
+
+class attention(Layer):
+    
+    def __init__(self, return_sequences=True):
+        self.return_sequences = return_sequences
+        super(attention,self).__init__()
+        
+    def build(self, input_shape):
+        
+        self.W=self.add_weight(name="att_weight", shape=(input_shape[-1],1),
+                               initializer="normal")
+        self.b=self.add_weight(name="att_bias", shape=(input_shape[1],1),
+                               initializer="zeros")
+        
+        super(attention,self).build(input_shape)
+        
+    def call(self, x):
+        
+        e = K.tanh(K.dot(x,self.W)+self.b)
+        a = K.softmax(e, axis=1)
+        output = x*a
+        
+        if self.return_sequences:
+            return output
+        
+        return K.sum(output, axis=1)
 
 #Creating the Dataset
 X = list()
@@ -47,11 +77,12 @@ for x in range(100):
     model1.fit(X_train_arr, y_train_arr, epochs=100, validation_split=0.2, verbose=0, batch_size=64)
 
     #model2 - with Attention()
+
+
     model2 = Sequential()
     model2.add(LSTM(100, activation='relu', input_shape=(3, 1)))
-    Attention()
+    model2.add(attention(return_sequences=True)) # receive 3D and output 3D
     model2.add(RepeatVector(3))
-    Attention()
     model2.add(LSTM(100, activation='relu', return_sequences=True))
     model2.add(TimeDistributed(Dense(1)))
     model2.compile(optimizer='adam', loss='mse')
