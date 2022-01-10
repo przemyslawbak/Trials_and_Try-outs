@@ -55,7 +55,7 @@ for x in range(repeats):
     model1.add(RepeatVector(4))
     model1.add(LSTM(100, activation='relu', return_sequences=True))
     model1.add(TimeDistributed(Dense(1)))
-    model1.compile(optimizer='adam', loss='mse')
+    model1.compile(optimizer='adam', loss='mse', metrics=['mae'])
     model1.fit(X_train_splitted, y_train_splitted, epochs=5, validation_split=0.2, verbose=2, batch_size=64)
 
     #model2 - with dropout
@@ -66,7 +66,7 @@ for x in range(repeats):
     model2.add(LSTM(100, activation='relu', return_sequences=True))
     model2.add(Dropout(0.1))
     model2.add(TimeDistributed(Dense(1)))
-    model2.compile(optimizer='adam', loss='mse')
+    model2.compile(optimizer='adam', loss='mse', metrics=['mae'])
     model2.fit(X_train_splitted, y_train_splitted, epochs=5, validation_split=0.2, verbose=2, batch_size=64)
 
     results1 = model1.evaluate(X_test_splitted, y_test_splitted, batch_size=128, verbose=2)
@@ -76,10 +76,10 @@ for x in range(repeats):
     base_results.append(results1)
     update_results.append(results2)
 
-mean_res1 = sum(base_results)/len(base_results)
-mean_res2 = sum(update_results)/len(update_results)
+mean_res1 = np.mean(base_results, axis=0)
+mean_res2 = np.mean(update_results, axis=0)
 
-print('Mean of results 1: ' + str(mean_res1)) #6.934136799827684e-05
-print('Mean of results 2: ' + str(mean_res2)) #0.0012056262959958986
+print('MSE & MAE 1 (basic): ' + str(mean_res1)) #
+print('MSE & MAE 2 (comp.): ' + str(mean_res2)) #
 
-#CONCLUSION: does not help
+#CONCLUSION: basic approach wins
