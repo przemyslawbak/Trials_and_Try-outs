@@ -22,13 +22,15 @@ OK - mastering hyperparameters
 OK - Transformer Time Series Prediction 
 OK	https://keras.io/examples/timeseries/timeseries_transformer_classification/
 NO	https://www.kaggle.com/yamqwe/tutorial-time-series-transformer-time2vec?scriptVersionId=84340000
-- LSTM with attention 
+OK - LSTM with attention 
 	https://github.com/philipperemy/keras-attention-mechanism
 	https://stackoverflow.com/questions/61909361/keras-lstm-input-dimension-setting-with-attention-class
 	https://stackoverflow.com/a/58357581
-- Transformer Time Series Prediction compare
+NO - Transformer Time Series Prediction compare
 - LSTM with attention compare
-- multi step predictions
+- LSTM encoder/decoder, where attention?
+- LSTM many-to-many, what output should be? (Dense(1) or Dense(5)?)
+- multi step future predictions
 - train RNN on more than 1 data sets?
 - post from 4p - requirements
 
