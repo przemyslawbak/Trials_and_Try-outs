@@ -47,9 +47,10 @@ y_test_splitted = np.reshape(y_test_splitted, (y_test_splitted.shape[0], 1, feat
 
 base_results = []
 update_results = []
+repeats = 10
 
-for x in range(10):
-    print('Trial No: ' + str(x) + ' of 100')
+for x in range(repeats):
+    print('Trial No: ' + str(x) + ' of ' + str(repeats))
     #model1 - base
     model1 = Sequential()
     model1.add(LSTM(100, activation='relu', input_shape=(60, 4)))
@@ -68,8 +69,8 @@ for x in range(10):
     model2.compile(optimizer='adam', loss='mse')
     model2.fit(X_train_splitted, y_train_splitted, epochs=5, validation_split=0.2, verbose=2, batch_size=64)
 
-    results1 = model1.evaluate(X_test_splitted, y_test_splitted, batch_size=128)
-    results2 = model2.evaluate(X_test_splitted, y_test_splitted, batch_size=128)
+    results1 = model1.evaluate(X_test_splitted, y_test_splitted, batch_size=128, verbose=2)
+    results2 = model2.evaluate(X_test_splitted, y_test_splitted, batch_size=128, verbose=2)
     print("test loss 1", results1)
     print("test loss 2", results2)
     base_results.append(results1)
@@ -78,7 +79,7 @@ for x in range(10):
 mean_res1 = sum(base_results)/len(base_results)
 mean_res2 = sum(update_results)/len(update_results)
 
-print('Mean of results 1: ' + str(mean_res1)) #
-print('Mean of results 2: ' + str(mean_res2)) #
+print('Mean of results 1: ' + str(mean_res1)) #6.282512258621864e-05
+print('Mean of results 2: ' + str(mean_res2)) #0.5365367595106363
 
-#CONCLUSION: 
+#CONCLUSION: regularizers DO NOT help
