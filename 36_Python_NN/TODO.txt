@@ -25,6 +25,7 @@ NO	https://www.kaggle.com/yamqwe/tutorial-time-series-transformer-time2vec?scrip
 - LSTM with attention 
 	https://github.com/philipperemy/keras-attention-mechanism
 	https://stackoverflow.com/questions/61909361/keras-lstm-input-dimension-setting-with-attention-class
+	https://stackoverflow.com/a/58357581
 - Transformer Time Series Prediction compare
 - LSTM with attention compare
 - multi step predictions

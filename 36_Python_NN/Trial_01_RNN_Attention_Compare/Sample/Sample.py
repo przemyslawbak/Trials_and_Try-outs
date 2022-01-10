@@ -77,6 +77,16 @@ for x in range(100):
     model1.fit(X_train_arr, y_train_arr, epochs=100, validation_split=0.2, verbose=0, batch_size=64)
 
     #model2 - with Attention()
+    ipt = Input(shape=(3,1))
+    x = LSTM(100, activation='relu', return_sequences=True)(ipt)
+    x = SeqSelfAttention(return_attention=True)(x) #EXCEPTION
+    x = RepeatVector(3)(x)
+    x = LSTM(100, activation='relu', return_sequences=True)(x)
+    out= TimeDistributed(Dense(1))(x)
+    model2 = keras.models.Model(ipt, out)
+
+
+
 
 
     model2 = Sequential()
