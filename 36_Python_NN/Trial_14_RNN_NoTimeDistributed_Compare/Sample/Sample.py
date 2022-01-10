@@ -4,37 +4,7 @@ import numpy as np
 from sklearn.preprocessing import MinMaxScaler
 from tensorflow.keras import Sequential
 import tensorflow as tf
-from tensorflow.keras.layers import Dense, LSTM, Dropout, TimeDistributed, RepeatVector, Bidirectional, Input, Layer
-from keras.models import Model
-from keras import backend as K
-from keras_self_attention import SeqSelfAttention, SeqWeightedAttention
-
-# Add attention layer to the deep learning network
-class attention(Layer):
-    def __init__(self,**kwargs):
-        super(attention,self).__init__(**kwargs)
-
-    def build(self,input_shape):
-        self.W=self.add_weight(name='attention_weight', shape=(input_shape[-1],1), 
-                               initializer='random_normal', trainable=True)
-        self.b=self.add_weight(name='attention_bias', shape=(input_shape[1],1), 
-                               initializer='zeros', trainable=True)        
-        super(attention, self).build(input_shape)
-
-    def call(self,x):
-        # Alignment scores. Pass them through tanh function
-        e = K.tanh(K.dot(x,self.W)+self.b)
-        # Remove dimension of size 1
-        e = K.squeeze(e, axis=-1)   
-        # Compute the weights
-        alpha = K.softmax(e)
-        # Reshape to tensorFlow format
-        alpha = K.expand_dims(alpha, axis=-1)
-        # Compute the context vector
-        context = x * alpha
-        context = K.sum(context, axis=1)
-        return context
-
+from tensorflow.keras.layers import Dense, LSTM, Dropout, TimeDistributed, RepeatVector
 
 #Import the training dataset
 filename = "GPW_DLY WIG20, 15.csv"
@@ -88,21 +58,14 @@ for x in range(repeats):
     model1.add(TimeDistributed(Dense(1)))
     model1.compile(optimizer='adam', loss='mse')
     model1.fit(X_train_splitted, y_train_splitted, epochs=5, validation_split=0.2, verbose=2, batch_size=64)
-    
-    #model2 - with Attention()
-    #RNN Network With Attention Layer
-    def create_model_with_attention(hidden_units, dense_units, input_shape, activation):
-        x=Input(shape=input_shape)
-        LSTM_layer1 = LSTM(hidden_units, return_sequences=True, activation=activation)(x)
-        attention_layer = attention()(LSTM_layer1)
-        repeat=RepeatVector(4)(attention_layer)
-        LSTM_layer2 = LSTM(hidden_units, return_sequences=True, activation=activation)(repeat)
-        outputs=TimeDistributed(Dense(dense_units, trainable=True, activation=activation))(LSTM_layer2)
-        model=Model(x,outputs)
-        model.compile(loss='mse', optimizer='adam')    
-        return model  
 
-    model2 = create_model_with_attention(hidden_units=100, dense_units=1, input_shape=(60,4), activation='relu')
+    #model2 - with no time distributed
+    model2 = Sequential()
+    model2.add(LSTM(100, activation='relu', input_shape=(60, 4)))
+    model2.add(RepeatVector(4))
+    model2.add(LSTM(100, activation='relu', return_sequences=True))
+    model2.add(Dense(1))
+    model2.compile(optimizer='adam', loss='mse')
     model2.fit(X_train_splitted, y_train_splitted, epochs=5, validation_split=0.2, verbose=2, batch_size=64)
 
     results1 = model1.evaluate(X_test_splitted, y_test_splitted, batch_size=128, verbose=2)
@@ -115,7 +78,7 @@ for x in range(repeats):
 mean_res1 = sum(base_results)/len(base_results)
 mean_res2 = sum(update_results)/len(update_results)
 
-print('Mean of results 1: ' + str(mean_res1)) #4.600586908054538e-05
-print('Mean of results 2: ' + str(mean_res2)) #0.0004911459982395172
+print('Mean of results 1: ' + str(mean_res1)) #5.719360851799138e-05
+print('Mean of results 2: ' + str(mean_res2)) #5.471942386066075e-05
 
-#CONCLUSION: in this approach Attention sux
+#CONCLUSION: performance improvement
