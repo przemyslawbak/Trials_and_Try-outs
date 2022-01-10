@@ -101,7 +101,7 @@ for x in range(repeats):
 mean_res1 = np.mean(base_results, axis=0)
 mean_res2 = np.mean(update_results, axis=0)
 
-print('MSE & MAE 1 (basic): ' + str(mean_res1)) #
-print('MSE & MAE 2 (comp.): ' + str(mean_res2)) #
+print('MSE & MAE 1 (basic): ' + str(mean_res1)) #3.252190799685195e-05, 0.004242862109094858
+print('MSE & MAE 2 (comp.): ' + str(mean_res2)) #4.4(...)e-05, 0.007(...)
 
-#CONCLUSION: 
+#CONCLUSION: minimal victory of basic approach

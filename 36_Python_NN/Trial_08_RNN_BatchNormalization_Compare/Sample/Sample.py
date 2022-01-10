@@ -4,7 +4,7 @@ import numpy as np
 from sklearn.preprocessing import MinMaxScaler
 from tensorflow.keras import Sequential
 import tensorflow as tf
-from tensorflow.keras.layers import Dense, LSTM, Dropout, TimeDistributed, RepeatVector, Bidirectional, Input, Layer
+from tensorflow.keras.layers import Dense, LSTM, Dropout, TimeDistributed, RepeatVector, Bidirectional, Input, Layer, BatchNormalization
 from keras.models import Model
 from keras import backend as K
 from keras_self_attention import SeqSelfAttention, SeqWeightedAttention
@@ -92,9 +92,9 @@ for x in range(repeats):
     #model2 - with bidirectional
     model2 = Sequential()
     model2.add(LSTM(100, activation='relu', input_shape=(60, 4)))
-    BatchNormalization()
+    model2.add(BatchNormalization(momentum=0.6))
     model2.add(RepeatVector(4))
-    model.add(BatchNormalization())
+    model2.add(BatchNormalization(momentum=0.6))
     model2.add(LSTM(100, activation='relu', return_sequences=True))
     model2.add(TimeDistributed(Dense(1)))
     model2.compile(optimizer='adam', loss='mse', metrics=['mae'])
@@ -113,4 +113,4 @@ mean_res2 = np.mean(update_results, axis=0)
 print('MSE & MAE 1 (basic): ' + str(mean_res1)) #
 print('MSE & MAE 2 (comp.): ' + str(mean_res2)) #
 
-#CONCLUSION: 
+#CONCLUSION: basic approach wins

@@ -31,6 +31,7 @@ OK - TimeDistributed?
 OK - , metrics=['mae'] in all comparisons?
 OK - LSTM with attention compare
 OK - LSTM encoder/decoder, where attention?
+- test witch EarlyStopping
 - model hyperband mastering
 - LSTM many-to-many, what output should be? (Dense(1) or Dense(5)?)
 - multi step future predictions

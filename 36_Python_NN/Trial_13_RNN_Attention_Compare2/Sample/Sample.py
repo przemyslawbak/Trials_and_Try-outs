@@ -118,4 +118,4 @@ mean_res2 = np.mean(update_results, axis=0)
 print('MSE & MAE 1 (basic): ' + str(mean_res1)) #
 print('MSE & MAE 2 (comp.): ' + str(mean_res2)) #
 
-#CONCLUSION:
+#CONCLUSION: basic approach wins
