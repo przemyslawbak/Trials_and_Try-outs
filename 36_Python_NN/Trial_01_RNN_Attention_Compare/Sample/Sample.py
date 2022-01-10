@@ -96,7 +96,7 @@ for x in range(100):
 mean_res1 = sum(base_results)/len(base_results)
 mean_res2 = sum(update_results)/len(update_results)
 
-print('Mean of results 1: ' + str(mean_res1)) #3.05502985984087
-print('Mean of results 2: ' + str(mean_res2)) #4.541839057207108
+print('Mean of results 1: ' + str(mean_res1)) #1558.4051204037667
+print('Mean of results 2: ' + str(mean_res2)) #1613.4093919467925
 
-#CONCLUSION: Attention do not improve performance
+#CONCLUSION: still no big difference
