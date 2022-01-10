@@ -47,20 +47,44 @@ class attention(Layer):
         
         return K.sum(output, axis=1)
 
-#Creating the Dataset
-X = list()
-Y = list()
-Xt = list()
-Yt = list()
-X = [x for x in range(5, 901, 5)]
-Y = [y for y in range(20, 916, 5)]
-Xt = [x for x in range(10, 910, 5)]
-Yt = [y for y in range(25, 921, 5)]
+#Import the training dataset
+filename = "GPW_DLY WIG20, 15.csv"
+dataset_train = pd.read_csv(filename)
+training_set = dataset_train[['close', 'high', 'low', 'open']]
+time_step = 60
 
-X_train_arr = np.array(X).reshape(60, 3, 1) #(samples, time-steps, features)
-y_train_arr = np.array(Y).reshape(60, 3, 1) #(samples, time-steps, features)
-X_test_arr = np.array(Xt).reshape(60, 3, 1) #(samples, time-steps, features)
-y_test_arr = np.array(Yt).reshape(60, 3, 1) #(samples, time-steps, features)
+from sklearn.preprocessing import MinMaxScaler
+#Perform feature scaling to transform the data
+scaler = MinMaxScaler(feature_range = (0, 1))
+training_set_scaled = scaler.fit_transform(training_set)
+
+#Variables
+features = len(training_set.columns)
+future_steps = 33
+time_step = 60 #learning step
+split_percent = 0.80 #train/test daa split percent (80%)
+split = int(split_percent*len(training_set_scaled)) #split percent multiplying by data rows
+
+#Create a data structure with n-time steps
+X = []
+y = []
+for i in range(time_step + 1, len(training_set_scaled)):
+    X.append(training_set_scaled[i-time_step-1:i-1, 0:features]) #take all columns into the set, including time_step legth
+    y.append(training_set_scaled[i, 0:features]) #take all columns into the set
+
+X_train_arr, y_train_arr = np.array(X), np.array(y)
+
+#Split data
+X_train_splitted = X_train_arr[:split] #(80%) model train input data
+y_train_splitted = y_train_arr[:split] #(80%) model train target data
+X_test_splitted = X_train_arr[split:] #(20%) test prediction input data
+y_test_splitted = y_train_arr[split:] #(20%) test prediction compare data
+
+#Reshaping to rows/time_step/columns
+X_train_splitted = np.reshape(X_train_splitted, (X_train_splitted.shape[0], time_step, features)) #(samples, time-steps, features), by default should be already
+y_train_splitted = np.reshape(y_train_splitted, (y_train_splitted.shape[0], 1, features))  #(samples, time-steps, features)
+X_test_splitted = np.reshape(X_test_splitted, (X_test_splitted.shape[0], time_step, features)) #(samples, time-steps, features), by default should be already
+y_test_splitted = np.reshape(y_test_splitted, (y_test_splitted.shape[0], 1, features))  #(samples, time-steps, features)
 
 base_results = []
 update_results = []
@@ -69,25 +93,25 @@ for x in range(100):
     print('Trial No: ' + str(x) + ' of 100')
     #model1 - base
     model1 = Sequential()
-    model1.add(LSTM(60, activation='relu', input_shape=(3, 1)))
-    model1.add(RepeatVector(3))
-    model1.add(LSTM(60, activation='relu', return_sequences=True))
+    model1.add(LSTM(64, activation='relu', input_shape=(60, 4)))
+    model1.add(RepeatVector(4))
+    model1.add(LSTM(64, activation='relu', return_sequences=True))
     model1.add(TimeDistributed(Dense(1)))
     model1.compile(optimizer='adam', loss='mse')
-    model1.fit(X_train_arr, y_train_arr, epochs=100, validation_data=(X_test_arr, y_test_arr), verbose=0, batch_size=64)
+    model1.fit(X_train_splitted, y_train_splitted, epochs=2, validation_split=0.2, verbose=1, batch_size=64)
 
     #model2 - with Attention()
     model2 = Sequential()
-    model2.add(LSTM(60, activation='relu', input_shape=(3, 1)))
+    model2.add(LSTM(64, activation='relu', input_shape=(60, 4)))
     model2.add(attention(return_sequences=True)) # receive 3D and output 3D
-    model2.add(RepeatVector(3))
-    model2.add(LSTM(60, activation='relu', return_sequences=True))
+    model2.add(RepeatVector(4))
+    model2.add(LSTM(64, activation='relu', return_sequences=True))
     model2.add(TimeDistributed(Dense(1)))
     model2.compile(optimizer='adam', loss='mse')
-    model2.fit(X_train_arr, y_train_arr, epochs=100, validation_data=(X_test_arr, y_test_arr), verbose=0, batch_size=64)
+    model2.fit(X_train_splitted, y_train_splitted, epochs=2, validation_split=0.2, verbose=1, batch_size=64) #ERROR
 
-    results1 = model1.evaluate(X_test_arr, y_test_arr, batch_size=128)
-    results2 = model2.evaluate(X_test_arr, y_test_arr, batch_size=128)
+    results1 = model1.evaluate(X_test_splitted, y_test_splitted, batch_size=128)
+    results2 = model2.evaluate(X_test_splitted, y_test_splitted, batch_size=128)
     print("test loss 1", results1)
     print("test loss 2", results2)
     base_results.append(results1)
