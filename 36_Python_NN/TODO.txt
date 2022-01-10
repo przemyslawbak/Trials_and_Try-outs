@@ -27,16 +27,14 @@ OK - LSTM with attention
 	https://stackoverflow.com/questions/61909361/keras-lstm-input-dimension-setting-with-attention-class
 	https://stackoverflow.com/a/58357581
 NO - Transformer Time Series Prediction compare
-- model analysis
-	https://www.tensorflow.org/tfx/guide/tfma
-	https://www.tensorflow.org/tfx/tutorials/model_analysis/tfma_basic
-- LSTM with attention compare
-- LSTM encoder/decoder, where attention?
-- LSTM many-to-many, what output should be? (Dense(1) or Dense(5)?)
 OK - TimeDistributed?
 OK - , metrics=['mae'] in all comparisons?
+OK - LSTM with attention compare
+OK - LSTM encoder/decoder, where attention?
+- model hyperband mastering
+- LSTM many-to-many, what output should be? (Dense(1) or Dense(5)?)
 - multi step future predictions
 - train RNN on more than 1 data sets?
-- post from 4p - requirements
+- post from 4p - requirements?
 
 https://stackoverflow.com/questions/48714407/rnn-regularization-which-component-to-regularize

@@ -98,10 +98,10 @@ for x in range(repeats):
     base_results.append(results1)
     update_results.append(results2)
 
-mean_res1 = sum(base_results)/len(base_results)
-mean_res2 = sum(update_results)/len(update_results)
+mean_res1 = np.mean(base_results, axis=0)
+mean_res2 = np.mean(update_results, axis=0)
 
-print('Mean of results 1: ' + str(mean_res1)) #
-print('Mean of results 2: ' + str(mean_res2)) #
+print('MSE & MAE 1 (basic): ' + str(mean_res1)) #
+print('MSE & MAE 2 (comp.): ' + str(mean_res2)) #
 
 #CONCLUSION: 

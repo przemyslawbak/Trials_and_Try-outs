@@ -86,7 +86,7 @@ for x in range(repeats):
     model1.add(RepeatVector(4))
     model1.add(LSTM(100, activation='relu', return_sequences=True))
     model1.add(TimeDistributed(Dense(1)))
-    model1.compile(optimizer='adam', loss='mse')
+    model1.compile(optimizer='adam', loss='mse', metrics=['mae'])
     model1.fit(X_train_splitted, y_train_splitted, epochs=5, validation_split=0.2, verbose=2, batch_size=64)
     
     #model2 - with Attention()
@@ -99,7 +99,7 @@ for x in range(repeats):
         LSTM_layer2 = LSTM(hidden_units, return_sequences=True, activation=activation)(repeat)
         outputs=TimeDistributed(Dense(dense_units, trainable=True, activation=activation))(LSTM_layer2)
         model=Model(x,outputs)
-        model.compile(loss='mse', optimizer='adam')    
+        model.compile(loss='mse', optimizer='adam', metrics=['mae'])    
         return model  
 
     model2 = create_model_with_attention(hidden_units=100, dense_units=1, input_shape=(60,4), activation='relu')
@@ -112,10 +112,10 @@ for x in range(repeats):
     base_results.append(results1)
     update_results.append(results2)
 
-mean_res1 = sum(base_results)/len(base_results)
-mean_res2 = sum(update_results)/len(update_results)
+mean_res1 = np.mean(base_results, axis=0)
+mean_res2 = np.mean(update_results, axis=0)
 
-print('Mean of results 1: ' + str(mean_res1)) #4.600586908054538e-05
-print('Mean of results 2: ' + str(mean_res2)) #0.0004911459982395172
+print('MSE & MAE 1 (basic): ' + str(mean_res1)) #
+print('MSE & MAE 2 (comp.): ' + str(mean_res2)) #
 
-#CONCLUSION: in this approach Attention sux
+#CONCLUSION:
