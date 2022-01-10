@@ -33,6 +33,8 @@ NO - Transformer Time Series Prediction compare
 - LSTM with attention compare
 - LSTM encoder/decoder, where attention?
 - LSTM many-to-many, what output should be? (Dense(1) or Dense(5)?)
+OK - TimeDistributed?
+OK - , metrics=['mae'] in all comparisons?
 - multi step future predictions
 - train RNN on more than 1 data sets?
 - post from 4p - requirements
