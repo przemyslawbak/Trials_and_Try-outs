@@ -52,15 +52,15 @@ X = list()
 Y = list()
 Xt = list()
 Yt = list()
-X = [x for x in range(5, 301, 5)]
-Y = [y for y in range(20, 316, 5)]
-Xt = [x for x in range(10, 310, 5)]
-Yt = [y for y in range(25, 321, 5)]
+X = [x for x in range(5, 901, 5)]
+Y = [y for y in range(20, 916, 5)]
+Xt = [x for x in range(10, 910, 5)]
+Yt = [y for y in range(25, 921, 5)]
 
-X_train_arr = np.array(X).reshape(20, 3, 1) #(samples, time-steps, features)
-y_train_arr = np.array(Y).reshape(20, 3, 1) #(samples, time-steps, features)
-X_test_arr = np.array(Xt).reshape(20, 3, 1) #(samples, time-steps, features)
-y_test_arr = np.array(Yt).reshape(20, 3, 1) #(samples, time-steps, features)
+X_train_arr = np.array(X).reshape(60, 3, 1) #(samples, time-steps, features)
+y_train_arr = np.array(Y).reshape(60, 3, 1) #(samples, time-steps, features)
+X_test_arr = np.array(Xt).reshape(60, 3, 1) #(samples, time-steps, features)
+y_test_arr = np.array(Yt).reshape(60, 3, 1) #(samples, time-steps, features)
 
 base_results = []
 update_results = []
@@ -69,34 +69,22 @@ for x in range(100):
     print('Trial No: ' + str(x) + ' of 100')
     #model1 - base
     model1 = Sequential()
-    model1.add(LSTM(100, activation='relu', input_shape=(3, 1)))
+    model1.add(LSTM(60, activation='relu', input_shape=(3, 1)))
     model1.add(RepeatVector(3))
-    model1.add(LSTM(100, activation='relu', return_sequences=True))
+    model1.add(LSTM(60, activation='relu', return_sequences=True))
     model1.add(TimeDistributed(Dense(1)))
     model1.compile(optimizer='adam', loss='mse')
-    model1.fit(X_train_arr, y_train_arr, epochs=100, validation_split=0.2, verbose=0, batch_size=64)
+    model1.fit(X_train_arr, y_train_arr, epochs=100, validation_data=(X_test_arr, y_test_arr), verbose=0, batch_size=64)
 
     #model2 - with Attention()
-    ipt = Input(shape=(3,1))
-    x = LSTM(100, activation='relu', return_sequences=True)(ipt)
-    x = SeqSelfAttention(return_attention=True)(x) #EXCEPTION
-    x = RepeatVector(3)(x)
-    x = LSTM(100, activation='relu', return_sequences=True)(x)
-    out= TimeDistributed(Dense(1))(x)
-    model2 = keras.models.Model(ipt, out)
-
-
-
-
-
     model2 = Sequential()
-    model2.add(LSTM(100, activation='relu', input_shape=(3, 1)))
+    model2.add(LSTM(60, activation='relu', input_shape=(3, 1)))
     model2.add(attention(return_sequences=True)) # receive 3D and output 3D
     model2.add(RepeatVector(3))
-    model2.add(LSTM(100, activation='relu', return_sequences=True))
+    model2.add(LSTM(60, activation='relu', return_sequences=True))
     model2.add(TimeDistributed(Dense(1)))
     model2.compile(optimizer='adam', loss='mse')
-    model2.fit(X_train_arr, y_train_arr, epochs=100, validation_split=0.2, verbose=0, batch_size=64)
+    model2.fit(X_train_arr, y_train_arr, epochs=100, validation_data=(X_test_arr, y_test_arr), verbose=0, batch_size=64)
 
     results1 = model1.evaluate(X_test_arr, y_test_arr, batch_size=128)
     results2 = model2.evaluate(X_test_arr, y_test_arr, batch_size=128)
