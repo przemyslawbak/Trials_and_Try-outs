@@ -120,5 +120,3 @@ plt.xlabel('Time')
 plt.ylabel('Column index 3')
 plt.legend()
 plt.show()
-
-#todo: future prediction
