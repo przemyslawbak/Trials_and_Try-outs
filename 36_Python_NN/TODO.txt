@@ -31,11 +31,12 @@ OK - TimeDistributed?
 OK - , metrics=['mae'] in all comparisons?
 OK - LSTM with attention compare
 OK - LSTM encoder/decoder, where attention?
-- test witch EarlyStopping
-- model hyperband mastering
-- LSTM many-to-many, what output should be? (Dense(1) or Dense(5)?)
+NO - test witch EarlyStopping
+OK - model hyperband mastering
 - multi step future predictions
-- train RNN on more than 1 data sets?
+OK - LSTM many-to-many, what output should be? (Dense(1) or Dense(5)?) https://stackoverflow.com/questions/43034960/many-to-one-and-many-to-many-lstm-examples-in-keras
+- finding best hyperparams
+NO - train RNN on more than 1 data sets?
 - post from 4p - requirements?
 
 https://stackoverflow.com/questions/48714407/rnn-regularization-which-component-to-regularize

@@ -56,7 +56,7 @@ model = Sequential()
 
 #Add Bidirectional LSTM, has better performance than stacked LSTM
 model = Sequential()
-model.add(LSTM(100, activation='relu', input_shape = (X_train_splitted.shape[1], X_train_splitted.shape[2]), return_sequences=True)) #input_shape will be (2494-size, 60-shape[1], 5-shape[2])
+model.add(Bidirectional(LSTM(128, activation='relu', input_shape = (X_train_splitted.shape[1], X_train_splitted.shape[2]), return_sequences=True)))
 model.add(Dense(4))
 
 #Compile the RNN
