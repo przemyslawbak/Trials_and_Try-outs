@@ -27,12 +27,12 @@ X = []
 y = []
 for i in range(time_step + 1, len(training_set_scaled)):
     X.append(training_set_scaled[i-time_step-1:i-1, 0:len(training_set.columns)]) #take all columns into the set, including time_step legth
-    y.append(training_set_scaled[i-time_step:i, 0:len(training_set.columns)]) #take all columns into the set
+    y.append(training_set_scaled[i-time_step:i, 0:len(training_set.columns)]) #take all columns into the set, including time_step legth
 
 X_train_arr, y_train_arr = np.array(X), np.array(y)
 
-print(X_train_arr.shape) #(2494, 60, 5) <-- train data, having now 2494 rows, with 60 time steps, each row has 5 features (MANY)
-print(y_train_arr.shape) #(2494, 5) <-- target data, having now 2494 rows, with 1 time step, but 5 features (TO MANY)
+print(X_train_arr.shape) #(2494, 100, 4) <-- train data, having now 2494 rows, with 60 time steps, each row has 4 features (MANY)
+print(y_train_arr.shape) #(2494, 100, 4) <-- target data, having now 2494 rows, with 1 time step, but 4 features (TO MANY)
 
 #Split data
 X_train_splitted = X_train_arr[:split] #(80%) model train input data
@@ -41,25 +41,25 @@ X_test_splitted = X_train_arr[split:] #(20%) test prediction input data
 y_test_splitted = y_train_arr[split:] #(20%) test prediction compare data
 
 #Reshaping to rows/time_step/columns
-X_train_splitted = np.reshape(X_train_splitted, (X_train_splitted.shape[0], X_train_splitted.shape[1], X_train_splitted.shape[2])) #(samples, time-steps, features), by default should be already
+X_train_splitted = np.reshape(X_train_splitted, (X_train_splitted.shape[0], X_train_splitted.shape[1], X_train_splitted.shape[2])) #(samples, time-steps, features)
 y_train_splitted = np.reshape(y_train_splitted, (y_train_splitted.shape[0], y_train_splitted.shape[1], y_train_splitted.shape[2]))  #(samples, time-steps, features)
-X_test_splitted = np.reshape(X_test_splitted, (X_test_splitted.shape[0], X_test_splitted.shape[1], X_test_splitted.shape[2])) #(samples, time-steps, features), by default should be already
+X_test_splitted = np.reshape(X_test_splitted, (X_test_splitted.shape[0], X_test_splitted.shape[1], X_test_splitted.shape[2])) #(samples, time-steps, features)
 y_test_splitted = np.reshape(y_test_splitted, (y_test_splitted.shape[0], y_test_splitted.shape[1], y_test_splitted.shape[2]))  #(samples, time-steps, features)
 
-print(X_train_arr.shape) #(2494, 60, 5)
-print(y_train_arr.shape) #(2494, 1, 5)
-print(X_test_splitted.shape) #(450, 60, 5)
-print(y_test_splitted.shape) #(450, 1, 5)
+print(X_train_arr.shape) #(2494, 60, 4)
+print(y_train_arr.shape) #(2494, 1, 4)
+print(X_test_splitted.shape) #(450, 60, 4)
+print(y_test_splitted.shape) #(450, 1, 4)
 
 #Initialize the RNN
 model = Sequential()
 
 #Add Bidirectional LSTM, has better performance than stacked LSTM
 model = Sequential()
-model.add(Bidirectional(LSTM(128, activation='relu', input_shape = (X_train_splitted.shape[1], X_train_splitted.shape[2]), return_sequences=True)))
-model.add(Dense(4))
+model.add(Bidirectional(LSTM(128, activation='relu', input_shape = (X_train_splitted.shape[1], X_train_splitted.shape[2]), return_sequences=True))) #test no o layers
+model.add(Dense(4)) #4 outputs, gives x, 100, 4
 
-#Compile the RNN
+#Compile many-to-many
 model.compile(optimizer='adam', loss = 'mean_squared_error', metrics=['accuracy'])
 
 #Fit to the training set
@@ -67,24 +67,4 @@ model.fit(X_train_splitted, y_train_splitted, epochs=5, batch_size=64, validatio
 
 #Test results
 y_pred = model.predict(X_test_splitted, verbose=1)
-print(y_pred.shape) #(450, 5, 1) - need to be reshaped for (450, 1, 5)
-
-#Reshaping data for inverse transforming
-y_test_splitted = np.reshape(y_test_splitted, (y_test_splitted.shape[0], 5)) #reshaping for (450, 1, 5)
-y_pred = np.reshape(y_pred, (y_pred.shape[0], 5)) #reshaping for (450, 1, 5)
-
-#Reversing transform to get proper data values
-y_test_splitted = scaler.inverse_transform(y_test_splitted)
-y_pred = scaler.inverse_transform(y_pred)
-
-#Plot data
-plt.figure(figsize=(14,5))
-plt.plot(y_test_splitted[-time_step:, 3], label = "Real values") #I am interested only with display of column index 3
-plt.plot(y_pred[-time_step:, 3], label = 'Predicted values') # #I am interested only with display of column index 3
-plt.title('Prediction test')
-plt.xlabel('Time')
-plt.ylabel('Column index 3')
-plt.legend()
-plt.show()
-
-#todo: future prediction
+print(y_pred.shape) 
