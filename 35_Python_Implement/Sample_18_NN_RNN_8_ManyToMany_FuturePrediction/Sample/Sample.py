@@ -18,14 +18,14 @@ training_set_scaled = scaler.fit_transform(training_set)
 
 #Model variables
 num_batch = 16
-num_epochs = 2
+num_epochs = 10
 num_validation=0.2
 num_verbose=1
 
 #Variables
 features = len(training_set.columns)
-future_steps = 33
-time_steps = 100 #learning step
+future_steps = 10
+time_steps = 200 #learning step
 split_percent = 0.80 #train/test daa split percent (80%)
 split = int(split_percent*len(training_set_scaled)) #split percent multiplying by data rows
 
@@ -64,6 +64,7 @@ model = Sequential()
 #Add Bidirectional LSTM, has better performance than stacked LSTM
 model = Sequential()
 model.add(Bidirectional(LSTM(128, activation='relu', input_shape = (time_steps, features), return_sequences=True))) #todo: tune qty o layers
+model.add(Bidirectional(LSTM(128, activation='relu', input_shape = (time_steps, features), return_sequences=True))) #todo: tune qty o layers
 model.add(Dense(4)) #4 outputs, gives output shape (x, 100, 4)
 
 #Compile many-to-many
@@ -99,16 +100,17 @@ y_pred = np.append(y_pred, future_results) #combine initial y_pred result array 
 y_pred = np.reshape(y_pred, (y_test_splitted.shape[0] + future_steps, time_steps, features)) #reshaping to (450 + 33, 100, 4)
 
 #Reshaping data for reverse transforming
-#y_test_splitted = np.reshape(y_test_splitted, (y_test_splitted.shape[0], features)) #reshaping to (450, 1, 4)
+y_pred = np.reshape(y_pred[:, -1:, :], (y_pred.shape[0], features))
+y_test_splitted = np.reshape(y_test_splitted[:, -1:, :], (y_test_splitted.shape[0], features))
 
 #Reversing transform to get proper data values
-y_test_splitted = scaler.inverse_transform(y_test_splitted) #Found array with dim 3. Estimator expected <= 2.
-y_pred = scaler.inverse_transform(y_pred) #Found array with dim 3. Estimator expected <= 2.
+y_test_splitted = scaler.inverse_transform(y_test_splitted)
+y_pred = scaler.inverse_transform(y_pred)
 
 #Plot data
 plt.figure(figsize=(14,features))
 plt.plot(y_test_splitted[-time_steps:, 3], label = "Real values") #I am interested only with display of column index 3
-plt.plot(y_pred[-time_steps - future_steps:, 3], label = 'Predicted values') # #I am interested only with display of column index 3
+plt.plot(y_pred[-time_steps - future_steps:, 3], label = 'Predicted values') #I am interested only with display of column index 3
 plt.title('Prediction test')
 plt.xlabel('Time')
 plt.ylabel('Column index 3')
