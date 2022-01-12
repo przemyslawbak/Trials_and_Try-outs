@@ -110,8 +110,8 @@ tuner = kt.Hyperband(model_builder,
                      max_epochs=10,
                      factor=3,
                      directory=os.path.normpath('C:/keras_tuning'),
-                     project_name='intro_to_kt',
-                     overwrite=True)
+                     project_name='wig_20_first',
+                     overwrite=False)
 print(tuner.search_space_summary()
 )
 stop_early = tf.keras.callbacks.EarlyStopping(monitor='val_acc', patience=es_patinence)
