@@ -28,8 +28,10 @@ scaler = MinMaxScaler(feature_range = (0, 1))
 training_set_scaled = scaler.fit_transform(training_set)
 
 #Model values
+dropout_rate=0.0
+num_layers=2
 future_steps = 32
-time_steps = 100 #learning step
+time_steps = 100
 lstm_units = 100
 num_batch = 64
 num_epochs = 10
@@ -76,8 +78,9 @@ model = Sequential()
 
 #Add Bidirectional LSTM, has better performance than stacked LSTM
 model = Sequential()
-model.add(Bidirectional(LSTM(lstm_units, activation='relu', return_sequences=True))) #todo: tune qty o layers
-model.add(Bidirectional(LSTM(lstm_units, activation='relu', return_sequences=True))) #todo: tune qty o layers
+for i in range(num_layers):
+        model.add(Bidirectional(LSTM(lstm_units, activation='relu', return_sequences=True)))
+        model.add(Dropout(rate=dropout_rate))
 model.add(Dense(features)) #4 outputs, gives output shape (x, 100, 4)
 
 #Compile many-to-many
@@ -86,6 +89,10 @@ model.compile(optimizer='adam', loss = 'mae', metrics=['mae', 'acc', 'mse'])
 #Fit to the training set
 es = EarlyStopping(monitor='val_mae', mode='min', patience=es_patinence)
 model.fit(X_train_splitted, y_train_splitted, epochs=num_epochs, batch_size=num_batch, validation_split=num_validation, verbose=num_verbose, callbacks=[es])
+
+#Evaluating
+eval = model.evaluate(X_test_splitted, y_test_splitted, batch_size=num_batch, verbose=num_verbose)
+print('Evaluation: ' + str(eval))
 
 #Predicting future
 def predict_future():
@@ -130,3 +137,5 @@ plt.xlabel('Time')
 plt.ylabel('Column index 3')
 plt.legend()
 plt.show()
+
+#Evaluation results
