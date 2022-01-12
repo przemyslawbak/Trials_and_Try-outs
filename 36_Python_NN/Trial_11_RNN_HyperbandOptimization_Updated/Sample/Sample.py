@@ -6,6 +6,7 @@ import pandas as pd
 import os
 from sklearn.preprocessing import MinMaxScaler
 from tensorflow.keras.layers import Dense, LSTM, Dropout, TimeDistributed, Activation, RepeatVector, Bidirectional
+
 #Import the training dataset
 filename = "GPW_DLY WIG20, 15_OLD.csv"
 dataset_train = pd.read_csv(filename)
