@@ -6,6 +6,7 @@ import numpy as np
 from sklearn.preprocessing import MinMaxScaler
 from tensorflow.keras import Sequential
 from tensorflow.keras.layers import Dense, LSTM, Dropout, TimeDistributed, Activation, RepeatVector, Bidirectional
+from tensorflow.keras.callbacks import EarlyStopping
 
 #Import the training dataset
 filename = "GPW_DLY WIG20, 15.csv"
@@ -17,14 +18,15 @@ scaler = MinMaxScaler(feature_range = (0, 1))
 training_set_scaled = scaler.fit_transform(training_set)
 
 #Model variables
-num_batch = 16
-num_epochs = 10
+num_batch = 64
+num_epochs = 1000
 num_validation=0.2
 num_verbose=1
+es_patinence = 5
 
 #Variables
 features = len(training_set.columns)
-future_steps = 10
+future_steps = 32
 time_steps = 200 #learning step
 split_percent = 0.80 #train/test daa split percent (80%)
 split = int(split_percent*len(training_set_scaled)) #split percent multiplying by data rows
@@ -68,10 +70,11 @@ model.add(Bidirectional(LSTM(128, activation='relu', input_shape = (time_steps, 
 model.add(Dense(4)) #4 outputs, gives output shape (x, 100, 4)
 
 #Compile many-to-many
-model.compile(optimizer='adam', loss = 'mean_squared_error', metrics=['accuracy'])
+model.compile(optimizer='adam', loss = 'mae', metrics=['mae', 'acc', 'mse'])
 
 #Fit to the training set
-model.fit(X_train_splitted, y_train_splitted, epochs=num_epochs, batch_size=num_batch, validation_split=num_validation, verbose=num_verbose)
+es = EarlyStopping(monitor='val_loss', mode='min', patience=es_patinence)
+model.fit(X_train_splitted, y_train_splitted, epochs=num_epochs, batch_size=num_batch, validation_split=num_validation, verbose=num_verbose, callbacks=[es])
 
 #Predicting future
 def predict_future():
