@@ -17,7 +17,10 @@ training_set = dataset_train[['close', 'high', 'low', 'open']]
 scaler = MinMaxScaler(feature_range = (0, 1))
 training_set_scaled = scaler.fit_transform(training_set)
 
-#Model variables
+#Model values
+future_steps = 32
+time_steps = 100 #learning step
+lstm_units = 100
 num_batch = 64
 num_epochs = 1000
 num_validation=0.2
@@ -26,8 +29,6 @@ es_patinence = 5
 
 #Variables
 features = len(training_set.columns)
-future_steps = 32
-time_steps = 200 #learning step
 split_percent = 0.80 #train/test daa split percent (80%)
 split = int(split_percent*len(training_set_scaled)) #split percent multiplying by data rows
 
@@ -65,8 +66,8 @@ model = Sequential()
 
 #Add Bidirectional LSTM, has better performance than stacked LSTM
 model = Sequential()
-model.add(Bidirectional(LSTM(128, activation='relu', input_shape = (time_steps, features), return_sequences=True))) #todo: tune qty o layers
-model.add(Bidirectional(LSTM(128, activation='relu', input_shape = (time_steps, features), return_sequences=True))) #todo: tune qty o layers
+model.add(Bidirectional(LSTM(lstm_units, activation='relu', return_sequences=True))) #todo: tune qty o layers
+model.add(Bidirectional(LSTM(lstm_units, activation='relu', return_sequences=True))) #todo: tune qty o layers
 model.add(Dense(4)) #4 outputs, gives output shape (x, 100, 4)
 
 #Compile many-to-many
