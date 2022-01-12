@@ -11,7 +11,17 @@ from tensorflow.keras.callbacks import EarlyStopping
 #Import the training dataset
 filename = "GPW_DLY WIG20, 15.csv"
 dataset_train = pd.read_csv(filename)
+
+dataset_train['DateTime'] = pd.to_datetime(dataset_train['time'])
+dataset_train['DateTime'] = dataset_train['DateTime'].dt.tz_localize('UTC').dt.tz_convert('Europe/Berlin')
 training_set = dataset_train[['close', 'high', 'low', 'open']]
+training_set["day"] = dataset_train['DateTime'].map(lambda x: x.day)
+training_set["month"] = dataset_train['DateTime'].map(lambda x: x.month)
+training_set["year"] = dataset_train['DateTime'].map(lambda x: x.year)
+training_set["hour"] = dataset_train['DateTime'].map(lambda x: x.hour)
+training_set["minute"] = dataset_train['DateTime'].map(lambda x: x.minute)
+
+print(training_set)
 
 #Perform feature scaling to transform the data
 scaler = MinMaxScaler(feature_range = (0, 1))
@@ -22,7 +32,7 @@ future_steps = 32
 time_steps = 100 #learning step
 lstm_units = 100
 num_batch = 64
-num_epochs = 1000
+num_epochs = 10
 num_validation=0.2
 num_verbose=1
 es_patinence = 5
@@ -68,13 +78,13 @@ model = Sequential()
 model = Sequential()
 model.add(Bidirectional(LSTM(lstm_units, activation='relu', return_sequences=True))) #todo: tune qty o layers
 model.add(Bidirectional(LSTM(lstm_units, activation='relu', return_sequences=True))) #todo: tune qty o layers
-model.add(Dense(4)) #4 outputs, gives output shape (x, 100, 4)
+model.add(Dense(features)) #4 outputs, gives output shape (x, 100, 4)
 
 #Compile many-to-many
 model.compile(optimizer='adam', loss = 'mae', metrics=['mae', 'acc', 'mse'])
 
 #Fit to the training set
-es = EarlyStopping(monitor='val_loss', mode='min', patience=es_patinence)
+es = EarlyStopping(monitor='val_mae', mode='min', patience=es_patinence)
 model.fit(X_train_splitted, y_train_splitted, epochs=num_epochs, batch_size=num_batch, validation_split=num_validation, verbose=num_verbose, callbacks=[es])
 
 #Predicting future
