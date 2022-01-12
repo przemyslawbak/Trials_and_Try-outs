@@ -52,7 +52,7 @@ X_test_splitted = np.reshape(X_test_splitted, (X_test_splitted.shape[0], time_st
 y_test_splitted = np.reshape(y_test_splitted, (y_test_splitted.shape[0], time_steps, features))
 
 def model_builder(hp):
-    hp_layers = hp.Int(
+    hp_layers = hp.Int( #best: 5
         'num_layers',
         min_value=1,
         max_value=5,
@@ -62,44 +62,51 @@ def model_builder(hp):
     hp_bi_units1 = hp.Int(
         'units',
         min_value=32,
-        max_value=512,
+        max_value=32,
         step=32,
-        default=128
+        default=32
     )
-    hp_bi_units2 = hp.Int(
-        'units',
-        min_value=32,
-        max_value=512,
-        step=32,
-        default=128
+    hp_activation_bilstm = hp.Choice( #best: elu
+        'activation_bilstm',
+        values=['elu'],
+        default='elu'
     )
-    hp_activation_bilstm = hp.Choice(
-        'activation',
-        values=['relu', 'tanh', 'sigmoid', 'elu'],
-        default='relu'
+    hp_activation_dense = hp.Choice( #best: sigmoid
+        'activation_dense',
+        values=['sigmoid'],
+        default='sigmoid'
     )
-    hp_activation_dense = hp.Choice(
-        'activation',
-        values=['relu', 'tanh', 'sigmoid', 'elu'],
-        default='relu'
-    )
-    hp_dropout = hp.Float(
-                'dropout_rate',
+    hp_dropout = hp.Float( #best: 0.1
+                'dropout_rate', #test at the end
                 min_value=0.0,
                 max_value=0.5,
-                default=0.1,
+                default=0.4,
                 step=0.1,
             )
-    hp_adam = hp.Float(
+    hp_adam = hp.Float( #best: 0.022
                     'adam_learning_rate',
-                    min_value=1e-4,
-                    max_value=1e-2,
+                    min_value=0.022,
+                    max_value=0.022,
                     sampling='LOG',
-                    default=1e-3
+                    default=0.022
+                )
+    hp_l1 = hp.Float( #best: 0.00011
+                    'hp_l1',
+                    min_value=0.00011,
+                    max_value=0.00011,
+                    sampling='LOG',
+                    default=0.00011
+                )
+    hp_l2 = hp.Float( #best: 0.00011
+                    'hp_l2',
+                    min_value=0.00011,
+                    max_value=0.00011,
+                    sampling='LOG',
+                    default=0.00011
                 )
     model = tf.keras.Sequential()
     for i in range(hp_layers):
-        model.add(Bidirectional(LSTM(units=hp_bi_units1, activation=hp_activation_bilstm, return_sequences=True)))
+        model.add(Bidirectional(LSTM(units=hp_bi_units1, activation=hp_activation_bilstm, return_sequences=True, kernel_regularizer=tf.keras.regularizers.l1_l2(l1=hp_l1, l2=hp_l2))))
         model.add(Dropout(rate=hp_dropout))
     model.add(Dense(4, activation=hp_activation_dense))
     model.compile(loss='mae', metrics=['mae', 'acc', 'mse'], optimizer=keras.optimizers.Adam(learning_rate=hp_adam))
@@ -107,33 +114,29 @@ def model_builder(hp):
 
 #TUNE - Hyperband
 tuner = kt.Hyperband(model_builder,
-                     objective='acc',
+                     objective='val_mae',
                      max_epochs=10,
                      factor=3,
                      directory=os.path.normpath('C:/keras_tuning'),
-                     project_name='wig_20_first',
-                     overwrite=False)
+                     project_name='wig_20',
+                     overwrite=True)
 print(tuner.search_space_summary()
 )
-stop_early = tf.keras.callbacks.EarlyStopping(monitor='val_acc', patience=es_patinence)
+stop_early = tf.keras.callbacks.EarlyStopping(monitor='val_mae', patience=es_patinence, mode='min')
 
 tuner.search(X_train_splitted, y_train_splitted, epochs=num_epochs, validation_data=(X_test_splitted, y_test_splitted), callbacks=[stop_early], verbose=num_verbose)
 
 # Get the optimal hyperparameters
 best_hps=tuner.get_best_hyperparameters(num_trials=1)[0]
 
-print(f"""
-The hyperparameter search is complete. The optimal number of units in the first densely-connected
-layer is {best_hps.get('units')} and the optimal learning rate for the optimizer
-is {best_hps.get('learning_rate')}.
-""")
+print('best')
 print(best_hps)
 
 # Build the model with the optimal hyperparameters and train it on the data for 50 epochs
 model = tuner.hypermodel.build(best_hps)
 history = model.fit(X_train_splitted, y_train_splitted, epochs=50, validation_data=(X_test_splitted, y_test_splitted), verbose=num_verbose)
 
-val_acc_per_epoch = history.history['val_accuracy']
+val_acc_per_epoch = history.history['val_mae']
 best_epoch = val_acc_per_epoch.index(max(val_acc_per_epoch)) + 1
 print('Best epoch: %d' % (best_epoch,))
 
