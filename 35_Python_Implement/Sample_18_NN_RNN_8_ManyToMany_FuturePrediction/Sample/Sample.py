@@ -19,7 +19,7 @@ training_set["day"] = dataset_train['DateTime'].map(lambda x: x.day)
 training_set["month"] = dataset_train['DateTime'].map(lambda x: x.month)
 training_set["year"] = dataset_train['DateTime'].map(lambda x: x.year)
 training_set["hour"] = dataset_train['DateTime'].map(lambda x: x.hour)
-training_set["minute"] = dataset_train['DateTime'].map(lambda x: x.minute)
+#training_set["minute"] = dataset_train['DateTime'].map(lambda x: x.minute)
 
 print(training_set)
 
@@ -28,13 +28,13 @@ scaler = MinMaxScaler(feature_range = (0, 1))
 training_set_scaled = scaler.fit_transform(training_set)
 
 #Model values
-dropout_rate=0.0
+dropout_rate=0.1
 num_layers=2
-future_steps = 32
-time_steps = 100
-lstm_units = 100
-num_batch = 64
-num_epochs = 10
+future_steps = 30
+time_steps = 1000
+lstm_units = 128
+num_batch = 128
+num_epochs = 5
 num_validation=0.2
 num_verbose=1
 es_patinence = 5
@@ -138,4 +138,4 @@ plt.ylabel('Column index 3')
 plt.legend()
 plt.show()
 
-#Evaluation results
+#Evaluation results (loss, mae, acc, mse)

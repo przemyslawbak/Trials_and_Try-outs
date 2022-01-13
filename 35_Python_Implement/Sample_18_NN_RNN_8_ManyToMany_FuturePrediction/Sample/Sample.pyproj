@@ -24,6 +24,7 @@
     <Compile Include="Sample.py" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="GPW_DLY WIG20, 15_BIG.csv" />
     <Content Include="GPW_DLY WIG20, 15.csv" />
     <Content Include="GPW_DLY WIG20, 15_OLD.csv" />
   </ItemGroup>
