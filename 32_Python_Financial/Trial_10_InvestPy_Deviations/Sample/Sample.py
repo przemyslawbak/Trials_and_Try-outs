@@ -24,6 +24,10 @@ importanceDictionary = {
 
 replacementDictionary = {"B": "", "M": "", "%": "", ",": ""}
 
+deviationDictionary = {
+    '' : ''
+    }
+
 def getEconomicData(from_date, to_date, country):
 
     df = investpy.economic_calendar(
@@ -32,8 +36,9 @@ def getEconomicData(from_date, to_date, country):
     countries=[country],
     )
 
-    #'All Day' events remove
+    #'All Day' and 'Tentative' events remove
     df = df[df['time'] != 'All Day']
+    df = df[df['time'] != 'Tentative']
 
     #combine columns: 'date' + 'time'
     df['date_time'] = pd.to_datetime(df['date'] + ' ' + df['time'])
@@ -46,7 +51,7 @@ def getEconomicData(from_date, to_date, country):
     #tz_localize time zone
     df['date_time'] = df['date_time'].dt.tz_localize('GMT').dt.tz_convert(localizeDictionary[country])
 
-    #numeric imporance
+    #numeric importance
     df['importance'] = df['importance'].map(importanceDictionary).fillna(0.00)
 
     #replacing substrings
@@ -56,7 +61,6 @@ def getEconomicData(from_date, to_date, country):
     df["actual"] = pd.to_numeric(df["actual"])
     df["previous"] = pd.to_numeric(df["previous"])
     df["forecast"] = pd.to_numeric(df["forecast"])
-
 
     return df
 
@@ -68,11 +72,11 @@ dataDf = getEconomicData('15/01/2021', '31/01/2022', 'poland')
 #OK: tz_localize time zone
 #OK: combine columns: 'date' + 'time'
 #OK: numeric imporance
-#todo: for deviation, compute 'previous' - 'actual' difference
 #todo: deviation dictionary for 'event' column
+#todo: for deviation, compute 'previous' - 'actual' difference
 #OK: remove nones?
-#NO: 'All Day' events change to 09:00
-#OK: 'All Day' events remove
+#NO: 'All Day' and 'Tentative' events change to 09:00
+#OK: 'All Day' and 'Tentative' events remove
 
 
 
