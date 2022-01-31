@@ -18,7 +18,6 @@ timeZoneDictionary = {
     }
 
 importanceDictionary = {
-    'NaN' : 0.00,
     'low' : 0.15,
     'medium' : 0.40,
     'high' : 1.00,
@@ -39,8 +38,11 @@ def getEconomicData(from_date, to_date, country):
     df.drop('date', axis=1, inplace=True)
     df.drop('time', axis=1, inplace=True)
 
+    #only full hours
+    df['date_time'] = df['date_time'].dt.to_period('H')
+
     #numeric imporance
-    df['importance'] = df['importance'].map(importanceDictionary)
+    df['importance'] = df['importance'].map(importanceDictionary).fillna(0.00)
 
     return df
 
@@ -48,7 +50,7 @@ dataDf = getEconomicData('15/01/2021', '31/01/2022', 'poland')
 
 
 
-#todo: only full hours
+#OK: only full hours
 #todo: tz_localize time zone
 #OK: combine columns: 'date' + 'time'
 #OK: numeric imporance
