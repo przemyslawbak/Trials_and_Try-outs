@@ -4,6 +4,7 @@
 
 import investpy
 import pandas as pd
+import numpy as np
 pd.set_option('display.max_rows', 1000)
 pd.set_option('display.max_columns', 10)
 pd.set_option('display.width', 1000)
@@ -41,15 +42,22 @@ def getEconomicData(from_date, to_date, country):
     df = df[df['time'] != 'Tentative']
 
     #combine columns: 'date' + 'time'
-    df['date_time'] = pd.to_datetime(df['date'] + ' ' + df['time'])
-    df.drop('date', axis=1, inplace=True)
-    df.drop('time', axis=1, inplace=True)
+    df['date_time'] = pd.to_datetime(df['date'] + ' ' + df['time'], format="%d/%m/%Y %H:%M")
+    #df.drop('date', axis=1, inplace=True)
+    #df.drop('time', axis=1, inplace=True)
 
     #only full hours
-    df['date_time'] = df['date_time'] - pd.to_timedelta(df['date_time'].dt.minute, unit='m')
+    df['date_time'] = df['date_time'] - pd.to_timedelta(df['date_time'].dt.minute, unit='m').sort_values()
 
     #tz_localize time zone
     df['date_time'] = df['date_time'].dt.tz_localize('GMT').dt.tz_convert(localizeDictionary[country])
+
+    #replace too big or too small hour values
+    hours=df['date_time'].dt.hour
+    tooMany=hours > 17
+    tooLess=hours < 9
+    hours=df['date_time'] = np.where(tooMany, df['date_time'] - pd.to_timedelta(df['date_time'].dt.hour - 17,unit='h'), df['date_time'])
+    hours=df['date_time'] = np.where(tooLess, df['date_time'] + pd.to_timedelta(9 - df['date_time'].dt.hour,unit='h'), df['date_time'])
 
     #numeric importance
     df['importance'] = df['importance'].map(importanceDictionary).fillna(0.00)
@@ -64,7 +72,7 @@ def getEconomicData(from_date, to_date, country):
 
     return df
 
-dataDf = getEconomicData('15/01/2021', '31/01/2022', 'poland')
+dataDf = getEconomicData('15/01/2019', '31/01/2022', 'poland')
 
 
 
@@ -72,6 +80,7 @@ dataDf = getEconomicData('15/01/2021', '31/01/2022', 'poland')
 #OK: tz_localize time zone
 #OK: combine columns: 'date' + 'time'
 #OK: numeric imporance
+#OK: replace too big or too small hour values
 #todo: deviation dictionary for 'event' column
 #todo: for deviation, compute 'previous' - 'actual' difference
 #OK: remove nones?
