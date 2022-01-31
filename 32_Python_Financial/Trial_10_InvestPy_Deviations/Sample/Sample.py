@@ -8,13 +8,12 @@ pd.set_option('display.max_rows', 1000)
 pd.set_option('display.max_columns', 10)
 pd.set_option('display.width', 1000)
 
-
-timeZoneDictionary = {
-    'poland':'GMT +1:00',
-    'united states':'GMT -5:00',
-    'germany':'GMT +1:00',
-    'euro zone':'GMT +1:00',
-    'japan':'GMT +9:00',
+localizeDictionary = {
+    'poland':'Europe/Berlin',
+    'united states':'US/Eastern',
+    'germany':'Europe/Berlin',
+    'euro zone':'Europe/Berlin',
+    'japan':'Japan',
     }
 
 importanceDictionary = {
@@ -29,17 +28,21 @@ def getEconomicData(from_date, to_date, country):
     from_date=from_date,
     to_date  =to_date,
     countries=[country],
-    time_zone = timeZoneDictionary[country],
     )
 
+    #'All Day' events remove
+    df = df[df['time'] != 'All Day']
+
     #combine columns: 'date' + 'time'
-    df['time'] = df['time'].replace('All Day', '09:00')
     df['date_time'] = pd.to_datetime(df['date'] + ' ' + df['time'])
     df.drop('date', axis=1, inplace=True)
     df.drop('time', axis=1, inplace=True)
 
     #only full hours
-    df['date_time'] = df['date_time'].dt.to_period('H')
+    df['date_time'] = df['date_time'] - pd.to_timedelta(df['date_time'].dt.minute, unit='m')
+
+    #tz_localize time zone
+    df['date_time'] = df['date_time'].dt.tz_localize('GMT').dt.tz_convert(localizeDictionary[country])
 
     #numeric imporance
     df['importance'] = df['importance'].map(importanceDictionary).fillna(0.00)
@@ -51,19 +54,14 @@ dataDf = getEconomicData('15/01/2021', '31/01/2022', 'poland')
 
 
 #OK: only full hours
-#todo: tz_localize time zone
+#OK: tz_localize time zone
 #OK: combine columns: 'date' + 'time'
 #OK: numeric imporance
 #todo: for deviation, compute 'previous' - 'actual' difference
 #todo: deviation dictionary for 'event' column
 #todo: remove nones?
-#todo: 'All Day' events change to 09:00
-#todo: for 'united states" use 'GMT -5:00'
-#todo: for 'poland" use 'GMT +1:00'
-#todo: for 'germany" use 'GMT +1:00'
-#todo: for 'euro zone" use 'GMT +1:00'
-#todo: for 'japan" use 'GMT +9:00'
-
+#NO: 'All Day' events change to 09:00
+#OK: 'All Day' events remove
 
 
 
