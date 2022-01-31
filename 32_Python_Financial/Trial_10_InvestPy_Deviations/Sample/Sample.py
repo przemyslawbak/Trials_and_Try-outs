@@ -25,8 +25,51 @@ importanceDictionary = {
 
 replacementDictionary = {"B": "", "M": "", "%": "", ",": "", "K": "", "T": ""}
 
-deviationDictionary = {
-    '' : ''
+#2021-01-19 last
+deviationScoreDictionary = {
+    'TIC Net Long-Term Transactions including Swaps...' : 0.01,
+    'TIC Net Long-Term Transactions' : 0.01,
+    'Overall Net Capital Flow' : 0.01,
+    'US Foreign Buying, T-bonds' : -0.1,
+    '3-Month Bill Auction' : -100,
+    '6-Month Bill Auction' : -100,
+    'Treasury Secretary Yellen Speaks' : 0,
+    'IEA Monthly Report' : 0,
+    'Investing.com Gold Index' : -0.05,
+    'Investing.com S&P 500 Index' : 0.05,
+    'CFTC Soybeans speculative net positions' : 0.05,
+    'CFTC Silver speculative net positions' : -0.05,
+    'CFTC S&P 500 speculative net positions' : 0.05,
+    'CFTC Natural Gas speculative net positions' : 0.05,
+    'CFTC Nasdaq 100 speculative net positions' : 0.05,
+    'CFTC Gold speculative net positions' : -0.05,
+    'CFTC Crude Oil speculative net positions' : 0.05,
+    'CFTC Corn speculative net positions' : 0.05,
+    'CFTC Copper speculative net positions' : 0.1,
+    'CFTC Aluminium speculative net positions' : 0.1,
+    'U.S. Baker Hughes Oil Rig Count' : 0.2,
+    'U.S. Baker Hughes Total Rig Count' : 0.2,
+    'Michigan 5-Year Inflation Expectations' : 0.3,
+    'Michigan Consumer Expectations' : 0.3,
+    'Michigan Current Conditions' : 0.3,
+    'Michigan Inflation Expectations' : 0.3,
+    'Business Inventories (MoM)' : 2,
+    'Manufacturing Production (MoM)' : 2,
+    'Capacity Utilization Rate' : 3,
+    'Industrial Production (MoM)' : 2,
+    'Industrial Production (YoY)' : 2,
+    'Retail Sales Ex Gas/Autos (MoM)' : 5,
+    'Retail Inventories Ex Auto' : 5,
+    'Retail Sales Ex Gas/Autos (YoY)' : 5,
+    'Retail Control (MoM)' : 1.33,
+    'Retail Sales (MoM)' : 1.33,
+    'Retail Sales (YoY)' : 1.33,
+    'PPI (MoM)' : 7.5,
+    'PPI (YoY)' : 7.5,
+    'Core PPI (YoY)' : 5,
+    'Core PPI (MoM)' : 5,
+    'Core Retail Sales (MoM)' : 1.4,
+    'NY Empire State Manufacturing Index' : 0.14,
     }
 
 def getEconomicData(from_date, to_date, country):
@@ -44,8 +87,7 @@ def getEconomicData(from_date, to_date, country):
 
     #combine columns: 'date' + 'time'
     df['date_time'] = pd.to_datetime(df['date'] + ' ' + df['time'], format="%d/%m/%Y %H:%M")
-    df.drop('date', axis=1, inplace=True)
-    df.drop('time', axis=1, inplace=True)
+    df.drop(['date', 'time', 'currency', 'zone', 'id'], axis=1, inplace=True)
 
     #only full hours
     df['date_time'] = df['date_time'] - pd.to_timedelta(df['date_time'].dt.minute, unit='m').sort_values()
