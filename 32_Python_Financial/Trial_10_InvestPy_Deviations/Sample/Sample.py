@@ -23,7 +23,7 @@ importanceDictionary = {
     'high' : 1.00,
     }
 
-replacementDictionary = {"B": "", "M": "", "%": "", ",": ""}
+replacementDictionary = {"B": "", "M": "", "%": "", ",": "", "K": "", "T": ""}
 
 deviationDictionary = {
     '' : ''
@@ -40,11 +40,12 @@ def getEconomicData(from_date, to_date, country):
     #'All Day' and 'Tentative' events remove
     df = df[df['time'] != 'All Day']
     df = df[df['time'] != 'Tentative']
+    df = df[df['time'] != '']
 
     #combine columns: 'date' + 'time'
     df['date_time'] = pd.to_datetime(df['date'] + ' ' + df['time'], format="%d/%m/%Y %H:%M")
-    #df.drop('date', axis=1, inplace=True)
-    #df.drop('time', axis=1, inplace=True)
+    df.drop('date', axis=1, inplace=True)
+    df.drop('time', axis=1, inplace=True)
 
     #only full hours
     df['date_time'] = df['date_time'] - pd.to_timedelta(df['date_time'].dt.minute, unit='m').sort_values()
@@ -72,7 +73,7 @@ def getEconomicData(from_date, to_date, country):
 
     return df
 
-dataDf = getEconomicData('15/01/2019', '31/01/2022', 'poland')
+dataDf = getEconomicData('15/01/2021', '31/01/2022', 'united states')
 
 
 
