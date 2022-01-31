@@ -22,6 +22,8 @@ importanceDictionary = {
     'high' : 1.00,
     }
 
+replacementDictionary = {"B": "", "M": "", "%": "", ",": ""}
+
 def getEconomicData(from_date, to_date, country):
 
     df = investpy.economic_calendar(
@@ -47,6 +49,15 @@ def getEconomicData(from_date, to_date, country):
     #numeric imporance
     df['importance'] = df['importance'].map(importanceDictionary).fillna(0.00)
 
+    #replacing substrings
+    df['actual'] = df['actual'].str.replace('|'.join(replacementDictionary), lambda string: replacementDictionary[string.group()]).fillna('0.0')
+    df['previous'] = df['previous'].str.replace('|'.join(replacementDictionary), lambda string: replacementDictionary[string.group()]).fillna('0.0')
+    df['forecast'] = df['forecast'].str.replace('|'.join(replacementDictionary), lambda string: replacementDictionary[string.group()]).fillna(df['previous'])
+    df["actual"] = pd.to_numeric(df["actual"])
+    df["previous"] = pd.to_numeric(df["previous"])
+    df["forecast"] = pd.to_numeric(df["forecast"])
+
+
     return df
 
 dataDf = getEconomicData('15/01/2021', '31/01/2022', 'poland')
@@ -59,7 +70,7 @@ dataDf = getEconomicData('15/01/2021', '31/01/2022', 'poland')
 #OK: numeric imporance
 #todo: for deviation, compute 'previous' - 'actual' difference
 #todo: deviation dictionary for 'event' column
-#todo: remove nones?
+#OK: remove nones?
 #NO: 'All Day' events change to 09:00
 #OK: 'All Day' events remove
 
