@@ -26,8 +26,25 @@ importanceDictionary = {
 replacementDictionary = {"B": "", "M": "", "%": "", ",": "", "K": "", "T": ""}
 
 #ref: https://www.fxstreet.com/economic-calendar
-#2021-01-27 last 'united states'
+#2021-02-05 last 'united states'
 deviationScoreDictionary = {
+    'Wholesale Trade Sales (MoM)' : 5,
+    'Wholesale Inventories (MoM)' : -5,
+    'Core CPI (YoY)' : -12.5,
+    'Core CPI (MoM)' : -7.5,
+    'WASDE Report' : 0,
+    'JOLTs Job Openings' : 2.66,
+    'NFIB Small Business Optimism' : 0.2,
+    'CB Employment Trends Index' : 0.1,
+    'Consumer Credit' : 0.09,
+    'Unemployment Rate' : -2,
+    'Private Nonfarm Payrolls' : 0.01,
+    'Nonfarm Payrolls' : 0.01,
+    'Imports' : -0.1,
+    'Exports' : 0.1,
+    'Average Weekly Hours' : 12.5,
+    'Average Hourly Earnings (YoY)' : 3.6,
+    'Average Hourly Earnings (MoM)' : 3.6,
     'Factory orders ex transportation (MoM)' : 0.4,
     'Factory Orders (MoM)' : 0.4,
     'NonfarmUnit Labor Costs (QoQ)' : -0.33,
@@ -103,7 +120,6 @@ deviationScoreDictionary = {
     'Gasoline Production' : 0.1,
     'EIA Weekly Distillates Stocks' : 0.1,
     'Distillate Fuel Production' : 0.1,
-    'Cushing Crude Oil Inventories' : 0.1,
     'Crude Oil Imports' : 0.1,
     'Crude Oil Inventories' : 0.3,
     'API Weekly Crude Oil Stock' : 0.3,
@@ -123,6 +139,7 @@ deviationScoreDictionary = {
     'Building Permits (MoM)' : 3.3,
     'NAHB Housing Market Index' : 0.33,
     'Treasury Secretary Yellen Speaks' : 0,
+    'OPEC Monthly Report' : 0,
     'IEA Monthly Report' : 0,
     'U.S. Baker Hughes Oil Rig Count' : 0.1,
     'U.S. Baker Hughes Total Rig Count' : 0.1,
