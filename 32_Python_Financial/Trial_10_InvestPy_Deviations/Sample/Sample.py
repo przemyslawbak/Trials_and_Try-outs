@@ -28,6 +28,10 @@ replacementDictionary = {"B": "", "M": "", "%": "", ",": "", "K": "", "T": ""}
 #ref: https://www.fxstreet.com/economic-calendar
 #2021-01-27 last 'united states'
 deviationScoreDictionary = {
+    'Factory orders ex transportation (MoM)' : 0.4,
+    'Factory Orders (MoM)' : 0.4,
+    'NonfarmUnit Labor Costs (QoQ)' : -0.33,
+    'Nonfarm Productivity (QoQ)' : 0.45,
     'ISM Non-Manufacturing Prices' : 0.4,
     'ISM Non-Manufacturing PMI' : 0.75,
     'ISM Non-Manufacturing New Orders' : 0.18,
