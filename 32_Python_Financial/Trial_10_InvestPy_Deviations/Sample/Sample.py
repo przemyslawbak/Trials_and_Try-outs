@@ -28,8 +28,18 @@ replacementDictionary = {"B": "", "M": "", "%": "", ",": "", "K": "", "T": ""}
 #ref: https://www.fxstreet.com/economic-calendar
 #2021-01-27 last 'united states'
 deviationScoreDictionary = {
-    'FOMC Member Daly Speaks' : 0,
-    'FOMC Member Kaplan Speaks' : 0,
+    'ISM Non-Manufacturing Prices' : 0.4,
+    'ISM Non-Manufacturing PMI' : 0.75,
+    'ISM Non-Manufacturing New Orders' : 0.18,
+    'ISM Non-Manufacturing Employment' : 0.13,
+    'Markit Composite PMI' : 2.5,
+    'ADP Nonfarm Employment Change' : 0.004,
+    'IBD/TIPP Economic Optimism' : 0.4,
+    'Total Vehicle Sales' : 0.5,
+    'ISM Manufacturing Prices' : 0.26,
+    'ISM Manufacturing PMI' : 0.5,
+    'Construction Spending (MoM)' : 1.6,
+    'FOMC Member ' : 0,
     'OPEC Crude Oil Production ' : 10,
     'Real Personal Consumption (MoM)' : 10,
     'Personal Spending (MoM)' : 10,
