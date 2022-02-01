@@ -26,8 +26,9 @@ importanceDictionary = {
 replacementDictionary = {"B": "", "M": "", "%": "", ",": "", "K": "", "T": ""}
 
 #ref: https://www.fxstreet.com/economic-calendar
-#2021-02-05 last 'united states'
+#2021-02-18 last 'united states'
 deviationScoreDictionary = {
+    'Michigan Consumer Sentiment' : 0.5,
     'Wholesale Trade Sales (MoM)' : 5,
     'Wholesale Inventories (MoM)' : -5,
     'Core CPI (YoY)' : -12.5,
