@@ -25,8 +25,31 @@ importanceDictionary = {
 
 replacementDictionary = {"B": "", "M": "", "%": "", ",": "", "K": "", "T": ""}
 
+#ref: https://www.fxstreet.com/economic-calendar
 #2021-01-27 last 'united states'
 deviationScoreDictionary = {
+    'FOMC Member Daly Speaks' : 0,
+    'FOMC Member Kaplan Speaks' : 0,
+    'OPEC Crude Oil Production ' : 10,
+    'Real Personal Consumption (MoM)' : 10,
+    'Personal Spending (MoM)' : 10,
+    'Employment Wages (QoQ)' : -10,
+    'Employment Cost Index (QoQ)' : -10,
+    'Core PCE Price Index (YoY)' : 7,
+    'Core PCE Price Index (MoM)' : 12.5,
+    'Real Consumer Spending' : 0.1,
+    'Goods Trade Balance' : 0.1,
+    'Pending Home Sales (MoM)' : -5,
+    'Pending Home Sales Index' : -1,
+    'New Home Sales' : 0.01,
+    'PCE Prices' : 0.7,
+    'Core PCE Prices' : 4,
+    'MBA Mortgage Applications (WoW)' : 1,
+    'MBA 30-Year Mortgage Rate' : -5,
+    'Durable Goods Orders (MoM)' : 1,
+    'Goods Orders Non Defense Ex Air (MoM)' : 1.75,
+    'Durables Excluding Defense (MoM)' : 0.35,
+    'Durable Goods Orders (MoM)' : 0.35,
     '30-Year Bond Auction' : 5,
     '10-Year Bond Auction' : 15,
     '20-Year Bond Auction' : 10,
@@ -68,7 +91,6 @@ deviationScoreDictionary = {
     'Distillate Fuel Production' : 0.1,
     'Cushing Crude Oil Inventories' : 0.1,
     'Crude Oil Imports' : 0.1,
-    'Crude Oil Inventories' : 0.3,
     'Crude Oil Inventories' : 0.3,
     'API Weekly Crude Oil Stock' : 0.3,
     'Natural Gas Storage' : 0.09,
