@@ -26,8 +26,14 @@ importanceDictionary = {
 replacementDictionary = {"B": "", "M": "", "%": "", ",": "", "K": "", "T": ""}
 
 #ref: https://www.fxstreet.com/economic-calendar
-#2021-02-18 last 'united states'
+#2021-03-08 last 'united states'
 deviationScoreDictionary = {
+    'All Truck Sales' : 5,
+    'All Car Sales' : 5,
+    'ISM NY Business Conditions' : 0.5,
+    'IBD/TIPP Economic Optimism' : 0.5,
+    'U.S. M2 Money Supply' : -12.5,
+    'Chicago PMI' : 0.3,
     'KC Fed Manufacturing Index' : 0.06,
     'Cap Goods Ship Non Defense Ex Air (MoM)' : 2,
     'Chicago Fed National Activity' : 1.22,
@@ -37,9 +43,9 @@ deviationScoreDictionary = {
     'Durable Goods Orders (MoM)' : 5,
     'Redbook (MoM)' : 5,
     'Michigan 5-Year Inflation Expectations' : -5,
+    'Michigan Consumer Sentiment' : 0.5,
     'Import Price Index (MoM)' : 3.7,
     'Export Price Index (MoM)' : 0.5,
-    'Michigan Consumer Sentiment' : 0.5,
     'Wholesale Trade Sales (MoM)' : 5,
     'Wholesale Inventories (MoM)' : -5,
     'Core CPI (MoM)' : -12.5,
@@ -47,7 +53,7 @@ deviationScoreDictionary = {
     'JOLTs Job Openings' : 2.66,
     'NFIB Small Business Optimism' : 0.2,
     'CB Employment Trends Index' : 0.1,
-    'Consumer Credit' : 0.09,
+    'Consumer Credit' : 0.1,
     'Unemployment Rate' : -2,
     'Private Nonfarm Payrolls' : 0.01,
     'Nonfarm Payrolls' : 0.01,
