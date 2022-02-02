@@ -28,6 +28,10 @@ replacementDictionary = {"B": "", "M": "", "%": "", ",": "", "K": "", "T": ""}
 #ref: https://www.fxstreet.com/economic-calendar
 #2021-02-18 last 'united states'
 deviationScoreDictionary = {
+    'KC Fed Manufacturing Index' : 0.06,
+    'Cap Goods Ship Non Defense Ex Air (MoM)' : 2,
+    'Chicago Fed National Activity' : 1.22,
+    'Dallas Fed Mfg Business Index' : 0.02,
     'MBA Delinquency Rates (QoQ)' : -5,
     'Challenger Job Cuts (YoY)' : -0.05,
     'Durable Goods Orders (MoM)' : 5,
