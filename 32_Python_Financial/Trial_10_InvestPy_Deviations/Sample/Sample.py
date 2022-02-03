@@ -26,7 +26,26 @@ importanceDictionary = {
 replacementDictionary = {"B": "", "M": "", "%": "", ",": "", "K": "", "T": ""}
 
 #ref: https://www.fxstreet.com/economic-calendar
-#2021-03-08 last 'united states'
+deviationScoreDictionaryDe = {
+
+    }
+
+deviationScoreDictionaryPl = {
+    'GDP (QoQ)' : 3.5,
+    'Manufacturing PMI' : 0.5,
+    'Unemployment Rate' : -2,
+    'M3 Money Supply (MoM)' : 1.4,
+    'Retail Sales (YoY)' : 5,
+    'PPI (YoY)' : 7.5,
+    'Industrial Output (YoY)' : 0.7,
+    'Employment Growth (YoY)' : 5,
+    'Corp. Sector Wages (YoY)' : 2.33,
+    'Core CPI (YoY)' : -12.5,
+    'Current Account (EUR)' : 0.002,
+    'Interest Rate Decision' : -12.5,
+    'NBP Monetary Policy Meeting Mi' : 0,
+    }
+
 deviationScoreDictionaryUs = {
     'Federal Budget Balance' : 0.006,
     'Loan Officer Survey' : 0,
@@ -34,7 +53,7 @@ deviationScoreDictionaryUs = {
     'IMF Meetings' : 0,
     'OPEC Meeting' : 0,
     'Current Account' : 0.15,
-    'Fed Interest Rate Decision' : 12.5,
+    'Fed Interest Rate Decision' : -12.5,
     'Thomson Reuters IPSOS PCSI' : 1,
     'All Truck Sales' : 5,
     'All Car Sales' : 5,
@@ -204,7 +223,7 @@ def getEconomicData(from_date, to_date, country):
 
     return df
 
-dataDf = getEconomicData('01/04/2021', '31/01/2022', 'united states')
+dataDf = getEconomicData('01/01/2021', '31/01/2022', 'germany')
 
 
 
