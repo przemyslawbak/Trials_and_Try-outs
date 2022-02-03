@@ -26,6 +26,31 @@ importanceDictionary = {
 replacementDictionary = {"B": "", "M": "", "%": "", ",": "", "K": "", "T": ""}
 
 #ref: https://www.fxstreet.com/economic-calendar
+deviationScoreDictionaryEu = {
+    'Markit Composite PMI' : 2.5,
+    'Private Sector Loans (YoY)' : 12.5,
+    'M3 Money Supply (YoY)' : 1.4,
+    'Speaks' : 0,
+    'Manufacturing PMI' : 0.5,
+    'CFTC EUR speculative net positions' : 0.05,
+    }
+
+deviationScoreDictionaryPl = {
+    'GDP (QoQ)' : 5,
+    'Manufacturing PMI' : 0.5,
+    'Unemployment Rate' : -2,
+    'M3 Money Supply (MoM)' : 1.4,
+    'Retail Sales (YoY)' : 5,
+    'PPI (YoY)' : 7.5,
+    'Industrial Output (YoY)' : 0.7,
+    'Employment Growth (YoY)' : 5,
+    'Corp. Sector Wages (YoY)' : 2.33,
+    'Core CPI (YoY)' : -12.5,
+    'Current Account (EUR)' : 0.002,
+    'Interest Rate Decision' : -12.5,
+    'NBP Monetary Policy Meeting Mi' : 0,
+    }
+
 deviationScoreDictionaryDe = {
     'German 12-Month Bubill' : -20,
     'German Import Price Index (MoM)' : 3.7,
@@ -56,22 +81,6 @@ deviationScoreDictionaryDe = {
     'German Unemployment Rate' : -2,
     'German Manufacturing PMI' : 0.86,
     'German Retail Sales (MoM)' : 5,
-    }
-
-deviationScoreDictionaryPl = {
-    'GDP (QoQ)' : 5,
-    'Manufacturing PMI' : 0.5,
-    'Unemployment Rate' : -2,
-    'M3 Money Supply (MoM)' : 1.4,
-    'Retail Sales (YoY)' : 5,
-    'PPI (YoY)' : 7.5,
-    'Industrial Output (YoY)' : 0.7,
-    'Employment Growth (YoY)' : 5,
-    'Corp. Sector Wages (YoY)' : 2.33,
-    'Core CPI (YoY)' : -12.5,
-    'Current Account (EUR)' : 0.002,
-    'Interest Rate Decision' : -12.5,
-    'NBP Monetary Policy Meeting Mi' : 0,
     }
 
 deviationScoreDictionaryUs = {
@@ -251,7 +260,7 @@ def getEconomicData(from_date, to_date, country):
 
     return df
 
-dataDf = getEconomicData('01/01/2021', '31/01/2022', 'germany')
+dataDf = getEconomicData('01/01/2021', '31/01/2022', 'euro zone')
 
 
 
