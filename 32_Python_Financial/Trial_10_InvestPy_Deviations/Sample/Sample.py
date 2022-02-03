@@ -27,11 +27,39 @@ replacementDictionary = {"B": "", "M": "", "%": "", ",": "", "K": "", "T": ""}
 
 #ref: https://www.fxstreet.com/economic-calendar
 deviationScoreDictionaryDe = {
-
+    'German 12-Month Bubill' : -20,
+    'German Import Price Index (MoM)' : 3.7,
+    'German Export Price Index (MoM)' : 0.5,
+    'GfK German Consumer Climate' : 1,
+    'German Buba' : 0,
+    'German Ifo Business Climate Index' : 1,
+    'German Current Assessment' : 1,
+    'German Business Expectations' : 1.5,
+    'German 30-Year Bund' : -5,
+    'German PPI (YoY)' : 7.5,
+    'German ZEW Economic Sentiment' : 0.4,
+    'German ZEW Current Conditions' : 0.4,
+    'German Car Registration (MoM)' : 5,
+    'Germany Thomson Reuters IPSOS PCSI' : 1,
+    'German GDP (QoQ' : 5,
+    'German 5-Year Bobl' : -15,
+    'German Trade Balance' : 0.1,
+    'German Industrial Production (MoM)' : 2,
+    'German Imports (MoM)' : -0.1,
+    'German Exports (MoM)' : 0.1,
+    'German Factory Orders (MoM)' : 0.4,
+    'German CPI (MoM)' : -12.5,
+    'German 10-Year Bund' : -11,
+    'German Services PMI' : 1,
+    'German Composite PMI' : 2.5,
+    'German 2-Year Schatz' : -20,
+    'German Unemployment Rate' : -2,
+    'German Manufacturing PMI' : 0.86,
+    'German Retail Sales (MoM)' : 5,
     }
 
 deviationScoreDictionaryPl = {
-    'GDP (QoQ)' : 3.5,
+    'GDP (QoQ)' : 5,
     'Manufacturing PMI' : 0.5,
     'Unemployment Rate' : -2,
     'M3 Money Supply (MoM)' : 1.4,
