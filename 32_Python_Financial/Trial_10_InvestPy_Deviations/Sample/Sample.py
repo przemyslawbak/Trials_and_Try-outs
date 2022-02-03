@@ -5,7 +5,7 @@
 import investpy
 import pandas as pd
 import numpy as np
-pd.set_option('display.max_rows', 1000)
+pd.set_option('display.max_rows', 10000)
 pd.set_option('display.max_columns', 10)
 pd.set_option('display.width', 1000)
 
@@ -27,7 +27,12 @@ replacementDictionary = {"B": "", "M": "", "%": "", ",": "", "K": "", "T": ""}
 
 #ref: https://www.fxstreet.com/economic-calendar
 #2021-03-08 last 'united states'
-deviationScoreDictionary = {
+deviationScoreDictionaryUs = {
+    'Federal Budget Balance' : 0.006,
+    'Loan Officer Survey' : 0,
+    'Beige Book' : 0,
+    'IMF Meetings' : 0,
+    'OPEC Meeting' : 0,
     'Current Account' : 0.15,
     'Fed Interest Rate Decision' : 12.5,
     'Thomson Reuters IPSOS PCSI' : 1,
@@ -35,7 +40,6 @@ deviationScoreDictionary = {
     'All Car Sales' : 5,
     'ISM NY Business Conditions' : 0.5,
     'IBD/TIPP Economic Optimism' : 0.5,
-    'NFIB Small Business Optimism' : 0.5,
     'U.S. M2 Money Supply' : -12.5,
     'Chicago PMI' : 0.3,
     'KC Fed Manufacturing Index' : 0.06,
@@ -45,7 +49,7 @@ deviationScoreDictionary = {
     'MBA Delinquency Rates (QoQ)' : -5,
     'Challenger Job Cuts (YoY)' : -0.05,
     'Durable Goods Orders (MoM)' : 5,
-    'Redbook (MoM)' : 5,
+    'Redbook (YoY)' : 5,
     'Michigan 5-Year Inflation Expectations' : -5,
     'Michigan Consumer Sentiment' : 0.5,
     'Import Price Index (MoM)' : 3.7,
@@ -60,7 +64,6 @@ deviationScoreDictionary = {
     'Consumer Credit' : 0.1,
     'Unemployment Rate' : -2,
     'Private Nonfarm Payrolls' : 0.01,
-    'Nonfarm Payrolls' : 0.01,
     'Imports' : -0.1,
     'Exports' : 0.1,
     'Average Weekly Hours' : 12.5,
@@ -95,10 +98,11 @@ deviationScoreDictionary = {
     'Goods Orders Non Defense Ex Air (MoM)' : 1.75,
     'Durable Goods Orders (MoM)' : 0.35,
     '30-Year Bond Auction' : 5,
-    '10-Year Bond Auction' : 15,
-    '20-Year Bond Auction' : 10,
-    '20-Year Bond Auction' : 10,
+    '10-Year Bond Auction' : 11,
+    '20-Year Bond Auction' : 8,
+    '7-Year Note Auction' : 13,
     '5-Year Note Auction' : 15,
+    '3-Year Note Auction' : 17,
     '2-Year Note Auction' : 20,
     '10-Year TIPS Auction' : 10,
     '8-Week Bill Auction' : 40,
@@ -200,7 +204,7 @@ def getEconomicData(from_date, to_date, country):
 
     return df
 
-dataDf = getEconomicData('15/01/2021', '31/01/2022', 'united states')
+dataDf = getEconomicData('01/04/2021', '31/01/2022', 'united states')
 
 
 
@@ -218,5 +222,5 @@ dataDf = getEconomicData('15/01/2021', '31/01/2022', 'united states')
 
 
 
-print(dataDf.head(1000))
+print(dataDf.head(10000))
 print(dataDf.dtypes)
