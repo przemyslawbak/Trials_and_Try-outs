@@ -27,9 +27,12 @@ replacementDictionary = {"B": "", "M": "", "%": "", ",": "", "K": "", "T": ""}
 
 #ref: https://www.fxstreet.com/economic-calendar
 deviationScoreDictionaryEu = {
-    'Consumer Confidence' : 2,
+    'ZEW Economic Sentiment' : 0.4,
+    'ECB LTRO' : 0.05,
+    'Wages in euro zone (YoY)' : 2.33,
+    'Labor Cost Index (YoY)' : -0.33,
     'Deposit Facility Rate' : -12.5,
-    'Current Account' : 0.2,
+    'Current Account n.s.a.' : 0.2,
     'Eurogroup Meetings' : 0.1,
     'Goods Trade Balance' : 0.1,
     'Industrial Production (MoM)' : 2,
@@ -44,13 +47,17 @@ deviationScoreDictionaryEu = {
     'PPI (YoY)' : 7.5,
     'Services PMI' : 1,
     'Markit Composite PMI' : 2.5,
+    'Manufacturing PMI' : 0.5,
     'Private Sector Loans (YoY)' : 12.5,
+    'Loans to Non Financial Corporations' : 12.5,
     'M3 Money Supply (YoY)' : 1.4,
+    'EU Economic Forecasts' : 0,
     'ECB Press Conference' : 0,
+    'ECB Financial Stability Review' : 0,
+    'Summit' : 0,
     'Meeting' : 0,
     'ECB Monetary Policy Statement' : 0,
     'Speaks' : 0,
-    'Manufacturing PMI' : 0.5,
     'CFTC EUR speculative net positions' : 0.05,
     }
 
@@ -161,7 +168,7 @@ deviationScoreDictionaryUs = {
     'OPEC Crude Oil Production ' : 10,
     'Real Personal Consumption (MoM)' : 5,
     'Personal Spending (MoM)' : 5,
-    'Employment Wages (QoQ)' : -10,
+    'Employment Wages (QoQ)' : 2.33,
     'Employment Cost Index (QoQ)' : -10,
     'Core PCE Price Index (MoM)' : 12.5,
     'Real Consumer Spending' : 0.1,
