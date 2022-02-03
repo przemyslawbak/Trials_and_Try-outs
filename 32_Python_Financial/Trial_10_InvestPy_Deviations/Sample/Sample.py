@@ -28,10 +28,14 @@ replacementDictionary = {"B": "", "M": "", "%": "", ",": "", "K": "", "T": ""}
 #ref: https://www.fxstreet.com/economic-calendar
 #2021-03-08 last 'united states'
 deviationScoreDictionary = {
+    'Current Account' : 0.15,
+    'Fed Interest Rate Decision' : 12.5,
+    'Thomson Reuters IPSOS PCSI' : 1,
     'All Truck Sales' : 5,
     'All Car Sales' : 5,
     'ISM NY Business Conditions' : 0.5,
     'IBD/TIPP Economic Optimism' : 0.5,
+    'NFIB Small Business Optimism' : 0.5,
     'U.S. M2 Money Supply' : -12.5,
     'Chicago PMI' : 0.3,
     'KC Fed Manufacturing Index' : 0.06,
