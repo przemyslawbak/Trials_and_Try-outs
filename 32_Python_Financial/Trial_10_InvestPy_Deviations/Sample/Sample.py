@@ -26,7 +26,29 @@ importanceDictionary = {
 replacementDictionary = {"B": "", "M": "", "%": "", ",": "", "K": "", "T": ""}
 
 #ref: https://www.fxstreet.com/economic-calendar
+
+deviationScoreDictionaryJp = {
+    'Foreign Bonds Buying' : -0.005,
+    'PPI (YoY)' : 7.5,
+    'M3 Money Supply' : 1.4,
+    'Economy Watchers Current Index' : 0.12,
+    'Current Account n.s.a.' : 5,
+    'Bank Lending (YoY)' : 1.6,
+    'Leading Index (MoM)' : 0.6,
+    '30-Year JGB Auction' : -5,
+    'Household Spending (MoM)' : 0.3,
+    'Foreign Investments in Japanese Stocks' : 0.005,
+    'Average Cash Earnings (YoY)' : 1.1,
+    'Household Confidence' : 1,
+    '10-Year JGB Auction' : -11,
+    'Services PMI' : 1,
+    'CFTC JPY speculative net positions' : 0.05,
+    'Manufacturing PMI' : 0.5,
+    }
+
 deviationScoreDictionaryEu = {
+    'Core Machinery Orders (YoY)' : 0.4,
+    'Machine Tool Orders (YoY)' : 5,
     'ZEW Economic Sentiment' : 0.4,
     'ECB LTRO' : 0.05,
     'Wages in euro zone (YoY)' : 2.33,
@@ -286,7 +308,7 @@ def getEconomicData(from_date, to_date, country):
 
     return df
 
-dataDf = getEconomicData('01/01/2021', '31/01/2022', 'euro zone')
+dataDf = getEconomicData('01/01/2021', '31/01/2022', 'japan')
 
 
 
@@ -298,6 +320,7 @@ dataDf = getEconomicData('01/01/2021', '31/01/2022', 'euro zone')
 #todo: deviation dictionary for 'event' column
 #todo: for deviation, compute 'previous' - 'actual' difference
 #todo: after finished find huge values with errors
+#todo: UK?
 #OK: remove nones?
 #NO: 'All Day' and 'Tentative' events change to 09:00
 #OK: 'All Day' and 'Tentative' events remove
