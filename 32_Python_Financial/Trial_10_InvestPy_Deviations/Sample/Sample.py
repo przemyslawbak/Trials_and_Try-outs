@@ -28,6 +28,11 @@ replacementDictionary = {"B": "", "M": "", "%": "", ",": "", "K": "", "T": ""}
 #ref: https://www.fxstreet.com/economic-calendar
 
 deviationScoreDictionaryJp = {
+    'Monetary Base (YoY)' : 0.5,
+    'Tankan Large Manufacturers Index' : 0.3,
+    'Tankan Big Manufacturing Outlook Index' : 0.3,
+    'Tankan All Small Industry CAPEX' : 0.76,
+    'Tankan All Big Industry CAPEX' : 0.76,
     'BSI Large Manufacturing Conditions' : 0.04,
     'Capacity Utilization Rate' : 3,
     'GDP (QoQ)' : 5,
@@ -96,7 +101,7 @@ deviationScoreDictionaryEu = {
     'Manufacturing PMI' : 0.5,
     'Private Sector Loans (YoY)' : 12.5,
     'Loans to Non Financial Corporations' : 12.5,
-    'M3 Money Supply (YoY)' : 1.4,
+    'M3 Money Supply (YoY)' : 0.014,
     'EU Economic Forecasts' : 0,
     'ECB Press Conference' : 0,
     'ECB Financial Stability Review' : 0,
