@@ -346,7 +346,7 @@ dataDf = getEconomicData('01/01/2021', '31/01/2022', 'japan')
 #OK: combine columns: 'date' + 'time'
 #OK: numeric imporance
 #OK: replace too big or too small hour values
-#todo: deviation dictionary for 'event' column
+#OK: deviation dictionary for 'event' column
 #todo: for deviation, compute 'previous' - 'actual' difference
 #todo: after finished find huge values with errors
 #todo: UK?
