@@ -19,7 +19,7 @@ localizeDictionary = {
 
 importanceDictionary = {
     'low' : 0.15,
-    'medium' : 0.40, #0.65
+    'medium' : 0.50,
     'high' : 1.00,
     }
 
@@ -72,20 +72,20 @@ deviationScoreDictionaryJp = {
     'Average Cash Earnings \(YoY\)' : 0.1,
     'Household Confidence' : 0.1,
     '10-Year JGB Auction' : -5,
-    'Services PMI' : 0.1,
+    'Services PMI' : 0.2,
     'CFTC JPY speculative net positions' : 0.005,
     'Manufacturing PMI' : 0.1,
     }
 
 deviationScoreDictionaryEu = {
-    'ZEW Economic Sentiment' : 0.05,
+    'ZEW Economic Sentiment' : 0.025,
     'ECB LTRO' : 0.002,
     'Wages in euro zone \(YoY\)' : 0.1,
     'Labor Cost Index \(YoY\)' : -0.33,
     'Deposit Facility Rate' : -12.5,
     'Current Account n.s.a.' : 0.02,
     'Eurogroup Meetings' : 0.1,
-    'Trade Balance' : 0.05,
+    'Trade Balance' : 0.03,
     'Industrial Production \(MoM\)' : 0.2,
     'Unemployment Rate' : -2,
     'Retail Sales \(YoY\)' : 0.1,
@@ -97,8 +97,8 @@ deviationScoreDictionaryEu = {
     'ECB Economic Bulletin' : 7.5,
     'PPI \(YoY\)' : 0.1,
     'Services PMI' : 0.1,
-    'Markit Composite PMI' : 0.1,
-    'Manufacturing PMI' : 0.1,
+    'Markit Composite PMI' : 0.8,
+    'Manufacturing PMI' : 0.2,
     'Private Sector Loans \(YoY\)' : 2,
     'Loans to Non Financial Corporations' : 0.2,
     'M3 Money Supply \(YoY\)' : 0.0002,
@@ -109,7 +109,7 @@ deviationScoreDictionaryEu = {
     'Meeting' : 0,
     'ECB Monetary Policy Statement' : 0,
     'Speaks' : 0,
-    'CFTC EUR speculative net positions' : 0.005,
+    'CFTC EUR speculative net positions' : 0.0075,
     }
 
 deviationScoreDictionaryPl = {
@@ -342,13 +342,14 @@ def computeDeviations(df, dictionary):
     df['event'].replace(dictionary, regex=True, inplace=True)
     df["event"] = pd.to_numeric(df["event"], errors='coerce')
     df = df[df['event'].notna()]
-    df['happening'] = 
     df['diffPrev'] = (df['actual'] - df['previous']) / 4
     df['diffForec'] = df['actual'] - df['forecast']
     df['deviation'] = ((df['diffPrev'] + df['diffForec']) * df['event'] * df['importance']).round(2)
     df.drop(['diffPrev', 'diffForec', 'event', 'forecast', 'actual', 'previous'], axis=1, inplace=True)
+    df['happening'] = np.where(df['deviation'] == 0.00, 1, 0)
+    df['happening'] = df['happening'] * df['importance']
 
-    return df.sort_values(by=['importance']) #todo: remove .sort_values
+    return df.sort_values(by=['eventName']).sort_values(by=['importance']) #todo: remove .sort_values
 
 dataDfJp = getEconomicData('01/01/2021', '31/01/2022', 'euro zone')
 dataDfJp = computeDeviations(dataDfJp, deviationScoreDictionaryEu)
