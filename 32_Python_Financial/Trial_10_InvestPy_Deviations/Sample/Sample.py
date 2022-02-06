@@ -337,10 +337,12 @@ def getEconomicData(from_date, to_date, country):
 
     return df
 
-def computeDeviations(dataDf, dictionary):
-    dataDf['event'].replace(dictionary, regex=True, inplace=True)
+def computeDeviations(df, dictionary):
+    df['event'].replace(dictionary, regex=True, inplace=True)
+    df["event"] = pd.to_numeric(df["event"], errors='coerce').fillna(0) #todo: change to sth else than 0
 
-    return dataDf
+
+    return df
 
 dataDfJp = getEconomicData('01/01/2021', '31/01/2022', 'japan')
 dataDfJp = computeDeviations(dataDfJp, deviationScoreDictionaryJp)
