@@ -37,12 +37,12 @@ deviationScoreDictionaryJp = {
     'Capacity Utilization Rate' : 3,
     'GDP \(QoQ\)' : 5,
     'Core Machinery Orders \(YoY\)' : 0.4,
-    'Machine Tool Orders \(YoY\)' : 5,
+    'Machine Tool Orders \(YoY\)' : 0.5,
     'Foreign Reserves \(USD\)' : 0.01,
-    'Housing Starts \(YoY\)' : 10,
+    'Housing Starts \(YoY\)' : 5,
     'Unemployment Rate' : -2,
     'Jobs/applications ratio' : 2.66,
-    'Retail Sales \(YoY\)' : 5,
+    'Retail Sales \(YoY\)' : 3,
     'Coincident Indicator \(MoM\)' : 0.8,
     'Corporate Services Price Index \(CSPI\) \(YoY\)' : -1.42,
     'BoJ Core CPI \(YoY\)' : -12.5,
@@ -88,7 +88,7 @@ deviationScoreDictionaryEu = {
     'Trade Balance' : 0.1,
     'Industrial Production \(MoM\)' : 2,
     'Unemployment Rate' : -2,
-    'Retail Sales \(YoY\)' : 5,
+    'Retail Sales \(YoY\)' : 3,
     'Sentix Investor Confidence' : 1,
     'Industrial Sentiment' : 1,
     'Services Sentiment' : 0.3,
@@ -117,7 +117,7 @@ deviationScoreDictionaryPl = {
     'Manufacturing PMI' : 0.5,
     'Unemployment Rate' : -2,
     'M3 Money Supply \(MoM\)' : 1.4,
-    'Retail Sales \(YoY\)' : 5,
+    'Retail Sales \(YoY\)' : 3,
     'PPI \(YoY\)' : 7.5,
     'Industrial Output \(YoY\)' : 0.7,
     'Employment Growth \(YoY\)' : 5,
@@ -157,7 +157,7 @@ deviationScoreDictionaryDe = {
     'German 2-Year Schatz' : -20,
     'German Unemployment Rate' : -2,
     'German Manufacturing PMI' : 0.86,
-    'German Retail Sales \(MoM\)' : 5,
+    'German Retail Sales \(MoM\)' : 3,
     }
 
 deviationScoreDictionaryUs = {
@@ -275,7 +275,7 @@ deviationScoreDictionaryUs = {
     'Philadelphia Fed Manufacturing Index' : 0.1,
     'Jobless Claims 4-Week Avg.' : -0.006,
     'Initial Jobless Claims' : -0.01,
-    'Housing Starts \(MoM\)' : 10,
+    'Housing Starts \(MoM\)' : 5,
     'Continuing Jobless Claims' : -0.006,
     'Building Permits \(MoM\)' : 3.3,
     'NAHB Housing Market Index' : 0.33,
@@ -287,7 +287,7 @@ deviationScoreDictionaryUs = {
     'Manufacturing Production \(MoM\)' : 2,
     'Capacity Utilization Rate' : 3,
     'Industrial Production \(MoM\)' : 2,
-    'Retail Sales \(MoM\)' : 5,
+    'Retail Sales \(MoM\)' : 3,
     'Retail Inventories Ex Auto' : 5,
     'Retail Control \(MoM\)' : 1.33,
     'PPI \(MoM\)' : 7.5,
@@ -338,9 +338,14 @@ def getEconomicData(from_date, to_date, country):
     return df
 
 def computeDeviations(df, dictionary):
+    df['eventName'] = df['event']
     df['event'].replace(dictionary, regex=True, inplace=True)
-    df["event"] = pd.to_numeric(df["event"], errors='coerce').fillna(0) #todo: change to sth else than 0
-
+    df["event"] = pd.to_numeric(df["event"], errors='coerce')
+    df = df[df['event'].notna()]
+    df['diffPrev'] = (df['actual'] - df['previous']) / 4
+    df['diffForec'] = df['actual'] - df['forecast']
+    df['deviation'] = ((df['diffPrev'] + df['diffForec']) * df['event'] * df['importance']).round(2)
+    df.drop(['diffPrev', 'diffForec', 'event', 'importance', 'forecast', 'actual', 'previous'], axis=1, inplace=True)
 
     return df
 
