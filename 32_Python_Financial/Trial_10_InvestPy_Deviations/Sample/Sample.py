@@ -337,8 +337,13 @@ def getEconomicData(from_date, to_date, country):
 
     return df
 
-dataDf = getEconomicData('01/01/2021', '31/01/2022', 'japan')
+def computeDeviations(dataDf, dictionary):
+    dataDf['event'].replace(dictionary, regex=True, inplace=True)
 
+    return dataDf
+
+dataDfJp = getEconomicData('01/01/2021', '31/01/2022', 'japan')
+dataDfJp = computeDeviations(dataDfJp, deviationScoreDictionaryJp)
 
 
 #OK: only full hours
@@ -348,13 +353,14 @@ dataDf = getEconomicData('01/01/2021', '31/01/2022', 'japan')
 #OK: replace too big or too small hour values
 #OK: deviation dictionary for 'event' column
 #todo: for deviation, compute 'previous' - 'actual' difference
-#todo: after finished find huge values with errors
-#todo: UK?
+#todo: after finished find huge values with errors, if any
+#todo: compute sum of n last rows for the result
+#NO: UK?
 #OK: remove nones?
 #NO: 'All Day' and 'Tentative' events change to 09:00
 #OK: 'All Day' and 'Tentative' events remove
 
 
 
-print(dataDf.head(10000))
-print(dataDf.dtypes)
+print(dataDfJp.head(10000))
+print(dataDfJp.dtypes)
