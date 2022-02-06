@@ -79,28 +79,28 @@ deviationScoreDictionaryJp = {
 
 deviationScoreDictionaryEu = {
     'ZEW Economic Sentiment' : 0.05,
-    'ECB LTRO' : 0.01,
-    'Wages in euro zone \(YoY\)' : 0.2,
+    'ECB LTRO' : 0.002,
+    'Wages in euro zone \(YoY\)' : 0.1,
     'Labor Cost Index \(YoY\)' : -0.33,
     'Deposit Facility Rate' : -12.5,
     'Current Account n.s.a.' : 0.02,
     'Eurogroup Meetings' : 0.1,
-    'Trade Balance' : 0.1,
-    'Industrial Production \(MoM\)' : 0.5,
+    'Trade Balance' : 0.05,
+    'Industrial Production \(MoM\)' : 0.2,
     'Unemployment Rate' : -2,
     'Retail Sales \(YoY\)' : 0.1,
-    'Sentix Investor Confidence' : 0.1,
-    'Industrial Sentiment' : 0.5,
+    'Sentix Investor Confidence' : 0.05,
+    'Industrial Sentiment' : 0.1,
     'Services Sentiment' : 0.1,
-    'Consumer Confidence' : 1,
-    'Business and Consumer Survey' : 0.2,
+    'Consumer Confidence' : 0.1,
+    'Business and Consumer Survey' : 0.05,
     'ECB Economic Bulletin' : 7.5,
     'PPI \(YoY\)' : 0.1,
-    'Services PMI' : 0.2,
+    'Services PMI' : 0.1,
     'Markit Composite PMI' : 0.1,
     'Manufacturing PMI' : 0.1,
     'Private Sector Loans \(YoY\)' : 2,
-    'Loans to Non Financial Corporations' : 1,
+    'Loans to Non Financial Corporations' : 0.2,
     'M3 Money Supply \(YoY\)' : 0.0002,
     'EU Economic Forecasts' : 0,
     'ECB Press Conference' : 0,
@@ -139,7 +139,7 @@ deviationScoreDictionaryDe = {
     'German Business Expectations' : 1.5,
     'German 30-Year Bund' : -2,
     'German PPI \(YoY\)' : 0.1,
-    'German ZEW Economic Sentiment' : 0.2,
+    'German ZEW Economic Sentiment' : 0.04,
     'German ZEW Current Conditions' : 0.2,
     'German Car Registration \(MoM\)' : 5,
     'Germany Thomson Reuters IPSOS PCSI' : 0.1,
@@ -152,7 +152,7 @@ deviationScoreDictionaryDe = {
     'German Factory Orders \(MoM\)' : 0.01,
     'German CPI \(MoM\)' : -2,
     'German 10-Year Bund' : -6,
-    'German Services PMI' : 0.2,
+    'German Services PMI' : 0.1,
     'German Composite PMI' : 0.1,
     'German 2-Year Schatz' : -10,
     'German Unemployment Rate' : -2,
@@ -270,7 +270,7 @@ deviationScoreDictionaryUs = {
     'API Weekly Crude Oil Stock' : 0.3,
     'Natural Gas Storage' : 0.09,
     'Existing Home Sales \(MoM\)' : 5.25,
-    'Services PMI' : 0.2,
+    'Services PMI' : 0.1,
     'Manufacturing PMI' : 0.2,
     'Philadelphia Fed Manufacturing Index' : 0.1,
     'Jobless Claims 4-Week Avg.' : -0.006,
@@ -342,15 +342,16 @@ def computeDeviations(df, dictionary):
     df['event'].replace(dictionary, regex=True, inplace=True)
     df["event"] = pd.to_numeric(df["event"], errors='coerce')
     df = df[df['event'].notna()]
+    df['happening'] = 
     df['diffPrev'] = (df['actual'] - df['previous']) / 4
     df['diffForec'] = df['actual'] - df['forecast']
     df['deviation'] = ((df['diffPrev'] + df['diffForec']) * df['event'] * df['importance']).round(2)
-    df.drop(['diffPrev', 'diffForec', 'event', 'importance', 'forecast', 'actual', 'previous'], axis=1, inplace=True)
+    df.drop(['diffPrev', 'diffForec', 'event', 'forecast', 'actual', 'previous'], axis=1, inplace=True)
 
-    return df
+    return df.sort_values(by=['importance']) #todo: remove .sort_values
 
-dataDfJp = getEconomicData('01/01/2021', '31/01/2022', 'japan')
-dataDfJp = computeDeviations(dataDfJp, deviationScoreDictionaryJp)
+dataDfJp = getEconomicData('01/01/2021', '31/01/2022', 'euro zone')
+dataDfJp = computeDeviations(dataDfJp, deviationScoreDictionaryEu)
 
 
 #OK: only full hours
