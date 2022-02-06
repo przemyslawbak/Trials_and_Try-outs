@@ -351,8 +351,8 @@ def computeDeviations(df, dictionary):
 
     return df.sort_values(by=['eventName']).sort_values(by=['importance']) #todo: remove .sort_values
 
-dataDfJp = getEconomicData('01/01/2021', '31/01/2022', 'euro zone')
-dataDfJp = computeDeviations(dataDfJp, deviationScoreDictionaryEu)
+dataDfJp = getEconomicData('01/01/2021', '31/01/2022', 'japan')
+dataDfJp = computeDeviations(dataDfJp, deviationScoreDictionaryJp)
 
 
 #OK: only full hours
@@ -361,7 +361,11 @@ dataDfJp = computeDeviations(dataDfJp, deviationScoreDictionaryEu)
 #OK: numeric imporance
 #OK: replace too big or too small hour values
 #OK: deviation dictionary for 'event' column
-#todo: for deviation, compute 'previous' - 'actual' difference
+#OK: for deviation, compute 'previous' - 'actual' difference
+#todo: update values for deviationScoreDictionaryJp (0-0.1-0.2)
+#todo: update values for deviationScoreDictionaryPl (0-0.1-0.2)
+#todo: update values for deviationScoreDictionaryDe (0-0.1-0.2)
+#todo: update values for deviationScoreDictionaryUs (0-0.1-0.2)
 #todo: after finished find huge values with errors, if any
 #todo: compute sum of n last rows for the result
 #NO: UK?
