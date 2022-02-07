@@ -30,7 +30,7 @@ replacementDictionary = {"B": "", "M": "", "%": "", ",": "", "K": "", "T": ""}
 deviationScoreDictionaryJp = {
     'Monetary Base \(YoY\)' : 0.1,
     'Tankan Large Manufacturers Index' : 0.02,
-    'Tankan Big Manufacturing Outlook Index' : 0.05,
+    'Tankan Big Manufacturing Outlook Index' : 0.1,
     'Tankan All Small Industry CAPEX' : 0.1,
     'Tankan All Big Industry CAPEX' : 0.1,
     'BSI Large Manufacturing Conditions' : 0.02,
@@ -41,7 +41,7 @@ deviationScoreDictionaryJp = {
     'Foreign Reserves \(USD\)' : 0.01,
     'Housing Starts \(YoY\)' : 0.1,
     'Unemployment Rate' : -2,
-    'Jobs/applications ratio' : 2.66,
+    'Jobs/applications ratio' : 5,
     'Retail Sales \(YoY\)' : 0.1,
     'Coincident Indicator \(MoM\)' : 0.1,
     'Corporate Services Price Index \(CSPI\) \(YoY\)' : -1.42,
@@ -56,8 +56,8 @@ deviationScoreDictionaryJp = {
     'Imports \(YoY\)' : -0.02,
     'Exports \(YoY\) ' : 0.02,
     'Adjusted Trade Balance' : 1,
-    'Industrial Production \(MoM\)' : 0.05,
-    'Tertiary Industry Activity Index \(MoM\)' : 0.05,
+    'Industrial Production \(MoM\)' : 0.1,
+    'Tertiary Industry Activity Index \(MoM\)' : 0.15,
     'Thomson Reuters IPSOS PCSI' : 0.1,
     'Foreign Bonds Buying' : -0.0001,
     'PPI \(YoY\)' : 0.1,
@@ -73,7 +73,7 @@ deviationScoreDictionaryJp = {
     'Household Confidence' : 0.1,
     '10-Year JGB Auction' : -5,
     'Services PMI' : 0.2,
-    'CFTC JPY speculative net positions' : 0.005,
+    'CFTC JPY speculative net positions' : 0.01,
     'Manufacturing PMI' : 0.1,
     }
 
@@ -362,7 +362,6 @@ dataDfJp = computeDeviations(dataDfJp, deviationScoreDictionaryJp)
 #OK: replace too big or too small hour values
 #OK: deviation dictionary for 'event' column
 #OK: for deviation, compute 'previous' - 'actual' difference
-#todo: update values for deviationScoreDictionaryJp (0-0.1-0.2)
 #todo: update values for deviationScoreDictionaryPl (0-0.1-0.2)
 #todo: update values for deviationScoreDictionaryDe (0-0.1-0.2)
 #todo: update values for deviationScoreDictionaryUs (0-0.1-0.2)
