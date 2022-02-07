@@ -23,6 +23,8 @@ importanceDictionary = {
     'high' : 1.00,
     }
 
+months = ['  \(Jun\)', '  \(Jul\)', '  \(Aug\)', '  \(Sep\)', '  \(Oct\)', '  \(Nov\)', '  \(Dec\)', '  \(Jan\)', '  \(Feb\)', '  \(Mar\)', '  \(Apr\)', '  \(May\)']
+
 replacementDictionary = {"B": "", "M": "", "%": "", ",": "", "K": "", "T": ""}
 
 #ref: https://www.fxstreet.com/economic-calendar
@@ -337,6 +339,7 @@ def getEconomicData(from_date, to_date, country):
     return df
 
 def computeDeviations(df, dictionary):
+    df['event'] = df['event'].str.replace('|'.join(months), '')
     df['eventName'] = df['event']
     df['event'].replace(dictionary, regex=True, inplace=True)
     df["event"] = pd.to_numeric(df["event"], errors='coerce')
@@ -361,8 +364,9 @@ dataDfJp = computeDeviations(dataDfJp, deviationScoreDictionaryUs)
 #OK: replace too big or too small hour values
 #OK: deviation dictionary for 'event' column
 #OK: for deviation, compute 'previous' - 'actual' difference
-#todo: double check update values for deviationScoreDictionaryUs
-#todo: compare weights for starndard indicators for all countries
+#NO: double check update values for deviationScoreDictionaryUs
+#OK: remove months from event names
+#todo: compare weights for starndard indicators for all countries, ex. PPI
 #OK: after finished find huge values with errors, if any
 #todo: compute sum of n last rows for the result
 #NO: UK?
