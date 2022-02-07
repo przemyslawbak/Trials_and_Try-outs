@@ -128,35 +128,35 @@ deviationScoreDictionaryPl = {
     }
 
 deviationScoreDictionaryDe = {
-    'German 12-Month Bubill' : -10,
-    'German Import Price Index \(MoM\)' : 3.7,
+    'German 12-Month Bubill' : -0.5,
+    'German Import Price Index \(MoM\)' : 0.3,
     'German Export Price Index \(MoM\)' : 0.5,
-    'GfK German Consumer Climate' : 1,
+    'GfK German Consumer Climate' : 0.05,
     'German Buba' : 0,
-    'German Ifo Business Climate Index' : 1,
-    'German Current Assessment' : 1,
-    'German Business Expectations' : 1.5,
-    'German 30-Year Bund' : -2,
-    'German PPI \(YoY\)' : 0.1,
-    'German ZEW Economic Sentiment' : 0.04,
-    'German ZEW Current Conditions' : 0.2,
-    'German Car Registration \(MoM\)' : 5,
+    'German Ifo Business Climate Index' : 0.2,
+    'German Current Assessment' : 0.2,
+    'German Business Expectations' : 0.1,
+    'German 30-Year Bund' : -1,
+    'German PPI \(YoY\)' : 0.2,
+    'German ZEW Economic Sentiment' : 0.08,
+    'German ZEW Current Conditions' : 0.02,
+    'German Car Registration \(MoM\)' : 0.5,
     'Germany Thomson Reuters IPSOS PCSI' : 0.1,
-    'German GDP \(QoQ' : 0.5,
-    'German 5-Year Bobl' : -7,
-    'German Trade Balance' : 0.1,
-    'German Industrial Production \(MoM\)' : 0.5,
-    'German Imports \(MoM\)' : -0.02,
-    'German Exports \(MoM\)' : 0.02,
-    'German Factory Orders \(MoM\)' : 0.01,
-    'German CPI \(MoM\)' : -2,
-    'German 10-Year Bund' : -6,
+    'German GDP \(QoQ' : 0.25,
+    'German 5-Year Bobl' : -3,
+    'German Trade Balance' : 0.05,
+    'German Industrial Production \(MoM\)' : 0.02,
+    'German Imports \(MoM\)' : -0.1,
+    'German Exports \(MoM\)' : 0.1,
+    'German Factory Orders \(MoM\)' : 0.05,
+    'German CPI \(MoM\)' : -1,
+    'German 10-Year Bund' : -3,
     'German Services PMI' : 0.1,
-    'German Composite PMI' : 0.1,
+    'German Composite PMI' : 0.2,
     'German 2-Year Schatz' : -10,
     'German Unemployment Rate' : -2,
     'German Manufacturing PMI' : 0.2,
-    'German Retail Sales \(MoM\)' : 0.1,
+    'German Retail Sales \(MoM\)' : 0.05,
     }
 
 deviationScoreDictionaryUs = {
@@ -350,8 +350,8 @@ def computeDeviations(df, dictionary):
 
     return df.sort_values(by=['eventName']).sort_values(by=['importance']) #todo: remove .sort_values
 
-dataDfJp = getEconomicData('01/01/2021', '31/01/2022', 'poland')
-dataDfJp = computeDeviations(dataDfJp, deviationScoreDictionaryPl)
+dataDfJp = getEconomicData('01/01/2021', '31/01/2022', 'germany')
+dataDfJp = computeDeviations(dataDfJp, deviationScoreDictionaryDe)
 
 
 #OK: only full hours
@@ -361,7 +361,6 @@ dataDfJp = computeDeviations(dataDfJp, deviationScoreDictionaryPl)
 #OK: replace too big or too small hour values
 #OK: deviation dictionary for 'event' column
 #OK: for deviation, compute 'previous' - 'actual' difference
-#todo: update values for deviationScoreDictionaryDe (0-0.1-0.2)
 #todo: update values for deviationScoreDictionaryUs (0-0.1-0.2)
 #todo: after finished find huge values with errors, if any
 #todo: compute sum of n last rows for the result
