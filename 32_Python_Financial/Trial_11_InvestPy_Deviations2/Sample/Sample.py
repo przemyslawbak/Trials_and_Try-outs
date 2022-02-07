@@ -29,7 +29,23 @@ replacementDictionary = {"B": "", "M": "", "%": "", ",": "", "K": "", "T": ""}
 
 #ref: https://www.fxstreet.com/economic-calendar
 
+importanceDictionary = {
+    'GDP' : 'high',
+    'Unemployment Rate' : 'high',
+    'CPI' : 'medium',
+    'Retail Sales' : 'medium',
+    'Industrial Production \(MoM\)' : 'medium',
+    }
+
 deviationScoreDictionaryJp = {
+    'GDP \(QoQ\)' : 0.5,
+    'BoJ Core CPI \(YoY\)' : -2,
+    'Retail Sales \(YoY\)' : 0.1,
+    'Unemployment Rate' : -2,
+    'Industrial Production \(MoM\)' : 0.1,
+
+
+
     'Monetary Base \(YoY\)' : 0.1,
     'Tankan Large Manufacturers Index' : 0.02,
     'Tankan Big Manufacturing Outlook Index' : 0.1,
@@ -37,17 +53,13 @@ deviationScoreDictionaryJp = {
     'Tankan All Big Industry CAPEX' : 0.1,
     'BSI Large Manufacturing Conditions' : 0.02,
     'Capacity Utilization Rate' : 3,
-    'GDP \(QoQ\)' : 0.5,
     'Core Machinery Orders \(YoY\)' : 0.01,
     'Machine Tool Orders \(YoY\)' : 0.01,
     'Foreign Reserves \(USD\)' : 0.01,
     'Housing Starts \(YoY\)' : 0.1,
-    'Unemployment Rate' : -2,
     'Jobs/applications ratio' : 5,
-    'Retail Sales \(YoY\)' : 0.1,
     'Coincident Indicator \(MoM\)' : 0.1,
     'Corporate Services Price Index \(CSPI\) \(YoY\)' : -1.42,
-    'BoJ Core CPI \(YoY\)' : -2,
     'BoJ Summary of Opinions' : 0,
     'Speaks' : 0,
     'Monetary Policy Meeting Minutes' : 0,
@@ -58,7 +70,6 @@ deviationScoreDictionaryJp = {
     'Imports \(YoY\)' : -0.02,
     'Exports \(YoY\) ' : 0.02,
     'Adjusted Trade Balance' : 1,
-    'Industrial Production \(MoM\)' : 0.1,
     'Tertiary Industry Activity Index \(MoM\)' : 0.15,
     'Thomson Reuters IPSOS PCSI' : 0.1,
     'Foreign Bonds Buying' : -0.0001,
@@ -80,6 +91,12 @@ deviationScoreDictionaryJp = {
     }
 
 deviationScoreDictionaryEu = {
+    'Retail Sales \(MoM\)' : 0.1,
+    'Unemployment Rate' : -2,
+    'Industrial Production \(MoM\)' : 0.2,
+
+
+
     'ZEW Economic Sentiment' : 0.025,
     'ECB LTRO' : 0.002,
     'Wages in euro zone \(YoY\)' : 0.1,
@@ -88,9 +105,6 @@ deviationScoreDictionaryEu = {
     'Current Account n.s.a.' : 0.02,
     'Eurogroup Meetings' : 0.1,
     'Trade Balance' : 0.03,
-    'Industrial Production \(MoM\)' : 0.2,
-    'Unemployment Rate' : -2,
-    'Retail Sales \(YoY\)' : 0.1,
     'Sentix Investor Confidence' : 0.05,
     'Industrial Sentiment' : 0.1,
     'Services Sentiment' : 0.1,
@@ -116,20 +130,29 @@ deviationScoreDictionaryEu = {
 
 deviationScoreDictionaryPl = {
     'GDP \(QoQ\)' : 0.25,
-    'Manufacturing PMI' : 0.2,
-    'Unemployment Rate' : -4,
-    'M3 Money Supply \(MoM\)' : 0.1,
+    'Core CPI \(YoY\)' : -2,
     'Retail Sales \(YoY\)' : 0.1,
+    'Unemployment Rate' : -4,
+
+
+    'Manufacturing PMI' : 0.2,
+    'M3 Money Supply \(MoM\)' : 0.1,
     'PPI \(YoY\)' : 0.3,
     'Industrial Output \(YoY\)' : 0.05,
     'Corp. Sector Wages \(YoY\)' : 0.35,
-    'Core CPI \(YoY\)' : -2,
     'Current Account' : 0.0005,
     'Interest Rate Decision' : -1.25,
     'NBP Monetary Policy Meeting Mi' : 0,
     }
 
 deviationScoreDictionaryDe = {
+    'German GDP \(QoQ' : 0.25,
+    'German CPI \(YoY\)' : -1,
+    'German Retail Sales \(YoY\)' : 0.05,
+    'German Unemployment Rate' : -2,
+    'German Industrial Production \(MoM\)' : 0.02,
+
+
     'German 12-Month Bubill' : -0.5,
     'German Import Price Index \(MoM\)' : 0.06,
     'German Export Price Index \(MoM\)' : 0.25,
@@ -144,24 +167,26 @@ deviationScoreDictionaryDe = {
     'German ZEW Current Conditions' : 0.02,
     'German Car Registration \(MoM\)' : 0.5,
     'Germany Thomson Reuters IPSOS PCSI' : 0.1,
-    'German GDP \(QoQ' : 0.25,
     'German 5-Year Bobl' : -3,
     'German Trade Balance' : 0.05,
-    'German Industrial Production \(MoM\)' : 0.02,
     'German Imports \(MoM\)' : -0.1,
     'German Exports \(MoM\)' : 0.1,
     'German Factory Orders \(MoM\)' : 0.05,
-    'German CPI \(MoM\)' : -1,
     'German 10-Year Bund' : -3,
     'German Services PMI' : 0.1,
     'German Composite PMI' : 0.2,
     'German 2-Year Schatz' : -10,
-    'German Unemployment Rate' : -2,
     'German Manufacturing PMI' : 0.2,
-    'German Retail Sales \(MoM\)' : 0.05,
     }
 
 deviationScoreDictionaryUs = {
+    'GDP \(QoQ\)' : 0.25,
+    'Core CPI \(YoY\)' : -2,
+    'Core Retail Sales \(MoM\)' : 0.1,
+    'Unemployment Rate' : -2,
+    'Industrial Production \(MoM\)' : 0.1,
+
+
     'Federal Budget Balance' : 0.006,
     'Loan Officer Survey' : 0,
     'Beige Book' : 0,
@@ -190,13 +215,11 @@ deviationScoreDictionaryUs = {
     'Export Price Index \(MoM\)' : 0.5,
     'Wholesale Trade Sales \(MoM\)' : 0.5,
     'Wholesale Inventories \(MoM\)' : -2.5,
-    'Core CPI \(MoM\)' : -2,
     'WASDE Report' : 0,
     'JOLTs Job Openings' : 0.3,
     'NFIB Small Business Optimism' : 0.2,
     'CB Employment Trends Index' : 0.2,
     'Consumer Credit' : 0.05,
-    'Unemployment Rate' : -2,
     'Private Nonfarm Payrolls' : 0.001,
     'Imports' : -0.02,
     'Exports' : 0.02,
@@ -287,8 +310,6 @@ deviationScoreDictionaryUs = {
     'Business Inventories \(MoM\)' : 2,
     'Manufacturing Production \(MoM\)' : 0.2,
     'Capacity Utilization Rate' : 0.5,
-    'Industrial Production \(MoM\)' : 0.1,
-    'Retail Sales \(MoM\)' : 0.1,
     'Retail Inventories Ex Auto' : 0.5,
     'Retail Control \(MoM\)' : 0.1,
     'PPI \(MoM\)' : 0.5,
@@ -356,9 +377,8 @@ def computeDeviations(df, dictionary):
 dataDfJp = getEconomicData('01/01/2021', '31/01/2022', 'united states')
 dataDfJp = computeDeviations(dataDfJp, deviationScoreDictionaryUs)
 
-
+#todo: create own importance weights based on key words
 #todo: compare weights for starndard indicators for all countries, ex. PPI
-#todo: create own weights based on key words
 #todo: compute sum of n last rows for the result
 #todo: find peaks for specific event names
 
