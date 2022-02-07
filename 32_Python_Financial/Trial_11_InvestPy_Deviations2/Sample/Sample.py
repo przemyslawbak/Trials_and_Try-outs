@@ -18,7 +18,7 @@ localizeDictionary = {
     'united kingdom':'Europe/London',
     }
 
-importanceDictionary = {
+importanceValueDictionary = {
     'low' : 0.15,
     'medium' : 0.50,
     'high' : 1.00,
@@ -28,24 +28,22 @@ eventMonths = ['  \(Jun\)', '  \(Jul\)', '  \(Aug\)', '  \(Sep\)', '  \(Oct\)', 
 
 replacementDictionary = {"B": "", "M": "", "%": "", ",": "", "K": "", "T": ""}
 
-#ref: https://www.fxstreet.com/economic-calendar
-
-importanceDictionary = {
-    'GDP' : 'high',
-    'Interest Rate' : 'high',
-    'Unemployment Rate' : 'high',
-    'Manufacturing PMI' : 'medium',
-    'CPI' : 'medium',
-    'Retail Sales' : 'medium',
-    'Industrial Production' : 'medium',
-    'Services PMI' : 'medium',
-    'Trade Balance' : 'medium',
-    '10-Year' : 'medium',
-    'Money Supply' : 'low',
-    'Thomson Reuters IPSOS PCSI' : 'low',
-    'PPI' : 'low',
-    '30-Year' : 'low',
-    'Current Account' : 'low',
+importanceEventDictionary = {
+    'GDP' : 1.00,
+    'Interest Rate' : 1.00,
+    'Unemployment Rate' : 1.00,
+    'Manufacturing PMI' : 0.50,
+    'CPI' : 0.50,
+    'Retail Sales' : 0.50,
+    'Industrial Production' : 0.50,
+    'Services PMI' : 0.50,
+    'Trade Balance' : 0.50,
+    '10-Year' : 0.50,
+    'Money Supply' : 0.15,
+    'Thomson Reuters IPSOS PCSI' : 0.15,
+    'PPI' : 0.15,
+    '30-Year' : 0.15,
+    'Current Account' : 0.15,
     }
 
 deviationScoreDictionaryUk = {
@@ -129,7 +127,7 @@ deviationScoreDictionaryUs = {
     'GDP \(QoQ\)' : 0.25,
     'Core CPI \(YoY\)' : -2,
     'Core Retail Sales \(MoM\)' : 0.1,
-    'Unemployment Rate' : -2,
+    'U6 Unemployment Rate' : -2,
     'Industrial Production \(MoM\)' : 0.1,
     'U.S. M2 Money Supply' : 0.2,
     'Fed Interest Rate Decision' : -12.5,
@@ -158,6 +156,8 @@ def getEconomicData(from_date, to_date, country):
 
     #combine columns: 'date' + 'time'
     df['date_time'] = pd.to_datetime(df['date'] + ' ' + df['time'], format="%d/%m/%Y %H:%M")
+
+    #drop unwanted columns
     df.drop(['date', 'time', 'currency', 'zone', 'id'], axis=1, inplace=True)
 
     #only full hours
@@ -174,7 +174,13 @@ def getEconomicData(from_date, to_date, country):
     hours=df['date_time'] = np.where(tooLess, df['date_time'] + pd.to_timedelta(9 - df['date_time'].dt.hour,unit='h'), df['date_time'])
 
     #numeric importance
-    df['importance'] = df['importance'].map(importanceDictionary).fillna(0.00)
+    df['importance'] = df['event']
+    df['importance'].replace(importanceEventDictionary, regex=True, inplace=True)
+    df["importance"] = pd.to_numeric(df["importance"], errors='coerce')
+    df = df[df['importance'].notna()]
+
+    print(df.head(10000))
+    print(df.dtypes)
 
     #replacing substrings
     df['actual'] = df['actual'].str.replace('|'.join(replacementDictionary), lambda string: replacementDictionary[string.group()]).fillna('0.0')
@@ -187,22 +193,30 @@ def getEconomicData(from_date, to_date, country):
     return df
 
 def computeDeviations(df, dictionary):
+    #set events from dictionary
     df['event'] = df['event'].str.replace('|'.join(eventMonths), '')
     df['eventName'] = df['event']
     df['event'].replace(dictionary, regex=True, inplace=True)
     df["event"] = pd.to_numeric(df["event"], errors='coerce')
     df = df[df['event'].notna()]
+
+    #compute diff columns
     df['diffPrev'] = (df['actual'] - df['previous']) / 4
     df['diffForec'] = df['actual'] - df['forecast']
+
+    #compute deviation
     df['deviation'] = ((df['diffPrev'] + df['diffForec']) * df['event'] * df['importance']).round(2)
-    df.drop(['diffPrev', 'diffForec', 'event', 'forecast', 'actual', 'previous'], axis=1, inplace=True)
     df['happening'] = np.where(df['deviation'] == 0.00, 1, 0)
     df['happening'] = df['happening'] * df['importance']
 
+    #drop unwanted columns
+    df.drop(['diffPrev', 'diffForec', 'event', 'forecast', 'actual', 'previous'], axis=1, inplace=True)
+
+
     return df.sort_values(by=['eventName']).sort_values(by=['importance']) #todo: remove .sort_values
 
-dataDfJp = getEconomicData('01/01/2021', '31/01/2022', 'united kingdom')
-#dataDfJp = computeDeviations(dataDfJp, deviationScoreDictionaryUs)
+dataDfJp = getEconomicData('01/01/2021', '31/01/2022', 'united states')
+dataDfJp = computeDeviations(dataDfJp, deviationScoreDictionaryUs)
 
 #todo: create own importance weights based on key words
 #todo: compare weights for starndard indicators for all countries, ex. PPI
