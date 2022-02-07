@@ -113,18 +113,17 @@ deviationScoreDictionaryEu = {
     }
 
 deviationScoreDictionaryPl = {
-    'GDP \(QoQ\)' : 0.5,
-    'Manufacturing PMI' : 0.1,
-    'Unemployment Rate' : -2,
-    'M3 Money Supply \(MoM\)' : 0.02,
+    'GDP \(QoQ\)' : 0.25,
+    'Manufacturing PMI' : 0.2,
+    'Unemployment Rate' : -4,
+    'M3 Money Supply \(MoM\)' : 0.1,
     'Retail Sales \(YoY\)' : 0.1,
-    'PPI \(YoY\)' : 0.1,
-    'Industrial Output \(YoY\)' : 0.7,
-    'Employment Growth \(YoY\)' : 5,
-    'Corp. Sector Wages \(YoY\)' : 0.2,
+    'PPI \(YoY\)' : 0.3,
+    'Industrial Output \(YoY\)' : 0.05,
+    'Corp. Sector Wages \(YoY\)' : 0.35,
     'Core CPI \(YoY\)' : -2,
     'Current Account' : 0.0005,
-    'Interest Rate Decision' : -12.5,
+    'Interest Rate Decision' : -1.25,
     'NBP Monetary Policy Meeting Mi' : 0,
     }
 
@@ -351,8 +350,8 @@ def computeDeviations(df, dictionary):
 
     return df.sort_values(by=['eventName']).sort_values(by=['importance']) #todo: remove .sort_values
 
-dataDfJp = getEconomicData('01/01/2021', '31/01/2022', 'japan')
-dataDfJp = computeDeviations(dataDfJp, deviationScoreDictionaryJp)
+dataDfJp = getEconomicData('01/01/2021', '31/01/2022', 'poland')
+dataDfJp = computeDeviations(dataDfJp, deviationScoreDictionaryPl)
 
 
 #OK: only full hours
@@ -362,7 +361,6 @@ dataDfJp = computeDeviations(dataDfJp, deviationScoreDictionaryJp)
 #OK: replace too big or too small hour values
 #OK: deviation dictionary for 'event' column
 #OK: for deviation, compute 'previous' - 'actual' difference
-#todo: update values for deviationScoreDictionaryPl (0-0.1-0.2)
 #todo: update values for deviationScoreDictionaryDe (0-0.1-0.2)
 #todo: update values for deviationScoreDictionaryUs (0-0.1-0.2)
 #todo: after finished find huge values with errors, if any
