@@ -29,9 +29,11 @@ eventMonths = ['  \(Jun\)', '  \(Jul\)', '  \(Aug\)', '  \(Sep\)', '  \(Oct\)', 
 replacementDictionary = {"B": "", "M": "", "%": "", ",": "", "K": "", "T": ""}
 
 importanceEventDictionary = {
+    #max 0.3x
     'GDP' : 1.00,
     'Interest Rate' : 1.00,
     'Unemployment Rate' : 1.00,
+    #max 0.2x
     'Manufacturing PMI' : 0.50,
     'CPI' : 0.50,
     'Retail Sales' : 0.50,
@@ -39,6 +41,7 @@ importanceEventDictionary = {
     'Services PMI' : 0.50,
     'Trade Balance' : 0.50,
     '10-Year' : 0.50,
+    #max 0.1x
     'Money Supply' : 0.15,
     'Thomson Reuters IPSOS PCSI' : 0.15,
     'PPI' : 0.15,
@@ -124,19 +127,19 @@ deviationScoreDictionaryDe = {
     }
 
 deviationScoreDictionaryUs = {
-    'GDP \(QoQ\)' : 0.25,
-    'Core CPI \(YoY\)' : -2,
-    'Core Retail Sales \(MoM\)' : 0.1,
-    'U6 Unemployment Rate' : -2,
-    'Industrial Production \(MoM\)' : 0.1,
+    'GDP \(QoQ\)' : 0.05,
+    'Core CPI \(YoY\)' : -0.5,
+    'Core Retail Sales \(MoM\)' : 0.075,
+    'U6 Unemployment Rate' : -0.4,
+    'Industrial Production \(MoM\)' : 0.15,
     'U.S. M2 Money Supply' : 0.2,
-    'Fed Interest Rate Decision' : -12.5,
-    'Services PMI' : 0.1,
-    'Trade Balance' : 0.1,
-    'Thomson Reuters IPSOS PCSI' : 0.1,
+    'Fed Interest Rate Decision' : -18.75,
+    'Services PMI' : 0.075,
+    'Goods Trade Balance' : 0.0375,
+    'Thomson Reuters IPSOS PCSI' : 0.12,
     'Core PPI \(MoM\)' : 0.5,
     'ISM Manufacturing PMI' : 0.1,
-    '30-Year Bond Auction' : -2,
+    '30-Year Bond Auction' : -1,
     '10-Year Bond Auction' : -5,
     'Current Account' : 0.05,
     }
@@ -179,9 +182,6 @@ def getEconomicData(from_date, to_date, country):
     df["importance"] = pd.to_numeric(df["importance"], errors='coerce')
     df = df[df['importance'].notna()]
 
-    print(df.head(10000))
-    print(df.dtypes)
-
     #replacing substrings
     df['actual'] = df['actual'].str.replace('|'.join(replacementDictionary), lambda string: replacementDictionary[string.group()]).fillna('0.0')
     df['previous'] = df['previous'].str.replace('|'.join(replacementDictionary), lambda string: replacementDictionary[string.group()]).fillna('0.0')
@@ -213,13 +213,14 @@ def computeDeviations(df, dictionary):
     df.drop(['diffPrev', 'diffForec', 'event', 'forecast', 'actual', 'previous'], axis=1, inplace=True)
 
 
-    return df.sort_values(by=['eventName']).sort_values(by=['importance']) #todo: remove .sort_values
+    return df.sort_values(['eventName', 'importance', 'deviation']) #todo: remove .sort_values
 
 dataDfJp = getEconomicData('01/01/2021', '31/01/2022', 'united states')
 dataDfJp = computeDeviations(dataDfJp, deviationScoreDictionaryUs)
 
-#todo: create own importance weights based on key words
-#todo: compare weights for starndard indicators for all countries, ex. PPI
+#OK: create own importance weights based on key words
+#OK: compare weights for starndard indicators for all countries, ex. PPI
+#todo: add happenings?
 #todo: compute sum of n last rows for the result
 #todo: find peaks for specific event names
 
