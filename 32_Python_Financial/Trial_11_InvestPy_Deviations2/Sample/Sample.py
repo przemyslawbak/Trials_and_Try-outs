@@ -51,14 +51,14 @@ importanceEventDictionary = {
 
 deviationScoreDictionaryUk = {
     'GDP \(QoQ\)' : 0.5, #const
-    'BoE Interest Rate Decision' : -18.75, #const
+    'BoE Interest Rate Decision' : -3, #const
     'Core CPI \(YoY\)' : -0.5, #const
     'Unemployment Rate' : -0.4, #const
     'Services PMI' : 0.075, #const
     'Manufacturing PMI' : 0.1, #const
     '30-Year Treasury Gilt Auction' : -1, #const
     'Thomson Reuters IPSOS PCSI' : 0.125, #const
-    '10-Year Treasury Gilt Auction' : -5, #const
+    '10-Year Treasury Gilt Auction' : -2, #const
     'Industrial Production \(MoM\)' : 0.15, #const
     'Core Retail Sales \(YoY\)' : 0.075, #const
     'Trade Balance Non-EU' : 0.0375, #const
@@ -70,11 +70,11 @@ deviationScoreDictionaryJp = {
     'GDP \(QoQ\)' : 0.5, #const
     'BoJ Core CPI \(YoY\)' : -0.5, #const
     'Unemployment Rate' : -0.4, #const
-    'BoJ Interest Rate Decision' : -18.75, #const
+    'BoJ Interest Rate Decision' : -3, #const
     'Services PMI' : 0.075, #const
     'Manufacturing PMI' : 0.1, #const
     '30-Year JGB Auction' : -1, #const
-    '10-Year JGB Auction' : -5, #const
+    '10-Year JGB Auction' : -2, #const
     'Industrial Production \(MoM\)' : 0.15, #const
     'Thomson Reuters IPSOS PCSI' : 0.125, #const
     'Retail Sales \(YoY\)' : 0.075, #const
@@ -85,7 +85,7 @@ deviationScoreDictionaryJp = {
 
 deviationScoreDictionaryEu = {
     'Unemployment Rate' : -0.4, #const
-    'Interest Rate Decision' : -18.75, #const
+    'Interest Rate Decision' : -3, #const
     'Services PMI' : 0.075, #const
     'Industrial Production \(MoM\)' : 0.15, #const
     'Manufacturing PMI' : 0.1, #const
@@ -99,7 +99,7 @@ deviationScoreDictionaryPl = {
     'GDP \(QoQ\)' : 0.05, #const
     'Core CPI \(YoY\)' : -0.5, #const
     'Unemployment Rate' : -0.4, #const
-    'Interest Rate Decision' : -18.75, #const
+    'Interest Rate Decision' : -3, #const
     'Manufacturing PMI' : 0.1, #const
     'Retail Sales \(YoY\)' : 0.075, #const
     'M3 Money Supply \(MoM\)' : 0.2, #const
@@ -114,7 +114,7 @@ deviationScoreDictionaryDe = {
     'German Services PMI' : 0.075, #const
     'German Manufacturing PMI' : 0.1, #const
     'German 30-Year Bund' : -1, #const
-    'German 10-Year Bund' : -5, #const
+    'German 10-Year Bund' : -2, #const
     'Germany Thomson Reuters IPSOS PCSI' : 0.125, #const
     'German Trade Balance' : 0.0375, #const
     'German PPI \(MoM\)' : -0.5, #const
@@ -122,7 +122,7 @@ deviationScoreDictionaryDe = {
 
 deviationScoreDictionaryUs = {
     'GDP \(QoQ\)' : 0.05, #const
-    'Fed Interest Rate Decision' : -18.75, #const
+    'Fed Interest Rate Decision' : -3, #const
     'Core CPI \(YoY\)' : -0.5, #const
     'U6 Unemployment Rate' : -0.4, #const
     'Services PMI' : 0.075, #const
@@ -130,7 +130,7 @@ deviationScoreDictionaryUs = {
     'Thomson Reuters IPSOS PCSI' : 0.125, #const
     'Industrial Production \(MoM\)' : 0.15, #const
     '30-Year Bond Auction' : -1, #const
-    '10-Year Note Auction' : -5, #const
+    '10-Year Note Auction' : -2, #const
     'Core PPI \(MoM\)' : -0.5, #const
     'U.S. M2 Money Supply' : 0.2, #const
     'Goods Trade Balance' : 0.0375, #const
@@ -138,6 +138,7 @@ deviationScoreDictionaryUs = {
     }
 
 def getEconomicData(from_date, to_date, country):
+    print('getting data for ' + country)
     df = investpy.economic_calendar(
     from_date=from_date,
     to_date  =to_date,
@@ -184,7 +185,7 @@ def getEconomicData(from_date, to_date, country):
 
     return df
 
-def computeDeviations(df, dictionary, sumLast):
+def computeDeviations(df, dictionary):
     #set events from dictionary
     df['event'] = df['event'].str.replace('|'.join(eventMonths), '')
     df['eventName'] = df['event']
@@ -201,16 +202,32 @@ def computeDeviations(df, dictionary, sumLast):
     df['happening'] = np.where(df['deviation'] == 0.00, 1, 0)
     df['happening'] = df['happening'] * df['importance']
 
-    #rolling sum
-    df['sum'] = df['deviation'].rolling(min_periods=1, window=sumLast).sum().round(2)
 
     #drop unwanted columns
     df.drop(['diffPrev', 'diffForec', 'event', 'forecast', 'actual', 'previous'], axis=1, inplace=True)
 
+    df['date_time'] = df['date_time'].dt.tz_localize(None)
+
     return df
 
-dataDfJp = getEconomicData('01/01/2021', '31/01/2022', 'united states')
-dataDfJp = computeDeviations(dataDfJp, deviationScoreDictionaryUs, 33)
+dataDfUs = getEconomicData('01/01/2021', '31/01/2022', 'united states')
+dataDfUs = computeDeviations(dataDfUs, deviationScoreDictionaryUs)
+dataDfDe = getEconomicData('01/01/2021', '31/01/2022', 'germany')
+dataDfDe = computeDeviations(dataDfDe, deviationScoreDictionaryDe)
+dataDfPl = getEconomicData('01/01/2021', '31/01/2022', 'poland')
+dataDfPl = computeDeviations(dataDfPl, deviationScoreDictionaryPl)
+dataDfEu = getEconomicData('01/01/2021', '31/01/2022', 'euro zone')
+dataDfEu = computeDeviations(dataDfEu, deviationScoreDictionaryEu)
+dataDfJp = getEconomicData('01/01/2021', '31/01/2022', 'japan')
+dataDfJp = computeDeviations(dataDfJp, deviationScoreDictionaryJp)
+dataDfUk = getEconomicData('01/01/2021', '31/01/2022', 'united kingdom')
+dataDfUk = computeDeviations(dataDfUk, deviationScoreDictionaryUk)
+
+dfs = [dataDfUs, dataDfDe, dataDfPl, dataDfEu, dataDfJp, dataDfUk]
+dataDfAll = pd.DataFrame().append(dfs)
+dataDfAll = dataDfAll.sort_values(by=['date_time'])
+#rolling sum
+dataDfAll['sum'] = dataDfAll['deviation'].rolling(min_periods=1, window=100).sum().round(2)
 
 #OK: create own importance weights based on key words
 #OK: compare weights for starndard indicators for all countries, ex. PPI
@@ -220,5 +237,5 @@ dataDfJp = computeDeviations(dataDfJp, deviationScoreDictionaryUs, 33)
 
 
 
-print(dataDfJp.head(10000))
-print(dataDfJp.dtypes)
+print(dataDfAll.head(10000))
+print(dataDfAll.dtypes)
