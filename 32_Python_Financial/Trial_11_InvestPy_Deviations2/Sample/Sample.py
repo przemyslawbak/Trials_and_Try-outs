@@ -18,6 +18,19 @@ localizeDictionary = {
     'united kingdom':'Europe/London',
     'france':'Europe/Berlin',
     'czech republic':'Europe/Berlin',
+    'italy':'Europe/Berlin',
+    }
+
+countryRateDictionary = {
+    'poland': 2.00,
+    'united states': 1.00,
+    'germany': 1.00,
+    'euro zone': 1.00,
+    'japan': 0.50,
+    'united kingdom': 1.00,
+    'france': 0.50,
+    'czech republic': 1.00,
+    'italy': 0.50,
     }
 
 importanceValueDictionary = {
@@ -49,6 +62,21 @@ importanceEventDictionary = {
     'PPI' : 0.15,
     '30-Year' : 0.15,
     'Current Account' : 0.15,
+    }
+
+deviationScoreDictionaryIt = {
+    'Ialian GDP \(QoQ\)' : 0.5, #const
+    'Italian CPI \(YoY\)' : -0.5, #const
+    'Italian Monthly Unemployment Rate' : -0.4, #const
+    'Italian Services PMI' : 0.075, #const
+    'Italian Manufacturing PMI' : 0.1, #const
+    'Italian 30-Year BTP' : -1, #const
+    'Italy Thomson Reuters IPSOS PCSI' : 0.125, #const
+    'Italian 10-Year BTP' : -2, #const
+    'Italian Industrial Production \(MoM\)' : 0.15, #const
+    'Italian Retail Sales \(YoY\)' : 0.075, #const
+    'Italian Trade Balance' : 0.0375, #const
+    'Italian PPI \(MoM\)' : -0.5, #const
     }
 
 deviationScoreDictionaryCz = {
@@ -172,6 +200,7 @@ def getEconomicData(from_date, to_date, country):
 
     #assign country col
     df['country'] = country
+    df['countryRate'] = countryRateDictionary[country]
 
     #'All Day' and 'Tentative' events remove
     df = df[df['time'] != 'All Day']
@@ -226,10 +255,9 @@ def computeDeviations(df, dictionary):
     df['diffForec'] = df['actual'] - df['forecast']
 
     #compute deviation
-    df['deviation'] = ((df['diffPrev'] + df['diffForec']) * df['event'] * df['importance']).round(2)
+    df['deviation'] = ((df['diffPrev'] + df['diffForec']) * df['event'] * df['importance'] * df['countryRate']).round(2)
     df['happening'] = np.where(df['deviation'] == 0.00, 1, 0)
     df['happening'] = df['happening'] * df['importance']
-
 
     #drop unwanted columns
     df.drop(['diffPrev', 'diffForec', 'event', 'forecast', 'actual', 'previous'], axis=1, inplace=True)
@@ -238,6 +266,8 @@ def computeDeviations(df, dictionary):
 
     return df
 
+dataDfIt = getEconomicData('01/01/2021', '31/01/2022', 'italy')
+dataDfIt = computeDeviations(dataDfIt, deviationScoreDictionaryIt)
 dataDfCz = getEconomicData('01/01/2017', '31/01/2022', 'czech republic')
 dataDfCz = computeDeviations(dataDfCz, deviationScoreDictionaryCz)
 dataDfFr = getEconomicData('01/01/2017', '31/01/2022', 'france')
@@ -255,7 +285,7 @@ dataDfJp = computeDeviations(dataDfJp, deviationScoreDictionaryJp)
 dataDfUk = getEconomicData('01/01/2017', '31/01/2022', 'united kingdom')
 dataDfUk = computeDeviations(dataDfUk, deviationScoreDictionaryUk)
 
-dfs = [dataDfUs, dataDfDe, dataDfPl, dataDfEu, dataDfJp, dataDfUk]
+dfs = [dataDfUs, dataDfDe, dataDfPl, dataDfEu, dataDfJp, dataDfUk, dataDfFr, dataDfCz, dataDfIt]
 dataDfAll = pd.DataFrame().append(dfs)
 dataDfAll = dataDfAll.sort_values(by=['date_time'])
 #rolling sum
