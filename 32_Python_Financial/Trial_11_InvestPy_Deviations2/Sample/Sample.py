@@ -60,11 +60,10 @@ deviationScoreDictionaryUk = {
     'Thomson Reuters IPSOS PCSI' : 0.125, #const
     '10-Year Treasury Gilt Auction' : -5, #const
     'Industrial Production \(MoM\)' : 0.15, #const
-    'Retail Sales \(YoY\)' : 0.1,
-    'Trade Balance' : 0.05,
-    'M4 Money Supply' : 0.0002,
-    'Core PPI Output \(MoM\)' : 0.1,
-    'Current Account' : 0.02,
+    'Core Retail Sales \(YoY\)' : 0.075, #const
+    'Trade Balance Non-EU' : 0.0375, #const
+    'M4 Money Supply' : 0.2, #const
+    'Core PPI Output \(MoM\)' : -0.5, #const
     }
 
 deviationScoreDictionaryJp = {
@@ -78,11 +77,10 @@ deviationScoreDictionaryJp = {
     '10-Year JGB Auction' : -5, #const
     'Industrial Production \(MoM\)' : 0.15, #const
     'Thomson Reuters IPSOS PCSI' : 0.125, #const
-    'Retail Sales \(YoY\)' : 0.1,
-    'M3 Money Supply' : 0.02,
-    'Adjusted Trade Balance' : 1,
-    'PPI \(YoY\)' : 0.1,
-    'Current Account n.s.a.' : 0.5,
+    'Retail Sales \(YoY\)' : 0.075, #const
+    'M3 Money Supply' : 0.002, #const (divided by 100)
+    'Adjusted Trade Balance' : 0.0375, #const (multiply by 10)
+    'PPI \(MoM\)' : -0.5, #const
     }
 
 deviationScoreDictionaryEu = {
@@ -91,11 +89,10 @@ deviationScoreDictionaryEu = {
     'Services PMI' : 0.075, #const
     'Industrial Production \(MoM\)' : 0.15, #const
     'Manufacturing PMI' : 0.1, #const
-    'Retail Sales \(MoM\)' : 0.1,
-    'M3 Money Supply \(YoY\)' : 0.0002,
-    'Trade Balance' : 0.03,
-    'PPI \(YoY\)' : 0.1,
-    'Current Account n.s.a.' : 0.02,
+    'Retail Sales \(MoM\)' : 0.075, #const
+    'M3 Money Supply \(YoY\)' : 0.2, #const
+    'Trade Balance' : 0.0375, #const
+    'PPI \(MoM\)' : -0.5, #const
     }
 
 deviationScoreDictionaryPl = {
@@ -104,26 +101,23 @@ deviationScoreDictionaryPl = {
     'Unemployment Rate' : -0.4, #const
     'Interest Rate Decision' : -18.75, #const
     'Manufacturing PMI' : 0.1, #const
-    'Retail Sales \(YoY\)' : 0.1,
-    'M3 Money Supply \(MoM\)' : 0.1,
-    'PPI \(YoY\)' : 0.3,
-    'Current Account' : 0.0005,
+    'Retail Sales \(YoY\)' : 0.075, #const
+    'M3 Money Supply \(MoM\)' : 0.2, #const
     }
 
 deviationScoreDictionaryDe = {
     'German GDP \(QoQ' : 0.05, #const
     'German CPI \(YoY\)' : -0.5, #const
     'German Unemployment Rate' : -0.4, #const
-    'German Retail Sales \(YoY\)' : 0.035,
+    'German Retail Sales \(MoM\)' : 0.075, #const
     'German Industrial Production \(MoM\)' : 0.15, #const
     'German Services PMI' : 0.075, #const
     'German Manufacturing PMI' : 0.1, #const
     'German 30-Year Bund' : -1, #const
     'German 10-Year Bund' : -5, #const
     'Germany Thomson Reuters IPSOS PCSI' : 0.125, #const
-    'German Trade Balance' : 0.075,
-    'German PPI \(MoM\)' : 0.2,
-    'Current Account' : 0.06,
+    'German Trade Balance' : 0.0375, #const
+    'German PPI \(MoM\)' : -0.5, #const
     }
 
 deviationScoreDictionaryUs = {
@@ -137,11 +131,10 @@ deviationScoreDictionaryUs = {
     'Industrial Production \(MoM\)' : 0.15, #const
     '30-Year Bond Auction' : -1, #const
     '10-Year Note Auction' : -5, #const
-    'U.S. M2 Money Supply' : 0.2, #var
-    'Goods Trade Balance' : 0.0375, #var
-    'Core PPI \(MoM\)' : 0.5, #var
-    'Current Account' : 0.05, #var
-    'Core Retail Sales \(MoM\)' : 0.075, #var
+    'Core PPI \(MoM\)' : -0.5, #const
+    'U.S. M2 Money Supply' : 0.2, #const
+    'Goods Trade Balance' : 0.0375, #const
+    'Core Retail Sales \(MoM\)' : 0.075, #const
     }
 
 def getEconomicData(from_date, to_date, country):
@@ -215,8 +208,8 @@ def computeDeviations(df, dictionary):
 
     return df.sort_values(['eventName', 'importance', 'deviation']) #todo: remove .sort_values
 
-dataDfJp = getEconomicData('01/01/2021', '31/01/2022', 'germany')
-dataDfJp = computeDeviations(dataDfJp, deviationScoreDictionaryDe)
+dataDfJp = getEconomicData('01/01/2021', '31/01/2022', 'united kingdom')
+dataDfJp = computeDeviations(dataDfJp, deviationScoreDictionaryUk)
 
 #OK: create own importance weights based on key words
 #OK: compare weights for starndard indicators for all countries, ex. PPI
