@@ -16,6 +16,8 @@ localizeDictionary = {
     'euro zone':'Europe/Berlin',
     'japan':'Japan',
     'united kingdom':'Europe/London',
+    'france':'Europe/Berlin',
+    'czech republic':'Europe/Berlin',
     }
 
 importanceValueDictionary = {
@@ -47,6 +49,29 @@ importanceEventDictionary = {
     'PPI' : 0.15,
     '30-Year' : 0.15,
     'Current Account' : 0.15,
+    }
+
+deviationScoreDictionaryCz = {
+    'GDP \(QoQ\)' : 0.5, #const
+    'Interest Rate Decision' : -3, #const
+    'CPI \(YoY\)' : -0.5, #const
+    'Unemployment Rate' : -0.4, #const
+    'Retail Sales \(YoY\)' : 0.075, #const
+    'Trade Balance' : 0.0375, #const
+    'PPI \(MoM\)' : -0.5, #const
+    }
+
+deviationScoreDictionaryFr = {
+    'French GDP \(QoQ\)' : 0.5, #const
+    'French CPI \(YoY\)' : -0.5, #const
+    'French Unemployment Rate' : -0.4, #const
+    'French Services PMI' : 0.075, #const
+    'French Manufacturing PMI' : 0.1, #const
+    'France Thomson Reuters IPSOS PCSI' : 0.125, #const
+    'French 10-Year OAT' : -2, #const
+    'French Industrial Production \(MoM\)' : 0.15, #const
+    'French Trade Balance' : 0.0375, #const
+    'French PPI \(MoM\)' : -0.5, #const
     }
 
 deviationScoreDictionaryUk = {
@@ -145,6 +170,9 @@ def getEconomicData(from_date, to_date, country):
     countries=[country],
     )
 
+    #assign country col
+    df['country'] = country
+
     #'All Day' and 'Tentative' events remove
     df = df[df['time'] != 'All Day']
     df = df[df['time'] != 'Tentative']
@@ -174,6 +202,9 @@ def getEconomicData(from_date, to_date, country):
     df['importance'].replace(importanceEventDictionary, regex=True, inplace=True)
     df["importance"] = pd.to_numeric(df["importance"], errors='coerce')
     df = df[df['importance'].notna()]
+
+    print(df.head(10000))
+    print(df.dtypes)
 
     #replacing substrings
     df['actual'] = df['actual'].str.replace('|'.join(replacementDictionary), lambda string: replacementDictionary[string.group()]).fillna('0.0')
@@ -210,24 +241,28 @@ def computeDeviations(df, dictionary):
 
     return df
 
-dataDfUs = getEconomicData('01/01/2021', '31/01/2022', 'united states')
+dataDfCz = getEconomicData('01/01/2017', '31/01/2022', 'czech republic')
+dataDfCz = computeDeviations(dataDfCz, deviationScoreDictionaryCz)
+dataDfFr = getEconomicData('01/01/2017', '31/01/2022', 'france')
+dataDfFr = computeDeviations(dataDfFr, deviationScoreDictionaryFr)
+dataDfUs = getEconomicData('01/01/2017', '31/01/2022', 'united states')
 dataDfUs = computeDeviations(dataDfUs, deviationScoreDictionaryUs)
-dataDfDe = getEconomicData('01/01/2021', '31/01/2022', 'germany')
+dataDfDe = getEconomicData('01/01/2017', '31/01/2022', 'germany')
 dataDfDe = computeDeviations(dataDfDe, deviationScoreDictionaryDe)
-dataDfPl = getEconomicData('01/01/2021', '31/01/2022', 'poland')
+dataDfPl = getEconomicData('01/01/2017', '31/01/2022', 'poland')
 dataDfPl = computeDeviations(dataDfPl, deviationScoreDictionaryPl)
-dataDfEu = getEconomicData('01/01/2021', '31/01/2022', 'euro zone')
+dataDfEu = getEconomicData('01/01/2017', '31/01/2022', 'euro zone')
 dataDfEu = computeDeviations(dataDfEu, deviationScoreDictionaryEu)
-dataDfJp = getEconomicData('01/01/2021', '31/01/2022', 'japan')
+dataDfJp = getEconomicData('01/01/2017', '31/01/2022', 'japan')
 dataDfJp = computeDeviations(dataDfJp, deviationScoreDictionaryJp)
-dataDfUk = getEconomicData('01/01/2021', '31/01/2022', 'united kingdom')
+dataDfUk = getEconomicData('01/01/2017', '31/01/2022', 'united kingdom')
 dataDfUk = computeDeviations(dataDfUk, deviationScoreDictionaryUk)
 
 dfs = [dataDfUs, dataDfDe, dataDfPl, dataDfEu, dataDfJp, dataDfUk]
 dataDfAll = pd.DataFrame().append(dfs)
 dataDfAll = dataDfAll.sort_values(by=['date_time'])
 #rolling sum
-dataDfAll['sum'] = dataDfAll['deviation'].rolling(min_periods=1, window=100).sum().round(2)
+dataDfAll['sum'] = dataDfAll['deviation'].rolling(min_periods=1, window=1000).sum().round(2)
 
 #OK: create own importance weights based on key words
 #OK: compare weights for starndard indicators for all countries, ex. PPI
