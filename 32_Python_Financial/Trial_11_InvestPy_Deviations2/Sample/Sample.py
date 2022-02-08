@@ -138,7 +138,6 @@ deviationScoreDictionaryUs = {
     }
 
 def getEconomicData(from_date, to_date, country):
-
     df = investpy.economic_calendar(
     from_date=from_date,
     to_date  =to_date,
@@ -185,7 +184,7 @@ def getEconomicData(from_date, to_date, country):
 
     return df
 
-def computeDeviations(df, dictionary):
+def computeDeviations(df, dictionary, sumLast):
     #set events from dictionary
     df['event'] = df['event'].str.replace('|'.join(eventMonths), '')
     df['eventName'] = df['event']
@@ -202,20 +201,22 @@ def computeDeviations(df, dictionary):
     df['happening'] = np.where(df['deviation'] == 0.00, 1, 0)
     df['happening'] = df['happening'] * df['importance']
 
+    #rolling sum
+    df['sum'] = df['deviation'].rolling(min_periods=1, window=sumLast).sum().round(2)
+
     #drop unwanted columns
     df.drop(['diffPrev', 'diffForec', 'event', 'forecast', 'actual', 'previous'], axis=1, inplace=True)
 
+    return df
 
-    return df.sort_values(['eventName', 'importance', 'deviation']) #todo: remove .sort_values
-
-dataDfJp = getEconomicData('01/01/2021', '31/01/2022', 'united kingdom')
-dataDfJp = computeDeviations(dataDfJp, deviationScoreDictionaryUk)
+dataDfJp = getEconomicData('01/01/2021', '31/01/2022', 'united states')
+dataDfJp = computeDeviations(dataDfJp, deviationScoreDictionaryUs, 33)
 
 #OK: create own importance weights based on key words
 #OK: compare weights for starndard indicators for all countries, ex. PPI
-#todo: add happenings?
-#todo: compute sum of n last rows for the result
-#todo: find peaks for specific event names
+#NO: add happenings?
+#OK: compute sum of n last rows for the result
+#NO: find peaks for specific event names
 
 
 
