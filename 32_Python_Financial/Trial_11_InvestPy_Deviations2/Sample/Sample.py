@@ -203,9 +203,6 @@ def getEconomicData(from_date, to_date, country):
     df["importance"] = pd.to_numeric(df["importance"], errors='coerce')
     df = df[df['importance'].notna()]
 
-    print(df.head(10000))
-    print(df.dtypes)
-
     #replacing substrings
     df['actual'] = df['actual'].str.replace('|'.join(replacementDictionary), lambda string: replacementDictionary[string.group()]).fillna('0.0')
     df['previous'] = df['previous'].str.replace('|'.join(replacementDictionary), lambda string: replacementDictionary[string.group()]).fillna('0.0')
