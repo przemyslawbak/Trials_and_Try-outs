@@ -75,7 +75,7 @@ deviationScoreDictionaryIt = {
     'Italian 10-Year BTP' : -2, #const
     'Italian Industrial Production \(MoM\)' : 0.15, #const
     'Italian Retail Sales \(YoY\)' : 0.075, #const
-    'Italian Trade Balance' : 0.0375, #const
+    'Italian Trade Balance' : -0.0375, #const
     'Italian PPI \(MoM\)' : -0.5, #const
     }
 
@@ -85,7 +85,7 @@ deviationScoreDictionaryCz = {
     'CPI \(YoY\)' : -0.5, #const
     'Unemployment Rate' : -0.4, #const
     'Retail Sales \(YoY\)' : 0.075, #const
-    'Trade Balance' : 0.0375, #const
+    'Trade Balance' : -0.0375, #const
     'PPI \(MoM\)' : -0.5, #const
     }
 
@@ -98,7 +98,7 @@ deviationScoreDictionaryFr = {
     'France Thomson Reuters IPSOS PCSI' : 0.125, #const
     'French 10-Year OAT' : -2, #const
     'French Industrial Production \(MoM\)' : 0.15, #const
-    'French Trade Balance' : 0.0375, #const
+    'French Trade Balance' : -0.0375, #const
     'French PPI \(MoM\)' : -0.5, #const
     }
 
@@ -114,7 +114,7 @@ deviationScoreDictionaryUk = {
     '10-Year Treasury Gilt Auction' : -2, #const
     'Industrial Production \(MoM\)' : 0.15, #const
     'Core Retail Sales \(YoY\)' : 0.075, #const
-    'Trade Balance Non-EU' : 0.0375, #const
+    'Trade Balance Non-EU' : -0.0375, #const
     'M4 Money Supply' : 0.2, #const
     'Core PPI Output \(MoM\)' : -0.5, #const
     }
@@ -132,7 +132,7 @@ deviationScoreDictionaryJp = {
     'Thomson Reuters IPSOS PCSI' : 0.125, #const
     'Retail Sales \(YoY\)' : 0.075, #const
     'M3 Money Supply' : 0.002, #const (divided by 100)
-    'Adjusted Trade Balance' : 0.0375, #const (multiply by 10)
+    'Adjusted Trade Balance' : -0.0375, #const (multiply by 10)
     'PPI \(MoM\)' : -0.5, #const
     }
 
@@ -144,7 +144,7 @@ deviationScoreDictionaryEu = {
     'Manufacturing PMI' : 0.1, #const
     'Retail Sales \(MoM\)' : 0.075, #const
     'M3 Money Supply \(YoY\)' : 0.2, #const
-    'Trade Balance' : 0.0375, #const
+    'Trade Balance' : -0.0375, #const
     'PPI \(MoM\)' : -0.5, #const
     }
 
@@ -169,7 +169,7 @@ deviationScoreDictionaryDe = {
     'German 30-Year Bund' : -1, #const
     'German 10-Year Bund' : -2, #const
     'Germany Thomson Reuters IPSOS PCSI' : 0.125, #const
-    'German Trade Balance' : 0.0375, #const
+    'German Trade Balance' : -0.0375, #const
     'German PPI \(MoM\)' : -0.5, #const
     }
 
@@ -186,7 +186,7 @@ deviationScoreDictionaryUs = {
     '10-Year Note Auction' : -2, #const
     'Core PPI \(MoM\)' : -0.5, #const
     'U.S. M2 Money Supply' : 0.2, #const
-    'Goods Trade Balance' : 0.0375, #const
+    'Goods Trade Balance' : -0.0375, #const
     'Core Retail Sales \(MoM\)' : 0.075, #const
     }
 
