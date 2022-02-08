@@ -50,98 +50,98 @@ importanceEventDictionary = {
     }
 
 deviationScoreDictionaryUk = {
-    'GDP \(QoQ\)' : 0.5,
-    'BoE Interest Rate Decision' : -12.5,
-    'Manufacturing PMI' : 0.1,
-    'Core CPI \(YoY\)' : -2,
+    'GDP \(QoQ\)' : 0.5, #const
+    'BoE Interest Rate Decision' : -18.75, #const
+    'Core CPI \(YoY\)' : -0.5, #const
+    'Unemployment Rate' : -0.4, #const
+    'Services PMI' : 0.075, #const
+    'Manufacturing PMI' : 0.1, #const
+    '30-Year Treasury Gilt Auction' : -1, #const
+    'Thomson Reuters IPSOS PCSI' : 0.125, #const
+    '10-Year Treasury Gilt Auction' : -5, #const
+    'Industrial Production \(MoM\)' : 0.15, #const
     'Retail Sales \(YoY\)' : 0.1,
-    'Unemployment Rate' : -2,
-    'Industrial Production \(MoM\)' : 0.2,
-    'Services PMI' : 0.2,
     'Trade Balance' : 0.05,
-    '10-Year Treasury Gilt Auction' : -5,
     'M4 Money Supply' : 0.0002,
-    'Thomson Reuters IPSOS PCSI' : 0.1,
     'Core PPI Output \(MoM\)' : 0.1,
-    '30-Year Treasury Gilt Auction' : -2,
     'Current Account' : 0.02,
     }
 
 deviationScoreDictionaryJp = {
-    'GDP \(QoQ\)' : 0.5,
-    'BoJ Core CPI \(YoY\)' : -2,
+    'GDP \(QoQ\)' : 0.5, #const
+    'BoJ Core CPI \(YoY\)' : -0.5, #const
+    'Unemployment Rate' : -0.4, #const
+    'BoJ Interest Rate Decision' : -18.75, #const
+    'Services PMI' : 0.075, #const
+    'Manufacturing PMI' : 0.1, #const
+    '30-Year JGB Auction' : -1, #const
+    '10-Year JGB Auction' : -5, #const
+    'Industrial Production \(MoM\)' : 0.15, #const
+    'Thomson Reuters IPSOS PCSI' : 0.125, #const
     'Retail Sales \(YoY\)' : 0.1,
-    'Unemployment Rate' : -2,
-    'Industrial Production \(MoM\)' : 0.1,
     'M3 Money Supply' : 0.02,
-    'BoJ Interest Rate Decision' : -12.5,
-    'Services PMI' : 0.2,
     'Adjusted Trade Balance' : 1,
-    'Thomson Reuters IPSOS PCSI' : 0.1,
     'PPI \(YoY\)' : 0.1,
-    'Manufacturing PMI' : 0.1,
-    '30-Year JGB Auction' : -2,
-    '10-Year JGB Auction' : -5,
     'Current Account n.s.a.' : 0.5,
     }
 
 deviationScoreDictionaryEu = {
+    'Unemployment Rate' : -0.4, #const
+    'Interest Rate Decision' : -18.75, #const
+    'Services PMI' : 0.075, #const
+    'Industrial Production \(MoM\)' : 0.15, #const
+    'Manufacturing PMI' : 0.1, #const
     'Retail Sales \(MoM\)' : 0.1,
-    'Unemployment Rate' : -2,
-    'Industrial Production \(MoM\)' : 0.2,
     'M3 Money Supply \(YoY\)' : 0.0002,
-    'Interest Rate Decision' : -12.5,
-    'Services PMI' : 0.1,
     'Trade Balance' : 0.03,
     'PPI \(YoY\)' : 0.1,
-    'Manufacturing PMI' : 0.2,
     'Current Account n.s.a.' : 0.02,
     }
 
 deviationScoreDictionaryPl = {
-    'GDP \(QoQ\)' : 0.25,
-    'Core CPI \(YoY\)' : -2,
+    'GDP \(QoQ\)' : 0.05, #const
+    'Core CPI \(YoY\)' : -0.5, #const
+    'Unemployment Rate' : -0.4, #const
+    'Interest Rate Decision' : -18.75, #const
+    'Manufacturing PMI' : 0.1, #const
     'Retail Sales \(YoY\)' : 0.1,
-    'Unemployment Rate' : -4,
     'M3 Money Supply \(MoM\)' : 0.1,
-    'Interest Rate Decision' : -1.25,
     'PPI \(YoY\)' : 0.3,
-    'Manufacturing PMI' : 0.2,
     'Current Account' : 0.0005,
     }
 
 deviationScoreDictionaryDe = {
-    'German GDP \(QoQ' : 0.25,
-    'German CPI \(YoY\)' : -1,
-    'German Retail Sales \(YoY\)' : 0.05,
-    'German Unemployment Rate' : -2,
-    'German Industrial Production \(MoM\)' : 0.02,
-    'German Services PMI' : 0.1,
-    'German Trade Balance' : 0.05,
-    'Germany Thomson Reuters IPSOS PCSI' : 0.1,
+    'German GDP \(QoQ' : 0.05, #const
+    'German CPI \(YoY\)' : -0.5, #const
+    'German Unemployment Rate' : -0.4, #const
+    'German Retail Sales \(YoY\)' : 0.035,
+    'German Industrial Production \(MoM\)' : 0.15, #const
+    'German Services PMI' : 0.075, #const
+    'German Manufacturing PMI' : 0.1, #const
+    'German 30-Year Bund' : -1, #const
+    'German 10-Year Bund' : -5, #const
+    'Germany Thomson Reuters IPSOS PCSI' : 0.125, #const
+    'German Trade Balance' : 0.075,
     'German PPI \(MoM\)' : 0.2,
-    'German Manufacturing PMI' : 0.2,
-    'German 30-Year Bund' : -1,
-    'German 10-Year Bund' : -3,
-    'Current Account' : 0.02,
+    'Current Account' : 0.06,
     }
 
 deviationScoreDictionaryUs = {
-    'GDP \(QoQ\)' : 0.05,
-    'Core CPI \(YoY\)' : -0.5,
-    'Core Retail Sales \(MoM\)' : 0.075,
-    'U6 Unemployment Rate' : -0.4,
-    'Industrial Production \(MoM\)' : 0.15,
-    'U.S. M2 Money Supply' : 0.2,
-    'Fed Interest Rate Decision' : -18.75,
-    'Services PMI' : 0.075,
-    'Goods Trade Balance' : 0.0375,
-    'Thomson Reuters IPSOS PCSI' : 0.12,
-    'Core PPI \(MoM\)' : 0.5,
-    'ISM Manufacturing PMI' : 0.1,
-    '30-Year Bond Auction' : -1,
-    '10-Year Bond Auction' : -5,
-    'Current Account' : 0.05,
+    'GDP \(QoQ\)' : 0.05, #const
+    'Fed Interest Rate Decision' : -18.75, #const
+    'Core CPI \(YoY\)' : -0.5, #const
+    'U6 Unemployment Rate' : -0.4, #const
+    'Services PMI' : 0.075, #const
+    'ISM Manufacturing PMI' : 0.1, #const
+    'Thomson Reuters IPSOS PCSI' : 0.125, #const
+    'Industrial Production \(MoM\)' : 0.15, #const
+    '30-Year Bond Auction' : -1, #const
+    '10-Year Note Auction' : -5, #const
+    'U.S. M2 Money Supply' : 0.2, #var
+    'Goods Trade Balance' : 0.0375, #var
+    'Core PPI \(MoM\)' : 0.5, #var
+    'Current Account' : 0.05, #var
+    'Core Retail Sales \(MoM\)' : 0.075, #var
     }
 
 def getEconomicData(from_date, to_date, country):
@@ -215,8 +215,8 @@ def computeDeviations(df, dictionary):
 
     return df.sort_values(['eventName', 'importance', 'deviation']) #todo: remove .sort_values
 
-dataDfJp = getEconomicData('01/01/2021', '31/01/2022', 'united states')
-dataDfJp = computeDeviations(dataDfJp, deviationScoreDictionaryUs)
+dataDfJp = getEconomicData('01/01/2021', '31/01/2022', 'germany')
+dataDfJp = computeDeviations(dataDfJp, deviationScoreDictionaryDe)
 
 #OK: create own importance weights based on key words
 #OK: compare weights for starndard indicators for all countries, ex. PPI
