@@ -27,9 +27,9 @@ countryRateDictionary = {
     'germany': 1.00,
     'euro zone': 1.00,
     'japan': 0.50,
-    'united kingdom': 1.00,
+    'united kingdom': 0.5,
     'france': 0.50,
-    'czech republic': 1.00,
+    'czech republic': 0.5,
     'italy': 0.50,
     }
 
@@ -54,9 +54,9 @@ importanceEventDictionary = {
     'Retail Sales' : 0.50,
     'Industrial Production' : 0.50,
     'Services PMI' : 0.50,
-    'Trade Balance' : 0.50,
-    '10-Year' : 0.50,
     #max 0.1x
+    'Trade Balance' : 0.15,
+    '10-Year' : 0.15,
     'Money Supply' : 0.15,
     'Thomson Reuters IPSOS PCSI' : 0.15,
     'PPI' : 0.15,
@@ -266,7 +266,7 @@ def computeDeviations(df, dictionary):
 
     return df
 
-dataDfIt = getEconomicData('01/01/2021', '31/01/2022', 'italy')
+dataDfIt = getEconomicData('01/01/2017', '31/01/2022', 'italy')
 dataDfIt = computeDeviations(dataDfIt, deviationScoreDictionaryIt)
 dataDfCz = getEconomicData('01/01/2017', '31/01/2022', 'czech republic')
 dataDfCz = computeDeviations(dataDfCz, deviationScoreDictionaryCz)
