@@ -33,12 +33,6 @@ countryRateDictionary = {
     'italy': 0.50,
     }
 
-importanceValueDictionary = {
-    'low' : 0.15,
-    'medium' : 0.50,
-    'high' : 1.00,
-    }
-
 eventMonths = ['  \(Jun\)', '  \(Jul\)', '  \(Aug\)', '  \(Sep\)', '  \(Oct\)', '  \(Nov\)', '  \(Dec\)', '  \(Jan\)', '  \(Feb\)', '  \(Mar\)', '  \(Apr\)', '  \(May\)']
 
 replacementDictionary = {"B": "", "M": "", "%": "", ",": "", "K": "", "T": ""}
