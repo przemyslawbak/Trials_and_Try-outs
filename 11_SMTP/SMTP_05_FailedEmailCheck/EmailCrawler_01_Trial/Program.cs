@@ -26,7 +26,7 @@ namespace EmailCrawler_01_Trial
                 {
                     using (Pop3Client client = new Pop3Client())
                     {
-                        client.Connect("pop.private-sender.com", 110, MailKit.Security.SecureSocketOptions.None);
+                        client.Connect("pop.simple-postman.com", 110, MailKit.Security.SecureSocketOptions.None);
                         client.Authenticate(konto, "!1Password!1");
                         var count = client.GetMessageCount();
                         for (int i = 0; i < client.Count; i++)
