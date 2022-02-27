@@ -15,7 +15,7 @@ wig20_d = pd.read_csv('../../data/wig20_d_1.csv')
 wig20_d.rename(columns={'Data': 'Date'}, inplace=True)
 wig20_d['Date'] = pd.to_datetime(wig20_d['Date'], format='%Y-%m-%d')
 wig20_d.set_index('Date', inplace=True)
-res = trendet.identify_df_trends(df=wig20_d, column='Zamkniecie')
+res = trendet.identify_df_trends(df=wig20_d, column='Zamkniecie', window_size=5)
 res.reset_index(inplace=True)
 
 plt.figure(figsize=(20, 10))
@@ -46,6 +46,6 @@ for label in labels:
                    alpha=0.2,
                    color='red')
 
-print(res.tail(1000))
+print(res.head(1000))
 plt.show()
     
