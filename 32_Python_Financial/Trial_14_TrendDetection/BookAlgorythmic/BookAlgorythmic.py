@@ -1,12 +1,12 @@
 #https://scipy-lectures.org/intro/scipy/auto_examples/plot_detrend.html
-import numpy as np
-t = np.linspace(0, 5, 100)
-x = t + np.random.normal(size=100)
 
 #trend
 import numpy as np
 from matplotlib import pyplot as plt
 from scipy import signal
+import pandas as pd
+
+wig20_d = pd.read_csv('../../data/wig20_d_1.csv')
 
 n = 150
 t = np.linspace(0, 10, n)
