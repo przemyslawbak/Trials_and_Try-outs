@@ -1,28 +1,34 @@
-#https://scipy-lectures.org/intro/scipy/auto_examples/plot_detrend.html
+#https://stackoverflow.com/a/61128030/12603542
 
 #trend
 import numpy as np
-from matplotlib import pyplot as plt
 from scipy import signal
 import pandas as pd
 
+pd.set_option('display.max_rows', 10000)
+pd.set_option('display.max_columns', 10)
+pd.set_option('display.width', 1000)
+
+period = 250
 wig20_d = pd.read_csv('../../data/wig20_d_1.csv')
-x_raw = wig20_d['Zamkniecie'].to_numpy()
-period = 100
 
-#n = 150
-#t = np.linspace(0, 10, n)
-#x_raw = .4 * t + np.random.normal(size=n)
+def getFromRow(rowNo):
+    if rowNo > period:
+        return rowNo - period
+    return 0
 
-x_raw = x_raw[-period:]
+def func(row):
+    i = row.name + 1
+    rowFrom = getFromRow(i)
+    rowTo = i
+    x_range = wig20_d.iloc[rowFrom:rowTo]
+    x_raw = x_range['Zamkniecie'].to_numpy()
+    x = signal.detrend(x_raw)
+    d = x_raw - x
+    is_positive_trend = d[-1] > d[0]
+    m = 1 if is_positive_trend else 0
+    return m
+    
+wig20_d['trend'] = wig20_d.apply(func, axis=1)
 
-x = signal.detrend(x_raw)
-d = x_raw - x
-
-is_positive_trend = d[-1] > d[0]
-m = "+" if is_positive_trend else "-"
-
-plt.figure(figsize=(5, 4))
-plt.plot(x_raw, label=f"Raw data ({m})")
-plt.legend(loc='best')
-plt.show()
+print(wig20_d.tail(10000))
