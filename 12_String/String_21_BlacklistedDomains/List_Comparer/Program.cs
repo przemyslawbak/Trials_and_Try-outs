@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net.Mail;
 
 namespace List_Comparer
 {
@@ -13,6 +14,7 @@ namespace List_Comparer
             List<string> blacklist = new List<string>(File.ReadAllLines("3.txt"));
             List<string> phrasesBanned = new List<string>(File.ReadAllLines("4.txt"));
             List<string> lista = new List<string>(File.ReadAllLines("1.txt"));
+            lista = lista.OrderByDescending(x => new MailAddress(x).Host).ToList();
             List<string> containBlacklisted = lista.Where(e => blacklist.Any(k => e.ToLower().Contains(k.ToLower()))).ToList();
             List<string> containPhrases = lista.Where(e => phrasesBanned.Any(k => e.ToLower().Contains(k.ToLower()))).ToList();
             List<string> removed = lista.Where(e => toRemove.Any(k => e.ToLower().Contains(k.ToLower()))).ToList();
