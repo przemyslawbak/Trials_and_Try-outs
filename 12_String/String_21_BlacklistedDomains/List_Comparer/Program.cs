@@ -19,6 +19,9 @@ namespace List_Comparer
             lista = lista.Except(containBlacklisted).ToList();
             lista = lista.Except(containPhrases).ToList();
             lista = lista.Except(removed).ToList();
+            lista = lista.Select(innerItem => innerItem.Trim())
+                .Distinct()
+                .ToList();
 
             //lista.RemoveAll(x => toRemove.Any(d => x.ToLower().Contains(d.ToLower())));
             File.WriteAllLines("output.txt", lista);
