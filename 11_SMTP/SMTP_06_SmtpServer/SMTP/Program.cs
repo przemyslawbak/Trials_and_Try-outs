@@ -11,7 +11,7 @@ using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace SMTP
+namespace SMTP //todo: test for lower frameworks
 {
     public class MailFilter : IMailboxFilter
     {
@@ -45,7 +45,7 @@ namespace SMTP
                 var position = buffer.GetPosition(0);
                 while (buffer.TryGet(ref position, out var memory))
                 {
-                    await stream.WriteAsync(memory, cancellationToken);
+                    await stream.WriteAsync(memory, cancellationToken); //framework problems
                 }
 
                 stream.Position = 0;
