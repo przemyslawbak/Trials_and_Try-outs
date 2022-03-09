@@ -40,24 +40,27 @@ namespace SMTP
     {
         public override async Task<SmtpResponse> SaveAsync(ISessionContext context, IMessageTransaction transaction, ReadOnlySequence<byte> buffer, CancellationToken cancellationToken)
         {
-            await using var stream = new MemoryStream();
-
-            var position = buffer.GetPosition(0);
-            while (buffer.TryGet(ref position, out var memory))
+            using (MemoryStream stream = new MemoryStream())
             {
-                await stream.WriteAsync(memory, cancellationToken);
+                var position = buffer.GetPosition(0);
+                while (buffer.TryGet(ref position, out var memory))
+                {
+                    await stream.WriteAsync(memory, cancellationToken);
+                }
+
+                stream.Position = 0;
+
+                var message = await MimeKit.MimeMessage.LoadAsync(stream, cancellationToken);
+                Console.WriteLine(message.TextBody);
             }
 
-            stream.Position = 0;
-
-            var message = await MimeKit.MimeMessage.LoadAsync(stream, cancellationToken);
-            Console.WriteLine(message.TextBody);
+            
 
             return SmtpResponse.Ok;
         }
     }
 
-    public class SampleUserAuthenticator : IUserAuthenticator, IUserAuthenticatorFactory
+    public class SampleUserAuthenticator : IUserAuthenticator
     {
         public Task<bool> AuthenticateAsync(ISessionContext context, string user, string password, CancellationToken token)
         {
