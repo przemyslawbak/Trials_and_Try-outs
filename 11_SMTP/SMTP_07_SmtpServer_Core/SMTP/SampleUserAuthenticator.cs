@@ -24,3 +24,4 @@ namespace SMTP
             return Task.FromResult(user == "user" && password == "password");
         }
     }
+}
