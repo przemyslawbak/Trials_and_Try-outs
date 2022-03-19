@@ -7,6 +7,7 @@ using System.Security.Cryptography.X509Certificates;
 using SmtpServer;
 using SmtpServer.ComponentModel;
 using SmtpServer.Tracing;
+using System.Threading.Tasks;
 
 namespace SMTP
 {
@@ -17,9 +18,9 @@ namespace SMTP
             // this is important when dealing with a certificate that isnt valid
             ServicePointManager.ServerCertificateValidationCallback = IgnoreCertificateValidationFailureForTestingOnly;
 
-            var cancellationTokenSource = new CancellationTokenSource();
+            CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
 
-            var options = new SmtpServerOptionsBuilder()
+            ISmtpServerOptions options = new SmtpServerOptionsBuilder()
                 .ServerName("SmtpServer SampleApp")
                 .Endpoint(builder =>
                     builder
@@ -28,13 +29,13 @@ namespace SMTP
                         .Certificate(CreateCertificate()))
                 .Build();
 
-            var serviceProvider = new ServiceProvider();
+            ServiceProvider serviceProvider = new ServiceProvider();
             serviceProvider.Add(new SampleUserAuthenticator());
 
-            var server = new SmtpServer.SmtpServer(options, serviceProvider);
+            SmtpServer.SmtpServer server = new SmtpServer.SmtpServer(options, serviceProvider);
             server.SessionCreated += OnSessionCreated;
 
-            var serverTask = server.StartAsync(cancellationTokenSource.Token);
+            Task serverTask = server.StartAsync(cancellationTokenSource.Token);
 
             SampleMailClient.Send(user: "user", password: "password", useSsl: true);
 
@@ -66,8 +67,8 @@ namespace SMTP
             // to create an X509Certificate for testing you need to run MAKECERT.EXE and then PVK2PFX.EXE
             // http://www.digitallycreated.net/Blog/38/using-makecert-to-create-certificates-for-development
 
-            var certificate = File.ReadAllBytes(@"C:\Users\cain\Dropbox\Documents\Cain\Programming\SmtpServer\SmtpServer.pfx");
-            var password = File.ReadAllText(@"C:\Users\cain\Dropbox\Documents\Cain\Programming\SmtpServer\SmtpServerPassword.txt");
+            byte[] certificate = File.ReadAllBytes(@"C:\Users\cain\Dropbox\Documents\Cain\Programming\SmtpServer\SmtpServer.pfx");
+            string password = File.ReadAllText(@"C:\Users\cain\Dropbox\Documents\Cain\Programming\SmtpServer\SmtpServerPassword.txt");
 
             return new X509Certificate2(certificate, password);
         }

@@ -3,6 +3,7 @@ using SmtpServer.ComponentModel;
 using SmtpServer.Tracing;
 using System;
 using System.Threading;
+using System.Threading.Tasks;
 
 namespace SMTP
 {
@@ -10,18 +11,18 @@ namespace SMTP
     {
         public static void Run()
         {
-            var cancellationTokenSource = new CancellationTokenSource();
+            CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
 
-            var options = new SmtpServerOptionsBuilder()
+            ISmtpServerOptions options = new SmtpServerOptionsBuilder()
                 .ServerName("SmtpServer SampleApp")
                 .Port(9025)
                 .CommandWaitTimeout(TimeSpan.FromSeconds(100))
                 .Build();
 
-            var server = new SmtpServer.SmtpServer(options, ServiceProvider.Default);
+            SmtpServer.SmtpServer server = new SmtpServer.SmtpServer(options, ServiceProvider.Default);
             server.SessionCreated += OnSessionCreated;
 
-            var serverTask = server.StartAsync(cancellationTokenSource.Token);
+            Task serverTask = server.StartAsync(cancellationTokenSource.Token);
 
             Console.WriteLine("Press any key to shutdown the server.");
             Console.ReadKey();

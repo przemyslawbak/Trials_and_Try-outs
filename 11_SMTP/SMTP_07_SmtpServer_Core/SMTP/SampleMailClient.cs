@@ -17,7 +17,7 @@ namespace SMTP
             int port = 9025)
         {
             //var message = MimeMessage.Load(@"C:\Dev\Cain\Temp\message.eml");
-            var message = new MimeMessage();
+            MimeMessage message = new MimeMessage();
 
             message.From.Add(MailboxAddress.Parse(from ?? "from@sample.com"));
             message.To.Add(MailboxAddress.Parse(to ?? "to@sample.com"));
