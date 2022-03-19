@@ -27,7 +27,7 @@ namespace SMTP
             Console.ReadKey();
 
             cancellationTokenSource.Cancel();
-            serverTask.WaitWithoutException();
+            serverTask.Wait();
         }
 
         static void OnSessionCreated(object sender, SessionEventArgs e)

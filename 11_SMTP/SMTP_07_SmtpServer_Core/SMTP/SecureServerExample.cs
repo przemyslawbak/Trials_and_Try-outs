@@ -39,7 +39,7 @@ namespace SMTP
             SampleMailClient.Send(user: "user", password: "password", useSsl: true);
 
             cancellationTokenSource.Cancel();
-            serverTask.WaitWithoutException();
+            serverTask.Wait();
         }
 
         static void OnSessionCreated(object sender, SessionEventArgs e)
