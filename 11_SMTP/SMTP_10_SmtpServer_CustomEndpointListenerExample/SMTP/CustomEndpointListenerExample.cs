@@ -24,7 +24,8 @@ namespace SMTP
                     builder
                         .Port(9025, true)
                         .AllowUnsecureAuthentication(false)
-                        .Certificate(CreateCertificate()))
+                        //.Certificate(CreateCertificate())
+                        )
                 .Build();
 
             ServiceProvider serviceProvider = new ServiceProvider();
@@ -34,7 +35,7 @@ namespace SMTP
 
             var serverTask = server.StartAsync(cancellationTokenSource.Token);
 
-            SampleMailClient.Send(useSsl: true);
+            SampleMailClient.Send(useSsl: false);
 
             cancellationTokenSource.Cancel();
             serverTask.Wait();
