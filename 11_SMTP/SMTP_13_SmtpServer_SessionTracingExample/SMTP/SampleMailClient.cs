@@ -20,11 +20,11 @@ namespace SMTP
             var message = new MimeMessage();
 
             message.From.Add(MailboxAddress.Parse(from ?? "from@sample.com"));
-            message.To.Add(MailboxAddress.Parse(to ?? "to@sample.com"));
-            message.Subject = subject ?? "Hello";
+            message.To.Add(MailboxAddress.Parse(to ?? "przemyslaw.pszemek@wp.pl"));
+            message.Subject = subject ?? "Hello World";
             message.Body = body ?? new TextPart("plain")
             {
-                Text = "Hello World"
+                Text = "Email body of Hello World message"
             };
 
             using SmtpClient client = new SmtpClient();
