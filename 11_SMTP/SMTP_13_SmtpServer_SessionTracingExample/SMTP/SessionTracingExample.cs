@@ -17,7 +17,7 @@ namespace SMTP
 
             var options = new SmtpServerOptionsBuilder()
                 .ServerName("SmtpServer SampleApp trial")
-                .Port(9025)
+                .Port(25, 587, 9025)
                 .Build();
 
             var server = new SmtpServer.SmtpServer(options, ServiceProvider.Default);
