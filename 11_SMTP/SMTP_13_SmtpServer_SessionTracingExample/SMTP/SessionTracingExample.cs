@@ -16,7 +16,7 @@ namespace SMTP
             _cancellationTokenSource = new CancellationTokenSource();
 
             var options = new SmtpServerOptionsBuilder()
-                .ServerName("SmtpServer SampleApp")
+                .ServerName("SmtpServer SampleApp trial")
                 .Port(9025)
                 .Build();
 
