@@ -1,10 +1,12 @@
-﻿namespace SMTP
+﻿using System.Threading.Tasks;
+
+namespace SMTP
 {
     class Program
     {
-        static void Main(string[] args)
+        static async Task Main(string[] args)
         {
-            SampleMailClient.Send();
+            await SampleMailClient.SendAsync();
         }
     }
 }

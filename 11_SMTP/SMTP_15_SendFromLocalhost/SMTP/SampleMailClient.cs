@@ -1,11 +1,12 @@
 ﻿using MailKit.Net.Smtp;
 using MimeKit;
+using System.Threading.Tasks;
 
 namespace SMTP
 {
     public static class SampleMailClient
     {
-        public static void Send(
+        public static async Task SendAsync(
             string from = null,
             string to = null,
             string subject = null,
@@ -36,12 +37,16 @@ namespace SMTP
                 client.Authenticate(user, password);
             }
 
+            /*
             while (count-- > 0)
             {
-                client.Send(message);
+                await client.SendAsync(message);
             }
+            */
 
-            client.Disconnect(true);
+            await client.SendAsync(message);
+
+            //client.Disconnect(true);
         }
     }
 }
