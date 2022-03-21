@@ -30,7 +30,7 @@ namespace SMTP
 
             using SmtpClient client = new SmtpClient();
 
-            client.Connect("smtp.email-messenger.com", port, useSsl);
+            client.Connect("mail.email-messenger.com", port, useSsl);
 
             if (user != null && password != null)
             {
