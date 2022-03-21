@@ -20,7 +20,7 @@ namespace SMTP
             //var message = MimeMessage.Load(@"C:\Dev\Cain\Temp\message.eml");
             var message = new MimeMessage();
 
-            message.From.Add(MailboxAddress.Parse(from ?? "miron@somefakedomainname.net"));
+            message.From.Add(MailboxAddress.Parse(from ?? "hmail@email-messenger.com"));
             message.To.Add(MailboxAddress.Parse(to ?? "przemyslaw.bak@simple-mail.net"));
             message.Subject = subject ?? "Hello";
             message.Body = body ?? new TextPart("plain")
@@ -30,23 +30,19 @@ namespace SMTP
 
             using SmtpClient client = new SmtpClient();
 
-            client.Connect("localhost", port, useSsl);
+            client.Connect("smtp.email-messenger.com", port, useSsl);
 
             if (user != null && password != null)
             {
                 client.Authenticate(user, password);
             }
 
-            /*
             while (count-- > 0)
             {
                 await client.SendAsync(message);
             }
-            */
 
-            await client.SendAsync(message);
-
-            //client.Disconnect(true);
+            client.Disconnect(true);
         }
     }
 }
