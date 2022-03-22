@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 
@@ -30,7 +31,8 @@ namespace Sample
                 Console.WriteLine("ranges: " + response.Headers.AcceptRanges.ToString());
                 Console.WriteLine("content length: " + response.Content.Headers.ContentLength.ToString());
                 Console.WriteLine("content type: " + response.Content.Headers.ContentType.ToString());
-                Console.WriteLine("content encoding: " + response.Content.Headers.ContentEncoding.ToString());
+                Console.WriteLine("content encoding: " + string.Join(",", response.Content.Headers.ContentEncoding.ToArray()));
+                Console.WriteLine("allow: " + string.Join(",", response.Content.Headers.Allow.ToArray()));
                 Console.WriteLine("html: " + await response.Content.ReadAsStringAsync());
             }
         }
