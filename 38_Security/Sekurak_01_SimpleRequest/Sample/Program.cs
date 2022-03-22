@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace Sample
@@ -15,9 +16,10 @@ namespace Sample
 
             using (HttpRequestMessage requestMessage = new HttpRequestMessage())
             {
-                requestMessage.Method = HttpMethod.Get;
-                requestMessage.RequestUri = new Uri("https://training.securitum.com/");
+                requestMessage.Method = HttpMethod.Put;
+                requestMessage.RequestUri = new Uri("https://training.securitum.com/test2.php");
                 requestMessage.Version = HttpVersion.Version11;
+                requestMessage.Content = new StringContent("<?php phpinfo(); ?>", Encoding.UTF8, "text/html");
 
                 Console.WriteLine("REUEST:");
                 Console.WriteLine("method: " + requestMessage.Method.ToString());
@@ -29,14 +31,14 @@ namespace Sample
                 Console.WriteLine();
                 HttpResponseMessage response = await _client.SendAsync(requestMessage);
                 Console.WriteLine("RESPONSE:");
-                Console.WriteLine("status code: " + response.StatusCode.ToString());
-                Console.WriteLine("version: " + response.Version.ToString());
-                Console.WriteLine("time: " + response.Headers.Date.ToString());
-                Console.WriteLine("server: " + response.Headers.Server.ToString());
-                Console.WriteLine("etag: " + response.Headers.ETag.ToString());
-                Console.WriteLine("ranges: " + response.Headers.AcceptRanges.ToString());
-                Console.WriteLine("content length: " + response.Content.Headers.ContentLength.ToString());
-                Console.WriteLine("content type: " + response.Content.Headers.ContentType.ToString());
+                Console.WriteLine("status code: " + response.StatusCode);
+                Console.WriteLine("version: " + (response.Version != null ? response.Version.ToString() : "not found"));
+                Console.WriteLine("time: " + (response.Headers.Date != null ? response.Headers.Date.ToString() : "not found"));
+                Console.WriteLine("server: " + (response.Headers.Server != null ? response.Headers.Server.ToString() : "not found"));
+                Console.WriteLine("etag: " + (response.Headers.ETag != null ? response.Headers.ETag.ToString() : "not found"));
+                Console.WriteLine("ranges: " + (response.Headers.AcceptRanges != null ? response.Headers.AcceptRanges.ToString() : "not found"));
+                Console.WriteLine("content length: " + (response.Content.Headers.ContentLength != null ? response.Content.Headers.ContentLength.ToString() : "not found"));
+                Console.WriteLine("content type: " + (response.Content.Headers.ContentType != null ? response.Content.Headers.ContentType.ToString() : "not found"));
                 Console.WriteLine("content encoding: " + string.Join(",", response.Content.Headers.ContentEncoding.ToArray()));
                 Console.WriteLine("allow: " + string.Join(",", response.Content.Headers.Allow.ToArray()));
                 Console.WriteLine("html: " + await response.Content.ReadAsStringAsync());
