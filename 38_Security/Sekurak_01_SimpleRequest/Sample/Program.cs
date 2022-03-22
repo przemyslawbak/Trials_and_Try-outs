@@ -11,8 +11,8 @@ namespace Sample
     {
         static async Task Main(string[] args)
         {
-            string host = "kwejk.pl";
-            string path = "/oczekujace";
+            string host = "training.securitum.com";
+            string path = "/";
 
             HttpClient _client = new HttpClient();
             _client.BaseAddress = new Uri("https://" + host);
@@ -23,14 +23,17 @@ namespace Sample
                 requestMessage.Headers.Host = host;
                 requestMessage.Version = HttpVersion.Version11;
                 requestMessage.Headers.Add("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:85.0) Gecko/20100101 Firefox/85.0");
-                requestMessage.Content = new StringContent("<?php phpinfo(); ?>", Encoding.UTF8, "text/html");
+                requestMessage.Headers.Add("Location", "https://kwejk.pl/");
+                //requestMessage.Headers.Referrer = new Uri("https://www.google.com/");
+                //requestMessage.Content = new StringContent("<?php phpinfo(); ?>", Encoding.UTF8, "text/html");
 
                 Console.WriteLine("REUEST:");
-                Console.WriteLine("host: " + requestMessage.Headers.Host.ToString());
                 Console.WriteLine("method: " + requestMessage.Method.ToString());
                 Console.WriteLine("version: " + requestMessage.Version.ToString());
-                Console.WriteLine("uri: " + requestMessage.RequestUri.ToString());
-                Console.WriteLine("user-agent: " + requestMessage.Headers.UserAgent.ToString()); //??
+                Console.WriteLine("host: " + (requestMessage.Headers.Host != null ? requestMessage.Headers.Host.ToString() : "not found"));
+                Console.WriteLine("relative uri: " + requestMessage.RequestUri.ToString());
+                Console.WriteLine("referer: " + (requestMessage.Headers.Referrer != null ? requestMessage.Headers.Referrer.ToString() : "not found"));
+                Console.WriteLine("user-agent: " + (requestMessage.Headers.UserAgent != null ? requestMessage.Headers.UserAgent.ToString() : "not found"));
                 Console.WriteLine();
                 Console.WriteLine("(...)");
                 Console.WriteLine();
@@ -41,6 +44,7 @@ namespace Sample
                 Console.WriteLine("time: " + (response.Headers.Date != null ? response.Headers.Date.ToString() : "not found"));
                 Console.WriteLine("server: " + (response.Headers.Server != null ? response.Headers.Server.ToString() : "not found"));
                 Console.WriteLine("etag: " + (response.Headers.ETag != null ? response.Headers.ETag.ToString() : "not found"));
+                Console.WriteLine("vary: " + (response.Headers.Vary != null ? response.Headers.Vary.ToString() : "not found"));
                 Console.WriteLine("ranges: " + (response.Headers.AcceptRanges != null ? response.Headers.AcceptRanges.ToString() : "not found"));
                 Console.WriteLine("content length: " + (response.Content.Headers.ContentLength != null ? response.Content.Headers.ContentLength.ToString() : "not found"));
                 Console.WriteLine("content type: " + (response.Content.Headers.ContentType != null ? response.Content.Headers.ContentType.ToString() : "not found"));
