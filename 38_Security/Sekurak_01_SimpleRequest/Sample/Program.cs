@@ -9,21 +9,24 @@ namespace Sample
 {
     class Program
     {
-        static async Task Main(string[] args) 
+        static async Task Main(string[] args)
         {
-            HttpClient _client = new HttpClient();
+            string host = "kwejk.pl";
+            string path = "/oczekujace";
 
-            using (HttpRequestMessage requestMessage = new HttpRequestMessage())
+            HttpClient _client = new HttpClient();
+            _client.BaseAddress = new Uri("https://" + host);
+
+            using (HttpRequestMessage requestMessage = new HttpRequestMessage(HttpMethod.Get, path))
             {
-                requestMessage.Method = HttpMethod.Put;
-                requestMessage.RequestUri = new Uri("https://kwejk.pl/");
-                //requestMessage.Headers.Host = "training.securitum.com"; //throwing SSL exceptions
+                requestMessage.Method = HttpMethod.Get;
+                requestMessage.Headers.Host = host;
                 requestMessage.Version = HttpVersion.Version11;
                 requestMessage.Headers.Add("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:85.0) Gecko/20100101 Firefox/85.0");
                 requestMessage.Content = new StringContent("<?php phpinfo(); ?>", Encoding.UTF8, "text/html");
 
                 Console.WriteLine("REUEST:");
-                //Console.WriteLine("host: " + requestMessage.Headers.Host.ToString()); //throwing SSL exceptions
+                Console.WriteLine("host: " + requestMessage.Headers.Host.ToString());
                 Console.WriteLine("method: " + requestMessage.Method.ToString());
                 Console.WriteLine("version: " + requestMessage.Version.ToString());
                 Console.WriteLine("uri: " + requestMessage.RequestUri.ToString());
