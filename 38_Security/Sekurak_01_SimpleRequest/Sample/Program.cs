@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 
@@ -12,12 +13,17 @@ namespace Sample
             HttpClient _client = new HttpClient();
             _client.DefaultRequestHeaders.Add("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:85.0) Gecko/20100101 Firefox/85.0");
 
-            using (HttpRequestMessage requestMessage = new HttpRequestMessage(HttpMethod.Get, "https://training.securitum.com/"))
+            using (HttpRequestMessage requestMessage = new HttpRequestMessage())
             {
+                requestMessage.Method = HttpMethod.Get;
+                requestMessage.RequestUri = new Uri("https://training.securitum.com/");
+                requestMessage.Version = HttpVersion.Version11;
+
                 Console.WriteLine("REUEST:");
                 Console.WriteLine("method: " + requestMessage.Method.ToString());
+                Console.WriteLine("version: " + requestMessage.Version.ToString());
                 Console.WriteLine("uri: " + requestMessage.RequestUri.ToString());
-                Console.WriteLine("user-agent: " + requestMessage.Headers.UserAgent.ToString());
+                Console.WriteLine("user-agent: " + requestMessage.Headers.UserAgent.ToString()); //??
                 Console.WriteLine();
                 Console.WriteLine("(...)");
                 Console.WriteLine();
