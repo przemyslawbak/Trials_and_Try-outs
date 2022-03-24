@@ -26,7 +26,7 @@ namespace Sample
             using (HttpRequestMessage requestMessage = new HttpRequestMessage(HttpMethod.Get, path))
             {
                 requestMessage.Method = HttpMethod.Get;
-                requestMessage.Headers.Host = "google.com"; //host changed
+                requestMessage.Headers.Host = host; //host changed
                 requestMessage.Version = HttpVersion.Version11;
                 requestMessage.Headers.Add("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:85.0) Gecko/20100101 Firefox/85.0");
                 requestMessage.Headers.Add("Location", "https://kwejk.pl/");
