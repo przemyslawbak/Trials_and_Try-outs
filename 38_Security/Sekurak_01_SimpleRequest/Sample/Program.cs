@@ -14,6 +14,7 @@ namespace Sample
             string host = "training.securitum.com";
             string path = "/";
 
+            //for CURL https://stackoverflow.com/a/43975415/12603542
             //https://stackoverflow.com/a/56460052/12603542
             HttpClientHandler clientHandler = new HttpClientHandler();
             clientHandler.ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; };
@@ -24,12 +25,12 @@ namespace Sample
             using (HttpRequestMessage requestMessage = new HttpRequestMessage(HttpMethod.Get, path))
             {
                 requestMessage.Method = HttpMethod.Get;
-                requestMessage.Headers.Host = "google.com";
+                requestMessage.Headers.Host = "google.com"; //host changed
                 requestMessage.Version = HttpVersion.Version11;
                 requestMessage.Headers.Add("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:85.0) Gecko/20100101 Firefox/85.0");
                 requestMessage.Headers.Add("Location", "https://kwejk.pl/");
                 //requestMessage.Headers.Referrer = new Uri("https://www.google.com/");
-                //requestMessage.Content = new StringContent("<?php phpinfo(); ?>", Encoding.UTF8, "text/html");
+                requestMessage.Content = new StringContent("<?php phpinfo(); ?>", Encoding.UTF8, "text/html");
 
                 Console.WriteLine("REUEST:");
                 Console.WriteLine("method: " + requestMessage.Method.ToString());

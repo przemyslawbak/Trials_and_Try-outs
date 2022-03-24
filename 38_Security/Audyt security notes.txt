@@ -2,3 +2,7 @@
 - szczególnie niebezpieczna bywa metoda PUT (często jest ona domyślnie wyłączona), umożliwiająca tworzenie plików na serwerze HTTP
 - blokowanie na serwerze metody PUT (pUT, puT itd), testowanie
 - Referer header jest wysyłany niezaszyfrowany nawet jak korzystamy z HTTPS. Zabezpieczenie: Referrer-Policy: no-referrer
+- SQL Injection, zlokalizowana 22 marca 2019 roku w nagłówku User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) ⤦
+Chrome/55.0.2883.87'XOR(if(now()=sysdate(),sleep(5*5),0))OR' - 
+- Path Traversal: Accept: ../../../../../../../../../../etc/passwd{{
+- parametry, często można manipulować
