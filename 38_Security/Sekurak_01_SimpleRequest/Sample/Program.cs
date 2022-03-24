@@ -14,13 +14,17 @@ namespace Sample
             string host = "training.securitum.com";
             string path = "/";
 
-            HttpClient _client = new HttpClient();
+            //https://stackoverflow.com/a/56460052/12603542
+            HttpClientHandler clientHandler = new HttpClientHandler();
+            clientHandler.ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; };
+            // Pass the handler to httpclient(from you are calling api)
+            HttpClient _client = new HttpClient(clientHandler); //todo: static client
             _client.BaseAddress = new Uri("https://" + host);
 
             using (HttpRequestMessage requestMessage = new HttpRequestMessage(HttpMethod.Get, path))
             {
                 requestMessage.Method = HttpMethod.Get;
-                requestMessage.Headers.Host = host;
+                requestMessage.Headers.Host = "google.com";
                 requestMessage.Version = HttpVersion.Version11;
                 requestMessage.Headers.Add("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:85.0) Gecko/20100101 Firefox/85.0");
                 requestMessage.Headers.Add("Location", "https://kwejk.pl/");
