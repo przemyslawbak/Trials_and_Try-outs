@@ -1,4 +1,4 @@
 - http HEAD nie pobiera ciala, przyspierza silowe szukanie plikow i inne testy
 - szczególnie niebezpieczna bywa metoda PUT (często jest ona domyślnie wyłączona), umożliwiająca tworzenie plików na serwerze HTTP
 - blokowanie na serwerze metody PUT (pUT, puT itd), testowanie
--
+- Referer header jest wysyłany niezaszyfrowany nawet jak korzystamy z HTTPS. Zabezpieczenie: Referrer-Policy: no-referrer
