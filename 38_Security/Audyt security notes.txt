@@ -5,4 +5,9 @@
 - SQL Injection, zlokalizowana 22 marca 2019 roku w nagłówku User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) ⤦
 Chrome/55.0.2883.87'XOR(if(now()=sysdate(),sleep(5*5),0))OR' - 
 - Path Traversal: Accept: ../../../../../../../../../../etc/passwd{{
-- parametry, często można manipulować
+- parametry, często można manipulować, wysyłane w url GET
+- parametry też się wysyła w ciele POST
+- manipulacja kontentem, żądanie POST: application/x-www-form-urlencoded
+- manipulacja kontentem, POST: multipart/form-data - WAF Bypass Techniques – Using HTTP Standard and Web Servers’ Behaviour
+- podatności z GET + ciało
+- 

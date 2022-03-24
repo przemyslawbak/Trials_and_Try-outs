@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -12,7 +13,7 @@ namespace Sample
         static async Task Main(string[] args)
         {
             string host = "training.securitum.com";
-            string path = "/";
+            string path = "/cookie.php";
 
             //for CURL https://stackoverflow.com/a/43975415/12603542
             //https://stackoverflow.com/a/56460052/12603542
@@ -39,10 +40,15 @@ namespace Sample
                 Console.WriteLine("relative uri: " + requestMessage.RequestUri.ToString());
                 Console.WriteLine("referer: " + (requestMessage.Headers.Referrer != null ? requestMessage.Headers.Referrer.ToString() : "not found"));
                 Console.WriteLine("user-agent: " + (requestMessage.Headers.UserAgent != null ? requestMessage.Headers.UserAgent.ToString() : "not found"));
+                Console.WriteLine("connection: " + (requestMessage.Headers.Connection != null ? requestMessage.Headers.Connection.ToString() : "not found"));
+                Console.WriteLine("accept: " + (requestMessage.Headers.Accept != null ? requestMessage.Headers.Accept.ToString() : "not found"));
+                Console.WriteLine("accept-lang: " + (requestMessage.Headers.AcceptLanguage != null ? requestMessage.Headers.AcceptLanguage.ToString() : "not found"));
+                Console.WriteLine("upgrade: " + (requestMessage.Headers.Upgrade != null ? requestMessage.Headers.Upgrade.ToString() : "not found"));
                 Console.WriteLine();
                 Console.WriteLine("(...)");
                 Console.WriteLine();
                 HttpResponseMessage response = await _client.SendAsync(requestMessage);
+                IEnumerable<string> cookies = response.Headers.SingleOrDefault(header => header.Key == "Set-Cookie").Value;
                 Console.WriteLine("RESPONSE:");
                 Console.WriteLine("status code: " + response.StatusCode);
                 Console.WriteLine("version: " + (response.Version != null ? response.Version.ToString() : "not found"));
@@ -55,6 +61,8 @@ namespace Sample
                 Console.WriteLine("content type: " + (response.Content.Headers.ContentType != null ? response.Content.Headers.ContentType.ToString() : "not found"));
                 Console.WriteLine("content encoding: " + string.Join(",", response.Content.Headers.ContentEncoding.ToArray()));
                 Console.WriteLine("allow: " + string.Join(",", response.Content.Headers.Allow.ToArray()));
+                Console.WriteLine("cookies: " + string.Join(",", (cookies != null ? cookies.ToArray() : "not found" )));
+                Console.WriteLine("connection: " + (response.Headers.Connection != null ? response.Headers.Connection.ToString() : "not found"));
                 Console.WriteLine("html: " + await response.Content.ReadAsStringAsync());
             }
         }
