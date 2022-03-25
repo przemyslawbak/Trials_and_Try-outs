@@ -1,8 +1,9 @@
+﻿---request
 HEAD / HTTP/1.1
 Host: training.sekurak.com
 
 
----
+---response
 HTTP/1.1 200 OK
 Date: Fri, 25 Mar 2022 19:43:26 GMT
 Server: Apache
@@ -12,4 +13,17 @@ Accept-Ranges: bytes
 Content-Length: 33
 Content-Type: text/html
 
-//NO CONTENT
+
+//NO CONTENT, pozwala przyspieszyć brute force
+
+---request
+HEAD /test HTTP/1.1
+Host: training.securitum.com
+
+
+---response
+HTTP/1.1 404 Not Found
+Date: Fri, 25 Mar 2022 19:48:23 GMT
+Server: Apache
+Content-Type: text/html; charset=iso-8859-1
+
