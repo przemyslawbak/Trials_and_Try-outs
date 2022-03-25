@@ -1,0 +1,30 @@
+---request
+PUT /test2.php HTTP/1.1
+Host: training.securitum.com
+Content-Length: 19
+
+
+<?php phpinfo(); ?>
+---response should be
+HTTP/1.1 201 Created
+Location: /test2.php
+
+
+//W kontekście naszych rozważań szczególnie niebezpieczna bywa metoda PUT (często jest ona domyślnie wyłączona), umożliwiająca tworzenie plików na serwerze HTTP
+
+---response
+HTTP/1.1 404 Not Found
+Date: Fri, 25 Mar 2022 19:59:39 GMT
+Server: Apache
+Content-Length: 196
+Content-Type: text/html; charset=iso-8859-1
+
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 2.0//EN">
+<html><head>
+<title>404 Not Found</title>
+</head><body>
+<h1>Not Found</h1>
+<p>The requested URL was not found on this server.</p>
+</body></html>
+
+
