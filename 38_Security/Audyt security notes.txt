@@ -1,3 +1,4 @@
+---TOPICS:
 - soft: Burp Suite community edition
 - http HEAD nie pobiera ciala, przyspierza silowe szukanie plikow i inne testy
 - szczególnie niebezpieczna bywa metoda PUT (często jest ona domyślnie wyłączona), umożliwiająca tworzenie plików na serwerze HTTP
@@ -11,4 +12,15 @@ Chrome/55.0.2883.87'XOR(if(now()=sysdate(),sleep(5*5),0))OR' -
 - manipulacja kontentem, żądanie POST: application/x-www-form-urlencoded
 - manipulacja kontentem, POST: multipart/form-data - WAF Bypass Techniques – Using HTTP Standard and Web Servers’ Behaviour
 - podatności z GET + ciało
+- w Burp w zakładce proxy można je skonfigurować i przechwytywać (intercept) zapytania i odpowiedzi, konfig w Opcjach
 - 
+
+---TODO:
+- modify requests and responses with C#
+
+---OWASP WEBSITES:
+https://owasp.org/www-project-top-ten/
+https://dvwa.co.uk/
+https://www.youtube.com/watch?v=IWWYNDiwYOA
+https://www.zaproxy.org/
+https://www.youtube.com/watch?v=2_lswM1S264
