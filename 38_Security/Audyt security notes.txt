@@ -18,6 +18,7 @@ Chrome/55.0.2883.87'XOR(if(now()=sysdate(),sleep(5*5),0))OR' -
 - w burp comparer służy do porównywania żądzań lub odpowiedzi
 - w Burp decoder służy do dekodowanie z BASE64 lub innego formatu
 - w Burp sequencer służy do analizy entropii tokena - spr identyfikatory sesji
+- HTTPS z Burp -> 127.0.0.1:8080 w przeglądarce -> save cert -> dodanie cert do przeglądarki (coś hurde fajans nie działa. do spr ostatni certyfikat PortSwigger CA)
 
 ---TODO:
 - modify requests and responses with C# (how?)?
