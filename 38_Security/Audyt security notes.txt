@@ -15,6 +15,9 @@ Chrome/55.0.2883.87'XOR(if(now()=sysdate(),sleep(5*5),0))OR' -
 - w Burp w zakładce proxy można je skonfigurować i przechwytywać (intercept) zapytania i odpowiedzi, konfig w Opcjach
 - w Burp do repeatera można skopiować żądanie
 - w Burp intruder służy do enumeracji parametrów żądania //COMMUNITY EDITION IS LIMITED
+- w burp comparer służy do porównywania żądzań lub odpowiedzi
+- w Burp decoder służy do dekodowanie z BASE64 lub innego formatu
+- w Burp sequencer służy do analizy entropii tokena - spr identyfikatory sesji
 
 ---TODO:
 - modify requests and responses with C# (how?)?
