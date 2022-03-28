@@ -1,5 +1,6 @@
 ---TOPICS:
 - soft: Burp Suite community edition
+- inny soft?
 - http HEAD nie pobiera ciala, przyspierza silowe szukanie plikow i inne testy
 - szczególnie niebezpieczna bywa metoda PUT (często jest ona domyślnie wyłączona), umożliwiająca tworzenie plików na serwerze HTTP
 - blokowanie na serwerze metody PUT (pUT, puT itd), testowanie
@@ -19,6 +20,21 @@ Chrome/55.0.2883.87'XOR(if(now()=sysdate(),sleep(5*5),0))OR' -
 - w Burp decoder służy do dekodowanie z BASE64 lub innego formatu
 - w Burp sequencer służy do analizy entropii tokena - spr identyfikatory sesji
 - HTTPS z Burp -> 127.0.0.1:8080 w przeglądarce -> save cert -> dodanie cert do przeglądarki (coś hurde fajans nie działa. do spr ostatni certyfikat PortSwigger CA)
+- w Burp socks proxy host jedt do wykorzystania proxy
+Do najpopularniejszych (nagłówków) – związanych z bezpieczeństwem – należy zaliczyć:
+- HTTP Strict Transport Security (HSTS)
+- Content-Security-Policy
+- X-Frame-Options
+- X-Content-Type-Options
+- Referrer-Policy
+- Feature-Policy
+- Access-Control-Allow-Origin
+Chrome / Firefox dev tools:
+- szukanie iframe
+- endpointy API
+- odwracanie minifikacji kodu JS w zakładce Sources
+- zakładka Elements zawiera też kod dodany dynamicznie przez JS
+- podejrzenie ciasteczek
 
 ---TODO:
 - modify requests and responses with C# (how?)?
