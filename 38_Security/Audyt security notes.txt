@@ -50,6 +50,12 @@ Hasła:
 - utrudnianie powtazralności ataków (opóźnienia, spowolnienia, captcha)
 - wymuszanie znaków specjalnych, cyfr, capsów
 - najbezpieczniej zapisane hasło: sól (indywidualnie), pieprz (osobne źródło), hashowanie SHA512
+Rekonesans:
+- lokalizacja serwerów nmap (urządzenie do skanowania portów) "W tym przypadku realizujemy sprawdzenie wszystkich portów TCP (0–65535) oraz skanowanie z wersjonowaniem (-sV). Możemy również posłużyć się skryptem http-headers, który dodatkowo wyświetli nagłówki odpowiedzi HTTP."
+- szukanie domen powiązanych i subdomen za pomocą: google/bing/yandex, serwisów i API, szukanie po IP, metoda słownikowa, wyszukiwarki Certificate Transparency logs, Projekt Sonar
+- wsteczna inżynieria aplikacji mobilnych w poszukiwaniu domen, linków itd
+- domeny wirtualne (?)
+Ukryte katalogi i pliki:
 
 
 ---TODO:
