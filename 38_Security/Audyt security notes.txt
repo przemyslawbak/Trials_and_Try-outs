@@ -56,7 +56,10 @@ Rekonesans:
 - wsteczna inżynieria aplikacji mobilnych w poszukiwaniu domen, linków itd
 - domeny wirtualne (?)
 Ukryte katalogi i pliki:
-
+- szukanie katalogu .git, .gitignore lub .svn
+- Jeżeli programista pozostawił na serwerze folder .git, nic nie stoi na przeszkodzie, aby odczytać zawartość dowolnego pliku, nawet jeśli nie mamy uprawnień do pobrania całego repozytorium, poleceniem git clone czy git checkout
+- Jak zatem sprawdzić, czy folder .git/.svn znajduje się na serwerze? Wystarczy sprawdzić, czy adres URL w postaci np. http://adresserwisu/.git/ zwróci odpowiedź HTTP z kodem innym niż 404 Not Found.
+- folder .idea i workspace.xml, inne
 
 ---TODO:
 - modify requests and responses with C# (how?)?
