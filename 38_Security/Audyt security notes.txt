@@ -60,6 +60,17 @@ Ukryte katalogi i pliki:
 - Jeżeli programista pozostawił na serwerze folder .git, nic nie stoi na przeszkodzie, aby odczytać zawartość dowolnego pliku, nawet jeśli nie mamy uprawnień do pobrania całego repozytorium, poleceniem git clone czy git checkout
 - Jak zatem sprawdzić, czy folder .git/.svn znajduje się na serwerze? Wystarczy sprawdzić, czy adres URL w postaci np. http://adresserwisu/.git/ zwróci odpowiedź HTTP z kodem innym niż 404 Not Found.
 - folder .idea i workspace.xml, inne
+XSS (Cross-Site Scripting):
+- test1: w forularz wpisanie <u>test (spr czy enkoduje)
+- test2: <script>alert(1)</script>
+- reflected XSS - wyświetlany w parametrze odpowedzi
+- persistent XSS - zapisanie skryptu w bazie danych (np blog)
+- DOM-based XSS
+- za pomocą XSS jesteśmy w stanie odczytać dowolne dane w kontekście zalogowanego użytkownika
+- możliwość wykonania dowolnej akcji w kontekście zalogowanego użytkownika
+- Innymi słowy, XSS pozwala na przejęcie dostępu do sesji użytkownika
+- Istnieją również narzędzia, takie jak BeEF3, które zawierają gotowe moduły pozwalające na dalsze wykorzystanie (post-eksploitację) XSS
+- 
 
 ---TODO:
 - modify requests and responses with C# (how?)?
