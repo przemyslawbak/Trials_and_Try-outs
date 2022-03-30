@@ -86,9 +86,13 @@ Metody obrony przed XSS:
 - Enkodowanie wszystkich znaków niealfanumerycznych do postaci UTF-16, tj. \uXXXX.
 - W przypadku zagnieżdżeń kontekstów należy pamiętać o odpowiedniej ochronie dla każdego z nich.
 Podatności DOM XSS:
-- Funkcje typu eval: zaleca się, by nie używać funkcji typu eval na danych pochodzących z niezaufanych źródeł (np. od użytkownika).
+- Funkcje typu eval: zaleca się, by nie używać funkcji typu eval czy Function na danych pochodzących z niezaufanych źródeł (np. od użytkownika).
 - Funkcje przyjmujące kod HTML: innerHTML, outerHTML, insertAdjacentHTML, document.write - należy pamiętać o enkodowaniu danych
 - Funkcje przyjmujące adres URL: obecny adres URL strony (location), ciasteczka (document.cookie) czy komunikacja typu postMessage, fetch
+- Najbardziej zalecana ochrona przed tego typu XSS to wydzielenie osobnej domeny (tzw. domeny sandboksowej), z której serwowane będą pliki wgrywane przez użytkowników.
+- upload plików SVG i html jest zagrożeniem (mogą zawierać skrypty, po przejściu do URL pliku można aktywować skrypt)
+- edytory tekstu są potencjalnym zagrożeniem, rozwiązaniem jest sanityzacja (oczyszczanie ze szkodliwych znaczników)
+- istnieją typowe obejścia popularnych filtrów XSS
 
 ---TODO:
 - modify requests and responses with C# (how?)?
