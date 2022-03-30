@@ -82,7 +82,13 @@ Konteksty XSS:
 Metody obrony przed XSS:
 - Zamiana znaków specjalnych HTML na encje.
 - Jeżeli aplikacja generuje dynamicznie HTML, lepiej wartości atrybutów umieszczać wewnątrz cudzysłowów/apostrofów
-- 
+- Jeżeli użytkownik może w aplikacji podać adres URL, walidujmy, czy protokół w adresie to HTTP/HTTPS. Odrzucajmy wszystkie pozostałe.
+- Enkodowanie wszystkich znaków niealfanumerycznych do postaci UTF-16, tj. \uXXXX.
+- W przypadku zagnieżdżeń kontekstów należy pamiętać o odpowiedniej ochronie dla każdego z nich.
+Podatności DOM XSS:
+- Funkcje typu eval: zaleca się, by nie używać funkcji typu eval na danych pochodzących z niezaufanych źródeł (np. od użytkownika).
+- Funkcje przyjmujące kod HTML: innerHTML, outerHTML, insertAdjacentHTML, document.write - należy pamiętać o enkodowaniu danych
+- Funkcje przyjmujące adres URL: obecny adres URL strony (location), ciasteczka (document.cookie) czy komunikacja typu postMessage, fetch
 
 ---TODO:
 - modify requests and responses with C# (how?)?
