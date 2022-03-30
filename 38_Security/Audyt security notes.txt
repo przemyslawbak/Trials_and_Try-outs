@@ -70,6 +70,18 @@ XSS (Cross-Site Scripting):
 - możliwość wykonania dowolnej akcji w kontekście zalogowanego użytkownika
 - Innymi słowy, XSS pozwala na przejęcie dostępu do sesji użytkownika
 - Istnieją również narzędzia, takie jak BeEF3, które zawierają gotowe moduły pozwalające na dalsze wykorzystanie (post-eksploitację) XSS
+- dla najpopularniejszych wariantów XSS zabezpieczeniem jest enkodowanie
+Konteksty XSS:
+- WSTRZYKNIĘCIE W ZAWARTOŚCI TAGU: <div><img src onerror=alert(1)></div>
+- WSTRZYKNIĘCIE W ZAWARTOŚCI ATRYBUTU: <div class="" onmouseover=alert(1) "></div>; <div class=""><script>alert(1)</script>"></div>
+- WSTRZYKNIĘCIE W ZAWARTOŚCI ATRYBUTU BEZ CUDZYSŁOWÓW/APOSTROFÓW: <div class=x onclick=alert(1)></div>
+- WSTRZYKNIĘCIE W ATRYBUCIE HREF: <a href="javascript:alert(1)"></a>
+- WSTRZYKNIĘCIE W STRINGU WEWNĄTRZ KODU JS: <script>var username="";alert(1)//";</script>
+- WSTRZYKNIĘCIE W ATRYBUCIE ZE ZDARZENIEM JS: <div onclick="change('&#39;);alert(1)//')">User1</div>
+- WSTRZYKNIĘCIE W ATRYBUCIE HREF WEWNĄTRZ PROTOKOŁU JS: <a href="javascript:change('%27);alert(1)//')">CLICK</a>
+Metody obrony przed XSS:
+- Zamiana znaków specjalnych HTML na encje.
+- Jeżeli aplikacja generuje dynamicznie HTML, lepiej wartości atrybutów umieszczać wewnątrz cudzysłowów/apostrofów
 - 
 
 ---TODO:
