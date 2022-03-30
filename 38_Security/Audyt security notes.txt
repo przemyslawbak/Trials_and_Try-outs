@@ -93,6 +93,27 @@ Podatności DOM XSS:
 - upload plików SVG i html jest zagrożeniem (mogą zawierać skrypty, po przejściu do URL pliku można aktywować skrypt)
 - edytory tekstu są potencjalnym zagrożeniem, rozwiązaniem jest sanityzacja (oczyszczanie ze szkodliwych znaczników)
 - istnieją typowe obejścia popularnych filtrów XSS
+Content Security Policy (CSP)
+- CSP może być wdrożony jako nagłówek HTTP (o nazwie Content-Security-Policy lub Content-Security-Policy-Report-Only), jak również jako element <meta> bezpośrednio w kodzie HTML
+- Przede wszystkim należy mieć na uwadze, że CSP to mechanizm, który chroni jedynie przed skutkami podatności
+- *-src: skąd mogą być ładowane zewnętrzne zasoby na stronie
+- script-src: jakie skrypty mogą zostać załadowane na stronie
+- base-uri: W praktyce zaleca się, by base-uri stosować zawsze – ustawiać je albo na wartość 'none', albo 'self'.
+- block-all-mixed-content i upgrade-insecure-requests
+- frame-ancestors: jest sposobem ochrony przed atakiem typu Clickjacking (niewidoczny <iframe>)
+- plugin-types: Dyrektywa plugin-types w praktyce używana jest niezwykle rzadko. odchodzi się od używania pluginów (takich jak Flash czy aplety Javy).
+- report-uri: Dyrektywa report-uri jest związana bezpośrednio z trybem raportowania w CSP
+- sandbox: Użycie atrybutu sandbox pozwala zastosować dodatkowe ograniczenia na stronie docelowej
+- raportowanie (report-uri) - CSP może też wysyłać raporty, jeśli jego polityka zablokuje załadowanie jakiegoś elementu na stronie.
+- można wł/wył raportowanie
+- Przykłady: Tabela 5. Przykładowe polityki CSP (książka Sekurak)
+Obejście CSP:
+- przez JSONP
+- przez frameworki JS
+- jak aplikacja korzysta z dużej ilości zewnętrznych skryptów, np google-analytics.com
+CORS:
+- 
+
 
 ---TODO:
 - modify requests and responses with C# (how?)?
