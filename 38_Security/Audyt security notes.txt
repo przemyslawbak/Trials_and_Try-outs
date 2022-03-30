@@ -111,8 +111,9 @@ Obejście CSP:
 - przez JSONP
 - przez frameworki JS
 - jak aplikacja korzysta z dużej ilości zewnętrznych skryptów, np google-analytics.com
-CORS:
-- 
+CORS & SOP:
+- Same-Origin Policy (SOP) - blokowanie ruchu z innych źródeł
+- CORS umożliwia nam bezpieczne wykonywanie zapytań HTTP Cross-Origin.
 
 
 ---TODO:
