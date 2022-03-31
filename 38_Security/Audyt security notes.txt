@@ -114,6 +114,17 @@ Obejście CSP:
 CORS & SOP:
 - Same-Origin Policy (SOP) - blokowanie ruchu z innych źródeł
 - CORS umożliwia nam bezpieczne wykonywanie zapytań HTTP Cross-Origin.
+- jeśli na serwerze można dokonać operacji zmieniających stan aplikacji za pomocą zapytań prostych, to w dalszym ciągu możliwy jest typowy atak CSRF (również tak jak w wersji oryginalnej – tagi <img> lub <form>)*. CORS, przez konieczność wstecznej kompatybilności, nie jest w stanie nas przed tym obronić.
+Obejścia CORS i złe praktyki:
+- Access-Control-Allow-Origin: *
+- dla https://example.com atakujący może zarejestrować https://example.com.evil.com
+- błędne regexy wprzy wykluczeniach
+- nagłówek ACAO ustawionym na null, przeglądarki nie zaimplementowały
+- CORS i Cache Poisoning
+- stosowanie w aplikacji podatnych modułów
+- XSS powoduje, że atakujący dostaje możliwość wywoływania dowolnych zapytań cross-origin, ponieważ… nie są one cross-origin, tylko same-origin
+- JSON Hijacking
+- side-channel
 
 
 ---TODO:
