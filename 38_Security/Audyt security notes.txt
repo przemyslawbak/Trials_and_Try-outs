@@ -125,6 +125,11 @@ Obejścia CORS i złe praktyki:
 - XSS powoduje, że atakujący dostaje możliwość wywoływania dowolnych zapytań cross-origin, ponieważ… nie są one cross-origin, tylko same-origin
 - JSON Hijacking
 - side-channel
+Cross-Site Request Forgery (XSRF, CSRF, OSRF):
+- jest to zmuszenie przeglądarki ofiary do wykonania pewnej nieautoryzowanej akcji (wykonania żądania HTTP), a atakujący na cel bierze zalogowanego użytkownika*.
+- przykład: napisanie na forum komentarza z tagiem <img src="url z parametrami">, admin po zalogowaniu się próbuje pobrać img, przeglądarka realizuje GET z url
+- przykład: na swojej stronie atakujący umieszcza tag <img src="url z parametrami">, nakłąnia admina do wejścia, realizowany jest GET z url
+- przykład: spreparowana strona posiada formularz POST który wysyła parametry na wybrany url
 
 
 ---TODO:
