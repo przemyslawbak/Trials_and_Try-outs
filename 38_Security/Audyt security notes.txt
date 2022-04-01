@@ -130,7 +130,14 @@ Cross-Site Request Forgery (XSRF, CSRF, OSRF):
 - przykład: napisanie na forum komentarza z tagiem <img src="url z parametrami">, admin po zalogowaniu się próbuje pobrać img, przeglądarka realizuje GET z url
 - przykład: na swojej stronie atakujący umieszcza tag <img src="url z parametrami">, nakłąnia admina do wejścia, realizowany jest GET z url
 - przykład: spreparowana strona posiada formularz POST który wysyła parametry na wybrany url
-
+- Zastosowanie parametru _method w formularzu HTML - można próbować innych metod HTTP
+- w urządzeniu sieciowym można próbować: <img src="http://admin:admin@192.168.10.1/reboot/">
+Zabezpieczenia przed CSRF:
+- losowe tokeny
+- zmiana wszystkich żądań metodą GET (które zmieniają stan aplikacji) na POST.
+- należy sprawdzić, czy nie można sztucznie zmienić w aplikacji żądania POST na żądanie GET (z parametrami przekazywanymi w URI)
+- atrybut SameSite (Flaga SameSite) dodawany do ciasteczek
+- 
 
 ---TODO:
 - modify requests and responses with C# (how?)?
