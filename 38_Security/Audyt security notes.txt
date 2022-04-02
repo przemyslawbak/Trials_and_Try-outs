@@ -137,7 +137,12 @@ Zabezpieczenia przed CSRF:
 - zmiana wszystkich żądań metodą GET (które zmieniają stan aplikacji) na POST.
 - należy sprawdzić, czy nie można sztucznie zmienić w aplikacji żądania POST na żądanie GET (z parametrami przekazywanymi w URI)
 - atrybut SameSite (Flaga SameSite) dodawany do ciasteczek
-- 
+Server-Side Template Injection (SSTI):
+- Aby możliwe było jej wykorzystanie, powinniśmy przetwarzać po stronie serwera szablony pochodzące od niezaufanych użytkowników
+- dostarczając użytkownikowi możliwość stworzenia szablonu, dajemy mu tym samym prawo do dodania nowego kodu do naszej aplikacji!
+- identyfikacja silnika najpierw
+- sprawdzanie podatności: w takich przypadkach dobrze sprawdzają się np. proste wyrażenia arytmetyczne typu ${2*2}
+- sprawdzanie podatności: przez ${ może zwróci błędy
 
 ---TODO:
 - modify requests and responses with C# (how?)?
