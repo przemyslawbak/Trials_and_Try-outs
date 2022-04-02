@@ -143,6 +143,12 @@ Server-Side Template Injection (SSTI):
 - identyfikacja silnika najpierw
 - sprawdzanie podatności: w takich przypadkach dobrze sprawdzają się np. proste wyrażenia arytmetyczne typu ${2*2}
 - sprawdzanie podatności: przez ${ może zwróci błędy
+Obrona przed SSTI:
+- rezygacja z szablonów (przynajmniej częściowa)
+- tylko zaufany użytkownik może edytować szablony
+- bezpieczne silniki
+- Sandboxing - możemy sprawdzić, czy mamy szczęście i czy dany silnik nie udostępnia trybu „bezpiecznego” lub „sandboxowanego”.
+- Hardening - Ostatnią deską ratunku może być konfiguracja serwera
 
 ---TODO:
 - modify requests and responses with C# (how?)?
