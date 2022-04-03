@@ -149,6 +149,21 @@ Obrona przed SSTI:
 - bezpieczne silniki
 - Sandboxing - możemy sprawdzić, czy mamy szczęście i czy dany silnik nie udostępnia trybu „bezpiecznego” lub „sandboxowanego”.
 - Hardening - Ostatnią deską ratunku może być konfiguracja serwera
+Server-Side Request Forgery (SSRF):
+- Server-Site Request Forgery – czyli zmuszenie serwera do zainicjowania pewnej komunikacji sieciowej
+Miejsca występowania SSRF:
+- parametry HTTP przekazywane w żądaniu, których nazwy zawierają nazwy plików lub adresy URL
+- Pliki XML: Najbardziej chyba znanym jest podatność XXE
+- Document type definition (DTD)
+- XInclude: Umożliwia on dołączenie do bazowego dokumentu XML innych plików
+- SVG/XLink
+- XSLT
+- Inne formaty plików
+- różne biblioteki
+- Mechanizm uploadu
+- inne protokoły niż HTTP
+Podatność SQL Injection:
+- 
 
 ---TODO:
 - modify requests and responses with C# (how?)?
