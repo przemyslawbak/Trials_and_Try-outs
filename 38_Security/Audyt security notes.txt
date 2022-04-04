@@ -202,7 +202,26 @@ Ochrona przed Path Traversal:
 - walidacja danych wejściowych (routing?)
 - Blokowanie ataku poprzez podmianę tekstu (../), ale rozważnie, da się ominąć
 Code Injection i Command Injection:
-
+- nieautoryzowane wykonanie kodu lub poleceń systemowych
+Wszystkie dane odbierane na wejściu aplikacji (np. z parametrów URL lub ciała zapytania POST) powinny być weryfikowane pod kątem:
+- dopuszczalnych znaków, jakie mogą wystąpić w danej zmiennej
+- dopuszczalnej długości danych
+- dopuszczalnego formatu danych
+- dopuszczalnego typu danych
+WEKTORY ATAKÓW:
+- Eval
+- Local File Inclusion i Remote File Inclusion
+- Podatności w mechanizmie wgrywania plików
+- Uruchamianie zewnętrznego oprogramowania
+- Panele administracyjne
+- Cross-Site Scripting a Code Injection
+- Tryb debug a serwer produkcyjny
+- Od SQL Injection do RCE
+- XSLT
+- WebDAV
+- Podatności w bibliotekach
+Skutki Code Injection i Command Injection:
+- 
 
 ---TODO:
 - modify requests and responses with C# (how?)?
