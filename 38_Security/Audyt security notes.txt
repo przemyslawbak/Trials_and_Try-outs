@@ -193,6 +193,16 @@ METODY OCHRONY PRZED SQL INJECTION:
 - Walidacja typów danych: spr czy odpowiedni format
 - Stosowanie systemów klasy ORM
 - Hardening bazy danych
+Podatność Path Traversal (Directory Traversal, dot dot slash attack):
+- niekontrolowany dostęp do plików oraz katalogów
+Testowanie Path Traversal:
+- zapytania GET / POST z ../
+- Omijanie filtrów (%2e%2e%2f itp)
+Ochrona przed Path Traversal:
+- walidacja danych wejściowych (routing?)
+- Blokowanie ataku poprzez podmianę tekstu (../), ale rozważnie, da się ominąć
+Code Injection i Command Injection:
+
 
 ---TODO:
 - modify requests and responses with C# (how?)?
