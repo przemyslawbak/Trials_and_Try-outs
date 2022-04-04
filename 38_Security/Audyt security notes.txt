@@ -189,7 +189,10 @@ PODSTAWOWE TESTY:
 Second-order SQL Injection:
 - sytuacja, w której SQL Injection nie występuje bezpośrednio w odpowiedzi na zapytanie HTTP, ale pewne dane są zapisywane – i dopiero w odpowiedzi na inne zapytanie pojawia się podatność
 METODY OCHRONY PRZED SQL INJECTION:
-- 
+- Zapytania parametryzowane (też w C#)
+- Walidacja typów danych: spr czy odpowiedni format
+- Stosowanie systemów klasy ORM
+- Hardening bazy danych
 
 ---TODO:
 - modify requests and responses with C# (how?)?
