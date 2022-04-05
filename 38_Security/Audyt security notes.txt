@@ -224,7 +224,26 @@ Skutki Code Injection i Command Injection:
 - Wykradanie danych, kodu źródłowego, haseł, konfiguracji
 - Eskalacja czyli uzyskanie nieautoryzowanego dostępu do serwera
 - tylne furtki, instalowanie ich po uzyskaniu dostępu do serwera
-Uwierzytelnianie, zarządzanie sesją, autoryzacja
+Uwierzytelnianie, zarządzanie sesją, autoryzacja:
+- uwierzytelnienie (logowanie) a nie autentykacja
+- identyfikacja - identyfikator: login, email
+- Protokół HTTP jest bezstanowy
+- wykorzystuje się ciasteczka sesyjne
+- Wykorzystanie ciasteczek to nie jedyny sposób na to, by ustanowić sesję. Wiele aplikacji wykorzystuje podejście polegające na przesyłaniu specjalnego tokena np. w nagłówkach HTTP
+- OAuth 2.0 lub OpenID Connnect - token przesyłany jest w nagłówku Authorization
+- autoryzacja - Gdy proces uwierzytelniania zakończy się pomyślnie, tzn. potwierdzona zostanie tożsamość podmiotu, następuje etap weryfikacji uprawnień
+- Podaj hasło jeszcze raz – krytyczne akcje
+- Logowanie zdarzeń
+Omijanie uwierzytelnienia:
+- SQL Injection (admin' --)
+- dane uwierzytelniające testowe, domyślne, dane w repo, słownikowe hasła, dane z serwera,
+- haveibeenpwned.com
+- Do najpopularniejszych narzędzi służących do przeprowadzania ataków słownikowych należy Hydra
+- Różny czas odpowiedzi aplikacji w przypadku próby resetu hasła dla nieistniejącego i istniejącego użytkownika
+Zarządzanie sesją:
+- korzystamy z gotowych mechanizmów i frameworków
+- Regenerowanie sesji (zmiana) identyfikatora sesji przy każdej zmianie poziomu uprawnień użytkownika, inaczej możliwy jest atak Session Fixation
+- wyczulenie na równoległe sesje użytkownika (2 przeglądarki), czy to dobry pomysł, jeśli tak, informowanie użytkownika o tym
 
 ---TODO:
 - modify requests and responses with C# (how?)?
