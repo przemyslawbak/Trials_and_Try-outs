@@ -221,7 +221,10 @@ WEKTORY ATAKÓW:
 - WebDAV
 - Podatności w bibliotekach
 Skutki Code Injection i Command Injection:
-- 
+- Wykradanie danych, kodu źródłowego, haseł, konfiguracji
+- Eskalacja czyli uzyskanie nieautoryzowanego dostępu do serwera
+- tylne furtki, instalowanie ich po uzyskaniu dostępu do serwera
+Uwierzytelnianie, zarządzanie sesją, autoryzacja
 
 ---TODO:
 - modify requests and responses with C# (how?)?
