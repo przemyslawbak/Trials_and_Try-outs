@@ -244,6 +244,13 @@ Zarządzanie sesją:
 - korzystamy z gotowych mechanizmów i frameworków
 - Regenerowanie sesji (zmiana) identyfikatora sesji przy każdej zmianie poziomu uprawnień użytkownika, inaczej możliwy jest atak Session Fixation
 - wyczulenie na równoległe sesje użytkownika (2 przeglądarki), czy to dobry pomysł, jeśli tak, informowanie użytkownika o tym
+- unieważnienie sesji na serwerze po wylogowaniu
+- określony czas sesji, zależny od jej ważności
+- czas życia ciasteczka z tokenem tez do ustalenia
+- uwaga z mechanizmem "zapamiętaj mnie"
+- poczytać OWASP ASVS 4.0
+Pułapki w przetwarzaniu plików XML:
+- 
 
 ---TODO:
 - modify requests and responses with C# (how?)?
