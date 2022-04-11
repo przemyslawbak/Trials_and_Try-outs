@@ -278,7 +278,13 @@ Niebezpieczeństwa JSON Web Token (JWT):
 - atak: czasowy na podpis, im więcej bajtów zgodnych, tym więcej potrzebnych jest porównań i stąd dłuższy czas potrzebny na odpowiedź
 - brak alternatyw
 Zalety i wady OAuth 2.0 z perspektywy bezpieczeństwa:
-- 
+- OAuth 2.0 token nie służy do zarządzania tożsamością posiadacza tokena
+- do zarządzania tożsamością posiadacza tokena może posłużyć OpenID Connect
+- obowiązkowe SSL - Wyciek tokena jest równoznaczny z możliwością wykorzystania go przez inny podmiot do uzyskania dostępu do zasobów.
+- zalecana jest granulacja uprawnień
+- Kod autoryzujący powinien być możliwy do wykorzystania tylko raz
+- Token i kod autoryzacyjny powinien mieć rozsądny czas życia i długość
+- OAUTH 2.0 CHECKLIST s 651
 
 ---TODO:
 - modify requests and responses with C# (how?)?
