@@ -250,6 +250,11 @@ Zarządzanie sesją:
 - uwaga z mechanizmem "zapamiętaj mnie"
 - poczytać OWASP ASVS 4.0
 Pułapki w przetwarzaniu plików XML:
+- sporo różnych zastosowań formatu
+- BILLION LAUGHS - zagnieżdżenia encji
+- QUADRATIC BLOWUP - nie kumam
+- XML EXTERNAL ENTITY - najpopularniejsza podatność, Jej skutkiem jest zwykle możliwość odczytu zawartości plików na dysku serwera lub przeprowadzenie ataku SSRF
+- wiele innych bibliotek, specyfikacja XML
 - 
 
 ---TODO:
