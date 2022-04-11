@@ -285,6 +285,18 @@ Zalety i wady OAuth 2.0 z perspektywy bezpieczeństwa:
 - Kod autoryzujący powinien być możliwy do wykorzystania tylko raz
 - Token i kod autoryzacyjny powinien mieć rozsądny czas życia i długość
 - OAUTH 2.0 CHECKLIST s 651
+Bezpieczeństwo protokołu WebSocket:
+- Po zestawieniu połączenia obie strony mogą wymieniać się danymi w dowolnym momencie, wysyłając pakiet danych
+- przy zapytaniu GET wysyłamy Sec-WebSocket-Key
+- zaleca się korzystanie z gotowych rozwiązań
+- można testować przy użyciu Burp Suite
+- WEBSOCKET CHECKLIST s 668
+Zagrożenia WebSocket:
+- brak Same Origin Policy
+- brak uwierzytelnienia i autoryzacji
+- Domyślnie klient nie posiada prawie żadnych ograniczeń co do liczby nawiązanych połączeń
+Flaga SameSite:
+- 
 
 ---TODO:
 - modify requests and responses with C# (how?)?
