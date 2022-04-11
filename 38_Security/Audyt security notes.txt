@@ -255,6 +255,16 @@ Pułapki w przetwarzaniu plików XML:
 - QUADRATIC BLOWUP - nie kumam
 - XML EXTERNAL ENTITY - najpopularniejsza podatność, Jej skutkiem jest zwykle możliwość odczytu zawartości plików na dysku serwera lub przeprowadzenie ataku SSRF
 - wiele innych bibliotek, specyfikacja XML
+API Rest:
+- problem z nadpisywaiem metod HTTP,
+- metody wykonują funkcje do których nie są przeznaczone (GET i HEAD powinny tylko pobierać dane)
+- należy sprawdzić czy metody HTTP wykonywane z alternatywnych ścieżek (np nadpisywanie) przejdą czy nie
+- spr podatności frameworków
+- pamiętać o wyłączeniu debugowania
+- rodzaje przejmowanych dany i podatności związane
+- bezpieczeństwo kluczy API: nie przesyłanie jako jako parametrów w URL, kluczy do API nie przechowywać bezpośrednio w źródłach aplikacji (lepiej w konfig), aplikacje mobilne są podatne, nie umieszczać w kodzie JS i HTML, rotacja kluczy, złożoność
+- podatności webhooków i wysyłania info o realizacji transakcji,
+Niebezpieczeństwa JSON Web Token (JWT):
 - 
 
 ---TODO:
