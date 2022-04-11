@@ -265,6 +265,19 @@ API Rest:
 - bezpieczeństwo kluczy API: nie przesyłanie jako jako parametrów w URL, kluczy do API nie przechowywać bezpośrednio w źródłach aplikacji (lepiej w konfig), aplikacje mobilne są podatne, nie umieszczać w kodzie JS i HTML, rotacja kluczy, złożoność
 - podatności webhooków i wysyłania info o realizacji transakcji,
 Niebezpieczeństwa JSON Web Token (JWT):
+- łatwość rozkodowania, brak poufności, można szyfrować
+- możliwość nieautoryzowanego dodania kolejnej akcji przez użytkownika – np. delete – czyli ominięcie autoryzacji, rozwiązaniem podpisywanie tokenów,
+- komplikowanie problem)
+- atak: usunięcie sekcji podpisu
+- atak: czasami podpis zwracany w komunikacie błęd
+- atak: łamanie tokenów/kluczy
+- z powodu błędu w bibliotece obsługującej JWT można czasem… po prostu podać w payloadzie tokena własny klucz
+- warto zweryfikować, czy używamy odpowiednio bezpiecznego algorytmu szyfrującego
+- tokeny mogą wyciec, ograniczona żywotność
+- czasami token powinien być użyty tylko raz
+- atak: czasowy na podpis, im więcej bajtów zgodnych, tym więcej potrzebnych jest porównań i stąd dłuższy czas potrzebny na odpowiedź
+- brak alternatyw
+Zalety i wady OAuth 2.0 z perspektywy bezpieczeństwa:
 - 
 
 ---TODO:
