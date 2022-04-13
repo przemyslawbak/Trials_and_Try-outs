@@ -2,6 +2,7 @@
 - soft: Burp Suite community edition
 - inny soft?
 HTTP:
+- Protokół HTTP jest bezstanowy1 (ang. stateless). Oznacza to, że bez zastosowania dodatkowych mechanizmów nie jest możliwe ustanowienie sesji pomiędzy klientem HTTP, najczęściej przeglądarką WWW, a serwerem HTTP
 - http HEAD nie pobiera ciala, przyspierza silowe szukanie plikow i inne testy
 - szczególnie niebezpieczna bywa metoda PUT (często jest ona domyślnie wyłączona), umożliwiająca tworzenie plików na serwerze HTTP
 - blokowanie na serwerze metody PUT (pUT, puT itd), testowanie
@@ -296,6 +297,10 @@ Zagrożenia WebSocket:
 - brak uwierzytelnienia i autoryzacji
 - Domyślnie klient nie posiada prawie żadnych ograniczeń co do liczby nawiązanych połączeń
 Flaga SameSite:
+- ustawienia kiedy zostanie dołączone ciasteczko
+- SameSite może przyjmować jedną z trzech wartości: Lax, Strict lub None
+- Strict spowoduje, że gdy zapytanie do serwera zostanie wygenerowane z innej domeny (zapytanie typu cross-site) niż ta, dla której ciasteczko zostało utworzone, przeglądarka nie dołączy go do żądania.
+- Zastosowanie polityki Lax będzie skutkowało tym, że gdy przeglądarka zostanie zmuszona do wysłania zapytania typu cross-site, ale z wykorzystaniem bezpiecznej metody HTTP
 - 
 
 ---TODO:
