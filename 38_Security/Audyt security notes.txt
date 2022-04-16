@@ -300,8 +300,11 @@ Flaga SameSite:
 - ustawienia kiedy zostanie dołączone ciasteczko
 - SameSite może przyjmować jedną z trzech wartości: Lax, Strict lub None
 - Strict spowoduje, że gdy zapytanie do serwera zostanie wygenerowane z innej domeny (zapytanie typu cross-site) niż ta, dla której ciasteczko zostało utworzone, przeglądarka nie dołączy go do żądania.
+- Zastosowanie polityki Strict - będzie to związane z koniecznością wprowadzenia poświadczeń przy każdym kliknięciu w link prowadzący do zasobu umieszczonego w innej domenie
 - Zastosowanie polityki Lax będzie skutkowało tym, że gdy przeglądarka zostanie zmuszona do wysłania zapytania typu cross-site, ale z wykorzystaniem bezpiecznej metody HTTP
-- 
+- Dodanie flagi SameSite z wartością Lax w przypadku poprawnie zaimplementowanych aplikacji powinno odbyć się bezboleśnie.
+- SameSite pozwala zabezpieczyć aplikację i jej użytkowników przed zagrożeniami, które wymagają wykonywania zapytań typu cross-site
+
 
 ---TODO:
 - modify requests and responses with C# (how?)?
