@@ -321,7 +321,10 @@ Niebezpieczeństwa deserializacji w Javie:
 - modify requests and responses with C# (how?)?
 - intruder c# (simple url + request setup)?
 
----OWASP WEBSITES:
+---var websites:
+https://www.ceos3c.com/security/the-best-hacking-books/
+https://geekflare.com/ethical-hacker-training-grounds/
+https://github.com/garethr/pentesting-playground
 https://owasp.org/www-project-top-ten/
 https://dvwa.co.uk/
 https://www.youtube.com/watch?v=IWWYNDiwYOA
