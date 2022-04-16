@@ -304,7 +304,18 @@ Flaga SameSite:
 - Zastosowanie polityki Lax będzie skutkowało tym, że gdy przeglądarka zostanie zmuszona do wysłania zapytania typu cross-site, ale z wykorzystaniem bezpiecznej metody HTTP
 - Dodanie flagi SameSite z wartością Lax w przypadku poprawnie zaimplementowanych aplikacji powinno odbyć się bezboleśnie.
 - SameSite pozwala zabezpieczyć aplikację i jej użytkowników przed zagrożeniami, które wymagają wykonywania zapytań typu cross-site
-
+Niebezpieczeństwa deserializacji w PHP:
+- PODATNOŚĆ PHP OBJECT INJECTION
+Niebezpieczeństwa deserializacji w Pythonie (moduł pickle):
+- moduł pickle de facto pozwala nam na wykonanie jakiejkolwiek metody, przekazując do niej dowolny zestaw argumentów
+Niebezpieczeństwa deserializacji w .NET:
+- jedna z propert jest "object"
+- Schody zaczynają się w momencie, kiedy chcemy w obiekcie JSON zamieścić nieco więcej informacji o danych niż tylko same dane
+- zabezpieczenie: whitelist typów, walidacja danych, nie deserializować danych pod kontrolą użytkownika, None dla parametru TypeNameHandling
+- XMLSERIALIZER
+- zabezpieczenie: pobierać informacji o typie z zewnątrz, reszta j.w.
+Niebezpieczeństwa deserializacji w Javie:
+- study cases
 
 ---TODO:
 - modify requests and responses with C# (how?)?
