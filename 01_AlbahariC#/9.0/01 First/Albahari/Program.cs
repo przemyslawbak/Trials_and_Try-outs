@@ -28,6 +28,11 @@ namespace Albahari
             Console.WriteLine(p1.Name); // Pan Dee
             Console.WriteLine(p2.Name); // Pan Dah
             Console.WriteLine(Panda.Population); // 2
+
+            //konwersje
+            int w = 12345; // int to 32-bitowa liczba całkowita
+            long y = w; // niejawna konwersja na 64-bitowy typ całkowitoliczbowy
+            short z = (short)x; // jawna konwersja na 16-bitowy typ całkowitoliczbowy
         }
 
     }
