@@ -27,14 +27,14 @@ print(training_set)
 scaler = MinMaxScaler(feature_range = (0, 1))
 training_set_scaled = scaler.fit_transform(training_set)
 
-#Model values
+#Model values !!!!!!!!!SAMPLE SETUP!!!!!!!!!!
 dropout_rate=0.1
 num_layers=2
 future_steps = 30
 time_steps = 1000
-lstm_units = 128
-num_batch = 128
-num_epochs = 5
+lstm_units = 64
+num_batch = 64
+num_epochs = 1
 num_validation=0.2
 num_verbose=1
 es_patinence = 5
@@ -80,7 +80,7 @@ model = Sequential()
 model = Sequential()
 for i in range(num_layers):
         model.add(Bidirectional(LSTM(lstm_units, activation='relu', return_sequences=True)))
-        model.add(Dropout(rate=dropout_rate))
+        #model.add(Dropout(rate=dropout_rate))
 model.add(Dense(features)) #4 outputs, gives output shape (x, 100, 4)
 
 #Compile many-to-many
