@@ -3,6 +3,11 @@ using System;
 
 namespace Albahari
 {
+    public class Dude
+    {
+        public string Name;
+        public Dude(string n) { Name = n; }
+    }
     class Program
     {
         static void Main(string[] args)
@@ -36,6 +41,16 @@ namespace Albahari
             int x = null; // błąd kompilacji'
 
             //są też nullable types
+
+            /*
+             * W przypadku typów referencyjnych równość jest standardowo określana na podstawie referencji, a nie rzeczywistej wartości obiektu
+            */
+            Dude d1 = new Dude("Jan");
+            Dude d2 = new Dude("Jan");
+            Console.WriteLine(d1 == d2); // fałsz
+            Dude d3 = d1;
+            Console.WriteLine(d1 == d3); // prawda
         }
+    
     }
 }
