@@ -50,7 +50,24 @@ namespace Albahari
             Console.WriteLine(d1 == d2); // fałsz
             Dude d3 = d1;
             Console.WriteLine(d1 == d3); // prawda
+
+            //string
+            string a = "test";
+            string b = "test";
+            Console.Write(a == b); // prawda
+            string escaped = "Pierwszy wiersz\r\nDrugi wiersz";
+            string verbatim = @"Pierwszy wiersz
+Drugi wiersz";
+            // Prawda, jeśli środowisko IDE używa znaku nowego wiersza CR-LF:
+            Console.WriteLine(escaped == verbatim);
+
+            string s = "a" + "b";
+            string t = "a" + 5; // a5
+            int x = 4;
+            Console.Write($"Kwadrat ma {x} boki."); // drukuje: Kwadrat ma 4 boki.
+            string s = $"255 w systemie szesnastkowym to {byte.MaxValue:X2}"; // X2 = cyfra szesnastkowa. Wynik: 255 w systemie szesnastkowym to FF"
+
         }
-    
+
     }
 }
