@@ -1,5 +1,6 @@
 ﻿
 using System;
+using System.Text;
 
 namespace Albahari
 {
@@ -86,6 +87,16 @@ Drugi wiersz";
             char[] middleOne = vowels[2..3]; // 'i'
             int[,] matrix = new int[3, 3];
 
+            //Stos i sterta
+            StringBuilder ref1 = new StringBuilder("obiekt1");
+            Console.WriteLine(ref1);
+            // obiekt typu StringBuilder wskazywany przez zmienną ref1 można już przekazać
+            // do systemu usuwania nieużytków
+            StringBuilder ref2 = new StringBuilder("obiekt2");
+            StringBuilder ref3 = ref2;
+            // obiekt StringBuilder wskazywany przez zmienną ref2 jeszcze nie jest gotowy
+            // do przekazania systemowi usuwania nieużytków
+            Console.WriteLine(ref3); // obiekt2
 
 
         }
