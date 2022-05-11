@@ -8,7 +8,7 @@ namespace Sample
     {
         static void Main(string[] args)
         {
-            List<uint> arr = new List<uint>()
+            List<int> arr = new List<int>()
             {
                 256741038, 623958417, 467905213, 714532089, 938071625
             };
@@ -17,7 +17,7 @@ namespace Sample
 
             for (int i = 0; i < arr.Count(); i++)
             {
-                List<uint> list = new List<uint>(arr);
+                List<uint> list = arr.ConvertAll(i => (uint)i);
                 list.RemoveAt(i);
                 ulong sum = (ulong)list.Sum(x => x);
                 results.Add(sum);
