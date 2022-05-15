@@ -31,10 +31,10 @@ training_set_scaled = scaler.fit_transform(training_set)
 dropout_rate=0.1
 num_layers=2
 future_steps = 10
-time_steps = 500
-lstm_units = 512 #allow to learn very long sequences
+time_steps = 400
+lstm_units = 255 #allow to learn very long sequences
 num_batch = 128 #number of samples to work through before updating the internal model parameters
-num_epochs = 10 #number times that the learning algorithm will work through the entire training dataset
+num_epochs = 1 #number times that the learning algorithm will work through the entire training dataset (10, 100, 1000)
 num_validation=0.2 #% split for validation set
 num_verbose=1 #how to display model fit progress (0 = silent, 1 = progress bar, 2 = one line per epoch)
 es_patinence = 5
