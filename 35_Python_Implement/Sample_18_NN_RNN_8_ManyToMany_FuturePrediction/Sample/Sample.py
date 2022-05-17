@@ -73,9 +73,6 @@ print(y_train_arr.shape) #(2494, 100, 4)
 print(X_test_splitted.shape) #(450, 100, 4)
 print(y_test_splitted.shape) #(450, 100, 4)
 
-#Initialize the RNN
-model = Sequential()
-
 #Add Bidirectional LSTM, has better performance than stacked LSTM
 model = Sequential()
 for i in range(num_layers):
