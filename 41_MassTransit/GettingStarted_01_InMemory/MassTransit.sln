@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31624.102
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MassTransit", "MassTransit\MassTransit.csproj", "{34DB5339-F5C0-4F9C-B7C5-AB559AA3DFDF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{34DB5339-F5C0-4F9C-B7C5-AB559AA3DFDF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{34DB5339-F5C0-4F9C-B7C5-AB559AA3DFDF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{34DB5339-F5C0-4F9C-B7C5-AB559AA3DFDF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{34DB5339-F5C0-4F9C-B7C5-AB559AA3DFDF}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {60515217-E7DC-4ECA-8C17-3E1BE2C711E5}
+	EndGlobalSection
+EndGlobal
