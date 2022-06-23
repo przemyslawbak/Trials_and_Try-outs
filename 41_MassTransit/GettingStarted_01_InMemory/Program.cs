@@ -34,7 +34,8 @@ namespace GettingStarted
                         x.AddSagaStateMachines(entryAssembly);
                         x.AddSagas(entryAssembly);
                         x.AddActivities(entryAssembly);
-
+						
+						//https://masstransit-project.com/quick-starts/in-memory.html
                         x.UsingInMemory((context, cfg) =>
                         {
                             cfg.ConfigureEndpoints(context);

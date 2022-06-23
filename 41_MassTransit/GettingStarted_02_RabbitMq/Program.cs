@@ -32,6 +32,7 @@ namespace GettingStarted
                         x.AddSagas(entryAssembly);
                         x.AddActivities(entryAssembly);
 
+                        //https://masstransit-project.com/quick-starts/rabbitmq.html
                         x.UsingRabbitMq((context, cfg) =>
                         {
                             cfg.Host("localhost", "/", h => {
