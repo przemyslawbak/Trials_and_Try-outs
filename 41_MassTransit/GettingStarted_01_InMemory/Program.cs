@@ -5,6 +5,7 @@ using System.Reflection;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Hosting;
 using MassTransit;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace GettingStarted
 {
@@ -39,6 +40,9 @@ namespace GettingStarted
                             cfg.ConfigureEndpoints(context);
                         });
                     });
+
+                    services.AddHostedService<Worker>();
+
                 });
     }
 }

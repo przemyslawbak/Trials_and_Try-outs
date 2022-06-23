@@ -1,6 +1,6 @@
 namespace Contracts
 {
-    public record GettingStarted
+    public record GettingStartedConract
     {
         public string Value { get; init; }
     }

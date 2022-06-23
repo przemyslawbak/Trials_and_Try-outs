@@ -1,4 +1,5 @@
-﻿using MassTransit;
+﻿using Contracts;
+using MassTransit;
 using Microsoft.Extensions.Hosting;
 using System;
 using System.Threading;
@@ -19,7 +20,7 @@ namespace GettingStarted
         {
             while (!stoppingToken.IsCancellationRequested)
             {
-                await _bus.Publish(new GettingStarted { Value = $"The time is {DateTimeOffset.Now}" }, stoppingToken);
+                await _bus.Publish(new GettingStartedConract { Value = $"The time is {DateTimeOffset.Now}" }, stoppingToken);
 
                 await Task.Delay(1000, stoppingToken);
             }
