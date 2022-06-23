@@ -1,6 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Hosting;
@@ -35,8 +32,13 @@ namespace GettingStarted
                         x.AddSagas(entryAssembly);
                         x.AddActivities(entryAssembly);
 
-                        x.UsingInMemory((context, cfg) =>
+                        x.UsingRabbitMq((context, cfg) =>
                         {
+                            cfg.Host("localhost", "/", h => {
+                                h.Username("guest");
+                                h.Password("guest");
+                            });
+
                             cfg.ConfigureEndpoints(context);
                         });
                     });
