@@ -4,36 +4,13 @@ using MassTransit;
 using MassTransit.Testing;
 using Microsoft.Extensions.DependencyInjection;
 using NUnit.Framework;
+using GettingStarted.Contracts;
 
 namespace GettingStarted.Tests
 {
     [TestFixture]
     public class ConsumerTests
     {
-        [Test]
-        public void IsTrue()
-        {
-            // Classic syntax
-            Assert.IsTrue(2 + 2 == 4);
-
-            // Constraint Syntax
-            Assert.That(2 + 2 == 4, Is.True);
-            Assert.That(2 + 2 == 4);
-        }
-
-        [Test]
-        public async Task IsTrueAsync()
-        {
-            await Task.Delay(100);
-
-            // Classic syntax
-            Assert.IsTrue(2 + 2 == 4);
-
-            // Constraint Syntax
-            Assert.That(2 + 2 == 4, Is.True);
-            Assert.That(2 + 2 == 4);
-        }
-
         [Test]
         public async Task SampleConsumerTest_Is_Sent_And_Consumed_And_()
         {
@@ -46,14 +23,14 @@ namespace GettingStarted.Tests
 
             await harness.Start();
 
-            var client = harness.GetRequestClient<GettingStartedConract>();
+            IRequestClient<GettingStartedConract>? client = harness.GetRequestClient<GettingStartedConract>();
 
-            await client.GetResponse<GettingStartedConract>(new //timeout :(
+            await client.GetResponse<ContractStarted>(new
             {
                 Value = "test_value_1"
             });
 
-            Assert.IsTrue(await harness.Sent.Any<GettingStartedConract>());
+            Assert.IsTrue(await harness.Sent.Any<ContractStarted>());
 
             Assert.IsTrue(await harness.Consumed.Any<GettingStartedConract>());
 

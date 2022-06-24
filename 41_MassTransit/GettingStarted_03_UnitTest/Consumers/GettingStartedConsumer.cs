@@ -4,6 +4,7 @@ namespace Company.Consumers
     using MassTransit;
     using Contracts;
     using Microsoft.Extensions.Logging;
+    using GettingStarted.Contracts;
 
     public class GettingStartedConsumer : IConsumer<GettingStartedConract>
     {
@@ -14,10 +15,13 @@ namespace Company.Consumers
             _logger = logger;
         }
 
-        public Task Consume(ConsumeContext<GettingStartedConract> context)
+        public async Task Consume(ConsumeContext<GettingStartedConract> context)
         {
             _logger.LogInformation("Received Text: {Text}", context.Message.Value);
-            return Task.CompletedTask;
+            await context.Publish<ContractStarted>(new
+            {
+                context.Message.Value
+            });
 
         }
     }
