@@ -7,17 +7,37 @@ using NUnit.Framework;
 
 namespace GettingStarted.Tests
 {
+    [TestFixture]
     public class ConsumerTests
     {
-        public ConsumerTests()
+        [Test]
+        public void IsTrue()
         {
+            // Classic syntax
+            Assert.IsTrue(2 + 2 == 4);
 
+            // Constraint Syntax
+            Assert.That(2 + 2 == 4, Is.True);
+            Assert.That(2 + 2 == 4);
+        }
+
+        [Test]
+        public async Task IsTrueAsync()
+        {
+            await Task.Delay(100);
+
+            // Classic syntax
+            Assert.IsTrue(2 + 2 == 4);
+
+            // Constraint Syntax
+            Assert.That(2 + 2 == 4, Is.True);
+            Assert.That(2 + 2 == 4);
         }
 
         [Test]
         public async Task SampleConsumerTest_Is_Sent_And_Consumed_And_()
         {
-            await using var provider = new ServiceCollection().AddMassTransitTestHarness(cfg =>
+            await using ServiceProvider? provider = new ServiceCollection().AddMassTransitTestHarness(cfg =>
             {
                 cfg.AddConsumer<GettingStartedConsumer>();
             }).BuildServiceProvider(true);
