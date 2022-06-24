@@ -48,7 +48,7 @@ namespace GettingStarted.Tests
 
             var client = harness.GetRequestClient<GettingStartedConract>();
 
-            await client.GetResponse<GettingStartedConract>(new
+            await client.GetResponse<GettingStartedConract>(new //timeout :(
             {
                 Value = "test_value_1"
             });
