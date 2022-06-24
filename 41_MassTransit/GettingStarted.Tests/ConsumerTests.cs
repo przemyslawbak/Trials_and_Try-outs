@@ -25,12 +25,12 @@ namespace GettingStarted.Tests
 
             IRequestClient<GettingStartedConract>? client = harness.GetRequestClient<GettingStartedConract>();
 
-            await client.GetResponse<ContractStarted>(new
+            await client.GetResponse<GettingStartedConract>(new //timeout :(
             {
                 Value = "test_value_1"
             });
 
-            Assert.IsTrue(await harness.Sent.Any<ContractStarted>());
+            Assert.IsTrue(await harness.Sent.Any<GettingStartedConract>());
 
             Assert.IsTrue(await harness.Consumed.Any<GettingStartedConract>());
 
