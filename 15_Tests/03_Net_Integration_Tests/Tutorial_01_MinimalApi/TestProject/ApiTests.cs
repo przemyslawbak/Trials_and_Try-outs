@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc.Testing;
-using Microsoft.VisualStudio.TestPlatform.TestHost;
 using NUnit.Framework;
 
 namespace TestProject
@@ -30,6 +29,15 @@ namespace TestProject
             var stringResult = await response.Content.ReadAsStringAsync();
             //Check the content of the stringResult variable against our expected “Hello World!” string.
             Assert.That(stringResult, Is.EqualTo("Hello World!"));
+        }
+
+        [Test]
+        public async Task Sum_Returns16For10And6()
+        {
+            var response = await _httpClient.GetAsync("/sum?n1=10&n2=6");
+            var stringResult = await response.Content.ReadAsStringAsync();
+            var intResult = int.Parse(stringResult);
+            Assert.That(intResult, Is.EqualTo(16));
         }
     }
 }
