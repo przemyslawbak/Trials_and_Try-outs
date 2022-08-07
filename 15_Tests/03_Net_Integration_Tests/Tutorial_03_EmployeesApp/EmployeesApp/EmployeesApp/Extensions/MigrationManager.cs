@@ -1,9 +1,5 @@
 ﻿using EmployeesApp.Models;
-using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-using System;
 
 namespace EmployeesApp.Extensions
 {

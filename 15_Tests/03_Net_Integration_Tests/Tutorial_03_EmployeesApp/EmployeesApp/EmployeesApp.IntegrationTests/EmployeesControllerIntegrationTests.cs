@@ -7,12 +7,17 @@ namespace EmployeesApp.IntegrationTests
 {
 	public class EmployeesControllerIntegrationTests : IClassFixture<TestingWebAppFactory<Program>>
 	{
+		/*So, we implement the TestingWebAppFactory class with the IClassFixture interface and inject it in a constructor, 
+		 * where we create an instance of the HttpClient.The IClassFixture interface is a decorator which indicates that 
+		 * tests in this class rely on a fixture to run.We can see that the fixture is our TestingWebAppFactory class.*/
 		private readonly HttpClient _client;
 
-		public EmployeesControllerIntegrationTests(TestingWebAppFactory<Program> factory) 
-			=> _client = factory.CreateClient();
+        public EmployeesControllerIntegrationTests(TestingWebAppFactory<Program> factory)
+        {
+            _client = factory.CreateClient();
+        }
 
-		[Fact]
+        [Fact]
 		public async Task Index_WhenCalled_ReturnsApplicationForm()
 		{
 			var response = await _client.GetAsync("/Employees");

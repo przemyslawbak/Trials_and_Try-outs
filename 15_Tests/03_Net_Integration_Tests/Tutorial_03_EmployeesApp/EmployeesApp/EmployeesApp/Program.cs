@@ -4,6 +4,8 @@ using EmployeesApp.Models;
 using EmployeesApp.Repository;
 using Microsoft.EntityFrameworkCore;
 
+//tutorial: https://code-maze.com/aspnet-core-integration-testing/
+
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddDbContext<EmployeeContext>(opts =>

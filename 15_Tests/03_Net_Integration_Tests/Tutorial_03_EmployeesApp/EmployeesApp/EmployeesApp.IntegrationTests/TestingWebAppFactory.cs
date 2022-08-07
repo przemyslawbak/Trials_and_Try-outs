@@ -23,7 +23,7 @@ namespace EmployeesApp.IntegrationTests
 
                 services.AddDbContext<EmployeeContext>(options =>
                 {
-                    options.UseInMemoryDatabase("InMemoryEmployeeTest");
+                    options.UseInMemoryDatabase("InMemoryEmployeeTest"); //using in memory DB
                 });
 
                 var sp = services.BuildServiceProvider();
