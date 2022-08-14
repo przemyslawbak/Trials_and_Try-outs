@@ -7,14 +7,14 @@ namespace Activator
         static void Main(string[] args)
         {
             var polygon = new PointModel[] {
-                new PointModel() { X = 1, Y = 1 },
-                new PointModel() { X = 1, Y = 10 },
+                new PointModel() { X = -10, Y = 10 },
                 new PointModel() { X = 10, Y = 10 },
-                new PointModel() { X = 12, Y = 5 },
-                new PointModel() { X = 10, Y = 1 },
+                new PointModel() { X = 11, Y = 8 },
+                new PointModel() { X = 10, Y = -10 },
+                new PointModel() { X = -10, Y = -10 },
             };
 
-            var point = new PointModel() { X = 12, Y = 4.9 };
+            var point = new PointModel() { X = 10.9, Y = 8.9 };
 
             Console.WriteLine(IsPointInPolygon(point, polygon)); //true
         }
