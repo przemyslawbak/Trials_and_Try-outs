@@ -14,7 +14,7 @@ namespace Activator
                 new PointModel() { X = 10, Y = 1 },
             };
 
-            var point = new PointModel() { X = 11.9, Y = 5 };
+            var point = new PointModel() { X = 12, Y = 4.9 };
 
             Console.WriteLine(IsPointInPolygon(point, polygon)); //true
         }
