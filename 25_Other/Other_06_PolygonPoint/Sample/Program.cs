@@ -6,15 +6,16 @@ namespace Activator
     {
         static void Main(string[] args)
         {
-            var polygon = new PointModel[] {
-                new PointModel() { X = -10, Y = 10 },
-                new PointModel() { X = 10, Y = 10 },
-                new PointModel() { X = 11, Y = 8 },
-                new PointModel() { X = 10, Y = -10 },
-                new PointModel() { X = -10, Y = -10 },
+            var polygon = new PointModel[] { //Baltic Sea coordinates
+                new PointModel() { X = 37.8, Y = 62.6 },
+                new PointModel() { X = 19, Y = 52.7 },
+                new PointModel() { X = 9.3, Y = 54.2 },
+                new PointModel() { X = 10.8, Y = 58.1 },
+                new PointModel() { X = 27.1, Y = 67.9 },
+                new PointModel() { X = 23.2, Y = 62},
             };
 
-            var point = new PointModel() { X = 10.9, Y = 8.9 };
+            var point = new PointModel() { X = 30.8, Y = 61.7 };
 
             Console.WriteLine(IsPointInPolygon(point, polygon)); //true
         }
