@@ -90,6 +90,10 @@ namespace Activator
             return multiPolygon;
         }
 
+        //is point inside polygon?
+        //https://github.com/NetTopologySuite/NetTopologySuite/issues/264
+        //https://stackoverflow.com/questions/53820355/fast-find-if-points-belong-to-polygon-nettopologysuite-geometries-c-net-cor
+
 
         //MORE:
         //compare 2 coordinates
