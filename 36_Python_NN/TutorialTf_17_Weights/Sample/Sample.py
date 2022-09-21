@@ -343,7 +343,7 @@ history = compile_and_fit(multi_lstm_model, multi_window)
 multi_window.plot(multi_lstm_model)
 
 plt.figure(figsize=(12, 8))
-plt.bar(x = range(len(train_df.columns)), height=linear.layers[0].kernel[:,0].numpy())
+plt.bar(x = range(len(train_df.columns)), height=multi_lstm_model.layers[0].cell.kernel[:,0].numpy())
 axis = plt.gca()
 axis.set_xticks(range(len(train_df.columns)))
 _ = axis.set_xticklabels(train_df.columns, rotation=90)
