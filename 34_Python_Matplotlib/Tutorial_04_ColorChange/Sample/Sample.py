@@ -8,8 +8,8 @@ sample = [10,4,6,20, 23, 29, 20]
 df = pd.DataFrame(sample)
 df = df.reset_index(drop=False)
 
-ax = df.iloc[:5,:].plot(y=0, color="crimson")
-df.iloc[4:,:].plot(y=0, color="C0", ax=ax)
+ax = df.iloc[:len(sample) -2,:].plot(y=0, color="crimson")
+df.iloc[len(sample) -3:,:].plot(y=0, color="C0", ax=ax)
 
 
 
