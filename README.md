@@ -6,24 +6,4 @@ This repository contains loads of small trial projects based on tutorials, solut
 
 ## Technology
 
-1. Main technologies, patterns and frameworks tryed-out in here:
-  - C#,
-  - .Net,
-  - APIs,
-  - HTTP,
-  - MVVM,
-  - React.js,
-  - JS,
-  - SMTP,
-  - SQL,
-  - xUnit,
-  - MVC,
-  - Web API,
-  - Xamarin forms,
-  - WPF,
-
-and still growing...
-
-## Production
-
 Feb 2018
