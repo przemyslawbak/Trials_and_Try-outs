@@ -13,8 +13,6 @@ df4 = pd.DataFrame([[0]], columns=['val'])
 for i in range(df2[0].max() + 1 + 10):
     df4.loc[i, 'val'] = 0
 
-df4 = df4.iloc[::5, :]
-
 df4.xs(0)['val'] = 1.1
 df4.xs(5)['val'] = 2.1
 df4.xs(10)['val'] = 3.3
@@ -44,10 +42,10 @@ ax1.set_xlabel('first')
 
 #https://stackoverflow.com/a/46324546
 #https://stackoverflow.com/q/30228069/12603542
-width = 0.75 # the width of the bars 
+width = 3 # the width of the bars
 ind = np.arange(len(df4['val']))  # the x locations for the groups
 ax2 = ax1.twiny() # ax1 and ax2 share y-axis
-ax2.barh(ind, df4['val'], width, color="blue")
+ax2.barh(ind, df4['val'], width, color="blue", alpha=0.3)
 ax2.set_xlabel('added')
 
 plt.legend('',frameon=False)
