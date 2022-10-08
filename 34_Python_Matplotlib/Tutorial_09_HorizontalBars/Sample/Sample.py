@@ -9,15 +9,22 @@ sample2 = [12,14,16,25, 21, 19, 10]
 df = pd.DataFrame(sample1)
 df2 = pd.DataFrame(sample2)
 
-df3 = pd.DataFrame([[0]], columns=['base'])
-df3[0] = 11
-df3[5] = 21
-df3[10] = 33
-df3[15] = 38
-df3[20] = 12
-df3[25] = 28
-df3[30] = 16
-df3 = df3.drop('base', axis=1) #todo: make index of column names, bars
+df4 = pd.DataFrame([[0]], columns=['val'])
+for i in range(df2[0].max() + 1 + 10):
+    df4.loc[i, 'val'] = 0
+
+df4 = df4.iloc[::5, :]
+
+df4.xs(0)['val'] = 1.1
+df4.xs(5)['val'] = 2.1
+df4.xs(10)['val'] = 3.3
+df4.xs(15)['val'] = 3.8
+df4.xs(20)['val'] = 1.2
+df4.xs(25)['val'] = 2.8
+df4.xs(30)['val'] = 1.6
+df4.xs(35)['val'] = 1.2
+
+print(df4)
 
 arr = df.to_numpy()
 df1 = pd.DataFrame(arr)
@@ -36,8 +43,11 @@ ax1.plot(future, color = 'red')
 ax1.set_xlabel('first')
 
 #https://stackoverflow.com/a/46324546
+#https://stackoverflow.com/q/30228069/12603542
+width = 0.75 # the width of the bars 
+ind = np.arange(len(df4['val']))  # the x locations for the groups
 ax2 = ax1.twiny() # ax1 and ax2 share y-axis
-ax2.plot(df3, color = 'pink')
+ax2.barh(ind, df4['val'], width, color="blue")
 ax2.set_xlabel('added')
 
 plt.legend('',frameon=False)
