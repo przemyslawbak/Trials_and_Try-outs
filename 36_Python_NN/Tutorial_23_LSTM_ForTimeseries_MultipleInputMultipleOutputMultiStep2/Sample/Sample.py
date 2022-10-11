@@ -8,6 +8,7 @@ from keras.layers import TimeDistributed
 from keras.layers import Conv1D
 from keras.layers import Flatten
 from keras.layers import ConvLSTM2D
+from keras.layers import RepeatVector
 
 #MULTIPLE OUTPUT
 #MULTIPLE TIME STEPS
