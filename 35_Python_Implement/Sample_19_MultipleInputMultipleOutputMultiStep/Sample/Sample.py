@@ -6,24 +6,27 @@ from tensorflow.keras import Sequential
 from tensorflow.keras.layers import Dense, LSTM, Dropout, TimeDistributed, Activation, RepeatVector, Bidirectional
 from tensorflow.keras.callbacks import EarlyStopping
 
+
+pd.set_option('display.max_rows', 1000)
+pd.set_option('display.max_columns', 10)
+pd.set_option('display.width', 1000)
+
 #based on: Tutorial_23_LSTM_ForTimeseries_MultipleInputMultipleOutputMultiStep2
 
-#todo: split with percentage
-# split a multivariate sequence into samples
-def split_sequences(sequences, n_steps_in, n_steps_out):
-	X, y = list(), list()
-	for i in range(len(sequences)):
-		# find the end of this pattern
-		end_ix = i + n_steps_in
-		out_end_ix = end_ix + n_steps_out
-		# check if we are beyond the dataset
-		if out_end_ix > len(sequences):
-			break
-		# gather input and output parts of the pattern
-		seq_x, seq_y = sequences[i:end_ix, :], sequences[end_ix:out_end_ix, :]
-		X.append(seq_x)
-		y.append(seq_y)
-	return np.array(X), np.array(y)
+#Model values !!!!!!!!!SAMPLE SETUP!!!!!!!!!!
+dropout_rate=0.1
+num_layers=2
+future_steps = 100
+time_steps = 100
+lstm_units = 255 #allow to learn very long sequences
+num_batch = 128 #number of samples to work through before updating the internal model parameters
+num_epochs = 1 #number times that the learning algorithm will work through the entire training dataset (10, 100, 1000)
+num_validation=0.2 #% split for validation set
+num_verbose=1 #how to display model fit progress (0 = silent, 1 = progress bar, 2 = one line per epoch)
+es_patinence = 5
+
+#NEW
+n_steps_out = time_steps
 
 #Import the training dataset
 filename = "GPW_DLY WIG20, 15.csv"
@@ -34,47 +37,8 @@ training_set = dataset_train[['close', 'high', 'low', 'open']]
 
 #scaling
 scaler = MinMaxScaler(feature_range = (0, 1))
-dataset = scaler.fit_transform(training_set)
+training_set_scaled = scaler.fit_transform(training_set)
 
-#todo: split like before
-# choose a number of time steps
-n_steps_in, n_steps_out = 3, 2
-X, y = split_sequences(dataset, n_steps_in, n_steps_out)
-
-# define model
-model = Sequential()
-model.add(LSTM(200, activation='relu', input_shape=(n_steps_in, n_features)))
-model.add(RepeatVector(n_steps_out))
-model.add(LSTM(200, activation='relu', return_sequences=True))
-model.add(TimeDistributed(Dense(n_features)))
-model.compile(optimizer='adam', loss='mse')
-
-# fit model
-model.fit(X, y, epochs=300, verbose=0)
-
-# demonstrate prediction
-#x_input = array([[60, 65, 125], [70, 75, 145], [80, 85, 165]])
-#x_input = x_input.reshape((1, n_steps_in, n_features))
-#yhat = model.predict(x_input, verbose=0)
-#print(yhat)
-
-
-
-#Perform feature scaling to transform the data
-
-#Model values !!!!!!!!!SAMPLE SETUP!!!!!!!!!!
-dropout_rate=0.1
-num_layers=2
-future_steps = 10
-time_steps = 400
-lstm_units = 255 #allow to learn very long sequences
-num_batch = 128 #number of samples to work through before updating the internal model parameters
-num_epochs = 1 #number times that the learning algorithm will work through the entire training dataset (10, 100, 1000)
-num_validation=0.2 #% split for validation set
-num_verbose=1 #how to display model fit progress (0 = silent, 1 = progress bar, 2 = one line per epoch)
-es_patinence = 5
-
-#Variables
 features = len(training_set.columns)
 split_percent = 0.80 #train/test daa split percent (80%)
 split = int(split_percent*len(training_set_scaled)) #split percent multiplying by data rows
@@ -88,9 +52,6 @@ for i in range(time_steps + 1, len(training_set_scaled)):
 
 X_train_arr, y_train_arr = np.array(X), np.array(y)
 
-print(X_train_arr.shape) #(2494, 100, 4) <-- train data, having now 2494 rows, with 100 time steps, each row has 4 features (MANY)
-print(y_train_arr.shape) #(2494, 100, 4) <-- target data, having now 2494 rows, with 100 time step, but 4 features (TO MANY)
-
 #Split data
 X_train_splitted = X_train_arr[:split] #(80%) model train input data
 y_train_splitted = y_train_arr[:split] #80%) model train target data
@@ -98,76 +59,39 @@ X_test_splitted = X_train_arr[split:] #(20%) test prediction input data
 y_test_splitted = y_train_arr[split:] #(20%) test prediction compare data
 
 #Reshaping to rows/time_steps/columns
-X_train_splitted = np.reshape(X_train_splitted, (X_train_splitted.shape[0], time_steps, features))
-y_train_splitted = np.reshape(y_train_splitted, (y_train_splitted.shape[0], time_steps, features))
+X = np.reshape(X_train_splitted, (X_train_splitted.shape[0], time_steps, features))
+y = np.reshape(y_train_splitted, (y_train_splitted.shape[0], time_steps, features))
 X_test_splitted = np.reshape(X_test_splitted, (X_test_splitted.shape[0], time_steps, features))
 y_test_splitted = np.reshape(y_test_splitted, (y_test_splitted.shape[0], time_steps, features))
 
-print(X_train_arr.shape) #(2494, 100, 4)
-print(y_train_arr.shape) #(2494, 100, 4)
-print(X_test_splitted.shape) #(450, 100, 4)
-print(y_test_splitted.shape) #(450, 100, 4)
-
-#Add Bidirectional LSTM, has better performance than stacked LSTM
+# define model
 model = Sequential()
-for i in range(num_layers):
-        model.add(Bidirectional(LSTM(lstm_units, activation='relu', return_sequences=True)))
-        #model.add(Dropout(rate=dropout_rate))
-model.add(Dense(features)) #4 outputs, gives output shape (x, 100, 4)
-
-#Compile many-to-many
+model.add(Bidirectional(LSTM(300, activation='relu', input_shape=(time_steps, features))))
+model.add(RepeatVector(n_steps_out))
+model.add(Bidirectional(LSTM(300, activation='relu', return_sequences=True)))
+model.add(TimeDistributed(Dense(features)))
 model.compile(optimizer='adam', loss = 'mae', metrics=['mae', 'acc', 'mse'])
 
 #Fit to the training set
 es = EarlyStopping(monitor='val_mae', mode='min', patience=es_patinence)
-model.fit(X_train_splitted, y_train_splitted, epochs=num_epochs, batch_size=num_batch, validation_split=num_validation, verbose=num_verbose, callbacks=[es])
+model.fit(X, y, epochs=num_epochs, batch_size=num_batch, validation_split=num_validation, verbose=num_verbose, callbacks=[es])
 
-#Evaluating
-eval = model.evaluate(X_test_splitted, y_test_splitted, batch_size=num_batch, verbose=num_verbose)
-print('Evaluation: ' + str(eval))
+x_input = X_test_splitted[-200:-100,:,:]
+x_exp = X_test_splitted[-100:,:,:]
+yhat = model.predict(x_input, verbose=0)
+yhat = np.reshape(yhat[:, -1:, :], (yhat.shape[0], features))
+xhat = np.reshape(x_exp[:, -1:, :], (x_exp.shape[0], features))
+ihat = np.reshape(x_input[:, -1:, :], (x_input.shape[0], features))
+y_pred = scaler.inverse_transform(yhat)
+x_pred = scaler.inverse_transform(xhat)
+i_inp = scaler.inverse_transform(ihat)
+resy = pd.DataFrame(y_pred)
+resx = pd.DataFrame(x_pred)
+resi = pd.DataFrame(i_inp)
 
-#Predicting future
-def predict_future():
-    global X_test_splitted
-    pred = model.predict(X_test_splitted, verbose=num_verbose) #predict from updated X_test_splitted
-    last_pred_item = pred[-1]
-    X_test_splitted_shape = X_test_splitted.shape
-    X_test_splitted = X_test_splitted = np.append(X_test_splitted, last_pred_item)
-    X_test_splitted = np.reshape(X_test_splitted, (X_test_splitted_shape[0] + 1, time_steps, features)) #reshape X_test_splitted to (x + 1, 100, 4)
-    return pred
-
-def nextFutureStep():
-    pred = predict_future()
-    return pred[-1] #return last prediction step
-
-future_results = np.array([]) #initialize numpy array
-y_pred = predict_future() #create initial result array
-
-for next in range(future_steps):
-    print('future step ' + str(next) + ' of ' + str(future_steps)) #display info
-    new_item = nextFutureStep() #assign item
-    future_results = np.append(future_results, new_item) #add last step to future_results prediction array
-
-#Combine future time_steps based prediction results with initial prediction based on test data and reshape
-y_pred = np.append(y_pred, future_results) #combine initial y_pred result array with predicted y_pred_future
-y_pred = np.reshape(y_pred, (y_test_splitted.shape[0] + future_steps, time_steps, features)) #reshaping to (450 + 33, 100, 4)
-
-#Reshaping data for reverse transforming
-y_pred = np.reshape(y_pred[:, -1:, :], (y_pred.shape[0], features))
-y_test_splitted = np.reshape(y_test_splitted[:, -1:, :], (y_test_splitted.shape[0], features))
-
-#Reversing transform to get proper data values
-y_test_splitted = scaler.inverse_transform(y_test_splitted)
-y_pred = scaler.inverse_transform(y_pred)
-
-#Plot data
-plt.figure(figsize=(14,features))
-plt.plot(y_test_splitted[-time_steps:, 3], label = "Real values") #I am interested only with display of column index 3
-plt.plot(y_pred[-time_steps - future_steps:, 3], label = 'Predicted values') #I am interested only with display of column index 3
-plt.title('Prediction test')
-plt.xlabel('Time')
-plt.ylabel('Column index 3')
-plt.legend()
-plt.show()
-
-#Evaluation results (loss, mae, acc, mse)
+print('input:')
+print(resi)
+print('expected:')
+print(resx)
+print('result:')
+print(resy)

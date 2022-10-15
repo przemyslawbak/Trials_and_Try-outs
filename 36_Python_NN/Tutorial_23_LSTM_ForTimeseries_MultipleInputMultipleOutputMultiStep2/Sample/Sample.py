@@ -43,7 +43,7 @@ out_seq = out_seq.reshape((len(out_seq), 1))
 dataset = hstack((in_seq1, in_seq2, out_seq))
 print(dataset)
 # choose a number of time steps
-n_steps_in, n_steps_out = 4, 2
+n_steps_in, n_steps_out = 4, 4
 # covert into input/output
 X, y = split_sequences(dataset, n_steps_in, n_steps_out)
 print(X)
@@ -60,7 +60,8 @@ model.compile(optimizer='adam', loss='mse')
 # fit model
 model.fit(X, y, epochs=300, verbose=0)
 # demonstrate prediction
-x_input = array([[60, 65, 125], [70, 75, 145], [80, 85, 165]])
+x_input = array([[60, 65, 125], [70, 75, 145], [80, 85, 165], [90, 95, 185]])
 x_input = x_input.reshape((1, n_steps_in, n_features))
+print(x_input)
 yhat = model.predict(x_input, verbose=0)
 print(yhat)
