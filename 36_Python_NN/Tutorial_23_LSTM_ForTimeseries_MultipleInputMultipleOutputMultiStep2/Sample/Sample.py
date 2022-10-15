@@ -41,10 +41,13 @@ in_seq2 = in_seq2.reshape((len(in_seq2), 1))
 out_seq = out_seq.reshape((len(out_seq), 1))
 # horizontally stack columns
 dataset = hstack((in_seq1, in_seq2, out_seq))
+print(dataset)
 # choose a number of time steps
-n_steps_in, n_steps_out = 3, 2
+n_steps_in, n_steps_out = 4, 2
 # covert into input/output
 X, y = split_sequences(dataset, n_steps_in, n_steps_out)
+print(X)
+print(y)
 # the dataset knows the number of features, e.g. 2
 n_features = X.shape[2]
 # define model
