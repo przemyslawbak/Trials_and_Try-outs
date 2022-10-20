@@ -1,10 +1,6 @@
 import numpy as np
 import pandas as pd
 
-futures = 40
-
-#https://www.analyticsvidhya.com/blog/2020/10/how-to-create-an-arima-model-for-time-series-forecasting-in-python/
-
 # Import data
 df = pd.read_csv('GPW_DLY WIG20, 15.csv', usecols=["close", 'open', 'high', 'low'])
 df.reset_index(drop=True)
