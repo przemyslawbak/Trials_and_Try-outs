@@ -3,11 +3,14 @@ import pandas as pd
 import matplotlib.pyplot as plt
 
 # Import data
-df = pd.read_csv('GPW_DLY WIG20, 15.csv', usecols=["close", 'open', 'high', 'low'])
+df = pd.read_csv('GPW_DLY WIG20, 60.csv', usecols=["close", 'open', 'high', 'low'])
 df.reset_index(drop=True)
 my_data = np.array(df)
 
-# Creating the signal function
+#Hit Ratio =  50.13953488372093
+#Profit factor =  1.11
+#Realized RR =  1.1
+#Number of Trades =  2150
 def signal_MARUBOZU(data, open_column, high_column, low_column, close_column, buy_column, sell_column):
 
     data = add_column(data, 5)    
@@ -34,7 +37,10 @@ def signal_MARUBOZU(data, open_column, high_column, low_column, close_column, bu
         
     return data
 
-# Creating the signal function
+#Hit Ratio =  57.13367609254498
+#Profit factor =  1.24
+#Realized RR =  0.929
+#Number of Trades =  3112
 def signal_THREE_CANDLES(data, open_column, close_column, buy_column, sell_column):
     body = 0.0005#You can also adjust the variable body to volatility
     data = add_column(data, 5)
@@ -71,6 +77,10 @@ def signal_THREE_CANDLES(data, open_column, close_column, buy_column, sell_colum
         
     return data
 
+#Hit Ratio =  50.495049504950494
+#Profit factor =  0.87
+#Realized RR =  0.856
+#Number of Trades =  101
 def signal_TASUKI(data, open_column, close_column, buy_column, sell_column):
 
     data = add_column(data, 5)
@@ -105,6 +115,10 @@ def signal_TASUKI(data, open_column, close_column, buy_column, sell_column):
         
     return data
 
+#Hit Ratio =  37.5
+#Profit factor =  0.32
+#Realized RR =  0.526
+#Number of Trades =  8
 def signal_THREE_METHODS(data, open_column, high_column, low_column, close_column, buy_column, sell_column):
 
     data = add_column(data, 5)
@@ -147,6 +161,10 @@ def signal_THREE_METHODS(data, open_column, high_column, low_column, close_colum
         
     return data
 
+#Hit Ratio =  49.532710280373834
+#Profit factor =  1.19
+#Realized RR =  1.216
+#Number of Trades =  107
 def signal_HIKKAKE(data, open_column, high_column, low_column, close_column, buy_signal, sell_signal):
 
     data = add_column(data, 5)    
@@ -249,7 +267,7 @@ def performance(data, open_price,buy_column,sell_column,long_result_col,short_re
     for i in range(len(data)):
         try:
             if data[i, buy_column] == 1:
-                for a in range(i + 1, i + 1000):
+                for a in range(i + 1, i + 225):
                     if data[a, buy_column] == 1 or data[a, sell_column]== -1:
                         data[a, long_result_col] = data[a, open_price] -data[i, open_price]
                         break
@@ -264,7 +282,7 @@ def performance(data, open_price,buy_column,sell_column,long_result_col,short_re
     for i in range(len(data)):
         try:
             if data[i, sell_column] == -1:
-                for a in range(i + 1, i + 1000):
+                for a in range(i + 1, i + 225):
                     if data[a, buy_column] == 1 or data[a, sell_column]== -1:
                         data[a, short_result_col] = data[i, open_price] -data[a, open_price]
                         break
@@ -306,9 +324,9 @@ def performance(data, open_price,buy_column,sell_column,long_result_col,short_re
 
 
 # Calling the signal function
-my_data = signal_HIKKAKE(my_data, 0, 1, 2, 3, 4, 5)
+my_data = signal_THREE_METHODS(my_data, 0, 1, 2, 3, 4, 5)
 # Charting the latest signals
-signal_chart(my_data, 0, 4, 5, window = 1000)
+signal_chart(my_data, 0, 4, 5, window = 20000)
 # Performance
 my_data = performance(my_data, 0, 4, 5, 6, 7, 8)
 print(my_data)
