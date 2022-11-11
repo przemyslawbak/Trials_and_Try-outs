@@ -3,12 +3,16 @@ import pandas as pd
 import matplotlib.pyplot as plt
 
 # Import data
-df = pd.read_csv('GPW_DLY WIG20, 15.csv', usecols=["close", 'open', 'high', 'low'])
+df = pd.read_csv('GPW_DLY WIG20, 60.csv', usecols=["close", 'open', 'high', 'low'])
 df.reset_index(drop=True)
 my_data = np.array(df)
 
+#Hit Ratio =  100.0
+#Profit factor =  inf
+#Realized RR =  nan
+#Number of Trades =  2
 def signal_TWEEZERS(data, open_column, high_column, low_column, close_column, buy_column, sell_column):
-    body = 0.0005
+    body = 10
     data = add_column(data, 5)    
     
     for i in range(len(data)):  
@@ -42,7 +46,7 @@ def signal_TWEEZERS(data, open_column, high_column, low_column, close_column, bu
     return data
 
 def signal_TOWER(data, open_column, high_column, low_column, close_column, buy_column, sell_column):
-    body = 0.0005
+    body = 10
     data = add_column(data, 5)    
     
     for i in range(len(data)):  
@@ -580,7 +584,7 @@ def performance(data, open_price,buy_column,sell_column,long_result_col,short_re
     for i in range(len(data)):
         try:
             if data[i, buy_column] == 1:
-                for a in range(i + 1, i + 1000):
+                for a in range(i + 1, i + 225):
                     if data[a, buy_column] == 1 or data[a, sell_column]== -1:
                         data[a, long_result_col] = data[a, open_price] -data[i, open_price]
                         break
@@ -595,7 +599,7 @@ def performance(data, open_price,buy_column,sell_column,long_result_col,short_re
     for i in range(len(data)):
         try:
             if data[i, sell_column] == -1:
-                for a in range(i + 1, i + 1000):
+                for a in range(i + 1, i + 225):
                     if data[a, buy_column] == 1 or data[a, sell_column]== -1:
                         data[a, short_result_col] = data[i, open_price] -data[a, open_price]
                         break
@@ -643,9 +647,9 @@ def performance(data, open_price,buy_column,sell_column,long_result_col,short_re
 # Calculating the ATR
 #my_data = atr(my_data, lookback, 1, 2, 3, 4)
 # Calling the signal function
-my_data = signal_TWEEZERS(my_data, 0, 1, 2, 3, 4, 5)
+my_data = signal_TOWER(my_data, 0, 1, 2, 3, 4, 5)
 # Charting the latest signals
-signal_chart(my_data, 0, 4, 5, window = 1000)
+signal_chart(my_data, 0, 4, 5, window = 20000)
 # Performance
 my_data = performance(my_data, 0, 4, 5, 6, 7, 8)
 print(my_data)
