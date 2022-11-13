@@ -7,9 +7,10 @@ df = pd.read_csv('GPW_DLY WIG20, 60.csv', usecols=["close", 'open', 'high', 'low
 df.reset_index(drop=True)
 my_data = np.array(df)
 
-#Profit factor =  inf
-#Realized RR =  nan
-#Number of Trades =  1
+#Hit Ratio =  20.0
+#Profit factor =  0.04
+#Realized RR =  0.16
+#Number of Trades =  5
 def signal_H(data, open_column, high_column, low_column, close_column, buy_column, sell_column):
 
     data = add_column(data, 5)    
@@ -44,10 +45,10 @@ def signal_H(data, open_column, high_column, low_column, close_column, buy_colum
         
     return data
 
-#Hit Ratio =  56.34920634920635
-#Profit factor =  1.47
-#Realized RR =  1.139
-#Number of Trades =  126
+#Hit Ratio =  56.32911392405063
+#Profit factor =  1.51
+#Realized RR =  1.169
+#Number of Trades =  158
 def signal_SLINGSHOT(data, open_column, high_column, low_column, close_column, buy_column, sell_column):
 
     data = add_column(data, 5)    
@@ -162,12 +163,12 @@ def signal_DOUBLE_TROUBLE(data, open_column, high_column, low_column, close_colu
         
     return data
 
-#Hit Ratio =  0
-#Profit factor =  nan
-#Realized RR =  nan
-#Number of Trades =  0
+#Hit Ratio =  60.22408963585434
+#Profit factor =  1.33
+#Realized RR =  0.88
+#Number of Trades =  357
 def signal_QUINTUPLES(data, open_column, close_column, buy_column, sell_column):
-    body = 0.0005#find optimal
+    body = 10 #find optimal
     data = add_column(data, 5)    
     
     for i in range(len(data)):    
@@ -316,7 +317,7 @@ def performance(data, open_price,buy_column,sell_column,long_result_col,short_re
     for i in range(len(data)):
         try:
             if data[i, buy_column] == 1:
-                for a in range(i + 1, i + 225):
+                for a in range(i + 1, i + 2000):
                     if data[a, buy_column] == 1 or data[a, sell_column]== -1:
                         data[a, long_result_col] = data[a, open_price] -data[i, open_price]
                         break
@@ -331,7 +332,7 @@ def performance(data, open_price,buy_column,sell_column,long_result_col,short_re
     for i in range(len(data)):
         try:
             if data[i, sell_column] == -1:
-                for a in range(i + 1, i + 225):
+                for a in range(i + 1, i + 2000):
                     if data[a, buy_column] == 1 or data[a, sell_column]== -1:
                         data[a, short_result_col] = data[i, open_price] -data[a, open_price]
                         break
@@ -379,7 +380,7 @@ lookback = 10
 # Calculating the ATR
 #my_data = atr(my_data, lookback, 1, 2, 3, 4)
 # Calling the signal function
-my_data = signal_SLINGSHOT(my_data, 0, 1, 2, 3, 4, 5)
+my_data = signal_QUINTUPLES(my_data, 0, 3, 4, 5)
 # Charting the latest signals
 signal_chart(my_data, 0, 4, 5, window = 20000)
 # Performance
