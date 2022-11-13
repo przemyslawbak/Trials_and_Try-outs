@@ -7,10 +7,10 @@ df = pd.read_csv('GPW_DLY WIG20, 60.csv', usecols=["close", 'open', 'high', 'low
 df.reset_index(drop=True)
 my_data = np.array(df)
 
-#Hit Ratio =  100.0
-#Profit factor =  inf
-#Realized RR =  nan
-#Number of Trades =  2
+#Hit Ratio =  37.5
+#Profit factor =  0.2
+#Realized RR =  0.326
+#Number of Trades =  8
 def signal_TWEEZERS(data, open_column, high_column, low_column, close_column, buy_column, sell_column):
     body = 10
     data = add_column(data, 5)    
@@ -45,6 +45,10 @@ def signal_TWEEZERS(data, open_column, high_column, low_column, close_column, bu
         
     return data
 
+#Hit Ratio =  74.28571428571429
+#Profit factor =  1.54
+#Realized RR =  0.533
+#Number of Trades =  35
 def signal_TOWER(data, open_column, high_column, low_column, close_column, buy_column, sell_column):
     body = 10
     data = add_column(data, 5)    
@@ -79,6 +83,10 @@ def signal_TOWER(data, open_column, high_column, low_column, close_column, buy_c
         
     return data
 
+#Hit Ratio =  47.368421052631575
+#Profit factor =  0.97
+#Realized RR =  1.075
+#Number of Trades =  152
 def signal_STICK_SANDWITCH(data, open_column, high_column, low_column, close_column, buy_column, sell_column):
 
     data = add_column(data, 5)    
@@ -119,6 +127,10 @@ def signal_STICK_SANDWITCH(data, open_column, high_column, low_column, close_col
         
     return data
 
+#Hit Ratio =  50.56179775280899
+#Profit factor =  1.08
+#Realized RR =  1.057
+#Number of Trades =  356
 def signal_STAR(data, open_column, high_column, low_column, close_column, buy_column, sell_column):
 
     data = add_column(data, 5)    
@@ -149,9 +161,13 @@ def signal_STAR(data, open_column, high_column, low_column, close_column, buy_co
         
     return data
 
+#Hit Ratio =  33.33333333333333
+#Profit factor =  1.25
+#Realized RR =  2.496
+#Number of Trades =  6
 def signal_SPINNING_TOP(data, open_column, high_column, low_column, close_column, buy_column, sell_column):
-    body = 0.0003
-    wick = 0.0005
+    body = 10
+    wick = 3
     data = add_column(data, 5)    
     
     for i in range(len(data)):  
@@ -186,6 +202,10 @@ def signal_SPINNING_TOP(data, open_column, high_column, low_column, close_column
         
     return data
 
+#Hit Ratio =  50.86071987480438
+#Profit factor =  0.91
+#Realized RR =  0.879
+#Number of Trades =  1278
 def signal_PIERCING(data, open_column, close_column, buy_column, sell_column):
 
     data = add_column(data, 5)    
@@ -220,6 +240,10 @@ def signal_PIERCING(data, open_column, close_column, buy_column, sell_column):
         
     return data
 
+#Hit Ratio =  58.14814814814815
+#Profit factor =  1.4
+#Realized RR =  1.006
+#Number of Trades =  270
 def signal_HARANI_STRICT(data, open_column, high_column, low_column, close_column, buy_column, sell_column):
 
     data = add_column(data, 5)    
@@ -253,6 +277,10 @@ def signal_HARANI_STRICT(data, open_column, high_column, low_column, close_colum
         
     return data
 
+#Hit Ratio =  55.590062111801245
+#Profit factor =  1.29
+#Realized RR =  1.033
+#Number of Trades =  644
 def signal_HARANI_FLEXIBLE(data, open_column, high_column, low_column, close_column, buy_column, sell_column):
 
     data = add_column(data, 5)    
@@ -289,9 +317,13 @@ def signal_HARANI_FLEXIBLE(data, open_column, high_column, low_column, close_col
         
     return data
 
+#Hit Ratio =  36.36363636363637
+#Profit factor =  0.35
+#Realized RR =  0.621
+#Number of Trades =  11
 def signal_HAMMER(data, open_column, high_column, low_column, close_column, buy_column, sell_column):
-    body = 0.0005 #optimize
-    wick = 0.0002 #optimize
+    body = 10 #optimize
+    wick = 3 #optimize
     data = add_column(data, 5)    
     
     for i in range(len(data)):  
@@ -322,6 +354,10 @@ def signal_HAMMER(data, open_column, high_column, low_column, close_column, buy_
         
     return data
 
+#Hit Ratio =  47.06405693950178
+#Profit factor =  0.9
+#Realized RR =  1.014
+#Number of Trades =  1124
 def signal_ENGULFING(data, open_column, close_column, buy_column, sell_column):
 
     data = add_column(data, 5)    
@@ -354,6 +390,10 @@ def signal_ENGULFING(data, open_column, close_column, buy_column, sell_column):
         
     return data
 
+#Hit Ratio =  47.12643678160919
+#Profit factor =  1.05
+#Realized RR =  1.173
+#Number of Trades =  87
 def signal_DOJI(data, open_column, close_column, buy_column, sell_column):
 
     data = add_column(data, 5)    
@@ -386,6 +426,10 @@ def signal_DOJI(data, open_column, close_column, buy_column, sell_column):
         
     return data
 
+#Hit Ratio =  33.33333333333333
+#Profit factor =  0.24
+#Realized RR =  0.486
+#Number of Trades =  6
 def signal_ABANDONED_BABY(data, open_column, high_column, low_column, close_column, buy_column, sell_column):
 
     data = add_column(data, 5)    
@@ -418,8 +462,12 @@ def signal_ABANDONED_BABY(data, open_column, high_column, low_column, close_colu
         
     return data
 
+#Hit Ratio =  35.714285714285715
+#Profit factor =  0.44
+#Realized RR =  0.8
+#Number of Trades =  28
 def signal_INSIDE_UP_DOWN(data, open_column, high_column, low_column, close_column, buy_column, sell_column):
-    body = 0.0005 #optimize
+    body = 10 #optimize
     data = add_column(data, 5)    
     
     for i in range(len(data)):  
@@ -456,6 +504,10 @@ def signal_INSIDE_UP_DOWN(data, open_column, high_column, low_column, close_colu
         
     return data
 
+#Hit Ratio =  35.714285714285715
+#Profit factor =  0.44
+#Realized RR =  0.8
+#Number of Trades =  28
 def signal_ON_NECK(data, open_column, high_column, low_column, close_column, buy_column, sell_column):
 
     data = add_column(data, 5)    
@@ -580,11 +632,12 @@ data[i - 1, close_column]))
     return data
 
 def performance(data, open_price,buy_column,sell_column,long_result_col,short_result_col,total_result_col):
+    print(data.size)
     # Variable holding period
     for i in range(len(data)):
         try:
             if data[i, buy_column] == 1:
-                for a in range(i + 1, i + 225):
+                for a in range(i + 1, i + 2000):
                     if data[a, buy_column] == 1 or data[a, sell_column]== -1:
                         data[a, long_result_col] = data[a, open_price] -data[i, open_price]
                         break
@@ -599,7 +652,7 @@ def performance(data, open_price,buy_column,sell_column,long_result_col,short_re
     for i in range(len(data)):
         try:
             if data[i, sell_column] == -1:
-                for a in range(i + 1, i + 225):
+                for a in range(i + 1, i + 2000):
                     if data[a, buy_column] == 1 or data[a, sell_column]== -1:
                         data[a, short_result_col] = data[i, open_price] -data[a, open_price]
                         break
@@ -647,7 +700,7 @@ def performance(data, open_price,buy_column,sell_column,long_result_col,short_re
 # Calculating the ATR
 #my_data = atr(my_data, lookback, 1, 2, 3, 4)
 # Calling the signal function
-my_data = signal_TOWER(my_data, 0, 1, 2, 3, 4, 5)
+my_data = signal_INSIDE_UP_DOWN(my_data, 0, 1, 2, 3, 4, 5)
 # Charting the latest signals
 signal_chart(my_data, 0, 4, 5, window = 20000)
 # Performance
