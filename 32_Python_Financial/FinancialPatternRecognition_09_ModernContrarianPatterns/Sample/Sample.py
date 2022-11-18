@@ -3,10 +3,14 @@ import pandas as pd
 import matplotlib.pyplot as plt
 
 # Import data
-df = pd.read_csv('GPW_DLY WIG20, 15.csv', usecols=["close", 'open', 'high', 'low'])
+df = pd.read_csv('GPW_DLY WIG20, 60.csv', usecols=["close", 'open', 'high', 'low'])
 df.reset_index(drop=True)
 my_data = np.array(df)
 
+#Hit Ratio =  56.666666666666664
+#Profit factor =  1.81
+#Realized RR =  1.383
+#Number of Trades =  30
 def signal_SHRINKING(data, open_column, high_column, low_column, close_column, buy_column, sell_column):
 
     data = add_column(data, 5)  
@@ -47,6 +51,9 @@ def signal_SHRINKING(data, open_column, high_column, low_column, close_column, b
         
     return data
 
+#Profit factor =  nan
+#Realized RR =  nan
+#Number of Trades =  0
 def signal_MIRROR(data, open_column, high_column, low_column, close_column, buy_column, sell_column):
 
     data = add_column(data, 5)  
@@ -86,6 +93,10 @@ def signal_MIRROR(data, open_column, high_column, low_column, close_column, buy_
         
     return data
 
+#Hit Ratio =  43.401015228426395
+#Profit factor =  0.9
+#Realized RR =  1.179
+#Number of Trades =  788
 def signal_EUPHORIA(data, open_column, close_column, buy_column, sell_column):
 
     data = add_column(data, 5)  
@@ -124,6 +135,11 @@ def signal_EUPHORIA(data, open_column, close_column, buy_column, sell_column):
         
     return data
 
+#Hit Ratio =  0
+#Profit factor =  nan
+#Realized RR =  nan
+#Number of Trades =  0
+#None
 def signal_DOPPELGANGER(data, open_column, high_column, low_column, close_column, buy_column, sell_column):
 
     data = add_column(data, 5)  
@@ -156,6 +172,10 @@ def signal_DOPPELGANGER(data, open_column, high_column, low_column, close_column
         
     return data
 
+#Hit Ratio =  54.11764705882353
+#Profit factor =  1.2
+#Realized RR =  1.018
+#Number of Trades =  85
 def signal_BLOCKADE(data, open_column, high_column, low_column, close_column, buy_column, sell_column):
 
     data = add_column(data, 5)    
@@ -198,6 +218,10 @@ def signal_BLOCKADE(data, open_column, high_column, low_column, close_column, bu
         
     return data
 
+#Hit Ratio =  0
+#Profit factor =  nan
+#Realized RR =  nan
+#Number of Trades =  0
 def signal_BARRIER(data, open_column, high_column, low_column, close_column, buy_column, sell_column):
 
     data = add_column(data, 5)  
@@ -330,7 +354,7 @@ def performance(data, open_price,buy_column,sell_column,long_result_col,short_re
     for i in range(len(data)):
         try:
             if data[i, buy_column] == 1:
-                for a in range(i + 1, i + 1000):
+                for a in range(i + 1, i + 2000):
                     if data[a, buy_column] == 1 or data[a, sell_column]== -1:
                         data[a, long_result_col] = data[a, open_price] -data[i, open_price]
                         break
@@ -345,7 +369,7 @@ def performance(data, open_price,buy_column,sell_column,long_result_col,short_re
     for i in range(len(data)):
         try:
             if data[i, sell_column] == -1:
-                for a in range(i + 1, i + 1000):
+                for a in range(i + 1, i + 2000):
                     if data[a, buy_column] == 1 or data[a, sell_column]== -1:
                         data[a, short_result_col] = data[i, open_price] -data[a, open_price]
                         break
@@ -388,14 +412,14 @@ def performance(data, open_price,buy_column,sell_column,long_result_col,short_re
     
 
 # Rounding
-#my_data = rounding(my_data, 4)
+my_data = rounding(my_data, 4)
 #lookback = 10
 # Calculating the ATR
 #my_data = atr(my_data, lookback, 1, 2, 3, 4)
 # Calling the signal function
-my_data = signal_SHRINKING(my_data, 0, 1, 2, 3, 4, 5)
+my_data = signal_BARRIER(my_data, 0, 1, 2, 3, 4, 5)
 # Charting the latest signals
-signal_chart(my_data, 0, 4, 5, window = 1000)
+signal_chart(my_data, 0, 4, 5, window = 20000)
 # Performance
 my_data = performance(my_data, 0, 4, 5, 6, 7, 8)
 print(my_data)
