@@ -11,6 +11,7 @@ my_data = np.array(df)
 #Profit factor =  0.04
 #Realized RR =  0.16
 #Number of Trades =  5
+#Breakeven hit ratio = 86.2
 def signal_H(data, open_column, high_column, low_column, close_column, buy_column, sell_column):
 
     data = add_column(data, 5)    
@@ -45,10 +46,11 @@ def signal_H(data, open_column, high_column, low_column, close_column, buy_colum
         
     return data
 
-#Hit Ratio =  56.32911392405063
+#Hit Ratio =  56.32911392405063 !!!!!!!!!!!!!!!!
 #Profit factor =  1.51
 #Realized RR =  1.169
 #Number of Trades =  158
+#Breakeven hit ratio = 46.1
 def signal_SLINGSHOT(data, open_column, high_column, low_column, close_column, buy_column, sell_column):
 
     data = add_column(data, 5)    
@@ -93,6 +95,7 @@ def signal_SLINGSHOT(data, open_column, high_column, low_column, close_column, b
 #Profit factor =  1.04
 #Realized RR =  1.049
 #Number of Trades =  800
+#Breakeven hit ratio = 48.8
 def signal_BOTTLE(data, open_column, high_column, low_column, close_column, buy_column, sell_column):
 
     data = add_column(data, 5)    
@@ -163,10 +166,11 @@ def signal_DOUBLE_TROUBLE(data, open_column, high_column, low_column, close_colu
         
     return data
 
-#Hit Ratio =  60.22408963585434
+#Hit Ratio =  60.22408963585434 !!!!!!!!!!!!!!!
 #Profit factor =  1.33
 #Realized RR =  0.88
 #Number of Trades =  357
+#Breakeven hit ratio = 53.2
 def signal_QUINTUPLES(data, open_column, close_column, buy_column, sell_column):
     body = 10 #find optimal
     data = add_column(data, 5)    

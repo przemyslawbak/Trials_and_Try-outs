@@ -11,6 +11,7 @@ my_data = np.array(df)
 #Profit factor =  0.2
 #Realized RR =  0.326
 #Number of Trades =  8
+#Breakeven hit ratio = 75.4
 def signal_TWEEZERS(data, open_column, high_column, low_column, close_column, buy_column, sell_column):
     body = 10
     data = add_column(data, 5)    
@@ -45,10 +46,11 @@ def signal_TWEEZERS(data, open_column, high_column, low_column, close_column, bu
         
     return data
 
-#Hit Ratio =  74.28571428571429
+#Hit Ratio =  74.28571428571429 !!!!!!!!!!!
 #Profit factor =  1.54
 #Realized RR =  0.533
 #Number of Trades =  35
+#Breakeven hit ratio = 65.2
 def signal_TOWER(data, open_column, high_column, low_column, close_column, buy_column, sell_column):
     body = 10
     data = add_column(data, 5)    
@@ -87,6 +89,7 @@ def signal_TOWER(data, open_column, high_column, low_column, close_column, buy_c
 #Profit factor =  0.97
 #Realized RR =  1.075
 #Number of Trades =  152
+#Breakeven hit ratio = 48.2
 def signal_STICK_SANDWITCH(data, open_column, high_column, low_column, close_column, buy_column, sell_column):
 
     data = add_column(data, 5)    
@@ -131,6 +134,7 @@ def signal_STICK_SANDWITCH(data, open_column, high_column, low_column, close_col
 #Profit factor =  1.08
 #Realized RR =  1.057
 #Number of Trades =  356
+#Breakeven hit ratio = 48.6
 def signal_STAR(data, open_column, high_column, low_column, close_column, buy_column, sell_column):
 
     data = add_column(data, 5)    
@@ -165,6 +169,7 @@ def signal_STAR(data, open_column, high_column, low_column, close_column, buy_co
 #Profit factor =  1.25
 #Realized RR =  2.496
 #Number of Trades =  6
+#Breakeven hit ratio = 28.6
 def signal_SPINNING_TOP(data, open_column, high_column, low_column, close_column, buy_column, sell_column):
     body = 10
     wick = 3
@@ -206,6 +211,7 @@ def signal_SPINNING_TOP(data, open_column, high_column, low_column, close_column
 #Profit factor =  0.91
 #Realized RR =  0.879
 #Number of Trades =  1278
+#Breakeven hit ratio = 53.2
 def signal_PIERCING(data, open_column, close_column, buy_column, sell_column):
 
     data = add_column(data, 5)    
@@ -240,10 +246,11 @@ def signal_PIERCING(data, open_column, close_column, buy_column, sell_column):
         
     return data
 
-#Hit Ratio =  58.14814814814815
+#Hit Ratio =  58.14814814814815 !!!!!!!!
 #Profit factor =  1.4
 #Realized RR =  1.006
 #Number of Trades =  270
+#Breakeven hit ratio = 49.9
 def signal_HARANI_STRICT(data, open_column, high_column, low_column, close_column, buy_column, sell_column):
 
     data = add_column(data, 5)    
@@ -281,6 +288,7 @@ def signal_HARANI_STRICT(data, open_column, high_column, low_column, close_colum
 #Profit factor =  1.29
 #Realized RR =  1.033
 #Number of Trades =  644
+#Breakeven hit ratio = 49.2
 def signal_HARANI_FLEXIBLE(data, open_column, high_column, low_column, close_column, buy_column, sell_column):
 
     data = add_column(data, 5)    
@@ -394,6 +402,7 @@ def signal_ENGULFING(data, open_column, close_column, buy_column, sell_column):
 #Profit factor =  1.05
 #Realized RR =  1.173
 #Number of Trades =  87
+#Breakeven hit ratio = 46.0
 def signal_DOJI(data, open_column, close_column, buy_column, sell_column):
 
     data = add_column(data, 5)    

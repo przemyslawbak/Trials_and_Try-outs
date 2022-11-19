@@ -7,10 +7,11 @@ df = pd.read_csv('GPW_DLY WIG20, 60.csv', usecols=["close", 'open', 'high', 'low
 df.reset_index(drop=True)
 my_data = np.array(df)
 
-#Hit Ratio =  56.666666666666664
+#Hit Ratio =  56.666666666666664 !!!!!!!!!!!!!
 #Profit factor =  1.81
 #Realized RR =  1.383
 #Number of Trades =  30
+#Breakeven hit ratio = 41.9
 def signal_SHRINKING(data, open_column, high_column, low_column, close_column, buy_column, sell_column):
 
     data = add_column(data, 5)  
@@ -97,6 +98,7 @@ def signal_MIRROR(data, open_column, high_column, low_column, close_column, buy_
 #Profit factor =  0.9
 #Realized RR =  1.179
 #Number of Trades =  788
+#Breakeven hit ratio = 45.9
 def signal_EUPHORIA(data, open_column, close_column, buy_column, sell_column):
 
     data = add_column(data, 5)  
@@ -176,6 +178,7 @@ def signal_DOPPELGANGER(data, open_column, high_column, low_column, close_column
 #Profit factor =  1.2
 #Realized RR =  1.018
 #Number of Trades =  85
+#Breakeven hit ratio = 49.5
 def signal_BLOCKADE(data, open_column, high_column, low_column, close_column, buy_column, sell_column):
 
     data = add_column(data, 5)    

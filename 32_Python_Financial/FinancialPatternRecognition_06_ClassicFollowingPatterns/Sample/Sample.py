@@ -11,6 +11,7 @@ my_data = np.array(df)
 #Profit factor =  1.1
 #Realized RR =  1.097
 #Number of Trades =  2151
+#Breakeven hit ratio = ‭47.68717215069146‬
 def signal_MARUBOZU(data, open_column, high_column, low_column, close_column, buy_column, sell_column):
 
     data = add_column(data, 5)    
@@ -37,10 +38,11 @@ def signal_MARUBOZU(data, open_column, high_column, low_column, close_column, bu
         
     return data
 
-#Hit Ratio =  62.5
+#Hit Ratio =  62.5 !!!!!!!!!!!!!!!!!!!
 #Profit factor =  1.35
 #Realized RR =  0.808
 #Number of Trades =  24
+#Breakeven hit ratio = 55.3
 def signal_THREE_CANDLES(data, open_column, close_column, buy_column, sell_column):
     body = 10 #You can also adjust the variable body to volatility
     data = add_column(data, 5)
@@ -81,6 +83,7 @@ def signal_THREE_CANDLES(data, open_column, close_column, buy_column, sell_colum
 #Profit factor =  0.92
 #Realized RR =  0.863
 #Number of Trades =  134
+#Breakeven hit ratio = 53.7
 def signal_TASUKI(data, open_column, close_column, buy_column, sell_column):
 
     data = add_column(data, 5)
@@ -119,6 +122,7 @@ def signal_TASUKI(data, open_column, close_column, buy_column, sell_column):
 #Profit factor =  0.96
 #Realized RR =  1.26
 #Number of Trades =  30
+#Breakeven hit ratio = 44
 def signal_THREE_METHODS(data, open_column, high_column, low_column, close_column, buy_column, sell_column):
 
     data = add_column(data, 5)
@@ -165,6 +169,7 @@ def signal_THREE_METHODS(data, open_column, high_column, low_column, close_colum
 #Profit factor =  0.97
 #Realized RR =  0.969
 #Number of Trades =  142
+#Breakeven hit ratio = 50.7
 def signal_HIKKAKE(data, open_column, high_column, low_column, close_column, buy_signal, sell_signal):
 
     data = add_column(data, 5)    
