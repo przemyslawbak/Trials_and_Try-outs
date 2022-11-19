@@ -709,7 +709,7 @@ def performance(data, open_price,buy_column,sell_column,long_result_col,short_re
 # Calculating the ATR
 #my_data = atr(my_data, lookback, 1, 2, 3, 4)
 # Calling the signal function
-my_data = signal_INSIDE_UP_DOWN(my_data, 0, 1, 2, 3, 4, 5)
+my_data = signal_TOWER(my_data, 0, 1, 2, 3, 4, 5)
 # Charting the latest signals
 signal_chart(my_data, 0, 4, 5, window = 20000)
 # Performance

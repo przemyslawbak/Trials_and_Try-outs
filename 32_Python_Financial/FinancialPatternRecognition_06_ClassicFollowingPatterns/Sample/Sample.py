@@ -11,7 +11,7 @@ my_data = np.array(df)
 #Profit factor =  1.1
 #Realized RR =  1.097
 #Number of Trades =  2151
-#Breakeven hit ratio = ‭47.68717215069146‬
+#Breakeven hit ratio = 47.6
 def signal_MARUBOZU(data, open_column, high_column, low_column, close_column, buy_column, sell_column):
 
     data = add_column(data, 5)    
@@ -329,7 +329,7 @@ def performance(data, open_price,buy_column,sell_column,long_result_col,short_re
 #Rounding
 my_data = rounding(my_data, 4)
 # Calling the signal function
-my_data = signal_HIKKAKE(my_data, 0, 1, 2, 3, 4, 5)
+my_data = signal_THREE_CANDLES(my_data, 0, 3, 4, 5)
 # Charting the latest signals
 signal_chart(my_data, 0, 4, 5, window = 20000)
 # Performance
