@@ -2,6 +2,10 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 
+pd.set_option('display.max_rows', 1000)
+pd.set_option('display.max_columns', 10)
+pd.set_option('display.width', 1000)
+
 # Import data
 df = pd.read_csv('GPW_DLY WIG20, 60.csv', usecols=["close", 'open', 'high', 'low'])
 df.reset_index(drop=True)
@@ -296,31 +300,32 @@ def rounding(data, how_far):
     data = data.round(decimals = how_far)
     return data
 
-def signal_chart(data, position, buy_column, sell_column, window = 500):
+def signal_chart(data, dataset, position, buy_column, sell_column, window = 500):
     sample = data[-window:, ]
-    fig, ax = plt.subplots(figsize = (10, 5))
-    ohlc_plot_bars(data, window)
+    fig, (ax1, ax2) = plt.subplots(2, gridspec_kw={'height_ratios':[3, 1]}, figsize = (10, 5))
+    for i in range(len(sample)):
+        ax1.vlines(x = i, ymin = sample[i, 2], ymax = sample[i, 1], color = 'black', linewidth = 1)
+        if sample[i, 3] > sample[i, 0]:
+            ax1.vlines(x = i, ymin = sample[i, 0], ymax = sample[i, 3], color = 'black', linewidth = 1)
+        if sample[i, 3] < sample[i, 0]:
+            ax1.vlines(x = i, ymin = sample[i, 3], ymax = sample[i, 0], color = 'black', linewidth = 1)
+        if sample[i, 3] == sample[i, 0]:
+            ax1.vlines(x = i, ymin = sample[i, 3], ymax = sample[i, 0] + 0.00003, color = 'black', linewidth = 1.00)
     for i in range(len(sample)):
         if sample[i, buy_column] == 1:
             x = i
             y = sample[i, position]
-            ax.annotate(' ', xy = (x, y),arrowprops = dict(width = 9, headlength = 11,headwidth = 11, facecolor = 'green', color ='green'))
+            ax1.annotate(' ', xy = (x, y),arrowprops = dict(width = 9, headlength = 11,headwidth = 11, facecolor = 'green', color ='green'))
         elif sample[i, sell_column] == -1:
             x = i
             y = sample[i, position]
-            ax.annotate(' ', xy = (x, y),arrowprops = dict(width = 9, headlength = -11,headwidth = -11, facecolor = 'red', color ='red'))
+            ax1.annotate(' ', xy = (x, y),arrowprops = dict(width = 9, headlength = -11,headwidth = -11, facecolor = 'red', color ='red'))
 
-def ohlc_plot_bars(data, window):
-    sample = data[-window:, ]
-    for i in range(len(sample)):
-        plt.vlines(x = i, ymin = sample[i, 2], ymax = sample[i, 1], color = 'black', linewidth = 1)
-        if sample[i, 3] > sample[i, 0]:
-            plt.vlines(x = i, ymin = sample[i, 0], ymax = sample[i, 3], color = 'black', linewidth = 1)
-        if sample[i, 3] < sample[i, 0]:
-            plt.vlines(x = i, ymin = sample[i, 3], ymax = sample[i, 0], color = 'black', linewidth = 1)
-        if sample[i, 3] == sample[i, 0]:
-            plt.vlines(x = i, ymin = sample[i, 3], ymax = sample[i, 0] + 0.00003, color = 'black', linewidth = 1.00)
-    plt.grid()
+    ax2.plot(dataset['result_sum'], color = 'blue')
+
+    ax1.grid(b=True, which='major', color='#666666', linestyle='-')
+    ax2.grid(b=True, which='major', color='#666666', linestyle='-')
+    
 
 def ma(data, lookback, close, position):
     data = add_column(data, 1)
@@ -368,7 +373,7 @@ def performance(data, open_price,buy_column,sell_column,long_result_col,short_re
     for i in range(len(data)):
         try:
             if data[i, buy_column] == 1:
-                for a in range(i + 1, i + 2000):
+                for a in range(i + 1, i + 200):
                     if data[a, buy_column] == 1 or data[a, sell_column]== -1:
                         data[a, long_result_col] = data[a, open_price] -data[i, open_price]
                         break
@@ -383,7 +388,7 @@ def performance(data, open_price,buy_column,sell_column,long_result_col,short_re
     for i in range(len(data)):
         try:
             if data[i, sell_column] == -1:
-                for a in range(i + 1, i + 2000):
+                for a in range(i + 1, i + 200):
                     if data[a, buy_column] == 1 or data[a, sell_column]== -1:
                         data[a, short_result_col] = data[i, open_price] -data[a, open_price]
                         break
@@ -454,10 +459,14 @@ dataset = pd.DataFrame(
         'Column8': my_data[:, 7],
         'Column9': my_data[:, 8],
         })
-print(dataset)
+
+dataset['long_result_sum'] =  dataset['Column5'].rolling(200, min_periods=1).sum()
+dataset['short_result_sum'] =  dataset['Column6'].rolling(200, min_periods=1).sum()
+dataset['result_sum'] =  dataset['long_result_sum'] + dataset['short_result_sum']
+print(dataset.tail(1000))
 # Charting the latest signals
 print("charting signals")
-signal_chart(my_data, 0, 4, 5, window = 20000)
+signal_chart(my_data, dataset, 0, 4, 5, window = 20000)
 # Performance
 print("computing performace")
 my_data = performance(my_data, 0, 4, 5, 6, 7, 8)
