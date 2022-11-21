@@ -301,8 +301,9 @@ def rounding(data, how_far):
     return data
 
 def signal_chart(data, dataset, position, buy_column, sell_column, window = 500):
-    sample = data[-window:, ]
-    fig, (ax1, ax2) = plt.subplots(2, gridspec_kw={'height_ratios':[3, 1]}, figsize = (10, 5))
+    #sample = data[-window:, ]
+    sample = data
+    fig, (ax1, ax2) = plt.subplots(2, gridspec_kw={'height_ratios':[3, 1]}, sharex=True, figsize = (10, 5))
     for i in range(len(sample)):
         ax1.vlines(x = i, ymin = sample[i, 2], ymax = sample[i, 1], color = 'black', linewidth = 1)
         if sample[i, 3] > sample[i, 0]:
@@ -321,7 +322,7 @@ def signal_chart(data, dataset, position, buy_column, sell_column, window = 500)
             y = sample[i, position]
             ax1.annotate(' ', xy = (x, y),arrowprops = dict(width = 9, headlength = -11,headwidth = -11, facecolor = 'red', color ='red'))
 
-    ax2.plot(dataset['result_sum'], color = 'blue')
+    ax2.plot(dataset['result_sum'].rolling(30, min_periods=1).mean(), color = 'blue')
 
     ax1.grid(b=True, which='major', color='#666666', linestyle='-')
     ax2.grid(b=True, which='major', color='#666666', linestyle='-')
@@ -460,8 +461,8 @@ dataset = pd.DataFrame(
         'Column9': my_data[:, 8],
         })
 
-dataset['long_result_sum'] =  dataset['Column5'].rolling(200, min_periods=1).sum()
-dataset['short_result_sum'] =  dataset['Column6'].rolling(200, min_periods=1).sum()
+dataset['long_result_sum'] =  dataset['Column5'].rolling(500, min_periods=1).sum()
+dataset['short_result_sum'] =  dataset['Column6'].rolling(500, min_periods=1).sum()
 dataset['result_sum'] =  dataset['long_result_sum'] + dataset['short_result_sum']
 print(dataset.tail(1000))
 # Charting the latest signals
