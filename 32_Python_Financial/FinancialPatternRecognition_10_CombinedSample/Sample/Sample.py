@@ -9,6 +9,7 @@ pd.set_option('display.width', 1000)
 # Import data
 df = pd.read_csv('GPW_DLY WIG20, 60.csv', usecols=["close", 'open', 'high', 'low'])
 df.reset_index(drop=True)
+print(df)
 my_data = np.array(df)
 
 #Hit Ratio =  56.666666666666664 !!!!!!!!!!!!!
@@ -17,8 +18,6 @@ my_data = np.array(df)
 #Number of Trades =  30
 #Breakeven hit ratio = 41.9
 def signal_SHRINKING(data, open_column, high_column, low_column, close_column, buy_column, sell_column):
-    
-    data = rounding(data, 4) # Put 0 instead of 4 as of pair 4
     
     for i in range(len(data)):  
         
@@ -60,8 +59,7 @@ def signal_SHRINKING(data, open_column, high_column, low_column, close_column, b
 #Number of Trades =  35
 #Breakeven hit ratio = 65.2
 def signal_TOWER(data, open_column, high_column, low_column, close_column, buy_column, sell_column):
-    body = 10
-    data = add_column(data, 5)    
+    body = 10  
     
     for i in range(len(data)):  
         
@@ -98,9 +96,7 @@ def signal_TOWER(data, open_column, high_column, low_column, close_column, buy_c
 #Realized RR =  1.006
 #Number of Trades =  270
 #Breakeven hit ratio = 49.9
-def signal_HARANI_STRICT(data, open_column, high_column, low_column, close_column, buy_column, sell_column):
-
-    data = add_column(data, 5)    
+def signal_HARANI_STRICT(data, open_column, high_column, low_column, close_column, buy_column, sell_column): 
     
     for i in range(len(data)):  
         
@@ -137,8 +133,6 @@ def signal_HARANI_STRICT(data, open_column, high_column, low_column, close_colum
 #Number of Trades =  158
 #Breakeven hit ratio = 46.1
 def signal_SLINGSHOT(data, open_column, high_column, low_column, close_column, buy_column, sell_column):
-
-    data = add_column(data, 5)    
     
     for i in range(len(data)):  
         
@@ -182,8 +176,7 @@ def signal_SLINGSHOT(data, open_column, high_column, low_column, close_column, b
 #Number of Trades =  357
 #Breakeven hit ratio = 53.2
 def signal_QUINTUPLES(data, open_column, n1, n2, close_column, buy_column, sell_column):
-    body = 10 #find optimal
-    data = add_column(data, 5)    
+    body = 10 
     
     for i in range(len(data)):    
 
@@ -239,8 +232,7 @@ def signal_QUINTUPLES(data, open_column, n1, n2, close_column, buy_column, sell_
 #Number of Trades =  24
 #Breakeven hit ratio = 55.3
 def signal_THREE_CANDLES(data, open_column, n1, n2, close_column, buy_column, sell_column):
-    body = 10 #You can also adjust the variable body to volatility
-    data = add_column(data, 5)
+    body = 10
     
     for i in range(len(data)):
         
@@ -301,7 +293,6 @@ def rounding(data, how_far):
     return data
 
 def signal_chart(data, dataset, position, buy_column, sell_column, window = 500):
-    #sample = data[-window:, ]
     sample = data
     fig, (ax1, ax2) = plt.subplots(2, gridspec_kw={'height_ratios':[3, 1]}, sharex=True, figsize = (10, 5))
     for i in range(len(sample)):
@@ -432,30 +423,31 @@ def performance(data, open_price,buy_column,sell_column,long_result_col,short_re
     
 
 # Rounding
-my_data = rounding(my_data, 4)
-my_data = add_column(my_data, 5)  
-#lookback = 10
-# Calculating the ATR
-#my_data = atr(my_data, lookback, 1, 2, 3, 4)
-# Calling the signal function
+my_data = rounding(my_data, 0)
+print(my_data.shape)
+buy_column = my_data.shape[1] + 1
+sell_column = my_data.shape[1] + 2
+my_data = add_column(my_data, buy_column)
+my_data = add_column(my_data, sell_column)
+# Calling the signal functions
 print("computing signal_SHRINKING")
-my_data = signal_SHRINKING(my_data, 0, 1, 2, 3, 4, 5)
+my_data = signal_SHRINKING(my_data, 0, 1, 2, 3, buy_column, sell_column)
 print("computing signal_TOWER")
-my_data = signal_TOWER(my_data, 0, 1, 2, 3, 4, 5)
+my_data = signal_TOWER(my_data, 0, 1, 2, 3, buy_column, sell_column)
 print("computing signal_HARANI_STRICT")
-my_data = signal_HARANI_STRICT(my_data, 0, 1, 2, 3, 4, 5)
+my_data = signal_HARANI_STRICT(my_data, 0, 1, 2, 3, buy_column, sell_column)
 print("computing signal_SLINGSHOT")
-my_data = signal_SLINGSHOT(my_data, 0, 1, 2, 3, 4, 5)
+my_data = signal_SLINGSHOT(my_data, 0, 1, 2, 3, buy_column, sell_column)
 print("computing signal_THREE_CANDLES")
-my_data = signal_THREE_CANDLES(my_data, 0, 1, 2, 3, 4, 5)
+my_data = signal_THREE_CANDLES(my_data, 0, 1, 2, 3, buy_column, sell_column)
 dataset = pd.DataFrame(
     {
         'Column1': my_data[:, 0], 
         'Column2': my_data[:, 1],
         'Column3': my_data[:, 2],
         'Column4': my_data[:, 3],
-        'Column5': my_data[:, 4],
-        'Column6': my_data[:, 5],
+        'Column5': my_data[:, buy_column],
+        'Column6': my_data[:, sell_column],
         'Column7': my_data[:, 6],
         'Column8': my_data[:, 7],
         'Column9': my_data[:, 8],
@@ -467,8 +459,8 @@ dataset['result_sum'] =  dataset['long_result_sum'] + dataset['short_result_sum'
 print(dataset.tail(1000))
 # Charting the latest signals
 print("charting signals")
-signal_chart(my_data, dataset, 0, 4, 5, window = 20000)
+signal_chart(my_data, dataset, 0, buy_column, sell_column, window = 20000)
 # Performance
 print("computing performace")
-my_data = performance(my_data, 0, 4, 5, 6, 7, 8)
+my_data = performance(my_data, 0, buy_column, sell_column, 6, 7, 8)
 plt.show()
