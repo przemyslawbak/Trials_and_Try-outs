@@ -1,4 +1,0 @@
-https://www.hackerrank.com/domains/sql
-https://www.hackerrank.com/domains/data-structures
-https://www.hackerrank.com/domains/regex
-https://www.hackerrank.com/domains/shell

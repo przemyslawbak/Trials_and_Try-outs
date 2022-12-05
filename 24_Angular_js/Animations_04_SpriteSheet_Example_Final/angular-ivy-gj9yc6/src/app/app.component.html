@@ -1,9 +1,0 @@
-<div class="flex-container">
-	<button (click)="onClick()">Click me!</button>
-	<div class="a" *ngIf="display">
-		<app-animated-sprite class="b" (animationFinish)="getNotification($event)" *ngFor="let ani of animationArray"
-			[url]="newurl" [id]="ani.id" [frameRate]="ani.frameRate" [totalRows]=4.00 [totalcols]=4 [totalFrames]=15
-			[isLoop]=false [style.top.px]=[posY] [style.left.px]=[posX] #aniDiv2>
-		</app-animated-sprite>
-	</div>
-</div>

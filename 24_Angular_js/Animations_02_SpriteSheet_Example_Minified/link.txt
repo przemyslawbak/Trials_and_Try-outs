@@ -1,2 +1,0 @@
-https://stackblitz.com/edit/angular-ivy-rwvimx?file=src%2Fapp%2Fapp.component.html
-splash - https://i.ibb.co/D75mYtZ/water-splash.png

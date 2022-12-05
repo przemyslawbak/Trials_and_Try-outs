@@ -1,9 +1,0 @@
-list null <- zabezpieczyæ walidacj¹
-
-usuwanie wszystkich takich samych ID //while indexof
-
-OK - dodawanie nowego + ProductIds <- na jutro chyba
-
-zak³adka i model literatury
-
-usuwanie wszystkich ProductIds po usuniêciu produktu

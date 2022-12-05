@@ -1,9 +1,0 @@
-<Project Sdk="Microsoft.NET.Sdk">
-
-  <PropertyGroup>
-    <OutputType>Exe</OutputType>
-    <TargetFramework>netcoreapp2.1</TargetFramework>
-    <RootNamespace>_14_Instrukcje_try_i_wyjatki</RootNamespace>
-  </PropertyGroup>
-
-</Project>
