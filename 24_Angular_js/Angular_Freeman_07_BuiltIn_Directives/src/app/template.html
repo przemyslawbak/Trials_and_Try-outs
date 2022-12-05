@@ -1,0 +1,49 @@
+<div class="text-white m-2">
+    <div class="bg-info p-2">
+        There are {{getProductCount()}} products.
+    </div>
+    <div *ngIf="getProductCount() > 4" class="bg-info p-2 mt-1">
+        There are more than 4 products in the model
+    </div>
+    <div *ngIf="getProductByPosition(1).name != 'Kayak'" class="bg-info p-2 mt-1">
+        The sec product isn't a Kayak
+    </div>
+
+    <div class="bg-info p-2 mt-1" [ngSwitch]="getProduct(1).name">
+        <span *ngSwitchCase="targetName">Kayak</span>
+        <span *ngSwitchCase="'Lifejacket'">Lifejacket</span>
+        <span *ngSwitchDefault>Other Product</span>
+    </div>
+
+    <table class="table table-sm table-bordered mt-1">
+        <tr class="text-dark">
+            <th></th>
+            <th>Name</th>
+            <th>Category</th>
+            <th>Price</th>
+        </tr>
+        <tr *ngFor="let item of getProducts(); let i = index; let odd = odd;
+    let first = first; let last = last; trackBy:getKey" class="text-white" [class.bg-primary]="odd"
+            [class.bg-info]="!odd" [class.bg-warning]="first || last">
+            <td>{{i + 1}}</td>
+            <td>{{item.name}}</td>
+            <td>{{item.category}}</td>
+            <td *ngIf="!last">{{item.price}}</td>
+        </tr>
+    </table>
+
+    <ng-template #titleTemplate let-text="title">
+        <h4 class="p-2 bg-success text-white">{{text}}</h4>
+    </ng-template>
+    <ng-template [ngTemplateOutlet]="titleTemplate" [ngTemplateOutletContext]="{title: 'Header'}">
+    </ng-template>
+    <div class="bg-info p-2 m-2 text-white">
+        There are {{getProductCount()}} products.
+    </div>
+    <ng-template [ngTemplateOutlet]="titleTemplate" [ngTemplateOutletContext]="{title: 'Footer'}">
+    </ng-template>
+
+    <div class="bg-info p-2 text-white">
+        Next Product is {{nextProduct.name}}
+    </div>
+</div>

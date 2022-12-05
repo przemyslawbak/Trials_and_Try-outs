@@ -1,0 +1,83 @@
+﻿
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Aplikacja</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="~/StyleSheet.css" />
+</head>
+<body oncopy="return false" oncut="return false" onpaste="return false">
+    Index.cshtml
+
+    <a asp-action="StageFirst">Go to stage first</a>
+
+
+    <script type='text/javascript'>
+
+        var table = document.getElementById('some-context');
+        var data = document.getElementById('data');
+        window.addEventListener('focus', showTable);
+        window.addEventListener('blur', hideTable);
+
+        document.onselectstart = new Function('return false');
+
+        document.oncontextmenu = new Function("return false");
+
+        document.addEventListener("contextmenu", function (e) {
+            e.preventDefault();
+        }, false);
+
+        document.addEventListener("keyup", function (e) {
+            var keyCode = e.keyCode ? e.keyCode : e.which;
+            if (keyCode == 44) {
+                stopPrntScr();
+            }
+        });
+
+        makeUnselectable(document.getElementById('some-context'));
+        function makeUnselectable(node) {
+            if (node.nodeType == 1) {
+                node.setAttribute("unselectable", "on");
+            }
+            var child = node.firstChild;
+            while (child) {
+                makeUnselectable(child);
+                child = child.nextSibling;
+            }
+        }
+
+        function stopPrntScr() {
+
+            var inpFld = document.createElement("input");
+            inpFld.setAttribute("value", ".");
+            inpFld.setAttribute("width", "0");
+            inpFld.style.height = "0px";
+            inpFld.style.width = "0px";
+            inpFld.style.border = "0px";
+            document.body.appendChild(inpFld);
+            inpFld.select();
+            document.execCommand("copy");
+            inpFld.remove(inpFld);
+
+            hideTable();
+        }
+
+        function hideTable() {
+            data.style.backgroundColor = 'white';
+        }
+
+        function showTable() {
+            data.style.backgroundColor = '#4a629e';
+        }
+
+
+        function AccessClipboardData() {
+            try {
+                window.clipboardData.setData('text', "Access   Restricted");
+            } catch (err) {
+            }
+        }
+        setInterval("AccessClipboardData()", 300);
+    </script>
+</body>
+</html>

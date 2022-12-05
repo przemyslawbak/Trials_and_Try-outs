@@ -1,0 +1,1 @@
+https://stackblitz.com/edit/angular-ivy-xwrncj?file=src%2Fapp%2Fanimated-sprite%2Fanimated-sprite.component.html

@@ -1,0 +1,281 @@
+﻿
+
+.body {
+}
+
+.sectionTitle {
+    font-family: Helvetica;
+    font-size: 30px;
+    margin-top: 40px;
+    margin-bottom: 10px;
+    margin-left: 80px;
+}
+
+/*HEADER*/
+
+.aboutMainContainer {
+    font-family: Helvetica;
+    background-color: #557da8;
+    color: white;
+    height: 220px;
+    width: 100%;
+}
+
+    .aboutMainContainer img {
+        border-radius: 50%;
+        height: 200px;
+        width: 200px;
+        margin-top: 10px;
+        margin-left: 40px;
+        float: left;
+    }
+
+.personalData {
+    height: 200px;
+    font-size: 30px;
+    float: left;
+    margin-top: 40px;
+    margin-left: 40px;
+    width: 33%;
+}
+
+.name {
+    font-size: 40px;
+}
+
+.sideInfo {
+    float: right;
+}
+
+.sideText {
+    margin-top: 40px;
+    margin-bottom: 25px;
+    margin-right: -20px;
+    display: inline-block;
+    width: 240px;
+}
+
+    .sideText div {
+        margin-bottom: 12px;
+        display: block;
+        float: right;
+    }
+
+.sideImages {
+    margin-top: -195px;
+    margin-right: 90px;
+    width: 18px;
+    display: inline-block;
+    float: right;
+}
+
+    .sideImages img {
+        margin-bottom: -5px;
+        display: block;
+        height: 25px;
+        width: 25px;
+    }
+
+/*PROJECT*/
+.projectContainer {
+    border-right: solid 1px #557da8;
+    border-top: solid 1px #557da8;
+    font-family: Helvetica;
+    height: 320px;
+    width: 48%;
+    color: black;
+    margin: 1%;
+    margin-top: 0.5%;
+    float: right;
+}
+
+.projectName {
+    color: #5C451C;
+    font-size: 30px;
+    margin-top: 10px;
+    margin-left: 10px;
+    overflow: hidden;
+}
+
+.projectComments {
+    width: 90%;
+    background-color: #f0f0f0;
+    font-size: 18px;
+    margin-top: 10px;
+    margin-left: 10px;
+    padding-right: 5px;
+    text-align: justify;
+    height: 90px;
+}
+
+.projectTech {
+    width: 90%;
+    font-size: 18px;
+    margin-top: 10px;
+    margin-left: 10px;
+    height: 67.5px;
+}
+
+.projImages {
+    margin-top: 10px;
+    width: 26px;
+    display: inline-block;
+    float: left;
+    margin-left: 40px;
+}
+
+    .projImages img {
+        margin-bottom: 5px;
+        display: block;
+        height: 25px;
+        width: 25px;
+    }
+
+.projText {
+    font-size: 16px;
+    margin-top: 10px;
+    margin-left: 10px;
+    display: inline-block;
+}
+
+    .projText div {
+        margin-bottom: 10px;
+        display: block;
+    }
+
+.projectLink {
+    text-decoration: none;
+    color: #557da8;
+}
+
+/*TECH STACK*/
+
+.techContainer {
+    border: solid 1px #557da8;
+    width: 95%;
+    height: 200px;
+    margin-left: 20px;
+}
+
+.singleTech {
+    font-family: Helvetica;
+    font-size: 18px;
+    height: 40px;
+    width: 175px;
+    margin: 5px;
+    margin-top: 15px;
+    float: left;
+}
+
+.techPic {
+    vertical-align: middle;
+    display: inline-block;
+    height: 35px;
+    width: 35px;
+    filter: sepia(100%);
+}
+
+.techName {
+    vertical-align: middle;
+    display: inline-block;
+    margin: 5px;
+    margin-top: auto;
+    margin-bottom: auto;
+    overflow-x: auto;
+}
+
+/*WORK HISTORY*/
+
+.historyContainer {
+    margin-left: 40px;
+    border-top: solid 1px #557da8;
+    width: 93%;
+}
+
+.workHistory {
+    font-family: Helvetica;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.workTitle {
+    color: #5C451C;
+    font-size: 30px;
+    margin-top: 10px;
+    overflow: hidden;
+    width: 60%;
+    display: inline-block;
+}
+
+.workDescription {
+    background-color: #f0f0f0;
+    font-size: 18px;
+    text-align: justify;
+    margin-top: 10px;
+    width: 95%;
+    padding-right: 10px;
+}
+
+.workPeriod {
+    margin-right: 20px;
+    font-size: 30px;
+    width: 29%;
+    text-align: center;
+    float: right;
+    display: inline-block;
+}
+
+/*INTERESTS*/
+
+.interestsContainer {
+    font-family: Helvetica;
+    font-size: 18px;
+    margin-left: 40px;
+    border-top: solid 1px #557da8;
+    width: 93%;
+}
+
+.interestsImages {
+    margin-top: 20px;
+    width: 26px;
+    display: inline-block;
+    float: left;
+    margin-left: 40px;
+}
+
+    .interestsImages img {
+        margin-bottom: 5px;
+        display: block;
+        height: 25px;
+        width: 25px;
+    }
+
+.interestsText {
+    font-size: 16px;
+    margin-top: 20px;
+    margin-left: 10px;
+    display: inline-block;
+}
+
+    .interestsText div {
+        margin-bottom: 10px;
+        display: block;
+    }
+
+/*FOTER*/
+
+.footerContainer {
+    margin-top: 70px;
+    width: 100%;
+    font-family: Helvetica;
+    background-color: #557da8;
+    color: white;
+    font-size: 14px;
+    text-align: justify;
+}
+
+.footerText {
+    margin: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}

@@ -1,0 +1,149 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Aplikacja</title>
+    <meta charset="utf-8">
+</head>
+<body class="container">
+    <div>
+        TEST
+    </div>
+    <script>
+        /*
+        const square = function (x) {
+            return x * x;
+        };
+        console.log(square(12));
+        // → 144
+
+        const makeNoise = function () {
+            console.log("Pling!");
+        };
+        makeNoise();
+        // → Pling!
+
+        let x = 10;
+        if (true) {
+            let y = 20;
+            var z = 30;
+            console.log(x + y + z);
+            // → 60
+        }
+        // y is not visible here
+        console.log(x + z);
+        // → 40
+
+        //nested func
+        const hummus = function (factor) {
+            const ingredient = function (amount, unit, name) {
+                let ingredientAmount = amount * factor;
+                if (ingredientAmount > 1) {
+                    unit += "s";
+                }
+                console.log(`${ingredientAmount} ${unit} ${name}`);
+            };
+            ingredient(1, "can", "chickpeas");
+            ingredient(0.25, "cup", "tahini");
+            ingredient(0.25, "cup", "lemon juice");
+            ingredient(1, "clove", "garlic");
+            ingredient(2, "tablespoon", "olive oil");
+            ingredient(0.5, "teaspoon", "cumin");
+        };
+        console.log(hummus(10));
+
+        //func declaration
+        console.log("The future says:", future());
+        function future() {
+            return "You'll never have flying cars";
+        }
+
+        //arrow func
+        const power = (base, exponent) => {
+            let result = 1;
+            for (let count = 0; count < exponent; count++) {
+                result *= base;
+            }
+            return result;
+        };
+
+        function greet(who) {
+            console.log("Hello " + who);
+        }
+        greet("Harry");
+        console.log("Bye");
+
+        //ignored args
+        function square(x) { return x * x; }
+        console.log(square(4, true, "hedgehog"));
+        // → 16
+
+        //optional args
+        function power(base, exponent = 2) {
+            let result = 1;
+            for (let count = 0; count < exponent; count++) {
+                result *= base;
+            }
+            return result;
+        }
+
+        //closure
+        function multiplier(factor) {
+            return number => number * factor;
+        }
+        let twice = multiplier(2);
+        console.log(twice(5));
+        // → 10
+
+        //recursive func
+        function power(base, exponent) {
+            if (exponent == 0) {
+                return 1;
+            } else {
+                return base * power(base, exponent - 1);
+            }
+        }
+        console.log(power(2, 3));
+        //->8
+
+        //growing func
+        function zeroPad(number, width) {
+            let string = String(number);
+            while (string.length < width) {
+                string = "0" + string;
+            }
+            return string;
+        }
+        function printFarmInventory(cows, chickens, pigs) {
+            console.log(`${zeroPad(cows, 3)} Cows`);
+            console.log(`${zeroPad(chickens, 3)} Chickens`);
+            console.log(`${zeroPad(pigs, 3)} Pigs`);
+        }
+        printFarmInventory(7, 16, 3);
+        */
+
+        //exercise 1
+        function getMinimum(x, y) {
+            return Math.min(x, y);
+        }
+
+        let min = getMinimum(8, 2);
+        console.log(min);
+
+        //exercise 2
+        function isEven(x) {
+            if (x % 2 === 0) {
+                return true;
+            }
+            else {
+                return false;
+            }
+        }
+        console.log(isEven(-2));
+        console.log(isEven(-1));
+        console.log(isEven(0));
+        console.log(isEven(1));
+
+
+    </script>
+</body>
+</html>

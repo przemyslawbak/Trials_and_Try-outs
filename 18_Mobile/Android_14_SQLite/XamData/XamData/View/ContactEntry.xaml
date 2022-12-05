@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="XamData.View.ContactEntry">
+    <ContentPage.Content>
+        <StackLayout
+      Padding="40">
+            <Entry
+        x:Name="FirstName"
+        Placeholder="First Name" />
+            <Entry
+        x:Name="LastName"
+        Placeholder="Last Name" />
+            <Entry
+        x:Name="Email"
+        Placeholder="Email" />
+            <StackLayout
+        Orientation="Horizontal">
+                <Label
+          Text="Favorite?" />
+                <Switch
+          x:Name="IsFavorite" />
+            </StackLayout>
+            <StackLayout
+        Orientation="Horizontal">
+                <Button
+          x:Name="Save"
+          Text="Save"
+          Clicked="OnSave" />
+                <Button
+          x:Name="Cancel"
+          Text="Cancel"
+          Clicked="OnCancel" />
+                <Button
+          x:Name="Review"
+          Text="Review"
+          Clicked="OnReview" />
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

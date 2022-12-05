@@ -1,0 +1,17 @@
+GET / HTTP/1.1
+Host: training.securitum.com
+
+---
+
+HTTP/1.1 200 OK
+Date: Fri, 25 Mar 2022 19:38:19 GMT
+Server: Apache
+Last-Modified: Tue, 15 Dec 2020 10:44:35 GMT
+ETag: "21-5b67e71d3a720"
+Accept-Ranges: bytes
+Content-Length: 33
+Content-Type: text/html
+
+<body>
+<h1>trening</h1>
+</body>

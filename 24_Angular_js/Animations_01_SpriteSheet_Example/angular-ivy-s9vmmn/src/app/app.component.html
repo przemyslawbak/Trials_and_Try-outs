@@ -1,0 +1,22 @@
+<div>
+	<button (click)="shift()">shift </button>
+	<button (click)="unshift()">unshift</button>
+	<button (click)="push()">Push </button>
+	<button (click)="pop()">Pop</button>
+	<button (click)="ten()">addTen</button>
+	<button (click)="removeTen()">removeTen</button>
+
+</div>
+
+<!--animation-->
+
+<div class="flex-container">
+
+
+	<app-animated-sprite (click)="removeSelf(i)" *ngFor="let ani of animationArray,let i=index" [url]="newurl"
+		[frameRate]="ani.frameRate" [totalRows]=6.7 [totalcols]=10 [totalFrames]=51 [isLoop]=true
+		(animationFinish)="showMe($event)" #aniDiv2>
+		FPS=>{{ani.frameRate}} id {{ani.id}}
+	</app-animated-sprite>
+
+</div>

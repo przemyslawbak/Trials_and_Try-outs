@@ -1,0 +1,13 @@
+reference: https://www.syncfusion.com/blogs/post/a-complete-guide-to-running-a-full-stack-angular-application-in-a-monorepo.aspx
+
+-install nude.js
+-install CLI: npm install -g @angular/cli
+-type: ng new my-app
+-Would you like to add Angular routing? (chyba tak)
+-Which stylesheet format would you like to use? (najczesciej CSS)
+-after install: cd my-app
+-ng serve --open
+
+for ASP.NET Core -> Angular:
+in app.nodule.ts: import { APP_BASE_HREF } from '@angular/common'; providers: [{ provide: APP_BASE_HREF, useValue: '/' }],
+in Startup.cs: services.AddCors(...), app.UseCors(...)

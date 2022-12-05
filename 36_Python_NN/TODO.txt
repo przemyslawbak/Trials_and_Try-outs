@@ -1,0 +1,43 @@
+OK - weights
+OK - remove randomness
+OK - one window display
+OK - verify Dense/LSTM OUT_STEPS in TutorialTf_16_TimeSeriesMultiStepRNN
+OK - auto model evaluation for multiple models
+OK - optimization
+OK - https://towardsdatascience.com/time-series-forecasting-with-recurrent-neural-networks-74674e289816
+OK - https://github.com/krishnaik06/Stock-MArket-Forecasting/blob/master/Untitled.ipynb
+OK - https://www.simplilearn.com/tutorials/deep-learning-tutorial/rnn
+NO - lstm many to many time series: https://wandb.ai/ayush-thakur/dl-question-bank/reports/One-to-Many-Many-to-One-and-Many-to-Many-LSTM-Examples-in-Keras--VmlldzoyMDIzOTM
+OK - future RNN prediction
+OK - test with attention
+OK - test with regularizers
+OK - test with dropout
+OK - test with Bidirectional
+OK - test with Bidirectional and LSTM https://keras.io/api/layers/recurrent_layers/bidirectional/
+NO - test with recurrent_activation=None
+OK - test with bayesian optimization https://philipperemy.github.io/visualization/
+OK - test with Batch Normalization
+OK - test with sigmoid
+OK - mastering hyperparameters
+OK - Transformer Time Series Prediction 
+OK	https://keras.io/examples/timeseries/timeseries_transformer_classification/
+NO	https://www.kaggle.com/yamqwe/tutorial-time-series-transformer-time2vec?scriptVersionId=84340000
+OK - LSTM with attention 
+	https://github.com/philipperemy/keras-attention-mechanism
+	https://stackoverflow.com/questions/61909361/keras-lstm-input-dimension-setting-with-attention-class
+	https://stackoverflow.com/a/58357581
+NO - Transformer Time Series Prediction compare
+OK - TimeDistributed?
+OK - , metrics=['mae'] in all comparisons?
+OK - LSTM with attention compare
+OK - LSTM encoder/decoder, where attention?
+NO - test witch EarlyStopping
+OK - model hyperband mastering
+OK - multi step future predictions
+OK - LSTM many-to-many, what output should be? (Dense(1) or Dense(5)?) https://stackoverflow.com/questions/43034960/many-to-one-and-many-to-many-lstm-examples-in-keras
+OK - process time data first
+- finding best hyperparams
+NO - train RNN on more than 1 data sets?
+- post from 4p - requirements?
+
+https://stackoverflow.com/questions/48714407/rnn-regularization-which-component-to-regularize

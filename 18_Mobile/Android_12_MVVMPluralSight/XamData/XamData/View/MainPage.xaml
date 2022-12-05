@@ -1,0 +1,71 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:XamData"
+             x:Class="XamData.MainPage">
+    <ContentPage.Content>
+        <StackLayout
+      Padding="40">
+            <Label
+        Text="Contacts"
+        FontSize="20" />
+            <ListView
+        x:Name="ContactList"
+        ItemsSource="{Binding Contacts}"
+        ItemTapped="OnItemTapped">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <ViewCell.View>
+                                <StackLayout
+                  Padding="10">
+                                    <StackLayout
+                    Orientation="Horizontal">
+                                        <Label
+                      Text="{Binding FirstName}"
+                      FontSize="14"
+                      FontAttributes="Bold"
+                      TextColor="Blue">
+                                            <Label.Triggers>
+                                                <DataTrigger
+                          TargetType="Label"
+                          Binding="{Binding Favorite}"
+                          Value="True">
+                                                    <Setter
+                            Property="TextColor"
+                            Value="Red" />
+                                                </DataTrigger>
+                                            </Label.Triggers>
+                                        </Label>
+                                        <Label
+                      Text="{Binding LastName}"
+                      FontSize="14"
+                      FontAttributes="Bold"
+                      TextColor="Blue">
+                                            <Label.Triggers>
+                                                <DataTrigger
+                          TargetType="Label"
+                          Binding="{Binding Favorite}"
+                          Value="True">
+                                                    <Setter
+                            Property="TextColor"
+                            Value="Red" />
+                                                </DataTrigger>
+                                            </Label.Triggers>
+                                        </Label>
+                                    </StackLayout>
+                                    <StackLayout
+                    Orientation="Horizontal">
+                                        <Label
+                      Text="{Binding Email}"
+                      FontSize="10" />
+                                    </StackLayout>
+                                </StackLayout>
+                            </ViewCell.View>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

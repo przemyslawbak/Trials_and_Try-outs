@@ -1,0 +1,107 @@
+﻿@model List<StatsViewModel>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Aplikacja</title>
+    <meta charset="utf-8">
+    <style>
+        .chartContainer {
+            width: 50%;
+            margin-left: auto;
+            margin-right: auto;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        TEST
+    </div>
+    <div class="chartContainer">
+        <canvas id="myChart" height="400"></canvas>
+    </div>
+    <script type='text/javascript' src="~/src/lib/Chart.bundle.min.js"></script>
+    <script>
+        var moving = [];
+        var moored = [];
+        var anchored = [];
+        var missing = [];
+        var labels = [];
+
+
+        @{
+            for (int i = 0; i < Model.Count(); i ++)
+            {
+                int total = Model[i].Moving + Model[i].NotMoving + Model[i].Anchored;
+
+                var pMove = (int)Math.Round((double)(100 * Model[i].Moving) / total);
+                var pMoor = (int)Math.Round((double)(100 * Model[i].NotMoving) / total);
+                var pAnch = 100 - pMoor - pMove;
+
+                @:moving.push(@pMove);
+                @:moored.push(@pMoor);
+                @:anchored.push(@pAnch);
+                @:labels.push("@Model[i].Date.ToString("yyyy-MM-dd")");
+            }
+        }
+
+        var ctx = document.getElementById('myChart').getContext('2d');
+        var myChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: labels,
+                datasets: [
+                    {
+                        label: 'Under way',
+                        data: moving,
+                        borderColor: 'rgb(255, 159, 64)',
+                        backgroundColor: 'rgba(255, 159, 64, 0.2)'
+                    },
+                    {
+                        label: 'Moored',
+                        data: moored,
+                        borderColor: 'rgb(255, 99, 132)',
+                        backgroundColor: 'rgba(255, 99, 132, 0.2)'
+                    },
+                    {
+                        label: 'Anchored',
+                        data: anchored,
+                        borderColor: 'rgba(255, 255, 0, 1)',
+                        backgroundColor: 'rgba(255, 255, 0, 0.2)'
+                    }
+                ]
+            },
+            options: {
+                maintainAspectRatio: false,
+                responsive: true,
+                scales: {
+                    yAxes: [{
+                        scaleLabel: {
+                            display: true,
+                            labelString: '% of found vessels'
+                        },
+                        stacked: true,
+                        ticks: {
+                            min: 0,
+                            max: 100
+                        }
+                    }],
+                    xAxes: [{
+                        scaleLabel: {
+                            display: true,
+                            labelString: 'Date'
+                        },
+                        type: 'time',
+                        time: {
+                            unit: 'day'
+                        }
+                    }]
+                },
+                animation: {
+                    duration: 750,
+                }
+            }
+        });
+    </script>
+</body>
+</html>

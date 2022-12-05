@@ -1,0 +1,70 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-type" content="text/html; charset = utf-8">
+    <title> Sample HTML5 File</title>
+    <script type="text/javascript" charset="utf-8">
+    </script>
+</head>
+<body onload="pageLoaded();">
+
+    <script type="text/javascript" charset="utf-8">
+        function pageLoaded() {
+            var image = new Image();
+            image.src = 'spaceship.png';
+            image.onload = function () {
+                console.log('image finished loading');
+            };
+
+            //imgae loader
+            var imageLoader = {
+                loaded: true,
+                loadedImages: 0,
+                totalImages: 0,
+                load: function (url) {
+                    this.totalImages++;
+                    this.loaded = false;
+                    var image = new Image();
+                    image.src = url;
+                    image.onload = function () {
+                        imageLoader.loadedImages++;
+                        if (imageLoader.loadedImages === imageLoader.totalImages) {
+                            imageLoader.loaded = true;
+                        }
+                    }
+                    return image;
+                }
+            }
+
+            //individial image
+            //First: (Load individual images and store in a big array)
+            // Three arguments: the element, and destination (x,y) coordinates.
+            var image = imageArray[imageNumber];
+            context.drawImage(image, x, y);
+
+            //load spreadsheet images
+            // First: (Load single sprite sheet image)
+            // Nine arguments: the element, source (x,y) coordinates,
+            // source width and height (for cropping),
+            // destination (x,y) coordinates, and
+            // destination width and height (resize).
+            context.drawImage(this.spriteImage, this.imageWidth * (imageNumber), 0, this.imageWidth,
+                this.imageHeight, x, y, this.imageWidth, this.imageHeight);
+
+            //animations
+            function animationLoop() {
+                // Iterate through all the items in the game
+                //And move them
+            }
+            function drawingLoop() {
+                //1. Clear the canvas
+                //2. Iterate through all the items
+                //3. And draw each item
+            }
+
+
+
+        }
+    </script>
+</body>
+</html>

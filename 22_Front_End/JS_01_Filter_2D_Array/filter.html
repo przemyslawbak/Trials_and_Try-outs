@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h1>JavaScript console.log() Method</h1>
+
+<p>Press F12 on your keyboard to view the message in the console view.</p>
+
+<script>
+console.clear();
+let arr = [];
+for (let i = 0; i < 10; i++) {
+      arr[i] = [];
+      for (let j = 0; j < 10; j++) {
+        arr[i][j] = {
+          row: j,
+          col: i,
+          value: 0,
+          color: 'rgba(0, 162, 255, 0.2)',
+          elX: -1,
+          elY: -1,
+        };
+      }
+    };
+arr[4][3].value = 2;
+arr[3][4].value = 2;
+arr[2][5].value = 2;
+    
+let filteredServices = arr.flat().filter(({ value }) => value === 2);
+console.log(filteredServices);
+
+
+</script>
+
+<script>
+console.clear();
+let arr1 = [];
+for (let i = 0; i < 10; i++) {
+      arr1[i] = [];
+      for (let j = 0; j < 10; j++) {
+        arr1[i][j] = {
+          row: j,
+          col: i,
+          value: 0,
+          color: 'rgba(0, 162, 255, 0.2)',
+          elX: -1,
+          elY: -1,
+        };
+      }
+    };
+    let one = arr1.flat().filter(({ value }) => value > -1);
+    
+let arr2 = [];
+for (let i = 0; i < 10; i++) {
+      arr2[i] = [];
+      for (let j = 0; j < 10; j++) {
+        arr2[i][j] = {
+          row: -1,
+          col: -1,
+          value: 0,
+          color: 'rgba(0, 162, 255, 0.2)',
+          elX: -1,
+          elY: -1,
+        };
+      }
+    };
+    arr2[0][0].col = 7;
+    arr2[0][0].row = 0;
+    
+    let two = arr2.flat().filter(x => x.col > 5);
+
+const results = one.filter(x => two.some(y => x.col === y.col && x.row === y.row));
+console.log(results.length);
+
+</script>
+
+</body>
+</html>

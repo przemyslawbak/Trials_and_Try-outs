@@ -1,0 +1,12 @@
+﻿<Application x:Class="WpfApplication1.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:viewModels="clr-namespace:WpfApplication1.ViewModels"
+             xmlns:views="clr-namespace:WpfApplication1.Views">
+    <Application.Resources>
+        <viewModels:ViewModelLocator x:Key="ViewModelLocator" />
+        <DataTemplate DataType="{x:Type viewModels:DialogYesNoViewModel}">
+            <views:DialogYesNoView></views:DialogYesNoView>
+        </DataTemplate>
+    </Application.Resources>
+</Application>

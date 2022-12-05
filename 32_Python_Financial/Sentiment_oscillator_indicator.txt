@@ -1,0 +1,17 @@
+//@version=4
+study("Sentiment Zone Oscillator", overlay=false)
+//          INPUTS:
+len = input(18, title="Length of EMA", type=input.integer, minval=1)
+len1 = input(9, title="Length of Smoothed Sentiment Zone EMA", type=input.integer, minval=1)
+src = input(close, title="Source")
+
+
+r = src > src[1] ? 1 : -1
+sm = ema(r, len)
+s = ema(sm, len1)
+
+
+//          PLOTTING:
+z0 = plot(0.0, title="Zero-Line", color=color.yellow, transp=0, linewidth=3)
+sm0 = plot(s, title="Sentiment Zone Oscillator", color=sm > 0 ? color.green : color.red, style=plot.style_histogram)
+fill(z0, sm0, color=sm>0 ? color.teal : color.fuchsia)

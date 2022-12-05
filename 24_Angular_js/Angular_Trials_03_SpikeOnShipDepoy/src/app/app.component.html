@@ -1,0 +1,44 @@
+<div>
+  <div
+    cdkDropList
+    #one="cdkDropList"
+    [cdkDropListData]="list1"
+    [cdkDropListConnectedTo]="[two]"
+    class="item-list"
+    (cdkDropListDropped)="drop($event)"
+  >
+    Next:
+
+    <div
+      *ngIf="list1.length > 0"
+      class="item-box"
+      cdkDrag
+      [style.size]="50 * list1[0].size + 'px'"
+    >
+      <div>Fleet: {{ list1[0].size }}</div>
+    </div>
+  </div>
+
+  <div
+    cdkDropList
+    #two="cdkDropList"
+    [cdkDropListData]="list2"
+    [cdkDropListConnectedTo]="[one]"
+    class="item-list"
+    (cdkDropListDropped)="drop($event)"
+  >
+    <div class="item-box" *ngFor="let ship of list2" cdkDrag>
+      Deployed: {{ ship.size }}
+    </div>
+    <div class="row" *ngFor="let row of boardP1; let i = index">
+      <div class="cell" *ngFor="let box of row; let j = index" id="columns">
+        <button
+          #bt
+          mat-button
+          class="bt-cell"
+          (mouseover)="position = bt.getBoundingClientRect()"
+        ></button>
+      </div>
+    </div>
+  </div>
+</div>

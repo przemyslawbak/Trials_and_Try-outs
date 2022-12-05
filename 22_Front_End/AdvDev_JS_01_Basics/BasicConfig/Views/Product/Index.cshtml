@@ -1,0 +1,29 @@
+﻿<div id="gamecontainer">
+    <script>
+        let say = "hello";
+        let outer = "An outer variable";
+        if (say === "hello") {
+            let say = "goodbye";
+            console.log(say);
+            //Displays: "goodbye"
+            console.log(outer);
+            //Displays: "An outer variable"
+            let inner = "An inner variable";
+            console.log(inner);
+            //Displays: "An inner variable"
+        }
+        console.log(say);
+        //Displays: "hello"
+        //console.log(inner);
+//Displays: ReferenceError: inner is not defined
+
+        function saySomething(value) {
+            console.log(value);
+        }
+
+        saySomething("Hello from a function statement");
+//Displays: "Hello from a function statement"
+
+    </script>
+
+</div>

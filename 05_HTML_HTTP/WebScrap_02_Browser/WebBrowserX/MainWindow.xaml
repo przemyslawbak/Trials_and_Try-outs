@@ -1,0 +1,63 @@
+﻿<Window x:Class="WebBrowserX.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WebBrowserX"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid>
+        <!-- Definicja wierszy i kolumn dla panelu Grid-->
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <!-- Menu programu-->
+        <Menu Grid.Row="0" Grid.Column="0">
+            <MenuItem Header="Plik">
+                <MenuItem Header="Zapisz jako" Click="Zapisz_Click"/>
+                <MenuItem Header="Drukuj" Click="Tmp_Click"/>
+                <Separator/>
+                <MenuItem Header="Wyjście" Click="Exit_Click"/>
+            </MenuItem>
+            <MenuItem Header="Narzędzia">
+                <MenuItem Header="Ramka" IsChecked="True" IsCheckable="True"
+Checked="RamkaOn_Click" Unchecked="RamkaOff_Click"/>
+                <Separator/>
+                <MenuItem Header="Ustawienia" Click="Tmp_Click"/>
+                <MenuItem Header="Rozmiar">
+                    <MenuItem Header="Zwiększ +" Click="Tmp_Click"/>
+                    <MenuItem Header="Zmniejsz -" Click="Tmp_Click"/>
+                </MenuItem>
+                <Separator/>
+                <MenuItem Header="O programie" Click="OProgramie_Click"/>
+            </MenuItem>
+        </Menu>
+        <!-- Przeglądarka -->
+        <DockPanel Grid.Row="1" Grid.Column="0">
+            <ToolBar DockPanel.Dock="Top">
+                <Button x:Name="btnWstecz" Content="Wstecz" Height="25"
+Background="LightSteelBlue" HorizontalAlignment="Left"
+VerticalAlignment="Top" Width="55" Click="btnWstecz_Click"/>
+                <Button x:Name="btnDalej" Content="Dalej" Height="25"
+Background="LightSteelBlue" HorizontalAlignment="Left"
+VerticalAlignment="Top" Width="55" Click="btnDalej_Click"/>
+                <Separator/>
+                <TextBox x:Name="txtAdres" HorizontalAlignment="Left" Height="25"
+TextWrapping="Wrap" Text="http://" KeyUp="txtAdres_KeyUp"
+VerticalAlignment="Top" MinWidth="400"/>
+                <Button x:Name="btnWejdz" Content="Wejdź" Height="25"
+Background="LightSteelBlue" HorizontalAlignment="Left"
+VerticalAlignment="Top" Width="50" Click="btnWejdz_Click"/>
+            </ToolBar>
+            <Border x:Name="brdRamka" BorderThickness="3" BorderBrush="DarkCyan">
+                <WebBrowser x:Name="wbPrzegladarka"
+Navigating="wbPrzegladarka_Navigating" VerticalAlignment="Top"
+Navigated="wbPrzegladarka_Navigated" HorizontalAlignment="Left"/>
+            </Border>
+        </DockPanel>
+    </Grid>
+</Window>

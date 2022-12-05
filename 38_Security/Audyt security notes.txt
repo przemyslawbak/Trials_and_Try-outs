@@ -1,0 +1,332 @@
+---TOPICS:
+- soft: Burp Suite community edition
+- inny soft?
+HTTP:
+- Protokół HTTP jest bezstanowy1 (ang. stateless). Oznacza to, że bez zastosowania dodatkowych mechanizmów nie jest możliwe ustanowienie sesji pomiędzy klientem HTTP, najczęściej przeglądarką WWW, a serwerem HTTP
+- http HEAD nie pobiera ciala, przyspierza silowe szukanie plikow i inne testy
+- szczególnie niebezpieczna bywa metoda PUT (często jest ona domyślnie wyłączona), umożliwiająca tworzenie plików na serwerze HTTP
+- blokowanie na serwerze metody PUT (pUT, puT itd), testowanie
+- Referer header jest wysyłany niezaszyfrowany nawet jak korzystamy z HTTPS. Zabezpieczenie: Referrer-Policy: no-referrer
+- SQL Injection, zlokalizowana 22 marca 2019 roku w nagłówku User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) ⤦
+Chrome/55.0.2883.87'XOR(if(now()=sysdate(),sleep(5*5),0))OR' - 
+- Path Traversal: Accept: ../../../../../../../../../../etc/passwd{{
+- parametry, często można manipulować, wysyłane w url GET
+- parametry też się wysyła w ciele POST
+- manipulacja kontentem, żądanie POST: application/x-www-form-urlencoded
+- manipulacja kontentem, POST: multipart/form-data - WAF Bypass Techniques – Using HTTP Standard and Web Servers’ Behaviour
+- podatności z GET + ciało
+Burp:
+- zakładce proxy można je skonfigurować i przechwytywać (intercept) zapytania i odpowiedzi, konfig w Opcjach
+- do repeatera można skopiować żądanie
+- intruder służy do enumeracji parametrów żądania //COMMUNITY EDITION IS LIMITED
+- comparer służy do porównywania żądzań lub odpowiedzi
+- decoder służy do dekodowanie z BASE64 lub innego formatu
+- sequencer służy do analizy entropii tokena - spr identyfikatory sesji
+- HTTPS z Burp -> 127.0.0.1:8080 w przeglądarce -> save cert -> dodanie cert do przeglądarki (coś hurde fajans nie działa. do spr ostatni certyfikat PortSwigger CA)
+- socks proxy host jedt do wykorzystania proxy
+Do najpopularniejszych (nagłówków) – związanych z bezpieczeństwem – należy zaliczyć:
+- HTTP Strict Transport Security (HSTS)
+- Content-Security-Policy
+- X-Frame-Options
+- X-Content-Type-Options
+- Referrer-Policy
+- Feature-Policy
+- Access-Control-Allow-Origin
+Chrome / Firefox dev tools:
+- szukanie iframe
+- endpointy API
+- odwracanie minifikacji kodu JS w zakładce Sources
+- zakładka Elements zawiera też kod dodany dynamicznie przez JS
+- podejrzenie ciasteczek
+- debugger pozwala podejrzenie wartości w kodzie
+- Punkty wejścia i wykonania kodu (sources oraz execution sinks) <- do ogarnięcia: Na kanale @LiveOverflow w serwisie YouTube
+Hasła:
+- atak słownikowy
+- atak siłowy
+- atak mieszany (słownikowy + siłowy)
+- atak tęczowe tablice
+- listy najczęściej używanych haseł
+- unimożliwiać użycie łatwego hasła
+- uniemożliwić użycie hasłą takeigo samego jak login / email
+- utrudnianie powtazralności ataków (opóźnienia, spowolnienia, captcha)
+- wymuszanie znaków specjalnych, cyfr, capsów
+- najbezpieczniej zapisane hasło: sól (indywidualnie), pieprz (osobne źródło), hashowanie SHA512
+Rekonesans:
+- lokalizacja serwerów nmap (urządzenie do skanowania portów) "W tym przypadku realizujemy sprawdzenie wszystkich portów TCP (0–65535) oraz skanowanie z wersjonowaniem (-sV). Możemy również posłużyć się skryptem http-headers, który dodatkowo wyświetli nagłówki odpowiedzi HTTP."
+- szukanie domen powiązanych i subdomen za pomocą: google/bing/yandex, serwisów i API, szukanie po IP, metoda słownikowa, wyszukiwarki Certificate Transparency logs, Projekt Sonar
+- wsteczna inżynieria aplikacji mobilnych w poszukiwaniu domen, linków itd
+- domeny wirtualne (?)
+Ukryte katalogi i pliki:
+- szukanie katalogu .git, .gitignore lub .svn
+- Jeżeli programista pozostawił na serwerze folder .git, nic nie stoi na przeszkodzie, aby odczytać zawartość dowolnego pliku, nawet jeśli nie mamy uprawnień do pobrania całego repozytorium, poleceniem git clone czy git checkout
+- Jak zatem sprawdzić, czy folder .git/.svn znajduje się na serwerze? Wystarczy sprawdzić, czy adres URL w postaci np. http://adresserwisu/.git/ zwróci odpowiedź HTTP z kodem innym niż 404 Not Found.
+- folder .idea i workspace.xml, inne
+XSS (Cross-Site Scripting):
+- test1: w forularz wpisanie <u>test (spr czy enkoduje)
+- test2: <script>alert(1)</script>
+- reflected XSS - wyświetlany w parametrze odpowedzi
+- persistent XSS - zapisanie skryptu w bazie danych (np blog)
+- DOM-based XSS
+- za pomocą XSS jesteśmy w stanie odczytać dowolne dane w kontekście zalogowanego użytkownika
+- możliwość wykonania dowolnej akcji w kontekście zalogowanego użytkownika
+- Innymi słowy, XSS pozwala na przejęcie dostępu do sesji użytkownika
+- Istnieją również narzędzia, takie jak BeEF3, które zawierają gotowe moduły pozwalające na dalsze wykorzystanie (post-eksploitację) XSS
+- dla najpopularniejszych wariantów XSS zabezpieczeniem jest enkodowanie
+Konteksty XSS:
+- WSTRZYKNIĘCIE W ZAWARTOŚCI TAGU: <div><img src onerror=alert(1)></div>
+- WSTRZYKNIĘCIE W ZAWARTOŚCI ATRYBUTU: <div class="" onmouseover=alert(1) "></div>; <div class=""><script>alert(1)</script>"></div>
+- WSTRZYKNIĘCIE W ZAWARTOŚCI ATRYBUTU BEZ CUDZYSŁOWÓW/APOSTROFÓW: <div class=x onclick=alert(1)></div>
+- WSTRZYKNIĘCIE W ATRYBUCIE HREF: <a href="javascript:alert(1)"></a>
+- WSTRZYKNIĘCIE W STRINGU WEWNĄTRZ KODU JS: <script>var username="";alert(1)//";</script>
+- WSTRZYKNIĘCIE W ATRYBUCIE ZE ZDARZENIEM JS: <div onclick="change('&#39;);alert(1)//')">User1</div>
+- WSTRZYKNIĘCIE W ATRYBUCIE HREF WEWNĄTRZ PROTOKOŁU JS: <a href="javascript:change('%27);alert(1)//')">CLICK</a>
+Metody obrony przed XSS:
+- Zamiana znaków specjalnych HTML na encje.
+- Jeżeli aplikacja generuje dynamicznie HTML, lepiej wartości atrybutów umieszczać wewnątrz cudzysłowów/apostrofów
+- Jeżeli użytkownik może w aplikacji podać adres URL, walidujmy, czy protokół w adresie to HTTP/HTTPS. Odrzucajmy wszystkie pozostałe.
+- Enkodowanie wszystkich znaków niealfanumerycznych do postaci UTF-16, tj. \uXXXX.
+- W przypadku zagnieżdżeń kontekstów należy pamiętać o odpowiedniej ochronie dla każdego z nich.
+Podatności DOM XSS:
+- Funkcje typu eval: zaleca się, by nie używać funkcji typu eval czy Function na danych pochodzących z niezaufanych źródeł (np. od użytkownika).
+- Funkcje przyjmujące kod HTML: innerHTML, outerHTML, insertAdjacentHTML, document.write - należy pamiętać o enkodowaniu danych
+- Funkcje przyjmujące adres URL: obecny adres URL strony (location), ciasteczka (document.cookie) czy komunikacja typu postMessage, fetch
+- Najbardziej zalecana ochrona przed tego typu XSS to wydzielenie osobnej domeny (tzw. domeny sandboksowej), z której serwowane będą pliki wgrywane przez użytkowników.
+- upload plików SVG i html jest zagrożeniem (mogą zawierać skrypty, po przejściu do URL pliku można aktywować skrypt)
+- edytory tekstu są potencjalnym zagrożeniem, rozwiązaniem jest sanityzacja (oczyszczanie ze szkodliwych znaczników)
+- istnieją typowe obejścia popularnych filtrów XSS
+Content Security Policy (CSP)
+- CSP może być wdrożony jako nagłówek HTTP (o nazwie Content-Security-Policy lub Content-Security-Policy-Report-Only), jak również jako element <meta> bezpośrednio w kodzie HTML
+- Przede wszystkim należy mieć na uwadze, że CSP to mechanizm, który chroni jedynie przed skutkami podatności
+- *-src: skąd mogą być ładowane zewnętrzne zasoby na stronie
+- script-src: jakie skrypty mogą zostać załadowane na stronie
+- base-uri: W praktyce zaleca się, by base-uri stosować zawsze – ustawiać je albo na wartość 'none', albo 'self'.
+- block-all-mixed-content i upgrade-insecure-requests
+- frame-ancestors: jest sposobem ochrony przed atakiem typu Clickjacking (niewidoczny <iframe>)
+- plugin-types: Dyrektywa plugin-types w praktyce używana jest niezwykle rzadko. odchodzi się od używania pluginów (takich jak Flash czy aplety Javy).
+- report-uri: Dyrektywa report-uri jest związana bezpośrednio z trybem raportowania w CSP
+- sandbox: Użycie atrybutu sandbox pozwala zastosować dodatkowe ograniczenia na stronie docelowej
+- raportowanie (report-uri) - CSP może też wysyłać raporty, jeśli jego polityka zablokuje załadowanie jakiegoś elementu na stronie.
+- można wł/wył raportowanie
+- Przykłady: Tabela 5. Przykładowe polityki CSP (książka Sekurak)
+Obejście CSP:
+- przez JSONP
+- przez frameworki JS
+- jak aplikacja korzysta z dużej ilości zewnętrznych skryptów, np google-analytics.com
+CORS & SOP:
+- Same-Origin Policy (SOP) - blokowanie ruchu z innych źródeł
+- CORS umożliwia nam bezpieczne wykonywanie zapytań HTTP Cross-Origin.
+- jeśli na serwerze można dokonać operacji zmieniających stan aplikacji za pomocą zapytań prostych, to w dalszym ciągu możliwy jest typowy atak CSRF (również tak jak w wersji oryginalnej – tagi <img> lub <form>)*. CORS, przez konieczność wstecznej kompatybilności, nie jest w stanie nas przed tym obronić.
+Obejścia CORS i złe praktyki:
+- Access-Control-Allow-Origin: *
+- dla https://example.com atakujący może zarejestrować https://example.com.evil.com
+- błędne regexy wprzy wykluczeniach
+- nagłówek ACAO ustawionym na null, przeglądarki nie zaimplementowały
+- CORS i Cache Poisoning
+- stosowanie w aplikacji podatnych modułów
+- XSS powoduje, że atakujący dostaje możliwość wywoływania dowolnych zapytań cross-origin, ponieważ… nie są one cross-origin, tylko same-origin
+- JSON Hijacking
+- side-channel
+Cross-Site Request Forgery (XSRF, CSRF, OSRF):
+- jest to zmuszenie przeglądarki ofiary do wykonania pewnej nieautoryzowanej akcji (wykonania żądania HTTP), a atakujący na cel bierze zalogowanego użytkownika*.
+- przykład: napisanie na forum komentarza z tagiem <img src="url z parametrami">, admin po zalogowaniu się próbuje pobrać img, przeglądarka realizuje GET z url
+- przykład: na swojej stronie atakujący umieszcza tag <img src="url z parametrami">, nakłąnia admina do wejścia, realizowany jest GET z url
+- przykład: spreparowana strona posiada formularz POST który wysyła parametry na wybrany url
+- Zastosowanie parametru _method w formularzu HTML - można próbować innych metod HTTP
+- w urządzeniu sieciowym można próbować: <img src="http://admin:admin@192.168.10.1/reboot/">
+Zabezpieczenia przed CSRF:
+- losowe tokeny
+- zmiana wszystkich żądań metodą GET (które zmieniają stan aplikacji) na POST.
+- należy sprawdzić, czy nie można sztucznie zmienić w aplikacji żądania POST na żądanie GET (z parametrami przekazywanymi w URI)
+- atrybut SameSite (Flaga SameSite) dodawany do ciasteczek
+Server-Side Template Injection (SSTI):
+- Aby możliwe było jej wykorzystanie, powinniśmy przetwarzać po stronie serwera szablony pochodzące od niezaufanych użytkowników
+- dostarczając użytkownikowi możliwość stworzenia szablonu, dajemy mu tym samym prawo do dodania nowego kodu do naszej aplikacji!
+- identyfikacja silnika najpierw
+- sprawdzanie podatności: w takich przypadkach dobrze sprawdzają się np. proste wyrażenia arytmetyczne typu ${2*2}
+- sprawdzanie podatności: przez ${ może zwróci błędy
+Obrona przed SSTI:
+- rezygacja z szablonów (przynajmniej częściowa)
+- tylko zaufany użytkownik może edytować szablony
+- bezpieczne silniki
+- Sandboxing - możemy sprawdzić, czy mamy szczęście i czy dany silnik nie udostępnia trybu „bezpiecznego” lub „sandboxowanego”.
+- Hardening - Ostatnią deską ratunku może być konfiguracja serwera
+Server-Side Request Forgery (SSRF):
+- Server-Site Request Forgery – czyli zmuszenie serwera do zainicjowania pewnej komunikacji sieciowej
+Miejsca występowania SSRF:
+- parametry HTTP przekazywane w żądaniu, których nazwy zawierają nazwy plików lub adresy URL
+- Pliki XML: Najbardziej chyba znanym jest podatność XXE
+- Document type definition (DTD)
+- XInclude: Umożliwia on dołączenie do bazowego dokumentu XML innych plików
+- SVG/XLink
+- XSLT
+- Inne formaty plików
+- różne biblioteki
+- Mechanizm uploadu
+- inne protokoły niż HTTP
+Podatność SQL Injection:
+- SQL Injection to podatność aplikacji webowych, dzięki której napastnik może wstrzyknąć własny fragment zapytania SQL
+- wstrzyknięcie -- (dwa dywizy): https://example.com/search?query=test'--
+- wstrzyknięcie: https://example.com/search?query=test' OR 1=1--
+- wtrzyknięcie UNION-based: https://example.com/search?query=test' UNION SELECT 1,2,3,4,5-- (dla 5 kolumn)
+- Próba wydobycia nazw wszystkich tabel: https://example.com/search?query=test' UNION SELECT null,null,table_name,null,null FROM information_schema.tables--
+- wstrzyknięcie ERROR-based: https://example.com/search?query=test' AND CAST((SELECT blog_user||'/'||user_password FROM blog_users) AS integer)--
+- wstrzyknięcie BLIND (content based)
+- wstrzyknięcie BLIND (time based): Tym razem nie będziemy opierać się na treści odpowiedzi, a na informacji o czasie, jaki zajmuje jej udzielenie
+- STACKED QUERIES: W niektórych konfiguracjach okazuje się to jednak możliwe, np. https://example.com/getCategoryCount?category=test'; DROP DATABASE blog--
+SKUTKI WYKORZYSTANIA SQL INJECTION:
+- Wydobycie dowolnych danych z bazy
+- Omijanie ekranu logowania: W pewnych sytuacjach może się okazać, że wstrzyknięcie SQL pozwoli na ominięcie ekranu logowania bez znajomości danych logujących, np. login: admin' OR 1=1-- hasło: admin1
+- Modyfikacja/usuwanie danych: Zmiana hasła administratora: UPDATE
+- Modyfikacja/usuwanie danych: Ścieżka dostępu (Path Traversal)
+- Modyfikacja/usuwanie danych: Wykonanie kodu PHP
+- Odczyt plików z dysku
+- Zapis plików na dysku
+- Wykonywanie poleceń systemu operacyjnego
+PODSTAWOWE TESTY:
+- Pole liczbowe, np id=1*1, id=2-(SELECT 1 FROM DUAL)
+- Pole zawierające tekst, np name=Jo'||(SELECT 'h' FROM dual)||'n, name=Jo'||'hn
+- Pola zawierające nazwy kolumn do sortowania (np. sort=name), np sort=name/**/, sort=name,(SELECT 1)
+- Mapowanie parametrów na kolumny, np user[city]=Warszawa&user[email]=a@localhost, user[city%3Dcity AND 1%3D2--]=x
+Second-order SQL Injection:
+- sytuacja, w której SQL Injection nie występuje bezpośrednio w odpowiedzi na zapytanie HTTP, ale pewne dane są zapisywane – i dopiero w odpowiedzi na inne zapytanie pojawia się podatność
+METODY OCHRONY PRZED SQL INJECTION:
+- Zapytania parametryzowane (też w C#)
+- Walidacja typów danych: spr czy odpowiedni format
+- Stosowanie systemów klasy ORM
+- Hardening bazy danych
+Podatność Path Traversal (Directory Traversal, dot dot slash attack):
+- niekontrolowany dostęp do plików oraz katalogów
+Testowanie Path Traversal:
+- zapytania GET / POST z ../
+- Omijanie filtrów (%2e%2e%2f itp)
+Ochrona przed Path Traversal:
+- walidacja danych wejściowych (routing?)
+- Blokowanie ataku poprzez podmianę tekstu (../), ale rozważnie, da się ominąć
+Code Injection i Command Injection:
+- nieautoryzowane wykonanie kodu lub poleceń systemowych
+Wszystkie dane odbierane na wejściu aplikacji (np. z parametrów URL lub ciała zapytania POST) powinny być weryfikowane pod kątem:
+- dopuszczalnych znaków, jakie mogą wystąpić w danej zmiennej
+- dopuszczalnej długości danych
+- dopuszczalnego formatu danych
+- dopuszczalnego typu danych
+WEKTORY ATAKÓW:
+- Eval
+- Local File Inclusion i Remote File Inclusion
+- Podatności w mechanizmie wgrywania plików
+- Uruchamianie zewnętrznego oprogramowania
+- Panele administracyjne
+- Cross-Site Scripting a Code Injection
+- Tryb debug a serwer produkcyjny
+- Od SQL Injection do RCE
+- XSLT
+- WebDAV
+- Podatności w bibliotekach
+Skutki Code Injection i Command Injection:
+- Wykradanie danych, kodu źródłowego, haseł, konfiguracji
+- Eskalacja czyli uzyskanie nieautoryzowanego dostępu do serwera
+- tylne furtki, instalowanie ich po uzyskaniu dostępu do serwera
+Uwierzytelnianie, zarządzanie sesją, autoryzacja:
+- uwierzytelnienie (logowanie) a nie autentykacja
+- identyfikacja - identyfikator: login, email
+- Protokół HTTP jest bezstanowy
+- wykorzystuje się ciasteczka sesyjne
+- Wykorzystanie ciasteczek to nie jedyny sposób na to, by ustanowić sesję. Wiele aplikacji wykorzystuje podejście polegające na przesyłaniu specjalnego tokena np. w nagłówkach HTTP
+- OAuth 2.0 lub OpenID Connnect - token przesyłany jest w nagłówku Authorization
+- autoryzacja - Gdy proces uwierzytelniania zakończy się pomyślnie, tzn. potwierdzona zostanie tożsamość podmiotu, następuje etap weryfikacji uprawnień
+- Podaj hasło jeszcze raz – krytyczne akcje
+- Logowanie zdarzeń
+Omijanie uwierzytelnienia:
+- SQL Injection (admin' --)
+- dane uwierzytelniające testowe, domyślne, dane w repo, słownikowe hasła, dane z serwera,
+- haveibeenpwned.com
+- Do najpopularniejszych narzędzi służących do przeprowadzania ataków słownikowych należy Hydra
+- Różny czas odpowiedzi aplikacji w przypadku próby resetu hasła dla nieistniejącego i istniejącego użytkownika
+Zarządzanie sesją:
+- korzystamy z gotowych mechanizmów i frameworków
+- Regenerowanie sesji (zmiana) identyfikatora sesji przy każdej zmianie poziomu uprawnień użytkownika, inaczej możliwy jest atak Session Fixation
+- wyczulenie na równoległe sesje użytkownika (2 przeglądarki), czy to dobry pomysł, jeśli tak, informowanie użytkownika o tym
+- unieważnienie sesji na serwerze po wylogowaniu
+- określony czas sesji, zależny od jej ważności
+- czas życia ciasteczka z tokenem tez do ustalenia
+- uwaga z mechanizmem "zapamiętaj mnie"
+- poczytać OWASP ASVS 4.0
+Pułapki w przetwarzaniu plików XML:
+- sporo różnych zastosowań formatu
+- BILLION LAUGHS - zagnieżdżenia encji
+- QUADRATIC BLOWUP - nie kumam
+- XML EXTERNAL ENTITY - najpopularniejsza podatność, Jej skutkiem jest zwykle możliwość odczytu zawartości plików na dysku serwera lub przeprowadzenie ataku SSRF
+- wiele innych bibliotek, specyfikacja XML
+API Rest:
+- problem z nadpisywaiem metod HTTP,
+- metody wykonują funkcje do których nie są przeznaczone (GET i HEAD powinny tylko pobierać dane)
+- należy sprawdzić czy metody HTTP wykonywane z alternatywnych ścieżek (np nadpisywanie) przejdą czy nie
+- spr podatności frameworków
+- pamiętać o wyłączeniu debugowania
+- rodzaje przejmowanych dany i podatności związane
+- bezpieczeństwo kluczy API: nie przesyłanie jako jako parametrów w URL, kluczy do API nie przechowywać bezpośrednio w źródłach aplikacji (lepiej w konfig), aplikacje mobilne są podatne, nie umieszczać w kodzie JS i HTML, rotacja kluczy, złożoność
+- podatności webhooków i wysyłania info o realizacji transakcji,
+Niebezpieczeństwa JSON Web Token (JWT):
+- łatwość rozkodowania, brak poufności, można szyfrować
+- możliwość nieautoryzowanego dodania kolejnej akcji przez użytkownika – np. delete – czyli ominięcie autoryzacji, rozwiązaniem podpisywanie tokenów,
+- komplikowanie problem)
+- atak: usunięcie sekcji podpisu
+- atak: czasami podpis zwracany w komunikacie błęd
+- atak: łamanie tokenów/kluczy
+- z powodu błędu w bibliotece obsługującej JWT można czasem… po prostu podać w payloadzie tokena własny klucz
+- warto zweryfikować, czy używamy odpowiednio bezpiecznego algorytmu szyfrującego
+- tokeny mogą wyciec, ograniczona żywotność
+- czasami token powinien być użyty tylko raz
+- atak: czasowy na podpis, im więcej bajtów zgodnych, tym więcej potrzebnych jest porównań i stąd dłuższy czas potrzebny na odpowiedź
+- brak alternatyw
+Zalety i wady OAuth 2.0 z perspektywy bezpieczeństwa:
+- OAuth 2.0 token nie służy do zarządzania tożsamością posiadacza tokena
+- do zarządzania tożsamością posiadacza tokena może posłużyć OpenID Connect
+- obowiązkowe SSL - Wyciek tokena jest równoznaczny z możliwością wykorzystania go przez inny podmiot do uzyskania dostępu do zasobów.
+- zalecana jest granulacja uprawnień
+- Kod autoryzujący powinien być możliwy do wykorzystania tylko raz
+- Token i kod autoryzacyjny powinien mieć rozsądny czas życia i długość
+- OAUTH 2.0 CHECKLIST s 651
+Bezpieczeństwo protokołu WebSocket:
+- Po zestawieniu połączenia obie strony mogą wymieniać się danymi w dowolnym momencie, wysyłając pakiet danych
+- przy zapytaniu GET wysyłamy Sec-WebSocket-Key
+- zaleca się korzystanie z gotowych rozwiązań
+- można testować przy użyciu Burp Suite
+- WEBSOCKET CHECKLIST s 668
+Zagrożenia WebSocket:
+- brak Same Origin Policy
+- brak uwierzytelnienia i autoryzacji
+- Domyślnie klient nie posiada prawie żadnych ograniczeń co do liczby nawiązanych połączeń
+Flaga SameSite:
+- ustawienia kiedy zostanie dołączone ciasteczko
+- SameSite może przyjmować jedną z trzech wartości: Lax, Strict lub None
+- Strict spowoduje, że gdy zapytanie do serwera zostanie wygenerowane z innej domeny (zapytanie typu cross-site) niż ta, dla której ciasteczko zostało utworzone, przeglądarka nie dołączy go do żądania.
+- Zastosowanie polityki Strict - będzie to związane z koniecznością wprowadzenia poświadczeń przy każdym kliknięciu w link prowadzący do zasobu umieszczonego w innej domenie
+- Zastosowanie polityki Lax będzie skutkowało tym, że gdy przeglądarka zostanie zmuszona do wysłania zapytania typu cross-site, ale z wykorzystaniem bezpiecznej metody HTTP
+- Dodanie flagi SameSite z wartością Lax w przypadku poprawnie zaimplementowanych aplikacji powinno odbyć się bezboleśnie.
+- SameSite pozwala zabezpieczyć aplikację i jej użytkowników przed zagrożeniami, które wymagają wykonywania zapytań typu cross-site
+Niebezpieczeństwa deserializacji w PHP:
+- PODATNOŚĆ PHP OBJECT INJECTION
+Niebezpieczeństwa deserializacji w Pythonie (moduł pickle):
+- moduł pickle de facto pozwala nam na wykonanie jakiejkolwiek metody, przekazując do niej dowolny zestaw argumentów
+Niebezpieczeństwa deserializacji w .NET:
+- jedna z propert jest "object"
+- Schody zaczynają się w momencie, kiedy chcemy w obiekcie JSON zamieścić nieco więcej informacji o danych niż tylko same dane
+- zabezpieczenie: whitelist typów, walidacja danych, nie deserializować danych pod kontrolą użytkownika, None dla parametru TypeNameHandling
+- XMLSERIALIZER
+- zabezpieczenie: pobierać informacji o typie z zewnątrz, reszta j.w.
+Niebezpieczeństwa deserializacji w Javie:
+- study cases
+
+---TODO:
+- modify requests and responses with C# (how?)?
+- intruder c# (simple url + request setup)?
+
+---var websites:
+https://www.ceos3c.com/security/the-best-hacking-books/
+https://geekflare.com/ethical-hacker-training-grounds/
+https://github.com/garethr/pentesting-playground
+https://owasp.org/www-project-top-ten/
+https://dvwa.co.uk/
+https://www.youtube.com/watch?v=IWWYNDiwYOA
+https://www.zaproxy.org/
+https://www.youtube.com/watch?v=2_lswM1S264

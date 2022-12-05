@@ -1,0 +1,23 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31112.23
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "BookAlgorythmic", "BookAlgorythmic\BookAlgorythmic.pyproj", "{3B75494F-172E-42BF-A69D-35A20EFF895F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3B75494F-172E-42BF-A69D-35A20EFF895F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3B75494F-172E-42BF-A69D-35A20EFF895F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {5328F26D-29AD-4A51-B314-7E580A191886}
+	EndGlobalSection
+EndGlobal

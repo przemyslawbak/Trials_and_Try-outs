@@ -1,0 +1,35 @@
+﻿@model PagingList<ColorPanel>
+
+@{
+    var next = new Dictionary<string, string>
+{
+{ "speakerId", "11" },
+{ "currentYear", "true" },
+{ "page", (Model.PageIndex + 1).ToString() }
+};
+}
+@{
+    var prev = new Dictionary<string, string>
+{
+{ "speakerId", "11" },
+{ "currentYear", "true" },
+{ "page", (Model.PageIndex - 1).ToString() }
+};
+}
+
+@if (Model.PageIndex > 1)
+{
+    <a asp-action="Index"
+       asp-all-route-data="prev">PREV PAGE</a>
+}
+
+@if (Model.PageIndex < Model.PageCount)
+{
+    <a asp-action="Index"
+       asp-all-route-data="next">NEXT PAGE</a>
+}
+
+@foreach (var item in Model)
+{
+    <div>@item.Element1BackgroundColor, @item.Element2BackgroundColor, @item.Element3BackgroundColor</div>
+}

@@ -1,0 +1,25 @@
+﻿<div id="gamecontainer">
+    <div id="gamestartscreen" class="gamelayer">
+        <span id="singleplayer" onclick="singleplayer.start();">Campaign</span><br>
+        <span id="multiplayer" onclick="multiplayer.start();">Multiplayer</span><br>
+    </div>
+    <div id="missionscreen" class="gamelayer">
+        <input type="button" id="entermission" onclick="singleplayer.play();">
+        <input type="button" id="exitmission" onclick="singleplayer.exit();">
+        <div id="missonbriefing">
+            Welcome to your first mission.
+        </div>
+    </div>
+    <div id="gameinterfacescreen" class="gamelayer">
+        <div id="gamemessages"></div>
+        <div id="callerpicture"></div>
+        <div id="cash"></div>
+        <div id="sidebarbuttons">
+        </div>
+        <canvas id="gamebackgroundcanvas" height="400" width="480"></canvas>
+        <canvas id="gameforegroundcanvas" height="400" width="480"></canvas>
+    </div>
+    <div id="loadingscreen" class="gamelayer">
+        <div id="loadingmessage"></div>
+    </div>
+</div>

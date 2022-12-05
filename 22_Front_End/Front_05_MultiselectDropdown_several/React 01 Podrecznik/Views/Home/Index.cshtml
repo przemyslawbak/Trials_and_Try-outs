@@ -1,0 +1,212 @@
+﻿@model MultiselectViewModel
+@{
+    Layout = null;
+}
+
+<!--good, also for many multiple selects-->
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Multiselect</title>
+    <link rel="stylesheet" href="~/css/site.css" />
+</head>
+<body>
+    <script>
+        function changeAttributes(sibling) {
+            const label = sibling.previousElementSibling;
+            const checkbox = sibling.previousElementSibling.children[0];
+            const parent = sibling.parentNode;
+
+            checkbox.id = label.htmlFor + parent.id;
+            label.setAttribute("for", label.htmlFor + parent.id);
+        }
+    </script>
+    <!--todo: onload checkboxes check-->
+    <form asp-action="Index">
+        <div class="column33 leftDivider">
+            <div class="barItem"><input class="searchRangeLeft lock" type="text" placeholder="from"> <label class="fromtoLabel">GRT</label> <input class="searchRangeRight lock" type="text" placeholder="to"></div>
+            <input class="inputTextBox barItem lock" type="text" placeholder="Call Sign">
+            <!--multiple select-->
+            <div class="multiselect inputSelect barItem" id="vesselflags">
+                <div class="selectBox">
+                    <div id="arrowSel"></div>
+                    <span class="oryginalText">Select flags</span>
+                    <div>Select flags</div>
+                    <select asp-for="Flags" class="inputSelect" id="selectvesselflags" multiple>
+                        @foreach (string item in ViewBag.VesselFlags)
+                        {
+                            <option>@item</option>
+                        }
+                    </select>
+                </div>
+                <div class="checkboxes" id="checkboxesvesselflags">
+                    @foreach (string item in ViewBag.VesselFlags)
+                    {
+                        <label for="@item">
+                            <input type="checkbox" id="@item" onchange="addSelection(this)" />@item
+                        </label>
+                        <img src onerror="changeAttributes(this)" />
+                    }
+                </div>
+            </div>
+            <div class="barItem"><input class="searchRangeLeft lock" type="text" placeholder="from"> <label class="fromtoLabel">LOA</label> <input class="searchRangeRight lock" type="text" placeholder="to"></div>
+            <div class="barItem"><input class="searchRangeLeft lock" type="text" placeholder="from"> <label class="fromtoLabel">Beam</label> <input class="searchRangeRight lock" type="text" placeholder="to"></div>
+            <div class="barItem"><input class="searchRangeLeft lock" type="text" placeholder="from"> <label class="fromtoLabel">YOB</label> <input class="searchRangeRight lock" type="text" placeholder="to"></div>
+        </div>
+        <div class="column33 leftDivider">
+            <div class="barItem"><input class="searchRangeLeft lock" type="text" placeholder="from"> <label class="fromtoLabel">LOA</label> <input class="searchRangeRight lock" type="text" placeholder="to"></div>
+            <input class="inputTextBox barItem lock" type="text" placeholder="Call Sign">
+            <input class="inputTextBox barItem lock" type="text" placeholder="Call Sign">
+            <!--multiple select-->
+            <div class="multiselect inputSelect barItem" id="vesseltypes">
+                <div class="selectBox">
+                    <div id="arrowSel"></div>
+                    <span class="oryginalText">Select vessel types</span>
+                    <div>Select vessel types</div>
+                    <select asp-for="Types" class="inputSelect" id="selectvesseltypes" multiple>
+                        @foreach (string item in ViewBag.VesselTypes)
+                        {
+                            <option>@item</option>
+                        }
+                    </select>
+                </div>
+                <div class="checkboxes" id="checkboxesvesseltypes">
+
+                    @foreach (string item in ViewBag.VesselTypes)
+                    {
+                        <label for="@item">
+                            <input type="checkbox" id="@item" onchange="addSelection(this)" />@item
+                        </label>
+                        <img src onerror="changeAttributes(this)" />
+                    }
+                </div>
+            </div>
+            <!--multiple select-->
+            <div class="multiselect inputSelect barItem" id="dupa">
+                <div class="selectBox">
+                    <div id="arrowSel"></div>
+                    <span class="oryginalText">Dupa</span>
+                    <div>Dupa</div>
+                    <select asp-for="Dupa" class="inputSelect" id="selectdupa" multiple>
+                        @foreach (string item in ViewBag.Dupa)
+                        {
+                            <option>@item</option>
+                        }
+                    </select>
+                </div>
+                <div class="checkboxes" id="checkboxesdupa">
+
+                    @foreach (string item in ViewBag.Dupa)
+                    {
+                        <label for="@item">
+                            <input type="checkbox" id="@item" onchange="addSelection(this)" />@item
+                        </label>
+                        <img src onerror="changeAttributes(this)" />
+                    }
+                </div>
+            </div>
+            <div class="barItem"><input class="searchRangeLeft lock" type="text" placeholder="from"> <label class="fromtoLabel">DWT</label> <input class="searchRangeRight lock" type="text" placeholder="to"></div>
+            <input class="inputTextBox barItem lock" type="text" placeholder="Call Sign">
+        </div>
+
+        <input type="submit" value="Send" />
+    </form>
+
+
+    <script>
+
+
+
+        //on checkbox change
+        function addSelection(checkbox) {
+            const checkboxes = checkbox.parentNode.parentNode.id;
+            const selectionId = checkboxes.replace('checkboxes', 'select');
+            checkbox.id = checkbox.id.replace(checkboxes, '');
+            if (checkbox.checked) {
+                select(true, checkbox, selectionId);
+            }
+            else {
+                select(false, checkbox, selectionId);
+            }
+        }
+
+        //on checkbox check or uncheck, called by: addSelection
+        function select(selection, checkbox, selectionId) {
+            var sel = document.getElementById(selectionId);
+            var opts = sel.options;
+            for (var opt, j = 0; opt = opts[j]; j++) {
+                if (opt.value === checkbox.id) {
+                    opt.selected = selection;
+                    break;
+                }
+            }
+            updatePlaceholder(opts, sel);
+
+
+        }
+
+        //on checkbox change
+        function updatePlaceholder(opts, sel) {
+            var counter = 0;
+            for (var opt, j = 0; opt = opts[j]; j++) {
+                if (opt.selected === true) {
+                    counter++;
+                }
+            }
+            if (counter === 0) {
+                sel.previousElementSibling.style.color = '#bbbbbb';
+                sel.previousElementSibling.innerHTML = sel.previousElementSibling.previousElementSibling.innerHTML;
+            }
+            else {
+                sel.previousElementSibling.style.color = 'black';
+                sel.previousElementSibling.innerHTML = 'Selected: ' + counter;
+            }
+        }
+
+        //populate checkboxes on selections
+        function verifyCheckboxes(selectionId, checkboxes) {
+            var sel = document.getElementById(selectionId);
+            var opts = sel.options;
+            for (var opt, j = 0; opt = opts[j]; j++) {
+                if (opt.selected === true) {
+                    var checkboxesList = checkboxes.getElementsByTagName("input");
+                    for (var i = 0; i < checkboxesList.length; i++) {
+                        if (checkboxesList[i].id == opt.value) {
+                            checkboxesList[i].checked = true;
+                        }
+                    }
+                    updatePlaceholder(opts, sel);
+                }
+            }
+        }
+
+
+        //get all select tag objects
+        const multiSelections = document.getElementsByClassName('multiselect');
+
+        //on click of select tag object
+        for (var multiSelect, j = 0; multiSelect = multiSelections[j]; j++) {
+            const checkboxes = document.getElementById("checkboxes" + multiSelect.id);
+            const selectionId = checkboxes.id.replace('checkboxes', 'select');
+            const multi = multiSelect;
+            verifyCheckboxes(selectionId, checkboxes);
+            window.addEventListener('click', function (e) {
+                if (multi.contains(e.target)) {
+                    if (checkboxes.style.display === 'block') {
+                        checkboxes.style.display = "none";
+                    } else {
+                        checkboxes.style.display = "block";
+                    };
+                }
+                if (!checkboxes.contains(e.target) && !multi.contains(e.target)) {
+                    checkboxes.style.display = "none";
+                }
+                if (checkboxes.contains(e.target)) {
+                    checkboxes.style.display = "block";
+                }
+            });
+        }
+    </script>
+    <script src="~/src/js/scripts.js"></script>
+</body>
+</html>

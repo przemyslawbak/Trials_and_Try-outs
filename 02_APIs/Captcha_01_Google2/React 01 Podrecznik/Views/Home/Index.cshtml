@@ -1,0 +1,39 @@
+﻿@using React_01_Podrecznik.Validation
+@using Microsoft.Extensions.Configuration
+@inject IConfiguration Configuration
+@model React_01_Podrecznik.Models.Comment
+@{
+    Layout = null;
+}
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <script src='https://www.google.com/recaptcha/api.js'></script>
+    <title>Sample comment page</title>
+</head>
+<body>
+    @using (Html.BeginForm(method: FormMethod.Post, controllerName: "Home", actionName: "Index", htmlAttributes: new { id = "comment-form" }))
+    {
+        <div>
+            <label for="Title">Title</label>
+            <input type="text" name="Title" id="Title" />
+        </div>
+        <div>
+            <label for="Content">Content</label>
+            <textarea type="text" name="Content" id="Content" rows="8" cols="20"></textarea>
+        </div>
+        <div>
+            <div class="g-recaptcha" data-sitekey="@(Configuration.GetValue<String>("GoogleReCaptcha:ClientKey"))"></div>
+        </div>
+        <div>
+            <button type="submit">Send comment</button>
+        </div>
+    }
+
+    <script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit"
+            async defer>
+    </script>
+
+
+</body>
+</html>

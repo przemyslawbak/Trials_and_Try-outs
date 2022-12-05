@@ -1,0 +1,62 @@
+documentation:
+https://finnhub.io/docs/api
+
+quote:
+https://finnhub.io/api/v1/quote?symbol=AAPL
+
+company profile:
+https://finnhub.io/api/v1/stock/profile2?symbol=AAPL&token=brmot2frh5re9nem09lg
+
+news:
+https://finnhub.io/api/v1/news?category=forex&minId=10&token=brmot2frh5re9nem09lg
+
+news sentiment:
+https://finnhub.io/api/v1/news-sentiment?symbol=AAPL&token=brmot2frh5re9nem09lg
+
+peers/competitors
+https://finnhub.io/api/v1/stock/peers?symbol=AAPL&token=brmot2frh5re9nem09lg
+
+financial data:
+https://finnhub.io/api/v1/stock/metric?symbol=AAPL&metric=all&token=brmot2frh5re9nem09lg
+
+raporty kwartalne:
+https://finnhub.io/api/v1/stock/financials-reported?cik=320193&freq=quarterly&token=brmot2frh5re9nem09lg
+
+public offers:
+https://finnhub.io/api/v1/calendar/ipo?from=2020-01-01&to=2020-04-30&token=brmot2frh5re9nem09lg
+
+recommendations:
+https://finnhub.io/api/v1/stock/recommendation?symbol=AAPL&token=brmot2frh5re9nem09lg
+
+earnings surpr:
+https://finnhub.io/api/v1/stock/earnings?symbol=AAPL&token=brmot2frh5re9nem09lg
+
+stock candles:
+https://finnhub.io/api/v1/stock/candle?symbol=AAPL&resolution=1&from=1572651390&to=1572910590&token=brmot2frh5re9nem09lg
+
+splits:
+https://finnhub.io/api/v1/stock/split?symbol=AAPL&from=2010-02-01&to=2020-02-01&token=brmot2frh5re9nem09lg
+
+patterns:
+https://finnhub.io/api/v1/scan/pattern?symbol=AAPL&resolution=D&token=brmot2frh5re9nem09lg
+
+support/resistance:
+https://finnhub.io/api/v1/scan/support-resistance?symbol=IBM&resolution=D&token=brmot2frh5re9nem09lg
+
+aggregate indicators:
+https://finnhub.io/api/v1/scan/technical-indicator?symbol=AAPL&resolution=D&token=brmot2frh5re9nem09lg
+
+economic calendar:
+https://finnhub.io/api/v1/calendar/economic?token=brmot2frh5re9nem09lg
+
+forex:
+https://finnhub.io/api/v1/forex/exchange?token=brmot2frh5re9nem09lg
+
+forex candles:
+https://finnhub.io/api/v1/forex/candle?symbol=OANDA:EUR_USD&resolution=D&from=1572651390&to=1575243390&token=brmot2frh5re9nem09lg
+
+forex rates:
+https://finnhub.io/api/v1/forex/rates?base=USD&token=brmot2frh5re9nem09lg
+
+API key: brmot2frh5re9nem09lg
+Secret: brmot2frh5re9nem09m0

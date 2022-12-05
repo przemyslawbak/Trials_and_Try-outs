@@ -1,0 +1,17 @@
+.ship-box {
+  background-color: coral;
+  position: relative;
+  height: 50px;
+  z-index: 100;
+  margin: 1px;
+}
+.ship-drop-wrapper {
+  position: absolute;
+  top: 0;
+}
+.ship-box-cell {
+  border: 1px dotted;
+  width: 50px;
+  height: 50px;
+  display: inline-block;
+}

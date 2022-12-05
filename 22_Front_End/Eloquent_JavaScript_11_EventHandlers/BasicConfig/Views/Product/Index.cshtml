@@ -1,0 +1,84 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Aplikacja</title>
+    <meta charset="utf-8">
+</head>
+<body class="container">
+    <div>
+        TEST
+    </div>
+
+    <button>Click me any way you want</button>
+
+    <p>A paragraph with a <button>button</button>.</p>
+
+    <p>This page turns violet when you hold the V key.</p>
+
+    <script>
+        window.addEventListener("click", () => {
+            console.log("You knocked?");
+        });
+
+        let button = document.querySelector("button");
+        button.addEventListener("mousedown", event => {
+            if (event.button == 0) {
+                console.log("Left button");
+            } else if (event.button == 1) {
+                console.log("Middle button");
+            } else if (event.button == 2) {
+                console.log("Right button");
+            }
+        });
+
+        let para = document.querySelector("p");
+        let btn = document.querySelector("button");
+        para.addEventListener("mousedown", () => {
+            console.log("Handler for paragraph.");
+        });
+        btn.addEventListener("mousedown", event => {
+            console.log("Handler for button.");
+            if (event.btn == 2) event.stopPropagation();
+        });
+
+        window.addEventListener("keydown", event => {
+            if (event.key == "v") {
+                document.body.style.background = "violet";
+            }
+        });
+        window.addEventListener("keyup", event => {
+            if (event.key == "v") {
+                document.body.style.background = "";
+            }
+        });
+
+        //mouse
+        window.addEventListener("click", event => {
+            let dot = document.createElement("div");
+            dot.className = "dot";
+            dot.style.left = (event.pageX - 4) + "px";
+            dot.style.top = (event.pageY - 4) + "px";
+            document.body.appendChild(dot);
+        });
+
+        //touch
+
+        //scroll
+
+        //focus
+
+        //load
+
+        //timer
+        let bombTimer = setTimeout(() => {
+            console.log("BOOM!");
+        }, 500);
+        if (Math.random() < 0.5) { // 50% chance
+            console.log("Defused.");
+            clearTimeout(bombTimer);
+        }
+
+
+    </script>
+</body>
+</html>

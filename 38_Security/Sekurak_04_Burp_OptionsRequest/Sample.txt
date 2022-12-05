@@ -1,0 +1,16 @@
+---request
+OPTIONS / HTTP/1.1
+Host: training.securitum.com
+
+
+---response
+HTTP/1.1 200 OK
+Date: Fri, 25 Mar 2022 19:50:41 GMT
+Server: Apache
+Allow: GET,HEAD,POST,OPTIONS,HEAD,HEAD
+Content-Length: 0
+Content-Type: text/html
+
+
+//OPTIONS wskazująca obsługiwane przez serwer metody (warto pamiętać, że informacja zwracana w odpowiedzi nie musi być zawsze prawdziwa)
+

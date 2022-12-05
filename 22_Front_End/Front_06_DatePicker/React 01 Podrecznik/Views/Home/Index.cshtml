@@ -1,0 +1,23 @@
+﻿@model MultiselectViewModel
+@{
+    Layout = null;
+}
+
+<!--creds: https://www.cssscript.com/developer-date-picker/-->
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Date picker</title>
+    <link href="~/css/the-datepicker.css" rel="stylesheet" />
+</head>
+<body>
+    <input type="text" id="example" placeholder="Click me"/>
+
+    <script src="~/js/the-datepicker.min.js"></script>
+    <script>
+        const input = document.getElementById('example');
+        const datepicker = new TheDatepicker.Datepicker(input);
+        datepicker.render();
+    </script>
+</body>
+</html>

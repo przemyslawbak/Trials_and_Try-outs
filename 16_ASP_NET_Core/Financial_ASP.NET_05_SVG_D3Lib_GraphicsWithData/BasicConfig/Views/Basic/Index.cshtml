@@ -1,0 +1,133 @@
+﻿@model int[]
+
+<script src="~/lib/d3/d3.min.js"></script>
+<script src="~/js/site.js"></script>
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-4">
+            <p></p>
+            <svg width="300" height="300" id="svg1" />
+        </div>
+        <div class="col-sm-4">
+            <p></p>
+            <svg width="300" height="300" id="svg2" />
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">
+        <p>Circles based on JSON</p>
+        <svg width="800" height="250" id="svg5" />
+    </div>
+    <div class="row">
+        <p>Circles based on math functions</p>
+        <svg width="400" height="400" id="svg6" />
+    </div>
+</div>
+
+<script>
+    var colors = ["#00008F", "#0000FF", "#006FFF", "#00DFFF", "#4FFFAF",
+        "#BFFF3F", "#FFCF00", "#FF5F00", "#EF0000", "#7F0000"];
+    var colormap = d3.scaleLinear()
+        .domain([0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100])
+        .range(colors);
+    var svg = d3.select("#svg6");
+    var data = createData();
+    draw(data);
+    function draw(data) {
+        // enter
+        svg.selectAll("circle")
+            .data(data)
+            .enter()
+            .append("circle");
+        // update
+        circle = svg.selectAll("circle")
+            .data(data)
+            .attr("cx", function (d) { return d.x; })
+            .attr("cy", function (d) { return d.y; })
+            .attr("r", function (d) { return d.radius; })
+            .style("stroke", "black")
+            .style("fill", function (d) { return colormap(d.color) })
+            .style("opacity", 0.5);
+        // exit
+        svg.selectAll("circle")
+            .data(data)
+            .exit()
+            .remove();
+    }
+    //czemu wyświetla w innym rzędzie?
+    setInterval(function () {
+        data.shift();
+        var ran = Math.random() * 100;
+        var r = Math.round(ran / 3);
+        var x = Math.round(400 * Math.random());
+        var y = Math.round(400 * Math.random());
+        data.push({ "x": x, "y": y, "radius": r, "color": ran });
+        draw(data);
+    }, 100);
+</script>
+
+<script type="text/javascript">
+    // Circles
+    var data = [
+        { "x": 20, "radius": 10, "color": "#00008F" },
+        { "x": 45, "radius": 15, "color": "#0000FF" },
+        { "x": 75, "radius": 20, "color": "#006FFF" },
+        { "x": 105, "radius": 25, "color": "#00DFFF" },
+        { "x": 145, "radius": 30, "color": "#4FFFAF" },
+        { "x": 190, "radius": 35, "color": "#BFFF3F" },
+        { "x": 240, "radius": 40, "color": "#FFCF00" },
+        { "x": 295, "radius": 45, "color": "#FF5F00" },
+        { "x": 355, "radius": 50, "color": "#EF0000" },
+        { "x": 420, "radius": 55, "color": "#7F0000" }];
+    var svg = d3.select("#svg5");
+    var circle = svg.selectAll("circle")
+        .data(data)
+        .enter()
+        .append("circle");
+    circle.attr("cx", function (d) { return d.x; })
+        .attr("cy", 100)
+        .attr("r", function (d) { return d.radius; })
+        .style("stroke", "black")
+        .style("fill", function (d) { return d.color })
+        .style("fill-opacity", 0.8);
+</script>
+
+<script type="text/javascript">
+    // vertical bar chart
+    var svg = d3.select("#svg1");
+    var data = @Html.Raw(Json.Serialize(Model));
+    var w = 20;
+    var bar = svg.selectAll("rect")
+        .data(data)
+        .enter()
+        .append("rect");
+    bar.attr("x", function (d, i) { return i * (w + 5); })
+        .attr("y", function (d) { return 240 - 2 * d; })
+        .attr("width", w)
+        .attr("height", function (d) { return 2 * d; })
+        .style("stroke", "black")
+        .style("fill", function (d) {
+            var color;
+            if (d < 50) {
+                return color = "green";
+            } else {
+                return color = "red";
+            }
+        });
+    // horizontal bar chart
+    var svg = d3.select("#svg2");
+    var h = 20;
+    var bar = svg.selectAll("rect")
+        .data(data)
+        .enter()
+        .append("rect");
+    bar.attr("x", 10)
+        .attr("y", function (d, i) { return i * (h + 5); })
+        .attr("height", h)
+        .attr("width", function (d) { return 10 + 2 * d; })
+        .style("stroke", "black")
+        .style("fill", "green");
+</script>
