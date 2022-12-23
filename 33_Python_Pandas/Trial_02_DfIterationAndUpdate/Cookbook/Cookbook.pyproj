@@ -11,6 +11,7 @@
     <OutputPath>.</OutputPath>
     <Name>Cookbook</Name>
     <RootNamespace>Cookbook</RootNamespace>
+    <SuppressConfigureTestFrameworkPrompt>true</SuppressConfigureTestFrameworkPrompt>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <DebugSymbols>true</DebugSymbols>
