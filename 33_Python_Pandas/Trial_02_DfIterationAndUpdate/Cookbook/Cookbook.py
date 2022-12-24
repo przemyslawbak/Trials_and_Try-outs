@@ -30,11 +30,11 @@ def verifySignals(buy, sell, is_long, is_short, last_close):
     if len(buy_signals) < 3:
         return buy, sell, is_long, is_short
 
-    buy_signal = [-1.0]
-    sell_signal = [1.0]
+    buy_signal = [-1.0, -1.0, -1.0]
+    sell_signal = [1.0, 1.0, 1.0]
     
-    buy_sample = buy_signals[-1:]
-    sell_sample = sell_signals[-1:]
+    buy_sample = buy_signals[-3:] #sell_signals[-3:] <- best performance for now
+    sell_sample = sell_signals[-3:]
 
     if buy_signal == buy_sample and sell_signal == sell_sample and (is_long or is_short):
         if is_long:
@@ -90,3 +90,4 @@ print('max income: ' + str(max(transactions)))
 print('max dropdown: ' + str(min(transactions)))
 
 #todo: save to the file
+#todo: test multiple variants in separate project
