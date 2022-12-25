@@ -13,9 +13,9 @@ df.loc[df['combined_result'] < 0, 'combined_result'] = -1.0
 df.loc[df['combined_result'] >= 0, 'combined_result'] = 1.0
 cases_list = []
 
-with open(cases_file) as topo_file:
+with open(cases_file, 'r') as topo_file:
     for line in topo_file:
-        cols = line.split()
+        cols = line.strip().split(',')
         cases_list.append(cols)
 
 def getBuySignal(last_signals, buy_pattern, sell_pattern):
@@ -57,25 +57,31 @@ def is_ready(all_signals, case, buy_pattern):
 
     return True
 
-def getLastSignals(all_signals, buy_pattern):
+def getLastSignals(case, all_signals, buy_pattern):
     last_signals = []
     if 'direction_pred_med' in case:
-        last_signals.append(all_signals.direction_pred_med_signals[-len(buy_pattern):])
+        lst = all_signals.direction_pred_med_signals[-len(buy_pattern):]
+        last_signals.append(lst)
 
     if 'direction_pred' in case:
-        last_signals.append(all_signals.direction_pred_signals[-len(buy_pattern):])
+        lst = all_signals.direction_pred_signals[-len(buy_pattern):]
+        last_signals.append(lst)
 
     if 'combined_result' in case:
-        last_signals.append(all_signals.combined_result_signals[-len(buy_pattern):])
+        lst = all_signals.combined_result_signals[-len(buy_pattern):]
+        last_signals.append(lst)
 
     if 'pattern_sum_result_trend' in case:
-        last_signals.append(all_signals.pattern_sum_result_trend_signals[-len(buy_pattern):])
+        lst = all_signals.pattern_sum_result_trend_signals[-len(buy_pattern):]
+        last_signals.append(lst)
 
     if 'sentiment_trend' in case:
-        last_signals.append(all_signals.sentiment_trend_signals[-len(buy_pattern):])
+        lst = all_signals.sentiment_trend_signals[-len(buy_pattern):]
+        last_signals.append(lst)
         
     if 'med_peak_sums_trend' in case:
-        last_signals.append(all_signals.med_peak_sums_trend_signals[-len(buy_pattern):])
+        lst = all_signals.med_peak_sums_trend_signals[-len(buy_pattern):]
+        last_signals.append(lst)
 
     return last_signals
         
@@ -94,7 +100,7 @@ def verifySignals(transactions, buy, sell, is_long, is_short, last_close, buy_pa
     if not is_ready(all_signals, case, buy_pattern):
         return transactions, buy, sell, is_long, is_short
 
-    last_signals = getLastSignals(all_signals, buy_pattern)
+    last_signals = getLastSignals(case, all_signals, buy_pattern)
         
     buy_signal = getBuySignal(last_signals, buy_pattern, sell_pattern)
     sell_signal = getSellSignal(last_signals, buy_pattern, sell_pattern)
@@ -173,8 +179,8 @@ def testData(case):
         try:
             if (len(transactions) > 0):
 
-                result_line = 'transactions no.: ' + str(len(transactions)) + '|profits total: ' + str(sum(transactions)) + '|max income: ' + str(max(transactions)) + '|max dropdown: ' + str(min(transactions)) + '|success total: ' + str(round(total_positive / len(transactions) * 100)) + ' %' + '|failed total: ' + str(round(total_negative / len(transactions) * 100)) + ' %' + '|success med: ' + str(round(positives_sum / total_positive)) + '|failed med: ' + str(round(negatives_sum / total_negative)) + '|results file: ' + filename + '|case: ' + '-'.join(case) + '-' + str(qty)
-                hs = open('_results.txt', "a")
+                result_line = str(len(transactions)) + '|' + str(sum(transactions)) + '|' + str(max(transactions)) + '|' + str(min(transactions)) + '|' + str(round(total_positive / len(transactions) * 100)) + '|' + str(round(total_negative / len(transactions) * 100)) + '|' + str(round(positives_sum / total_positive)) + '|' + str(round(negatives_sum / total_negative)) + '|' + filename + '|' + '-'.join(case) + '-' + str(qty)
+                hs = open('_results.csv', "a")
                 hs.write(result_line + "\n")
 
                 print('')
@@ -194,6 +200,10 @@ def testData(case):
                 print('')
         except:
             print('exception')
+
+line = 'transactions no.' + '|profits total' + '|max income' + '|max dropdown' + '|success total' + '|failed total' + '|success med' + '|failed med' + '|results file' + '|case'
+hs = open('_results.csv', "a")
+hs.write(line + "\n")
 
 for case in cases_list:
     testData(case)
