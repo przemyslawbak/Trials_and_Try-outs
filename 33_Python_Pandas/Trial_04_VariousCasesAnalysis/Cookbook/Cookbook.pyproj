@@ -23,10 +23,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Cookbook.py" />
-    <Compile Include="signals.py" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="test_set.txt" />
+    <Compile Include="signals_model.py" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
   <!-- Uncomment the CoreCompile target to enable the Build command in

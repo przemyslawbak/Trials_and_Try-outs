@@ -1,5 +1,5 @@
 import pandas as pd
-import signals
+import signals_model
 
 pd.set_option('display.max_rows', 1000)
 pd.set_option('display.max_columns', 10)
@@ -88,8 +88,6 @@ def verifySignals(transactions, buy, sell, is_long, is_short, last_close, buy_pa
         sell = 0
         is_long = False
         is_short = False
-        
-        print('transaction closed')
 
     if not is_ready(all_signals, case, buy_pattern):
         return transactions, buy, sell, is_long, is_short
@@ -105,33 +103,23 @@ def verifySignals(transactions, buy, sell, is_long, is_short, last_close, buy_pa
         if is_short:
             buy = last_close
 
-        print('close position')
-
     if buy_signal and not sell_signal and not is_short and not is_long:
 
         buy = last_close
         is_long = True
 
-        print('open long position')
-
     if not buy_signal and sell_signal and not is_long and not is_short:
 
         sell = last_close
         is_short = True
-
-        print('open short position')
         
     if buy_signal and not sell_signal and is_short:
 
         buy = last_close
 
-        print('close position with buy')
-
     if not buy_signal and sell_signal and is_long:
 
         sell = last_close
-
-        print('close position with sell')
 
     return transactions, buy, sell, is_long, is_short
 
@@ -144,7 +132,7 @@ def testData(case):
             buy_pattern.append(-1.0)
             sell_pattern.append(1.0)
 
-        all_signals = signals.AllSignals()
+        all_signals = signals_model.AllSignals()
         all_signals.direction_pred_med_signals = []
         all_signals.direction_pred_signals = []
         all_signals.combined_result_signals = []
@@ -179,18 +167,23 @@ def testData(case):
             else:
                 total_positive += 1
                 positives_sum += value
-                
-        print('')
-        print('SUMMARY:')
-        print('transactions no.: ' + str(len(transactions)))
-        print('profits total: ' + str(sum(transactions)))
-        print('max income: ' + str(max(transactions)))
-        print('max dropdown: ' + str(min(transactions)))
-        print('success total: ' + str(round(total_positive / len(transactions) * 100)) + ' %')
-        print('failed total: ' + str(round(total_negative / len(transactions) * 100)) + ' %')
-        print('success med: ' + str(round(positives_sum / total_positive)))
-        print('failed med: ' + str(round(negatives_sum / total_negative)))
-        print('')
+
+        if (len(transactions) > 0):
+            print('')
+            print('SUMMARY:')
+            print('transactions no.: ' + str(len(transactions)))
+            print('profits total: ' + str(sum(transactions)))
+            print('max income: ' + str(max(transactions)))
+            print('max dropdown: ' + str(min(transactions)))
+            print('success total: ' + str(round(total_positive / len(transactions) * 100)) + ' %')
+            print('failed total: ' + str(round(total_negative / len(transactions) * 100)) + ' %')
+            print('success med: ' + str(round(positives_sum / total_positive)))
+            print('failed med: ' + str(round(negatives_sum / total_negative)))
+            print('')
+        else:
+            print('')
+            print('no transactions')
+            print('')
 
 for case in cases_list:
     testData(case)
