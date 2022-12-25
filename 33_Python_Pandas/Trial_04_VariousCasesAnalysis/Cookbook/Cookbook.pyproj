@@ -23,6 +23,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Cookbook.py" />
+    <Compile Include="signals.py" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="test_set.txt" />
