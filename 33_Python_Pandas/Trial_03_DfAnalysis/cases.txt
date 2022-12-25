@@ -1,5 +1,3 @@
-All 1/2/3 x
-
 direction_pred_med -> buy / sell / close
 direction_pred_med -> buy / sell / close
 direction_pred_med -> buy / sell / close
