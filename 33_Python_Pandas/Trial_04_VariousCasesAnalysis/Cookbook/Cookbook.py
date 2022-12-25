@@ -9,6 +9,8 @@ filename = "test_set.csv"
 cases_file = "cases_base.csv"
 df = pd.read_csv(filename, sep='|', engine='python', skiprows=[0])
 df = df.reset_index()  # make sure indexes pair with number of rows
+df.loc[df['combined_result'] < 0, 'combined_result'] = -1.0
+df.loc[df['combined_result'] >= 0, 'combined_result'] = 1.0
 cases_list = []
 
 with open(cases_file) as topo_file:
@@ -73,7 +75,7 @@ def getLastSignals(all_signals, buy_pattern):
         last_signals.append(all_signals.sentiment_trend_signals[-len(buy_pattern):])
         
     if 'med_peak_sums_trend' in case:
-        last_signals.append(last_signals.med_peak_sums_trend_signals[-len(buy_pattern):])
+        last_signals.append(all_signals.med_peak_sums_trend_signals[-len(buy_pattern):])
 
     return last_signals
         
@@ -168,22 +170,30 @@ def testData(case):
                 total_positive += 1
                 positives_sum += value
 
-        if (len(transactions) > 0):
-            print('')
-            print('SUMMARY:')
-            print('transactions no.: ' + str(len(transactions)))
-            print('profits total: ' + str(sum(transactions)))
-            print('max income: ' + str(max(transactions)))
-            print('max dropdown: ' + str(min(transactions)))
-            print('success total: ' + str(round(total_positive / len(transactions) * 100)) + ' %')
-            print('failed total: ' + str(round(total_negative / len(transactions) * 100)) + ' %')
-            print('success med: ' + str(round(positives_sum / total_positive)))
-            print('failed med: ' + str(round(negatives_sum / total_negative)))
-            print('')
-        else:
-            print('')
-            print('no transactions')
-            print('')
+        try:
+            if (len(transactions) > 0):
+
+                result_line = 'transactions no.: ' + str(len(transactions)) + '|profits total: ' + str(sum(transactions)) + '|max income: ' + str(max(transactions)) + '|max dropdown: ' + str(min(transactions)) + '|success total: ' + str(round(total_positive / len(transactions) * 100)) + ' %' + '|failed total: ' + str(round(total_negative / len(transactions) * 100)) + ' %' + '|success med: ' + str(round(positives_sum / total_positive)) + '|failed med: ' + str(round(negatives_sum / total_negative)) + '|results file: ' + filename + '|case: ' + '-'.join(case) + '-' + str(qty)
+                hs = open('_results.txt', "a")
+                hs.write(result_line + "\n")
+
+                print('')
+                print('SUMMARY:')
+                print('transactions no.: ' + str(len(transactions)))
+                print('profits total: ' + str(sum(transactions)))
+                print('max income: ' + str(max(transactions)))
+                print('max dropdown: ' + str(min(transactions)))
+                print('success total: ' + str(round(total_positive / len(transactions) * 100)) + ' %')
+                print('failed total: ' + str(round(total_negative / len(transactions) * 100)) + ' %')
+                print('success med: ' + str(round(positives_sum / total_positive)))
+                print('failed med: ' + str(round(negatives_sum / total_negative)))
+                print('')
+            else:
+                print('')
+                print('no transactions')
+                print('')
+        except:
+            print('exception')
 
 for case in cases_list:
     testData(case)
