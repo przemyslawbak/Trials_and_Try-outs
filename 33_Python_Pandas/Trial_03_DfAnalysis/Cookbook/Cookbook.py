@@ -30,11 +30,11 @@ def verifySignals(buy, sell, is_long, is_short, last_close):
     if len(buy_signals) < 3:
         return buy, sell, is_long, is_short
 
-    buy_signal = [-1.0, -1.0]
-    sell_signal = [1.0, 1.0]
+    buy_signal = [-1.0]
+    sell_signal = [1.0]
     
-    buy_sample = sell_signals[-len(buy_signal):] #sell_signals[-3:] <- best performance for now
-    sell_sample = sell_signals[-len(sell_signal):]
+    buy_sample = buy_signals[-len(buy_signal):] #sell_signals[-3:] <- best performance for now
+    sell_sample = buy_signals[-len(sell_signal):]
 
     if buy_signal == buy_sample and sell_signal == sell_sample and (is_long or is_short):
         if is_long:
@@ -46,8 +46,8 @@ def verifySignals(buy, sell, is_long, is_short, last_close):
 
     if buy_signal == buy_sample and sell_signal != sell_sample and not is_short and not is_long:
 
-        #buy = last_close
-        #is_long = True
+        buy = last_close
+        is_long = True
 
         print('open long position')
 
@@ -93,7 +93,6 @@ for value in transactions:
     else:
         total_positive += 1
         positives_sum += value
-
 
 print('')
 print('SUMMARY:')

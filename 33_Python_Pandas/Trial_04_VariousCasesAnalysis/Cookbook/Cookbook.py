@@ -16,11 +16,66 @@ with open(cases_file) as topo_file:
         cols = line.split()
         cases_list.append(cols)
 
-def getBuySignal(all_signals, buy_pattern, sell_pattern, case):
-    print('getBuySignal')
+def getBuySignal(last_signals, buy_pattern, sell_pattern):
+    if sell_pattern in last_signals:
+        return False
+    else:
+        return True
 
-def getSellSignal(all_signals, buy_pattern, sell_pattern, case):
-    print('getSellSignal')
+def getSellSignal(last_signals, buy_pattern, sell_pattern):
+    if buy_pattern in last_signals:
+        return False
+    else:
+        return True
+
+def is_ready(all_signals, case, buy_pattern):
+    if 'direction_pred_med' in case:
+        if len(all_signals.direction_pred_med_signals) < len(buy_pattern):
+            return False
+
+    if 'direction_pred' in case:
+        if len(all_signals.direction_pred_signals) < len(buy_pattern):
+            return False
+
+    if 'combined_result' in case:
+        if len(all_signals.combined_result_signals) < len(buy_pattern):
+            return False
+
+    if 'pattern_sum_result_trend' in case:
+        if len(all_signals.pattern_sum_result_trend_signals) < len(buy_pattern):
+            return False
+
+    if 'sentiment_trend' in case:
+        if len(all_signals.sentiment_trend_signals) < len(buy_pattern):
+            return False
+        
+    if 'med_peak_sums_trend' in case:
+        if len(all_signals.med_peak_sums_trend_signals) < len(buy_pattern):
+            return False
+
+    return True
+
+def getLastSignals(all_signals, buy_pattern):
+    last_signals = []
+    if 'direction_pred_med' in case:
+        last_signals.append(all_signals.direction_pred_med_signals[-len(buy_pattern):])
+
+    if 'direction_pred' in case:
+        last_signals.append(all_signals.direction_pred_signals[-len(buy_pattern):])
+
+    if 'combined_result' in case:
+        last_signals.append(all_signals.combined_result_signals[-len(buy_pattern):])
+
+    if 'pattern_sum_result_trend' in case:
+        last_signals.append(all_signals.pattern_sum_result_trend_signals[-len(buy_pattern):])
+
+    if 'sentiment_trend' in case:
+        last_signals.append(all_signals.sentiment_trend_signals[-len(buy_pattern):])
+        
+    if 'med_peak_sums_trend' in case:
+        last_signals.append(last_signals.med_peak_sums_trend_signals[-len(buy_pattern):])
+
+    return last_signals
         
 def verifySignals(transactions, buy, sell, is_long, is_short, last_close, buy_pattern, sell_pattern, case, all_signals):
     
@@ -35,39 +90,14 @@ def verifySignals(transactions, buy, sell, is_long, is_short, last_close, buy_pa
         is_short = False
         
         print('transaction closed')
+
+    if not is_ready(all_signals, case, buy_pattern):
+        return transactions, buy, sell, is_long, is_short
+
+    last_signals = getLastSignals(all_signals, buy_pattern)
         
-    if 'direction_pred_med' in case:
-        print('direction_pred_med')
-        if len(all_signals.direction_pred_med_signals) < len(buy_pattern):
-            return transactions, buy, sell, is_long, is_short
-
-    if 'direction_pred' in case:
-        print('direction_pred')
-        if len(all_signals.direction_pred_signals) < len(buy_pattern):
-            return transactions, buy, sell, is_long, is_short
-
-    if 'combined_result' in case:
-        print('combined_result')
-        if len(all_signals.combined_result_signals) < len(buy_pattern):
-            return transactions, buy, sell, is_long, is_short
-
-    if 'pattern_sum_result_trend' in case:
-        print('pattern_sum_result_trend')
-        if len(all_signals.pattern_sum_result_trend_signals) < len(buy_pattern):
-            return transactions, buy, sell, is_long, is_short
-
-    if 'sentiment_trend' in case:
-        print('sentiment_trend')
-        if len(all_signals.sentiment_trend_signals) < len(buy_pattern):
-            return transactions, buy, sell, is_long, is_short
-        
-    if 'med_peak_sums_trend' in case:
-        print('med_peak_sums_trend')
-        if len(all_signals.med_peak_sums_trend_signals) < len(buy_pattern):
-            return transactions, buy, sell, is_long, is_short
-        
-    buy_signal = getBuySignal(all_signals, buy_pattern, sell_pattern, case)
-    sell_signal = getSellSignal(all_signals, buy_pattern, sell_pattern, case)
+    buy_signal = getBuySignal(last_signals, buy_pattern, sell_pattern)
+    sell_signal = getSellSignal(last_signals, buy_pattern, sell_pattern)
 
     if buy_signal and sell_signal and (is_long or is_short):
         if is_long:
@@ -79,8 +109,8 @@ def verifySignals(transactions, buy, sell, is_long, is_short, last_close, buy_pa
 
     if buy_signal and not sell_signal and not is_short and not is_long:
 
-        #buy = last_close
-        #is_long = True
+        buy = last_close
+        is_long = True
 
         print('open long position')
 
@@ -115,11 +145,12 @@ def testData(case):
             sell_pattern.append(1.0)
 
         all_signals = signals.AllSignals()
-        signals.direction_pred_med_signals = []
-        signals.combined_result_signals = []
-        signals.pattern_sum_result_trend_signals = []
-        signals.sentiment_trend_signals = []
-        signals.med_peak_sums_trend_signals = []
+        all_signals.direction_pred_med_signals = []
+        all_signals.direction_pred_signals = []
+        all_signals.combined_result_signals = []
+        all_signals.pattern_sum_result_trend_signals = []
+        all_signals.sentiment_trend_signals = []
+        all_signals.med_peak_sums_trend_signals = []
 
         transactions = []
         buy = 0
@@ -128,12 +159,12 @@ def testData(case):
         is_short = False
 
         for index, row in df.iterrows():
-            signals.direction_pred_med_signals.append(row['direction_pred_med'])
-            signals.direction_pred_signals.append(row['direction_pred'])
-            signals.combined_result_signals.append(row['combined_result'])
-            signals.pattern_sum_result_trend_signals.append(row['pattern_sum_result_trend'])
-            signals.sentiment_trend_signals.append(row['sentiment_trend'])
-            signals.med_peak_sums_trend_signals.append(row['med_peak_sums_trend'])
+            all_signals.direction_pred_med_signals.append(row['direction_pred_med'])
+            all_signals.direction_pred_signals.append(row['direction_pred'])
+            all_signals.combined_result_signals.append(row['combined_result'])
+            all_signals.pattern_sum_result_trend_signals.append(row['pattern_sum_result_trend'])
+            all_signals.sentiment_trend_signals.append(row['sentiment_trend'])
+            all_signals.med_peak_sums_trend_signals.append(row['med_peak_sums_trend'])
 
             transactions, buy, sell, is_long, is_short = verifySignals(transactions, buy, sell, is_long, is_short, row['last_close'], buy_pattern, sell_pattern, case, all_signals)
             
