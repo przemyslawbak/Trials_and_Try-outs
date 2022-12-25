@@ -1,0 +1,12 @@
+direction_pred_med 3x -1 -> sell
+direction_pred_med 2x -1 -> sell
+direction_pred_med 1x -1 -> sell
+direction_pred 3x -1 -> sell
+direction_pred 2x -1 -> sell
+direction_pred 1x -1 -> sell
+direction_pred_med 3x 1 -> buy
+direction_pred_med 2x 1 -> buy
+direction_pred_med 1x 1 -> buy
+direction_pred 3x 1 -> buy
+direction_pred 2x 1 -> buy
+direction_pred 1x 1 -> buy

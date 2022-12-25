@@ -30,8 +30,8 @@ def verifySignals(buy, sell, is_long, is_short, last_close):
     if len(buy_signals) < 3:
         return buy, sell, is_long, is_short
 
-    buy_signal = [-1.0, -1.0, -1.0]
-    sell_signal = [1.0, 1.0, 1.0]
+    buy_signal = [-1.0, -1.0]
+    sell_signal = [1.0, 1.0]
     
     buy_sample = sell_signals[-len(buy_signal):] #sell_signals[-3:] <- best performance for now
     sell_sample = sell_signals[-len(sell_signal):]
@@ -82,12 +82,30 @@ for index, row in df.iterrows():
     sell_signals.append(row['direction_pred'])
     buy, sell, is_long, is_short = verifySignals(buy, sell, is_long, is_short, row['last_close'])
 
+total_negative = 0
+total_positive = 0
+positives_sum = 0
+negatives_sum = 0
+for value in transactions:
+    if value < 0:
+        total_negative += 1
+        negatives_sum += value
+    else:
+        total_positive += 1
+        positives_sum += value
+
+
 print('')
 print('SUMMARY:')
 print('transactions no.: ' + str(len(transactions)))
 print('profits total: ' + str(sum(transactions)))
 print('max income: ' + str(max(transactions)))
 print('max dropdown: ' + str(min(transactions)))
+print('success total: ' + str(round(total_positive / len(transactions) * 100)) + ' %')
+print('failed total: ' + str(round(total_negative / len(transactions) * 100)) + ' %')
+print('success med: ' + str(round(positives_sum / total_positive)))
+print('failed med: ' + str(round(negatives_sum / total_negative)))
+print('')
 
 #todo: save to the file
 #todo: test multiple variants in separate project
