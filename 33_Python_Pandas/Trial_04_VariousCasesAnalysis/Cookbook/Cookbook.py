@@ -201,7 +201,7 @@ def testData(case):
         except:
             print('exception')
 
-line = 'transactions no.' + '|profits total' + '|max income' + '|max dropdown' + '|success total' + '|failed total' + '|success med' + '|failed med' + '|results file' + '|case'
+line = 'transactions no.' + '|profits total' + '|max income' + '|max dropdown' + '|success total%' + '|failed total%' + '|success med' + '|failed med' + '|results file' + '|case'
 hs = open('_results.csv', "a")
 hs.write(line + "\n")
 
