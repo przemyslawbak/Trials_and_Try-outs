@@ -2,6 +2,16 @@ using UnityEngine;
 
 public abstract class Character : MonoBehaviour {
 
-    public int hitPoints;
-    public int maxHitPoints;
+    public HitPoints hitPoints;
+
+    public float startingHitPoints;
+    public float maxHitPoints;
+
+    public enum CharacterCategory
+    {
+        PLAYER,
+        ENEMY
+    }
+
+    public CharacterCategory characterCategory;
 }
