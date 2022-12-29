@@ -2,23 +2,40 @@ using UnityEngine;
 
 public class Player : Character
 {
-    // 1
-void OnTriggerEnter2D(Collider2D collision)
-{
-// 2
-if (collision.gameObject.CompareTag("CanBePickedUp"))
-{
-// 1
-// Note: This should all be on a single line
-Item hitObject = collision.gameObject.
-GetComponent<Consumable>().item;
-// 2
-if (hitObject != null)
-{
-// 3
-print("it: " + hitObject.objectName);
-collision.gameObject.SetActive(false);
-}
-}
-}
+    public void Start()
+	{
+
+	}
+
+	void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("CanBePickedUp"))
+        {
+            Item hitObject = collision.gameObject.GetComponent<Consumable>().item;
+
+            if (hitObject != null)
+            {
+                print("Hit: " + hitObject.objectName);
+
+                switch (hitObject.itemType)
+                {
+                    case Item.ItemType.COIN:
+                        break;
+                    case Item.ItemType.HEALTH:
+                        AdjustHitPoints(hitObject.quantity);
+                        break;
+                    default:
+                        break;
+                }
+
+                collision.gameObject.SetActive(false);
+            }
+        }
+    }
+
+    public void AdjustHitPoints(int amount)
+    {
+        hitPoints = hitPoints + amount;
+        print("Adjusted hitpoints by: " + amount + ". New value: " + hitPoints);
+    }
 }
