@@ -107,7 +107,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2371552720172939567}
   m_Layer: 0
-  m_Name: Barrier_01
+  m_Name: TurretBarrier
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
