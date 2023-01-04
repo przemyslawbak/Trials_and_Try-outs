@@ -18,9 +18,16 @@ cases_list = []
 dfAcc = pd.read_csv(models_accuracies_path, sep='|', engine='python')
 modelFilePaths = []
 modelFilePaths.append(dfAcc['file_name'].iloc[0])
+
+if modelFilePaths[0] in modelFilePaths:
+    print('ok 1')
+
 dfAcc = dfAcc.sort_values(['val_acc', 'val_loss'], ascending=[False, True])
 for index, row in dfAcc.iterrows():
     modelFilePaths.append(row['file_name'])
+
+if not 'dupa' in modelFilePaths:
+    print('ok 2')
 
 with open(cases_file, 'r') as topo_file:
     for line in topo_file:
