@@ -85,7 +85,9 @@ def getLastSignals(case, all_signals, buy_pattern):
 
     return last_signals
         
-def verifySignals(transactions, buy, sell, is_long, is_short, last_close, buy_pattern, sell_pattern, case, all_signals):
+def verifySignals(transactions, buy, sell, is_long, is_short, last_close, buy_pattern, sell_pattern, case, all_signals, multiplier):
+    buy_pattern = [x * multiplier for x in buy_pattern]
+    sell_pattern = [x * multiplier for x in sell_pattern]
     
     if buy != 0 and sell != 0:
 
@@ -132,76 +134,78 @@ def verifySignals(transactions, buy, sell, is_long, is_short, last_close, buy_pa
     return transactions, buy, sell, is_long, is_short
 
 def testData(case):
-    signal_qtys = [1, 2, 3]
-    for qty in signal_qtys:
-        buy_pattern = []
-        sell_pattern = []
-        for i in range(qty):
-            buy_pattern.append(-1.0)
-            sell_pattern.append(1.0)
+    signal_qtys = [1, 2, 3, 4, 5, 6, 7, 8]
+    multipliers = [1, -1]
+    for mplr in multipliers:
+        for qty in signal_qtys:
+            buy_pattern = []
+            sell_pattern = []
+            for i in range(qty):
+                buy_pattern.append(-1.0)
+                sell_pattern.append(1.0)
 
-        all_signals = signals_model.AllSignals()
-        all_signals.direction_pred_med_signals = []
-        all_signals.direction_pred_signals = []
-        all_signals.combined_result_signals = []
-        all_signals.pattern_sum_result_trend_signals = []
-        all_signals.sentiment_trend_signals = []
-        all_signals.med_peak_sums_trend_signals = []
+            all_signals = signals_model.AllSignals()
+            all_signals.direction_pred_med_signals = []
+            all_signals.direction_pred_signals = []
+            all_signals.combined_result_signals = []
+            all_signals.pattern_sum_result_trend_signals = []
+            all_signals.sentiment_trend_signals = []
+            all_signals.med_peak_sums_trend_signals = []
 
-        transactions = []
-        buy = 0
-        sell = 0
-        is_long = False
-        is_short = False
+            transactions = []
+            buy = 0
+            sell = 0
+            is_long = False
+            is_short = False
 
-        for index, row in df.iterrows():
-            all_signals.direction_pred_med_signals.append(row['direction_pred_med'])
-            all_signals.direction_pred_signals.append(row['direction_pred'])
-            all_signals.combined_result_signals.append(row['combined_result'])
-            all_signals.pattern_sum_result_trend_signals.append(row['pattern_sum_result_trend'])
-            all_signals.sentiment_trend_signals.append(row['sentiment_trend'])
-            all_signals.med_peak_sums_trend_signals.append(row['med_peak_sums_trend'])
+            for index, row in df.iterrows():
+                all_signals.direction_pred_med_signals.append(row['direction_pred_med'])
+                all_signals.direction_pred_signals.append(row['direction_pred'])
+                all_signals.combined_result_signals.append(row['combined_result'])
+                all_signals.pattern_sum_result_trend_signals.append(row['pattern_sum_result_trend'])
+                all_signals.sentiment_trend_signals.append(row['sentiment_trend'])
+                all_signals.med_peak_sums_trend_signals.append(row['med_peak_sums_trend'])
 
-            transactions, buy, sell, is_long, is_short = verifySignals(transactions, buy, sell, is_long, is_short, row['last_close'], buy_pattern, sell_pattern, case, all_signals)
+                transactions, buy, sell, is_long, is_short = verifySignals(transactions, buy, sell, is_long, is_short, row['last_close'], buy_pattern, sell_pattern, case, all_signals, mplr)
             
-        total_negative = 0
-        total_positive = 0
-        positives_sum = 0
-        negatives_sum = 0
-        for value in transactions:
-            if value < 0:
-                total_negative += 1
-                negatives_sum += value
-            else:
-                total_positive += 1
-                positives_sum += value
+            total_negative = 0
+            total_positive = 0
+            positives_sum = 0
+            negatives_sum = 0
+            for value in transactions:
+                if value < 0:
+                    total_negative += 1
+                    negatives_sum += value
+                else:
+                    total_positive += 1
+                    positives_sum += value
 
-        try:
-            if (len(transactions) > 0):
+            try:
+                if (len(transactions) > 0):
 
-                result_line = str(len(transactions)) + '|' + str(sum(transactions)) + '|' + str(max(transactions)) + '|' + str(min(transactions)) + '|' + str(round(total_positive / len(transactions) * 100)) + '|' + str(round(total_negative / len(transactions) * 100)) + '|' + str(round(positives_sum / total_positive)) + '|' + str(round(negatives_sum / total_negative)) + '|' + filename + '|' + '-'.join(case) + '-' + str(qty)
-                hs = open('_results.csv', "a")
-                hs.write(result_line + "\n")
+                    result_line = str(len(transactions)) + '|' + str(sum(transactions)) + '|' + str(max(transactions)) + '|' + str(min(transactions)) + '|' + str(round(total_positive / len(transactions) * 100)) + '|' + str(round(total_negative / len(transactions) * 100)) + '|' + str(round(positives_sum / total_positive)) + '|' + str(round(negatives_sum / total_negative)) + '|' + filename + '|' + '-'.join(case) + '-' + str(qty) + '|' + str(mplr)
+                    hs = open('_results.csv', "a")
+                    hs.write(result_line + "\n")
 
-                print('')
-                print('SUMMARY:')
-                print('transactions no.: ' + str(len(transactions)))
-                print('profits total: ' + str(sum(transactions)))
-                print('max income: ' + str(max(transactions)))
-                print('max dropdown: ' + str(min(transactions)))
-                print('success total: ' + str(round(total_positive / len(transactions) * 100)) + ' %')
-                print('failed total: ' + str(round(total_negative / len(transactions) * 100)) + ' %')
-                print('success med: ' + str(round(positives_sum / total_positive)))
-                print('failed med: ' + str(round(negatives_sum / total_negative)))
-                print('')
-            else:
-                print('')
-                print('no transactions')
-                print('')
-        except:
-            print('exception')
+                    print('')
+                    print('SUMMARY:')
+                    print('transactions no.: ' + str(len(transactions)))
+                    print('profits total: ' + str(sum(transactions)))
+                    print('max income: ' + str(max(transactions)))
+                    print('max dropdown: ' + str(min(transactions)))
+                    print('success total: ' + str(round(total_positive / len(transactions) * 100)) + ' %')
+                    print('failed total: ' + str(round(total_negative / len(transactions) * 100)) + ' %')
+                    print('success med: ' + str(round(positives_sum / total_positive)))
+                    print('failed med: ' + str(round(negatives_sum / total_negative)))
+                    print('')
+                else:
+                    print('')
+                    print('no transactions')
+                    print('')
+            except:
+                print('exception')
 
-line = 'transactions no.' + '|profits total' + '|max income' + '|max dropdown' + '|success total%' + '|failed total%' + '|success med' + '|failed med' + '|results file' + '|case'
+line = 'transactions no.' + '|profits total' + '|max income' + '|max dropdown' + '|success total%' + '|failed total%' + '|success med' + '|failed med' + '|results file' + '|case' + '|multiplier'
 hs = open('_results.csv', "a")
 hs.write(line + "\n")
 
