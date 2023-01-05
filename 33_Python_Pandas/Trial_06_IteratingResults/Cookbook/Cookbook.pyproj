@@ -32,7 +32,6 @@
   <ItemGroup>
     <Content Include="ml_tests\test_set_2.csv" />
     <Content Include="ml_tests\test_set_1.csv" />
-    <Content Include="ml_tests\~models_accuracies.csv" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
   <!-- Uncomment the CoreCompile target to enable the Build command in
