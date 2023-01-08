@@ -5,9 +5,13 @@
 import investpy
 import pandas as pd
 import numpy as np
+import api_key
+
 pd.set_option('display.max_rows', 10000)
 pd.set_option('display.max_columns', 10)
 pd.set_option('display.width', 1000)
+
+dupa = api_key.get_api_key()
 
 localizeDictionary = {
     'poland':'Europe/Berlin',
