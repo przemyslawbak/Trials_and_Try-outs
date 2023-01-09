@@ -5,13 +5,25 @@
 import investpy
 import pandas as pd
 import numpy as np
+import json
+from urllib.request import urlopen
 import api_key
 
 pd.set_option('display.max_rows', 10000)
 pd.set_option('display.max_columns', 10)
 pd.set_option('display.width', 1000)
 
-dupa = api_key.get_api_key()
+api_key = api_key.get_api_key()
+url = 'https://financialmodelingprep.com/api/v3/economic_calendar?from=2022-012-01&to=2023-01-10&apikey=' + api_key
+
+# store the response of URL
+response = urlopen(url)
+  
+# storing the JSON response 
+# from url in data
+data_json = json.loads(response.read())
+df = pd.json_normalize(data_json)
+
 
 localizeDictionary = {
     'poland':'Europe/Berlin',
