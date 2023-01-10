@@ -40,7 +40,7 @@ for file_name in onlyfiles:
         else:
             return True
 
-    def is_ready(all_signals, case, buy_pattern):
+    def is_ready_to_compute(all_signals, case, buy_pattern):
         if 'direction_pred_med' in case:
             if len(all_signals.direction_pred_med_signals) < len(buy_pattern):
                 return False
@@ -109,7 +109,7 @@ for file_name in onlyfiles:
             is_long = False
             is_short = False
 
-        if not is_ready(all_signals, case, buy_pattern):
+        if not is_ready_to_compute(all_signals, case, buy_pattern):
             return transactions, buy, sell, is_long, is_short
 
         last_signals = getLastSignals(case, all_signals, buy_pattern)
