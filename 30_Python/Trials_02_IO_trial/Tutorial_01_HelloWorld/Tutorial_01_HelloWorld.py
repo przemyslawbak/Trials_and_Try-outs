@@ -11,7 +11,7 @@ def saveNewLine(text, path, mode):
 def deleteFile(file_path):
     try:
         os.remove(file_path)
-    except OSError:
+    except Exception as e:
         pass
 
 prediction_counter_path = 'ml_tests/prediction_counter.csv'
@@ -24,8 +24,8 @@ for i in range(rng):
 
     if checkIfFileExists(prediction_counter_path):
         prediction_counter_line = ''
-        infile = open(prediction_counter_path, 'r')
-        prediction_counter_line = infile.readline()
+        with open(prediction_counter_path, 'r') as f:
+            prediction_counter_line = f.readline()
 
     deleteFile(prediction_counter_path)
     predictions_line = str(i) + '|' + text + str(i)
