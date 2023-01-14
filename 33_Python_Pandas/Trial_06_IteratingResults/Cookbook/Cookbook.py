@@ -7,7 +7,7 @@ pd.set_option('display.max_rows', 1000)
 pd.set_option('display.max_columns', 10)
 pd.set_option('display.width', 1000)
 
-onlyfiles = [f for f in listdir('ml_tests') if isfile(join('ml_tests', f))]
+onlyfiles = [f for f in listdir('ml_tests/signals/') if isfile(join('ml_tests/signals/', f))]
 
 line = 'transactions no.' + '|profits total' + '|max income' + '|max dropdown' + '|success total%' + '|failed total%' + '|success med' + '|failed med' + '|results file' + '|case' + '|multiplier'
 hs = open('_results.csv', "a")
