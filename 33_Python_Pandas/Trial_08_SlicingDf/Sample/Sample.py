@@ -27,7 +27,8 @@ def sliceData(mlDataFrame, SLICE_LENGTH, TICKS_BACKWARDS, PRED_QTY, mode):
         df_slice = mlDataFrame.iloc[sliceFrom:sliceTo] #removing first n rows and getting slice with 'head'
         print(df_slice)
         listDf.append(df_slice) #add slice to the list
-        listDfLen = len(listDf)
+        
+    listDf = list(reversed(listDf))
 
     return listDf, days_of_test, days_of_spread, slicesQty
 
@@ -38,8 +39,8 @@ df = pd.read_csv(filename)
 print(df.tail(1000))
 
 SLICE_LENGTH = 5000 #or 5000
-TICKS_BACKWARDS = 8000 #or 90
-PRED_QTY = 888 #or 10
+TICKS_BACKWARDS = 90 #or 8000
+PRED_QTY = 10 #or 888
 mode = 'signals'
 
 slicedDfList, days_of_test, days_of_spread, slicesQty = sliceData(df, SLICE_LENGTH, TICKS_BACKWARDS, PRED_QTY, mode)
