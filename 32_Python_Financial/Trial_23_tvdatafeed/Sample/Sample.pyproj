@@ -21,6 +21,7 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="appModels.py" />
     <Compile Include="login_data.py" />
     <Compile Include="Sample.py" />
   </ItemGroup>
