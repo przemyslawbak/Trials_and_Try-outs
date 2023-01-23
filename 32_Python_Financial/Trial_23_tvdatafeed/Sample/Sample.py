@@ -37,10 +37,7 @@ last_day_timestamp =pd.to_datetime(pd.date_range(end='today', periods=daysBack +
 mask = (data['datetime'] > first_day_timestamp) & (data['datetime'] <= last_day_timestamp)
 data = data.loc[mask]
 
-data = data.rename(columns={'volume': 'Volume', 'datetime' : 'time'})
+data = data.rename(columns={'volume': 'Volume', 'datetime' : 'Datetime'})
 data['time'] = data['time'].dt.tz_localize('Europe/Warsaw').dt.tz_convert('UTC')
-
-#todo: verify yahoo time zones <- Pl
-#todo: verify if is daysBack from today or yesterday?
 
 print(data.tail(1000))
