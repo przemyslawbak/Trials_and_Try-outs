@@ -22,7 +22,7 @@ tv = TvDatafeed(username, password)
 #    #print('symbol:' + symbol['symbol'] + ' exchange:' + symbol['exchange'] + ' type:' + symbol['type'] + ' provider_id:' + symbol['provider_id'] + ' description:' + symbol['description']) 
 #    print()
 
-sth = appModels.TvSearchModel('aapl', 'nasdaq', False)
+sth = appModels.TvSearchModel('dji', 'dj', False)
 
 
 if not sth.futures:
@@ -38,7 +38,9 @@ mask = (data['datetime'] > first_day_timestamp) & (data['datetime'] <= last_day_
 data = data.loc[mask]
 
 data = data.rename(columns={'volume': 'Volume', 'datetime' : 'time'})
+data['time'] = data['time'].dt.tz_localize('Europe/Warsaw').dt.tz_convert('UTC')
 
-#todo: time zone
+#todo: verify yahoo time zones <- Pl
+#todo: verify if is daysBack from today or yesterday?
 
 print(data.tail(1000))
