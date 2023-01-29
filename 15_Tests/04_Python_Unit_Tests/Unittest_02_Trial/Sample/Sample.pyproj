@@ -25,9 +25,11 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Sample.py" />
+    <Compile Include="test_2.py" />
     <Compile Include="test_1.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="test_3.py" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="testing\" />
