@@ -2,7 +2,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>14817794-a197-4cc2-b1f9-395cf6c2a4a1</ProjectGuid>
+    <ProjectGuid>580a976b-f56d-4001-81de-95b412a95d75</ProjectGuid>
     <ProjectHome>.</ProjectHome>
     <StartupFile>Sample.py</StartupFile>
     <SearchPath>
@@ -11,9 +11,6 @@
     <OutputPath>.</OutputPath>
     <Name>Sample</Name>
     <RootNamespace>Sample</RootNamespace>
-    <TestFramework>unittest</TestFramework>
-    <UnitTestPattern>test*.py</UnitTestPattern>
-    <UnitTestRootDirectory>.</UnitTestRootDirectory>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <DebugSymbols>true</DebugSymbols>
@@ -24,12 +21,7 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="assertions.py" />
     <Compile Include="Sample.py" />
-    <Compile Include="test_1.py">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="sample_file_to_be_checked.py" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
   <!-- Uncomment the CoreCompile target to enable the Build command in
