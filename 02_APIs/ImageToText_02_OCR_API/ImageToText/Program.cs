@@ -42,7 +42,7 @@ namespace ImageToText
                 form.Add(new StringContent("94918c9c5c88957"), "apikey"); //Added api key in form data
                 form.Add(new StringContent("eng"), "language");
 
-                string image = "jcaptcha.jpg";
+                string image = "chart.png";
 
                 byte[] imageData = File.ReadAllBytes(image);
 
@@ -59,7 +59,7 @@ namespace ImageToText
                     for (int i = 0; i < ocrResult.ParsedResults.Count(); i++)
                     {
                         string res = ocrResult.ParsedResults[i].ParsedText;
-                        res = res.Replace(" ", "").Trim();
+                        //res = res.Replace(" ", "").Trim();
                         Console.WriteLine(res);
                     }
                 }
