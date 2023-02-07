@@ -1,8 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
+﻿using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
+using System.Linq;
 
 namespace ImageToText
 {
@@ -15,6 +14,12 @@ namespace ImageToText
             var curvePixels = GetPixels(path, 70, 130, 180);
             var gridPixels = GetPixels(path, 211, 211, 211);
             var numbersPixels = GetPixels(path, 0, 0, 0);
+
+            curvePixels = curvePixels
+                .GroupBy(x => x.X)
+                .Select(g => new PixelData { Color = g.FirstOrDefault().Color, X = g.FirstOrDefault().X, Y = (int)g.Average(x => x.Y) })
+                .ToList();
+
             //todo: get number values
             //todo: assign values to Y ranges
             //todo: parse grid pixels with number values
