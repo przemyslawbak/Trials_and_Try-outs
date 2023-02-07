@@ -21,7 +21,7 @@ namespace ImageToText
 
             ClearImage(image, updated);
 
-            FileStream stream = File.OpenRead(updated);
+            FileStream stream = File.OpenRead(image);
             var text = service.GetText(stream);
         }
 

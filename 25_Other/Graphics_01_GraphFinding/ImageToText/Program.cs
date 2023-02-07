@@ -16,7 +16,7 @@ namespace ImageToText
             var gridPixels = GetPixels(path, 211, 211, 211);
             var numbersPixels = GetPixels(path, 0, 0, 0);
             //todo: get number values
-            //todo: numer pixels
+            //todo: assign values to Y ranges
             //todo: parse grid pixels with number values
             //todo: 
         }
