@@ -9,26 +9,39 @@ namespace ImageToText
     {
         private static List<PixelData> _curvePixels = new List<PixelData>();
         private static List<PixelData> _gridPixels = new List<PixelData>();
-        private static List<PixelData> _labelsPixels = new List<PixelData>();
+        private static List<PixelData> _labelPixels = new List<PixelData>();
         static void Main(string[] args)
         {
             string path = Path.Combine("chart.png");
+            Bitmap bmp = new Bitmap(path);
 
-            GetPixels(path);
+            GetPixels(bmp);
 
             _curvePixels = _curvePixels
                 .GroupBy(x => x.X)
                 .Select(g => new PixelData { Color = g.FirstOrDefault().Color, X = g.FirstOrDefault().X, Y = (int)g.Average(x => x.Y) })
                 .ToList();
 
-            var maxY = _gridPixels.Where(x => x.X == 50).Select(x => x.Y).Max();
-            var minY = _gridPixels.Where(x => x.X == 50).Select(x => x.Y).Min();
-            var maxYlabel = maxY;
-            var minYlabel = minY;
-            var maxX = _gridPixels.Where(y => y.Y == maxY).Select(y => y.X).Max();
-            var minX = _gridPixels.Where(y => y.Y == maxY).Select(y => y.X).Min();
-            var maxXlabel = _gridPixels.Where(y => y.Y == maxY + 2).Select(y => y.X).Max();
-            var minXlabel = _gridPixels.Where(y => y.Y == maxY + 2).Select(y => y.X).Min();
+            var maxYgraph = _gridPixels.Where(x => x.X == 50).Select(x => x.Y).Max();
+            var minYgraph = _gridPixels.Where(x => x.X == 50).Select(x => x.Y).Min();
+            var maxYlabelLine = maxYgraph;
+            var minYlabelLine = minYgraph;
+            var maxXgraph = _gridPixels.Where(y => y.Y == maxYgraph).Select(y => y.X).Max();
+            var minXgraph = _gridPixels.Where(y => y.Y == maxYgraph).Select(y => y.X).Min();
+            var maxXlabelLine = _gridPixels.Where(y => y.Y == maxYgraph + 2).Select(y => y.X).Max();
+            var minXlabelLine = _gridPixels.Where(y => y.Y == maxYgraph + 2).Select(y => y.X).Min();
+            var oYlabelsXmin = maxXgraph + 1;
+            var oYlabelsXmax = bmp.Width;
+            var oXlabelsYmin = 0;
+            var oXlabelsYmax = minYgraph;
+            var oYlabelHeight = 20;
+            var oXlabelHeight = 20;
+            var oXlabelWidth = 60;
+
+            var oYmaxValue = 0;
+            var oYminValue = 0;
+            var oXmaxValue = 0;
+            var oXminValue = 0;
 
             //todo: get number values
             //todo: assign values to Y ranges
@@ -36,10 +49,8 @@ namespace ImageToText
             //todo: 
         }
 
-        private static void GetPixels(string path)
+        private static void GetPixels(Bitmap bmp)
         {
-            Bitmap bmp = new Bitmap(path);
-
             for (int y = 0; y < bmp.Height; y++)
             {
                 for (int x = 0; x < bmp.Width; x++)
@@ -55,7 +66,7 @@ namespace ImageToText
                     }
                     if (pixel.R == 0 && pixel.G == 0 && pixel.B == 0)
                     {
-                        _labelsPixels.Add(new PixelData() { Color = pixel, X = x, Y = y }); 
+                        _labelPixels.Add(new PixelData() { Color = pixel, X = x, Y = y }); 
                     }
                 }
             }
