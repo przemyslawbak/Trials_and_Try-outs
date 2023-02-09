@@ -2,9 +2,9 @@
 
 namespace ImageToText
 {
-    public class PixelData
+    public class DigitData
     {
-        public Color Color { get; set; }
+        public int Digit { get; set; }
         public int X { get; set; }
         public int Y { get; set; }
     }

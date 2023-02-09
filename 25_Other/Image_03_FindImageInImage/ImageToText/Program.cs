@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
+using System.Linq;
 
 namespace ImageToText
 {
@@ -28,6 +29,8 @@ namespace ImageToText
             ExhaustiveTemplateMatching tm = new ExhaustiveTemplateMatching(0.95f);
             // find all matchings with specified above similarity
 
+            List<DigitData> digits = new List<DigitData>();
+
             foreach (KeyValuePair<int, Bitmap> template in templatesDict)
             {
                 System.Console.WriteLine("processing: " + template.Key);
@@ -37,10 +40,13 @@ namespace ImageToText
                 BitmapData data = sourceImage.LockBits(
                      new Rectangle(0, 0, sourceImage.Width, sourceImage.Height),
                      ImageLockMode.ReadWrite, sourceImage.PixelFormat);
+
+
                 foreach (TemplateMatch m in matchings)
                 {
-
                     Drawing.Rectangle(data, m.Rectangle, Color.White);
+
+                    digits.Add(new DigitData() { X = m.Rectangle.Location.X, Y = m.Rectangle.Location.Y, Digit = template.Key });
 
                     //MessageBox.Show(m.Rectangle.Location.ToString());
                     System.Console.WriteLine(m.Rectangle.Location.ToString());
@@ -48,6 +54,16 @@ namespace ImageToText
                 }
                 sourceImage.UnlockBits(data);
             }
+
+            digits = digits.OrderBy(x => x.X).ToList();
+            string number = "";
+
+            foreach (var digit in digits)
+            {
+                number = number + digit.Digit;
+            }
+
+            int result = int.Parse(number);
         }
 
         public static Bitmap ConvertToFormat(Bitmap image, PixelFormat format)
