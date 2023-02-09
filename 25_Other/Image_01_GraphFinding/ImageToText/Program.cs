@@ -73,8 +73,10 @@ namespace ImageToText
             var oXmaxValue = GetValueFromImage(templatesDict, oXmaxValueImage);
             var oXminValue = GetValueFromImage(templatesDict, oXminValueImage);
 
-            //todo: find value ranges
-            //todo: extract data for oX values
+            var yAxisLength = bottomGridHorizontalLine - topGridHorizontalLine;
+            var xAxisLength = maxXgraph - minXgraph;
+
+            //todo: extract data for each month
         }
 
         public static Bitmap ConvertToFormat(Bitmap image, PixelFormat format)
@@ -91,11 +93,7 @@ namespace ImageToText
         {
             var sourceImage = ConvertToFormat(valueImage, PixelFormat.Format24bppRgb);
 
-            // create template matching algorithm's instance
-            // (set similarity threshold to 98%)
-
             ExhaustiveTemplateMatching tm = new ExhaustiveTemplateMatching(0.95f);
-            // find all matchings with specified above similarity
 
             List<DigitData> digits = new List<DigitData>();
 
@@ -103,7 +101,6 @@ namespace ImageToText
             {
                 System.Console.WriteLine("processing: " + template.Key);
                 TemplateMatch[] matchings = tm.ProcessImage(sourceImage, template.Value);
-                // highlight found matchings
 
                 BitmapData data = sourceImage.LockBits(
                      new Rectangle(0, 0, sourceImage.Width, sourceImage.Height),
@@ -115,10 +112,6 @@ namespace ImageToText
                     Drawing.Rectangle(data, m.Rectangle, Color.White);
 
                     digits.Add(new DigitData() { X = m.Rectangle.Location.X, Y = m.Rectangle.Location.Y, Digit = template.Key });
-
-                    //MessageBox.Show(m.Rectangle.Location.ToString());
-                    System.Console.WriteLine(m.Rectangle.Location.ToString());
-                    // do something else with matching
                 }
                 sourceImage.UnlockBits(data);
             }
