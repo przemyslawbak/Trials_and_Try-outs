@@ -43,10 +43,8 @@ namespace ImageToText
             var oXmaxValue = 0;
             var oXminValue = 0;
 
-            //todo: get number values
+            //todo: detecting imgaes (digits) in images (numbers)
             //todo: assign values to Y ranges
-            //todo: parse grid pixels with number values
-            //todo: 
         }
 
         private static void GetPixels(Bitmap bmp)
