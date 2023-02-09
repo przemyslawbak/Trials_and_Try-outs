@@ -1,5 +1,4 @@
 ﻿using AForge.Imaging;
-using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
@@ -68,6 +67,10 @@ namespace ImageToText
             var oYminValue = GetValueFromImage(templatesDict, oYminValueImage);
             var oXmaxValue = GetValueFromImage(templatesDict, oXmaxValueImage);
             var oXminValue = GetValueFromImage(templatesDict, oXminValueImage);
+
+            //todo: verify rectangles (save them first?)
+            //todo: find value ranges
+            //todo: extract data for oX values
         }
 
         public static Bitmap ConvertToFormat(Bitmap image, PixelFormat format)
