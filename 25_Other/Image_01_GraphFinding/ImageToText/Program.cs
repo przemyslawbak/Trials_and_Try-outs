@@ -1,5 +1,6 @@
 ﻿using AForge.Imaging;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
@@ -57,6 +58,7 @@ namespace ImageToText
 
             var templatesDict = new Dictionary<int, Bitmap>
             {
+                { -1, ConvertToFormat((Bitmap)Bitmap.FromFile("minus.png"), PixelFormat.Format24bppRgb) },
                 { 0, ConvertToFormat((Bitmap)Bitmap.FromFile("0.png"), PixelFormat.Format24bppRgb) },
                 { 1, ConvertToFormat((Bitmap)Bitmap.FromFile("1.png"), PixelFormat.Format24bppRgb) },
                 { 2, ConvertToFormat((Bitmap)Bitmap.FromFile("2.png"), PixelFormat.Format24bppRgb) },
@@ -97,7 +99,7 @@ namespace ImageToText
             int leftGridVerticalLine)
         {
             var positionXstart = leftGridVerticalLine - ((int)oneYearXunitPixels * 2); //start position
-            var positionX = positionXstart;
+            var positionXdec = (decimal)positionXstart;
             var result = new List<DataModel>();
             var months = 12;
 
@@ -108,29 +110,38 @@ namespace ImageToText
             {
                 for (int j = 1; j <= months; j++)
                 {
-                    positionX = (int)(positionX + oneMonthXunitPixels);
+                    positionXdec = positionXdec + oneMonthXunitPixels;
+                    var positionX = (int)Math.Round(positionXdec, 0, MidpointRounding.AwayFromZero);
                     if ((positionX >= minXgraph) && (positionX <= maxXgraph))
                     {
                         int? positionY = _curvePixels.Where(x => x.X == positionX).Select(x => x.Y).FirstOrDefault();
 
                         if (positionY.HasValue)
                         {
-                            var dataValue = InterpolateValue(positionY.Value);
-                            result.Add(new DataModel() { DateTime = new DateTime(i, j, 28) });
+                            var dataValue = InterpolateValue(positionY.Value, maxYgraph, minYgraph, oYmaxValue, oYminValue);
+                            result.Add(new DataModel() { DateTime = new DateTime(i, j, 28), DataValue = dataValue, X = positionX, Y = positionY.Value });
                         }
                     }
                 }
 
                 yearCounter++;
-                positionX = (int)(positionXstart + (yearCounter * oneYearXunitPixels));
+                positionXdec = (decimal)(positionXstart + (yearCounter * oneYearXunitPixels));
             }
 
             return result;
         }
 
-        private static decimal InterpolateValue(int positionY)
+        private static decimal InterpolateValue(int positionY, int maxYgraph, int minYgraph, int oYmaxValue, int oYminValue)
         {
             decimal result = (decimal)0.0;
+
+            var yValueDiff = oYminValue - oYmaxValue;
+            var yGraphDiff = minYgraph - maxYgraph;
+            var yPixelValue = (decimal)(yValueDiff / yGraphDiff);
+            var yPositionDiff = minYgraph - positionY;
+            var valueDiff = yPositionDiff * yPixelValue;
+
+            result = oYminValue - valueDiff;
 
             return result;
         }
@@ -167,7 +178,9 @@ namespace ImageToText
                 {
                     Drawing.Rectangle(data, m.Rectangle, Color.White);
 
-                    digits.Add(new DigitData() { X = m.Rectangle.Location.X, Y = m.Rectangle.Location.Y, Digit = template.Key });
+                    var digitData = new DigitData() { X = m.Rectangle.Location.X, Y = m.Rectangle.Location.Y, Digit = template.Key };
+
+                    digits.Add(digitData);
                 }
                 sourceImage.UnlockBits(data);
             }
@@ -177,10 +190,18 @@ namespace ImageToText
 
             foreach (var digit in digits)
             {
-                number = number + digit.Digit;
+                if (digit.Digit != -1)
+                {
+                    number = number + digit.Digit;
+                }
             }
 
-            return int.Parse(number);
+            var res = int.Parse(number);
+            if (digits.Any(x => x.Digit == -1))
+            {
+                res = res * -1;
+            }
+            return res;
         }
 
         private static Bitmap CropImage(Bitmap bmpImage, RectangleF cropArea)
