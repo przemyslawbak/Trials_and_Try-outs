@@ -53,6 +53,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DataModel.cs" />
     <Compile Include="DigitData.cs" />
     <Compile Include="PixelData.cs" />
     <Compile Include="Program.cs" />

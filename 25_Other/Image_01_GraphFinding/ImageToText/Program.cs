@@ -1,4 +1,5 @@
 ﻿using AForge.Imaging;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
@@ -76,7 +77,62 @@ namespace ImageToText
             var yAxisLength = bottomGridHorizontalLine - topGridHorizontalLine;
             var xAxisLength = maxXgraph - minXgraph;
 
-            //todo: extract data for each month
+            var oneYearXunitPixels = (decimal)((rightGridVerticalLine - leftGridVerticalLine) / (oXmaxValue - oXminValue));
+            var oneMonthXunitPixels = (decimal)(oneYearXunitPixels / 12);
+
+            var dataValues = ComputeDataValues(oneMonthXunitPixels, oneYearXunitPixels, maxYgraph, minYgraph, maxXgraph, minXgraph, oYmaxValue, oYminValue, oXmaxValue, oXminValue, leftGridVerticalLine);
+        }
+
+        private static List<DataModel> ComputeDataValues(
+            decimal oneMonthXunitPixels, 
+            decimal oneYearXunitPixels, 
+            int maxYgraph, 
+            int minYgraph, 
+            int maxXgraph, 
+            int minXgraph, 
+            int oYmaxValue, 
+            int oYminValue, 
+            int oXmaxValue, 
+            int oXminValue, 
+            int leftGridVerticalLine)
+        {
+            var positionXstart = leftGridVerticalLine - ((int)oneYearXunitPixels * 2); //start position
+            var positionX = positionXstart;
+            var result = new List<DataModel>();
+            var months = 12;
+
+            var startoXminValue = (int)(oXminValue - 2);
+
+            var yearCounter = 0;
+            for (int i = startoXminValue; i <= oXmaxValue; i++)
+            {
+                for (int j = 1; j <= months; j++)
+                {
+                    positionX = (int)(positionX + oneMonthXunitPixels);
+                    if ((positionX >= minXgraph) && (positionX <= maxXgraph))
+                    {
+                        int? positionY = _curvePixels.Where(x => x.X == positionX).Select(x => x.Y).FirstOrDefault();
+
+                        if (positionY.HasValue)
+                        {
+                            var dataValue = InterpolateValue(positionY.Value);
+                            result.Add(new DataModel() { DateTime = new DateTime(i, j, 28) });
+                        }
+                    }
+                }
+
+                yearCounter++;
+                positionX = (int)(positionXstart + (yearCounter * oneYearXunitPixels));
+            }
+
+            return result;
+        }
+
+        private static decimal InterpolateValue(int positionY)
+        {
+            decimal result = (decimal)0.0;
+
+            return result;
         }
 
         public static Bitmap ConvertToFormat(Bitmap image, PixelFormat format)
