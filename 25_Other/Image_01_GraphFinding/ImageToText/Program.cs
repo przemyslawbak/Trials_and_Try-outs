@@ -119,7 +119,7 @@ namespace ImageToText
                         if (positionY.HasValue)
                         {
                             var dataValue = InterpolateValue(positionY.Value, maxYgraph, minYgraph, oYmaxValue, oYminValue);
-                            result.Add(new DataModel() { DateTime = new DateTime(i, j, 28), DataValue = dataValue, X = positionX, Y = positionY.Value });
+                            result.Add(new DataModel() { DateTime = new DateTime(i, j, 28), DataValue = dataValue });
                         }
                     }
                 }
