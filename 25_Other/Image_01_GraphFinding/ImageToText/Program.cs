@@ -137,7 +137,7 @@ namespace ImageToText
 
             var yValueDiff = oYminValue - oYmaxValue;
             var yGraphDiff = minYgraph - maxYgraph;
-            var yPixelValue = (decimal)(yValueDiff / yGraphDiff);
+            var yPixelValue = (decimal)yValueDiff / (decimal)yGraphDiff;
             var yPositionDiff = minYgraph - positionY;
             var valueDiff = yPositionDiff * yPixelValue;
 
