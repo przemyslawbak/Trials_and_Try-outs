@@ -209,8 +209,12 @@ namespace ImageToText
             return bmpImage.Clone(cropArea, bmpImage.PixelFormat);
         }
 
-        private static void GetPixels(Bitmap bmp)
+        private void GetPixels(Bitmap bmp)
         {
+            _curvePixels = new List<PixelData>();
+            _gridPixels = new List<PixelData>();
+            _labelPixels = new List<PixelData>();
+
             for (int y = 0; y < bmp.Height; y++)
             {
                 for (int x = 0; x < bmp.Width; x++)
@@ -218,15 +222,15 @@ namespace ImageToText
                     var pixel = bmp.GetPixel(x, y);
                     if (pixel.R == 70 && pixel.G == 130 && pixel.B == 180)
                     {
-                        _curvePixels.Add(new PixelData() { Color = pixel, X = x, Y = y }); 
+                        _curvePixels.Add(new PixelData() { Color = pixel, X = x, Y = y });
                     }
-                    if (pixel.R == 211 && pixel.G == 211 && pixel.B == 211)
+                    if (pixel.G == 211 && pixel.B == 211)
                     {
-                        _gridPixels.Add(new PixelData() { Color = pixel, X = x, Y = y }); 
+                        _gridPixels.Add(new PixelData() { Color = pixel, X = x, Y = y });
                     }
                     if (pixel.R == 0 && pixel.G == 0 && pixel.B == 0)
                     {
-                        _labelPixels.Add(new PixelData() { Color = pixel, X = x, Y = y }); 
+                        _labelPixels.Add(new PixelData() { Color = pixel, X = x, Y = y });
                     }
                 }
             }
