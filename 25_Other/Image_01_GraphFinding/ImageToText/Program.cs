@@ -30,14 +30,20 @@ namespace ImageToText
             var bottomGridHorizontalLine = _gridPixels.Where(x => x.X == 66).Select(x => x.Y).Max();
             var leftGridVerticalLine = _gridPixels.Where(y => y.Y == topGridHorizontalLine + 2).Select(y => y.X).Min();
             var rightGridVerticalLine = _gridPixels.Where(y => y.Y == topGridHorizontalLine + 2).Select(y => y.X).Max();
-            var maxYgraph = _gridPixels.Where(x => x.X == 66).Select(x => x.Y).Min();
-            var minYgraph = _gridPixels.Where(x => x.X == 66).Select(x => x.Y).Max();
-            var maxXgraph = _gridPixels.Where(y => y.Y == maxYgraph).Select(y => y.X).Max() - 10;
-            var minXgraph = _gridPixels.Where(y => y.Y == maxYgraph).Select(y => y.X).Min() + 10;
 
-            var oYlabelsXmin = maxXgraph + 1;
+            var maxYgraph = _curvePixels.Select(x => x.Y).Min() + 2;
+            var minYgraph = _curvePixels.Select(x => x.Y).Max() + 2;
+            var maxXgraph = _curvePixels.Select(y => y.X).Max();
+            var minXgraph = _curvePixels.Select(y => y.X).Min();
+
+            var maxYgraphLabel = _gridPixels.Where(x => x.X == 66).Select(x => x.Y).Min();
+            var minYgraphLabel = _gridPixels.Where(x => x.X == 66).Select(x => x.Y).Max();
+            var maxXgraphLabel = _gridPixels.Where(y => y.Y == maxYgraphLabel).Select(y => y.X).Max() - 10;
+            var minXgraphLabel = _gridPixels.Where(y => y.Y == maxYgraphLabel).Select(y => y.X).Min() + 10;
+
+            var oYlabelsXmin = maxXgraphLabel + 1;
             var oYlabelsXmax = bmp.Width;
-            var oXlabelsYmax = minYgraph;
+            var oXlabelsYmax = minYgraphLabel;
             var oYlabelHeight = 24;
             var oXlabelHeight = 24;
             var oXlabelWidth = 80;
@@ -82,7 +88,7 @@ namespace ImageToText
             var oneYearXunitPixels = (decimal)((rightGridVerticalLine - leftGridVerticalLine) / (oXmaxValue - oXminValue));
             var oneMonthXunitPixels = (decimal)(oneYearXunitPixels / 12);
 
-            var dataValues = ComputeDataValues(oneMonthXunitPixels, oneYearXunitPixels, maxYgraph, minYgraph, maxXgraph, minXgraph, oYmaxValue, oYminValue, oXmaxValue, oXminValue, leftGridVerticalLine);
+            var dataValues = ComputeDataValues(oneMonthXunitPixels, oneYearXunitPixels, maxYgraphLabel, minYgraphLabel, maxXgraphLabel, minXgraphLabel, oYmaxValue, oYminValue, oXmaxValue, oXminValue, leftGridVerticalLine);
         }
 
         private static List<DataModel> ComputeDataValues(
