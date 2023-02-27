@@ -166,7 +166,7 @@ namespace ImageToText
 
             foreach (KeyValuePair<int, Bitmap> template in templatesDict)
             {
-                System.Console.WriteLine("processing: " + template.Key);
+                Console.WriteLine("processing: " + template.Key);
                 TemplateMatch[] matchings = tm.ProcessImage(sourceImage, template.Value);
 
                 BitmapData data = sourceImage.LockBits(
