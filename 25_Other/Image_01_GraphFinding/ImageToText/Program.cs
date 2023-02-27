@@ -26,12 +26,12 @@ namespace ImageToText
                 .Select(g => new PixelData { Color = g.FirstOrDefault().Color, X = g.FirstOrDefault().X, Y = (int)g.Average(x => x.Y) })
                 .ToList();
 
-            var topGridHorizontalLine = _gridPixels.Where(x => x.X == 50).Select(x => x.Y).Min();
-            var bottomGridHorizontalLine = _gridPixels.Where(x => x.X == 50).Select(x => x.Y).Max();
+            var topGridHorizontalLine = _gridPixels.Where(x => x.X == 66).Select(x => x.Y).Min();
+            var bottomGridHorizontalLine = _gridPixels.Where(x => x.X == 66).Select(x => x.Y).Max();
             var leftGridVerticalLine = _gridPixels.Where(y => y.Y == topGridHorizontalLine + 2).Select(y => y.X).Min();
             var rightGridVerticalLine = _gridPixels.Where(y => y.Y == topGridHorizontalLine + 2).Select(y => y.X).Max();
-            var maxYgraph = _gridPixels.Where(x => x.X == 50).Select(x => x.Y).Min();
-            var minYgraph = _gridPixels.Where(x => x.X == 50).Select(x => x.Y).Max();
+            var maxYgraph = _gridPixels.Where(x => x.X == 66).Select(x => x.Y).Min();
+            var minYgraph = _gridPixels.Where(x => x.X == 66).Select(x => x.Y).Max();
             var maxXgraph = _gridPixels.Where(y => y.Y == maxYgraph).Select(y => y.X).Max();
             var minXgraph = _gridPixels.Where(y => y.Y == maxYgraph).Select(y => y.X).Min();
 
@@ -44,8 +44,8 @@ namespace ImageToText
 
             var oYmaxRect = new RectangleF(oYlabelsXmin, topGridHorizontalLine - oYlabelHeight / 2, oYlabelsXmax - oYlabelsXmin, oYlabelHeight);
             var oYminRect = new RectangleF(oYlabelsXmin, bottomGridHorizontalLine - oYlabelHeight / 2, oYlabelsXmax - oYlabelsXmin, oYlabelHeight);
-            var oXmaxRect = new RectangleF(rightGridVerticalLine - oXlabelWidth / 2, oXlabelsYmax + 10, oXlabelWidth, oXlabelHeight);
-            var oXminRect = new RectangleF(leftGridVerticalLine - oXlabelWidth / 2, oXlabelsYmax + 10, oXlabelWidth, oXlabelHeight);
+            var oXmaxRect = new RectangleF(rightGridVerticalLine - oXlabelWidth / 2, oXlabelsYmax + 16, oXlabelWidth, oXlabelHeight);
+            var oXminRect = new RectangleF(leftGridVerticalLine - oXlabelWidth / 2, oXlabelsYmax + 16, oXlabelWidth, oXlabelHeight);
 
             var oYmaxValueImage = CropImage(bmp, oYmaxRect);
             var oYminValueImage = CropImage(bmp, oYminRect);
@@ -209,7 +209,7 @@ namespace ImageToText
             return bmpImage.Clone(cropArea, bmpImage.PixelFormat);
         }
 
-        private void GetPixels(Bitmap bmp)
+        private static void GetPixels(Bitmap bmp)
         {
             _curvePixels = new List<PixelData>();
             _gridPixels = new List<PixelData>();
