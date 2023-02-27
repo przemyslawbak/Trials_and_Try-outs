@@ -32,8 +32,8 @@ namespace ImageToText
             var rightGridVerticalLine = _gridPixels.Where(y => y.Y == topGridHorizontalLine + 2).Select(y => y.X).Max();
             var maxYgraph = _gridPixels.Where(x => x.X == 66).Select(x => x.Y).Min();
             var minYgraph = _gridPixels.Where(x => x.X == 66).Select(x => x.Y).Max();
-            var maxXgraph = _gridPixels.Where(y => y.Y == maxYgraph).Select(y => y.X).Max();
-            var minXgraph = _gridPixels.Where(y => y.Y == maxYgraph).Select(y => y.X).Min();
+            var maxXgraph = _gridPixels.Where(y => y.Y == maxYgraph).Select(y => y.X).Max() - 10;
+            var minXgraph = _gridPixels.Where(y => y.Y == maxYgraph).Select(y => y.X).Min() + 10;
 
             var oYlabelsXmin = maxXgraph + 1;
             var oYlabelsXmax = bmp.Width;
@@ -119,7 +119,7 @@ namespace ImageToText
                         if (positionY.HasValue)
                         {
                             var dataValue = InterpolateValue(positionY.Value, maxYgraph, minYgraph, oYmaxValue, oYminValue);
-                            result.Add(new DataModel() { DateTime = new DateTime(i, j, 28), DataValue = dataValue });
+                            result.Add(new DataModel() { DateTime = new DateTime(i, j, 28), DataValue = dataValue, X = positionX, Y = positionY.Value });
                         }
                     }
                 }
