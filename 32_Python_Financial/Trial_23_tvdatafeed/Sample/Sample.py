@@ -26,9 +26,9 @@ sth = appModels.TvSearchModel('dji', 'dj', False)
 
 
 if not sth.futures:
-    data = tv.get_hist(symbol=sth.symbol,exchange=sth.exchange,interval=Interval.in_1_hour,n_bars=20000)
+    data = tv.get_hist(symbol=sth.symbol,exchange=sth.exchange,interval=Interval.in_1_minute,n_bars=2000000)
 else:
-    data = tv.get_hist(symbol=sth.symbol,exchange=sth.exchange,interval=Interval.in_1_hour,n_bars=20000, fut_contract=1)
+    data = tv.get_hist(symbol=sth.symbol,exchange=sth.exchange,interval=Interval.in_1_minute,n_bars=2000000, fut_contract=1)
 
 data = data.reset_index()
 first_day_timestamp =pd.to_datetime(pd.date_range(end='today', periods=daysBack + 1)[0]).floor('d')
@@ -37,7 +37,7 @@ last_day_timestamp =pd.to_datetime(pd.date_range(end='today', periods=daysBack +
 mask = (data['datetime'] > first_day_timestamp) & (data['datetime'] <= last_day_timestamp)
 data = data.loc[mask]
 
-data = data.rename(columns={'volume': 'Volume', 'datetime' : 'Datetime'})
-data['time'] = data['time'].dt.tz_localize('Europe/Warsaw').dt.tz_convert('UTC')
+#data = d/ata.rename(columns={'volume': 'Volume', 'datetime' : 'Datetime'})
+#data['time'] = data['time'].dt.tz_localize('Europe/Warsaw').dt.tz_convert('UTC')
 
 print(data.tail(1000))

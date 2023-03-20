@@ -14,12 +14,12 @@ namespace List_Comparer
         static void Main(string[] args)
         {
             Console.WriteLine("Reading all files...");
-            foreach (string file in Directory.EnumerateFiles(Path.Combine("files"), "*.csv"))
+            foreach (string file in Directory.EnumerateFiles(Path.Combine("files"), "*.*"))
             {
                 Console.WriteLine("Reading " + file);
                 Console.WriteLine("..." + file);
                 List<string> contents = File.ReadAllLines(file).ToList();
-                List<EmailModel> items = contents.Where(i => !i.Contains("\0")).Select(i => new EmailModel() { Address = i.Split('|')[0], Company = i.Split('|')[1] }).ToList();
+                List<EmailModel> items = contents.Where(c => c.Contains("|")).Select(i => new EmailModel() { Address = i.Split('|')[1].ToLower(), Company = i.Split('|')[0].ToLower() }).ToList();
                 _listFromFiles.AddRange(items);
             }
 
@@ -30,10 +30,13 @@ namespace List_Comparer
             {
                 counter++;
                 Console.WriteLine(counter + " of " + listOfFirms.Count());
-                string newfirm = firm.Replace(".", "");
+                string newfirm = firm.ToLower().Replace(".", "");
                 List<string> emails = _listFromFiles.Where(l => l.Company.ToLower() == newfirm.ToLower()).Select(l => l.Address.ToLower()).ToList();
                 if (emails.Count() > 0)
                 {
+                    emails = emails.GroupBy(g => g.Trim().ToLower())
+                         .Select(g => g.First())
+                         .ToList();
                     foreach (string email in emails)
                     {
                         string res = email.ToLower() + "|" + newfirm.ToLower();
