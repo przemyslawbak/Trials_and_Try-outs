@@ -6,8 +6,6 @@ using Sample;
 
 namespace Activator
 {
-    //examples from https://developer.trimblemaps.com/engineering-blog/brief-intro-to-nettopology-in-net-core/
-
     class Program
     {
         static void Main(string[] args)
