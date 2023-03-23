@@ -4,13 +4,20 @@
     {
         static void Main(string[] args)
         {
+            List<int> futuresRollingMonthsPoland = new List<int>() { 3, 6, 9, 12 };
+
+
             var timeZoneOffsetPoland = GetTimeSpanToUtc("Central European Standard Time");
             var rollingHourPoland = 1;
-            var month = GetUtcMonthNow();
+            var month = GetClosestGreaterMonthNumber(GetUtcMonthNow(), futuresRollingMonthsPoland);
+            var nextMonth = GetClosestGreaterMonthNumber(month + 1, futuresRollingMonthsPoland);
+            var anotherMonth = GetClosestGreaterMonthNumber(nextMonth + 1, futuresRollingMonthsPoland);
+
             var year = GetUtcYearNow();
+
             var thirdFridayOfMonth = GetThirdFriday(year, month);
-            var thirdFridayOfNextMonth = GetThirdFriday(year, month + 1);
-            var thirdFridayOfAnotherMonth = GetThirdFriday(year, month + 2);
+            var thirdFridayOfNextMonth = GetThirdFriday(year, nextMonth);
+            var thirdFridayOfAnotherMonth = GetThirdFriday(year, anotherMonth);
 
             if (thirdFridayOfMonth.AddHours(rollingHourPoland) < DateTime.UtcNow + timeZoneOffsetPoland)
             {
@@ -25,6 +32,13 @@
         {
             var timeZoneInfo = TimeZoneInfo.FindSystemTimeZoneById(timeZone);
             return timeZoneInfo.GetUtcOffset(DateTime.UtcNow);
+        }
+
+        private static int GetClosestGreaterMonthNumber(int month, List<int> monthsNosList)
+        {
+            return monthsNosList.SkipWhile(p => p <= month).FirstOrDefault() != 0
+                ? monthsNosList.SkipWhile(p => p <= month).FirstOrDefault()
+                : monthsNosList.First();
         }
 
         private static DateTime GetThirdFriday(int year, int month)
