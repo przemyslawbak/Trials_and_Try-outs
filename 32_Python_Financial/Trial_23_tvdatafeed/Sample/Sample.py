@@ -40,4 +40,4 @@ data = data.loc[mask]
 #data = d/ata.rename(columns={'volume': 'Volume', 'datetime' : 'Datetime'})
 #data['time'] = data['time'].dt.tz_localize('Europe/Warsaw').dt.tz_convert('UTC')
 
-print(data.tail(1000))
+print(data.tail(1000)) #only prev. day
