@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 
@@ -15,14 +16,22 @@ namespace List_Comparer
             {
                 Console.WriteLine("Reading " + file);
                 List<string> contents = File.ReadAllLines(file).ToList();
-                List<string> names = contents.Where(c => c.Contains(",")).Select(i => i.Split(',')[0]).ToList();
-                _givenNames.AddRange(names);
+                List<string> names = contents.Where(c => c.Contains(",")).Select(i => i.Split(',')[0].Split(' ')[0].ToLower()).Select(name => RemoveAccents(name)).Where(name => name.Length >= 4).Distinct().ToList();
+                File.AppendAllLines("output.txt", names.Where(name => !string.IsNullOrEmpty(name)));
             }
 
-            File.WriteAllLines("output2.txt", _givenNames.Distinct());
-            Console.WriteLine("saved");
+            Console.WriteLine("finished");
             Console.ReadKey();
 
+        }
+
+        public static string RemoveAccents(string input)
+        {
+            return new string(input
+                .Normalize(System.Text.NormalizationForm.FormD)
+                .ToCharArray()
+                .Where(c => CharUnicodeInfo.GetUnicodeCategory(c) != UnicodeCategory.NonSpacingMark)
+                .ToArray());
         }
     }
 }
