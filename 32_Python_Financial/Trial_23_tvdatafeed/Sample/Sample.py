@@ -22,7 +22,7 @@ tv = TvDatafeed(username, password)
 #    #print('symbol:' + symbol['symbol'] + ' exchange:' + symbol['exchange'] + ' type:' + symbol['type'] + ' provider_id:' + symbol['provider_id'] + ' description:' + symbol['description']) 
 #    print()
 
-sth = appModels.TvSearchModel('dji', 'dj', False)
+sth = appModels.TvSearchModel('kgh', 'gpw', False)
 
 
 if not sth.futures:
