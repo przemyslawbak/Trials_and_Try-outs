@@ -8,7 +8,7 @@ import matplotlib.pyplot as plt
 
 #https://www.w3schools.com/python/pandas/pandas_plotting.asp
 
-NIFTY = yf.download('^GDAXI',start='2023-4-1', end='2023-4-8', interval = '1m')
+NIFTY = yf.download('^GDAXI',start='2023-3-30', end='2023-4-6', interval = '1m')
 
 # Compute the logarithmic returns using the Closing price
 NIFTY['Log_Ret'] = np.log(NIFTY['Close'] / NIFTY['Close'].shift(1))
