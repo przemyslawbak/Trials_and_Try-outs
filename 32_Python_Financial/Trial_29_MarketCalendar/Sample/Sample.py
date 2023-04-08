@@ -1,5 +1,7 @@
 import pandas_market_calendars as mcal
 
+#https://github.com/rsheftel/pandas_market_calendars
+
 # Create a calendar (XWAR -> GPW)
 xwar = mcal.get_calendar('XWAR')
 
