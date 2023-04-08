@@ -8,13 +8,13 @@ import matplotlib.pyplot as plt
 
 #https://www.w3schools.com/python/pandas/pandas_plotting.asp
 
-NIFTY = yf.download('^GDAXI',start='2019-6-1', end='2023-6-1')
+NIFTY = yf.download('^GDAXI',start='2023-4-1', end='2023-4-8', interval = '1m')
 
 # Compute the logarithmic returns using the Closing price
 NIFTY['Log_Ret'] = np.log(NIFTY['Close'] / NIFTY['Close'].shift(1))
 
 # Compute Volatility using the pandas rolling standard deviation function
-NIFTY['Volatility'] = NIFTY['Log_Ret'].rolling(window=15).std() * np.sqrt(252)
+NIFTY['Volatility'] = NIFTY['Log_Ret'].rolling(window=50).std() * np.sqrt(252)
 print(NIFTY.tail(15))
 
 # Plot the NIFTY Price series and the Volatility
