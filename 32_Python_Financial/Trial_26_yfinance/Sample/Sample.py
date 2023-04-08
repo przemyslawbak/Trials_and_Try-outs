@@ -7,7 +7,7 @@ pd.set_option('display.max_rows', 20000)
 pd.set_option('display.max_columns', 10)
 pd.set_option('display.width', 1000)
 
-symbol = 'acp.wa'
+symbol = '^OVX'
 ticker = yf.Ticker(symbol)
 print(ticker.info)
 
