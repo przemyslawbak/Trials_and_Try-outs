@@ -34,38 +34,6 @@ namespace List_Comparer
                 }
             }
 
-            //Stock Historical Price
-            using (var httpClient = new HttpClient())
-            {
-                string symbol = "AAPL";
-                using (var request = new HttpRequestMessage(new HttpMethod("GET"), "https://financialmodelingprep.com/api/v3/historical-chart/1min/" + symbol + "?apikey=" + k))
-
-                {
-                    request.Headers.TryAddWithoutValidation("Upgrade-Insecure-Requests", "1");
-
-                    var response = await httpClient.SendAsync(request);
-
-                    var d = await response.Content.ReadAsStringAsync();
-                    //Console.WriteLine(d);
-                }
-            }
-
-            //Index Historical Price
-            using (var httpClient = new HttpClient())
-            {
-                //SP500
-                using (var request = new HttpRequestMessage(new HttpMethod("GET"), "https://financialmodelingprep.com/api/v3/historical-chart/1min/%5EGSPC?apikey=" + k))
-
-                {
-                    request.Headers.TryAddWithoutValidation("Upgrade-Insecure-Requests", "1");
-
-                    var response = await httpClient.SendAsync(request);
-
-                    var d = await response.Content.ReadAsStringAsync();
-                    //Console.WriteLine(d);
-                }
-            }
-
             //Market Index
             using (var httpClient = new HttpClient())
             {
@@ -134,6 +102,7 @@ namespace List_Comparer
             {
                 Console.WriteLine("Time: " + DateTime.Now.ToShortTimeString());
                 Console.WriteLine();
+
                 //Major Indexes (real-time) <--confirmed
                 using (var httpClient = new HttpClient())
                 {
@@ -179,6 +148,38 @@ namespace List_Comparer
 
                         var d = await response.Content.ReadAsStringAsync();
                         Console.WriteLine("AAPL DCF: " + d);
+                    }
+                }
+
+                //Stock Historical Price (real-time) <--confirmed
+                using (var httpClient = new HttpClient())
+                {
+                    string symbol = "AAPL";
+                    using (var request = new HttpRequestMessage(new HttpMethod("GET"), "https://financialmodelingprep.com/api/v3/historical-chart/1min/" + symbol + "?apikey=" + k))
+
+                    {
+                        request.Headers.TryAddWithoutValidation("Upgrade-Insecure-Requests", "1");
+
+                        var response = await httpClient.SendAsync(request);
+
+                        var d = await response.Content.ReadAsStringAsync();
+                        //Console.WriteLine(d);
+                    }
+                }
+
+                //Index Historical Price (real-time) <--confirmed
+                using (var httpClient = new HttpClient())
+                {
+                    //SP500
+                    using (var request = new HttpRequestMessage(new HttpMethod("GET"), "https://financialmodelingprep.com/api/v3/historical-chart/1min/%5EGSPC?apikey=" + k))
+
+                    {
+                        request.Headers.TryAddWithoutValidation("Upgrade-Insecure-Requests", "1");
+
+                        var response = await httpClient.SendAsync(request);
+
+                        var d = await response.Content.ReadAsStringAsync();
+                        //Console.WriteLine(d);
                     }
                 }
 
