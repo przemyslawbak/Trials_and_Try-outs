@@ -10,7 +10,7 @@ namespace CefSharp.MinimalExample.OffScreen
 {
     public class Program
     {
-        private static string _url = "https://www.barchart.com/stocks/quotes/DYM23/options/apr-23?expiration=2023-04-21-m";
+        private static string _url = "https://stooq.com/q/o/?s=wig20&i=1";
         private static ChromiumWebBrowser _browser;
         private static RequestContext _requestContext;
         private static BrowserSettings _browserSettings;
@@ -139,10 +139,46 @@ namespace CefSharp.MinimalExample.OffScreen
 
         private static async Task RunProgramAsync()
         {
-            await LoadPage(_url);
+            await LoadPageWithPrivacy(_url);
+            await ReloadPage(_url);
+            await ReloadPage(_url);
+            await ReloadPage(_url);
+            await ReloadPage(_url);
         }
 
-        private static async Task LoadPage(string url)
+        private static async Task LoadPageWithPrivacy(string url)
+        {
+            _browser.Size = new Size(2000, 2500);
+
+            LoadingPage = true;
+
+            _browser.Load(url);
+
+            _pageLoadedEventHandler = (sender, args) =>
+            {
+                if (args.IsLoading == false)
+                {
+                    _browser.LoadingStateChanged -= _pageLoadedEventHandler;
+
+                    LoadingPage = false;
+                }
+            };
+
+            _browser.LoadingStateChanged += _pageLoadedEventHandler;
+
+            while (LoadingPage)
+            {
+                await Task.Delay(100);
+            }
+
+            var script1 = @"
+            document.getElementsByClassName('fc-primary-button')[0].click();";
+            _browser.ExecuteScriptAsync(script1);
+
+            await Task.Delay(1000);
+        }
+
+        private static async Task ReloadPage(string url)
         {
             _browser.Size = new Size(2000, 2500);
 
