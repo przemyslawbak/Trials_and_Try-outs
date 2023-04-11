@@ -410,3 +410,4 @@ MigrationBackup/
 /32_Python_Financial/Trial_20_Finnhub/Sample/api.py
 /32_Python_Financial/Trial_23_tvdatafeed/Sample/login_data.py
 /29_Financial/Trial_03_FMP_trials/List_Comparer/Hidden.cs
+/11_SMTP/SMTP_05_FailedEmailCheck/EmailCrawler_01_Trial/Hidden.cs
