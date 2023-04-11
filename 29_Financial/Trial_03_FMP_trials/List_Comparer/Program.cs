@@ -114,43 +114,11 @@ namespace List_Comparer
                 }
             }
 
-            //Major Indexes (real-time)
-            using (var httpClient = new HttpClient())
-            {
-                //SP500
-                using (var request = new HttpRequestMessage(new HttpMethod("GET"), "https://financialmodelingprep.com/api/v3/quote/%5EGSPC?apikey=" + k))
-
-                {
-                    request.Headers.TryAddWithoutValidation("Upgrade-Insecure-Requests", "1");
-
-                    var response = await httpClient.SendAsync(request);
-
-                    var d = await response.Content.ReadAsStringAsync();
-                    //Console.WriteLine(d);
-                }
-            }
-
-            //Company quote (real-time) //PL 15min delay
-            using (var httpClient = new HttpClient())
-            {
-                //SP500
-                using (var request = new HttpRequestMessage(new HttpMethod("GET"), "https://financialmodelingprep.com/api/v3/quote/ADS.F?apikey=" + k))
-
-                {
-                    request.Headers.TryAddWithoutValidation("Upgrade-Insecure-Requests", "1");
-
-                    var response = await httpClient.SendAsync(request);
-
-                    var d = await response.Content.ReadAsStringAsync();
-                    //Console.WriteLine(d);
-                }
-            }
-
-            //Company DCF (real-time)
+            //Social sentiment
             using (var httpClient = new HttpClient())
             {
                 //AAPL
-                using (var request = new HttpRequestMessage(new HttpMethod("GET"), "https://financialmodelingprep.com/api/v3/discounted-cash-flow/AAPL?apikey=" + k))
+                using (var request = new HttpRequestMessage(new HttpMethod("GET"), "https://financialmodelingprep.com/api/v4/historical/social-sentiment?symbol=AAPL&page=0&apikey=" + k))
 
                 {
                     request.Headers.TryAddWithoutValidation("Upgrade-Insecure-Requests", "1");
@@ -158,9 +126,67 @@ namespace List_Comparer
                     var response = await httpClient.SendAsync(request);
 
                     var d = await response.Content.ReadAsStringAsync();
-                    Console.WriteLine(d);
+                    //Console.WriteLine(d);
                 }
             }
+
+            while(true)
+            {
+                Console.WriteLine("Time: " + DateTime.Now.ToShortTimeString());
+                Console.WriteLine();
+                //Major Indexes (real-time)
+                using (var httpClient = new HttpClient())
+                {
+                    //SP500
+                    using (var request = new HttpRequestMessage(new HttpMethod("GET"), "https://financialmodelingprep.com/api/v3/quote/%5EGSPC?apikey=" + k))
+
+                    {
+                        request.Headers.TryAddWithoutValidation("Upgrade-Insecure-Requests", "1");
+
+                        var response = await httpClient.SendAsync(request);
+
+                        var d = await response.Content.ReadAsStringAsync();
+                        Console.WriteLine("SPX quote: " + d);
+                    }
+                }
+
+                //Company quote (real-time) //PL 15min delay
+                using (var httpClient = new HttpClient())
+                {
+                    //SP500
+                    using (var request = new HttpRequestMessage(new HttpMethod("GET"), "https://financialmodelingprep.com/api/v3/quote/AAPL?apikey=" + k))
+
+                    {
+                        request.Headers.TryAddWithoutValidation("Upgrade-Insecure-Requests", "1");
+
+                        var response = await httpClient.SendAsync(request);
+
+                        var d = await response.Content.ReadAsStringAsync();
+                        Console.WriteLine("AAPL quote: " + d);
+                    }
+                }
+
+                //Company DCF (real-time)
+                using (var httpClient = new HttpClient())
+                {
+                    //AAPL
+                    using (var request = new HttpRequestMessage(new HttpMethod("GET"), "https://financialmodelingprep.com/api/v3/discounted-cash-flow/AAPL?apikey=" + k))
+
+                    {
+                        request.Headers.TryAddWithoutValidation("Upgrade-Insecure-Requests", "1");
+
+                        var response = await httpClient.SendAsync(request);
+
+                        var d = await response.Content.ReadAsStringAsync();
+                        Console.WriteLine("AAPL DCF: " + d);
+                    }
+                }
+
+                Console.WriteLine();
+                await Task.Delay(60000);
+            }
+
+            
 
             Console.ReadKey();
         }
