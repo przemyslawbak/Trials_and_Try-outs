@@ -14,8 +14,10 @@ namespace EmailCrawler_01_Trial
     }
     class Program
     {
+        private static Hidden _hidden;
         static void Main(string[] args)
         {
+            _hidden = new Hidden();
             List<string> adresy = new List<string>();
             List<string> konta = new List<string>(File.ReadAllLines("1.txt"));
             foreach (string konto in konta)
@@ -26,8 +28,8 @@ namespace EmailCrawler_01_Trial
                 {
                     using (Pop3Client client = new Pop3Client())
                     {
-                        client.Connect("pop.email-messenger.com", 110, MailKit.Security.SecureSocketOptions.None);
-                        client.Authenticate(konto, "!1Password!1");
+                        client.Connect(_hidden.GetE(), 110, MailKit.Security.SecureSocketOptions.None);
+                        client.Authenticate(konto, _hidden.GetP());
                         var count = client.GetMessageCount();
                         for (int i = 0; i < client.Count; i++)
                         {
