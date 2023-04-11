@@ -134,7 +134,7 @@ namespace List_Comparer
             {
                 Console.WriteLine("Time: " + DateTime.Now.ToShortTimeString());
                 Console.WriteLine();
-                //Major Indexes (real-time)
+                //Major Indexes (real-time) <--confirmed
                 using (var httpClient = new HttpClient())
                 {
                     //SP500
@@ -150,7 +150,7 @@ namespace List_Comparer
                     }
                 }
 
-                //Company quote (real-time) //PL 15min delay
+                //Company quote (real-time) <--confirmed //PL 15min delay
                 using (var httpClient = new HttpClient())
                 {
                     //SP500
@@ -166,7 +166,7 @@ namespace List_Comparer
                     }
                 }
 
-                //Company DCF (real-time)
+                //Company DCF (real-time) <--confirmed
                 using (var httpClient = new HttpClient())
                 {
                     //AAPL
@@ -185,8 +185,6 @@ namespace List_Comparer
                 Console.WriteLine();
                 await Task.Delay(60000);
             }
-
-            
 
             Console.ReadKey();
         }
