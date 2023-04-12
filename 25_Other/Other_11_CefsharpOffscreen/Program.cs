@@ -10,7 +10,7 @@ namespace CefSharp.MinimalExample.OffScreen
 {
     public class Program
     {
-        private static string _url = "https://stooq.com/q/o/?s=wig20&i=1";
+        private static string _url = "https://www.cboe.com/us/options/";
         private static ChromiumWebBrowser _browser;
         private static RequestContext _requestContext;
         private static BrowserSettings _browserSettings;
@@ -140,10 +140,6 @@ namespace CefSharp.MinimalExample.OffScreen
         private static async Task RunProgramAsync()
         {
             await LoadPageWithPrivacy(_url);
-            await ReloadPage(_url);
-            await ReloadPage(_url);
-            await ReloadPage(_url);
-            await ReloadPage(_url);
         }
 
         private static async Task LoadPageWithPrivacy(string url)
@@ -171,48 +167,9 @@ namespace CefSharp.MinimalExample.OffScreen
                 await Task.Delay(100);
             }
 
-            var script1 = @"
-            document.getElementsByClassName('fc-primary-button')[0].click();";
-            _browser.ExecuteScriptAsync(script1);
-
             await Task.Delay(1000);
-        }
 
-        private static async Task ReloadPage(string url)
-        {
-            _browser.Size = new Size(2000, 2500);
-
-            LoadingPage = true;
-
-            _browser.Load(url);
-
-            _pageLoadedEventHandler = (sender, args) =>
-            {
-                if (args.IsLoading == false)
-                {
-                    _browser.LoadingStateChanged -= _pageLoadedEventHandler;
-
-                    LoadingPage = false;
-                }
-            };
-
-            _browser.LoadingStateChanged += _pageLoadedEventHandler;
-
-            while (LoadingPage)
-            {
-                await Task.Delay(100);
-            }
-
-            await Task.Delay(5000);
-
-            using (var task = await _browser.ScreenshotAsync())
-            {
-                task.Save(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "temp_files", "Screenshot.png"));
-            }
-
-            await Task.Delay(5000);
-
-            await GetHtml();
+            var html = GetHtml();
         }
 
         private static async Task GetHtml()
