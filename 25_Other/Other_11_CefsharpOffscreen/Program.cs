@@ -25,8 +25,6 @@ namespace CefSharp.MinimalExample.OffScreen
             Cef.Shutdown();
         }
 
-        public static bool SavingImoCounter { get; set; }
-        public static bool SavingResults { get; set; }
         public static bool LoadingPage { get; set; }
         public static bool InitBrowser { get; set; }
 
