@@ -16,7 +16,7 @@ pd.set_option('display.width', 1000)
 #Model values !!!!!!!!!SAMPLE SETUP!!!!!!!!!!
 dropout_rate=0.1
 num_layers=2
-future_steps = 100
+future_steps = 1
 time_steps = 100
 lstm_units = 255 #allow to learn very long sequences
 num_batch = 128 #number of samples to work through before updating the internal model parameters

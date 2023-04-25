@@ -18,10 +18,10 @@ df = pd.read_csv(csv_path, sep=';')
 df = df.iloc[::-1]
 print(df)
 
-df = df.drop('week', axis=1)
-df = df.drop('from', axis=1)
-df = df.drop('to', axis=1)
-df = df.drop('delta', axis=1)
+#df = df.drop('week', axis=1)
+#df = df.drop('from', axis=1)
+#df = df.drop('to', axis=1)
+#df = df.drop('delta', axis=1)
 
 features = len(df.columns)
 
@@ -31,6 +31,8 @@ n = len(df)
 train_df = df[0:int(n*0.7)]
 val_df = df[int(n*0.7):int(n*0.9)]
 test_df = df[int(n*0.9):]
+
+print(test_df)
 
 #set of df variables
 train_mean = train_df.mean()

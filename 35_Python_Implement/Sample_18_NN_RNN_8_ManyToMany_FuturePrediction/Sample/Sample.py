@@ -10,38 +10,35 @@ from tensorflow.keras.callbacks import EarlyStopping
 
 #Import the training dataset
 filename = "GPW_DLY WIG20, 15.csv"
-dataset_train = pd.read_csv(filename)
+dataset_train = pd.read_csv(filename, sep=';')
+dataset_train = dataset_train.iloc[::-1]
+dataset_train = dataset_train.drop('week', axis=1)
+dataset_train = dataset_train.drop('from', axis=1)
+dataset_train = dataset_train.drop('to', axis=1)
+dataset_train = dataset_train.drop('delta', axis=1)
 
-dataset_train['DateTime'] = pd.to_datetime(dataset_train['time'])
-dataset_train['DateTime'] = dataset_train['DateTime'].dt.tz_localize('UTC').dt.tz_convert('Europe/Berlin')
-training_set = dataset_train[['close', 'high', 'low', 'open']]
-training_set["day"] = dataset_train['DateTime'].map(lambda x: x.day)
-training_set["month"] = dataset_train['DateTime'].map(lambda x: x.month)
-training_set["year"] = dataset_train['DateTime'].map(lambda x: x.year)
-training_set["hour"] = dataset_train['DateTime'].map(lambda x: x.hour)
+training_set = dataset_train
 #training_set["minute"] = dataset_train['DateTime'].map(lambda x: x.minute)
-
-print(training_set)
 
 #Perform feature scaling to transform the data
 scaler = MinMaxScaler(feature_range = (0, 1))
 training_set_scaled = scaler.fit_transform(training_set)
 
 #Model values !!!!!!!!!SAMPLE SETUP!!!!!!!!!!
-dropout_rate=0.1
-num_layers=2
-future_steps = 10
-time_steps = 400
-lstm_units = 255 #allow to learn very long sequences
+dropout_rate=0.2
+num_layers=1
+future_steps = 1
+time_steps = 40
+lstm_units = 500 #allow to learn very long sequences
 num_batch = 128 #number of samples to work through before updating the internal model parameters
-num_epochs = 1 #number times that the learning algorithm will work through the entire training dataset (10, 100, 1000)
+num_epochs = 1000 #number times that the learning algorithm will work through the entire training dataset (10, 100, 1000)
 num_validation=0.2 #% split for validation set
 num_verbose=1 #how to display model fit progress (0 = silent, 1 = progress bar, 2 = one line per epoch)
-es_patinence = 5
+es_patinence = 50
 
 #Variables
 features = len(training_set.columns)
-split_percent = 0.80 #train/test daa split percent (80%)
+split_percent = 0.50 #train/test daa split percent (80%)
 split = int(split_percent*len(training_set_scaled)) #split percent multiplying by data rows
 
 #Create a data structure with n-time steps
@@ -77,7 +74,7 @@ print(y_test_splitted.shape) #(450, 100, 4)
 model = Sequential()
 for i in range(num_layers):
         model.add(Bidirectional(LSTM(lstm_units, activation='relu', return_sequences=True)))
-        #model.add(Dropout(rate=dropout_rate))
+        model.add(Dropout(rate=dropout_rate))
 model.add(Dense(features)) #4 outputs, gives output shape (x, 100, 4)
 
 #Compile many-to-many
@@ -127,8 +124,8 @@ y_pred = scaler.inverse_transform(y_pred)
 
 #Plot data
 plt.figure(figsize=(14,features))
-plt.plot(y_test_splitted[-time_steps:, 3], label = "Real values") #I am interested only with display of column index 3
-plt.plot(y_pred[-time_steps - future_steps:, 3], label = 'Predicted values') #I am interested only with display of column index 3
+plt.plot(y_test_splitted[-time_steps:, 1], label = "Real values") #I am interested only with display of column index 3
+plt.plot(y_pred[-time_steps - future_steps:, 1], label = 'Predicted values') #I am interested only with display of column index 3
 plt.title('Prediction test')
 plt.xlabel('Time')
 plt.ylabel('Column index 3')
