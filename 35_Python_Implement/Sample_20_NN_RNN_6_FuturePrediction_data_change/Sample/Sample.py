@@ -7,7 +7,7 @@ import tensorflow as tf
 mpl.rcParams['figure.figsize'] = (8, 6)
 mpl.rcParams['axes.grid'] = False
 
-MAX_EPOCHS = 5 #more ok
+MAX_EPOCHS = 200 #more ok
 CONV_WIDTH = 3
 LABEL_WIDTH = 100
 INPUT_WIDTH = LABEL_WIDTH + (CONV_WIDTH - 1)
@@ -22,6 +22,7 @@ df = df.drop('to', axis=1)
 df = df.drop('delta', axis=1)
 
 print(df)
+features = len(df.columns)
 
 column_indices = {name: i for i, name in enumerate(df.columns)}
 
@@ -133,7 +134,7 @@ def make_dataset(self, data):
       sequence_length=self.total_window_size,
       sequence_stride=1,
       shuffle=False,
-      batch_size=32,)
+      batch_size=128,)
 
   ds = ds.map(self.split_window)
 
@@ -179,13 +180,12 @@ wide_window = WindowGenerator(
 #LSTM
 lstm_model = tf.keras.models.Sequential([
   tf.keras.layers.Bidirectional(tf.keras.layers.LSTM(500, return_sequences=True)),
-  tf.keras.layers.Dropout(rate=0.2)
+  tf.keras.layers.Dropout(rate=0.2),
+  tf.keras.layers.Dense(features)
 ])
 
 def compile_and_fit(model, window, patience=2):
-  early_stopping = tf.keras.callbacks.EarlyStopping(monitor='val_loss',
-                                                    patience=patience,
-                                                    mode='min')
+  early_stopping = tf.keras.callbacks.EarlyStopping(monitor='val_mae', mode='min', patience=50, verbose = 1)
   model.compile(optimizer='adam', loss = 'mae', metrics=['mae', 'acc', 'mse'])
   history = model.fit(window.train, epochs=MAX_EPOCHS,
                       validation_data=window.val,
