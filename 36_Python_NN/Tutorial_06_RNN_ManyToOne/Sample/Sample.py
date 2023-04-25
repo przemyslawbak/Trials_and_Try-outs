@@ -1,21 +1,9 @@
 #https://stackabuse.com/solving-sequence-problems-with-lstm-in-keras/
 
-from keras.preprocessing.text import one_hot
-from keras.preprocessing.sequence import pad_sequences
 from keras.models import Sequential
-from keras.layers.core import Activation, Dropout, Dense
-from keras.layers import Flatten, LSTM
-from keras.layers import GlobalMaxPooling1D
-from keras.models import Model
-from keras.layers.embeddings import Embedding
-from sklearn.model_selection import train_test_split
-from keras.preprocessing.text import Tokenizer
-from keras.layers import Input
-from keras.layers.merge import Concatenate
-from keras.layers import Bidirectional
-import pandas as pd
+from keras.layers.core import Dense
+from keras.layers import LSTM
 import numpy as np
-import matplotlib.pyplot as plt
 
 #Creating the Dataset
 X = np.array([x+1 for x in range(45)]) #input
@@ -41,7 +29,7 @@ model.add(Dense(1))
 model.compile(optimizer='adam', loss='mse')
 
 #Training model
-history = model.fit(X_train_arr, y_train_arr, epochs=1000, validation_split=0.2, verbose=1)
+history = model.fit(X_train_arr, y_train_arr, epochs=200, validation_split=0.2, verbose=1)
 
 #Prediction
 test_input = np.array([50,51,52])

@@ -7,7 +7,7 @@ import tensorflow as tf
 mpl.rcParams['figure.figsize'] = (8, 6)
 mpl.rcParams['axes.grid'] = False
 
-MAX_EPOCHS = 200 #more ok
+MAX_EPOCHS = 1000 #more ok
 CONV_WIDTH = 3
 LABEL_WIDTH = 100
 INPUT_WIDTH = LABEL_WIDTH + (CONV_WIDTH - 1)
@@ -15,13 +15,14 @@ INPUT_WIDTH = LABEL_WIDTH + (CONV_WIDTH - 1)
 #path to the data file
 csv_path = 'GPW_DLY WIG20, 15.csv'
 df = pd.read_csv(csv_path, sep=';')
+df = df.iloc[::-1]
+print(df)
 
 df = df.drop('week', axis=1)
 df = df.drop('from', axis=1)
 df = df.drop('to', axis=1)
 df = df.drop('delta', axis=1)
 
-print(df)
 features = len(df.columns)
 
 column_indices = {name: i for i, name in enumerate(df.columns)}
@@ -184,8 +185,8 @@ lstm_model = tf.keras.models.Sequential([
   tf.keras.layers.Dense(features)
 ])
 
-def compile_and_fit(model, window, patience=2):
-  early_stopping = tf.keras.callbacks.EarlyStopping(monitor='val_mae', mode='min', patience=50, verbose = 1)
+def compile_and_fit(model, window, patience=10):
+  early_stopping = tf.keras.callbacks.EarlyStopping(monitor='mae', mode='min', patience=patience, verbose = 1)
   model.compile(optimizer='adam', loss = 'mae', metrics=['mae', 'acc', 'mse'])
   history = model.fit(window.train, epochs=MAX_EPOCHS,
                       validation_data=window.val,
