@@ -32,10 +32,10 @@ future_steps = 2
 time_steps = 20
 lstm_units = 500 #allow to learn very long sequences
 num_batch = 16 #number of samples to work through before updating the internal model parameters
-num_epochs = 250 #number times that the learning algorithm will work through the entire training dataset (10, 100, 1000)
+num_epochs = 1000 #number times that the learning algorithm will work through the entire training dataset (10, 100, 1000)
 num_validation=0.2 #% split for validation set
 num_verbose=1 #how to display model fit progress (0 = silent, 1 = progress bar, 2 = one line per epoch)
-es_patinence = 20
+es_patinence = 50
 
 #Variables
 features = len(training_set.columns)
