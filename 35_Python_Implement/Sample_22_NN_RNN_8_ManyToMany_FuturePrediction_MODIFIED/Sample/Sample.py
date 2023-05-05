@@ -29,7 +29,7 @@ training_set_scaled = scaler.fit_transform(training_set)
 dropout_rate=0.2
 num_layers=1
 future_steps = 2
-time_steps = 15
+time_steps = 20
 lstm_units = 500 #allow to learn very long sequences
 num_batch = 16 #number of samples to work through before updating the internal model parameters
 num_epochs = 1000 #number times that the learning algorithm will work through the entire training dataset (10, 100, 1000)
@@ -39,7 +39,7 @@ es_patinence = 50
 
 #Variables
 features = len(training_set.columns)
-split_percent = 0.69 #train/test daa split percent (80%)
+split_percent = 0.59 #train/test daa split percent (80%)
 split = int(split_percent*len(training_set_scaled)) #split percent multiplying by data rows
 
 def getTestSets():
