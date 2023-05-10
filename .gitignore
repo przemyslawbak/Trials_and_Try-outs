@@ -412,3 +412,4 @@ MigrationBackup/
 /29_Financial/Trial_03_FMP_trials/List_Comparer/Hidden.cs
 /11_SMTP/SMTP_05_FailedEmailCheck/EmailCrawler_01_Trial/Hidden.cs
 /29_Financial/Trial_04_DCF_Spike/List_Comparer/KeyLocker.cs
+/29_Financial/Trial_05_UDC_Spike/List_Comparer/KeyLocker.cs
