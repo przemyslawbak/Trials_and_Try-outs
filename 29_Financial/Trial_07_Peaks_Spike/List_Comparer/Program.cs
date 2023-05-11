@@ -38,7 +38,7 @@ namespace List_Comparer
             CancellationTokenSource tokenSource = GetCancellationTokenSource();
             List<OhlcvResult> results = new List<OhlcvResult>();
 
-            for (int i = 0; i < 100; i++)
+            for (int i = 0; i < 100; i++) //limited to 100 (70% of index weight)
             {
                 int iteration = i;
 
@@ -87,21 +87,29 @@ namespace List_Comparer
             tokenSource.Cancel();
 
             var sumHamemrs = results.Sum(x => x.Hammers);
+            var sumGaps = results.Sum(x => x.Gaps);
 
             return results.Count;
         }
 
         private static decimal GetHammersValue(List<OhlcvObject> items)
         {
-            var upper = items.Where(x => x.Close == x.High).Count();
-            var lower = items.Where(x => x.Close == x.Low).Count();
+            var upper = items.Where(x => x.Close == x.High)
+                .Select(x => (x.Close - x.Open) / x.Close);
+            var lower = items.Where(x => x.Close == x.Low)
+                .Select(x => (x.Close - x.Open) / x.Close);
 
-            return (upper - lower) * items[0].Multiplier;
+            return (upper.Sum(x => x) - lower.Sum(x => x)) * items[0].Multiplier;
         }
 
         private static decimal GetGapsValue(List<OhlcvObject> items)
         {
-            return 0;
+            var gaps = Enumerable.Range(1, items.Count - 1)
+                  .Select(i => (items[i].Open - items[i - 1].Close) / items[i - 1].Close)
+                  .Where(x => x > 0.005M)
+                  .ToList();
+
+            return gaps.Sum(x => x) * items[0].Multiplier;
         }
 
         private static decimal GetPeakValue(List<OhlcvObject> items)
