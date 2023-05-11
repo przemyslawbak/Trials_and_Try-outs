@@ -18,6 +18,7 @@ namespace List_Comparer
 
         [JsonProperty(PropertyName = "volume")]
         public int Volume { get; set; }
+        public int Index { get; set; }
         public decimal Capital { get; set; }
         public decimal Multiplier { get; set; }
         public string Symbol { get; set; }
