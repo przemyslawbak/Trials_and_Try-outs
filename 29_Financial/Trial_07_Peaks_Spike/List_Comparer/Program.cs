@@ -22,11 +22,12 @@ namespace List_Comparer
             DateTime utcNowTimestamp = DateTime.UtcNow;
             string apiKey = _keyLocker.GetApiKey();
             var companyList = _service.GetIndexComponents().Select(x => new CompanyModel() { Code = x.Key, Weight = x.Value, UtcTimeStamp = utcNowTimestamp }).ToList();
+            companyList = companyList.OrderByDescending(x => x.Weight).ToList();
             string indexName = "SPX";
             var ohlcvUrlDictionary = _service.GetStock1minUrlDictionary(companyList, apiKey);
             var interval = Interval.Minute;
 
-            var peakValue = await TriggerParallelPeaksCollectAndComputeAsync(indexName, ohlcvUrlDictionary, utcNowTimestamp, interval, companyList);
+            var values = await TriggerParallelPeaksCollectAndComputeAsync(indexName, ohlcvUrlDictionary, utcNowTimestamp, interval, companyList);
 
             Console.ReadLine();
         }
@@ -35,9 +36,9 @@ namespace List_Comparer
         {
             List<Task> currentRunningTasks = new List<Task>();
             CancellationTokenSource tokenSource = GetCancellationTokenSource();
-            List<decimal> results = new List<decimal>();
+            List<OhlcvResult> results = new List<OhlcvResult>();
 
-            for (int i = 0; i < dataUrls.Count; i++)
+            for (int i = 0; i < 100; i++)
             {
                 int iteration = i;
 
@@ -64,9 +65,14 @@ namespace List_Comparer
                             Volume = x.Volume
                         }).ToList();
 
-                        var peakValue = GetPeakValue(items);
-                        var gapsValue = GetGapsValue(items);
-                        var hammersValue = GetHammersValue(items);
+                        OhlcvResult result = new OhlcvResult()
+                        {
+                            Gaps = GetGapsValue(items),
+                            Hammers = GetHammersValue(items),
+                            Peaks = GetPeakValue(items)
+                        };
+
+                        results.Add(result);
 
                     }
                     catch (Exception ex)
@@ -80,22 +86,27 @@ namespace List_Comparer
             await Task.WhenAny(Task.WhenAll(currentRunningTasks), Task.Delay(30000));
             tokenSource.Cancel();
 
-            return results.Sum(x => Convert.ToDecimal(x)) / 100;
+            var sumHamemrs = results.Sum(x => x.Hammers);
+
+            return results.Count;
         }
 
         private static decimal GetHammersValue(List<OhlcvObject> items)
         {
-            throw new NotImplementedException();
+            var upper = items.Where(x => x.Close == x.High).Count();
+            var lower = items.Where(x => x.Close == x.Low).Count();
+
+            return (upper - lower) * items[0].Multiplier;
         }
 
         private static decimal GetGapsValue(List<OhlcvObject> items)
         {
-            throw new NotImplementedException();
+            return 0;
         }
 
         private static decimal GetPeakValue(List<OhlcvObject> items)
         {
-            throw new NotImplementedException();
+            return 0;
         }
 
         private static CancellationTokenSource GetCancellationTokenSource()
