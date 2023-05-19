@@ -39,7 +39,7 @@ es_patinence = 50
 
 #Variables
 features = len(training_set.columns)
-split_percent = 0.59 #train/test daa split percent (80%)
+split_percent = 0.50 #train/test daa split percent (80%)
 split = int(split_percent*len(training_set_scaled)) #split percent multiplying by data rows
 
 def getTestSets():
@@ -139,7 +139,7 @@ def trainModel(train_data):
 
     #Compile many-to-many
     #loss should decrease, acc should increase
-    model.compile(optimizer='adam', loss = 'mae', metrics=['mae', 'acc', 'mse'], run_eagerly=True) #MAE & MSE are popular for regression models
+    model.compile(optimizer='adam', loss = 'mae', metrics=['mae', 'acc', 'mse']) #MAE & MSE are popular for regression models
     
     #Fit to the training set
     es = EarlyStopping(monitor='val_mae', mode='min', patience=es_patinence, verbose = num_verbose)
