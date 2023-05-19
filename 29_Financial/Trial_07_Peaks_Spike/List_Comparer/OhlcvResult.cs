@@ -8,5 +8,6 @@
         public decimal Patterns { get; set; }
         public decimal Momentum { get; set; }
         public decimal Strength { get; set; }
+        public decimal Sentiment { get; set; }
     }
 }
