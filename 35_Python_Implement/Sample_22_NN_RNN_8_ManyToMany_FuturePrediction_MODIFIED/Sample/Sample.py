@@ -39,7 +39,7 @@ es_patinence = 50
 
 #Variables
 features = len(training_set.columns)
-split_percent = 0.50 #train/test daa split percent (80%)
+split_percent = 0.59 #train/test daa split percent (80%)
 split = int(split_percent*len(training_set_scaled)) #split percent multiplying by data rows
 
 def getTestSets():
