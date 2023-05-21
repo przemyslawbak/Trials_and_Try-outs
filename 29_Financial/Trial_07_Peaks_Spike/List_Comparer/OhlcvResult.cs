@@ -9,5 +9,6 @@
         public decimal Momentum { get; set; }
         public decimal Strength { get; set; }
         public decimal Sentiment { get; set; }
+        public decimal McClellan { get; set; }
     }
 }
