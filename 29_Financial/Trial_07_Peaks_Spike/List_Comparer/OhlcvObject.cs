@@ -22,5 +22,6 @@ namespace List_Comparer
         public decimal Capital { get; set; }
         public decimal Multiplier { get; set; }
         public string Symbol { get; set; }
+        public bool Signal { get; set; }
     }
 }
