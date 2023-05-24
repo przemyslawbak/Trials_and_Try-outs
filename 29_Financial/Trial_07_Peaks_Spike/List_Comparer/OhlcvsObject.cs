@@ -19,5 +19,6 @@ namespace List_Comparer
         [JsonProperty(PropertyName = "volume")]
         public int Volume { get; set; }
         public bool Signal { get; set; } = false;
+        public string Symbol { get; set; }
     }
 }
