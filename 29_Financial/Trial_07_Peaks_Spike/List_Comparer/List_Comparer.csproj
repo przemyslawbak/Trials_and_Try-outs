@@ -50,7 +50,6 @@
     <Compile Include="HelperService.cs" />
     <Compile Include="Interval.cs" />
     <Compile Include="KeyLocker.cs" />
-    <Compile Include="OhlcvsObject.cs" />
     <Compile Include="OhlcvResult.cs" />
     <Compile Include="Patterns.cs" />
     <Compile Include="Program.cs" />
