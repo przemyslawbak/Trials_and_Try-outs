@@ -521,17 +521,5 @@ namespace List_Comparer
         {
             return "https://financialmodelingprep.com/api/v3/economic_calendar?from=" + utcWeekBackTimestamp.Year + "-" + utcWeekBackTimestamp.Month.ToString("00") + "-" + utcWeekBackTimestamp.Day.ToString("00") + "&to=" + utcNowTimestamp.Year + "-" + utcNowTimestamp.Month.ToString("00") + "-" + utcNowTimestamp.Day.ToString("00") + "&apikey=" + apiKey;
         }
-
-        internal Dictionary<string, string> GetCalendarUrlDictionary(List<CompanyModel> companyList, string apiKey)
-        {
-            Dictionary<string, string> dict = new Dictionary<string, string>();
-
-            foreach (CompanyModel company in companyList)
-            {
-                dict.Add(company.Code, "https://financialmodelingprep.com/api/v4/historical/social-sentiment?page=0&symbol=" + company.Code + "&apikey=" + apiKey);
-            }
-
-            return dict;
-        }
     }
 }
