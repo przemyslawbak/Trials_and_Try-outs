@@ -35,17 +35,16 @@ namespace List_Comparer
         {
             var json = await _scrapper.GetHtml(dataUrl);
             var data = JsonConvert.DeserializeObject<List<CalendarObject>>(json);
-
-            //todo: add event weights
-            //todo: add country weights
+            var eventWeights = _service.GetEventWeights();
+            var countryWeights = _service.GetCountryWeights();
             var item = data;
 
-            var result = ComputeCalendarItemsValue(item);
+            var result = ComputeCalendarItemsValue(item, eventWeights, countryWeights);
 
             return result;
         }
 
-        private static decimal ComputeCalendarItemsValue(object item)
+        private static decimal ComputeCalendarItemsValue(List<CalendarObject> item, Dictionary<string, decimal> eventWeights, Dictionary<string, decimal> countryWeights)
         {
             return 0;
         }

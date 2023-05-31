@@ -521,5 +521,41 @@ namespace List_Comparer
         {
             return "https://financialmodelingprep.com/api/v3/economic_calendar?from=" + utcWeekBackTimestamp.Year + "-" + utcWeekBackTimestamp.Month.ToString("00") + "-" + utcWeekBackTimestamp.Day.ToString("00") + "&to=" + utcNowTimestamp.Year + "-" + utcNowTimestamp.Month.ToString("00") + "-" + utcNowTimestamp.Day.ToString("00") + "&apikey=" + apiKey;
         }
+
+        internal Dictionary<string, decimal> GetCountryWeights()
+        {
+            return new Dictionary<string, decimal>()
+            {
+                { "GB", 0.03M },
+                { "FR", 0.03M },
+                { "ME", 0.02M },
+                { "IT", 0.02M },
+                { "ES", 0.02M },
+                { "CH", 0.01M },
+                { "NL", 0.01M },
+                { "AT", 0.005M },
+                { "NZ", 0.005M },
+                { "FI", 0.005M },
+                { "IE", 0.005M },
+                { "GR", 0.005M },
+                { "SI", 0.005M },
+                { "BG", 0.005M },
+                { "PT", 0.005M },
+                { "DE", 0.05M },
+                { "CA", 0.02M },
+                { "JP", 0.06M },
+                { "AU", 0.02M },
+                { "US", 0.24M },
+                { "CN", 0.15M },
+            };
+        }
+
+        internal Dictionary<string, decimal> GetEventWeights()
+        {
+            return new Dictionary<string, decimal>()
+            {
+                { "GB", 0M },
+            };
+        }
     }
 }
