@@ -560,11 +560,11 @@ namespace List_Comparer
             };
         }
 
-        internal Dictionary<string, decimal> GetEventWeights()
+        internal Dictionary<string, int> GetEventWeights()
         {
-            return new Dictionary<string, decimal>()
+            return new Dictionary<string, int>()
             {
-                { "Capital Spending YoY", 0M },
+                { "a", 1 },
             };
         }
     }

@@ -46,17 +46,22 @@ namespace List_Comparer
             return result;
         }
 
-        private static decimal ComputeCalendarItemsValue(List<CalendarObject> item, Dictionary<string, decimal> eventWeights, Dictionary<string, decimal> countryWeights, Dictionary<string, decimal> impactWeights)
+        private static decimal ComputeCalendarItemsValue(List<CalendarObject> item, Dictionary<string, int> eventWeights, Dictionary<string, decimal> countryWeights, Dictionary<string, decimal> impactWeights)
         {
             List<decimal> calendarResults = new List<decimal>();
 
             foreach (var thing in item)
             {
+                if (thing.Event.Contains("("))
+                {
+                    thing.Event = thing.Event.Split('(')[0].Trim();
+                }
+
                 try
                 {
                     decimal diffPrevious = 0;
                     decimal diffEstimate = 0;
-                    var weight = eventWeights[thing.Event] * countryWeights[thing.CountryCode] * impactWeights[thing.Impact];
+                    var weight = (decimal)eventWeights[thing.Event] * countryWeights[thing.CountryCode] * impactWeights[thing.Impact];
 
                     if (thing.Actual.HasValue && thing.Previous.HasValue)
                     {
