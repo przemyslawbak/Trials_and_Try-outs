@@ -11,13 +11,13 @@ namespace List_Comparer
         public string Event { get; set; }
 
         [JsonProperty(PropertyName = "previous")]
-        public decimal Previous { get; set; }
+        public decimal? Previous { get; set; }
 
         [JsonProperty(PropertyName = "estimate")]
-        public decimal Estimate { get; set; }
+        public decimal? Estimate { get; set; }
 
         [JsonProperty(PropertyName = "actual")]
-        public decimal Actual { get; set; }
+        public decimal? Actual { get; set; }
 
         [JsonProperty(PropertyName = "impact")]
         public string Impact { get; set; }

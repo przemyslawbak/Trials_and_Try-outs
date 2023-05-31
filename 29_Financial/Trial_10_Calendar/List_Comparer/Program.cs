@@ -2,7 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Security.Policy;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -35,7 +34,8 @@ namespace List_Comparer
         private static async Task<decimal> TriggerParallelSocialCollectAndComputeAsync(string dataUrl)
         {
             var json = await _scrapper.GetHtml(dataUrl);
-            var data = JsonConvert.DeserializeObject<List<CalendarObject>>(json); //todo: fix exception: previous, estimate, actual sometimes null
+            var data = JsonConvert.DeserializeObject<List<CalendarObject>>(json);
+
             //todo: add event weights
             //todo: add country weights
             var item = data;
