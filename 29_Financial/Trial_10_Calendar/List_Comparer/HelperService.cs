@@ -550,11 +550,21 @@ namespace List_Comparer
             };
         }
 
+        internal Dictionary<string, decimal> GetImpactWeights()
+        {
+            return new Dictionary<string, decimal>()
+            {
+                { "High", 1.00M },
+                { "Medium", 0.50M },
+                { "Low", 0.15M },
+            };
+        }
+
         internal Dictionary<string, decimal> GetEventWeights()
         {
             return new Dictionary<string, decimal>()
             {
-                { "GB", 0M },
+                { "Capital Spending YoY", 0M },
             };
         }
     }

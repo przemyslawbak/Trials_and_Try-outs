@@ -35,18 +35,47 @@ namespace List_Comparer
         {
             var json = await _scrapper.GetHtml(dataUrl);
             var data = JsonConvert.DeserializeObject<List<CalendarObject>>(json);
+            data.Reverse();
             var eventWeights = _service.GetEventWeights();
             var countryWeights = _service.GetCountryWeights();
+            var impactWeights = _service.GetImpactWeights();
             var item = data;
 
-            var result = ComputeCalendarItemsValue(item, eventWeights, countryWeights);
+            var result = ComputeCalendarItemsValue(item, eventWeights, countryWeights, impactWeights);
 
             return result;
         }
 
-        private static decimal ComputeCalendarItemsValue(List<CalendarObject> item, Dictionary<string, decimal> eventWeights, Dictionary<string, decimal> countryWeights)
+        private static decimal ComputeCalendarItemsValue(List<CalendarObject> item, Dictionary<string, decimal> eventWeights, Dictionary<string, decimal> countryWeights, Dictionary<string, decimal> impactWeights)
         {
-            return 0;
+            List<decimal> calendarResults = new List<decimal>();
+
+            foreach (var thing in item)
+            {
+                try
+                {
+                    decimal diffPrevious = 0;
+                    decimal diffEstimate = 0;
+                    var weight = eventWeights[thing.Event] * countryWeights[thing.CountryCode] * impactWeights[thing.Impact];
+
+                    if (thing.Actual.HasValue && thing.Previous.HasValue)
+                    {
+                        diffPrevious = thing.Actual.Value - thing.Previous.Value;
+                    }
+                    if (thing.Actual.HasValue && thing.Estimate.HasValue)
+                    {
+                        diffEstimate = thing.Actual.Value - thing.Estimate.Value;
+                    }
+
+                    calendarResults.Add(diffPrevious * weight + diffEstimate * 2 * weight);
+                }
+                catch (Exception ex)
+                {
+                    //do nothing
+                }
+            }
+
+            return calendarResults.Sum(x => x);
         }
 
         private static CancellationTokenSource GetCancellationTokenSource()
