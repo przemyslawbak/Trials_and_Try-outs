@@ -39,7 +39,7 @@ namespace List_Comparer
 
             System.IO.File.WriteAllLines("weekRes.txt", weekRes);*/
 
-            DateTime utcNowTimestamp = DateTime.UtcNow;
+            DateTime utcNowTimestamp = DateTime.UtcNow.AddMonths(1);
             DateTime utcMonthBackTimestamp = DateTime.UtcNow.AddMonths(-1);
             string apiKey = _keyLocker.GetApiKey();
             string indexName = "SPX";
@@ -48,7 +48,6 @@ namespace List_Comparer
 
             var socialTradingValue = await TriggerParallelSocialCollectAndComputeAsync(calendarUrl); //3.54
 
-
             Console.ReadLine();
         }
 
@@ -56,7 +55,6 @@ namespace List_Comparer
         {
             var json = await _scrapper.GetHtml(dataUrl);
             var data = JsonConvert.DeserializeObject<List<CalendarObject>>(json);
-            data.Reverse();
             var eventWeights = _service.GetEventWeights();
             var countryWeights = _service.GetCountryWeights();
             var impactWeights = _service.GetImpactWeights();
@@ -82,6 +80,7 @@ namespace List_Comparer
                 {
                     decimal diffPrevious = 0;
                     decimal diffEstimate = 0;
+                    decimal diffPrognosis = 0;
                     var weightCountry = countryWeights[thing.CountryCode];
                     var weightImpact = impactWeights[thing.Impact];
                     var weightEvent = eventWeights.Where(x => thing.Event.Contains(x.Key)).Select(x => x.Value).First();
@@ -96,8 +95,12 @@ namespace List_Comparer
                     {
                         diffEstimate = thing.Actual.Value - thing.Estimate.Value < 0 ? -1 : 1;
                     }
+                    if (!thing.Actual.HasValue && thing.Estimate.HasValue && thing.Previous.HasValue)
+                    {
+                        diffPrognosis = thing.Estimate.Value - thing.Previous.Value < 0 ? -1 : 1;
+                    }
 
-                    calendarResults.Add((diffPrevious + diffEstimate * 0.5M) * weight);
+                    calendarResults.Add((diffPrevious + diffEstimate * 0.5M + diffPrognosis) * weight);
                 }
                 catch (Exception ex)
                 {
