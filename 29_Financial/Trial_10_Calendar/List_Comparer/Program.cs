@@ -39,18 +39,18 @@ namespace List_Comparer
             var eventWeights = _service.GetEventWeights();
             var countryWeights = _service.GetCountryWeights();
             var impactWeights = _service.GetImpactWeights();
-            var item = data;
+            var items = data;
 
-            var result = ComputeCalendarItemsValue(item, eventWeights, countryWeights, impactWeights);
+            var result = ComputeCalendarItemsValue(items, eventWeights, countryWeights, impactWeights);
 
             return result;
         }
 
-        private static decimal ComputeCalendarItemsValue(List<CalendarObject> item, Dictionary<string, int> eventWeights, Dictionary<string, decimal> countryWeights, Dictionary<string, decimal> impactWeights)
+        private static decimal ComputeCalendarItemsValue(List<CalendarObject> items, Dictionary<string, int> eventWeights, Dictionary<string, decimal> countryWeights, Dictionary<string, decimal> impactWeights)
         {
             List<decimal> calendarResults = new List<decimal>();
 
-            foreach (var thing in item)
+            foreach (var thing in items)
             {
                 if (thing.Event.Contains("("))
                 {
@@ -61,7 +61,11 @@ namespace List_Comparer
                 {
                     decimal diffPrevious = 0;
                     decimal diffEstimate = 0;
-                    var weight = (decimal)eventWeights[thing.Event] * countryWeights[thing.CountryCode] * impactWeights[thing.Impact];
+                    var weightCountry = countryWeights[thing.CountryCode];
+                    var weightImpact = impactWeights[thing.Impact];
+                    var weightEvent = eventWeights.Where(x => thing.Event.Contains(x.Key)).Select(x => x.Value).First();
+
+                    decimal weight = weightCountry * weightImpact * weightEvent;
 
                     if (thing.Actual.HasValue && thing.Previous.HasValue)
                     {
@@ -72,7 +76,7 @@ namespace List_Comparer
                         diffEstimate = thing.Actual.Value - thing.Estimate.Value;
                     }
 
-                    calendarResults.Add(diffPrevious * weight + diffEstimate * 2 * weight);
+                    calendarResults.Add(diffPrevious * weight + diffEstimate * 0.5M * weight);
                 }
                 catch (Exception ex)
                 {
