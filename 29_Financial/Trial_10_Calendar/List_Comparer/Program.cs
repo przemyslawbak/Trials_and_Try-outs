@@ -20,14 +20,14 @@ namespace List_Comparer
 
         private static async Task DoSomething()
         {
-            List<string> weekRes = new List<string>();
+            /*List<string> weekRes = new List<string>();
             var weeksBack = 100;
 
             for (int i = 0; i < weeksBack; i++)
             {
                 Console.WriteLine(i + " of " + weeksBack);
                 DateTime utcNowTimestamp = DateTime.UtcNow.AddDays(-i * 7).AddDays(-5);
-                DateTime utcMonthBackTimestamp = DateTime.UtcNow.AddDays(-i * 7).AddDays(-14).AddDays(-5);
+                DateTime utcMonthBackTimestamp = DateTime.UtcNow.AddDays(-i * 7).AddDays(-60).AddDays(-5);
                 string apiKey = _keyLocker.GetApiKey();
                 string indexName = "SPX";
                 var calendarUrl = _service.GetCalendarUrl(apiKey, utcNowTimestamp, utcMonthBackTimestamp);
@@ -37,7 +37,16 @@ namespace List_Comparer
                 weekRes.Add(socialTradingValue.ToString("0.00"));
             };
 
-            System.IO.File.WriteAllLines("weekRes.txt", weekRes);
+            System.IO.File.WriteAllLines("weekRes.txt", weekRes);*/
+
+            DateTime utcNowTimestamp = DateTime.UtcNow.AddDays(-i * 7).AddDays(-5);
+            DateTime utcMonthBackTimestamp = DateTime.UtcNow.AddDays(-i * 7).AddDays(-60).AddDays(-5);
+            string apiKey = _keyLocker.GetApiKey();
+            string indexName = "SPX";
+            var calendarUrl = _service.GetCalendarUrl(apiKey, utcNowTimestamp, utcMonthBackTimestamp);
+            var interval = Interval.Minute;
+
+            var socialTradingValue = await TriggerParallelSocialCollectAndComputeAsync(calendarUrl);
 
 
             Console.ReadLine();
