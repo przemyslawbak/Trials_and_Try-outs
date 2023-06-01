@@ -39,14 +39,14 @@ namespace List_Comparer
 
             System.IO.File.WriteAllLines("weekRes.txt", weekRes);*/
 
-            DateTime utcNowTimestamp = DateTime.UtcNow.AddDays(-i * 7).AddDays(-5);
-            DateTime utcMonthBackTimestamp = DateTime.UtcNow.AddDays(-i * 7).AddDays(-60).AddDays(-5);
+            DateTime utcNowTimestamp = DateTime.UtcNow;
+            DateTime utcMonthBackTimestamp = DateTime.UtcNow.AddMonths(-1);
             string apiKey = _keyLocker.GetApiKey();
             string indexName = "SPX";
             var calendarUrl = _service.GetCalendarUrl(apiKey, utcNowTimestamp, utcMonthBackTimestamp);
             var interval = Interval.Minute;
 
-            var socialTradingValue = await TriggerParallelSocialCollectAndComputeAsync(calendarUrl);
+            var socialTradingValue = await TriggerParallelSocialCollectAndComputeAsync(calendarUrl); //3.54
 
 
             Console.ReadLine();
