@@ -76,7 +76,7 @@ namespace List_Comparer
                         diffEstimate = thing.Actual.Value - thing.Estimate.Value;
                     }
 
-                    calendarResults.Add(diffPrevious * weight + diffEstimate * 0.5M * weight);
+                    calendarResults.Add((diffPrevious + diffEstimate * 0.5M) * weight);
                 }
                 catch (Exception ex)
                 {
