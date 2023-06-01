@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
@@ -19,14 +20,24 @@ namespace List_Comparer
 
         private static async Task DoSomething()
         {
-            DateTime utcNowTimestamp = DateTime.UtcNow;
-            DateTime utcMonthBackTimestamp = DateTime.UtcNow.AddMonths(-1);
-            string apiKey = _keyLocker.GetApiKey();
-            string indexName = "SPX";
-            var calendarUrl = _service.GetCalendarUrl(apiKey, utcNowTimestamp, utcMonthBackTimestamp);
-            var interval = Interval.Minute;
+            List<string> weekRes = new List<string>();
+            var weeksBack = 100;
 
-            var socialTradingValue = await TriggerParallelSocialCollectAndComputeAsync(calendarUrl);
+            for (int i = 0; i < weeksBack; i++)
+            {
+                DateTime utcNowTimestamp = DateTime.UtcNow.AddDays(-i * 7);
+                DateTime utcMonthBackTimestamp = DateTime.UtcNow.AddDays(-i * 7).AddDays(-14);
+                string apiKey = _keyLocker.GetApiKey();
+                string indexName = "SPX";
+                var calendarUrl = _service.GetCalendarUrl(apiKey, utcNowTimestamp, utcMonthBackTimestamp);
+                var interval = Interval.Minute;
+
+                var socialTradingValue = await TriggerParallelSocialCollectAndComputeAsync(calendarUrl);
+                weekRes.Add(socialTradingValue.ToString("0.00"));
+            };
+
+            System.IO.File.WriteAllLines("weekRes.txt", weekRes);
+
 
             Console.ReadLine();
         }
@@ -69,11 +80,11 @@ namespace List_Comparer
 
                     if (thing.Actual.HasValue && thing.Previous.HasValue)
                     {
-                        diffPrevious = thing.Actual.Value - thing.Previous.Value;
+                        diffPrevious = thing.Actual.Value - thing.Previous.Value < 0 ? -1 : 1;
                     }
                     if (thing.Actual.HasValue && thing.Estimate.HasValue)
                     {
-                        diffEstimate = thing.Actual.Value - thing.Estimate.Value;
+                        diffEstimate = thing.Actual.Value - thing.Estimate.Value < 0 ? -1 : 1;
                     }
 
                     calendarResults.Add((diffPrevious + diffEstimate * 0.5M) * weight);
