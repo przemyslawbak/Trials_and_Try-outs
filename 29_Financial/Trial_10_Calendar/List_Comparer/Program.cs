@@ -25,8 +25,9 @@ namespace List_Comparer
 
             for (int i = 0; i < weeksBack; i++)
             {
-                DateTime utcNowTimestamp = DateTime.UtcNow.AddDays(-i * 7);
-                DateTime utcMonthBackTimestamp = DateTime.UtcNow.AddDays(-i * 7).AddDays(-14);
+                Console.WriteLine(i + " of " + weeksBack);
+                DateTime utcNowTimestamp = DateTime.UtcNow.AddDays(-i * 7).AddDays(-5);
+                DateTime utcMonthBackTimestamp = DateTime.UtcNow.AddDays(-i * 7).AddDays(-14).AddDays(-5);
                 string apiKey = _keyLocker.GetApiKey();
                 string indexName = "SPX";
                 var calendarUrl = _service.GetCalendarUrl(apiKey, utcNowTimestamp, utcMonthBackTimestamp);
