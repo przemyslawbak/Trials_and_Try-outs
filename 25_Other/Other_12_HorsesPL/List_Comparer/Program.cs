@@ -61,7 +61,7 @@ namespace List_Comparer
                     int place = int.Parse(row.Split(separator)[7].Split('/')[0].Trim());
                     int qty = int.Parse(row.Split(separator)[7].Split('/')[1].Trim());
                     decimal raceScore = (decimal)catValue * (decimal)place / (decimal)qty * yearRaceScore * distanceScore;
-                    resultsHorse.Add(raceScore);
+                    if (raceScore > 0) resultsHorse.Add(raceScore);
                 }
                 catch (Exception ex)
                 {
@@ -81,7 +81,7 @@ namespace List_Comparer
                     int place = int.Parse(row.Split(separator)[7].Split('/')[0].Trim());
                     int qty = int.Parse(row.Split(separator)[7].Split('/')[1].Trim());
                     decimal raceScore = (decimal)catValue * (decimal)place / (decimal)qty * distanceScore;
-                    resultsFather.Add(raceScore);
+                    if (raceScore > 0) resultsFather.Add(raceScore);
                 }
                 catch (Exception ex)
                 {
@@ -101,7 +101,7 @@ namespace List_Comparer
                     int place = int.Parse(row.Split(separator)[7].Split('/')[0].Trim());
                     int qty = int.Parse(row.Split(separator)[7].Split('/')[1].Trim());
                     decimal raceScore = (decimal)catValue * (decimal)place / (decimal)qty * distanceScore;
-                    resultsMother.Add(raceScore);
+                    if (raceScore > 0) resultsMother.Add(raceScore);
                 }
                 catch (Exception ex)
                 {
@@ -121,7 +121,8 @@ namespace List_Comparer
                     int place = int.Parse(row.Split(separator)[7].Split('/')[0].Trim());
                     int qty = int.Parse(row.Split(separator)[7].Split('/')[1].Trim());
                     decimal raceScore = (decimal)catValue * (decimal)place / (decimal)qty * distanceScore;
-                    resultsSibling1.Add(raceScore);
+                    if (raceScore > 0)
+                        resultsSibling1.Add(raceScore);
                 }
                 catch (Exception ex)
                 {
@@ -141,7 +142,8 @@ namespace List_Comparer
                     int place = int.Parse(row.Split(separator)[7].Split('/')[0].Trim());
                     int qty = int.Parse(row.Split(separator)[7].Split('/')[1].Trim());
                     decimal raceScore = (decimal)catValue * (decimal)place / (decimal)qty * distanceScore;
-                    resultsSibling2.Add(raceScore);
+                    if (raceScore > 0)
+                        resultsSibling2.Add(raceScore);
                 }
                 catch (Exception ex)
                 {
@@ -161,7 +163,8 @@ namespace List_Comparer
                     int place = int.Parse(row.Split(separator)[7].Split('/')[0].Trim());
                     int qty = int.Parse(row.Split(separator)[7].Split('/')[1].Trim());
                     decimal raceScore = (decimal)catValue * (decimal)place / (decimal)qty * distanceScore;
-                    resultsSibling3.Add(raceScore);
+                    if (raceScore > 0)
+                        resultsSibling3.Add(raceScore);
                 }
                 catch (Exception ex)
                 {
