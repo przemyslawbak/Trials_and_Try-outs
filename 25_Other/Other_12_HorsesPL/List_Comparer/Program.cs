@@ -233,22 +233,26 @@ namespace List_Comparer
                 }
             }
 
-            var sibling1core = (decimal)resultsSibling1.Sum(x => x) / (decimal)resultsSibling1.Count;
-            var sibling2core = (decimal)resultsSibling2.Sum(x => x) / (decimal)resultsSibling2.Count;
-            var sibling3core = (decimal)resultsSibling3.Sum(x => x) / (decimal)resultsSibling3.Count;
-            var motherScore = (decimal)resultsMother.Sum(x => x) / (decimal)resultsMother.Count;
-            var fatherScore = (decimal)resultsFather.Sum(x => x) / (decimal)resultsFather.Count;
-            var horseScore = (decimal)resultsHorse.Sum(x => x) / (decimal)resultsHorse.Count * sexWeight * ageWeight;
-            var jockeyScore = (decimal)resultsJockey.Sum(x => x) / (decimal)resultsJockey.Count;
-            var trenerScore = (decimal)resultsTrener.Sum(x => x) / (decimal)resultsTrener.Count;
+            var sibling1core = resultsSibling1.Count > 0 ? (decimal)resultsSibling1.Average(x => x) : 1;
+            var sibling2core = resultsSibling2.Count > 0 ? (decimal)resultsSibling2.Average(x => x) : 1;
+            var sibling3core = resultsSibling3.Count > 0 ? (decimal)resultsSibling3.Average(x => x) : 1;
+            var motherScore = resultsMother.Count > 0 ? (decimal)resultsMother.Average(x => x) : 1;
+            var fatherScore = resultsFather.Count > 0 ? (decimal)resultsFather.Average(x => x) : 1;
+            var horseScore = resultsHorse.Count > 0 ? (decimal)resultsHorse.Average(x => x) * sexWeight * ageWeight : 1;
+            var jockeyScore = resultsJockey.Count > 0 ? (decimal)resultsJockey.Average(x => x) : 1;
+            var trenerScore = resultsTrener.Count > 0 ? (decimal)resultsTrener.Average(x => x) : 1;
 
-            System.IO.File.WriteAllText(@"_result.txt", horseScore + "|" + jockeyScore + "|" + trenerScore + "|" + fatherScore + "|" + motherScore + "|" + sibling1core + "|" + sibling2core + "|" + sibling3core);
+            System.IO.File.WriteAllText(@"_result.txt", horseScore + "|" + jockeyScore + "|" + trenerScore + "|" + fatherScore + "|" + motherScore + "|" + sibling1core + "|" + sibling2core + "|" + sibling3core + "|" + resultsHorse.Count);
         }
 
         private static Dictionary<string, int> GetClassValues()
         {
             return new Dictionary<string, int>()
             {
+                { "G1 A", 8 },
+                { "G1 B", 8 },
+                { "L B", 8 },
+                { "L A", 8 },
                 { "A", 10 },
                 { "B", 15 },
                 { "I", 20 },
