@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Runtime.Remoting.Contexts;
 
 namespace List_Comparer
 {
@@ -53,30 +54,81 @@ namespace List_Comparer
                     decimal raceScore = (decimal)catValue * (decimal)place / (decimal)qty * yearRaceScore * distanceScore;
                     resultsHorse.Add(raceScore);
                 }
-                catch
+                catch (Exception ex)
                 {
                     //do nothing
                 }
             }
 
-            foreach (var row in horsieInfoRows)
+            foreach (var row in jockeyRows)
             {
                 try
                 {
-                    string horseName = row.Split(separator)[0].Split(' ')[0]
+                    string horseName = row.Split(separator)[0].Split(' ')[0];
+                    decimal nameMultiplier = horseName == horsieName ? 0.7M : 1.0M;
 
+                    if (decimal.Parse(row.Split(separator)[10]) > 0 && (int.Parse(row.Split(separator)[4]) > 0 || int.Parse(row.Split(separator)[5]) > 0 || int.Parse(row.Split(separator)[6]) > 0))
+                    {
 
+                        decimal times1 = 0M;
+                        decimal times2 = 0M;
+                        decimal times3 = 0M;
+                        if (int.Parse(row.Split(separator)[4]) > 0) times1 = 1 / decimal.Parse(row.Split(separator)[4]) * decimal.Parse(row.Split(separator)[10]) * 0.1M;
+                        if (int.Parse(row.Split(separator)[5]) > 0) times2 = 1 / decimal.Parse(row.Split(separator)[5]) * decimal.Parse(row.Split(separator)[10]) * 0.2M;
+                        if (int.Parse(row.Split(separator)[6]) > 0) times3 = 1 / decimal.Parse(row.Split(separator)[6]) * decimal.Parse(row.Split(separator)[10]) * 0.3M;
+                        var results = (times1 + times2 + times3) * nameMultiplier;
 
-                    decimal raceScore = (decimal)catValue * (decimal)place / (decimal)qty * yearRaceScore * distanceScore;
-                    resultsHorse.Add(raceScore);
+                        decimal raceScore = nameMultiplier * results;
+                        resultsJockey.Add(raceScore);
+                    }
+                    else if (decimal.Parse(row.Split(separator)[10]) > 0)
+                    {
+                        resultsJockey.Add(1M * decimal.Parse(row.Split(separator)[10]));
+                    }
                 }
-                catch
+                catch (Exception ex)
+                {
+                    //do nothing
+                }
+            }
+
+            foreach (var row in trenerRows)
+            {
+                try
+                {
+                    string horseName = row.Split(separator)[0].Split(' ')[0];
+                    decimal nameMultiplier = horseName == horsieName ? 0.7M : 1.0M;
+
+                    if (decimal.Parse(row.Split(separator)[10]) > 0 && (int.Parse(row.Split(separator)[4]) > 0 || int.Parse(row.Split(separator)[5]) > 0 || int.Parse(row.Split(separator)[6]) > 0))
+                    {
+
+                        decimal times1 = 0M;
+                        decimal times2 = 0M;
+                        decimal times3 = 0M;
+                        if (int.Parse(row.Split(separator)[4]) > 0) times1 = 1 / decimal.Parse(row.Split(separator)[4]) * decimal.Parse(row.Split(separator)[10]) * 0.1M;
+                        if (int.Parse(row.Split(separator)[5]) > 0) times2 = 1 / decimal.Parse(row.Split(separator)[5]) * decimal.Parse(row.Split(separator)[10]) * 0.2M;
+                        if (int.Parse(row.Split(separator)[6]) > 0) times3 = 1 / decimal.Parse(row.Split(separator)[6]) * decimal.Parse(row.Split(separator)[10]) * 0.3M;
+                        var results = (times1 + times2 + times3) * nameMultiplier;
+
+                        decimal raceScore = nameMultiplier * results;
+                        resultsTrener.Add(raceScore);
+                    }
+                    else if (decimal.Parse(row.Split(separator)[10]) > 0)
+                    {
+                        resultsTrener.Add(1M * decimal.Parse(row.Split(separator)[10]));
+                    }
+                }
+                catch (Exception ex)
                 {
                     //do nothing
                 }
             }
 
             var horseScore = (decimal)resultsHorse.Sum(x => x) / (decimal)resultsHorse.Count * sexWeight * ageWeight;
+            var jockeyScore = (decimal)resultsJockey.Sum(x => x) / (decimal)resultsJockey.Count;
+            var trenerScore = (decimal)resultsTrener.Sum(x => x) / (decimal)resultsTrener.Count;
+
+            System.IO.File.WriteAllText(@"_result.txt", horseScore + "|" + jockeyScore + "|" + trenerScore);
         }
 
         private static Dictionary<string, int> GetClassValues()
