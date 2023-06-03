@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Runtime.Remoting.Contexts;
 
 namespace List_Comparer
 {
@@ -18,6 +17,11 @@ namespace List_Comparer
             string[] jockeyRows = File.ReadAllLines("jockey.txt");
             string[] trenerRows = File.ReadAllLines("trener.txt");
             string[] horsieInfoRows = File.ReadAllLines("horsie.txt");
+            string[] fatherRoes = File.ReadAllLines("father.txt");
+            string[] motherRoes = File.ReadAllLines("mother.txt");
+            string[] sibling1Roes = File.ReadAllLines("sibling1.txt");
+            string[] sibling2Roes = File.ReadAllLines("sibling2.txt");
+            string[] sibling3Roes = File.ReadAllLines("sibling3.txt");
 
             var classValues = GetClassValues();
             int raceDistance = int.Parse(raceRows[0].Trim());
@@ -39,6 +43,11 @@ namespace List_Comparer
             List<decimal> resultsHorse = new List<decimal>();
             List<decimal> resultsJockey = new List<decimal>();
             List<decimal> resultsTrener = new List<decimal>();
+            List<decimal> resultsFather = new List<decimal>();
+            List<decimal> resultsMother = new List<decimal>();
+            List<decimal> resultsSibling1 = new List<decimal>();
+            List<decimal> resultsSibling2 = new List<decimal>();
+            List<decimal> resultsSibling3 = new List<decimal>();
 
             foreach (var row in horseRows)
             {
@@ -53,6 +62,106 @@ namespace List_Comparer
                     int qty = int.Parse(row.Split(separator)[7].Split('/')[1].Trim());
                     decimal raceScore = (decimal)catValue * (decimal)place / (decimal)qty * yearRaceScore * distanceScore;
                     resultsHorse.Add(raceScore);
+                }
+                catch (Exception ex)
+                {
+                    //do nothing
+                }
+            }
+
+            foreach (var row in fatherRoes)
+            {
+                try
+                {
+                    int distance = int.Parse(row.Split(separator)[2].Split(' ')[0].Trim());
+                    decimal distanceScore = 1 + (decimal)Math.Abs(raceDistance - distance) / raceDistance * 10;
+                    int yearRace = DateTime.Parse(row.Split(separator)[0]).Year;
+                    decimal yearRaceScore = (1 + (yearNow - yearRace) * yearStep);
+                    int catValue = classValues[row.Split(separator)[3]];
+                    int place = int.Parse(row.Split(separator)[7].Split('/')[0].Trim());
+                    int qty = int.Parse(row.Split(separator)[7].Split('/')[1].Trim());
+                    decimal raceScore = (decimal)catValue * (decimal)place / (decimal)qty * distanceScore;
+                    resultsFather.Add(raceScore);
+                }
+                catch (Exception ex)
+                {
+                    //do nothing
+                }
+            }
+
+            foreach (var row in motherRoes)
+            {
+                try
+                {
+                    int distance = int.Parse(row.Split(separator)[2].Split(' ')[0].Trim());
+                    decimal distanceScore = 1 + (decimal)Math.Abs(raceDistance - distance) / raceDistance * 10;
+                    int yearRace = DateTime.Parse(row.Split(separator)[0]).Year;
+                    decimal yearRaceScore = (1 + (yearNow - yearRace) * yearStep);
+                    int catValue = classValues[row.Split(separator)[3]];
+                    int place = int.Parse(row.Split(separator)[7].Split('/')[0].Trim());
+                    int qty = int.Parse(row.Split(separator)[7].Split('/')[1].Trim());
+                    decimal raceScore = (decimal)catValue * (decimal)place / (decimal)qty * distanceScore;
+                    resultsMother.Add(raceScore);
+                }
+                catch (Exception ex)
+                {
+                    //do nothing
+                }
+            }
+
+            foreach (var row in sibling1Roes)
+            {
+                try
+                {
+                    int distance = int.Parse(row.Split(separator)[2].Split(' ')[0].Trim());
+                    decimal distanceScore = 1 + (decimal)Math.Abs(raceDistance - distance) / raceDistance * 10;
+                    int yearRace = DateTime.Parse(row.Split(separator)[0]).Year;
+                    decimal yearRaceScore = (1 + (yearNow - yearRace) * yearStep);
+                    int catValue = classValues[row.Split(separator)[3]];
+                    int place = int.Parse(row.Split(separator)[7].Split('/')[0].Trim());
+                    int qty = int.Parse(row.Split(separator)[7].Split('/')[1].Trim());
+                    decimal raceScore = (decimal)catValue * (decimal)place / (decimal)qty * distanceScore;
+                    resultsSibling1.Add(raceScore);
+                }
+                catch (Exception ex)
+                {
+                    //do nothing
+                }
+            }
+
+            foreach (var row in sibling2Roes)
+            {
+                try
+                {
+                    int distance = int.Parse(row.Split(separator)[2].Split(' ')[0].Trim());
+                    decimal distanceScore = 1 + (decimal)Math.Abs(raceDistance - distance) / raceDistance * 10;
+                    int yearRace = DateTime.Parse(row.Split(separator)[0]).Year;
+                    decimal yearRaceScore = (1 + (yearNow - yearRace) * yearStep);
+                    int catValue = classValues[row.Split(separator)[3]];
+                    int place = int.Parse(row.Split(separator)[7].Split('/')[0].Trim());
+                    int qty = int.Parse(row.Split(separator)[7].Split('/')[1].Trim());
+                    decimal raceScore = (decimal)catValue * (decimal)place / (decimal)qty * distanceScore;
+                    resultsSibling2.Add(raceScore);
+                }
+                catch (Exception ex)
+                {
+                    //do nothing
+                }
+            }
+
+            foreach (var row in sibling3Roes)
+            {
+                try
+                {
+                    int distance = int.Parse(row.Split(separator)[2].Split(' ')[0].Trim());
+                    decimal distanceScore = 1 + (decimal)Math.Abs(raceDistance - distance) / raceDistance * 10;
+                    int yearRace = DateTime.Parse(row.Split(separator)[0]).Year;
+                    decimal yearRaceScore = (1 + (yearNow - yearRace) * yearStep);
+                    int catValue = classValues[row.Split(separator)[3]];
+                    int place = int.Parse(row.Split(separator)[7].Split('/')[0].Trim());
+                    int qty = int.Parse(row.Split(separator)[7].Split('/')[1].Trim());
+                    decimal raceScore = (decimal)catValue * (decimal)place / (decimal)qty * distanceScore;
+                    resultsSibling3.Add(raceScore);
                 }
                 catch (Exception ex)
                 {
@@ -124,11 +233,16 @@ namespace List_Comparer
                 }
             }
 
+            var sibling1core = (decimal)resultsSibling1.Sum(x => x) / (decimal)resultsSibling1.Count;
+            var sibling2core = (decimal)resultsSibling2.Sum(x => x) / (decimal)resultsSibling2.Count;
+            var sibling3core = (decimal)resultsSibling3.Sum(x => x) / (decimal)resultsSibling3.Count;
+            var motherScore = (decimal)resultsMother.Sum(x => x) / (decimal)resultsMother.Count;
+            var fatherScore = (decimal)resultsFather.Sum(x => x) / (decimal)resultsFather.Count;
             var horseScore = (decimal)resultsHorse.Sum(x => x) / (decimal)resultsHorse.Count * sexWeight * ageWeight;
             var jockeyScore = (decimal)resultsJockey.Sum(x => x) / (decimal)resultsJockey.Count;
             var trenerScore = (decimal)resultsTrener.Sum(x => x) / (decimal)resultsTrener.Count;
 
-            System.IO.File.WriteAllText(@"_result.txt", horseScore + "|" + jockeyScore + "|" + trenerScore);
+            System.IO.File.WriteAllText(@"_result.txt", horseScore + "|" + jockeyScore + "|" + trenerScore + "|" + fatherScore + "|" + motherScore + "|" + sibling1core + "|" + sibling2core + "|" + sibling3core);
         }
 
         private static Dictionary<string, int> GetClassValues()
