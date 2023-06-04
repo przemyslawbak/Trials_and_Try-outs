@@ -9,6 +9,7 @@ namespace List_Comparer
     {
         static void Main(string[] args)
         {
+            var obstructions = true;
             var yearStep = 0.8M;
             int yearNow = DateTime.Now.Year;
             char[] separator = new char[] { '\t' };
@@ -39,6 +40,8 @@ namespace List_Comparer
 
             decimal sexWeight = sexWeightDict[horsieSex];
             decimal ageWeight = 1 + (decimal)horsieAge * 0.05M;
+            if (obstructions) classValues["płoty"] = 5;
+            if (obstructions) classValues["przeszkody"] = 5;
 
             List<decimal> resultsHorse = new List<decimal>();
             List<decimal> resultsJockey = new List<decimal>();
@@ -252,6 +255,7 @@ namespace List_Comparer
         {
             return new Dictionary<string, int>()
             {
+                { "LR A", 8 },
                 { "G1 A", 8 },
                 { "G1 B", 8 },
                 { "L B", 8 },
