@@ -263,6 +263,9 @@ namespace List_Comparer
                 { "III", 30 },
                 { "", 30 },
                 { "IV", 35 },
+                { "płoty", 10 },
+                { "sulki", 10 },
+                { "przeszkody", 10 },
             };
         }
     }
