@@ -38,7 +38,7 @@ namespace List_Comparer
             string horsieName = horsieInfoRows[1].Trim();
 
             decimal sexWeight = sexWeightDict[horsieSex];
-            decimal ageWeight = (decimal)horsieAge * 0.95M;
+            decimal ageWeight = 1 + (decimal)horsieAge * 0.05M;
 
             List<decimal> resultsHorse = new List<decimal>();
             List<decimal> resultsJockey = new List<decimal>();
@@ -245,7 +245,7 @@ namespace List_Comparer
             var jockeyScore = resultsJockey.Count > 0 ? (decimal)resultsJockey.Average(x => x) : 1;
             var trenerScore = resultsTrener.Count > 0 ? (decimal)resultsTrener.Average(x => x) : 1;
 
-            System.IO.File.WriteAllText(@"_result.txt", horseScore + "|" + jockeyScore + "|" + trenerScore + "|" + fatherScore + "|" + motherScore + "|" + sibling1core + "|" + sibling2core + "|" + sibling3core + "|" + resultsHorse.Count);
+            System.IO.File.WriteAllText(@"_result.txt", horsieName + "|" + horseScore + "|" + jockeyScore + "|" + trenerScore + "|" + fatherScore + "|" + motherScore + "|" + sibling1core + "|" + sibling2core + "|" + sibling3core + "|" + resultsHorse.Count);
         }
 
         private static Dictionary<string, int> GetClassValues()
