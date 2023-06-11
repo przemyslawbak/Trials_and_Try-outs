@@ -64,7 +64,7 @@ namespace List_Comparer
                 }, tokenSource.Token));
             }
 
-            await Task.WhenAny(Task.WhenAll(currentRunningTasks), Task.Delay(30000));
+            await Task.WhenAny(Task.WhenAll(currentRunningTasks), Task.Delay(3000000));
             tokenSource.Cancel();
 
             var aver = results.Average();
