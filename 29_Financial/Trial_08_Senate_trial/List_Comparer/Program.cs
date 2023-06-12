@@ -28,7 +28,7 @@ namespace List_Comparer
 
             var senateTradingValue = await TriggerParallelSenateCollectAndComputeAsync(indexName, senateUrlDictionary, utcNowTimestamp, interval, companyList);
 
-            Console.ReadLine();
+            Console.WriteLine("Result: " + senateTradingValue);
         }
 
         private static async Task<decimal> TriggerParallelSenateCollectAndComputeAsync(string indexName, Dictionary<string, string> dataUrls, DateTime utcNowTimestamp, Interval interval, List<CompanyModel> companyList)
@@ -36,9 +36,11 @@ namespace List_Comparer
             List<Task> currentRunningTasks = new List<Task>();
             CancellationTokenSource tokenSource = GetCancellationTokenSource();
             List<decimal> results = new List<decimal>();
+            var exceptions = 0;
 
             for (int i = 0; i < dataUrls.Count; i++)
             {
+                await Task.Delay(1);
                 int iteration = i;
 
                 currentRunningTasks.Add(Task.Run(async () =>
@@ -58,7 +60,7 @@ namespace List_Comparer
                     }
                     catch (Exception ex)
                     {
-                        //do nothing
+                        exceptions++;
                     }
 
                 }, tokenSource.Token));
@@ -66,6 +68,8 @@ namespace List_Comparer
 
             await Task.WhenAny(Task.WhenAll(currentRunningTasks), Task.Delay(30000));
             tokenSource.Cancel();
+
+            Console.WriteLine("Exceptions: " + exceptions);
 
             var aver = results.Average();
 

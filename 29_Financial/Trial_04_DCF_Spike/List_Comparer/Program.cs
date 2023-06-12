@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -28,7 +29,7 @@ namespace List_Comparer
 
             var dcfValue = await TriggerParallelDcfCollectAndComputeAsync(indexName, dcfUrlDictionary, utcNowTimestamp, interval, companyList);
 
-            Console.ReadLine();
+            Console.WriteLine("DCF: " + dcfValue);
         }
 
         private static async Task<decimal> TriggerParallelDcfCollectAndComputeAsync(string indexName, Dictionary<string, string> dataUrls, DateTime utcNowTimestamp, Interval interval, List<CompanyModel> companyList)
@@ -36,11 +37,12 @@ namespace List_Comparer
             List<Task> currentRunningTasks = new List<Task>();
             CancellationTokenSource tokenSource = GetCancellationTokenSource();
             List<decimal> results = new List<decimal>();
+            var exceptions = 0;
 
             for (int i = 0; i < dataUrls.Count; i++)
             {
+                await Task.Delay(1);
                 int iteration = i;
-                var result = new ScrapResultModel();
 
                 currentRunningTasks.Add(Task.Run(async () =>
                 {
@@ -58,7 +60,7 @@ namespace List_Comparer
                     }
                     catch (Exception ex)
                     {
-                        //do nothing
+                        exceptions++;
                     }
 
                 }, tokenSource.Token));
@@ -66,6 +68,8 @@ namespace List_Comparer
 
             await Task.WhenAny(Task.WhenAll(currentRunningTasks), Task.Delay(3000000));
             tokenSource.Cancel();
+
+            Console.WriteLine("Exceptions: " + exceptions);
 
             var aver = results.Average();
 
