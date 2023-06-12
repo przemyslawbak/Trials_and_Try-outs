@@ -60,7 +60,6 @@ namespace List_Comparer
                     catch (Exception ex)
                     {
                         exceptions++;
-                        Console.WriteLine(ex.Message);
                     }
 
                 }, tokenSource.Token));
