@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using Skender.Stock.Indicators;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,9 +28,10 @@ namespace List_Comparer
             var ohlcvUrlDictionary = _service.GetStock1minUrlDictionary(companyList, apiKey);
             var interval = Interval.Minute;
 
-            var hgppValues = await TriggerParallelOhlcvCollectAndComputeAsync(indexName, ohlcvUrlDictionary, utcNowTimestamp, interval, companyList);
+            var indValues = await TriggerParallelOhlcvCollectAndComputeAsync(indexName, ohlcvUrlDictionary, utcNowTimestamp, interval, companyList);
 
-            Console.ReadLine();
+            Console.WriteLine(indValues);
+            Console.WriteLine();
         }
 
         private static async Task<OhlcvTaResult> TriggerParallelOhlcvCollectAndComputeAsync(string indexName, Dictionary<string, string> dataUrls, DateTime utcNowTimestamp, Interval interval, List<CompanyModel> companyList)
@@ -78,7 +80,6 @@ namespace List_Comparer
                         };
 
                         results.Add(result);
-
                     }
                     catch (Exception ex)
                     {
@@ -109,29 +110,56 @@ namespace List_Comparer
             };
         }
 
+        //https://dotnet.stockindicators.dev/indicators/Stc/#content
         private static decimal GetShaffTrendCycleValue(List<OhlcvObject> items)
         {
-            throw new NotImplementedException();
+            var quotes = items.Select(x => new Quote() { Open = x.Open, High = x.High, Low = x.Low, Close = x.Close, Volume = x.Volume, Date = x.Date });
+            var res = quotes.GetStc().Last().Stc;
+
+            return (decimal)res * items[0].Multiplier;
         }
 
+        //https://dotnet.stockindicators.dev/indicators/Mfi/#content
         private static decimal GetMoneyFlowIndexValue(List<OhlcvObject> items)
         {
-            throw new NotImplementedException();
+            var quotes = items.Select(x => new Quote() { Open = x.Open, High = x.High, Low = x.Low, Close = x.Close, Volume = x.Volume, Date = x.Date });
+            var res = quotes.GetMfi().Last().Mfi;
+
+            return (decimal)res * items[0].Multiplier;
         }
 
+        //https://dotnet.stockindicators.dev/indicators/ElderRay/#content
         private static decimal GetElderRayValue(List<OhlcvObject> items)
         {
-            throw new NotImplementedException();
+            var quotes = items.Select(x => new Quote() { Open = x.Open, High = x.High, Low = x.Low, Close = x.Close, Volume = x.Volume, Date = x.Date });
+            var resBull = quotes.GetElderRay().Last().BullPower;
+            var resBear = quotes.GetElderRay().Last().BearPower;
+            var res = resBull - resBear;
+
+            return (decimal)res * items[0].Multiplier;
         }
 
+        //https://dotnet.stockindicators.dev/indicators/Cmf/#content
         private static decimal GetChaikinMoneyFlowValue(List<OhlcvObject> items)
         {
-            throw new NotImplementedException();
+            var quotes = items.Select(x => new Quote() { Open = x.Open, High = x.High, Low = x.Low, Close = x.Close, Volume = x.Volume, Date = x.Date });
+            var res = quotes.GetCmf().Last().Cmf;
+
+            return (decimal)res * items[0].Multiplier;
         }
 
+        //https://dotnet.stockindicators.dev/indicators/Awesome/#content
         private static decimal GetAwesomeOscillatorValue(List<OhlcvObject> items)
         {
-            throw new NotImplementedException();
+            var quotes = items.Select(x => new Quote() { Open = x.Open, High = x.High, Low = x.Low, Close = x.Close, Volume = x.Volume, Date = x.Date });
+            var res = quotes.GetAwesome().Last().Oscillator;
+
+            return (decimal)res * items[0].Multiplier;
+        }
+
+        private static CancellationTokenSource GetCancellationTokenSource()
+        {
+            return new CancellationTokenSource();
         }
     }
 }

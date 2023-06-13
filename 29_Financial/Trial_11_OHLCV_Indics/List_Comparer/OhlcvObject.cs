@@ -1,9 +1,13 @@
 ﻿using Newtonsoft.Json;
+using System;
 
 namespace List_Comparer
 {
     public class OhlcvObject
     {
+        [JsonProperty(PropertyName = "date")]
+        public DateTime Date { get; set; }
+
         [JsonProperty(PropertyName = "open")]
         public decimal Open { get; set; }
 
