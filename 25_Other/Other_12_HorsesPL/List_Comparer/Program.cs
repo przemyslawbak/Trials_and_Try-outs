@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net;
 
 namespace List_Comparer
 {
@@ -23,6 +24,7 @@ namespace List_Comparer
             string[] sibling1Roes = File.ReadAllLines("sibling1.txt");
             string[] sibling2Roes = File.ReadAllLines("sibling2.txt");
             string[] sibling3Roes = File.ReadAllLines("sibling3.txt");
+            string[] link = File.ReadAllLines("link.txt");
 
             var classValues = GetClassValues();
             int raceDistance = int.Parse(raceRows[0].Trim());
@@ -51,6 +53,22 @@ namespace List_Comparer
             List<decimal> resultsSibling1 = new List<decimal>();
             List<decimal> resultsSibling2 = new List<decimal>();
             List<decimal> resultsSibling3 = new List<decimal>();
+
+            string html = "";
+            if (!string.IsNullOrEmpty(link[0]))
+            {
+                var url = link[0];
+
+                using (WebClient client = new WebClient())
+                {
+                    html = client.DownloadString(url);
+                }
+            }
+
+            var startyHtml = html.Split(new string[] { "<th style=\"text-align:right\" scope=\"col\">wygrana</th>" }, StringSplitOptions.None)[1];
+            var startyArray = startyHtml.Split(new string[] { "<td style=\"text-align:center\"> <span>" }, StringSplitOptions.None).ToList();
+            startyArray.RemoveAt(0);
+
 
             foreach (var row in horseRows)
             {
