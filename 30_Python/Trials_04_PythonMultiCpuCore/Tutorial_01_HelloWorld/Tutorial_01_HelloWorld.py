@@ -2,6 +2,7 @@
 
 #import time
 
+##single CPU core
 #def basic_func(x):
 #    if x == 0:
 #        return 'zero'
@@ -11,16 +12,17 @@
 #        return 'odd'
     
 #starttime = time.time()
-#for i in range(0,10):
+#for i in range(0,100000000000):
 #    y = i*i
 #    time.sleep(2)
 #    print('{} squared results in a/an {} number'.format(i, basic_func(y)))
     
-#print('That took {} seconds'.format(time.time() - starttime)) #over 20s
+#print('That took {} seconds'.format(time.time() - starttime))
 
 import time
 import multiprocessing 
 
+#multi CPU core
 def basic_func(x):
     if x == 0:
         return 'zero'
@@ -37,7 +39,7 @@ def multiprocessing_func(x):
 if __name__ == '__main__':
     starttime = time.time()
     processes = []
-    for i in range(0,10):
+    for i in range(0,100000000000):
         p = multiprocessing.Process(target=multiprocessing_func, args=(i,))
         processes.append(p)
         p.start()
@@ -45,4 +47,4 @@ if __name__ == '__main__':
     for process in processes:
         process.join()
         
-    print('That took {} seconds'.format(time.time() - starttime)) #over 2s
+    print('That took {} seconds'.format(time.time() - starttime))
