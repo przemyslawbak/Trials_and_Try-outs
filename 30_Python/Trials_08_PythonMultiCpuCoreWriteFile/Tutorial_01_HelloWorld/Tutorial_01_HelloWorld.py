@@ -7,7 +7,11 @@ from multiprocessing import Process, current_process
 
 fn = 'myfile.txt'
 
+def get_somethig():
+    return 'something'
+
 def doubler(q, number):
+    something = get_somethig()
     odd = False
     """
     A doubling function that can be used by a process
@@ -28,12 +32,11 @@ def listener(q, txt):
 
     with open(fn, 'a') as f:
         f.write(txt + '\n')
-        f.close()
             
+print('test')
 if __name__ == '__main__':
     starttime = time.time()
     numbers = range(0,5000)
-    jobs = []
 
     #mp config:
     manager = mp.Manager()
@@ -45,7 +48,6 @@ if __name__ == '__main__':
     for index, number in enumerate(numbers):
         print(str(number))
         job = pool.apply_async(doubler, (q, number))
-        jobs.append(job)
         number_str, odd_str = job.get()
         pool.apply_async(listener, (q, number_str + ' ' + odd_str))
 
