@@ -1,6 +1,6 @@
 ﻿namespace MAUI_01_Tutorial;
 
-//https://www.c-sharpcorner.com/article/getting-started-with-net-maui-first-impressions/
+//https://dotnet.microsoft.com/en-us/learn/maui/first-app-tutorial/create
 public partial class MainPage : ContentPage
 {
 	int count = 0;
@@ -12,7 +12,7 @@ public partial class MainPage : ContentPage
 
 	private void OnCounterClicked(object sender, EventArgs e)
 	{
-		count++;
+		count+=10;
 
 		if (count == 1)
 			CounterBtn.Text = $"Clicked {count} time";
