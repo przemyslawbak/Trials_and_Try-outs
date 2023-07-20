@@ -116,7 +116,7 @@ namespace List_Comparer
             var quotes = items.Select(x => new Quote() { Open = x.Open, High = x.High, Low = x.Low, Close = x.Close, Volume = x.Volume, Date = x.Date });
             var res = quotes.GetStc().Last().Stc;
 
-            return (decimal)res * items[0].Multiplier;
+            return (decimal)res * items[0].Multiplier / 100;
         }
 
         //https://dotnet.stockindicators.dev/indicators/Mfi/#content
@@ -125,7 +125,7 @@ namespace List_Comparer
             var quotes = items.Select(x => new Quote() { Open = x.Open, High = x.High, Low = x.Low, Close = x.Close, Volume = x.Volume, Date = x.Date });
             var res = quotes.GetMfi().Last().Mfi;
 
-            return (decimal)res * items[0].Multiplier;
+            return (decimal)res * items[0].Multiplier / 100;
         }
 
         //https://dotnet.stockindicators.dev/indicators/ElderRay/#content
