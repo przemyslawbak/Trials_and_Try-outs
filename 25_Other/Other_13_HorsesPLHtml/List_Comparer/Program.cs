@@ -21,8 +21,8 @@ namespace List_Comparer
 
             string[] urls = File.ReadAllLines("link.txt");
             var urlHorse = urls[0];
-            var urlJockey = urls[1];
-            var urlTrainer = urls[2];
+            /*var urlJockey = urls[1];
+            var urlTrainer = urls[2];*/
 
             var classValues = GetClassValues();
             int raceDistance = int.Parse(raceRows[0].Trim());
@@ -47,6 +47,8 @@ namespace List_Comparer
             List<decimal> resultsFather = new List<decimal>();
             List<decimal> resultsMother = new List<decimal>();
             List<decimal> siblingResults = new List<decimal>();
+            List<decimal> resultsJockey = new List<decimal>();
+            List<decimal> resultsTrainer = new List<decimal>();
 
             foreach (var row in horseRows)
             {
@@ -69,8 +71,54 @@ namespace List_Comparer
             }
 
             string htmlHorse = GetHtml(urlHorse);
-            string htmlJockey = GetHtml(urlJockey);
+            /*string htmlJockey = GetHtml(urlJockey);
             string htmlTrainer = GetHtml(urlTrainer);
+
+            var jockeyStarts = htmlJockey
+                .Split(new string[] { "<h3 class=\"g-color-black g-font-weight-600 mb-3\">WYNIKI KONI DOSIADANYCH W SEZONIE " }, StringSplitOptions.None)[1]
+                .Split(new string[] { "<tbody>" }, StringSplitOptions.None)[1]
+                .Split(new string[] { "WYKAZ STARTÓW W SEZONIE " }, StringSplitOptions.None)[0];
+
+            var jockeyRows = jockeyStarts
+                .Split(new string[] { "<tr>" }, StringSplitOptions.None);
+
+            var xxx = 0;*/
+
+
+            /*foreach (var row in jockeyRows)
+            {
+                try
+                {
+                    string horseName = row.Split(separator)[0].Split(' ')[0];
+                    decimal nameMultiplier = horseName == horsieName ? 0.7M : 1.0M;
+
+                    if (decimal.Parse(row.Split(separator)[10]) > 0 && (int.Parse(row.Split(separator)[4]) > 0 || int.Parse(row.Split(separator)[5]) > 0 || int.Parse(row.Split(separator)[6]) > 0))
+                    {
+
+                        decimal times1 = 0M;
+                        decimal times2 = 0M;
+                        decimal times3 = 0M;
+                        if (int.Parse(row.Split(separator)[4]) > 0) times1 = 1 / decimal.Parse(row.Split(separator)[4]) * decimal.Parse(row.Split(separator)[10]) * 0.1M;
+                        if (int.Parse(row.Split(separator)[5]) > 0) times2 = 1 / decimal.Parse(row.Split(separator)[5]) * decimal.Parse(row.Split(separator)[10]) * 0.2M;
+                        if (int.Parse(row.Split(separator)[6]) > 0) times3 = 1 / decimal.Parse(row.Split(separator)[6]) * decimal.Parse(row.Split(separator)[10]) * 0.3M;
+                        var results = (times1 + times2 + times3) * nameMultiplier;
+
+                        decimal raceScore = nameMultiplier * results;
+                        resultsJockey.Add(raceScore);
+                    }
+                    else if (decimal.Parse(row.Split(separator)[10]) > 0)
+                    {
+                        resultsJockey.Add(1M * decimal.Parse(row.Split(separator)[10]));
+                    }
+                }
+                catch (Exception ex)
+                {
+                    //do nothing
+                }
+            }*/
+
+
+
 
             var urlFather = htmlHorse.Split(new string[] { "<td><a href=\"" }, StringSplitOptions.None)[1].Split('"')[0];
             if (urlFather.Length > 10)
