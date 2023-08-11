@@ -21,8 +21,8 @@ namespace List_Comparer
 
             string[] urls = File.ReadAllLines("link.txt");
             var urlHorse = urls[0];
-            /*var urlJockey = urls[1];
-            var urlTrainer = urls[2];*/
+            var urlJockey = urls[1] + "&sezon=2022#wyniki_koni";
+            var urlTrainer = urls[2] + "&sezon=2022#wyniki_koni";
 
             var classValues = GetClassValues();
             int raceDistance = int.Parse(raceRows[0].Trim());
@@ -71,7 +71,7 @@ namespace List_Comparer
             }
 
             string htmlHorse = GetHtml(urlHorse);
-            /*string htmlJockey = GetHtml(urlJockey);
+            string htmlJockey = GetHtml(urlJockey);
             string htmlTrainer = GetHtml(urlTrainer);
 
             var jockeyStarts = htmlJockey
@@ -82,31 +82,37 @@ namespace List_Comparer
             var jockeyRows = jockeyStarts
                 .Split(new string[] { "<tr>" }, StringSplitOptions.None);
 
-            var xxx = 0;*/
+            if (jockeyRows.Length > 0) jockeyRows = jockeyRows.Take(jockeyRows.Count() - 1).ToArray();
 
-
-            /*foreach (var row in jockeyRows)
+            foreach (var row in jockeyRows)
             {
                 try
                 {
-                    string horseName = row.Split(separator)[0].Split(' ')[0];
-                    decimal nameMultiplier = horseName == horsieName ? 0.7M : 1.0M;
+                    var horseName = row
+                        .Split('>')[2]
+                        .Split('(')[0];
 
-                    if (decimal.Parse(row.Split(separator)[10]) > 0 && (int.Parse(row.Split(separator)[4]) > 0 || int.Parse(row.Split(separator)[5]) > 0 || int.Parse(row.Split(separator)[6]) > 0))
+                    decimal nameMultiplier = horseName.ToLower() == horsieName.ToLower() ? 0.7M : 1.0M;
+
+                    var placesFirst = row.Split(new string[] { "<td style=\"text-align:center\">" }, StringSplitOptions.None)[4].Split('<')[0];
+                    var placesSecond = row.Split(new string[] { "<td style=\"text-align:center\">" }, StringSplitOptions.None)[5].Split('<')[0];
+                    var placesThird = row.Split(new string[] { "<td style=\"text-align:center\">" }, StringSplitOptions.None)[6].Split('<')[0];
+                    var races = row.Split(new string[] { "<td style=\"text-align: center\">" }, StringSplitOptions.None)[1].Split('<')[0];
+
+                    if (races != "0" && (placesFirst != "0" || placesSecond != "0" || placesThird != "0"))
                     {
-
                         decimal times1 = 0M;
                         decimal times2 = 0M;
                         decimal times3 = 0M;
-                        if (int.Parse(row.Split(separator)[4]) > 0) times1 = 1 / decimal.Parse(row.Split(separator)[4]) * decimal.Parse(row.Split(separator)[10]) * 0.1M;
-                        if (int.Parse(row.Split(separator)[5]) > 0) times2 = 1 / decimal.Parse(row.Split(separator)[5]) * decimal.Parse(row.Split(separator)[10]) * 0.2M;
-                        if (int.Parse(row.Split(separator)[6]) > 0) times3 = 1 / decimal.Parse(row.Split(separator)[6]) * decimal.Parse(row.Split(separator)[10]) * 0.3M;
+                        if (int.Parse(placesFirst) > 0) times1 = 1 / decimal.Parse(placesFirst) * decimal.Parse(races) * 0.1M;
+                        if (int.Parse(placesSecond) > 0) times2 = 1 / decimal.Parse(placesSecond) * decimal.Parse(races) * 0.2M;
+                        if (int.Parse(placesThird) > 0) times3 = 1 / decimal.Parse(placesThird) * decimal.Parse(races) * 0.3M;
                         var results = (times1 + times2 + times3) * nameMultiplier;
 
                         decimal raceScore = nameMultiplier * results;
                         resultsJockey.Add(raceScore);
                     }
-                    else if (decimal.Parse(row.Split(separator)[10]) > 0)
+                    else if (decimal.Parse(races) > 0)
                     {
                         resultsJockey.Add(1M * decimal.Parse(row.Split(separator)[10]));
                     }
@@ -115,9 +121,7 @@ namespace List_Comparer
                 {
                     //do nothing
                 }
-            }*/
-
-
+            }
 
 
             var urlFather = htmlHorse.Split(new string[] { "<td><a href=\"" }, StringSplitOptions.None)[1].Split('"')[0];
@@ -385,7 +389,6 @@ namespace List_Comparer
                             //do nothing
                         }
 
-
                         var siblingScore = resultsSibling.Count > 0 ? (decimal)resultsSibling.Average(x => x) : 1;
                         siblingResults.Add(siblingScore);
                     }
@@ -396,8 +399,9 @@ namespace List_Comparer
             var motherScore = resultsMother.Count > 0 ? (decimal)resultsMother.Average(x => x) : 1;
             var fatherScore = resultsFather.Count > 0 ? (decimal)resultsFather.Average(x => x) : 1;
             var horseScore = resultsHorse.Count > 0 ? (decimal)resultsHorse.Average(x => x) * sexWeight * ageWeight : 1;
+            var jockeyScore = resultsJockey.Count > 0 ? (decimal)resultsJockey.Average(x => x) : 1;
 
-            System.IO.File.WriteAllText(@"_result.txt", horsieName + "|" + horseScore + "|" + fatherScore + "|" + motherScore + "|" + siblingsScore + "|" + resultsHorse.Count);
+            System.IO.File.WriteAllText(@"_result.txt", horsieName + "|" + horseScore + "|" + fatherScore + "|" + motherScore + "|" + siblingsScore + "|" + jockeyScore + "|" + resultsHorse.Count);
         }
 
         private static Dictionary<string, int> GetClassValues()
