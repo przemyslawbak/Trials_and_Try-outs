@@ -19,7 +19,10 @@ namespace List_Comparer
             string[] horseRows = File.ReadAllLines("results.txt");
 
 
-            string[] urlHorse = File.ReadAllLines("link.txt");
+            string[] urls = File.ReadAllLines("link.txt");
+            var urlHorse = urls[0];
+            var urlJockey = urls[1];
+            var urlTrainer = urls[2];
 
             var classValues = GetClassValues();
             int raceDistance = int.Parse(raceRows[0].Trim());
@@ -65,7 +68,9 @@ namespace List_Comparer
                 }
             }
 
-            string htmlHorse = GetHtml(urlHorse[0]);
+            string htmlHorse = GetHtml(urlHorse);
+            string htmlJockey = GetHtml(urlJockey);
+            string htmlTrainer = GetHtml(urlTrainer);
 
             var urlFather = htmlHorse.Split(new string[] { "<td><a href=\"" }, StringSplitOptions.None)[1].Split('"')[0];
             if (urlFather.Length > 10)
