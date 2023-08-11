@@ -22,7 +22,7 @@ namespace List_Comparer
             string[] urls = File.ReadAllLines("link.txt");
             var urlHorse = urls[0];
             var urlJockey = urls[1] + "&sezon=2022#wyniki_koni";
-            var urlTrainer = urls[2] + "&sezon=2020#wyniki_koni";
+            var urlTrainer = urls[2] + "&sezon=2022#wyniki_koni";
 
             var classValues = GetClassValues();
             int raceDistance = int.Parse(raceRows[0].Trim());
@@ -49,6 +49,8 @@ namespace List_Comparer
             List<decimal> siblingResults = new List<decimal>();
             List<decimal> resultsJockey = new List<decimal>();
             List<decimal> resultsTrainer = new List<decimal>();
+
+            Console.WriteLine("Computing horse score...");
 
             foreach (var row in horseRows)
             {
@@ -83,6 +85,8 @@ namespace List_Comparer
                 .Split(new string[] { "<tr>" }, StringSplitOptions.None);
 
             if (jockeyRows.Length > 0) jockeyRows = jockeyRows.Take(jockeyRows.Count() - 1).ToArray();
+
+            Console.WriteLine("Computing jockeys score...");
 
             foreach (var row in jockeyRows)
             {
@@ -131,6 +135,8 @@ namespace List_Comparer
                 .Split(new string[] { "<tr>" }, StringSplitOptions.None);
 
             if (trainerRows.Length > 0) trainerRows = trainerRows.Take(trainerRows.Count() - 1).ToArray();
+
+            Console.WriteLine("Computing trainers score...");
 
             foreach (var row in trainerRows)
             {
@@ -200,6 +206,8 @@ namespace List_Comparer
             var potomstwoPreFather = potomstwoHtmlFather.Split(new string[] { "<td style=\"text-align:center\"><a href=\"" }, StringSplitOptions.None).Select(x => x.Split('"')[0]).ToList();
             potomstwoPreFather.RemoveAt(0);
 
+            Console.WriteLine("Computing fathers score...");
+
             List<string> siblingsFatherUrls = new List<string>();
             for (int i = 0; i < potomstwoPreFather.Count;  i++)
             {
@@ -221,6 +229,8 @@ namespace List_Comparer
             var potomstwoHtmlMother = htmlMother.Split(new string[] { "<table class=\"table table-striped\" id=\"wykaz\">" }, StringSplitOptions.None)[2].Split(new string[] { "</tbody>" }, StringSplitOptions.None)[0];
             var potomstwoPreMother = potomstwoHtmlMother.Split(new string[] { "<td style=\"text-align:center\"><a href=\"" }, StringSplitOptions.None).Select(x => x.Split('"')[0]).ToList();
             potomstwoPreMother.RemoveAt(0);
+
+            Console.WriteLine("Computing mothers score...");
 
             List<string> siblingsMotherUrls = new List<string>();
             for (int i = 0; i < potomstwoPreMother.Count;  i++)
@@ -354,6 +364,8 @@ namespace List_Comparer
                 }
             }
 
+            Console.WriteLine("Computing siblings score...");
+
             foreach (var url in potomstwoUrlFather)
             {
                 var htmlSibling = GetHtml(url);
@@ -450,8 +462,10 @@ namespace List_Comparer
             var jockeyScore = resultsJockey.Count > 0 ? (decimal)resultsJockey.Average(x => x) : 1;
             var trenerScore = resultsTrainer.Count > 0 ? (decimal)resultsTrainer.Average(x => x) : 1;
 
-            System.IO.File.WriteAllText(@"_result.txt", horsieName + "|" + horseScore + "|" + fatherScore + "|" + motherScore + "|" + siblingsScore + "|" + jockeyScore + "|" trenerScore + "|" + resultsHorse.Count);
+            File.WriteAllText(@"_result.txt", horsieName + "|" + horseScore + "|" + fatherScore + "|" + motherScore + "|" + siblingsScore + "|" + jockeyScore + "|" + trenerScore + "|" + resultsHorse.Count);
         }
+
+        Console.WriteLine("Finito...");
 
         private static Dictionary<string, int> GetClassValues()
         {
