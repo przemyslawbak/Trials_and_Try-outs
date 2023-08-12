@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
@@ -45,15 +46,17 @@ namespace List_Comparer
             var calendarUrl = _service.GetCalendarUrl(apiKey, utcNowTimestamp, utcMonthBackTimestamp);
             var interval = Interval.Minute;
 
-            var socialTradingValue = await TriggerParallelSocialCollectAndComputeAsync(calendarUrl); //3.54
+            var calendarValues = await TriggerParallelCalendarCollectAndComputeAsync(calendarUrl); //3.54
 
             Console.ReadLine();
         }
 
-        private static async Task<decimal> TriggerParallelSocialCollectAndComputeAsync(string dataUrl)
+        private static async Task<decimal> TriggerParallelCalendarCollectAndComputeAsync(string dataUrl)
         {
             var json = await _scrapper.GetHtml(dataUrl);
             var data = JsonConvert.DeserializeObject<List<CalendarObject>>(json);
+            //var countries = data.GroupBy(x => x.CountryCode).Select(x => x.Key).ToList();
+            //System.IO.File.WriteAllLines("country_codes.txt", countries);
             var eventWeights = _service.GetEventWeights();
             var countryWeights = _service.GetCountryWeights();
             var impactWeights = _service.GetImpactWeights();
