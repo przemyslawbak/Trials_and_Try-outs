@@ -34,9 +34,9 @@ namespace List_Comparer
                 { "wałach", 0.975M },
             };
 
-            int horsieAge = int.Parse(horsieInfoRows[1].Split('(')[1].Split(' ')[0].ToLower().Trim());
-            string horsieSex = horsieInfoRows[1].Split(' ')[1].ToLower();
-            string horsieName = horsieInfoRows[0].Trim();
+            int horsieAge = int.Parse(horsieInfoRows[2].Split('(')[1].Split(' ')[0].ToLower().Trim());
+            string horsieSex = horsieInfoRows[2].Split(' ')[1].ToLower();
+            string horsieName = horsieInfoRows[1].Trim();
 
             decimal sexWeight = sexWeightDict[horsieSex];
             decimal ageWeight = 1 + (decimal)horsieAge * 0.05M;
@@ -463,9 +463,9 @@ namespace List_Comparer
             var trenerScore = resultsTrainer.Count > 0 ? (decimal)resultsTrainer.Average(x => x) : 1;
 
             File.WriteAllText(@"_result.txt", horsieName + "|" + horseScore + "|" + fatherScore + "|" + motherScore + "|" + siblingsScore + "|" + jockeyScore + "|" + trenerScore + "|" + resultsHorse.Count);
-        }
 
-        Console.WriteLine("Finito...");
+            Console.WriteLine("Finito...");
+        }
 
         private static Dictionary<string, int> GetClassValues()
         {
