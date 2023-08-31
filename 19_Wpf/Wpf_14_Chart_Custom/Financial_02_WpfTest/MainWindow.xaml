@@ -6,7 +6,27 @@
         xmlns:local="clr-namespace:Financial_02_WpfTest"
         mc:Ignorable="d"
         Title="MainWindow" Height="300" Width="300">
-    <StackPanel>
-        <Polyline Height="300" Width="300"  Name="_myPolyline" Stroke="{Binding ColorName}" StrokeThickness="1" Points="{Binding Points}" ></Polyline>
-    </StackPanel>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="70"/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="70"/>
+        </Grid.ColumnDefinitions>
+        <Polyline
+            Grid.Row="1"
+            Grid.Column="1"
+            Grid.ColumnSpan="4"
+            Name="_myPolyline"
+            Stroke="{Binding ColorName}"
+            StrokeThickness="1"
+            Points="{Binding Points}">
+        </Polyline>
+    </Grid>
 </Window>
