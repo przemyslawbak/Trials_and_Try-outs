@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Windows;
-using System.Windows.Documents;
 using System.Windows.Media;
 
 namespace Financial_02_WpfTest
@@ -12,6 +11,17 @@ namespace Financial_02_WpfTest
             InitializeComponent();
             DataContext = this;
             AddCustomPiontsAndColor();
+            this.SizeChanged += OnWindowSizeChanged;
+        }
+
+        public double NewWindowHeight { get; set; } = 0;
+        public double NewWindowWidth { get; set; } = 0;
+
+        //https://stackoverflow.com/a/22870433/12603542
+        protected void OnWindowSizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            NewWindowHeight = e.NewSize.Height;
+            NewWindowWidth = e.NewSize.Width;
         }
 
         private void AddCustomPiontsAndColor()
@@ -40,8 +50,6 @@ namespace Financial_02_WpfTest
 
             for (int i = 0; i < data.Count; i++)
             {
-                //todo: how to get actual window height and width?
-                //todo: fix lines row height
                 //todo: process Value, depending on window height
                 //todo: process X depending on window width
 
