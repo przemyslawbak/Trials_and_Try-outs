@@ -19,14 +19,17 @@
             <ColumnDefinition/>
             <ColumnDefinition Width="70"/>
         </Grid.ColumnDefinitions>
-        <Polyline
-            Grid.Row="1"
-            Grid.Column="1"
-            Grid.ColumnSpan="4"
-            Name="_myPolyline"
-            Stroke="{Binding ColorName}"
-            StrokeThickness="1"
-            Points="{Binding Points}">
-        </Polyline>
+        <Canvas
+                    Grid.Row="1"
+                    Grid.Column="1"
+                    Grid.ColumnSpan="4">
+            <Canvas.Children>
+                <Polyline
+                    Stroke="{Binding ColorName}"
+                    StrokeThickness="1"
+                    Points="{Binding Points}">
+                </Polyline>
+            </Canvas.Children>
+        </Canvas>
     </Grid>
 </Window>
