@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Shapes;
 
@@ -14,24 +13,22 @@ namespace Financial_02_WpfTest
             InitializeComponent();
             DataContext = this;
             this.SizeChanged += OnWindowSizeChanged;
-            chart_canvas.Width = this.Width - 140;
-            chart_canvas.Height = this.Height/2;
-            Color c = new Color() { ScA = 1, ScR = 1, ScG = 0, ScB = 0 };
-            var line = new Line() { X1 = 0, Y1 = 20, X2 = chart_canvas.Width, Y2 = 20, Stroke = new SolidColorBrush(c), StrokeThickness = 2.0 };
-            chart_canvas.Children.Add(line);
         }
 
         public double NewWindowHeight { get; set; } = 0;
         public double NewWindowWidth { get; set; } = 0;
-        public PointCollection Points { get; set; } = new PointCollection();
         public string ColorName { get; set; }
+        public int XPrev { get; set; } = 0;
+        public int YPrev { get; set; } = 100;
 
         //https://stackoverflow.com/a/22870433/12603542
         protected void OnWindowSizeChanged(object sender, SizeChangedEventArgs e)
         {
-            NewWindowHeight = e.NewSize.Height;
-            NewWindowWidth = e.NewSize.Width;
-            Points.Clear();
+            XPrev = 0;
+            YPrev = 100;
+            chart_canvas.Width = e.NewSize.Width - 140;
+            chart_canvas.Height = e.NewSize.Height / 2.5;
+            chart_canvas.Children.Clear();
             AddCustomPiontsAndColor();
         }
 
@@ -61,33 +58,40 @@ namespace Financial_02_WpfTest
 
             for (int i = 0; i < data.Count; i++)
             {
-                //todo: process Value, depending on window height
-                //todo: process X depending on window width
-
-                Point point = ComputePointCoordinates(data[i].Value, i, data);
-
-                Points.Add(point);
+                ComputePointCoordinates(data[i].Value, i, data);
             }
 
             ColorName = "Red";
         }
 
-        private Point ComputePointCoordinates(int value, int i, List<SomeDataModel> data)
+        private void ComputePointCoordinates(int value, int i, List<SomeDataModel> data)
         {
             var maxVal = data.Max(d => d.Value);
             var minVal = data.Min(d => d.Value);
+            var valDiff = maxVal - minVal;
+
+
             var dataQty = data.Count;
 
-            var containerHeight = NewWindowHeight / 2;
-            var containerWidth = NewWindowWidth;
+            var entityWidth = chart_canvas.Width / dataQty;
 
-            var entityWidth = containerWidth / dataQty;
-            var entityValue = 0; //todo: compute Y
-
+            int y = 0;
             int x = (int)entityWidth * i;
-            int y = 100; //todo: compute Y
+            if (valDiff > chart_canvas.Height)
+            {
+                var change = valDiff - chart_canvas.Height;
+                y = value - minVal - (int)change;
+            }
+            else
+            {
+                y = value - minVal;
+            }
 
-            return new Point(x, y);
+            Color c = new Color() { ScA = 1, ScR = 1, ScG = 0, ScB = 0 };
+            var line = new Line() { X1 = XPrev, Y1 = YPrev, X2 = x, Y2 = y, Stroke = new SolidColorBrush(c), StrokeThickness = 1.0 };
+            chart_canvas.Children.Add(line);
+            XPrev = x;
+            YPrev = y;
         }
     }
 }
