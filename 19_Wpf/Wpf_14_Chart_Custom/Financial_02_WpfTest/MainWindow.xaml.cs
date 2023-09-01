@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Windows;
 using System.Windows.Media;
 
@@ -10,18 +11,21 @@ namespace Financial_02_WpfTest
         {
             InitializeComponent();
             DataContext = this;
-            AddCustomPiontsAndColor();
             this.SizeChanged += OnWindowSizeChanged;
         }
 
         public double NewWindowHeight { get; set; } = 0;
         public double NewWindowWidth { get; set; } = 0;
+        public PointCollection Points { get; set; } = new PointCollection();
+        public string ColorName { get; set; }
 
         //https://stackoverflow.com/a/22870433/12603542
         protected void OnWindowSizeChanged(object sender, SizeChangedEventArgs e)
         {
             NewWindowHeight = e.NewSize.Height;
             NewWindowWidth = e.NewSize.Width;
+            Points.Clear();
+            AddCustomPiontsAndColor();
         }
 
         private void AddCustomPiontsAndColor()
@@ -53,13 +57,30 @@ namespace Financial_02_WpfTest
                 //todo: process Value, depending on window height
                 //todo: process X depending on window width
 
-                Points.Add(new Point(i, data[i].Value));
+                Point point = ComputePointCoordinates(data[i].Value, i, data);
+
+                Points.Add(point);
             }
 
             ColorName = "Red";
         }
 
-        public PointCollection Points { get; set; } = new PointCollection();
-        public string ColorName { get; set; }
+        private Point ComputePointCoordinates(int value, int i, List<SomeDataModel> data)
+        {
+            var maxVal = data.Max(d => d.Value);
+            var minVal = data.Min(d => d.Value);
+            var dataQty = data.Count;
+
+            var containerHeight = NewWindowHeight / 2;
+            var containerWidth = NewWindowWidth;
+
+            var entityWidth = containerWidth / dataQty;
+            var entityValue = 0; //todo: compute Y
+
+            int x = (int)entityWidth * i;
+            int y = 100; //todo: compute Y
+
+            return new Point(x, y);
+        }
     }
 }
