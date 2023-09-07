@@ -19,6 +19,12 @@
             <ColumnDefinition/>
             <ColumnDefinition Width="70"/>
         </Grid.ColumnDefinitions>
+        <Button
+            Grid.Row="0"
+            Grid.Column="1"
+            Grid.ColumnSpan="4">
+            
+        </Button>
         <Canvas
             Grid.Row="1"
             Grid.Column="1"

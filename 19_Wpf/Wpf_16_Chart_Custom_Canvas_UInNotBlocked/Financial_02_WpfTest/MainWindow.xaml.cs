@@ -1,6 +1,10 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Shapes;
 
@@ -15,24 +19,25 @@ namespace Financial_02_WpfTest
             this.SizeChanged += OnWindowSizeChanged;
         }
 
-        public double NewWindowHeight { get; set; } = 0;
-        public double NewWindowWidth { get; set; } = 0;
         public string ColorName { get; set; }
         public int XPrev { get; set; } = 0;
         public int YPrev { get; set; } = 100;
 
-        //https://stackoverflow.com/a/22870433/12603542
-        protected void OnWindowSizeChanged(object sender, SizeChangedEventArgs e)
+
+        protected async void OnWindowSizeChanged(object sender, SizeChangedEventArgs e)
         {
             XPrev = 0;
             YPrev = 100;
             chart_canvas.Width = e.NewSize.Width - 140;
             chart_canvas.Height = e.NewSize.Height / 2.5;
             chart_canvas.Children.Clear();
-            AddCustomPiontsAndColor();
+
+            await AddCustomPiontsAndColorAsync();
+
+            //todo: https://stackoverflow.com/questions/4253088/updating-gui-wpf-using-a-different-thread
         }
 
-        public long TimeConsumingBlockingUi(int n)
+        public void TimeConsumingBlockingUi(int n)
         {
             int count = 0;
             long a = 2;
@@ -55,13 +60,10 @@ namespace Financial_02_WpfTest
                 }
                 a++;
             }
-            return (--a);
         }
 
-        private void AddCustomPiontsAndColor()
+        private async Task AddCustomPiontsAndColorAsync()
         {
-            long nthPrime = TimeConsumingBlockingUi(200000);
-
             var data = new List<SomeDataModel>()
             {
                 new SomeDataModel() { Value = 3584, Signal = 0 },
@@ -84,16 +86,39 @@ namespace Financial_02_WpfTest
                 new SomeDataModel() { Value = 3485, Signal = 0 },
             };
 
+            var coordinatesList = new List<CoordinatesModel>();
+
             for (int i = 0; i < data.Count; i++)
             {
-                ComputePointCoordinates(data[i].Value, i, data);
+                var width = chart_canvas.Width;
+                var height = chart_canvas.Height;
+
+                var coordinates = await Task.Run(() => ComputePointCoordinates(data[i].Value, i, data, width, height));
+                coordinatesList.Add(coordinates);
+
+            }
+
+            var resultCoordinates = coordinatesList.OrderBy(x => x.X).ToList();
+
+            chart_canvas.Children.Clear();
+
+            foreach (var coordinate in resultCoordinates)
+            {
+                Color c = new Color() { ScA = 1, ScR = 1, ScG = 0, ScB = 0 };
+                var line = new Line() { X1 = XPrev, Y1 = YPrev, X2 = coordinate.X, Y2 = coordinate.Y, Stroke = new SolidColorBrush(c), StrokeThickness = 1.0 };
+                chart_canvas.Children.Add(line);
+                XPrev = coordinate.X;
+                YPrev = coordinate.Y;
             }
 
             ColorName = "Red";
         }
 
-        private void ComputePointCoordinates(int value, int i, List<SomeDataModel> data)
+        private CoordinatesModel ComputePointCoordinates(int value, int i, List<SomeDataModel> data, double width, double height)
         {
+            TimeConsumingBlockingUi(10000);
+
+            var coordinates = new CoordinatesModel();
             var maxVal = data.Max(d => d.Value);
             var minVal = data.Min(d => d.Value);
             var valDiff = maxVal - minVal;
@@ -101,25 +126,20 @@ namespace Financial_02_WpfTest
 
             var dataQty = data.Count;
 
-            var entityWidth = chart_canvas.Width / dataQty;
+            var entityWidth = width / dataQty;
 
-            int y = 0;
-            int x = (int)entityWidth * i;
-            if (valDiff > chart_canvas.Height)
+            coordinates.X = (int)entityWidth * i;
+            if (valDiff > height)
             {
-                var change = valDiff - chart_canvas.Height;
-                y = value - minVal - (int)change;
+                var change = valDiff - height;
+                coordinates.Y = value - minVal - (int)change;
             }
             else
             {
-                y = value - minVal;
+                coordinates.Y = value - minVal;
             }
 
-            Color c = new Color() { ScA = 1, ScR = 1, ScG = 0, ScB = 0 };
-            var line = new Line() { X1 = XPrev, Y1 = YPrev, X2 = x, Y2 = y, Stroke = new SolidColorBrush(c), StrokeThickness = 1.0 };
-            chart_canvas.Children.Add(line);
-            XPrev = x;
-            YPrev = y;
+            return coordinates;
         }
     }
 }
