@@ -1,6 +1,6 @@
 ﻿namespace Financial_02_WpfTest
 {
-    internal class Points
+    public class Points
     {
         public int X { get; set; }
         public int Y { get; set; }

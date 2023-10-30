@@ -46,6 +46,17 @@ namespace Financial_02_WpfTest
             }
         }
 
+        private ObservableCollection<Points> _pointsCollection = new ObservableCollection<Points>();
+        public ObservableCollection<Points> PointsCollection
+        {
+            get => _pointsCollection;
+            set
+            {
+                _pointsCollection = value;
+                OnPropertyChanged();
+            }
+        }
+
 
         protected async void OnWindowSizeChanged(object sender, SizeChangedEventArgs e)
         {
@@ -53,7 +64,7 @@ namespace Financial_02_WpfTest
             YPrev = 100;
             ChartCanvasWidth = e.NewSize.Width - 140;
             ChartCanvasHeight = e.NewSize.Height / 2.5;
-            chart_canvas.Children.Clear();
+            //chart_canvas.Children.Clear();
 
             await AddCustomPiontsAndColorAsync();
 
@@ -126,13 +137,13 @@ namespace Financial_02_WpfTest
 
             var resultCoordinates = coordinatesList.OrderBy(x => x.X).ToList();
 
-            chart_canvas.Children.Clear();
+            //chart_canvas.Children.Clear();
 
             foreach (var coordinate in resultCoordinates)
             {
                 Color c = new Color() { ScA = 1, ScR = 1, ScG = 0, ScB = 0 };
                 var line = new Line() { X1 = XPrev, Y1 = YPrev, X2 = coordinate.X, Y2 = coordinate.Y, Stroke = new SolidColorBrush(c), StrokeThickness = 1.0 };
-                chart_canvas.Children.Add(line);
+                //chart_canvas.Children.Add(line);
                 XPrev = coordinate.X;
                 YPrev = coordinate.Y;
             }

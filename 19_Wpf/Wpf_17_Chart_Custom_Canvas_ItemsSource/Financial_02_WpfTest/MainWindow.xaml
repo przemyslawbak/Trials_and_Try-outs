@@ -25,13 +25,29 @@
             Grid.ColumnSpan="4">
             
         </Button>
-        <Canvas
-            Grid.Row="1"
-            Grid.Column="1"
-            Grid.ColumnSpan="4"
-            Name="chart_canvas"
-            Width="{Binding ChartCanvasWidth, Mode=TwoWay}"
-            Height="{Binding ChartCanvasHeight, Mode=TwoWay}">
-        </Canvas>
+        <ItemsControl ItemsSource="{Binding PointsCollection}">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <Canvas
+                        Grid.Row="1"
+                        Grid.Column="1"
+                        Grid.ColumnSpan="4"
+                        Name="chart_canvas"
+                        Width="{Binding ChartCanvasWidth, Mode=TwoWay}"
+                        Height="{Binding ChartCanvasHeight, Mode=TwoWay}"/>
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemContainerStyle>
+                <Style>
+                    <Setter Property="Canvas.Left" Value="{Binding X}"/>
+                    <Setter Property="Canvas.Top" Value="{Binding Y}"/>
+                </Style>
+            </ItemsControl.ItemContainerStyle>
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <Border BorderBrush="Red" BorderThickness="1" Width="{Binding Width}" Height="{Binding Height}"/>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
     </Grid>
 </Window>
