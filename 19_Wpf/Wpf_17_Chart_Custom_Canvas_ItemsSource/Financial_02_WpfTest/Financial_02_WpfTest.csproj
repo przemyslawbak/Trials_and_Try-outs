@@ -64,6 +64,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="CoordinatesModel.cs" />
+    <Compile Include="MyLine.cs" />
     <Compile Include="Points.cs" />
     <Compile Include="SomeDataModel.cs" />
     <Compile Include="MainWindow.xaml.cs">

@@ -10,7 +10,7 @@ using System.Windows.Shapes;
 
 namespace Financial_02_WpfTest
 {
-    //test: https://stackoverflow.com/questions/5913792/wpf-canvas-how-to-add-children-dynamically-with-mvvm-code-behind
+    //test: https://stackoverflow.com/a/23564452
     public partial class MainWindow : Window, INotifyPropertyChanged
     {
         public MainWindow()
@@ -56,7 +56,7 @@ namespace Financial_02_WpfTest
                 OnPropertyChanged();
             }
         }
-
+        public ObservableCollection<MyLine> Lines { get; set; } = new ObservableCollection<MyLine>();
 
         protected async void OnWindowSizeChanged(object sender, SizeChangedEventArgs e)
         {
@@ -139,10 +139,14 @@ namespace Financial_02_WpfTest
 
             //chart_canvas.Children.Clear();
 
+            Lines.Clear();
+
             foreach (var coordinate in resultCoordinates)
             {
                 Color c = new Color() { ScA = 1, ScR = 1, ScG = 0, ScB = 0 };
                 var line = new Line() { X1 = XPrev, Y1 = YPrev, X2 = coordinate.X, Y2 = coordinate.Y, Stroke = new SolidColorBrush(c), StrokeThickness = 1.0 };
+
+                Lines.Add(new MyLine() { X1 = XPrev, X2 = coordinate.X, Y1 = YPrev, Y2 = coordinate.Y });
                 //chart_canvas.Children.Add(line);
                 XPrev = coordinate.X;
                 YPrev = coordinate.Y;
