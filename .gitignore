@@ -423,3 +423,4 @@ MigrationBackup/
 /29_Financial/Trial_07_OHLCV_Spike/List_Comparer/Program.cs
 /29_Financial/Trial_10_Calendar/List_Comparer/KeyLocker.cs
 /29_Financial/Trial_10_Calendar/calendar.xlsx
+/25_Other/Other_15_CreateDataTableWithLINQ/Sample/UrlLocker.cs
