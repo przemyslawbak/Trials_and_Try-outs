@@ -13,6 +13,7 @@ namespace Activator
         {
             RunProgram().Wait();
             Console.WriteLine("finito");
+            Console.ReadKey();
         }
 
         private static async Task RunProgram()
@@ -22,6 +23,7 @@ namespace Activator
             var dataFromApi = GetSignalsObjectFromJson(jsonString);
             dataFromApi = RemoveDuplicatedTimeStamps(dataFromApi);
             dataFromApi = ProcessMissingDataFromApi(dataFromApi);
+            var xxx = ProcessMissingDataFromApiUPDATED(dataFromApi);
             DataTable dataTable = await Task.Run(() => CreateDataTableWithTrends(dataFromApi, _intervals));
         }
 
@@ -122,28 +124,25 @@ namespace Activator
             return dt;
         }
 
-        private static List<DataResultModel> ProcessMissingDataFromApi(List<DataResultModel> dataList) //TODO: optimization
+        private static List<DataResultModel> ProcessMissingDataFromApi(List<DataResultModel> dataList)
         {
+            var watch = System.Diagnostics.Stopwatch.StartNew();
+
             var dataTypes = dataList.GroupBy(x => x.DataType).Select(x => x.Key).ToList();
             var timeStampsSpx = dataList.Where(x => x.DataType == "Index_SPXINDEX").Select(x => x.UtcTimeStamp).ToList();
 
             foreach (var dataTypeName in dataTypes)
             {
                 var dataForDataType = dataList
-                    .Where(x => x.DataType == dataTypeName)
-                    .ToList();
+                    .Where(x => x.DataType == dataTypeName);
                 var dataTypeTimeStamps = dataForDataType
-                    .Select(x => x.UtcTimeStamp)
-                    .ToList();
+                    .Select(x => x.UtcTimeStamp);
                 var minutesNotCoveredInDataType = timeStampsSpx
                     .Where(x => !dataTypeTimeStamps.Contains(x))
-                    .ToList();
+                    .OrderBy(x => x);
 
                 foreach (var missingimeStamp in minutesNotCoveredInDataType)
                 {
-                    var ts = timeStampsSpx
-                        .Where(x => x == missingimeStamp)
-                        .FirstOrDefault();
                     var nearestDiff = dataTypeTimeStamps
                         .Min(date => Math.Abs((date - missingimeStamp).Ticks));
                     var nearestDateTime = dataTypeTimeStamps
@@ -177,6 +176,62 @@ namespace Activator
             }
 
             toReturn = toReturn.OrderBy(x => x.UtcTimeStamp).Distinct().ToList(); //ascending
+
+            watch.Stop();
+            var elapsedMs = watch.ElapsedMilliseconds;
+            Console.WriteLine("ORYGINAL: (ms) " + elapsedMs);
+
+            return toReturn;
+        }
+        
+        private static List<DataResultModel> ProcessMissingDataFromApiUPDATED(List<DataResultModel> dataList) //TODO: optimization
+        {
+            var watch = System.Diagnostics.Stopwatch.StartNew();
+
+            var dataTypes = dataList.GroupBy(x => x.DataType).Select(x => x.Key).ToList();
+            var timeStampsSpx = dataList.Where(x => x.DataType == "Index_SPXINDEX").Select(x => x.UtcTimeStamp).ToList();
+
+            foreach (var dataTypeName in dataTypes)
+            {
+
+                var dataTypeTimeStamps = dataList
+                    .Where(x => x.DataType == dataTypeName)
+                    .Select(x => x.UtcTimeStamp);
+                var minutesNotCoveredInDataType = timeStampsSpx
+                    .Where(x => !dataTypeTimeStamps.Contains(x))
+                    .OrderBy(x => x);
+
+                var ranged = minutesNotCoveredInDataType.Select(x => new DataResultModel()
+                {
+                    UtcTimeStamp = x,
+                    DataGuid = new Guid(),
+                    DataType = dataTypeName,
+                    IndexName = dataList
+                    .Select(y => y.IndexName)
+                    .First(),
+                    Release = false,
+                    ResultValue = dataList
+                    .Where(y => y.DataType == dataTypeName)
+                    .Where(y => y.UtcTimeStamp < x)
+                    .Select(z => z.ResultValue).Last()
+                });
+
+                dataList.AddRange(ranged);
+            }
+
+            var toReturn = new List<DataResultModel>();
+
+            foreach (var dataTypeName in dataTypes)
+            {
+                var toAdd = dataList.Where(x => x.DataType == dataTypeName).Where(x => timeStampsSpx.Contains(x.UtcTimeStamp)).ToList();
+                toReturn.AddRange(toAdd);
+            }
+
+            toReturn = toReturn.OrderBy(x => x.UtcTimeStamp).Distinct().ToList(); //ascending
+
+            watch.Stop();
+            var elapsedMs = watch.ElapsedMilliseconds;
+            Console.WriteLine("UPDATED: (ms) " + elapsedMs);
 
             return toReturn;
         }
