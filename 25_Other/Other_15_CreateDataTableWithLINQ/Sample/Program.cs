@@ -32,13 +32,14 @@ namespace Activator
             xxx = ProcessMissingDataFromApiUPDATED(dataFromApi);
             dataFromApi = ProcessMissingDataFromApi(dataFromApi);
             xxx = ProcessMissingDataFromApiUPDATED(dataFromApi);*/
-            DataTable dataTable = await Task.Run(() => CreateDataTableWithTrends(dataFromApi, _intervals));
+            DataTable dataTableORIGIN = await Task.Run(() => CreateDataTableWithTrends(dataFromApi, _intervals));
+            DataTable dataTableUPDATED = await Task.Run(() => CreateDataTableWithTrendsUPDATED(dataFromApi, _intervals));
 
             Console.WriteLine("FINAL ORIGINAL AVER: " + _resOriginal.Average());
             Console.WriteLine("FINAL UPDATED AVER: " + _resUpdated.Average());
         }
 
-        private static DataTable CreateDataTableWithTrends(List<DataResultModel> dataFromApi, int[] intervals) //TODO: optimization
+        private static DataTable CreateDataTableWithTrends(List<DataResultModel> dataFromApi, int[] intervals)
         {
             var watch = System.Diagnostics.Stopwatch.StartNew();
 
@@ -136,7 +137,107 @@ namespace Activator
 
             watch.Stop();
             var elapsedMs = watch.ElapsedMilliseconds;
-            Console.WriteLine("DATATABLE: (ms) " + elapsedMs);
+            Console.WriteLine("DATATABLE ORIGINAL: (ms) " + elapsedMs);
+
+            return dt;
+        }
+
+        private static DataTable CreateDataTableWithTrendsUPDATED(List<DataResultModel> dataFromApi, int[] intervals) //TODO: optimization
+        {
+            var watch = System.Diagnostics.Stopwatch.StartNew();
+
+            var dt = new DataTable();
+
+            if (dataFromApi != null)
+            {
+
+                var dataTypes = dataFromApi.GroupBy(x => x.DataType).Select(x => x.Key).ToList();
+                var timestamps = dataFromApi.Where(x => x.DataType == "Index_SPXINDEX").Select(x => x.UtcTimeStamp).ToList();
+
+                //add columns
+                dt.Columns.Add("UtcTimeStamp", typeof(DateTime));
+
+                foreach (var dataType in dataTypes)
+                {
+                    dt.Columns.Add(dataType, typeof(decimal));
+
+                    foreach (var interval in _intervals)
+                    {
+                        dt.Columns.Add(dataType + "_" + interval + "_mean", typeof(int));
+                        dt.Columns.Add(dataType + "_" + interval + "_trend", typeof(int));
+                    }
+                }
+
+                //add existing data
+                foreach (var timeStamp in timestamps)
+                {
+                    DataRow dr = dt.NewRow();
+                    dr["UtcTimeStamp"] = timeStamp;
+
+                    dt.Rows.Add(dr);
+
+                    foreach (var dataType in dataTypes)
+                    {
+                        dr[dataType] = dataFromApi.Where(x => x.DataType == dataType && x.UtcTimeStamp == timeStamp).Select(x => x.ResultValue).First();
+                    }
+                }
+
+                //compute and add means and trends
+                foreach (var dataType in dataTypes)
+                {
+                    foreach (var interval in _intervals)
+                    {
+                        var meanColName = dataType + "_" + interval + "_mean";
+                        var trendColName = dataType + "_" + interval + "_trend";
+
+                        decimal lastVal = 0;
+
+                        for (int i = dt.Rows.Count - 1; i >= 0; i--)
+                        {
+                            if (i >= interval)
+                            {
+                                decimal sumOfLastN = 0;
+                                for (int j = 0; j < interval; j++)
+                                {
+                                    sumOfLastN = sumOfLastN + (decimal)dt.Rows[i - j][dataType];
+                                }
+
+                                dt.Rows[i][meanColName] = sumOfLastN / interval;
+                                lastVal = sumOfLastN / interval;
+                            }
+                            else
+                            {
+                                dt.Rows[i][meanColName] = lastVal;
+                            }
+
+                            if (i >= 1)
+                            {
+                                var direction = (decimal)dt.Rows[i][meanColName] - (decimal)dt.Rows[i - 1][meanColName];
+
+                                if (direction >= 0)
+                                {
+                                    dt.Rows[i][trendColName] = 1;
+                                }
+                                else
+                                {
+                                    dt.Rows[i][trendColName] = -1;
+                                }
+                            }
+                            else
+                            {
+                                dt.Rows[i][trendColName] = 1;
+                            }
+                        }
+
+                        var meanVals = dt.AsEnumerable().Select(x => x[meanColName]).ToList();
+                        var trendVals = dt.AsEnumerable().Select(x => x[trendColName]).ToList();
+                    }
+                }
+            }
+
+            watch.Stop();
+            var elapsedMs = watch.ElapsedMilliseconds;
+            Console.WriteLine("DATATABLE UPDATED: (ms) " + elapsedMs);
 
             return dt;
         }
