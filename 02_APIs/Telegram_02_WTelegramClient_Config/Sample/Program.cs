@@ -10,11 +10,6 @@ internal class Program
         var config = new ConfigProvider();
         client = new WTelegram.Client(config.GetApiId(), config.GetApiHash()); // this constructor doesn't need a Config method
         await DoLogin(config.GetPhoneNumber()); // initial call with user's phone_number
-
-        var myself = await client.LoginUserIfNeeded();
-        Console.WriteLine($"We are logged-in as {myself} (id {myself.id})");
-        Console.WriteLine("Press any key...");
-        Console.ReadKey();
     }
 
     private static async Task DoLogin(string loginInfo) // (add this method to your code)
