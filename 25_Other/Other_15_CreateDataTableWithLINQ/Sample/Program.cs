@@ -32,14 +32,13 @@ namespace Activator
             xxx = ProcessMissingDataFromApiUPDATED(dataFromApi);
             dataFromApi = ProcessMissingDataFromApi(dataFromApi);
             xxx = ProcessMissingDataFromApiUPDATED(dataFromApi);*/
-            DataTable dataTableORIGIN = await Task.Run(() => CreateDataTableWithTrends(dataFromApi, _intervals));
-            DataTable dataTableUPDATED = await Task.Run(() => CreateDataTableWithTrendsUPDATED(dataFromApi, _intervals));
+            DataTable dataTable = await Task.Run(() => CreateDataTableWithTrends(dataFromApi, _intervals));
 
             Console.WriteLine("FINAL ORIGINAL AVER: " + _resOriginal.Average());
             Console.WriteLine("FINAL UPDATED AVER: " + _resUpdated.Average());
         }
 
-        private static DataTable CreateDataTableWithTrends(List<DataResultModel> dataFromApi, int[] intervals)
+        private static DataTable CreateDataTableWithTrends(List<DataResultModel> dataFromApi, int[] intervals) //TODO: optimization
         {
             var watch = System.Diagnostics.Stopwatch.StartNew();
 
@@ -137,11 +136,12 @@ namespace Activator
 
             watch.Stop();
             var elapsedMs = watch.ElapsedMilliseconds;
-            Console.WriteLine("DATATABLE ORIGINAL: (ms) " + elapsedMs);
+            Console.WriteLine("DATATABLE: (ms) " + elapsedMs);
 
             return dt;
         }
 
+        //https://learn.microsoft.com/en-us/dotnet/framework/data/adonet/creating-a-datatable-from-a-query-linq-to-dataset
         private static DataTable CreateDataTableWithTrendsUPDATED(List<DataResultModel> dataFromApi, int[] intervals) //TODO: optimization
         {
             var watch = System.Diagnostics.Stopwatch.StartNew();
@@ -163,8 +163,8 @@ namespace Activator
 
                     foreach (var interval in _intervals)
                     {
-                        dt.Columns.Add(dataType + "_" + interval + "_mean", typeof(int));
-                        dt.Columns.Add(dataType + "_" + interval + "_trend", typeof(int));
+                        dt.Columns.Add(dataType + "_" + interval + "_mean", typeof(decimal));
+                        dt.Columns.Add(dataType + "_" + interval + "_trend", typeof(decimal));
                     }
                 }
 
@@ -209,7 +209,10 @@ namespace Activator
                             {
                                 dt.Rows[i][meanColName] = lastVal;
                             }
+                        }
 
+                        for (int i = dt.Rows.Count - 1; i >= 0; i--)
+                        {
                             if (i >= 1)
                             {
                                 var direction = (decimal)dt.Rows[i][meanColName] - (decimal)dt.Rows[i - 1][meanColName];
@@ -237,7 +240,7 @@ namespace Activator
 
             watch.Stop();
             var elapsedMs = watch.ElapsedMilliseconds;
-            Console.WriteLine("DATATABLE UPDATED: (ms) " + elapsedMs);
+            Console.WriteLine("DATATABLE: (ms) " + elapsedMs);
 
             return dt;
         }
