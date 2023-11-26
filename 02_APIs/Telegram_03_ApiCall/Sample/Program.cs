@@ -45,7 +45,7 @@ internal class Program
         */
 
         // plain text
-        await client.SendMessageAsync(resolved, "testing 123");
+        await client.SendMessageAsync(resolved, "TEST MESSAGE");
         Console.WriteLine("sent test message");
     }
 
