@@ -13,12 +13,10 @@ internal class Program
         var resolved = await client.Contacts_ResolveUsername(config.GetUserName()); // username without the @
 
         /*
-
         // HTML-formatted text:
-        var text = $"Hello <u>dear <b>{HtmlText.Escape(client.User.first_name)}</b></u>\n" +
-                   "Enjoy this <code>userbot</code> written with <a href=\"https://github.com/wiz0u/WTelegramClient\">WTelegramClient</a>";
+        var text = $"<b>BOLD</b>, <i>ITALIC</i>, <a href=\"https://github.com/wiz0u/WTelegramClient\">LINK</a>, <code>CODE</code>";
         var entities = client.HtmlToEntities(ref text);
-        var sent = await client.SendMessageAsync(InputPeer.Self, text, entities: entities);
+        var sent = await client.SendMessageAsync(resolved, text, entities: entities);
         // if you need to convert a sent/received Message to HTML: (easier to store)
         text = client.EntitiesToHtml(sent.message, sent.entities);
         Console.WriteLine("sent test HTML message");
@@ -27,7 +25,7 @@ internal class Program
         var text2 = $"Hello __dear *{Markdown.Escape(client.User.first_name)}*__\n" +
                     "Enjoy this `userbot` written with [WTelegramClient](https://github.com/wiz0u/WTelegramClient)";
         var entities2 = client.MarkdownToEntities(ref text2);
-        var sent2 = await client.SendMessageAsync(InputPeer.Self, text2, entities: entities2);
+        var sent2 = await client.SendMessageAsync(resolved, text2, entities: entities2);
         // if you need to convert a sent/received Message to Markdown: (easier to store)
         text2 = client.EntitiesToMarkdown(sent2.message, sent2.entities);
         Console.WriteLine("sent test Markdown-style message");
@@ -42,11 +40,103 @@ internal class Program
         if (contacts.imported.Length > 0)
             await client.SendMessageAsync(contacts.users[contacts.imported[0].user_id], "Helloooooooooooooo!");
         Console.WriteLine("sent test by phone number");
-        */
-
         // plain text
         await client.SendMessageAsync(resolved, "TEST MESSAGE");
         Console.WriteLine("sent test message");
+
+        */
+
+        var emojis = GetEmojis();
+
+        // plain text
+        await client.SendMessageAsync(resolved, string.Join(", ", emojis) + " test");
+        Console.WriteLine("sent test message");
+
+
+
+    }
+    public static string[] GetEmojis()
+    {
+        return new string[]
+            {
+                "♋",
+                "⏫",
+                "🌄",
+                "🌈",
+                "🌋",
+                "🌌",
+                "🎆",
+                "🎡",
+                "🎠",
+                "🎰",
+                "👔",
+                "💌",
+                "💟",
+                "💩",
+                "💰",
+                "💼",
+                "📊",
+                "🗻",
+                "🗽",
+                "✅",
+                "🚹",
+                "🚺",
+                "🚼",
+                "🅰",
+                "🅱",
+                "🅾",
+                "🅿",
+                "🆚",
+                "🈯",
+                "®",
+                "⚠",
+                "⛔",
+                "❌",
+                "😜",
+                "😡",
+                "🙈",
+                "✂",
+                "✈",
+                "❄",
+                "🚀",
+                "🚥",
+                "🚧",
+                "🚩",
+                "🚻",
+                "🇩🇪",
+                "🇵🇱",
+                "🇬🇧",
+                "⌛",
+                "☀",
+                "☁",
+                "☎",
+                "☔",
+                "♦",
+                "♨",
+                "♻",
+                "⚡",
+                "⚓",
+                "⚽",
+                "⛄",
+                "🃏",
+                "🌵",
+                "🍁",
+                "🍄",
+                "🍔",
+                "🍺",
+                "🎅",
+                "🎎",
+                "🎨",
+                "🏊",
+                "🏡",
+                "🐌",
+                "🐯",
+                "🐸",
+                "👑",
+                "👹",
+                "👾",
+                "💥",
+            };
     }
 
     private static async Task DoLogin(string loginInfo) // (add this method to your code)
