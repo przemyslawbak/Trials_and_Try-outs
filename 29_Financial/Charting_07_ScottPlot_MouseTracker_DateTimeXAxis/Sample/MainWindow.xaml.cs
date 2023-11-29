@@ -20,7 +20,7 @@ namespace Sample
         double[] _dataSetY = Array.Empty<double>();
         double[] _positions = Array.Empty<double>();
 
-        public MainWindow() //https://scottplot.net/faq/datetime/
+        public MainWindow()
         {
             InitializeComponent();
             _dataSetY = GetSomeData().Select(x => x.Value).ToArray();
