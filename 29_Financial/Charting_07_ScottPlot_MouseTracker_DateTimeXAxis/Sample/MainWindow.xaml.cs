@@ -1,12 +1,11 @@
 ﻿using ScottPlot;
 using ScottPlot.Plottable;
-using ScottPlot.Renderable;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Windows;
 using System.Windows.Input;
-using static ScottPlot.Plottable.PopulationPlot;
 
 namespace Sample
 {
@@ -16,21 +15,26 @@ namespace Sample
     public partial class MainWindow : Window
     {
         Crosshair Crosshair;
+        string[] DataSetX = new string[] { };
+        double[] DataSetY = new double[] { };
+        double[] Positions = new double[] { };
 
         public MainWindow() //https://scottplot.net/faq/datetime/
         {
-            InitializeComponent();
-            var dataSetY = GetSomeData().Select(x => x.Value).ToArray();
-            var dataSetX = GetSomeData().Select(x => x.Time.ToString("dd-MM HH:mm")).ToArray();
-            double[] positions = DataGen.Consecutive(dataSetX.Length);
-            wpfPlot1.Plot.AddSignalXY(positions, dataSetY);
+            //todo: TickDensity
 
-            string[] labels = dataSetX;
-            wpfPlot1.Plot.XAxis.ManualTickPositions(positions, labels);
+            InitializeComponent();
+            DataSetY = GetSomeData().Select(x => x.Value).ToArray();
+            DataSetX = GetSomeData().Select(x => x.Time.ToString("dd-MM HH:mm")).ToArray();
+            Positions = DataGen.Consecutive(DataSetX.Length); //https://scottplot.net/cookbook/4.1/category/advanced-axis-features/#nonlinear-tick-spacing
+            wpfPlot1.Plot.AddSignalXY(Positions, DataSetY);
+
+            string[] labels = DataSetX;
+            wpfPlot1.Plot.XAxis.ManualTickPositions(Positions, labels);
 
             wpfPlot1.Plot.XAxis.DateTimeFormat(true);
-            Crosshair = wpfPlot1.Plot.AddCrosshair(positions[0], dataSetY[0]);
-            Crosshair.VerticalLine.PositionFormatter = pos => DateTime.FromOADate(pos).ToShortTimeString();
+            Crosshair = wpfPlot1.Plot.AddCrosshair(Positions[0], DataSetY[0]);
+            Crosshair.VerticalLine.PositionFormatter = pos => pos > Positions.Last() ? DataSetX.Last() : (pos < Positions.First() ? DataSetX.First() : DataSetX[(int)pos]);
             wpfPlot1.Plot.XAxis.TickDensity(0.1);
             wpfPlot1.Plot.XAxis.TickLabelStyle(rotation: 45);
             wpfPlot1.Refresh();
@@ -81,7 +85,7 @@ namespace Sample
                 new SomeDataModel() { Value = 3543, Time = DateTime.Now.AddMinutes(-6) },
                 new SomeDataModel() { Value = 3534, Time = DateTime.Now.AddMinutes(-5) },
                 new SomeDataModel() { Value = 3512, Time = DateTime.Now.AddMinutes(-4) },
-                new SomeDataModel() { Value = 3485, Time = DateTime.Now.AddMinutes(-3) }, //todo: remove auto scaling
+                new SomeDataModel() { Value = 3485, Time = DateTime.Now.AddMinutes(-3) },
                 new SomeDataModel() { Value = 3485, Time = DateTime.Now.AddMinutes(-0) },
             };
 
@@ -98,12 +102,13 @@ namespace Sample
             XPixelLabel.Content = $"{pixelX:0.000}";
             YPixelLabel.Content = $"{pixelY:0.000}";
 
-            XCoordinateLabel.Content = DateTime.FromOADate(wpfPlot1.Plot.GetCoordinateX(pixelX)).ToShortTimeString();
+            //DateTime.FromOADate(pos).ToShortTimeString();
+            var pos = wpfPlot1.Plot.GetCoordinateX(pixelX);
+            //XCoordinateLabel.Content = DateTime.FromOADate(wpfPlot1.Plot.GetCoordinateX(pixelX)).ToShortTimeString();
+            XCoordinateLabel.Content = pos > Positions.Last() ? DataSetX.Last() : (pos < Positions.First() ? DataSetX.First() : DataSetX[(int)pos]);
             YCoordinateLabel.Content = $"{wpfPlot1.Plot.GetCoordinateY(pixelY):0.00000000}";
-
             Crosshair.X = coordinateX;
             Crosshair.Y = coordinateY;
-
             wpfPlot1.Refresh();
         }
 
