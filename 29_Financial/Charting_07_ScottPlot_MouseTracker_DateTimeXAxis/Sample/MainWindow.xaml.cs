@@ -21,17 +21,41 @@ namespace Sample
             InitializeComponent();
             var dataSetY = GetSomeData().Select(x => x.Value).ToArray();
             var dataSetX = GetSomeData().Select(x => x.Time.ToOADate()).ToArray();
-            double samplesPerDay = (24 * 60); // one sample per minute
 
-            wpfPlot1.Plot.AddSignal(dataSetY, sampleRate: samplesPerDay);
+            wpfPlot1.Plot.AddSignalXY(dataSetX, dataSetY);
             wpfPlot1.Plot.XAxis.DateTimeFormat(true);
-            Crosshair = wpfPlot1.Plot.AddCrosshair(0, dataSetY[0]);
+            Crosshair = wpfPlot1.Plot.AddCrosshair(dataSetX[0], dataSetY[0]);
             wpfPlot1.Refresh();
         }
         private List<SomeDataModel> GetSomeData()
         {
             var xxx = new List<SomeDataModel>()
             {
+                new SomeDataModel() { Value = 3592, Time = DateTime.Now.AddMinutes(-49) },
+                new SomeDataModel() { Value = 3591, Time = DateTime.Now.AddMinutes(-48) },
+                new SomeDataModel() { Value = 3582, Time = DateTime.Now.AddMinutes(-47) },
+                new SomeDataModel() { Value = 3543, Time = DateTime.Now.AddMinutes(-46) },
+                new SomeDataModel() { Value = 3534, Time = DateTime.Now.AddMinutes(-45) },
+                new SomeDataModel() { Value = 3512, Time = DateTime.Now.AddMinutes(-44) },
+                new SomeDataModel() { Value = 3485, Time = DateTime.Now.AddMinutes(-43) },
+                new SomeDataModel() { Value = 3485, Time = DateTime.Now.AddMinutes(-42) },
+                new SomeDataModel() { Value = 3485, Time = DateTime.Now.AddMinutes(-41) },
+                new SomeDataModel() { Value = 3485, Time = DateTime.Now.AddMinutes(-40) },
+                new SomeDataModel() { Value = 3592, Time = DateTime.Now.AddMinutes(-39) },
+                new SomeDataModel() { Value = 3591, Time = DateTime.Now.AddMinutes(-38) },
+                new SomeDataModel() { Value = 3582, Time = DateTime.Now.AddMinutes(-37) },
+                new SomeDataModel() { Value = 3543, Time = DateTime.Now.AddMinutes(-36) },
+                new SomeDataModel() { Value = 3534, Time = DateTime.Now.AddMinutes(-35) },
+                new SomeDataModel() { Value = 3512, Time = DateTime.Now.AddMinutes(-34) },
+                new SomeDataModel() { Value = 3485, Time = DateTime.Now.AddMinutes(-33) },
+                new SomeDataModel() { Value = 3611, Time = DateTime.Now.AddMinutes(-30) },
+                new SomeDataModel() { Value = 3592, Time = DateTime.Now.AddMinutes(-29) },
+                new SomeDataModel() { Value = 3591, Time = DateTime.Now.AddMinutes(-28) },
+                new SomeDataModel() { Value = 3582, Time = DateTime.Now.AddMinutes(-27) },
+                new SomeDataModel() { Value = 3543, Time = DateTime.Now.AddMinutes(-26) },
+                new SomeDataModel() { Value = 3534, Time = DateTime.Now.AddMinutes(-25) },
+                new SomeDataModel() { Value = 3512, Time = DateTime.Now.AddMinutes(-24) },
+                new SomeDataModel() { Value = 3485, Time = DateTime.Now.AddMinutes(-23) },
                 new SomeDataModel() { Value = 3584, Time = DateTime.Now.AddMinutes(-20) },
                 new SomeDataModel() { Value = 3586, Time = DateTime.Now.AddMinutes(-19) },
                 new SomeDataModel() { Value = 3534, Time = DateTime.Now.AddMinutes(-18) },
@@ -50,6 +74,9 @@ namespace Sample
                 new SomeDataModel() { Value = 3534, Time = DateTime.Now.AddMinutes(-5) },
                 new SomeDataModel() { Value = 3512, Time = DateTime.Now.AddMinutes(-4) },
                 new SomeDataModel() { Value = 3485, Time = DateTime.Now.AddMinutes(-3) },
+                new SomeDataModel() { Value = 3485, Time = DateTime.Now.AddMinutes(-2) },
+                new SomeDataModel() { Value = 3485, Time = DateTime.Now.AddMinutes(-1) },
+                new SomeDataModel() { Value = 3485, Time = DateTime.Now.AddMinutes(-0) },
             };
 
             return xxx;
