@@ -14,31 +14,48 @@ namespace Sample
     /// </summary>
     public partial class MainWindow : Window
     {
+        int _labelSpacingDivider = 6;
         Crosshair Crosshair;
-        string[] DataSetX = new string[] { };
-        double[] DataSetY = new double[] { };
-        double[] Positions = new double[] { };
+        string[] _dataSetX = Array.Empty<string>();
+        double[] _dataSetY = Array.Empty<double>();
+        double[] _positions = Array.Empty<double>();
 
         public MainWindow() //https://scottplot.net/faq/datetime/
         {
-            //todo: TickDensity
-
             InitializeComponent();
-            DataSetY = GetSomeData().Select(x => x.Value).ToArray();
-            DataSetX = GetSomeData().Select(x => x.Time.ToString("dd-MM HH:mm")).ToArray();
-            Positions = DataGen.Consecutive(DataSetX.Length); //https://scottplot.net/cookbook/4.1/category/advanced-axis-features/#nonlinear-tick-spacing
-            wpfPlot1.Plot.AddSignalXY(Positions, DataSetY);
+            _dataSetY = GetSomeData().Select(x => x.Value).ToArray();
+            _dataSetX = GetSomeData().Select(x => x.Time.ToString("dd-MM HH:mm")).ToArray();
+            _positions = DataGen.Consecutive(_dataSetX.Length);
+            wpfPlot1.Plot.AddSignalXY(_positions, _dataSetY);
 
-            string[] labels = DataSetX;
-            wpfPlot1.Plot.XAxis.ManualTickPositions(Positions, labels);
 
             wpfPlot1.Plot.XAxis.DateTimeFormat(true);
-            Crosshair = wpfPlot1.Plot.AddCrosshair(Positions[0], DataSetY[0]);
-            Crosshair.VerticalLine.PositionFormatter = pos => pos > Positions.Last() ? DataSetX.Last() : (pos < Positions.First() ? DataSetX.First() : DataSetX[(int)pos]);
-            wpfPlot1.Plot.XAxis.TickDensity(0.1);
+            Crosshair = wpfPlot1.Plot.AddCrosshair(_positions[0], _dataSetY[0]);
+            Crosshair.VerticalLine.PositionFormatter = pos => pos > _positions.Last() ? _dataSetX.Last() : (pos < _positions.First() ? _dataSetX.First() : _dataSetX[(int)pos]);
+            
             wpfPlot1.Plot.XAxis.TickLabelStyle(rotation: 45);
+
+            wpfPlot1.AxesChanged += OnAxesChanged;
             wpfPlot1.Refresh();
         }
+
+        private void OnAxesChanged(object sender, RoutedEventArgs e)
+        {
+            var ticksDisplayed = wpfPlot1.Plot.XAxis.GetTicks().Length;
+            var labelsSpacing = ticksDisplayed / _labelSpacingDivider;
+            if (labelsSpacing != 0)
+            {
+                string[] labels = _dataSetX.Select((x, i) => i % labelsSpacing == 0 ? x : "").ToArray();
+                wpfPlot1.Plot.XAxis.ManualTickPositions(_positions, labels);
+            }
+            else
+            {
+                labelsSpacing = _dataSetX.Length / _labelSpacingDivider;
+                string[] labels = _dataSetX.Select((x, i) => i % labelsSpacing == 0 ? x : "").ToArray();
+                wpfPlot1.Plot.XAxis.ManualTickPositions(_positions, labels);
+            }
+        }
+
         private List<SomeDataModel> GetSomeData()
         {
             var xxx = new List<SomeDataModel>()
@@ -105,7 +122,7 @@ namespace Sample
             //DateTime.FromOADate(pos).ToShortTimeString();
             var pos = wpfPlot1.Plot.GetCoordinateX(pixelX);
             //XCoordinateLabel.Content = DateTime.FromOADate(wpfPlot1.Plot.GetCoordinateX(pixelX)).ToShortTimeString();
-            XCoordinateLabel.Content = pos > Positions.Last() ? DataSetX.Last() : (pos < Positions.First() ? DataSetX.First() : DataSetX[(int)pos]);
+            XCoordinateLabel.Content = pos > _positions.Last() ? _dataSetX.Last() : (pos < _positions.First() ? _dataSetX.First() : _dataSetX[(int)pos]);
             YCoordinateLabel.Content = $"{wpfPlot1.Plot.GetCoordinateY(pixelY):0.00000000}";
             Crosshair.X = coordinateX;
             Crosshair.Y = coordinateY;
