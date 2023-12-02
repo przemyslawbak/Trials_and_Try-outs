@@ -1,6 +1,5 @@
 ﻿using ScottPlot;
 using ScottPlot.Plottable;
-using ScottPlot.Renderable;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -30,6 +29,8 @@ namespace Sample
             _dataSetY3 = GetSomeData().Select(x => x.Value3).ToArray();
             _dataSetX = GetSomeData().Select(x => x.Time.ToString("dd-MM HH:mm")).ToArray();
             _positions = DataGen.Consecutive(_dataSetX.Length);
+
+            var xxx = GetDataFromApi(new List<string>() { "Index_SPXINDEX", "DataTypeA", "DataTypeB", "DataTypeC", "DataTypeD" });
 
             var valMain = wpfPlot1.Plot.AddSignalXY(_positions, _dataSetYMain);
             wpfPlot1.Plot.XAxis.DateTimeFormat(true);
@@ -74,12 +75,61 @@ namespace Sample
             }
         }
 
-        private List<DataResultModel> GetDataFromApi()
+        private List<DataResultModel> GetDataFromApi(List<string> dataTypes)
         {
-            var xxx = new List<DataResultModel>()
+            var xxx = new List<DataResultModel>();
+            var bogus = new Bogus.Faker<DataResultModel>();
+            var baseResultValueDictionary = new Dictionary<string, decimal>()
             {
-                new DataResultModel() { DataGuid = Guid.NewGuid(), DataType = "Index_SPXINDEX", IndexName = "SPX", Release = true, ResultValue = 3485, UtcTimeStamp = DateTime.Now.AddMinutes(-0) },
+                { "Index_SPXINDEX", 3485.00M },
+                { "DataTypeA", 0.294M },
+                { "DataTypeB", 10.9M },
+                { "DataTypeC", 0.017M },
+                { "DataTypeD", 183.15M },
             };
+            var baseMinValRangeDictionary = new Dictionary<string, decimal>()
+            {
+                { "Index_SPXINDEX", -30M },
+                { "DataTypeA", -0.15M },
+                { "DataTypeB", -1M },
+                { "DataTypeC", -0.02M },
+                { "DataTypeD", -15M },
+            };
+            var baseMaxValRangeDictionary = new Dictionary<string, decimal>()
+            {
+                { "Index_SPXINDEX", 30M },
+                { "DataTypeA", 0.15M },
+                { "DataTypeB", 1M },
+                { "DataTypeC", 0.02M },
+                { "DataTypeD", 15M },
+            };
+            var releaseDictionary = new Dictionary<string, bool>()
+            {
+                { "Index_SPXINDEX", true },
+                { "DataTypeA", false },
+                { "DataTypeB", true },
+                { "DataTypeC", false },
+                { "DataTypeD", true },
+            };
+
+            for (int i = 0; i < dataTypes.Count(); i++)
+            {
+                for (int j = 0; j < 100; j++)
+                {
+
+                    bogus.CustomInstantiator(faker => new DataResultModel()
+                    {
+                        DataGuid = Guid.NewGuid(),
+                        DataType = dataTypes[i],
+                        IndexName = "SPX",
+                        Release = releaseDictionary[dataTypes[i]],
+                        ResultValue = baseResultValueDictionary[dataTypes[i]] + faker.Random.Decimal(baseMinValRangeDictionary[dataTypes[i]], baseMaxValRangeDictionary[dataTypes[i]]),
+                        UtcTimeStamp = DateTime.UtcNow,
+                    });
+
+                    xxx.Add(bogus.Generate());
+                }
+            }
 
             return xxx;
         }

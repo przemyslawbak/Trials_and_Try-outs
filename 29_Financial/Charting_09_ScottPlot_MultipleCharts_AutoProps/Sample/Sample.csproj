@@ -8,6 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Bogus" Version="34.0.2" />
     <PackageReference Include="ScottPlot.WPF" Version="4.1.68" />
   </ItemGroup>
 
