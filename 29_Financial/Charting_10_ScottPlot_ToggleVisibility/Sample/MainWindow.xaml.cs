@@ -1,11 +1,9 @@
 ﻿using Bogus;
-using Bogus.DataSets;
 using ScottPlot;
 using ScottPlot.Plottable;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.ComponentModel.DataAnnotations;
 using System.Data;
 using System.Linq;
 using System.Windows;
@@ -13,8 +11,6 @@ using System.Windows.Input;
 
 namespace Sample
 {
-    //https://scottplot.net/cookbook/4.1/category/multi-axis/#additional-y-axis
-    //https://scottplot.net/cookbook/4.1/category/plottable-axis-line-and-span/#position-labels-on-additional-axes
     public partial class MainWindow : Window
     {
         int _labelSpacingDivider = 6;
