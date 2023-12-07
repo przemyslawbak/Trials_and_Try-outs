@@ -1,22 +1,34 @@
-﻿using System;
-using System.IO;
-using System.Linq;
+﻿using System.Net.Http;
+using System.Threading.Tasks;
 
 namespace List_Comparer
 {
     class Program
     {
+        private static HttpClient _client = new HttpClient();
 
         static void Main(string[] args)
         {
+            RunAsync().Wait();
+        }
 
-            string text = File.ReadAllText("1.txt");
-            var numbers = text.Split(',').Select(x => int.Parse(x)).ToList();
-            var diffs = numbers.Select((x, i) => i == 0 ? 0 : x - numbers[i - 1]).ToList();
-            var greaterDiffs = diffs.Where(x => x > 300).ToList();
-            Console.WriteLine("saved");
-            Console.ReadKey();
+        private static async Task RunAsync()
+        {
+            _client.DefaultRequestHeaders.Add("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101 Firefox/120.0");
+            int spread = 199980;
+            UrlVault urlVault = new UrlVault();
+            string itemSearched = "DXY";
+            var to = urlVault.GetToMaxInt();
+            var from = to - spread;
+            var dt = urlVault.GetToMaxIntUtcTimeStampe();
+            var min = urlVault.GetToMinInt();
 
+            while (from > min)
+            {
+                string url = urlVault.GetBaseUrl() + urlVault.GetResolution() + "&from=" + from + "&to=" + to;
+                var response = await _client.GetAsync(url);
+                var html = await response.Content.ReadAsStringAsync(); //no data loaded :(
+            }
         }
     }
 }
