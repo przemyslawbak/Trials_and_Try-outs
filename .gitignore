@@ -428,3 +428,4 @@ MigrationBackup/
 /29_Financial/Trial_15_SymbolsApi/Sample/UrlLocker.cs
 /29_Financial/Trial_16_ProcessingSymbolsApi/Sample/UrlLocker.cs
 /29_Financial/Trial_17_Inv_Scr/List_Comparer/UrlVault.cs
+/29_Financial/Trial_18_Inv_Scr_Cef_Offscreen/UrlVault.cs
