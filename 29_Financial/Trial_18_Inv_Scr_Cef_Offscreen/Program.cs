@@ -1,10 +1,9 @@
 ﻿using CefSharp.OffScreen;
-using HtmlAgilityPack;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace CefSharp.MinimalExample.OffScreen
@@ -90,50 +89,75 @@ namespace CefSharp.MinimalExample.OffScreen
             int spread = 199980;
             UrlVault urlVault = new UrlVault();
             string itemSearched = "DXY";
-            var to = urlVault.GetToMaxInt();
+            var maxTo = urlVault.GetToMaxInt();
+            var to = maxTo;
             var from = to - spread;
             var dt = urlVault.GetToMaxIntUtcTimeStampe();
             var min = urlVault.GetToMinInt();
-            string url = urlVault.GetBaseUrl() + urlVault.GetResolution() + "&from=" + from + "&to=" + to;
 
-            _browser.Load(url);
-
-            _pageLoadedEventHandler = (sender, args) =>
+            while (from > min)
             {
-                if (args.IsLoading == false)
+                string url = urlVault.GetBaseUrl() + urlVault.GetResolution() + "&from=" + from + "&to=" + to;
+                _browser.Load(url);
+
+                _pageLoadedEventHandler = (sender, args) =>
                 {
-                    _browser.LoadingStateChanged -= _pageLoadedEventHandler;
+                    if (args.IsLoading == false)
+                    {
+                        _browser.LoadingStateChanged -= _pageLoadedEventHandler;
 
-                    LoadingPage = false;
+                        LoadingPage = false;
+                    }
+                };
+
+                _browser.LoadingStateChanged += _pageLoadedEventHandler;
+
+                while (LoadingPage)
+                {
+                    await Task.Delay(100);
                 }
-            };
 
-            _browser.LoadingStateChanged += _pageLoadedEventHandler;
-
-            int i = 0;
-
-            while (LoadingPage)
-            {
-                i++;
-                await Task.Delay(100);
-                if (i == 1000)
-                    break;
+                await GetAndSaveData(itemSearched, dt, maxTo);
             }
-
-            await GetAndSaveData();
         }
 
-        private static async Task GetAndSaveData()
+        private static async Task<int> GetAndSaveData(string itemSearched, DateTime dt, int maxTo)
         {
+            var dataValues = new List<DataObject>();
             string html = "";
-            HtmlDocument doc = new HtmlDocument();
-
             await _browser.GetSourceAsync().ContinueWith(taskHtml =>
             {
                 html = taskHtml.Result;
             });
-            doc = new HtmlDocument();
-            doc.LoadHtml(html);
+
+            var ticks = html
+                .Split(new string[] { "<html><head></head><body>{\"t\":[" }, StringSplitOptions.None)[1]
+                .Split(new string[] { "],\"c\":[" }, StringSplitOptions.None)[0]
+                .Split(',')
+                .Select(x => int.Parse(x))
+                .Reverse()
+                .ToList();
+
+            var values = html
+                .Split(new string[] { "],\"c\":[" }, StringSplitOptions.None)[1]
+                .Split(new string[] { "],\"o\":[" }, StringSplitOptions.None)[0]
+                .Split(',')
+                .Select(x => decimal.Parse(x, NumberStyles.AllowDecimalPoint, CultureInfo.InvariantCulture))
+                .Reverse()
+                .ToList();
+
+            for (int i = 0; i < ticks.Count; i++)
+            {
+                var multiplier = (maxTo - ticks[i]) / 300;
+                dataValues.Add(new DataObject()
+                {
+                    DataValue = values[i],
+                    UtcTimeStamp = dt.AddMinutes(-multiplier)
+                }); ;
+            }
+
+            return ticks.First();
+
         }
     }
 }
