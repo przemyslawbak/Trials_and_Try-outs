@@ -1,5 +1,6 @@
 ﻿using CefSharp.OffScreen;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
@@ -11,6 +12,7 @@ namespace CefSharp.MinimalExample.OffScreen
     public class Program
     {
         private static ChromiumWebBrowser _browser;
+        private static List<DataObject> _allValues = new List<DataObject>();
         private static RequestContext _requestContext;
         private static BrowserSettings _browserSettings;
         private static EventHandler<LoadingStateChangedEventArgs> _pageLoadedEventHandler;
@@ -61,15 +63,15 @@ namespace CefSharp.MinimalExample.OffScreen
         {
             using (CefSettings settings = new CefSettings())
             {
-                settings.LogSeverity = LogSeverity.Disable; //disabled console logs
-                settings.CachePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "CefSharp\\Cache"); //browser cache
-                Cef.Initialize(settings, performDependencyCheck: true, browserProcessHandler: null); //init
+                settings.LogSeverity = LogSeverity.Disable;
+                settings.CachePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "CefSharp\\Cache");
+                Cef.Initialize(settings, performDependencyCheck: true, browserProcessHandler: null);
             }
 
             RequestContextSettings requestContextSettings = new RequestContextSettings();
 
-            requestContextSettings.PersistSessionCookies = false; //separated cookies for each instance
-            requestContextSettings.PersistUserPreferences = false; //separated user cred for each instance
+            requestContextSettings.PersistSessionCookies = false;
+            requestContextSettings.PersistUserPreferences = false;
 
             return new RequestContext(requestContextSettings);
         }
@@ -78,8 +80,6 @@ namespace CefSharp.MinimalExample.OffScreen
         {
             
             await LoadPage();
-
-            Console.WriteLine("Finito");
         }
 
         private static async Task LoadPage()
@@ -89,15 +89,16 @@ namespace CefSharp.MinimalExample.OffScreen
             int spread = 199980;
             UrlVault urlVault = new UrlVault();
             string itemSearched = "DXY";
-            var maxTo = urlVault.GetToMaxInt();
-            var to = maxTo;
-            var from = to - spread;
-            var dt = urlVault.GetToMaxIntUtcTimeStampe();
-            var min = urlVault.GetToMinInt();
+            var maxToTick = urlVault.GetToMaxInt();
+            var toTick = maxToTick;
+            var fromTick = toTick - spread;
+            var dtMaxToTick = urlVault.GetToMaxIntUtcTimeStampe();
+            var minTick = urlVault.GetToMinInt();
 
-            while (from > min)
+            while (fromTick > minTick)
             {
-                string url = urlVault.GetBaseUrl() + urlVault.GetResolution() + "&from=" + from + "&to=" + to;
+                string url = urlVault.GetBaseUrl() + urlVault.GetResolution() + "&from=" + fromTick + "&to=" + toTick;
+                Console.WriteLine("processing from " + fromTick + " to " + toTick);
                 _browser.Load(url);
 
                 _pageLoadedEventHandler = (sender, args) =>
@@ -117,11 +118,19 @@ namespace CefSharp.MinimalExample.OffScreen
                     await Task.Delay(100);
                 }
 
-                await GetAndSaveData(itemSearched, dt, maxTo);
+                toTick = await GetAndSaveData(dtMaxToTick, maxToTick) - 300;
+                fromTick = toTick - spread;
+
+                await Task.Delay(2000);
             }
+
+            var toSave = _allValues.GroupBy(x => x.UtcTimeStamp).First().OrderBy(x => x.UtcTimeStamp).ToList();
+            File.WriteAllLines("_" + itemSearched + ".txt", toSave.Select(x => x.UtcTimeStamp + "|" + x.DataValue));
+
+            Console.WriteLine("Saved");
         }
 
-        private static async Task<int> GetAndSaveData(string itemSearched, DateTime dt, int maxTo)
+        private static async Task<int> GetAndSaveData(DateTime dtMaxToTick, int maxTo)
         {
             var dataValues = new List<DataObject>();
             string html = "";
@@ -152,11 +161,13 @@ namespace CefSharp.MinimalExample.OffScreen
                 dataValues.Add(new DataObject()
                 {
                     DataValue = values[i],
-                    UtcTimeStamp = dt.AddMinutes(-multiplier)
+                    UtcTimeStamp = dtMaxToTick.AddMinutes(-multiplier)
                 }); ;
             }
 
-            return ticks.First();
+            _allValues.AddRange(dataValues);
+            var toReturn = ticks.Last();
+            return toReturn;
 
         }
     }
