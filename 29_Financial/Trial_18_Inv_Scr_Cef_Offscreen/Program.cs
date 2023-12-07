@@ -1,6 +1,5 @@
 ﻿using CefSharp.OffScreen;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
@@ -19,10 +18,26 @@ namespace CefSharp.MinimalExample.OffScreen
 
         static void Main(string[] args)
         {
-            Task t = new Task(ExecuteProgram);
-            t.Start();
-            Console.ReadKey();
-            Cef.Shutdown();
+            string itemSearched = "US_BONDS_10y";
+
+            try
+            {
+                Task t = new Task(ExecuteProgram);
+                t.Start();
+                Cef.Shutdown();
+                Console.ReadKey();
+            }
+            catch
+            {
+
+            }
+            finally
+            {
+                var toSave = _allValues.GroupBy(x => x.Tick).Select(z => z.OrderBy(y => y.UtcTimeStamp).First()).ToList();
+                File.WriteAllLines("_" + itemSearched + ".txt", toSave.Select(x => x.UtcTimeStamp + "|" + x.DataValue + "|" + x.Tick));
+
+                Console.WriteLine("Saved");
+            }
         }
 
         public static bool LoadingPage { get; set; }
@@ -86,9 +101,8 @@ namespace CefSharp.MinimalExample.OffScreen
         {
             LoadingPage = true;
 
-            int spread = 199980;
+            int spread = 199980 * 3;
             UrlVault urlVault = new UrlVault();
-            string itemSearched = "DXY";
             var maxToTick = urlVault.GetToMaxInt();
             var toTick = maxToTick;
             var fromTick = toTick - spread;
@@ -118,20 +132,16 @@ namespace CefSharp.MinimalExample.OffScreen
                     await Task.Delay(100);
                 }
 
-                toTick = await GetAndSaveData(dtMaxToTick, maxToTick) - 300;
+                toTick = await GetAndSaveData(dtMaxToTick, maxToTick);
                 fromTick = toTick - spread;
 
                 await Task.Delay(2000);
             }
-
-            var toSave = _allValues.GroupBy(x => x.UtcTimeStamp).First().OrderBy(x => x.UtcTimeStamp).ToList();
-            File.WriteAllLines("_" + itemSearched + ".txt", toSave.Select(x => x.UtcTimeStamp + "|" + x.DataValue));
-
-            Console.WriteLine("Saved");
-        }
+         }
 
         private static async Task<int> GetAndSaveData(DateTime dtMaxToTick, int maxTo)
         {
+            var toReturn = 0;
             var dataValues = new List<DataObject>();
             string html = "";
             await _browser.GetSourceAsync().ContinueWith(taskHtml =>
@@ -140,12 +150,12 @@ namespace CefSharp.MinimalExample.OffScreen
             });
 
             var ticks = html
-                .Split(new string[] { "<html><head></head><body>{\"t\":[" }, StringSplitOptions.None)[1]
-                .Split(new string[] { "],\"c\":[" }, StringSplitOptions.None)[0]
-                .Split(',')
-                .Select(x => int.Parse(x))
-                .Reverse()
-                .ToList();
+                    .Split(new string[] { "<html><head></head><body>{\"t\":[" }, StringSplitOptions.None)[1]
+                    .Split(new string[] { "],\"c\":[" }, StringSplitOptions.None)[0]
+                    .Split(',')
+                    .Select(x => int.Parse(x))
+                    .Reverse()
+                    .ToList();
 
             var values = html
                 .Split(new string[] { "],\"c\":[" }, StringSplitOptions.None)[1]
@@ -157,16 +167,18 @@ namespace CefSharp.MinimalExample.OffScreen
 
             for (int i = 0; i < ticks.Count; i++)
             {
-                var multiplier = (maxTo - ticks[i]) / 300;
+                var multiplier = (maxTo - ticks[i]) / 60;
                 dataValues.Add(new DataObject()
                 {
                     DataValue = values[i],
-                    UtcTimeStamp = dtMaxToTick.AddMinutes(-multiplier)
+                    UtcTimeStamp = dtMaxToTick.AddMinutes(-multiplier),
+                    Tick = ticks[i],
                 }); ;
             }
 
             _allValues.AddRange(dataValues);
-            var toReturn = ticks.Last();
+            toReturn = ticks.Last();
+
             return toReturn;
 
         }

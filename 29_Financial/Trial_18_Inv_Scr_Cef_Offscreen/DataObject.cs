@@ -6,5 +6,6 @@ namespace CefSharp.MinimalExample.OffScreen
     {
         public DateTime UtcTimeStamp { get; set; }
         public decimal DataValue { get; set; }
+        public int Tick { get; set; }
     }
 }
