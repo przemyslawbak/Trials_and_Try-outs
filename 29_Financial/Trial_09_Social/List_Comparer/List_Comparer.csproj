@@ -52,6 +52,7 @@
     <Compile Include="KeyLocker.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SocialObjectHistory.cs" />
     <Compile Include="SocialObject.cs" />
     <Compile Include="Scrapper.cs" />
     <Compile Include="ScrapResultModel.cs" />

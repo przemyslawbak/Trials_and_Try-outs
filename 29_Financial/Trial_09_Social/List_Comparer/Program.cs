@@ -19,6 +19,7 @@ namespace List_Comparer
 
         private static async Task DoSomething()
         {
+            var history = true; //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
             DateTime utcNowTimestamp = DateTime.UtcNow;
             string apiKey = _keyLocker.GetApiKey();
             var companyList = _service.GetIndexComponents().Select(x => new CompanyModel() { Code = x.Key, Weight = x.Value, UtcTimeStamp = utcNowTimestamp }).ToList();
@@ -26,12 +27,12 @@ namespace List_Comparer
             var socialUrlDictionary = _service.GetSocialUrlDictionary(companyList, apiKey);
             var interval = Interval.Minute;
 
-            var socialTradingValue = await TriggerParallelSocialCollectAndComputeAsync(indexName, socialUrlDictionary, utcNowTimestamp, interval, companyList);
+            var socialTradingValue = await TriggerParallelSocialCollectAndComputeAsync(indexName, socialUrlDictionary, utcNowTimestamp, interval, companyList, history);
 
             Console.WriteLine("Social: " + socialTradingValue);
         }
 
-        private static async Task<decimal> TriggerParallelSocialCollectAndComputeAsync(string indexName, Dictionary<string, string> dataUrls, DateTime utcNowTimestamp, Interval interval, List<CompanyModel> companyList)
+        private static async Task<decimal> TriggerParallelSocialCollectAndComputeAsync(string indexName, Dictionary<string, string> dataUrls, DateTime utcNowTimestamp, Interval interval, List<CompanyModel> companyList, bool history)
         {
             List<Task> currentRunningTasks = new List<Task>();
             CancellationTokenSource tokenSource = GetCancellationTokenSource();
@@ -50,12 +51,34 @@ namespace List_Comparer
 
                     try
                     {
-                        var json = await _scrapper.GetHtml(url);
-                        var data = JsonConvert.DeserializeObject<List<SocialObject>>(json);
-                        var item = data;
-                        item[0].Multiplier = companyList.Where(x => x.Code == item[0].Symbol).Select(x => x.Weight).First();
+                        if (history)
+                        {
+                            var companyHistoryResults = new List<SocialObject>();
+                            var historyPages = 100;
 
-                        results.Add(ComputeSocialItemsValue(item));
+                            for (int iter = 0; iter <= historyPages; i++)
+                            {
+                                var json = await _scrapper.GetHtml(url.Replace("page=0", "page=" + i));
+                                var data = JsonConvert.DeserializeObject<List<SocialObject>>(json);
+                                var item = data;
+                                item[0].Multiplier = companyList.Where(x => x.Code == item[0].Symbol).Select(x => x.Weight).First();
+
+                                
+                            }
+
+                        }
+                        else
+                        {
+                            var json = await _scrapper.GetHtml(url);
+                            var data = JsonConvert.DeserializeObject<List<SocialObject>>(json);
+                            var item = data;
+                            item[0].Multiplier = companyList.Where(x => x.Code == item[0].Symbol).Select(x => x.Weight).First();
+
+                            results.Add(ComputeSocialItemsValue(item));
+                        }
+
+
+
                     }
                     catch (Exception ex)
                     {
