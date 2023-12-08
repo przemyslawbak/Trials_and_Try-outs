@@ -21,7 +21,7 @@ namespace List_Comparer
         public decimal Close { get; set; }
 
         [JsonProperty(PropertyName = "volume")]
-        public int Volume { get; set; }
+        public decimal Volume { get; set; }
         public decimal Capital { get; set; }
         public string Symbol { get; set; }
         public DateTime UtcTimeStamp { get; set; }

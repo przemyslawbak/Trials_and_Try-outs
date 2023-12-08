@@ -29,6 +29,10 @@ namespace List_Comparer
             foreach (var symbol in companySymbols)
             {
                 y++;
+                if (y < 42)
+                {
+                    continue;
+                };
                 await GetAndSaveCompanyTicks(symbol, y);
             }
 
@@ -79,8 +83,8 @@ namespace List_Comparer
                 x.Open + "|" + 
                 x.High + "|" + 
                 x.Low + "|" + 
-                x.Close + "|" + 
-                x.Volume + "|" + 
+                x.Close + "|" +
+                string.Format("{0}", (int)x.Volume) + "|" + 
                 x.Capital
                 ));
         }
