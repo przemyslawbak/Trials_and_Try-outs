@@ -8,6 +8,8 @@ namespace List_Comparer
         {
             return new string[]
             {
+                "^SPX",
+                "^SP500-40",
                 "AAPL",
                 "MSFT",
                 "AMZN",

@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -24,31 +25,34 @@ namespace List_Comparer
 
             string[] companySymbols = _helper.GetSymbols().Distinct().ToArray();
 
+            var y = 0;
             foreach (var symbol in companySymbols)
             {
-                await GetAndSaveCompanyTicks(symbol);
+                y++;
+                await GetAndSaveCompanyTicks(symbol, y);
             }
 
         }
 
-        private static async Task GetAndSaveCompanyTicks(string symbol)
+        private static async Task GetAndSaveCompanyTicks(string symbol, int y)
         {
             var companyTicks = new List<OhlcvObject>();
-            int[] months = new int[] { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+            int[] months = new int[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 };
             int[] days = new int[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31 };
 
-            for (int i = months.Length - 1; i > 0; i--)
+            for (int i = months.Length - 1; i >= 0; i--)
             {
-                for (int j = days.Length - 1; j > 0; j--)
+                for (int j = days.Length - 1; j >= 0; j--)
                 {
                     var url = _url.GetFirstPart() + symbol + _url.SecondPart() + months[i].ToString("D2") + "-" + days[j].ToString("D2") + _url.ThirdPart() + months[i].ToString("D2") + "-" + days[j].ToString("D2") + _url.FourthPart();
                     var response = await _client.GetAsync(url);
                     var json = await response.Content.ReadAsStringAsync();
                     if (!json.Contains(DateTime.Now.ToShortDateString()))
                     {
-                        Console.WriteLine("Processing " + symbol + " " + 2023 + "-" + months[i].ToString("D2") + "-" + days[j].ToString("D2"));
+                        Console.Clear();
+                        Console.WriteLine(y.ToString("D3") + ". Processing " + symbol + " " + 2023 + "-" + months[i].ToString("D2") + "-" + days[j].ToString("D2"));
 
-                        var dataFromTheDay = JsonConvert.DeserializeObject<List<OhlcvObject>>(json);
+                        var dataFromTheDay = JsonConvert.DeserializeObject<IEnumerable<OhlcvObject>>(json);
                         dataFromTheDay = dataFromTheDay
                             .Select(x => new OhlcvObject()
                             {
@@ -61,15 +65,24 @@ namespace List_Comparer
                                 Symbol = symbol,
                                 EstTimeStamp = x.EstTimeStamp,
                                 UtcTimeStamp = ConvertToUtc(x.EstTimeStamp),
-                            })
-                            .OrderByDescending(x => x.EstTimeStamp)
-                            .ToList();
+                            });
                         companyTicks.AddRange(dataFromTheDay);
                     }
                 }
             }
 
-            //todo: save to the file
+            var toSave = companyTicks.GroupBy(g => g.UtcTimeStamp).Select(c => c.OrderByDescending(w => w.UtcTimeStamp).First()).ToList();
+            File
+                .WriteAllLines(symbol + ".txt", toSave
+                .Select(x => 
+                x.UtcTimeStamp + "|" + 
+                x.Open + "|" + 
+                x.High + "|" + 
+                x.Low + "|" + 
+                x.Close + "|" + 
+                x.Volume + "|" + 
+                x.Capital
+                ));
         }
 
         private static DateTime ConvertToUtc(DateTime estTimeStamp)
