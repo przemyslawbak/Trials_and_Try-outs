@@ -1,9 +1,13 @@
 ﻿using Newtonsoft.Json;
+using System;
 
 namespace List_Comparer
 {
     public class SocialObjectHistory
     {
+        [JsonProperty(PropertyName = "date")]
+        public DateTime EstTimeStamp { get; set; }
+
         [JsonProperty(PropertyName = "symbol")]
         public string Symbol { get; set; }
 

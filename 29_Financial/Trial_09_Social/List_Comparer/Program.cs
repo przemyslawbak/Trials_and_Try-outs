@@ -14,7 +14,16 @@ namespace List_Comparer
         private static Scrapper _scrapper = new Scrapper();
         static void Main(string[] args)
         {
-            DoSomething().Wait();
+            Task.Run(async () => await DoSomething());
+            Waiter().Wait();
+        }
+
+        private static async Task Waiter()
+        {
+            while (true)
+            {
+                await Task.Delay(1000);
+            }
         }
 
         private static async Task DoSomething()
@@ -38,10 +47,11 @@ namespace List_Comparer
             CancellationTokenSource tokenSource = GetCancellationTokenSource();
             List<decimal> results = new List<decimal>();
             var exceptions = 0;
+            var positive = 0;
 
             for (int i = 0; i < dataUrls.Count; i++)
             {
-                await Task.Delay(1);
+                await Task.Delay(10);
                 int iteration = i;
 
                 currentRunningTasks.Add(Task.Run(async () =>
@@ -53,18 +63,39 @@ namespace List_Comparer
                     {
                         if (history)
                         {
-                            var companyHistoryResults = new List<SocialObject>();
+                            var companyHistoryResults = new List<SocialObjectHistory>();
+                            var items = new List<SocialObjectHistory>();
                             var historyPages = 100;
 
                             for (int iter = 0; iter <= historyPages; i++)
                             {
                                 var json = await _scrapper.GetHtml(url.Replace("page=0", "page=" + i));
-                                var data = JsonConvert.DeserializeObject<List<SocialObject>>(json);
+                                var data = JsonConvert.DeserializeObject<List<SocialObjectHistory>>(json);
                                 var item = data;
-                                item[0].Multiplier = companyList.Where(x => x.Code == item[0].Symbol).Select(x => x.Weight).First();
+                                if (data.Count > 0)
+                                {
+                                    item[0].Multiplier = companyList.Where(x => x.Code == item[0].Symbol).Select(x => x.Weight).First();
+                                    items.AddRange(item);
 
-                                
+                                    //todo: how many items in 'page'? 10?
+
+                                    /*foreach (var xxx in item)
+                                    {
+                                        companyHistoryResults.Add(ComputeSocialItemsValueHistory(xxx, item[0].Multiplier));
+                                    }*/
+                                }
+                                else
+                                {
+                                    break;
+                                }
                             }
+
+                            if (items.Count > 0)
+                            {
+                                positive++;
+                            }
+
+                            //todo: save companyHistoryResults
 
                         }
                         else
@@ -91,11 +122,21 @@ namespace List_Comparer
             await Task.WhenAny(Task.WhenAll(currentRunningTasks), Task.Delay(30000));
             tokenSource.Cancel();
 
-            Console.WriteLine("Exceptions: " + exceptions);
+            Console.WriteLine("Exceptions: " + exceptions); //why does it fisnih so quick?
 
             var aver = results.Average();
 
             return results.Sum(x => Convert.ToDecimal(x)) / 100000;
+        }
+
+        private static SocialObjectHistory ComputeSocialItemsValueHistory(SocialObjectHistory xxx, decimal multiplier)
+        {
+            List<decimal> socialList = new List<decimal>();
+            var multi = multiplier;
+
+            //todo: implement
+
+            return new SocialObjectHistory();
         }
 
         private static decimal ComputeSocialItemsValue(object item)
