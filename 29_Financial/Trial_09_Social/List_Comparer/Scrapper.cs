@@ -5,9 +5,9 @@ namespace List_Comparer
 {
     internal class Scrapper
     {
-        public Task<string> GetHtml(string url)
+        public async Task<string> GetHtml(string url)
         {
-            return GetHtmlDocumentAsync(url);
+            return await GetHtmlDocumentAsync(url);
         }
 
         public async Task<string> GetHtmlDocumentAsync(string url)
@@ -19,7 +19,7 @@ namespace List_Comparer
             {
                 using (HttpContent content = response.Content)
                 {
-                    html = content.ReadAsStringAsync().Result;
+                    html = await content.ReadAsStringAsync();
                 }
             }
 

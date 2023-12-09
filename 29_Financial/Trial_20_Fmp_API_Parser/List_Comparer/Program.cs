@@ -29,10 +29,6 @@ namespace List_Comparer
             foreach (var symbol in companySymbols)
             {
                 y++;
-                if (y < 42)
-                {
-                    continue;
-                };
                 await GetAndSaveCompanyTicks(symbol, y);
             }
 

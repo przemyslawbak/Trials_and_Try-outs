@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using System;
+using System.Collections.Generic;
 
 namespace List_Comparer
 {
@@ -26,5 +27,8 @@ namespace List_Comparer
         [JsonProperty(PropertyName = "stocktwitsSentiment")]
         public decimal Sentiment { get; set; }
         public decimal Multiplier { get; set; }
+        public decimal ResultValue { get; set; }
+        public List<SocialObjectHistory> DataSet { get; set; }
+        public DateTime UtcTimeStamp { get; set; }
     }
 }
