@@ -8,6 +8,16 @@ namespace List_Comparer
         {
             return new string[]
             {
+                "^W5000",
+                "^DXY",
+                "^VIX",
+                "^OVX",
+            };
+        }
+        /*internal string[] GetSymbols()
+        {
+            return new string[]
+            {
                 "^SPX",
                 "^SP500-40",
                 "AAPL",
@@ -526,6 +536,6 @@ namespace List_Comparer
                 "NWS",
                 "DISH",
             };
-        }
+        }*/
     }
 }
