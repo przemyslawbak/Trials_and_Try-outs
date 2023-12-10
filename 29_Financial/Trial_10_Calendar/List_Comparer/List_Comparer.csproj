@@ -46,6 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CalendarObjectHistory.cs" />
     <Compile Include="HelperService.cs" />
     <Compile Include="Interval.cs" />
     <Compile Include="KeyLocker.cs" />

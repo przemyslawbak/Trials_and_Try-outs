@@ -7,9 +7,16 @@ namespace List_Comparer
     {
         public HelperService() { }
 
-        internal string GetCalendarUrl(string apiKey, DateTime utcNowTimestamp, DateTime utcWeekBackTimestamp)
+        internal string GetCalendarUrl(string apiKey, DateTime utcNowTimestamp, DateTime utcMonthBackTimestamp, string range = "")
         {
-            return "https://financialmodelingprep.com/api/v3/economic_calendar?from=" + utcWeekBackTimestamp.Year + "-" + utcWeekBackTimestamp.Month.ToString("00") + "-" + utcWeekBackTimestamp.Day.ToString("00") + "&to=" + utcNowTimestamp.Year + "-" + utcNowTimestamp.Month.ToString("00") + "-" + utcNowTimestamp.Day.ToString("00") + "&apikey=" + apiKey;
+            var dateRange = utcMonthBackTimestamp.Year + "-" + utcMonthBackTimestamp.Month.ToString("00") + "-" + utcMonthBackTimestamp.Day.ToString("00") + "&to=" + utcNowTimestamp.Year + "-" + utcNowTimestamp.Month.ToString("00") + "-" + utcNowTimestamp.Day.ToString("00");
+
+            if (!string.IsNullOrEmpty(range))
+            {
+                dateRange = range;
+            }
+
+            return "https://financialmodelingprep.com/api/v3/economic_calendar?from=" + dateRange + "&apikey=" + apiKey;
         }
 
         internal Dictionary<string, decimal> GetCountryWeights()
