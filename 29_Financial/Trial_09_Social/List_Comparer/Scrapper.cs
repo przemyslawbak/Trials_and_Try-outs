@@ -5,6 +5,7 @@ namespace List_Comparer
 {
     internal class Scrapper
     {
+        private static HttpClient _client = new HttpClient();
         public async Task<string> GetHtml(string url)
         {
             return await GetHtmlDocumentAsync(url);
@@ -13,7 +14,7 @@ namespace List_Comparer
         public async Task<string> GetHtmlDocumentAsync(string url)
         {
             string html = string.Empty;
-            var httpClient = GetNewClient();
+            var httpClient = _client;
 
             using (HttpResponseMessage response = await httpClient.GetAsync(url))
             {
@@ -24,11 +25,6 @@ namespace List_Comparer
             }
 
             return html;
-        }
-
-        private HttpClient GetNewClient()
-        {
-            return new HttpClient();
         }
     }
 }

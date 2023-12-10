@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -45,7 +46,6 @@ namespace List_Comparer
         {
             List<decimal> results = new List<decimal>();
             var exceptions = 0;
-            var positive = 0;
 
             for (int i = 0; i < dataUrls.Count; i++)
             {
@@ -59,38 +59,36 @@ namespace List_Comparer
                     if (history)
                     {
                         var companyHistoryResults = new List<SocialObjectHistory>();
-                        var items = new List<SocialObjectHistory>();
-                        var historyPages = 3;
-                        //var historyPages = 100;
+                        var historyPages = 100;
 
                         for (int iter = 0; iter <= historyPages; iter++)
                         {
-                            Console.WriteLine(dataUrls.ElementAt(i).Key + " page: " + iter);
+                            Console.WriteLine(i.ToString("D3") + ". " + dataUrls.ElementAt(i).Key + " page: " + iter);
                             var json = await _scrapper.GetHtml(url.Replace("page=0", "page=" + iter));
                             var data = JsonConvert.DeserializeObject<List<SocialObjectHistory>>(json);
-                            var item = data;
                             if (data.Count > 0)
                             {
-                                item[0].Multiplier = companyList.Where(x => x.Code == item[0].Symbol).Select(x => x.Weight).First();
-                                items.AddRange(item);
-                                companyHistoryResults.AddRange(items);
-
-                                //todo: how many items in 'page'? 10?
-
-                                /*foreach (var xxx in item)
+                                var multi = companyList.Where(x => x.Code == data[0].Symbol).Select(x => x.Weight).First();
+                                data = data.Select(x => new SocialObjectHistory()
                                 {
-                                    companyHistoryResults.Add(ComputeSocialItemsValueHistory(xxx, item[0].Multiplier));
-                                }*/
+                                    Comments = x.Comments,
+                                    DataSet = x.DataSet,
+                                    EstTimeStamp = x.EstTimeStamp,
+                                    Impressions = x.Impressions,
+                                    Likes = x.Likes,
+                                    Multiplier = multi,
+                                    Posts = x.Posts,
+                                    ResultValue = x.ResultValue,
+                                    Sentiment = x.Sentiment,
+                                    Symbol = x.Symbol,
+                                    UtcTimeStamp = x.UtcTimeStamp,
+                                }).ToList();
+                                companyHistoryResults.AddRange(data);
                             }
                             else
                             {
                                 break;
                             }
-                        }
-
-                        if (items.Count > 0)
-                        {
-                            positive++;
                         }
 
                         Console.WriteLine("res: " + companyHistoryResults.Count);
@@ -108,10 +106,10 @@ namespace List_Comparer
                             ResultValue= x.ResultValue,
                             Sentiment= x.Sentiment,
                             Symbol = x.Symbol,
+                            UtcTimeStamp = ConvertToUtc(x.EstTimeStamp),
                         }).ToList();
 
-
-                        modifiedResults = companyHistoryResults.Select((x, ind) => new SocialObjectHistory()
+                        var toBeSaved = modifiedResults.Select(x => new SocialObjectHistory()
                         {
                             Comments = x.Comments,
                             EstTimeStamp = x.EstTimeStamp,
@@ -120,12 +118,19 @@ namespace List_Comparer
                             Likes = x.Likes,
                             Multiplier = x.Multiplier,
                             Posts = x.Posts,
-                            ResultValue = GetResult(x.DataSet),
+                            ResultValue = GetResult(x.DataSet, x.Multiplier),
                             Sentiment = x.Sentiment,
                             Symbol = x.Symbol,
+                            UtcTimeStamp = x.UtcTimeStamp
                         }).ToList();
 
-                        //todo: save companyHistoryResults
+                        var toSave = toBeSaved.GroupBy(g => g.UtcTimeStamp).Select(c => c.OrderByDescending(w => w.UtcTimeStamp).First()).ToList();
+                        File
+                            .WriteAllLines("_" + toSave[0].Symbol + "_social.txt", toSave
+                            .Select(x =>
+                            x.UtcTimeStamp + "|" +
+                            x.ResultValue
+                            ));
 
                     }
                     else
@@ -150,29 +155,72 @@ namespace List_Comparer
 
             return results.Sum(x => Convert.ToDecimal(x)) / 100000;
         }
-
-        private static decimal GetResult(List<SocialObjectHistory> item)
+        private static DateTime ConvertToUtc(DateTime estTimeStamp)
         {
-            var itemsList = (List<SocialObjectHistory>)item;
-            List<decimal> socialList = new List<decimal>();
-            var multi = itemsList[0].Multiplier;
-
-            foreach (var fing in itemsList)
+            try
             {
-                var added = (decimal)fing.Likes * 0.1M + (decimal)fing.Comments * 1 + (decimal)fing.Posts * 1 + (decimal)fing.Impressions * 0.00001M;
-                decimal res = (decimal)added * (decimal)fing.Sentiment * multi;
+                TimeZoneInfo est = TimeZoneInfo.FindSystemTimeZoneById("Eastern Standard Time");
+                return TimeZoneInfo.ConvertTimeToUtc(estTimeStamp, est);
+            }
+            catch (Exception ex)
+            {
 
-                socialList.Add(res);
             }
 
-            return socialList.Sum(x => x);
+            return DateTime.Now.AddYears(100);
+        }
+
+        private static decimal GetResult(List<SocialObjectHistory> item, decimal multiplier)
+        {
+            if (item != null)
+            {
+                var itemsList = (List<SocialObjectHistory>)item;
+                List<decimal> socialList = new List<decimal>();
+                var multi = multiplier;
+
+                try
+                {
+
+                    foreach (var fing in itemsList)
+                    {
+                        var added = (decimal)fing.Likes * 0.1M + (decimal)fing.Comments * 1 + (decimal)fing.Posts * 1 + (decimal)fing.Impressions * 0.00001M;
+                        decimal res = (decimal)added * (decimal)fing.Sentiment * multi;
+
+                        socialList.Add(res);
+                    }
+
+                    return socialList.Sum(x => x);
+                }
+                catch (Exception ex)
+                {
+
+                }
+            }
+
+            return 0.0M;
         }
 
         private static List<SocialObjectHistory> GetDataSet(List<SocialObjectHistory> companyHistoryResults, int ind)
         {
-            var pageItemsQty = 250;
+            var ret = new List<SocialObjectHistory>();
+            var pageItemsQty = 0;
+            try
+            {
+                pageItemsQty = 250;
 
-            return companyHistoryResults.GetRange(ind, ind + pageItemsQty);
+                if (pageItemsQty + ind > companyHistoryResults.Count - 1)
+                {
+                    pageItemsQty = companyHistoryResults.Count - 1;
+                }
+
+                ret = companyHistoryResults.GetRange(ind, pageItemsQty);
+            }
+            catch (Exception ex)
+            {
+                //do nothing
+            }
+
+            return ret;
         }
 
         /*private static async Task<decimal> TriggerParallelSocialCollectAndComputeAsync(string indexName, Dictionary<string, string> dataUrls, DateTime utcNowTimestamp, Interval interval, List<CompanyModel> companyList, bool history)
