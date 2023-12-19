@@ -1,4 +1,5 @@
 ﻿using System.Collections.Concurrent;
+using System.Collections.Generic;
 
 namespace Activator
 {
@@ -12,15 +13,18 @@ namespace Activator
             var nums = Enumerable.Range(0, 5000).ToArray();
 
             var watchSync = System.Diagnostics.Stopwatch.StartNew();
+            List<long> syncList = new List<long>();
 
             foreach (var i in nums)
             {
                 var l = ProcessData(i);
+                syncList.Add(l);
             }
 
             watchSync.Stop();
             var edMs = watchSync.ElapsedMilliseconds;
             Console.WriteLine("sync (ms): " + edMs);
+            Console.WriteLine("list count: " + syncList.Count);
 
             Console.ReadKey();
 
@@ -32,14 +36,21 @@ namespace Activator
             // The partitioner is the query's data source.
             var q = customPartitioner.AsParallel().Select(x => x);
 
+            List<long> paraList = new List<long>();
+
             q.ForAll(x =>
             {
                 var l = ProcessData(x);
+                lock (paraList)
+                {
+                    paraList.Add(l);
+                }
             });
 
             watchParallel.Stop();
             var elapsedMs = watchParallel.ElapsedMilliseconds;
             Console.WriteLine("parallel (ms): " + elapsedMs);
+            Console.WriteLine("list count: " + paraList.Count);
         }
 
         private static long ProcessData(int n)
