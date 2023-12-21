@@ -1,11 +1,11 @@
 ﻿using System.Collections.Concurrent;
-using System.Collections.Generic;
 
 namespace Activator
 {
     class Program
     {
         //https://learn.microsoft.com/en-us/dotnet/standard/parallel-programming/custom-partitioners-for-plinq-and-tpl?redirectedfrom=MSDN
+        //optional: https://stackoverflow.com/a/22273528
         static void Main(string[] args)
         {
             // Static partitioning requires indexable source. Load balancing
