@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using System;
 
 namespace List_Comparer
 {
@@ -15,6 +16,9 @@ namespace List_Comparer
 
         [JsonProperty(PropertyName = "close")]
         public decimal Close { get; set; }
+
+        [JsonProperty(PropertyName = "date")]
+        public DateTime TimeStamp { get; set; }
 
         [JsonProperty(PropertyName = "volume")]
         public int Volume { get; set; }
