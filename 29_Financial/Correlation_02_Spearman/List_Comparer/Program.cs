@@ -12,10 +12,10 @@ namespace List_Comparer
             double[] dataD = new double[] { 0.1, 0.0, 0.0, -0.3, -0.7, -0.6 };
             double[] dataE = new double[] { 2.1, 2.2, 2.2, 2.5, 2.9, 2.8 };
 
-            var correlationPaersonB = Correlation.Pearson(dataA, dataB);
-            var correlationPaersonC = Correlation.Pearson(dataA, dataC);
-            var correlationPaersonD = Correlation.Pearson(dataA, dataD);
-            var correlationPaersonE = Correlation.Pearson(dataA, dataE);
+            var correlationSpearmanB = Correlation.Spearman(dataA, dataB);
+            var correlationSpearmanC = Correlation.Spearman(dataA, dataC);
+            var correlationSpearmanD = Correlation.Pearson(dataA, dataD);
+            var correlationSpearmanE = Correlation.Pearson(dataA, dataE);
         }
     }
 }
