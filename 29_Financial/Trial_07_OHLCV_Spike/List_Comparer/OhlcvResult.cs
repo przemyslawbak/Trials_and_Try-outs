@@ -11,5 +11,6 @@
         public decimal Sentiment { get; set; }
         public decimal McClellan { get; set; }
         public decimal VwapPriceDiff { get; set; }
+        public decimal PriceScore { get; set; }
     }
 }
