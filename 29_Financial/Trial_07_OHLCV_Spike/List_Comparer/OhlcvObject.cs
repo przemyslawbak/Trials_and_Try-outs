@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using System;
+using System.Diagnostics;
 
 namespace List_Comparer
 {
@@ -27,5 +28,11 @@ namespace List_Comparer
         public decimal Multiplier { get; set; }
         public string Symbol { get; set; }
         public bool Signal { get; set; }
+        public decimal TypicalPrice { get; set; }
+        public decimal MultiplyTheAveragePriceWithVolume { get; set; }
+        public decimal CumulativeTotalProductTypicalPriceAndVolume { get; set; }
+        public decimal CumulativeTotalVol { get; set; }
+        public decimal VWAP { get; set; }
+
     }
 }
