@@ -10,6 +10,6 @@
         public decimal Strength { get; set; }
         public decimal Sentiment { get; set; }
         public decimal McClellan { get; set; }
-        public decimal Vwap { get; set; }
+        public decimal VwapPriceDiff { get; set; }
     }
 }

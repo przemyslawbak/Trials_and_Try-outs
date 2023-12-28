@@ -57,6 +57,7 @@
     <Compile Include="OhlcvObject.cs" />
     <Compile Include="Scrapper.cs" />
     <Compile Include="VariablesModel.cs" />
+    <Compile Include="VwapModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
