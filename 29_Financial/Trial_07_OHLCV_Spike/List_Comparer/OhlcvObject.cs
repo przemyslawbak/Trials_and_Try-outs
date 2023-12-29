@@ -26,6 +26,7 @@ namespace List_Comparer
         public int Index { get; set; }
         public decimal Capital { get; set; }
         public decimal Multiplier { get; set; }
+        public decimal DiffSquare { get; set; }
         public string Symbol { get; set; }
         public bool Signal { get; set; }
 
