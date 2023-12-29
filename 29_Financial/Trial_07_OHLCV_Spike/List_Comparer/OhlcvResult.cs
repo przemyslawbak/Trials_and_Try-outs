@@ -13,5 +13,6 @@
         public decimal VwapPriceDiff { get; set; }
         public decimal PriceScore { get; set; }
         public decimal Volatility { get; set; }
+        public decimal CnotShadowDiff { get; set; }
     }
 }
