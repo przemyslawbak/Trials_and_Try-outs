@@ -22,7 +22,7 @@ namespace List_Comparer
         public DateTime TimeStamp { get; set; }
 
         [JsonProperty(PropertyName = "volume")]
-        public int Volume { get; set; }
+        public decimal Volume { get; set; }
         public int Index { get; set; }
         public decimal Capital { get; set; }
         public decimal Multiplier { get; set; }
