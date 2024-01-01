@@ -14,5 +14,11 @@
         public decimal PriceScore { get; set; }
         public decimal Volatility { get; set; }
         public decimal CnotShadowDiff { get; set; }
+        public decimal CryptoIndex { get; set; }
+        public decimal CommMetalsIndex { get; set; }
+        public decimal CommCarbsIndex { get; set; }
+        public decimal CommPlantsIndex { get; set; }
+        public decimal CommAnimalsIndex { get; set; }
+        public decimal CommOtherIndex { get; set; }
     }
 }
