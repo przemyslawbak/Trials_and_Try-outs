@@ -21,7 +21,7 @@ namespace List_Comparer
 
         private static async Task DoSomething()
         {
-            /*List<string> weekRes = new List<string>();
+            List<string> weekRes = new List<string>();
             var weeksBack = 100;
 
             for (int i = 0; i < weeksBack; i++)
@@ -34,26 +34,26 @@ namespace List_Comparer
                 var calendarUrl = _service.GetCalendarUrl(apiKey, utcNowTimestamp, utcMonthBackTimestamp);
                 var interval = Interval.Minute;
 
-                var socialTradingValue = await TriggerParallelSocialCollectAndComputeAsync(calendarUrl);
+                var socialTradingValue = await TriggerParallelCalendarCollectAndComputeAsync(calendarUrl);
                 weekRes.Add(socialTradingValue.ToString("0.00"));
             };
 
-            System.IO.File.WriteAllLines("weekRes.txt", weekRes);*/
+            System.IO.File.WriteAllLines("weekRes.txt", weekRes);
 
-            string indexName = "SPX";
+            /*string indexName = "SPX";
             var interval = Interval.Minute;
 
-            var calendarValues = await TriggerParallelCalendarCollectAndComputeAsync();
+            var calendarValues = await TriggerParallelCalendarCollectAndComputeAsync();*/
 
             Console.ReadLine();
         }
 
-        /*private static async Task<decimal> TriggerParallelCalendarCollectAndComputeAsync(string dataUrl)
+        private static async Task<decimal> TriggerParallelCalendarCollectAndComputeAsync(string dataUrl)
         {
             var json = await _scrapper.GetHtml(dataUrl);
             var data = JsonConvert.DeserializeObject<List<CalendarObject>>(json);
-            //var countries = data.GroupBy(x => x.CountryCode).Select(x => x.Key).ToList();
-            //System.IO.File.WriteAllLines("country_codes.txt", countries);
+            var countries = data.GroupBy(x => x.Event).Select(x => x.Key).ToList();
+            System.IO.File.WriteAllLines("_events_codes.txt", countries);
             var eventWeights = _service.GetEventWeights();
             var countryWeights = _service.GetCountryWeights();
             var impactWeights = _service.GetImpactWeights();
@@ -62,9 +62,9 @@ namespace List_Comparer
             var result = ComputeCalendarItemsValue(items, eventWeights, countryWeights, impactWeights);
 
             return result;
-        }*/
+        }
 
-        private static async Task<decimal> TriggerParallelCalendarCollectAndComputeAsync()
+        /*private static async Task<decimal> TriggerParallelCalendarCollectAndComputeAsync()
         {
             List<CalendarObjectHistory> objects = new List<CalendarObjectHistory>();
             DateTime utcNowTimestamp = DateTime.UtcNow.AddMonths(1);
@@ -149,7 +149,7 @@ namespace List_Comparer
             Console.WriteLine("Saved");
 
             return new decimal();
-        }
+        }*/
 
         private static decimal GetResult(List<CalendarObjectHistory> dataSet, Dictionary<string, int> eventWeights, Dictionary<string, decimal> countryWeights, Dictionary<string, decimal> impactWeights)
         {
