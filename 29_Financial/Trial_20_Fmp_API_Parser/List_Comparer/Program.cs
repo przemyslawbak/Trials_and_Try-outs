@@ -37,36 +37,40 @@ namespace List_Comparer
         private static async Task GetAndSaveCompanyTicks(string symbol, int y)
         {
             var companyTicks = new List<OhlcvObject>();
+            int[] years = new int[] { 2024, 2023 };
             int[] months = new int[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 };
             int[] days = new int[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31 };
 
-            for (int i = months.Length - 1; i >= 0; i--)
+            for (int q = years.Length - 1; q >= 0; q--)
             {
-                for (int j = days.Length - 1; j >= 0; j--)
+                for (int i = months.Length - 1; i >= 0; i--)
                 {
-                    var url = _url.GetFirstPart() + symbol + _url.SecondPart() + months[i].ToString("D2") + "-" + days[j].ToString("D2") + _url.ThirdPart() + months[i].ToString("D2") + "-" + days[j].ToString("D2") + _url.FourthPart();
-                    var response = await _client.GetAsync(url);
-                    var json = await response.Content.ReadAsStringAsync();
-                    if (!json.Contains(DateTime.Now.ToShortDateString()))
+                    for (int j = days.Length - 1; j >= 0; j--)
                     {
-                        Console.Clear();
-                        Console.WriteLine(y.ToString("D3") + ". Processing " + symbol + " " + 2023 + "-" + months[i].ToString("D2") + "-" + days[j].ToString("D2"));
+                        var url = _url.GetFirstPart() + symbol + _url.SecondPart() + years[q] + "-" + months[i].ToString("D2") + "-" + days[j].ToString("D2") + _url.ThirdPart() + years[q] + "-" + months[i].ToString("D2") + "-" + days[j].ToString("D2") + _url.FourthPart();
+                        var response = await _client.GetAsync(url);
+                        var json = await response.Content.ReadAsStringAsync();
+                        if (!json.Contains(DateTime.Now.ToShortDateString()))
+                        {
+                            Console.Clear();
+                            Console.WriteLine(y.ToString("D3") + ". Processing " + symbol + " " + years[q] + "-" + months[i].ToString("D2") + "-" + days[j].ToString("D2"));
 
-                        var dataFromTheDay = JsonConvert.DeserializeObject<IEnumerable<OhlcvObject>>(json);
-                        dataFromTheDay = dataFromTheDay
-                            .Select(x => new OhlcvObject()
-                            {
-                                Open = x.Open,
-                                High = x.High,
-                                Low = x.Low,
-                                Close = x.Close,
-                                Volume = x.Volume,
-                                Capital = x.Close * x.Volume,
-                                Symbol = symbol,
-                                EstTimeStamp = x.EstTimeStamp,
-                                UtcTimeStamp = ConvertToUtc(x.EstTimeStamp),
-                            });
-                        companyTicks.AddRange(dataFromTheDay);
+                            var dataFromTheDay = JsonConvert.DeserializeObject<IEnumerable<OhlcvObject>>(json);
+                            dataFromTheDay = dataFromTheDay
+                                .Select(x => new OhlcvObject()
+                                {
+                                    Open = x.Open,
+                                    High = x.High,
+                                    Low = x.Low,
+                                    Close = x.Close,
+                                    Volume = x.Volume,
+                                    Capital = x.Close * x.Volume,
+                                    Symbol = symbol,
+                                    EstTimeStamp = x.EstTimeStamp,
+                                    UtcTimeStamp = ConvertToUtc(x.EstTimeStamp),
+                                });
+                            companyTicks.AddRange(dataFromTheDay);
+                        }
                     }
                 }
             }
