@@ -2,7 +2,7 @@
 {
     internal class HelperService
     {
-        internal string[] GetSymbols()
+        /*internal string[] GetSymbols()
         {
             return new string[]
             {
@@ -10,6 +10,12 @@
                 "^DXY",
                 "^VIX",
                 "^OVX",
+            };
+        }*/
+        internal string[] GetSymbols()
+        {
+            return new string[]
+            {
                 "^SPX",
                 "^SP500-40",
                 "AAPL",
