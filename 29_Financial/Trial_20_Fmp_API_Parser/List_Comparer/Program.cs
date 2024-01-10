@@ -37,7 +37,7 @@ namespace List_Comparer
         private static async Task GetAndSaveCompanyTicks(string symbol, int y)
         {
             var companyTicks = new List<OhlcvObject>();
-            int[] years = new int[] { 2024, 2023 };
+            int[] years = new int[] { 2023, 2024 };
             int[] months = new int[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 };
             int[] days = new int[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31 };
 
