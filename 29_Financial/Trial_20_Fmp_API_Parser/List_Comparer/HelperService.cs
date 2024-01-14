@@ -533,10 +533,12 @@
                 "FRC",
                 "NWS",
                 "DISH",
+                //crypto
                 "BTCUSD",
                 "ETHUSD",
                 "SOLUSD",
                 "USDTUSD",
+                //commodities
                 "GCUSD",
                 "PLUSD",
                 "SILUSD",
@@ -553,7 +555,6 @@
                 "CCUSD",
                 "ZRUSD",
                 "CTUSX",
-                "KCUSX",
                 "OJUSX",
                 "SBUSX",
                 "ZSUSX",
@@ -561,7 +562,6 @@
                 "ZOUSX",
                 "ZCUSX",
                 "LBUSD",
-                "CTUSX",
                 "DCUSD",
                 "GFUSX",
                 "LEUSX",
