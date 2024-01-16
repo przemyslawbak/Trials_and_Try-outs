@@ -143,7 +143,7 @@ namespace List_Comparer
 
             var toSave = toBeSaved.GroupBy(g => g.UtcTimeStamp).Select(c => c.OrderByDescending(w => w.UtcTimeStamp).First()).ToList();
             File
-                .WriteAllLines("_calendarNew.txt", toSave
+                .WriteAllLines("_calendar.txt", toSave
                 .Select(x =>
                 x.UtcTimeStamp + "|" +
                 x.ResultValue

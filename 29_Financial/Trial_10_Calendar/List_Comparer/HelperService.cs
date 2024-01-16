@@ -87,7 +87,7 @@ namespace List_Comparer
             };
         }
 
-        internal Dictionary<string, int> GetEventWeights()
+        /*internal Dictionary<string, int> GetEventWeights()
         {
             return new Dictionary<string, int>()
             {
@@ -379,9 +379,9 @@ namespace List_Comparer
                 { "ZEW Current Conditions", 1 },
                 { "ZEW Economic Sentiment Index", 1 },
             };
-        }
-        
-        /*internal Dictionary<string, int> GetEventWeights()
+        }*/
+
+        internal Dictionary<string, int> GetEventWeights()
         {
             return new Dictionary<string, int>()
             {
@@ -688,6 +688,6 @@ namespace List_Comparer
                 { "ZEW Current Conditions", 1 },
                 { "ZEW Economic Sentiment Index", 1 },
             };
-        }*/
+        }
     }
 }
