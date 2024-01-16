@@ -109,12 +109,12 @@ namespace List_Comparer
                 //var result = ComputeCalendarItemsValue(data, eventWeights, countryWeights, impactWeights);
             }
 
-            Console.WriteLine("Computing result values...");
+            Console.WriteLine("Converting to UTC...");
 
             var modifiedResults = objects.Select((x, ind) => new CalendarObjectHistory()
             {
                 EstTimeStamp = x.EstTimeStamp,
-                DataSet = GetDataSet(objects, ind),
+                DataSet = GetDataSet(objects, ind, objects.Count),
                 ResultValue = x.ResultValue,
                 UtcTimeStamp = ConvertToUtc(x.EstTimeStamp),
                 Actual = x.Actual,
@@ -125,11 +125,13 @@ namespace List_Comparer
                 Previous = x.Previous
             }).ToList();
 
-            var toBeSaved = modifiedResults.Select(x => new CalendarObjectHistory()
+            Console.WriteLine("Getting results...");
+
+            var toBeSaved = modifiedResults.Select((x, ind) => new CalendarObjectHistory()
             {
                 EstTimeStamp = x.EstTimeStamp,
                 DataSet = x.DataSet,
-                ResultValue = GetResult(x.DataSet, eventWeights, countryWeights, impactWeights),
+                ResultValue = GetResult(x.DataSet, eventWeights, countryWeights, impactWeights, ind, modifiedResults.Count),
                 UtcTimeStamp = x.UtcTimeStamp,
                 Actual = x.Actual,
                 CountryCode = x.CountryCode,
@@ -141,7 +143,7 @@ namespace List_Comparer
 
             var toSave = toBeSaved.GroupBy(g => g.UtcTimeStamp).Select(c => c.OrderByDescending(w => w.UtcTimeStamp).First()).ToList();
             File
-                .WriteAllLines("_calendar.txt", toSave
+                .WriteAllLines("_calendarNew.txt", toSave
                 .Select(x =>
                 x.UtcTimeStamp + "|" +
                 x.ResultValue
@@ -152,8 +154,9 @@ namespace List_Comparer
             return new decimal();
         }
 
-        private static decimal GetResult(List<CalendarObjectHistory> dataSet, Dictionary<string, int> eventWeights, Dictionary<string, decimal> countryWeights, Dictionary<string, decimal> impactWeights)
+        private static decimal GetResult(List<CalendarObjectHistory> dataSet, Dictionary<string, int> eventWeights, Dictionary<string, decimal> countryWeights, Dictionary<string, decimal> impactWeights, int ind, int count)
         {
+            Console.WriteLine("Results " + ind + " of " + count);
             if (dataSet != null)
             {
                 List<decimal> calendarResults = new List<decimal>();
@@ -218,8 +221,9 @@ namespace List_Comparer
             return DateTime.Now.AddYears(100);
         }
 
-        private static List<CalendarObjectHistory> GetDataSet(List<CalendarObjectHistory> objects, int ind)
+        private static List<CalendarObjectHistory> GetDataSet(List<CalendarObjectHistory> objects, int ind, int count)
         {
+            Console.WriteLine("Data set " + ind + " of " + count);
             var ret = new List<CalendarObjectHistory>();
             var pageItemsQty = 0;
             try
