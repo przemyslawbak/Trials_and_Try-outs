@@ -18,7 +18,7 @@ namespace CefSharp.MinimalExample.OffScreen
 
         static void Main(string[] args)
         {
-            string itemSearched = "US_BONDS_10y";
+            string itemSearched = "SPX_F";
 
             try
             {

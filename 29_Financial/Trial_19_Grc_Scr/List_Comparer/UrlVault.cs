@@ -6,7 +6,7 @@ namespace List_Comparer
     {
         internal string GetBaseUrl()
         {
-            return "https://www.global-rates.com/highchart-api/?minticks=1578268800000&maxticks=1701820800000&series[0].id=4&series[0].type=2&extra=null";
+            return "https://www.global-rates.com/highchart-api/?minticks=1578268800000&maxticks=1801820800000&series[0].id=19&series[0].type=3&extra=null";
         }
 
         internal string GetResolution()
