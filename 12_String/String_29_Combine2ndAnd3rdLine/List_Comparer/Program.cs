@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data.SqlTypes;
 using System.IO;
 
 namespace List_Comparer
@@ -9,38 +10,28 @@ namespace List_Comparer
         {
             var counter = 1;
             string toWrite = "";
+            string last = "";
             foreach (var line in File.ReadLines("1.txt"))
             {
-                if (counter == 1 && !string.IsNullOrEmpty(line))
+                if (counter == 1 && !string.IsNullOrEmpty(line) && last != line)
                 {
                     toWrite = line;
+                    counter++;
+                }
+                else if (counter == 2 && line.Contains("views"))
+                {
+                    toWrite = toWrite + "|" + line.Split(',')[1].Trim();
                     counter = 0;
                 }
-                if (counter == 2 && !string.IsNullOrEmpty(line))
-                {
-                    toWrite = toWrite + "|" + line;
-                    counter = 0;
-                }
-                if (counter == 3 && !string.IsNullOrEmpty(line))
-                {
-                    toWrite = toWrite + ", " + line;
-                    counter = 0;
-                }
-                if (line.Contains("Country"))
-                {
-                    counter = 2;
-                }
-                if (line.Contains("Address"))
-                {
-                    counter = 3;
-                }
-                if (line.Contains("VACANCIES"))
+                else if (string.IsNullOrEmpty(line))
                 {
                     toWrite = toWrite + Environment.NewLine;
                     File.AppendAllText("output.txt", toWrite);
                     counter = 1;
+                    toWrite = "";
                 }
 
+                last = line;
             }
 
             Console.WriteLine("DONE");
