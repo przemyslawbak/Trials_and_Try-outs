@@ -9,24 +9,29 @@ namespace List_Comparer
         {
             var counter = 1;
             string toWrite = "";
+            var previous = "";
             foreach (var line in File.ReadLines("1.txt"))
             {
                 if (counter == 1)
                 {
-                    toWrite = line + "|";
+                    if (line.Contains(","))
+                    {
+                        toWrite = line.Split(',')[0] + "|" + line.Split(',')[1].Trim() + ", ";
+                    }
+                    else
+                    {
+                        toWrite = line + "|";
+                    }
                     counter++;
                 }
-                else if (counter == 2)
+                else if (line == "")
                 {
-                    counter++;
-                }
-                else if (counter == 3)
-                {
-                    toWrite = toWrite + line + Environment.NewLine;
+                    toWrite = toWrite + previous + Environment.NewLine;
                     counter = 1;
                     File.AppendAllText("output.txt", toWrite);
                     toWrite = "";
                 }
+                previous = line;
             }
 
             Console.WriteLine("DONE");
