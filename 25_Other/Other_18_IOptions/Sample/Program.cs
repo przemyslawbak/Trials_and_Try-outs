@@ -1,6 +1,9 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Models;
+using Services;
+using System.Configuration;
 
 namespace Sample
 {
@@ -21,9 +24,8 @@ namespace Sample
                     services.AddSingleton(config);
                     var connectionString = config.GetSection("ConnectionString").Value;
 
-                    /*
-
-                    services.AddTransient<IFileManager, FileManager>();*/
+                    services.AddTransient<IServiceClass, ServiceClass>();
+                    services.Configure<TransientFaultHandlingOptions>(config.GetSection("TransientFaultHandlingOptions"));
                 })
                 .Build();
 
@@ -33,6 +35,7 @@ namespace Sample
             Console.WriteLine("Program finished, press any key...");
             Console.ReadKey();
         }
+
     }
 }
 
