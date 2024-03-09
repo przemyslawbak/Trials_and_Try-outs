@@ -60,11 +60,15 @@ namespace Sample
             List<string> selectedDataTypes = new List<string>() { "COL_1", "COL_2", "COL_3" };
             string mainDataType = "COL_1";
 
-            var dt = CreateDataTableWithTrends(dataFromApi, _intervals, selectedDataTypes, mainDataType, trendsToo);
+            CreateDataTableWithTrends(dataFromApi, _intervals, selectedDataTypes, mainDataType, trendsToo);
+            Console.ReadKey();
         }
 
-        public static DataTable CreateDataTableWithTrends(List<DataResultEntity> dataFromApi, int[] _intervals, List<string> selectedDataTypes, string mainDataType, bool trendsToo)
+        public static void CreateDataTableWithTrends(List<DataResultEntity> dataFromApi, int[] _intervals, List<string> selectedDataTypes, string mainDataType, bool trendsToo)
         {
+            long elapsedMsNew = 0;
+            long elapsedMsOld = 0;
+
             using (DataTable dt = new DataTable())
             {
                 if (dataFromApi != null)
@@ -96,8 +100,20 @@ namespace Sample
                     }
                     dt.AcceptChanges();
 
+                    Console.WriteLine("Adding timestamps...");
+
+                    foreach (var timestamp in timestamps)
+                    {
+                        DataRow dr = dt.NewRow();
+                        dr["UtcTimeStamp"] = timestamp;
+                        dt.Rows.Add(dr);
+                    }
+
+                    dt.AcceptChanges();
+
                     Console.WriteLine("Adding existing data...");
                     //add existing data
+                    var watchOld = System.Diagnostics.Stopwatch.StartNew();
 
                     var percentage = 0.00;
                     var progress = 0;
@@ -119,70 +135,125 @@ namespace Sample
                         percentage = Math.Round((double)progress / timestamps.Count() * 100, 2);
                     });
 
+                    dt.DefaultView.Sort = "UtcTimeStamp DESC";
+
                     dt.AcceptChanges();
 
-                    if (trendsToo)
+                    watchOld.Stop();
+                    elapsedMsOld = watchOld.ElapsedMilliseconds;
+
+                    ExportDataTableToFile(dt, "|", true, "_exportedDataTableOld.txt");
+                }
+
+                dt.DefaultView.Sort = "UtcTimeStamp DESC";
+                Console.WriteLine("Old way time (ms): " + elapsedMsOld);
+            }
+
+            using (DataTable dt = new DataTable())
+            {
+
+                if (dataFromApi != null)
+                {
+                    int result = selectedDataTypes.IndexOf(mainDataType);
+
+                    if (result == -1)
                     {
-                        //compute and add means and trends
-                        foreach (var dataType in selectedDataTypes)
+                        selectedDataTypes.Add(mainDataType);
+                    }
+
+                    var timestamps = dataFromApi.Where(x => x.DataType == mainDataType).Select(x => x.UtcTimeStamp);
+
+                    //add columns
+                    dt.Columns.Add("UtcTimeStamp", typeof(DateTime));
+                    Console.WriteLine("Adding columns...");
+                    foreach (var dataType in selectedDataTypes)
+                    {
+                        dt.Columns.Add(dataType, typeof(decimal));
+
+                        if (trendsToo)
                         {
-                            Console.WriteLine("Computing data table for " + dataType);
                             foreach (var interval in _intervals)
                             {
-                                var meanColName = dataType + "_" + interval + "_mean";
-                                var trendColName = dataType + "_" + interval + "_trend";
-
-                                decimal lastVal = 0;
-
-                                for (int i = dt.Rows.Count - 1; i >= 0; i--)
-                                {
-                                    if (i >= interval)
-                                    {
-                                        decimal sumOfLastN = 0;
-                                        for (int j = 0; j < interval; j++)
-                                        {
-                                            sumOfLastN = sumOfLastN + (decimal)dt.Rows[i - j][dataType];
-                                        }
-
-                                        dt.Rows[i][meanColName] = sumOfLastN / interval;
-                                        lastVal = sumOfLastN / interval;
-                                    }
-                                    else
-                                    {
-                                        dt.Rows[i][meanColName] = lastVal;
-                                    }
-                                }
-
-                                for (int i = dt.Rows.Count - 1; i >= 0; i--)
-                                {
-                                    if (i >= 1)
-                                    {
-                                        var direction = (decimal)dt.Rows[i][meanColName] - (decimal)dt.Rows[i - 1][meanColName];
-
-                                        if (direction >= 0)
-                                        {
-                                            dt.Rows[i][trendColName] = 1;
-                                        }
-                                        else
-                                        {
-                                            dt.Rows[i][trendColName] = -1;
-                                        }
-                                    }
-                                    else
-                                    {
-                                        dt.Rows[i][trendColName] = 1;
-                                    }
-                                }
+                                dt.Columns.Add(dataType + "_" + interval + "_mean", typeof(decimal));
+                                dt.Columns.Add(dataType + "_" + interval + "_trend", typeof(decimal));
                             }
                         }
-                        dt.AcceptChanges();
                     }
+                    dt.AcceptChanges();
+
+                    Console.WriteLine("Adding timestamps...");
+
+                    foreach (var timestamp in timestamps)
+                    {
+                        DataRow dr = dt.NewRow();
+                        dr["UtcTimeStamp"] = timestamp;
+                        dt.Rows.Add(dr);
+                    }
+
+                    dt.AcceptChanges();
+
+                    Console.WriteLine("Adding existing data...");
+                    //add existing data
+
+                    var percentage = 0.00;
+                    var progress = 0;
+
+                    var watchNew = System.Diagnostics.Stopwatch.StartNew();
+
+                    Parallel.ForEach(dt.AsEnumerable(), dr =>
+                    {
+                        progress++;
+                        Console.Write("\r{0}%", percentage);
+                        dr.BeginEdit();
+                        var timestamp = (DateTime)dr["UtcTimeStamp"];
+                        foreach (var dataType in selectedDataTypes)
+                        {
+                            var xxx = dataFromApi.Where(y => y.DataType == dataType && y.UtcTimeStamp == timestamp).Select(y => y.ResultValue).First();
+                            dr[dataType] = xxx;
+                        }
+                        dr.EndEdit();
+                        percentage = Math.Round((double)progress / timestamps.Count() * 100, 2);
+                    });
+
+                    dt.DefaultView.Sort = "UtcTimeStamp DESC";
+
+                    dt.AcceptChanges();
+
+                    watchNew.Stop();
+                    elapsedMsNew = watchNew.ElapsedMilliseconds;
+
+                    ExportDataTableToFile(dt, "|", true, "_exportedDataTableNew.txt");
                 }
 
                 dt.DefaultView.Sort = "UtcTimeStamp DESC";
 
-                return dt;
+                Console.WriteLine("New way time (ms): " + elapsedMsNew);
             }
+        }
+
+        public static void ExportDataTableToFile(DataTable datatable, string delimited, bool exportcolumnsheader, string file)
+        {
+            StreamWriter str = new StreamWriter(file, false, System.Text.Encoding.Default);
+            if (exportcolumnsheader)
+            {
+                string Columns = string.Empty;
+                foreach (DataColumn column in datatable.Columns)
+                {
+                    Columns += column.ColumnName + delimited;
+                }
+                str.WriteLine(Columns.Remove(Columns.Length - 1, 1));
+            }
+            foreach (DataRow datarow in datatable.Rows)
+            {
+                string row = string.Empty;
+                foreach (object items in datarow.ItemArray)
+                {
+                    row += items.ToString() + delimited;
+                }
+                str.WriteLine(row.Remove(row.Length - 1, 1));
+            }
+            str.Flush();
+            str.Close();
         }
     }
 }
