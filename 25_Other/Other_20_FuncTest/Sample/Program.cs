@@ -1,10 +1,18 @@
-﻿
-namespace Sample
+﻿namespace Sample
 {
     class Program
     {
         static void Main(string[] args)
         {
+            var simpleObject = new SimpleModel()
+            {
+                NumberInt = 1,
+                Text = "Sample Text",
+            };
+
+            var yyy = ProcessSampleObject(simpleObject);
+
+
             var inputClosePosition = new InputClosePositionModel()
             {
                 LastClose = 4987.62500000M,
@@ -38,6 +46,18 @@ namespace Sample
             };
 
             var closePositionOutput = ClosePositionIfNeed(inputClosePosition);
+        }
+
+        private static SimpleModel ProcessSampleObject(SimpleModel simpleObject)
+        {
+            simpleObject.Text = "DUPA";
+            simpleObject.NumberInt = 666;
+
+            return new SimpleModel()
+            {
+                Text = simpleObject.Text,
+                NumberInt = simpleObject.NumberInt,
+            };
         }
 
         private static ClosedPositionOutputModel ClosePositionIfNeed(InputClosePositionModel inputClosePosition)
