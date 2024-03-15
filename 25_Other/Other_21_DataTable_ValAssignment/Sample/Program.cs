@@ -109,8 +109,6 @@ namespace Sample
 
         public static DataTable CreateDataTableWithTrends(List<DataResultEntity> dataFromApi, int[] _intervals, List<string> selectedDataTypes, string mainDataType, bool trendsToo)
         {
-            long elapsedMsNew = 0;
-
             using (DataTable dt = new DataTable())
             {
                 if (dataFromApi != null)
@@ -160,26 +158,30 @@ namespace Sample
                     var percentage = 0.00;
                     var progress = 0;
 
-                    foreach (var timestamp in timestamps)
+                    Parallel.ForEach(dt.AsEnumerable(), dr =>
                     {
                         progress++;
                         Console.Write("\r{0}%", percentage);
-                        var dr = dt.AsEnumerable().Where(dr => dr.Field<DateTime>("UtcTimeStamp") == timestamp).First();
+                        var timestamp = (DateTime)dr["UtcTimeStamp"];
 
-                        foreach (var dataType in selectedDataTypes)
+                        lock (dt.Rows.SyncRoot)
                         {
-                            var xxx = dataFromApi.Where(y => y.DataType == dataType && y.UtcTimeStamp == timestamp).Select(y => y.ResultValue).ToList();
-                            dr[dataType] = xxx.First();
+                            foreach (var dataType in selectedDataTypes)
+                            {
+                                var xxx = dataFromApi.Where(y => y.DataType == dataType && y.UtcTimeStamp == timestamp).Select(y => y.ResultValue).ToList();
+                                var res = xxx.First();
+
+                                dr.SetField(dataType, res);
+                            }
                         }
+
                         percentage = Math.Round((double)progress / timestamps.Count() * 100, 2);
-                    };
+                    });
+                    dt.AcceptChanges();
 
                     dt.DefaultView.Sort = "UtcTimeStamp DESC";
 
-                    dt.AcceptChanges();
                 }
-
-                Console.WriteLine("New way time (ms): " + elapsedMsNew);
 
                 return dt;
             }
