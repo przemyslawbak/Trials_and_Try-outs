@@ -24,9 +24,9 @@ namespace Sample
                     DataType = "COL_1",
                     IndexName = "SOME INDEX",
                     Release = true,
-                    ResultValue = r.Next(0, 100) / 100,
+                    ResultValue = (decimal)r.Next(0, 100) / 100,
                     UtcTimeStamp = x,
-                });
+                }).ToList();
 
             var col4Data = utcTimeStamps
                 .Select(x => new DataResultEntity()
@@ -35,9 +35,9 @@ namespace Sample
                     DataType = "COL_4",
                     IndexName = "SOME INDEX",
                     Release = true,
-                    ResultValue = r.Next(0, 100) / 100,
+                    ResultValue = (decimal)r.Next(0, 100) / 100,
                     UtcTimeStamp = x,
-                });
+                }).ToList();
 
             var col2Data = utcTimeStamps
                 .Select(x => new DataResultEntity()
@@ -48,7 +48,7 @@ namespace Sample
                     Release = true,
                     ResultValue = r.Next(0, 100000),
                     UtcTimeStamp = x,
-                });
+                }).ToList();
 
             var col3Data = utcTimeStamps
                 .Select(x => new DataResultEntity()
@@ -59,23 +59,30 @@ namespace Sample
                     Release = true,
                     ResultValue = r.Next(0, 100000),
                     UtcTimeStamp = x,
-                });
+                }).ToList();
 
             dataFromApi.AddRange(col1Data);
             dataFromApi.AddRange(col2Data);
             dataFromApi.AddRange(col3Data);
+            dataFromApi.AddRange(col4Data);
+
+            System.IO.File.WriteAllLines("col1Data.txt", col1Data.Select(x => x.UtcTimeStamp + "|" + x.ResultValue.ToString()));
+            System.IO.File.WriteAllLines("col2Data.txt", col2Data.Select(x => x.UtcTimeStamp + "|" + x.ResultValue.ToString()));
+            System.IO.File.WriteAllLines("col3Data.txt", col3Data.Select(x => x.UtcTimeStamp + "|" + x.ResultValue.ToString()));
+            System.IO.File.WriteAllLines("col4Data.txt", col4Data.Select(x => x.UtcTimeStamp + "|" + x.ResultValue.ToString()));
+
 
             //create params
             bool trendsToo = false;
             int[] _intervals = new int[] { 5, 10 };
-            List<string> selectedDataTypes = new List<string>() { "COL_1", "COL_2", "COL_3" };
+            List<string> selectedDataTypes = new List<string>() { "COL_1", "COL_2", "COL_3", "COL_4" };
             string mainDataType = "COL_1";
 
             var dt = CreateDataTableWithTrends(dataFromApi, _intervals, selectedDataTypes, mainDataType, trendsToo);
 
             Console.WriteLine("Computing diff...");
             int[] intervals = new int[] { 15, 60, 90 };
-            dt = AddFDiff(dt, intervals);
+            //dt = AddFDiff(dt, intervals);
 
             ExportDataTableToFile(dt, "|", true, "_exportedDataTable.txt");
 
@@ -88,8 +95,8 @@ namespace Sample
             for (int i = 0; i < dt.Rows.Count; i++)
             {
                 var row = dt.Rows[i];
-                var SPXFUTURES = row.Field<decimal>("COL_1");
-                var SPXINDEX = row.Field<decimal>("COL_4");
+                var SPXFUTURES = row.Field<decimal?>("COL_1");
+                var SPXINDEX = row.Field<decimal?>("COL_4");
 
                 var futuresDiff = SPXINDEX - SPXFUTURES;
                 row["Diff"] = futuresDiff;
@@ -106,7 +113,6 @@ namespace Sample
 
             using (DataTable dt = new DataTable())
             {
-
                 if (dataFromApi != null)
                 {
                     int result = selectedDataTypes.IndexOf(mainDataType);
@@ -149,36 +155,29 @@ namespace Sample
 
                     Console.WriteLine("Adding existing data...");
                     //add existing data
+                    var watchOld = System.Diagnostics.Stopwatch.StartNew();
 
                     var percentage = 0.00;
                     var progress = 0;
 
-                    var watchNew = System.Diagnostics.Stopwatch.StartNew();
-
-                    Parallel.ForEach(dt.AsEnumerable(), dr =>
+                    foreach (var timestamp in timestamps)
                     {
                         progress++;
                         Console.Write("\r{0}%", percentage);
-                        dr.BeginEdit();
-                        var timestamp = (DateTime)dr["UtcTimeStamp"];
+                        var dr = dt.AsEnumerable().Where(dr => dr.Field<DateTime>("UtcTimeStamp") == timestamp).First();
+
                         foreach (var dataType in selectedDataTypes)
                         {
-                            var xxx = dataFromApi.Where(y => y.DataType == dataType && y.UtcTimeStamp == timestamp).Select(y => y.ResultValue).First();
-                            dr[dataType] = xxx;
+                            var xxx = dataFromApi.Where(y => y.DataType == dataType && y.UtcTimeStamp == timestamp).Select(y => y.ResultValue).ToList();
+                            dr[dataType] = xxx.First();
                         }
-                        dr.EndEdit();
                         percentage = Math.Round((double)progress / timestamps.Count() * 100, 2);
-                    });
+                    };
 
                     dt.DefaultView.Sort = "UtcTimeStamp DESC";
 
                     dt.AcceptChanges();
-
-                    watchNew.Stop();
-                    elapsedMsNew = watchNew.ElapsedMilliseconds;
                 }
-
-                dt.DefaultView.Sort = "UtcTimeStamp DESC";
 
                 Console.WriteLine("New way time (ms): " + elapsedMsNew);
 
@@ -209,6 +208,8 @@ namespace Sample
             }
             str.Flush();
             str.Close();
+
+            Console.WriteLine("Saved...");
         }
     }
 }
