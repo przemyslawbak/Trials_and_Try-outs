@@ -1,4 +1,8 @@
-﻿using System.Data;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Data;
+using System.Linq;
 
 namespace Sample
 {
@@ -13,7 +17,7 @@ namespace Sample
             var end = DateTime.Now;
 
             //create list
-            var utcTimeStamps = Enumerable.Range(0, 5000)
+            var utcTimeStamps = Enumerable.Range(0, 1000)
               .Select(offset => start.AddMinutes(offset))
               .ToList();
 
@@ -82,24 +86,32 @@ namespace Sample
 
             Console.WriteLine("Computing diff...");
             int[] intervals = new int[] { 15, 60, 90 };
-            //dt = AddFDiff(dt, intervals);
+            dt = AddDiff(dt, intervals);
 
             ExportDataTableToFile(dt, "|", true, "_exportedDataTable.txt");
 
             Console.ReadKey();
         }
 
-        public static DataTable AddFDiff(DataTable dt, int[] intervals)
+        public static DataTable AddDiff(DataTable dt, int[] intervals)
         {
             dt.Columns.Add("Diff", typeof(decimal));
             for (int i = 0; i < dt.Rows.Count; i++)
             {
-                var row = dt.Rows[i];
-                var SPXFUTURES = row.Field<decimal?>("COL_1");
-                var SPXINDEX = row.Field<decimal?>("COL_4");
+                try
+                {
+                    var row = dt.Rows[i];
+                    var SPXFUTURES = row.Field<decimal?>("COL_1");
+                    var SPXINDEX = row.Field<decimal?>("COL_4");
 
-                var futuresDiff = SPXINDEX - SPXFUTURES;
-                row["Diff"] = futuresDiff;
+                    var futuresDiff = SPXINDEX - SPXFUTURES;
+                    row["Diff"] = futuresDiff;
+                }
+                catch
+                {
+                    var row = dt.Rows[i];
+                    row["Diff"] = 0M;
+                }
             }
 
             dt.AcceptChanges();
@@ -164,23 +176,69 @@ namespace Sample
                         Console.Write("\r{0}%", percentage);
                         var timestamp = (DateTime)dr["UtcTimeStamp"];
 
-                        lock (dt.Rows.SyncRoot)
+                        dr.BeginEdit();
+                        foreach (var dataType in selectedDataTypes)
                         {
-                            foreach (var dataType in selectedDataTypes)
-                            {
-                                var xxx = dataFromApi.Where(y => y.DataType == dataType && y.UtcTimeStamp == timestamp).Select(y => y.ResultValue).ToList();
-                                var res = xxx.First();
+                            var xxx = dataFromApi.Where(y => y.DataType == dataType && y.UtcTimeStamp == timestamp).Select(y => y.ResultValue).ToList();
+                            var res = xxx.First();
 
-                                dr.SetField(dataType, res);
-                            }
+                            dr.SetField(dataType, res);
                         }
+                        dr.EndEdit();
 
                         percentage = Math.Round((double)progress / timestamps.Count() * 100, 2);
                     });
                     dt.AcceptChanges();
 
-                    dt.DefaultView.Sort = "UtcTimeStamp DESC";
+                    //added
+                    Console.WriteLine("filling Nulls..."); //todo: fix timestamp if null
 
+                    for (int i = 0; i < dt.Rows.Count; i++)
+                    {
+                        foreach (var dataType in selectedDataTypes)
+                        {
+                            if (dt.Rows[i][dataType].ToString() == "")
+                            {
+                                var replacement = 0M;
+                                if (i > 0)
+                                {
+                                    replacement = (decimal)dt.Rows[i - 1][dataType];
+                                }
+
+                                var dr = dt.Rows[i];
+                                dr.SetField(dataType, replacement);
+                            }
+                        }
+                    };
+
+                    for (int i = 0; i < dt.Rows.Count; i++)
+                    {
+                        if (dt.Rows[i]["UtcTimeStamp"].ToString() == "")
+                        {
+                            var dr = dt.Rows[i];
+                            dr.Delete();
+                        }
+
+                        if (i > 0 && dt.Rows[i]["UtcTimeStamp"] == dt.Rows[i - 1]["UtcTimeStamp"])
+                        {
+                            var dr = dt.Rows[i];
+                            dr.Delete();
+                        }
+                    }
+
+                    dt.AcceptChanges();
+
+                    try
+                    {
+                        dt.DefaultView.Sort = "UtcTimeStamp DESC";
+
+                        dt.AcceptChanges();
+                    }
+                    catch //try again
+                    {
+                        Console.WriteLine("Error occured, computing again...");
+                        return CreateDataTableWithTrends(dataFromApi, _intervals, selectedDataTypes, mainDataType, trendsToo);
+                    }
                 }
 
                 return dt;
