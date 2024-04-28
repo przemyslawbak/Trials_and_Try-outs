@@ -21,8 +21,54 @@ namespace List_Comparer
 
             string[] urls = File.ReadAllLines("link.txt");
             var urlHorse = urls[0];
-            var urlJockey = urls[1] + "&sezon=2022#wyniki_koni";
-            var urlTrainer = urls[2] + "&sezon=2022#wyniki_koni";
+
+            var urlJockeyList = new List<string>()
+            {
+                urls[1] + "&sezon=2023#wyniki_koni",
+                urls[1] + "&sezon=2022#wyniki_koni",
+                urls[1] + "&sezon=2021#wyniki_koni",
+                urls[1] + "&sezon=2020#wyniki_koni",
+            };
+            var urlTrainerList = new List<string>()
+            {
+                urls[2] + "&sezon=2023#wyniki_koni",
+                urls[2] + "&sezon=2022#wyniki_koni",
+                urls[2] + "&sezon=2021#wyniki_koni",
+                urls[2] + "&sezon=2020#wyniki_koni",
+            };
+
+            var jr = new List<string>();
+            var tr = new List<string>();
+
+            foreach (var urlJockey in urlJockeyList)
+            {
+                string htmlJockey = GetHtml(urlJockey);
+                var jockeyStarts = htmlJockey
+                .Split(new string[] { "<h3 class=\"g-color-black g-font-weight-600 mb-3\">WYNIKI KONI DOSIADANYCH W SEZONIE " }, StringSplitOptions.None)[1]
+                .Split(new string[] { "<tbody>" }, StringSplitOptions.None)[1]
+                .Split(new string[] { "WYKAZ STARTÓW W SEZONIE " }, StringSplitOptions.None)[0];
+                var rows = jockeyStarts
+                .Split(new string[] { "<tr>" }, StringSplitOptions.None);
+
+                jr.AddRange(rows);
+            }
+
+            foreach (var urlTrainer in urlTrainerList)
+            {
+                string htmlTrainer = GetHtml(urlTrainer);
+
+                var trainerStarts = htmlTrainer
+                .Split(new string[] { "WYNIKI KONI TRENOWANYCH W SEZONIE " }, StringSplitOptions.None)[1]
+                .Split(new string[] { "<tbody>" }, StringSplitOptions.None)[1];
+
+                var rows = trainerStarts
+                    .Split(new string[] { "<tr>" }, StringSplitOptions.None);
+
+                tr.AddRange(rows);
+            }
+
+            var jockeyRows = jr.ToArray();
+            var trainerRows = tr.ToArray();
 
             var classValues = GetClassValues();
             int raceDistance = int.Parse(raceRows[0].Trim());
@@ -73,16 +119,6 @@ namespace List_Comparer
             }
 
             string htmlHorse = GetHtml(urlHorse);
-            string htmlJockey = GetHtml(urlJockey);
-            string htmlTrainer = GetHtml(urlTrainer);
-
-            var jockeyStarts = htmlJockey
-                .Split(new string[] { "<h3 class=\"g-color-black g-font-weight-600 mb-3\">WYNIKI KONI DOSIADANYCH W SEZONIE " }, StringSplitOptions.None)[1]
-                .Split(new string[] { "<tbody>" }, StringSplitOptions.None)[1]
-                .Split(new string[] { "WYKAZ STARTÓW W SEZONIE " }, StringSplitOptions.None)[0];
-
-            var jockeyRows = jockeyStarts
-                .Split(new string[] { "<tr>" }, StringSplitOptions.None);
 
             if (jockeyRows.Length > 0) jockeyRows = jockeyRows.Take(jockeyRows.Count() - 1).ToArray();
 
@@ -126,13 +162,6 @@ namespace List_Comparer
                     //do nothing
                 }
             }
-
-            var trainerStarts = htmlTrainer
-                .Split(new string[] { "WYNIKI KONI TRENOWANYCH W SEZONIE " }, StringSplitOptions.None)[1]
-                .Split(new string[] { "<tbody>" }, StringSplitOptions.None)[1];
-
-            var trainerRows = trainerStarts
-                .Split(new string[] { "<tr>" }, StringSplitOptions.None);
 
             if (trainerRows.Length > 0) trainerRows = trainerRows.Take(trainerRows.Count() - 1).ToArray();
 
