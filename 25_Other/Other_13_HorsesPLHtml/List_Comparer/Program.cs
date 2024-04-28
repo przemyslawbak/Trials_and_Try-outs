@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -17,7 +18,7 @@ namespace List_Comparer
             string[] raceRows = File.ReadAllLines("race.txt");
             string[] horsieInfoRows = File.ReadAllLines("horsie.txt");
             string[] horseRows = File.ReadAllLines("results.txt");
-
+            string[] sizeRows = File.ReadAllLines("size.txt");
 
             string[] urls = File.ReadAllLines("link.txt");
             var urlHorse = urls[0];
@@ -72,6 +73,12 @@ namespace List_Comparer
 
             var classValues = GetClassValues();
             int raceDistance = int.Parse(raceRows[0].Trim());
+
+            var sizeHeight = sizeRows[0].Split('-')[0]; //(200 - 161) : 2 = 19,5; (200-157) : 2 = 21,5
+            var sizeChest = sizeRows[0].Split('-')[1]; //200-181 = 19; 200-178 = 21
+            var sizeLeg = sizeRows[0].Split('-')[2]; //1 : 22 * 400 = 18,2; 1 : 19 * 300 = 21
+
+            var sizeRatio = ((200 - decimal.Parse(sizeHeight, CultureInfo.InvariantCulture)) / 2) + (200 - decimal.Parse(sizeChest, CultureInfo.InvariantCulture)) + (1 / decimal.Parse(sizeLeg, CultureInfo.InvariantCulture) * 400);
 
             Dictionary<string, decimal> sexWeightDict = new Dictionary<string, decimal>()
             {
@@ -491,7 +498,7 @@ namespace List_Comparer
             var jockeyScore = resultsJockey.Count > 0 ? (decimal)resultsJockey.Average(x => x) : 1;
             var trenerScore = resultsTrainer.Count > 0 ? (decimal)resultsTrainer.Average(x => x) : 1;
 
-            File.WriteAllText(@"_result.txt", horsieName + "|" + horseScore + "|" + fatherScore + "|" + motherScore + "|" + siblingsScore + "|" + jockeyScore + "|" + trenerScore + "|" + resultsHorse.Count);
+            File.WriteAllText(@"_result.txt", horsieName + "|" + horseScore + "|" + fatherScore + "|" + motherScore + "|" + siblingsScore + "|" + jockeyScore + "|" + trenerScore + "|" + sizeRatio + "|" + resultsHorse.Count);
 
             Console.WriteLine("Finito...");
         }
