@@ -23,19 +23,21 @@ namespace List_Comparer
             string[] urls = File.ReadAllLines("link.txt");
             var urlHorse = urls[0];
 
+            var currSeason = DateTime.Now.Year;
+
             var urlJockeyList = new List<string>()
             {
-                urls[1] + "&sezon=2023#wyniki_koni",
-                urls[1] + "&sezon=2022#wyniki_koni",
-                urls[1] + "&sezon=2021#wyniki_koni",
-                urls[1] + "&sezon=2020#wyniki_koni",
+                urls[1] + "&sezon=" + (currSeason - 1).ToString() + "#wyniki_koni",
+                urls[1] + "&sezon=" + (currSeason - 2).ToString() + "#wyniki_koni",
+                urls[1] + "&sezon=" + (currSeason - 3).ToString() + "#wyniki_koni",
+                urls[1] + "&sezon=" + (currSeason - 4).ToString() + "#wyniki_koni",
             };
             var urlTrainerList = new List<string>()
             {
-                urls[2] + "&sezon=2023#wyniki_koni",
-                urls[2] + "&sezon=2022#wyniki_koni",
-                urls[2] + "&sezon=2021#wyniki_koni",
-                urls[2] + "&sezon=2020#wyniki_koni",
+                urls[2] + "&sezon=" + (currSeason - 1).ToString() + "#wyniki_koni",
+                urls[2] + "&sezon=" + (currSeason - 2).ToString() + "#wyniki_koni",
+                urls[2] + "&sezon=" + (currSeason - 3).ToString() + "#wyniki_koni",
+                urls[2] + "&sezon=" + (currSeason - 4).ToString() + "#wyniki_koni",
             };
 
             var jr = new List<string>();
@@ -102,6 +104,7 @@ namespace List_Comparer
             List<decimal> siblingResults = new List<decimal>();
             List<decimal> resultsJockey = new List<decimal>();
             List<decimal> resultsTrainer = new List<decimal>();
+            List<decimal> resultsOwner = new List<decimal>();
 
             Console.WriteLine("Computing horse score...");
 
@@ -213,7 +216,6 @@ namespace List_Comparer
                 }
             }
 
-
             var urlFather = htmlHorse.Split(new string[] { "<td><a href=\"" }, StringSplitOptions.None)[1].Split('"')[0];
             if (urlFather.Length > 10)
             {
@@ -233,6 +235,16 @@ namespace List_Comparer
             {
                 urlMother = "https://koniewyscigowe.pl" + "/horse/" + urlMother;
             }
+
+            var urlOwner = htmlHorse.Split(new string[] { "<td><a href=\"" }, StringSplitOptions.None)[3].Split('"')[0];
+            var urlOwnerList = new List<string>()
+            {
+                urlOwner + "&sezon=" + (currSeason - 1).ToString() + "#wyniki_koni",
+                urlOwner + "&sezon=" + (currSeason - 2).ToString() + "#wyniki_koni",
+                urlOwner + "&sezon=" + (currSeason - 3).ToString() + "#wyniki_koni",
+                urlOwner + "&sezon=" + (currSeason - 4).ToString() + "#wyniki_koni",
+            };
+
 
             string htmlFather = GetHtml(urlFather);
             string htmlMother = GetHtml(urlMother);
