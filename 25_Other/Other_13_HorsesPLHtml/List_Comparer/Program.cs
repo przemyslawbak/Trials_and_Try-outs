@@ -158,7 +158,7 @@ namespace List_Comparer
                         decimal times1 = 0M;
                         decimal times2 = 0M;
                         decimal times3 = 0M;
-                        if (int.Parse(placesFirst) > 0) times1 = 1 / decimal.Parse(placesFirst) * decimal.Parse(races) * multiplier1
+                        if (int.Parse(placesFirst) > 0) times1 = 1 / decimal.Parse(placesFirst) * decimal.Parse(races) * multiplier1;
                         if (int.Parse(placesSecond) > 0) times2 = 1 / decimal.Parse(placesSecond) * decimal.Parse(races) * multiplier2;
                         if (int.Parse(placesThird) > 0) times3 = 1 / decimal.Parse(placesThird) * decimal.Parse(races) * multiplier3;
                         var results = (times1 + times2 + times3) * nameMultiplier;
