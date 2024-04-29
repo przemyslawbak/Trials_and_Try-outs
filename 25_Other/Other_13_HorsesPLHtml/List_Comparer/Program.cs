@@ -19,6 +19,9 @@ namespace List_Comparer
             string[] horsieInfoRows = File.ReadAllLines("horsie.txt");
             string[] horseRows = File.ReadAllLines("results.txt");
             string[] sizeRows = File.ReadAllLines("size.txt");
+            var multiplier1 = 0.1M;
+            var multiplier2= 0.3M;
+            var multiplier3= 0.6M;
 
             string[] urls = File.ReadAllLines("link.txt");
             var urlHorse = urls[0];
@@ -42,6 +45,7 @@ namespace List_Comparer
 
             var jr = new List<string>();
             var tr = new List<string>();
+            var or = new List<string>();
 
             foreach (var urlJockey in urlJockeyList)
             {
@@ -154,9 +158,9 @@ namespace List_Comparer
                         decimal times1 = 0M;
                         decimal times2 = 0M;
                         decimal times3 = 0M;
-                        if (int.Parse(placesFirst) > 0) times1 = 1 / decimal.Parse(placesFirst) * decimal.Parse(races) * 0.1M;
-                        if (int.Parse(placesSecond) > 0) times2 = 1 / decimal.Parse(placesSecond) * decimal.Parse(races) * 0.2M;
-                        if (int.Parse(placesThird) > 0) times3 = 1 / decimal.Parse(placesThird) * decimal.Parse(races) * 0.3M;
+                        if (int.Parse(placesFirst) > 0) times1 = 1 / decimal.Parse(placesFirst) * decimal.Parse(races) * multiplier1
+                        if (int.Parse(placesSecond) > 0) times2 = 1 / decimal.Parse(placesSecond) * decimal.Parse(races) * multiplier2;
+                        if (int.Parse(placesThird) > 0) times3 = 1 / decimal.Parse(placesThird) * decimal.Parse(races) * multiplier3;
                         var results = (times1 + times2 + times3) * nameMultiplier;
 
                         decimal raceScore = nameMultiplier * results;
@@ -197,9 +201,9 @@ namespace List_Comparer
                         decimal times1 = 0M;
                         decimal times2 = 0M;
                         decimal times3 = 0M;
-                        if (int.Parse(placesFirst) > 0) times1 = 1 / decimal.Parse(placesFirst) * decimal.Parse(races) * 0.1M;
-                        if (int.Parse(placesSecond) > 0) times2 = 1 / decimal.Parse(placesSecond) * decimal.Parse(races) * 0.2M;
-                        if (int.Parse(placesThird) > 0) times3 = 1 / decimal.Parse(placesThird) * decimal.Parse(races) * 0.3M;
+                        if (int.Parse(placesFirst) > 0) times1 = 1 / decimal.Parse(placesFirst) * decimal.Parse(races) * multiplier1;
+                        if (int.Parse(placesSecond) > 0) times2 = 1 / decimal.Parse(placesSecond) * decimal.Parse(races) * multiplier2;
+                        if (int.Parse(placesThird) > 0) times3 = 1 / decimal.Parse(placesThird) * decimal.Parse(races) * multiplier3;
                         var results = (times1 + times2 + times3) * nameMultiplier;
 
                         decimal raceScore = nameMultiplier * results;
@@ -236,6 +240,8 @@ namespace List_Comparer
                 urlMother = "https://koniewyscigowe.pl" + "/horse/" + urlMother;
             }
 
+            Console.WriteLine("Computing owners score...");
+
             var urlOwner = htmlHorse.Split(new string[] { "<td><a href=\"" }, StringSplitOptions.None)[3].Split('"')[0];
             var urlOwnerList = new List<string>()
             {
@@ -245,6 +251,60 @@ namespace List_Comparer
                 urlOwner + "&sezon=" + (currSeason - 4).ToString() + "#wyniki_koni",
             };
 
+            foreach (var url in urlOwnerList)
+            {
+                string htmlOwner = GetHtml(url);
+                var year = url.Split('=')[2].Split('#')[0];
+
+                var trainerStarts = htmlOwner
+                .Split(new string[] { "> " + year + "<" }, StringSplitOptions.None)[1]
+                .Split(new string[] { "<tbody>" }, StringSplitOptions.None)[1];
+
+                var rows = trainerStarts
+                    .Split(new string[] { "<tr>" }, StringSplitOptions.None);
+
+                or.AddRange(rows);
+            }
+            var ownerRows = tr.ToArray();
+
+            foreach (var row in ownerRows)
+            {
+                try
+                {
+                    var horseName = row
+                        .Split('>')[2]
+                        .Split('(')[0].Trim();
+
+                    decimal nameMultiplier = horseName.ToLower() == horsieName.ToLower() ? 0.7M : 1.0M;
+
+                    var placesFirst = row.Split(new string[] { "<td style=\"text-align:center\">" }, StringSplitOptions.None)[4].Split('<')[0];
+                    var placesSecond = row.Split(new string[] { "<td style=\"text-align:center\">" }, StringSplitOptions.None)[5].Split('<')[0];
+                    var placesThird = row.Split(new string[] { "<td style=\"text-align:center\">" }, StringSplitOptions.None)[6].Split('<')[0];
+                    var races = row.Split(new string[] { "<td style=\"text-align: center\">" }, StringSplitOptions.None)[1].Split('<')[0];
+
+                    if (races != "0" && (placesFirst != "0" || placesSecond != "0" || placesThird != "0"))
+                    {
+                        decimal times1 = 0M;
+                        decimal times2 = 0M;
+                        decimal times3 = 0M;
+                        if (int.Parse(placesFirst) > 0) times1 = 1 / decimal.Parse(placesFirst) * decimal.Parse(races) * multiplier1;
+                        if (int.Parse(placesSecond) > 0) times2 = 1 / decimal.Parse(placesSecond) * decimal.Parse(races) * multiplier2;
+                        if (int.Parse(placesThird) > 0) times3 = 1 / decimal.Parse(placesThird) * decimal.Parse(races) * multiplier3;
+                        var results = (times1 + times2 + times3) * nameMultiplier;
+
+                        decimal raceScore = nameMultiplier * results;
+                        resultsOwner.Add(raceScore);
+                    }
+                    else if (decimal.Parse(races) > 0)
+                    {
+                        resultsOwner.Add(1M * decimal.Parse(races));
+                    }
+                }
+                catch (Exception ex)
+                {
+                    //do nothing
+                }
+            }
 
             string htmlFather = GetHtml(urlFather);
             string htmlMother = GetHtml(urlMother);
@@ -509,8 +569,9 @@ namespace List_Comparer
             var horseScore = resultsHorse.Count > 0 ? (decimal)resultsHorse.Average(x => x) * sexWeight * ageWeight : 1;
             var jockeyScore = resultsJockey.Count > 0 ? (decimal)resultsJockey.Average(x => x) : 1;
             var trenerScore = resultsTrainer.Count > 0 ? (decimal)resultsTrainer.Average(x => x) : 1;
+            var ownerScore = resultsOwner.Count > 0 ? (decimal)resultsOwner.Average(x => x) : 1;
 
-            File.WriteAllText(@"_result.txt", horsieName + "|" + horseScore + "|" + fatherScore + "|" + motherScore + "|" + siblingsScore + "|" + jockeyScore + "|" + trenerScore + "|" + sizeRatio + "|" + resultsHorse.Count);
+            File.WriteAllText(@"_result.txt", horsieName + "|" + horseScore + "|" + fatherScore + "|" + motherScore + "|" + siblingsScore + "|" + jockeyScore + "|" + trenerScore + "|" + ownerScore + "|" + sizeRatio + "|" + resultsHorse.Count);
 
             Console.WriteLine("Finito...");
         }
@@ -545,7 +606,14 @@ namespace List_Comparer
             {
                 using (WebClient client = new WebClient())
                 {
-                    htmlHorse = client.DownloadString(url);
+                    if (url.Contains("koniewyscigowe"))
+                    {
+                        htmlHorse = client.DownloadString(url);
+                    }
+                    else
+                    {
+                        htmlHorse = client.DownloadString("https://koniewyscigowe.pl/" + url);
+                    }
                 }
             }
 
