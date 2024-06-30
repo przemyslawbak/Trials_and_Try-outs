@@ -51,11 +51,23 @@ namespace List_Comparer
 
                     try
                     {
-                         var json = await _scrapper.GetHtml(url);
+                        var json = await _scrapper.GetHtml(url);
                         var data = JsonConvert.DeserializeObject<List<OhlcvObject>>(json);
                         data.Reverse();
 
+                        var quotes = data.Select(x => new Quote()
+                        {
+                            Close = x.Close,
+                            Date = x.Date,
+                            High = x.High,
+                            Low = x.Low,
+                            Open = x.Open,
+                            Volume = x.Volume,
+                        }).ToList();
 
+                        var renko = quotes.GetRenkoAtr(100, EndType.Close).ToList();
+
+                        var res = renko.Last().IsUp ? 1 : -1; //<------
                     }
                     catch (Exception ex)
                     {
@@ -69,6 +81,8 @@ namespace List_Comparer
             tokenSource.Cancel();
 
             Console.WriteLine("Exceptions: " + exceptions);
+
+            return new OhlcvTaResult();
         }
 
         
