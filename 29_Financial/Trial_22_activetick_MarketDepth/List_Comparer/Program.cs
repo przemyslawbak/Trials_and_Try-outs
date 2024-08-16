@@ -32,8 +32,8 @@ namespace List_Comparer
             var data = new FormUrlEncodedContent(new[]
             {
                 new KeyValuePair<string, string>("sessionid", "acf9d3ce3e944261a27d5762f693a070"),
-                new KeyValuePair<string, string>("symbol", "MSFT_S U"),
-                new KeyValuePair<string, string>("source", "totalview"),
+                new KeyValuePair<string, string>("symbol", "ES_230300_FCU"),
+                new KeyValuePair<string, string>("source", "cme"),
             });
 
             var response = client.PostAsync(url, data).Result;
