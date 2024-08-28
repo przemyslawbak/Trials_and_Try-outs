@@ -31,7 +31,7 @@ namespace List_Comparer
 
             var data = new FormUrlEncodedContent(new[]
             {
-                new KeyValuePair<string, string>("sessionid", "acf9d3ce3e944261a27d5762f693a070"),
+                new KeyValuePair<string, string>("sessionid", "fe457b72039547649b9df4143ea813c9"),
                 new KeyValuePair<string, string>("symbol", "ES_230300_FCU"),
                 new KeyValuePair<string, string>("source", "cme"),
             });
