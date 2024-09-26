@@ -7,7 +7,7 @@ namespace HelloML.Trainer
         private static MLContext Context = new MLContext();
 
         // Main method
-        public static void CreateModel(string inputDataFileName, string outputModelFileName) //CAN NOT FINISH, NO SOURCE CODE :(
+        public static void CreateModel(string inputDataFileName, string outputModelFileName) //CAN NOT FINISH, NDUE TO LACK OF SAMPLE CODE
         {
             // Load data
             // Build training pipeline
