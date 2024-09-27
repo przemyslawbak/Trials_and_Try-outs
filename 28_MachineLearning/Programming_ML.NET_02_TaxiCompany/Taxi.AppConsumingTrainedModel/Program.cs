@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.ML;
 using Microsoft.ML;
+using System.Reflection;
 using Taxi.Models;
 
 namespace Taxi.AppConsumingTrainedModel
@@ -8,13 +9,29 @@ namespace Taxi.AppConsumingTrainedModel
     {
         static void Main(string[] args)
         {
+            //fixed model 1
+            /*
             //https://learn.microsoft.com/en-us/dotnet/machine-learning/how-to-guides/machine-learning-model-predictions-ml-net
             //Create MLContext
             MLContext mlContext = new MLContext();
 
             // Load Trained Model
             DataViewSchema predictionPipelineSchema;
-            ITransformer predictionPipeline = mlContext.Model.Load(@"..\..\..\..\Sample\Data\SampleTaxi.Fare.zip", out predictionPipelineSchema);
+            ITransformer predictionPipeline = mlContext.Model.Load(@"..\..\..\..\Sample\Data\SampleTaxi.Fare.zip", out predictionPipelineSchema);*/
+
+            //fixed model 2
+
+            //Create MLContext
+            MLContext mlContext = new MLContext();
+
+            var trainedModel = mlContext.Model.Load(@"..\..\..\..\Sample\Data\SampleTaxi.Fare.zip", out var modelInputSchema);
+
+            // Create prediction engine related to the loaded trained model
+            var predictionEngine = mlContext
+            .Model
+            .CreatePredictionEngine<TaxiTrip,
+            TaxiFarePrediction>(trainedModel);
+
 
             int i;
             int pax = 0;
@@ -51,7 +68,7 @@ namespace Taxi.AppConsumingTrainedModel
             };
 
             // Create PredictionEngines
-            PredictionEngine<TaxiTrip, TaxiFarePrediction> predictionEngine = mlContext.Model.CreatePredictionEngine<TaxiTrip, TaxiFarePrediction>(predictionPipeline);
+            //PredictionEngine<TaxiTrip, TaxiFarePrediction> predictionEngine = mlContext.Model.CreatePredictionEngine<TaxiTrip, TaxiFarePrediction>(predictionPipeline);
             
             //predict
             var predictedFee = predictionEngine.Predict(testTrip).FareAmount;
