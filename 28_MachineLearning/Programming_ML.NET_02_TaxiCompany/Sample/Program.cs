@@ -28,8 +28,7 @@ namespace Sample
             var fareDataProcessing = ComposeDataProcessingPipeline(mlContext); //FEATURES <- created here!!!!!
 
             //train and evaluate
-            TrainEvaluateSaveModel(mlContext, dataViewTraining, dataViewTesting, fareDataProcessing, _modelFarePath);
-
+            TrainEvaluateAndSaveModel(mlContext, dataViewTraining, dataViewTesting, fareDataProcessing, _modelFarePath);
         }
 
         private static IDataView RemoveOutliers(MLContext context, IDataView data)
@@ -60,11 +59,13 @@ namespace Sample
             return pipeline;
         }
 
-        private static void TrainEvaluateSaveModel(MLContext mlContext, IDataView dataViewTraining, IDataView dataViewTesting, IEstimator<ITransformer> fareDataProcessing, string modelFarePath)
+        private static void TrainEvaluateAndSaveModel(MLContext mlContext, IDataView dataViewTraining, IDataView dataViewTesting, IEstimator<ITransformer> fareDataProcessing, string modelFarePath)
         {
-            //pick up algo
+            //OPTION 1: CROSS VALIDATION OF SEVERAL MODELS
+
+            //pick up algo WITH cross validation
             Console.WriteLine("Pick up algo...");
-            var trainer = mlContext
+            var trainer1 = mlContext
                     .Regression
                     .Trainers
                     .OnlineGradientDescent("Label", "Features", lossFunction: new SquaredLoss());
@@ -75,7 +76,7 @@ namespace Sample
 
             //training
             Console.WriteLine("Training models...");
-            var results = mlContext.Regression.CrossValidate(transformedData, trainer, numberOfFolds: 5);
+            var results = mlContext.Regression.CrossValidate(transformedData, trainer1, numberOfFolds: 5);
             ITransformer[] models =
                 results
                     .OrderByDescending(fold => fold.Metrics.RSquared)
@@ -93,6 +94,26 @@ namespace Sample
             //save best model
             mlContext.Model.Save(bestModel, dataViewTraining.Schema, _modelFarePath);
             Console.WriteLine("The model is saved to {0}\n\n", _modelFarePath);
+
+            //OPTION 2: NO CROSS VALIDATION, JUST EVALUATE AT THE END
+
+            /*var trainer2 = mlContext
+                    .Regression
+                    .Trainers
+                    .Sdca("Label", "Features", lossFunction: new SquaredLoss());
+            var trainingPipeline = fareDataProcessing.Append(trainer2);
+
+            // Train the model fitting to the training dataset
+            var trainedModel = trainingPipeline.Fit(dataViewTraining);
+
+            // Evaluate the model and show accuracy stats
+            IDataView predictions = trainedModel.Transform(dataViewTesting);
+
+            var metrics2 = mlContext.Regression.Evaluate(predictions, labelColumnName: "Label", scoreColumnName: "Score");
+
+            // Save the trained model to a .ZIP file
+            mlContext.Model.Save(trainedModel, dataViewTraining.Schema, _modelFarePath);
+            Console.WriteLine("The model is saved to {0}\n\n", _modelFarePath);*/
         }
     }
 }
