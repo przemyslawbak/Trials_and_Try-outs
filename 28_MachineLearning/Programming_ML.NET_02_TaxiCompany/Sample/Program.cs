@@ -17,15 +17,15 @@ namespace Sample
 
             //load from files
             IDataView dataViewTraining = mlContext.Data.LoadFromTextFile<TaxiTrip>(
-                _trainDataPath, hasHeader: true, separatorChar: ',');
+                _trainDataPath, hasHeader: true, separatorChar: ','); //80%
             IDataView dataViewTesting = mlContext.Data.LoadFromTextFile<TaxiTrip>(
-                _testDataPath, hasHeader: true, separatorChar: ',');
+                _testDataPath, hasHeader: true, separatorChar: ','); //20%
 
             //remove outliers
             dataViewTraining = RemoveOutliers(mlContext, dataViewTraining);
 
             //create pipeline for data processing
-            var fareDataProcessing = ComposeDataProcessingPipeline(mlContext); //FEATURES <- created here!!!!!
+            var fareDataProcessing = ComposeDataProcessingPipeline(mlContext); //FEATURES <- created here!!!!! - all columns
 
             //train and evaluate
             TrainEvaluateAndSaveModel(mlContext, dataViewTraining, dataViewTesting, fareDataProcessing, _modelFarePath);
@@ -42,7 +42,7 @@ namespace Sample
 
         private static IEstimator<ITransformer> ComposeDataProcessingPipeline(MLContext context)
         {
-            var pipeline = context.Transforms.CopyColumns("Label", "FareAmount")
+            var pipeline = context.Transforms.CopyColumns("Label", "FareAmount") //LABEL <- created here!!!!! - target result
                 .Append(context.Transforms.Categorical.OneHotEncoding("VendorIdEncoded", "VendorId"))
                 .Append(context.Transforms.Categorical.OneHotEncoding("RateCodeEncoded", "RateCode"))
                 .Append(context.Transforms.Categorical.OneHotEncoding("PaymentTypeEncoded", "PaymentType"))
@@ -59,9 +59,22 @@ namespace Sample
             return pipeline;
         }
 
+        public static void PrintRegressionMetrics(string name, RegressionMetrics metrics)
+        {
+            Console.WriteLine($"*************************************************");
+            Console.WriteLine($"*       Metrics for {name} model      ");
+            Console.WriteLine($"*------------------------------------------------");
+            Console.WriteLine($"*       LossFn:        {metrics.LossFunction:0.##}");
+            Console.WriteLine($"*       R2 Score:      {metrics.RSquared:0.##}");
+            Console.WriteLine($"*       Absolute loss: {metrics.MeanAbsoluteError:#.##}");
+            Console.WriteLine($"********Squared loss:  {metrics.MeanSquaredError:#.##}");
+            Console.WriteLine($"*       RMS loss:      {metrics.RootMeanSquaredError:#.##}");
+            Console.WriteLine($"*************************************************");
+        }
+
         private static void TrainEvaluateAndSaveModel(MLContext mlContext, IDataView dataViewTraining, IDataView dataViewTesting, IEstimator<ITransformer> fareDataProcessing, string modelFarePath)
         {
-            //OPTION 1: CROSS VALIDATION OF SEVERAL MODELS
+            //OPTION 1: CROSS VALIDATION OF SEVERAL MODELS (better but slower than evaluation)
 
             //pick up algo WITH cross validation
             Console.WriteLine("Pick up algo...");
@@ -82,6 +95,12 @@ namespace Sample
                     .OrderByDescending(fold => fold.Metrics.RSquared)
                     .Select(fold => fold.Model)
                     .ToArray();
+            /*Rsquared:
+                Double value. RSquared (or R2) indicates the coefficient of
+                determination of the model. It is given by the ratio of mean
+                squared error of the model and the variance of the predicted
+                feature.
+            more: p.77*/
             var metrics = results
                 .OrderByDescending(fold => fold.Metrics.RSquared)
                 .Select(fold => fold.Metrics)
@@ -94,6 +113,7 @@ namespace Sample
             //save best model
             mlContext.Model.Save(bestModel, dataViewTraining.Schema, _modelFarePath);
             Console.WriteLine("The model is saved to {0}\n\n", _modelFarePath);
+            PrintRegressionMetrics(trainer1.ToString(), bestModelMetrics);
 
             //OPTION 2: NO CROSS VALIDATION, JUST EVALUATE AT THE END
 
@@ -113,7 +133,8 @@ namespace Sample
 
             // Save the trained model to a .ZIP file
             mlContext.Model.Save(trainedModel, dataViewTraining.Schema, _modelFarePath);
-            Console.WriteLine("The model is saved to {0}\n\n", _modelFarePath);*/
+            Console.WriteLine("The model is saved to {0}\n\n", _modelFarePath);
+            PrintRegressionMetrics(trainer2.ToString(), metrics2);*/
         }
     }
 }
