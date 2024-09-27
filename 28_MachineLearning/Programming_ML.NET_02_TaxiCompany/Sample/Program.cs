@@ -76,7 +76,7 @@ namespace Sample
         {
             //OPTION 1: CROSS VALIDATION OF SEVERAL MODELS (better but slower than evaluation)
 
-            //pick up algo WITH cross validation
+            /*//pick up algo WITH cross validation
             Console.WriteLine("Pick up algo...");
             var trainer1 = mlContext
                     .Regression
@@ -95,12 +95,12 @@ namespace Sample
                     .OrderByDescending(fold => fold.Metrics.RSquared)
                     .Select(fold => fold.Model)
                     .ToArray();
-            /*Rsquared:
+            *//*Rsquared:
                 Double value. RSquared (or R2) indicates the coefficient of
                 determination of the model. It is given by the ratio of mean
                 squared error of the model and the variance of the predicted
                 feature.
-            more: p.77*/
+            more: p.77*//*
             var metrics = results
                 .OrderByDescending(fold => fold.Metrics.RSquared)
                 .Select(fold => fold.Metrics)
@@ -113,11 +113,11 @@ namespace Sample
             //save best model
             mlContext.Model.Save(bestModel, dataViewTraining.Schema, _modelFarePath);
             Console.WriteLine("The model is saved to {0}\n\n", _modelFarePath);
-            PrintRegressionMetrics(trainer1.ToString(), bestModelMetrics);
+            PrintRegressionMetrics(trainer1.ToString(), bestModelMetrics);*/
 
             //OPTION 2: NO CROSS VALIDATION, JUST EVALUATE AT THE END
 
-            /*var trainer2 = mlContext
+            var trainer2 = mlContext
                     .Regression
                     .Trainers
                     .Sdca("Label", "Features", lossFunction: new SquaredLoss());
@@ -134,7 +134,7 @@ namespace Sample
             // Save the trained model to a .ZIP file
             mlContext.Model.Save(trainedModel, dataViewTraining.Schema, _modelFarePath);
             Console.WriteLine("The model is saved to {0}\n\n", _modelFarePath);
-            PrintRegressionMetrics(trainer2.ToString(), metrics2);*/
+            PrintRegressionMetrics(trainer2.ToString(), metrics2);
         }
     }
 }
