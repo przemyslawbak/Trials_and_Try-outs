@@ -9,7 +9,7 @@ namespace Taxi.AppConsumingTrainedModel
     {
         static void Main(string[] args)
         {
-            //fixed model 1
+            //fixed model 1:
             /*
             //https://learn.microsoft.com/en-us/dotnet/machine-learning/how-to-guides/machine-learning-model-predictions-ml-net
             //Create MLContext
@@ -19,8 +19,7 @@ namespace Taxi.AppConsumingTrainedModel
             DataViewSchema predictionPipelineSchema;
             ITransformer predictionPipeline = mlContext.Model.Load(@"..\..\..\..\Sample\Data\SampleTaxi.Fare.zip", out predictionPipelineSchema);*/
 
-            //fixed model 2
-
+            //fixed model 2:
             //Create MLContext
             MLContext mlContext = new MLContext();
 
