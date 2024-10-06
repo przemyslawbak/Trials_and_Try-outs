@@ -134,6 +134,24 @@ namespace Sample
 
             norm1 = Normal(torch.tensor(0.5f), torch.tensor(0.125f), generator: gen2);
             norm1.sample(10);
+
+            //Using cuda
+            //https://github.com/dotnet/TorchSharpExamples/blob/main/tutorials/CSharp/tutorial5.ipynb
+
+            torch.ones(3, 4, device: torch.CUDA);
+
+            var aa = torch.ones(3, 4, device: torch.CUDA);
+            var bb = torch.ones(3, 4, device: torch.CUDA);
+            var cc = torch.ones(3, 4, device: torch.CPU);
+
+            (aa + bb).print();
+            (aa + cc).print();
+
+            //GPU Memory management
+            var t0 = a + b;
+            var t1 = c.cuda();
+            var t2 = a + t1;
+            var t3 = t0 * t2;
         }
     }
 }
