@@ -69,12 +69,21 @@ namespace Sample
             //getting array from tensor
             var ten = torch.rand(2, 5);
             TorchSharp.Utils.TensorAccessor<float> ta = ten.data<float>();
-            float[] a = ta.ToArray();
+            float[] f = ta.ToArray();
 
             //reshaping
             torch.arange(3.0f, 5.0f, step: 0.1f).reshape(4, 5).str(fltFormat: "0.00");
 
+            //Basic Numerics
+            //https://github.com/dotnet/TorchSharpExamples/blob/main/tutorials/CSharp/tutorial3.ipynb
 
+            //arithm
+            var a = torch.ones(3, 4);
+            var b = torch.ones(3, 4);
+            var c = torch.tensor(5);
+            var arithmetic = a * c + b; //6x6x6
+            Console.WriteLine(arithmetic.ToString(TensorStringStyle.Julia));
+            Console.WriteLine(arithmetic.shape);
         }
     }
 }
