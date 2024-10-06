@@ -45,6 +45,36 @@ namespace Sample
 
             //access matrix item (array)
             Console.Write(t[0, 0]);
+
+            // Normal distribution
+            torch.randn(3, 4);
+
+            // Uniform distribution between [0,1]
+            torch.rand(3, 4);
+
+            // Uniform distribution between [100,110]
+            var uni = (torch.rand(3, 4) * 10 + 100);
+
+            //tensors from array
+            var arr = new float[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
+            var tArr = torch.from_array(arr);
+
+            //Since torch.from_array doesn't copy the data, modifying the tensor or the array will affect the other:
+            tArr.print();
+            arr[0] = 100;
+            tArr.print();
+            tArr[1] = 200;
+            tArr.print();
+
+            //getting array from tensor
+            var ten = torch.rand(2, 5);
+            TorchSharp.Utils.TensorAccessor<float> ta = ten.data<float>();
+            float[] a = ta.ToArray();
+
+            //reshaping
+            torch.arange(3.0f, 5.0f, step: 0.1f).reshape(4, 5).str(fltFormat: "0.00");
+
+
         }
     }
 }
