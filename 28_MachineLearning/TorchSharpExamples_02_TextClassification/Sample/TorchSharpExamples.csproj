@@ -6,6 +6,7 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
   <ItemGroup>
+    <PackageReference Include="libtorch-cpu-win-x64" Version="2.4.0" />
     <PackageReference Include="TorchSharp" Version="0.103.0" />
   </ItemGroup>
 </Project>
