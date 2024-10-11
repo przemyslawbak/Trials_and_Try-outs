@@ -2,6 +2,7 @@
 using TorchSharp.Modules;
 using static TorchSharp.torch;
 using static TorchSharp.torch.distributions;
+using static TorchSharp.torch.nn;
 
 namespace Sample
 {
@@ -21,7 +22,18 @@ namespace Sample
 
         static void Main(string[] args)
         {
-            
+            torch.random.manual_seed(1); //what for?
+
+            var cwd = Environment.CurrentDirectory; //what for?
+
+            var device = torch.cuda.is_available() ? torch.CUDA : torch.CPU; //CPU will be (nuget?)
+
+            Console.WriteLine($"Running TextClassification on {device.type.ToString()}"); //prints CPU
+
+            using (var reader = TorchText.Data.AG_NEWSReader.AG_NEWS("train", (Device)device, _dataLocation)) //how should be data readed?
+            {
+
+            }
         }
     }
 }
