@@ -17,7 +17,7 @@ namespace Sample
 
         private const int epochs = 15;
 
-        private readonly static string _dataLocation = Path.Join(Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory), "..", "Downloads", "AG_NEWS");
+        private readonly static string _dataLocation = Path.Join(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "AG_NEWS");
 
         static void Main(string[] args)
         {
