@@ -1,8 +1,13 @@
-﻿using TorchSharp;
-using TorchSharp.Modules;
+﻿using System;
+using System.IO;
+using System.Linq;
+using System.Collections.Generic;
+using System.Diagnostics;
+
 using static TorchSharp.torch;
-using static TorchSharp.torch.distributions;
 using static TorchSharp.torch.nn;
+using TorchSharp;
+
 
 namespace Sample
 {
@@ -30,9 +35,9 @@ namespace Sample
 
             Console.WriteLine($"Running TextClassification on {device.type.ToString()}"); //prints CPU
 
-            using (var reader = TorchText) //how should be data readed?
+            using (var reader = torch.utils.data.DataLoader) //how should be data readed?
             {
-
+                var model = new TextClassificationModel(vocab.Count, emsize, 4).to((Device)device);
             }
         }
     }

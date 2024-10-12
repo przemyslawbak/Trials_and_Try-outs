@@ -6,7 +6,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Microsoft.ML" Version="3.0.1" />
-    <PackageReference Include="Microsoft.ML.TorchSharp" Version="0.21.1" />
+    <PackageReference Include="libtorch-cpu-win-x64" Version="2.4.0" />
+    <PackageReference Include="TorchSharp" Version="0.103.0" />
+    <PackageReference Include="TorchVision" Version="0.103.0" />
   </ItemGroup>
 </Project>
