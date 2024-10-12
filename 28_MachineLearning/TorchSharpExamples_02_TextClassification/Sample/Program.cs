@@ -30,7 +30,7 @@ namespace Sample
 
             Console.WriteLine($"Running TextClassification on {device.type.ToString()}"); //prints CPU
 
-            using (var reader = TorchText.Data.AG_NEWSReader.AG_NEWS("train", (Device)device, _dataLocation)) //how should be data readed?
+            using (var reader = TorchText) //how should be data readed?
             {
 
             }
