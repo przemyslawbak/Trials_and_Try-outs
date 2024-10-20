@@ -50,7 +50,24 @@ namespace Sample
 
             Console.WriteLine($"\tCreating the model...");
 
-            Module<torch.Tensor, torch.Tensor> model = new AlexNet(_numClasses, device: device);
+            //available models
+            Module<torch.Tensor, torch.Tensor> model = new AlexNet(_numClasses, device: device); //convolutional neural network (CNN)
+            //Module<torch.Tensor, torch.Tensor> model = new TransformerModel(_numClasses, device: device); //not available
+            //Module<torch.Tensor, torch.Tensor> model = ResNet.ResNet18(_numClasses, device: device); //Deep Residual Learning
+            //Module<torch.Tensor, torch.Tensor> model = new VGG(_numClasses, device: device); //convolutional neural network (CNN)
+            //Module<torch.Tensor, torch.Tensor> model = new MobileNet(_numClasses, device); //not available
+
+            //optional: modular NN models
+            /*var modules = new List<(string, Module<Tensor, Tensor>)>();
+            modules.Add(($"conv2d-first", Conv2d(3, 32, kernelSize: 3, stride: 1, padding: 1, bias: false)));
+            modules.Add(($"bnrm2d-first", BatchNorm2d(32)));
+            modules.Add(($"relu-first", ReLU()));
+            MakeLayers(modules, 32);
+            modules.Add(("avgpool", AvgPool2d(new long[] { 2, 2 })));
+            modules.Add(("flatten", Flatten()));
+            modules.Add(($"linear", Linear(planes[planes.Length - 1], numClasses)));
+            layers = Sequential(modules);*/
+
 
             Console.WriteLine($"\tPreparing training and test data...");
             Console.WriteLine();
@@ -69,7 +86,6 @@ namespace Sample
 
                 for (var epoch = 1; epoch <= epochs; epoch++)
                 {
-
                     Stopwatch epchSW = new Stopwatch();
                     epchSW.Start();
 
