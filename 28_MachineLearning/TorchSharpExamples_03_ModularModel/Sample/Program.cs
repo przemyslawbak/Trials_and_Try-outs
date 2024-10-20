@@ -2,6 +2,8 @@
 using static TorchSharp.torch.nn;
 using TorchSharp;
 using TorchSharp.Modules;
+using PandasNet;
+using Tensorflow;
 
 namespace Sample
 {
@@ -44,8 +46,9 @@ namespace Sample
                 }
             }
 
+            var pd = new Pandas();
 
-
+            var dataset_train = pd.read_csv(url);
 
             //prepare train and test data
 
