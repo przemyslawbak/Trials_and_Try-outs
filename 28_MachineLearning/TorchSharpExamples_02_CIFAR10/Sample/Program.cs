@@ -55,8 +55,8 @@ namespace Sample
             Console.WriteLine($"\tPreparing training and test data...");
             Console.WriteLine();
 
-            var train_data = torchvision.datasets.CIFAR100(datasetPath, true, download: true);
-            var test_data = torchvision.datasets.CIFAR100(datasetPath, false, download: true); //exception
+            var train_data = torchvision.datasets.CIFAR100(datasetPath, true, download: true); //downloading train data
+            var test_data = torchvision.datasets.CIFAR100(datasetPath, true, download: true); //downloading test data
 
             using var train = new DataLoader(train_data, _trainBatchSize, device: device, shuffle: true);
             using var test = new DataLoader(test_data, _testBatchSize, device: device, shuffle: false);
