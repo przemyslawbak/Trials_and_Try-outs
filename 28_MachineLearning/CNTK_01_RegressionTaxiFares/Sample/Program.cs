@@ -30,7 +30,7 @@ namespace Sample
     internal class Program
     {
         // file paths to data files
-        private static readonly string dataPath = Path.GetFullPath(@"..\..\..\Data\yellow_tripdata_2018-12.csv");
+        private static readonly string dataPath = Path.GetFullPath(@"..\..\..\..\Data\yellow_tripdata_2018-12.csv");
 
         /// <summary>
         /// The main application entry point.
