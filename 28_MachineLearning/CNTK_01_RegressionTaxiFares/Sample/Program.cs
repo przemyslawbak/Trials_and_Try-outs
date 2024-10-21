@@ -1,9 +1,7 @@
-﻿using System;
-using System.IO;
-using System.Linq;
-using Microsoft.ML;
+﻿using Microsoft.ML;
 using Microsoft.ML.Data;
 using CNTK;
+using Sample.CNTKUtil;
 
 namespace Sample
 {
@@ -74,8 +72,8 @@ namespace Sample
             var training_labels = training.Select(v => v.GetLabel()).ToArray();
 
             // build features and labels
-            var features = NetUtil.Var(new int[] { 5 }, DataType.Float); //CNTKUtil not available anymore
-            var labels = NetUtil.Var(new int[] { 1 }, DataType.Float); //CNTKUtil not available anymore
+            var features = NetUtil.Var(new int[] { 5 }, DataType.Float);
+            var labels = NetUtil.Var(new int[] { 1 }, DataType.Float);
 
             // build a regression model
             var network = features
