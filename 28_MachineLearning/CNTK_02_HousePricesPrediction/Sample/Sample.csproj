@@ -12,6 +12,7 @@
     <PackageReference Include="CNTK.CPUOnly" Version="2.7.0" />
     <PackageReference Include="Microsoft.ML" Version="3.0.1" />
     <PackageReference Include="OpenCvSharp4" Version="4.10.0.20240616" />
+    <PackageReference Include="XPlot.Plotly" Version="4.1.0" />
   </ItemGroup>
 
 </Project>
