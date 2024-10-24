@@ -9,12 +9,9 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.ML" Version="3.0.1" />
+    <PackageReference Include="Microsoft.ML.FastTree" Version="3.0.1" />
     <PackageReference Include="Microsoft.ML.TimeSeries" Version="3.0.1" />
     <PackageReference Include="System.Data.SqlClient" Version="4.8.6" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\Taxi.Models\Rental.Models.csproj" />
   </ItemGroup>
 
   <ItemGroup>
