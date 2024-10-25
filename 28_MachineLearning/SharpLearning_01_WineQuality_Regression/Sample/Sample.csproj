@@ -8,7 +8,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="SharpLearning.Common.Interfaces" Version="0.31.8" />
+    <PackageReference Include="SharpLearning.Containers" Version="0.31.8" />
+    <PackageReference Include="SharpLearning.CrossValidation" Version="0.31.8" />
+    <PackageReference Include="SharpLearning.DecisionTrees" Version="0.31.8" />
+    <PackageReference Include="SharpLearning.FeatureTransformations" Version="0.31.8" />
     <PackageReference Include="SharpLearning.InputOutput" Version="0.31.8" />
+    <PackageReference Include="SharpLearning.Metrics" Version="0.31.8" />
+    <PackageReference Include="SharpLearning.RandomForest" Version="0.31.8" />
   </ItemGroup>
 
 </Project>
