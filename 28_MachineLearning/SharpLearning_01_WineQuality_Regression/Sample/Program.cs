@@ -1,6 +1,7 @@
 ﻿using SharpLearning.CrossValidation.TrainingTestSplitters;
 using SharpLearning.InputOutput.Csv;
 using SharpLearning.Metrics.Regression;
+using SharpLearning.Optimization;
 using SharpLearning.RandomForest.Learners;
 
 namespace Sample
@@ -26,6 +27,8 @@ namespace Sample
             // this is the observations for our learner.
             var observations = parser.EnumerateRows(c => c != targetName)
                 .ToF64Matrix();
+
+            var numberOfFeatures = observations.ColumnCount;
 
             // 30 % of the data is used for the test set. 
             var splitter = new RandomTrainingTestIndexSplitter<double>(trainingPercentage: 0.7, seed: 24);
@@ -57,6 +60,27 @@ namespace Sample
 
             // Get the variable importance from the model.
             var importances = model.GetVariableImportance(featureNameToIndex);
+
+            //https://github.com/mdabros/SharpLearning/wiki/hyperparameter-tuning
+
+            // Parameter specs for the optimizer
+            var parameters = new IParameterSpec[]
+            {
+    new MinMaxParameterSpec(min: 80, max: 300,
+        transform: Transform.Linear, parameterType: ParameterType.Discrete), // iterations
+
+    new MinMaxParameterSpec(min: 0.02, max:  0.2,
+        transform: Transform.Log10, parameterType: ParameterType.Continuous), // learning rate
+
+    new MinMaxParameterSpec(min: 8, max: 15,
+        transform: Transform.Linear, parameterType: ParameterType.Discrete), // maximumTreeDepth
+
+    new MinMaxParameterSpec(min: 0.5, max: 0.9,
+        transform: Transform.Linear, parameterType: ParameterType.Continuous), // subSampleRatio
+
+    new MinMaxParameterSpec(min: 1, max: numberOfFeatures,
+        transform: Transform.Linear, parameterType: ParameterType.Discrete), // featuresPrSplit
+            };
 
             //POSSIBLE TO SAVE AND LOAD THE MODEL
         }
