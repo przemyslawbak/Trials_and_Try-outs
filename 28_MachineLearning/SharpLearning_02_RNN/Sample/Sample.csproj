@@ -1,0 +1,25 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net7.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="SharpLearning.Common.Interfaces" Version="0.31.8" />
+    <PackageReference Include="SharpLearning.Containers" Version="0.31.8" />
+    <PackageReference Include="SharpLearning.CrossValidation" Version="0.31.8" />
+    <PackageReference Include="SharpLearning.DecisionTrees" Version="0.31.8" />
+    <PackageReference Include="SharpLearning.FeatureTransformations" Version="0.31.8" />
+    <PackageReference Include="SharpLearning.GradientBoost" Version="0.31.8" />
+    <PackageReference Include="SharpLearning.InputOutput" Version="0.31.8" />
+    <PackageReference Include="SharpLearning.Metrics" Version="0.31.8" />
+    <PackageReference Include="SharpLearning.Neural" Version="0.31.8" />
+    <PackageReference Include="SharpLearning.Optimization" Version="0.31.8" />
+    <PackageReference Include="SharpLearning.RandomForest" Version="0.31.8" />
+  </ItemGroup>
+
+</Project>
