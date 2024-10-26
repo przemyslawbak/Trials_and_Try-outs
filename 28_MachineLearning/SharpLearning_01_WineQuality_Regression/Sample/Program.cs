@@ -1,4 +1,5 @@
 ﻿using SharpLearning.CrossValidation.TrainingTestSplitters;
+using SharpLearning.GradientBoost.Learners;
 using SharpLearning.InputOutput.Csv;
 using SharpLearning.Metrics.Regression;
 using SharpLearning.Optimization;
@@ -37,16 +38,80 @@ namespace Sample
             var trainSet = trainingTestSplit.TrainingSet;
             var testSet = trainingTestSplit.TestSet;
 
-            // Create the learner and learn the model.
-            var learner = new RegressionRandomForestLearner(trees: 100);
+            // create the metric
+            var metric = new MeanSquaredErrorRegressionMetric();
+
+            //HYPERPARAMETERS
+            //https://github.com/mdabros/SharpLearning/wiki/hyperparameter-tuning
+            // Parameter specs for the optimizer
+            var parameters = new IParameterSpec[]
+            {
+    new MinMaxParameterSpec(min: 80, max: 300,
+        transform: Transform.Linear, parameterType: ParameterType.Discrete), // iterations
+
+    new MinMaxParameterSpec(min: 0.02, max:  0.2,
+        transform: Transform.Log10, parameterType: ParameterType.Continuous), // learning rate
+
+    new MinMaxParameterSpec(min: 8, max: 15,
+        transform: Transform.Linear, parameterType: ParameterType.Discrete), // maximumTreeDepth
+
+    new MinMaxParameterSpec(min: 0.5, max: 0.9,
+        transform: Transform.Linear, parameterType: ParameterType.Continuous), // subSampleRatio
+
+    new MinMaxParameterSpec(min: 1, max: numberOfFeatures,
+        transform: Transform.Linear, parameterType: ParameterType.Discrete), // featuresPrSplit
+            };
+
+            // Further split the training data to have a validation set to measure
+            // how well the model generalizes to unseen data during the optimization.
+            var validationSplit = new RandomTrainingTestIndexSplitter<double>(trainingPercentage: 0.7, seed: 24)
+                .SplitSet(trainSet.Observations, trainSet.Targets);
+
+            // Define optimizer objective (function to minimize)
+            Func<double[], OptimizerResult> minimize = p =>
+            {
+                // create the candidate learner using the current optimization parameters.
+                var candidateLearner = new RegressionRandomForestLearner(
+                                     maximumTreeDepth: (int)p[2],
+                                     subSampleRatio: p[3],
+                                     featuresPrSplit: (int)p[4],
+                                     runParallel: false);
+
+                var candidateModel = candidateLearner.Learn(validationSplit.TrainingSet.Observations,
+                validationSplit.TrainingSet.Targets);
+
+                var validationPredictions = candidateModel.Predict(validationSplit.TestSet.Observations);
+                var candidateError = metric.Error(validationSplit.TestSet.Targets, validationPredictions);
+
+                return new OptimizerResult(p, candidateError);
+            };
+
+            // create optimizer
+            var optimizer = new RandomSearchOptimizer(parameters, iterations: 30, runParallel: true);
+
+            // find best hyperparameters
+            var result = optimizer.OptimizeBest(minimize);
+            var best = result.ParameterSet;
+
+            // create the final learner using the best hyperparameters.
+            var learner = new RegressionSquareLossGradientBoostLearner(
+                            iterations: (int)best[0],
+                            learningRate: best[1],
+                            maximumTreeDepth: (int)best[2],
+                            subSampleRatio: best[3],
+                            featuresPrSplit: (int)best[4],
+                            runParallel: false);
+
+            // learn model with found parameters
             var model = learner.Learn(trainSet.Observations, trainSet.Targets);
+
+            // Create the learner and learn the model.
+            /*var learner = new RegressionRandomForestLearner(trees: 100);
+            var model = learner.Learn(trainSet.Observations, trainSet.Targets);*/
 
             // predict the training and test set.
             var trainPredictions = model.Predict(trainSet.Observations);
             var testPredictions = model.Predict(testSet.Observations);
-
-            // create the metric
-            var metric = new MeanSquaredErrorRegressionMetric();
 
             // measure the error on training and test set.
             var trainError = metric.Error(trainSet.Targets, trainPredictions);
