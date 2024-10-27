@@ -12,6 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.Spark" Version="2.1.1" />
     <PackageReference Include="SynapseML.Cognitive" Version="0.10.0" />
     <PackageReference Include="SynapseML.Core" Version="0.10.0" />
     <PackageReference Include="SynapseML.DeepLearning" Version="0.10.0" />
