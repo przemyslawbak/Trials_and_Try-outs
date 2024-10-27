@@ -12,7 +12,7 @@ namespace Sample
 
         static void Main(string[] args)
         {
-            //https://microsoft.github.io/SynapseML/docs/Reference/Dotnet%20Setup/#1-install-net
+            //https://devblogs.microsoft.com/dotnet/announcing-synapseml-for-dotnet/#a-.net-example-using-lightgbmclassifier-in-synapseml
         }
     }
 }
