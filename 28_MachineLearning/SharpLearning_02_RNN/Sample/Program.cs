@@ -1,15 +1,19 @@
 ﻿using Newtonsoft.Json;
-using SharpLearning.CrossValidation.TrainingTestSplitters;
-using SharpLearning.GradientBoost.Learners;
+using SharpLearning.FeatureTransformations.MatrixTransforms;
 using SharpLearning.InputOutput.Csv;
 using SharpLearning.Metrics.Regression;
-using SharpLearning.Optimization;
-using SharpLearning.RandomForest.Learners;
+using SharpLearning.Neural.Activations;
+using SharpLearning.Neural.Layers;
+using SharpLearning.Neural;
 using System.ComponentModel;
+using SharpLearning.Neural.Learners;
+using SharpLearning.Neural.Loss;
+using System.Diagnostics;
 
 namespace Sample
 {
     //https://github.com/mdabros/SharpLearning.Examples/tree/master/src/SharpLearning.Examples
+
     internal class Program
     {
         private static string dataPath = Path.GetFullPath(@"..\..\..\Data\output.csv");
@@ -49,25 +53,11 @@ namespace Sample
             }).Reverse().ToList();
 
             SaveToCsv(dataOhlcv, dataPath);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
             // Setup the CsvParser
             var parser = new CsvParser(() => new StreamReader(dataPath));
 
             // the column name in the wine quality data set we want to model.
-            var targetName = "quality";
+            var targetName = "Close";
 
             // read the "quality" column, this is the targets for our learner. 
             var targets = parser.EnumerateRows(targetName)
@@ -78,102 +68,31 @@ namespace Sample
             var observations = parser.EnumerateRows(c => c != targetName)
                 .ToF64Matrix();
 
+            // transform pixel values to be between 0 and 1.
+            var minMaxTransformer = new MinMaxTransformer(0.0, 1.0);
+            minMaxTransformer.Transform(observations, observations);
+
             var numberOfFeatures = observations.ColumnCount;
 
-            // 30 % of the data is used for the test set. 
-            var splitter = new RandomTrainingTestIndexSplitter<double>(trainingPercentage: 0.7, seed: 24);
+            // define the neural net.
+            var net = new NeuralNet();
+            net.Add(new InputLayer(inputUnits: numberOfFeatures));
+            net.Add(new DropoutLayer(0.2));
+            net.Add(new DenseLayer(800, Activation.Relu));
+            net.Add(new DropoutLayer(0.5));
+            net.Add(new DenseLayer(800, Activation.Relu));
+            net.Add(new DropoutLayer(0.5));
+            net.Add(new SquaredErrorRegressionLayer());
 
-            var trainingTestSplit = splitter.SplitSet(observations, targets);
-            var trainSet = trainingTestSplit.TrainingSet;
-            var testSet = trainingTestSplit.TestSet;
+            // using only 10 iteration to make the example run faster.
+            // using square error as error metric. This is only used for reporting progress.
+            var learner = new RegressionNeuralNetLearner(net, iterations: 10, loss: new SquareLoss());
+            var model = learner.Learn(observations, targets);
 
-            // create the metric
             var metric = new MeanSquaredErrorRegressionMetric();
+            var predictions = model.Predict(observations);
 
-            //HYPERPARAMETERS
-            //https://github.com/mdabros/SharpLearning/wiki/hyperparameter-tuning
-            // Parameter specs for the optimizer
-            var parameters = new IParameterSpec[]
-            {
-    new MinMaxParameterSpec(min: 80, max: 300,
-        transform: Transform.Linear, parameterType: ParameterType.Discrete), // iterations
-
-    new MinMaxParameterSpec(min: 0.02, max:  0.2,
-        transform: Transform.Log10, parameterType: ParameterType.Continuous), // learning rate
-
-    new MinMaxParameterSpec(min: 8, max: 15,
-        transform: Transform.Linear, parameterType: ParameterType.Discrete), // maximumTreeDepth
-
-    new MinMaxParameterSpec(min: 0.5, max: 0.9,
-        transform: Transform.Linear, parameterType: ParameterType.Continuous), // subSampleRatio
-
-    new MinMaxParameterSpec(min: 1, max: numberOfFeatures,
-        transform: Transform.Linear, parameterType: ParameterType.Discrete), // featuresPrSplit
-            };
-
-            // Further split the training data to have a validation set to measure
-            // how well the model generalizes to unseen data during the optimization.
-            var validationSplit = new RandomTrainingTestIndexSplitter<double>(trainingPercentage: 0.7, seed: 24)
-                .SplitSet(trainSet.Observations, trainSet.Targets);
-
-            // Define optimizer objective (function to minimize)
-            Func<double[], OptimizerResult> minimize = p =>
-            {
-                // create the candidate learner using the current optimization parameters.
-                var candidateLearner = new RegressionRandomForestLearner(
-                                     maximumTreeDepth: (int)p[2],
-                                     subSampleRatio: p[3],
-                                     featuresPrSplit: (int)p[4],
-                                     runParallel: false);
-
-                var candidateModel = candidateLearner.Learn(validationSplit.TrainingSet.Observations,
-                validationSplit.TrainingSet.Targets);
-
-                var validationPredictions = candidateModel.Predict(validationSplit.TestSet.Observations);
-                var candidateError = metric.Error(validationSplit.TestSet.Targets, validationPredictions);
-
-                return new OptimizerResult(p, candidateError);
-            };
-
-            // create optimizer
-            var optimizer = new RandomSearchOptimizer(parameters, iterations: 30, runParallel: true);
-
-            // find best hyperparameters
-            var result = optimizer.OptimizeBest(minimize);
-            var best = result.ParameterSet;
-
-            // create the final learner using the best hyperparameters.
-            var learner = new RegressionSquareLossGradientBoostLearner(
-                            iterations: (int)best[0],
-                            learningRate: best[1],
-                            maximumTreeDepth: (int)best[2],
-                            subSampleRatio: best[3],
-                            featuresPrSplit: (int)best[4],
-                            runParallel: false);
-
-            // learn model with found parameters
-            var model = learner.Learn(trainSet.Observations, trainSet.Targets);
-
-            // Create the learner and learn the model.
-            /*var learner = new RegressionRandomForestLearner(trees: 100);
-            var model = learner.Learn(trainSet.Observations, trainSet.Targets);*/
-
-            // predict the training and test set.
-            var trainPredictions = model.Predict(trainSet.Observations);
-            var testPredictions = model.Predict(testSet.Observations);
-
-            // measure the error on training and test set.
-            var trainError = metric.Error(trainSet.Targets, trainPredictions);
-            var testError = metric.Error(testSet.Targets, testPredictions);
-
-            // the variable importance requires the featureNameToIndex
-            // from the data set. This mapping describes the relation
-            // from column name to index in the feature matrix.
-            var featureNameToIndex = parser.EnumerateRows(c => c != targetName)
-                .First().ColumnNameToIndex;
-
-            // Get the variable importance from the model.
-            var importances = model.GetVariableImportance(featureNameToIndex);
+            Trace.WriteLine("Training Error: " + metric.Error(targets, predictions));
 
             //POSSIBLE TO SAVE AND LOAD THE MODEL
         }
