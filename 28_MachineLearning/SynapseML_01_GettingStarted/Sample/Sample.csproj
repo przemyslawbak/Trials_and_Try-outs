@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net7.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="Data\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="SynapseML.Cognitive" Version="0.10.0" />
+    <PackageReference Include="SynapseML.Core" Version="0.10.0" />
+    <PackageReference Include="SynapseML.DeepLearning" Version="0.10.0" />
+    <PackageReference Include="SynapseML.Lightgbm" Version="0.10.0" />
+    <PackageReference Include="SynapseML.Opencv" Version="0.10.0" />
+    <PackageReference Include="SynapseML.Vw" Version="0.10.0" />
+  </ItemGroup>
+
+</Project>
