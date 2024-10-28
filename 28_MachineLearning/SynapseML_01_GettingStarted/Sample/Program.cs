@@ -16,8 +16,7 @@ namespace Sample
             //https://devblogs.microsoft.com/dotnet/announcing-synapseml-for-dotnet/#a-.net-example-using-lightgbmclassifier-in-synapseml
             //https://microsoft.github.io/SynapseML/docs/Reference/Dotnet%20Setup/#1-install-net
             //https://www.c-sharpcorner.com/article/how-to-addedit-path-environment-variable-in-windows-11/
-
-            //'spark-submit' is not recognized as an internal or external command, :(
+            //https://github.com/dotnet/spark/blob/main/docs/developer-guide.md#debugging-spark-net-application
 
             // Create Spark session
             SparkSession spark = SparkSession //exception
