@@ -17,6 +17,8 @@ namespace Sample
             //https://microsoft.github.io/SynapseML/docs/Reference/Dotnet%20Setup/#1-install-net
             //https://www.c-sharpcorner.com/article/how-to-addedit-path-environment-variable-in-windows-11/
 
+            //'spark-submit' is not recognized as an internal or external command, :(
+
             // Create Spark session
             SparkSession spark = SparkSession //exception
                 .Builder()
