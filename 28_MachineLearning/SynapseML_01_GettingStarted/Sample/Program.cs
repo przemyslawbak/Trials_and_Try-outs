@@ -14,6 +14,7 @@ namespace Sample
         static void Main(string[] args)
         {
             //https://github.com/dotnet/spark/blob/main/docs/getting-started/windows-instructions.md
+            //next step: https://github.com/dotnet/spark/blob/main/docs/building/windows-instructions.md#building-net-samples-application
 
             // Create Spark session
             SparkSession spark = SparkSession //exception "System.Net.Internals.SocketExceptionFactory.ExtendedSocketException: 'No connection could be made because the target machine actively refused it. 127.0.0.1:5567'"
