@@ -2,133 +2,61 @@
 using static Tensorflow.KerasApi;
 using static Tensorflow.Binding;
 using static PandasNet.PandasApi;
+using OneOf.Types;
+using Tensorflow.Keras.Engine;
+using Tensorflow.NumPy;
 
-//https://github.com/SciSharp/SciSharp-Stack-Examples/blob/master/src/TensorFlowNET.Examples/NeuralNetworks/FuelEfficiencyPrediction.cs
+//https://github.com/SciSharp/SciSharp-Stack-Examples/blob/master/src/TensorFlowNET.Examples/BasicModels/LinearRegressionKeras.cs
 
 namespace Sample
 {
-    public class FuelEfficiencyPrediction : SciSharpExample, IExample
+    public class LinearRegressionKeras : SciSharpExample, IExample
     {
+        NDArray train_X, train_Y;
+        ICallback result;
+
         public ExampleConfig InitConfig()
         => Config = new ExampleConfig
         {
-            Name = "Predict fuel efficiency",
-            Enabled = true
+            Name = "Linear Regression (Keras)",
+            Enabled = true,
+            IsImportingGraph = false,
         };
 
         public bool Run()
         {
+            tf.enable_eager_execution(); //what is that?
+
             PrepareData();
+
+            BuildModel();
+
             return true;
+        }
+
+        public override void BuildModel()
+        {
+            var inputs = keras.Input(shape: 1);
+            var outputs = layers.Dense(1).Apply(inputs);
+            var model = keras.Model(inputs, outputs);
+
+            model.summary();
+            model.compile(loss: keras.losses.MeanSquaredError(),
+                optimizer: keras.optimizers.SGD(0.005f),
+                metrics: new[] { "acc" });
+            result = model.fit(train_X, train_Y, epochs: 10);
+
+            var weights = model.TrainableVariables;
+            print($"weight: {weights[0].numpy()}, bias: {weights[1].numpy()}");
         }
 
         public override void PrepareData()
         {
-            string url = $"http://archive.ics.uci.edu/ml/machine-learning-databases/auto-mpg/auto-mpg.data";
-            var dataset = pd.read_csv(url,
-                names: new[]
-                {
-                "MPG", "Cylinders", "Displacement", "Horsepower",
-                "Weight", "Acceleration", "Model Year", "Origin"
-                },
-                sep: ' ',
-                na_values: '?',
-                comment: '\t',
-                skipinitialspace: true);
-            dataset = dataset.dropna();
-            var xx = dataset.data;
+            train_X = np.array(3.3f, 4.4f, 5.5f, 6.71f, 6.93f, 4.168f, 9.779f, 6.182f,
+                    7.59f, 2.167f, 7.042f, 10.791f, 5.313f, 7.997f, 5.654f, 9.27f, 3.1f);
 
-            // The "Origin" column is categorical, not numeric.
-            // So the next step is to one-hot encode the values in the column with pd.get_dummies.
-            dataset["Origin"] = dataset["Origin"].map<string, string>((i) => i switch
-            {
-                "1" => "USA",
-                "2" => "Europe",
-                "3" => "Japan",
-                _ => "N/A"
-            });
-
-            dataset = pd.get_dummies(dataset, columns: new[] { "Origin" }, prefix: "", prefix_sep: "");
-
-            var train_dataset = dataset.sample(frac: 0.8f, random_state: 0);
-            var test_dataset = dataset.drop(train_dataset.index.array<int>());
-
-            var train_features = train_dataset.copy();
-            var test_features = test_dataset.copy();
-
-            var train_labels = train_features.pop("MPG");
-            var test_labels = test_features.pop("MPG");
-
-            // var df = train_dataset.describe().transpose()["mean", "std"];
-
-            var normalizer = tf.keras.layers.Normalization(axis: -1);
-            normalizer.adapt(train_features); //problem with dots/commas
-
-            // Linear regression
-            var horsepower = train_features["Horsepower"];
-
-            var horsepower_normalizer = layers.Normalization(input_shape: 1, axis: null);
-            horsepower_normalizer.adapt(horsepower);
-
-            var horsepower_model = keras.Sequential(horsepower_normalizer,
-                layers.Dense(units: 1));
-
-            horsepower_model.summary();
-
-            horsepower_model.compile(
-                optimizer: tf.keras.optimizers.Adam(learning_rate: 0.1f),
-                loss: tf.keras.losses.MeanAbsoluteError());
-
-            var history = horsepower_model.fit(
-                train_features["Horsepower"],
-                train_labels,
-                epochs: 100,
-                // Suppress logging.
-                verbose: 1,
-                // Calculate validation results on 20% of the training data.
-                validation_split: 0.2f);
-
-            var results = horsepower_model.evaluate(
-                test_features["Horsepower"],
-                test_labels, verbose: 1);
-
-            // Linear regression with multiple inputs
-            var linear_model = keras.Sequential(normalizer,
-                layers.Dense(units: 1));
-
-            linear_model.compile(
-                optimizer: tf.keras.optimizers.Adam(learning_rate: 0.1f),
-                loss: tf.keras.losses.MeanAbsoluteError());
-
-            history = linear_model.fit(
-                train_features,
-                train_labels,
-                epochs: 100,
-                verbose: 1,
-                validation_split: 0.2f);
-
-            linear_model.evaluate(
-                test_features, test_labels, verbose: 1);
-
-            // Regression with a deep neural network (DNN)
-            var dnn_model = keras.Sequential(normalizer,
-                layers.Dense(64, activation: "relu"),
-                layers.Dense(64, activation: "relu"),
-                layers.Dense(1));
-
-            dnn_model.compile(
-                optimizer: tf.keras.optimizers.Adam(learning_rate: 0.001f),
-                loss: tf.keras.losses.MeanAbsoluteError());
-
-            history = dnn_model.fit(
-                train_features,
-                train_labels,
-                epochs: 100,
-                verbose: 1,
-                validation_split: 0.2f);
-
-            dnn_model.evaluate(
-                test_features, test_labels, verbose: 1);
+            train_Y = np.array(1.7f, 2.76f, 2.09f, 3.19f, 1.694f, 1.573f, 3.366f,
+                    2.596f, 2.53f, 1.221f, 2.827f, 3.465f, 1.65f, 2.904f, 2.42f, 2.94f, 1.3f);
         }
     }
 
@@ -136,7 +64,8 @@ namespace Sample
     {
         static void Main(string[] args)
         {
-            //
+            LinearRegressionKeras x = new LinearRegressionKeras();
+            x.Run();
         }
     }
 }
