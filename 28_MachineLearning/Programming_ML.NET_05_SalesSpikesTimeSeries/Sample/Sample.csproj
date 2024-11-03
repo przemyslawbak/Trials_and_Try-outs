@@ -1,5 +1,12 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
+  <Target Name="CopyFiles" AfterTargets="Build">
+    <ItemGroup>
+      <PlotFiles Include="$(TargetDir)runtimes\win-x64\native\**\*.*" />
+    </ItemGroup>
+    <Message Text="Executing AfterBuild copy files task" Importance="High" />
+    <Copy SourceFiles="@(PlotFiles)" DestinationFolder="$(TargetDir)%(RecursiveDir)" ContinueOnError="true" />
+    <Message Text="AfterBuild copy files task completed" Importance="High" />
+  </Target>
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>net7.0</TargetFramework>
@@ -11,6 +18,7 @@
     <PackageReference Include="Microsoft.ML" Version="3.0.1" />
     <PackageReference Include="Microsoft.ML.FastTree" Version="3.0.1" />
     <PackageReference Include="Microsoft.ML.TimeSeries" Version="3.0.1" />
+    <PackageReference Include="PLplot" Version="5.13.7" />
     <PackageReference Include="System.Data.SqlClient" Version="4.8.6" />
   </ItemGroup>
 
