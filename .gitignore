@@ -433,3 +433,4 @@ MigrationBackup/
 /29_Financial/Trial_20_Fmp_API_Parser/List_Comparer/UrlVault.cs
 /29_Financial/Trial_11_OHLCV_Indics/List_Comparer/KeyLocker.cs
 /02_APIs/Ntfy_01_SimpleCall/Sample/ConfigProvider.cs
+/29_Financial/Trial_07_OHLCV_Spike/List_Comparer/KeyLocker.cs
