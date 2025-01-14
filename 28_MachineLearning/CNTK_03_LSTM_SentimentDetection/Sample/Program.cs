@@ -1,11 +1,4 @@
-﻿using Microsoft.ML;
-using Microsoft.ML.Data;
-using CNTK;
-using Sample.CNTKUtil;
-using XPlot.Plotly;
-using System;
-using System.IO;
-using System.Linq;
+﻿using Sample.CNTKUtil;
 using System.IO.Compression;
 
 namespace Sample
