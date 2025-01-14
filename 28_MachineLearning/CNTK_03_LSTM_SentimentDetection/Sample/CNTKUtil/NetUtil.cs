@@ -550,25 +550,23 @@ namespace Sample.CNTKUtil
         }
 
         /// <summary>
-        /// Get an Adam learner to train the network.
+        /// Get an SGD learner to train the network.
         /// </summary>
         /// <param name="input">The network to train.</param>
         /// <param name="learningRateSchedule">The learning rate schedule.</param>
         /// <param name="momentumSchedule">The moment schedule.</param>
         /// <param name="unitGain">The unit gain.</param>
         /// <returns>An Adamlearner to train the network.</returns>
-        public static CNTK.Learner GetAdamLearner(
+        public static CNTK.Learner GetSGDLearner(
             this CNTK.Function input,
             (double, uint) learningRateSchedule,
             (double, uint) momentumSchedule,
             bool unitGain = true)
         {
             var parameterVector = new CNTK.ParameterVector((System.Collections.ICollection)input.Parameters());
-            return CNTK.CNTKLib.AdamLearner(
+            return CNTK.CNTKLib.SGDLearner(
                 parameterVector,
-                new CNTK.TrainingParameterScheduleDouble(learningRateSchedule.Item1, learningRateSchedule.Item2),
-                new CNTK.TrainingParameterScheduleDouble(momentumSchedule.Item1, momentumSchedule.Item2),
-                unitGain);
+                new CNTK.TrainingParameterScheduleDouble(learningRateSchedule.Item1, learningRateSchedule.Item2));
         }
 
         /// <summary>

@@ -175,7 +175,7 @@ namespace Sample.CNTKUtil
             }
 
             // set up an adam learner
-            var learner = Model.GetAdamLearner(
+            var learner = Model.GetSGDLearner(
                 (LearningRate, (uint)BatchSize),   // remove batch_size?
                 (0.9, (uint)BatchSize),  // remove batch_size?
                 unitGain: false);
