@@ -20,11 +20,11 @@ namespace Sample
             // with only 2 input variables (x and y):
             double[][] inputs =
             {
-                new[] { 3.0, 1.0 },
-                new[] { 7.0, 1.0 },
-                new[] { 3.0, 1.0 },
-                new[] { 3.0, 2.0 },
-                new[] { 6.0, 1.0 },
+                new[] { 3.0, 1.0, 2.6 },
+                new[] { 7.0, 1.0, 2.5 },
+                new[] { 3.0, 1.0, 2.4 },
+                new[] { 3.0, 2.0, 2.3 },
+                new[] { 6.0, 1.0, 2.1 },
             };
 
             // The task is to output a non-linear combination 
