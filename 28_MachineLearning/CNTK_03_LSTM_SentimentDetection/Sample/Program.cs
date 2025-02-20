@@ -1,7 +1,6 @@
 ﻿using CNTK;
 using Sample.CNTKUtil;
 using System.IO.Compression;
-using XPlot.Plotly;
 
 namespace Sample
 {
@@ -61,6 +60,7 @@ namespace Sample
 
             // set up the loss function and the classification error function
             var lossFunc = CNTKLib.BinaryCrossEntropy(network.Output, labels);
+            lossFunc.Save();
             var errorFunc = NetUtil.BinaryClassificationError(network.Output, labels);
 
             // use the Adam learning algorithm
