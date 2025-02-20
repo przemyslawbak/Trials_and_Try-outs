@@ -3,6 +3,7 @@ using Accord.Math;
 using Accord.Math.Optimization.Losses;
 using Accord.Statistics.Kernels;
 using Accord.Math.Optimization;
+using Accord.IO;
 
 namespace Sample
 {
@@ -60,6 +61,8 @@ namespace Sample
 
             // Use the algorithm to learn the machine
             var svm = teacher.Learn(inputs, outputs);
+
+            Serializer.Save(svm);
 
             // Get machine's predictions for inputs
             double[] prediction = svm.Score(inputs);
