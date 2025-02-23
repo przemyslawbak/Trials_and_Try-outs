@@ -110,6 +110,7 @@ namespace Sample
             var trainingError = new double[maxEpochs];
             var testingError = new double[maxEpochs];
             var batchCount = 0;
+
             for (int epoch = 0; epoch < maxEpochs; epoch++)
             {
                 // train one epoch on batches
@@ -123,15 +124,15 @@ namespace Sample
                     var labelBatch = labels.GetBatch(training_labels, indices, begin, end);
 
                     // train the network on the batch
-                    var result = trainer.TrainBatch(
+                    var (Loss, Evaluation) = trainer.TrainBatch(
                         new[] {
             (features, featureBatch),
             (labels,  labelBatch)
                         },
                         false
                     );
-                    loss[epoch] += result.Loss;
-                    trainingError[epoch] += result.Evaluation;
+                    loss[epoch] += Loss;
+                    trainingError[epoch] += Evaluation;
                     batchCount++;
                 });
 
