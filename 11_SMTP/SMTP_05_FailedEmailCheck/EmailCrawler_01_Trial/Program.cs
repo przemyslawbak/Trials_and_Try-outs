@@ -28,8 +28,8 @@ namespace EmailCrawler_01_Trial
                 {
                     using (Pop3Client client = new Pop3Client())
                     {
-                        client.Connect(_hidden.GetE(), 110, MailKit.Security.SecureSocketOptions.None);
-                        client.Authenticate(konto, _hidden.GetP());
+                        client.Connect(_hidden.GetHost(), _hidden.GetPort(), MailKit.Security.SecureSocketOptions.None);
+                        client.Authenticate(konto, _hidden.GetPass());
                         var count = client.GetMessageCount();
                         for (int i = 0; i < client.Count; i++)
                         {
