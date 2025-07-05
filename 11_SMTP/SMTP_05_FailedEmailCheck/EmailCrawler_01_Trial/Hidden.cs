@@ -14,7 +14,7 @@
 
         internal int GetPort()
         {
-            return 587;
+            return 110;
         }
     }
 }

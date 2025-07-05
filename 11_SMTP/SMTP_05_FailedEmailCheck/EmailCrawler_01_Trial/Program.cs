@@ -36,7 +36,7 @@ namespace EmailCrawler_01_Trial
                             var wiadomosc = client.GetMessage(i);
                             string temat = wiadomosc.Subject.ToString();
                             string tresc = wiadomosc.Body.ToString();
-                            if (temat.Contains("Mail delivery failed"))
+                            if (temat.Contains("Undeliverable") || (temat.Contains("(Failure)")))
                             {
                                 if (tresc.Contains("@"))
                                 {
@@ -45,12 +45,23 @@ namespace EmailCrawler_01_Trial
                                     string[] words = tresc.Split(" ");
                                     foreach (var word in words)
                                     {
-                                        if (word.Contains("@"))
+                                        if (word.Contains("@") && !word.Contains("myworkemail.net"))
                                         {
                                             string replacement = Regex.Replace(word, @"\t|\n|\r", "");
-                                            dane.AdresEmail = replacement;
+                                            if (replacement.Contains("mailto:"))
+                                            {
+                                                dane.AdresEmail = replacement.Split('(')[1].Split(')')[0];
+                                            }
+                                            else
+                                            {
+                                                dane.AdresEmail = replacement.ToLower().Trim().Replace("<", "").Replace(">", "");
+                                            }
                                             Console.WriteLine(dane.AdresEmail);
-                                            adresy.Add(dane.AdresEmail);
+
+                                            if (dane.AdresEmail.Contains("@"))
+                                            {
+                                                adresy.Add(dane.AdresEmail);
+                                            }
                                             break;
                                         }
                                     }
