@@ -48,11 +48,11 @@ namespace SampleCore
             var toReturn = new List<DataIndexComponentHistoric>();
 
             // Group by year and month, then take the first day of each month
-            var filtered = records
+            var filteredByMonth = records
                 .GroupBy(r => new { r.Date.Year, r.Date.Month })
                 .ToList();
 
-            foreach (var record in filtered)
+            foreach (var record in filteredByMonth)
             {
                 var firstDateItem = record.OrderBy(x => x.Date).First();
                 var date = firstDateItem.Date;
@@ -60,7 +60,7 @@ namespace SampleCore
                 var toAdd = firstDateMultipleItems.Select(r => new DataIndexComponentHistoric
                 {
                     ComponentGuid = Guid.NewGuid(),
-                    IndexName = "S&P 500",
+                    IndexName = "SPX",
                     ComponentsName = r.Name,
                     ComponentsWeight = r.Weight,
                     UtcTimeStamp = r.Date.ToUniversalTime()
@@ -74,11 +74,12 @@ namespace SampleCore
 
         private static void SaveToDatabase(List<DataIndexComponentHistoric> records)
         {
-            using var context = new AppDbContext();
+            var secret = new Secret();
+            using var context = new AppDbContext(secret.ConnectionString);
             context.Database.EnsureCreated();
 
-            context.IndexComponents.AddRange(records);
-            context.SaveChanges();
+            //context.ComponentsHistoric.AddRange(records);
+            //context.SaveChanges();
         }
     }
 
@@ -107,12 +108,19 @@ namespace SampleCore
     // DbContext
     public class AppDbContext : DbContext
     {
-        public DbSet<DataIndexComponentHistoric> IndexComponents { get; set; }
+        private string connectionString;
+
+        public AppDbContext(string connectionString)
+        {
+            this.connectionString = connectionString;
+        }
+
+        public DbSet<DataIndexComponentHistoric> ComponentsHistoric { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             // Configure your database connection here
-            optionsBuilder.UseSqlServer("Your_Connection_String_Here");
+            optionsBuilder.UseSqlServer(connectionString);
         }
     }
 }
