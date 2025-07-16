@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using CsvHelper;
+using CsvHelper.Configuration;
+using System.ComponentModel.DataAnnotations;
 using System.Globalization;
 
 namespace SampleCore
@@ -28,7 +30,7 @@ namespace SampleCore
 
         private static List<CsvRecord> ReadCsvFile(string filePath)
         {
-            var config = new CsvConfiguration(CultureInfo.InvariantCulture)
+            var config = new CsvConfiguration(CultureInfo.InvariantCulture) //nuget CsvHelper
             {
                 HasHeaderRecord = true,
                 Delimiter = ","
@@ -92,7 +94,7 @@ namespace SampleCore
     }
 
     // DbContext
-    public class AppDbContext : DbContext
+    public class AppDbContext : DbContext //nuget Microsoft.EntityFrameworkCore, //Microsoft.EntityFrameworkCore.SqlServer
     {
         public DbSet<DataIndexComponentHistoric> IndexComponents { get; set; }
 
