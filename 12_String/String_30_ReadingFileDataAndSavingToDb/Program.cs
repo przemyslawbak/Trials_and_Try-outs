@@ -61,9 +61,9 @@ namespace SampleCore
                 {
                     ComponentGuid = Guid.NewGuid(),
                     IndexName = "SPX",
-                    ComponentsName = r.Name,
+                    ComponentsName = r.Ticker,
                     ComponentsWeight = r.Weight,
-                    UtcTimeStamp = r.Date.ToUniversalTime()
+                    UtcTimeStamp = r.Date
                 });
 
                 toReturn.AddRange(toAdd);
