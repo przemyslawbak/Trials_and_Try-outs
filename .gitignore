@@ -435,3 +435,4 @@ MigrationBackup/
 /02_APIs/Ntfy_01_SimpleCall/Sample/ConfigProvider.cs
 /29_Financial/Trial_07_OHLCV_Spike/List_Comparer/KeyLocker.cs
 /29_Financial/Trial_21_Renko/List_Comparer/KeyLocker.cs
+/12_String/String_30_ReadingFileDataAndSavingToDb/Secret.cs
