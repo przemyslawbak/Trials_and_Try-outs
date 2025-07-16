@@ -78,8 +78,8 @@ namespace SampleCore
             using var context = new AppDbContext(secret.ConnectionString);
             context.Database.EnsureCreated();
 
-            //context.ComponentsHistoric.AddRange(records);
-            //context.SaveChanges();
+            context.ComponentsHistoric.AddRange(records);
+            context.SaveChanges();
         }
     }
 
@@ -89,8 +89,6 @@ namespace SampleCore
         public DateTime Date { get; set; }
         public decimal Rank { get; set; }
         public string Ticker { get; set; }
-        public string Name { get; set; }
-        public string Sector { get; set; }
         public decimal Weight { get; set; }
     }
 
