@@ -31,7 +31,7 @@ namespace SampleCore
 
         private static List<CsvRecord> ReadCsvFile(string filePath)
         {
-            var config = new CsvConfiguration(CultureInfo.InvariantCulture) //nuget CsvHelper
+            var config = new CsvConfiguration(CultureInfo.InvariantCulture)
             {
                 HasHeaderRecord = true,
                 Delimiter = ","
@@ -76,7 +76,7 @@ namespace SampleCore
     public class CsvRecord
     {
         public DateTime Date { get; set; }
-        public int Rank { get; set; }
+        public decimal Rank { get; set; }
         public string Ticker { get; set; }
         public string Name { get; set; }
         public string Sector { get; set; }
@@ -95,7 +95,7 @@ namespace SampleCore
     }
 
     // DbContext
-    public class AppDbContext : DbContext //nuget Microsoft.EntityFrameworkCore, //Microsoft.EntityFrameworkCore.SqlServer
+    public class AppDbContext : DbContext
     {
         public DbSet<DataIndexComponentHistoric> IndexComponents { get; set; }
 
