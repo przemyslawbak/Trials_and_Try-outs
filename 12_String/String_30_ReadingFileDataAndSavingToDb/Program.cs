@@ -45,21 +45,31 @@ namespace SampleCore
 
         private static List<DataIndexComponentHistoric> FilterFirstDayOfMonth(List<CsvRecord> records)
         {
+            var toReturn = new List<DataIndexComponentHistoric>();
+
             // Group by year and month, then take the first day of each month
             var filtered = records
                 .GroupBy(r => new { r.Date.Year, r.Date.Month })
-                .Select(g => g.OrderBy(r => r.Date).First())
                 .ToList();
 
-            // Convert to target model
-            return filtered.Select(r => new DataIndexComponentHistoric
+            foreach (var record in filtered)
             {
-                ComponentGuid = Guid.NewGuid(),
-                IndexName = "S&P 500",
-                ComponentsName = r.Name,
-                ComponentsWeight = r.Weight,
-                UtcTimeStamp = r.Date.ToUniversalTime()
-            }).ToList();
+                var firstDateItem = record.OrderBy(x => x.Date).First();
+                var date = firstDateItem.Date;
+                var firstDateMultipleItems = record.Where(x => x.Date == date);
+                var toAdd = firstDateMultipleItems.Select(r => new DataIndexComponentHistoric
+                {
+                    ComponentGuid = Guid.NewGuid(),
+                    IndexName = "S&P 500",
+                    ComponentsName = r.Name,
+                    ComponentsWeight = r.Weight,
+                    UtcTimeStamp = r.Date.ToUniversalTime()
+                });
+
+                toReturn.AddRange(toAdd);
+            }
+
+            return toReturn;
         }
 
         private static void SaveToDatabase(List<DataIndexComponentHistoric> records)
