@@ -31,9 +31,9 @@ namespace SampleCore
                     // Interpolate weights for this month
                     var interpolatedWeights = InterpolateWeights(octoberData, julyData, allComponents, factor);
 
-                    // Generate the CSV file
+                    // Generate the CSV file with original headers
                     string fileName = $"MonthlyWeights/{date:yyyy_MM}.csv";
-                    SaveToCsv(interpolatedWeights, fileName, date);
+                    SaveToCsvWithOriginalHeaders(interpolatedWeights, fileName, date);
 
                     Console.WriteLine($"Generated: {fileName}");
                 }
@@ -98,15 +98,20 @@ namespace SampleCore
             return result;
         }
 
-        static void SaveToCsv(Dictionary<string, double> weights, string filePath, DateTime date)
+        static void SaveToCsvWithOriginalHeaders(Dictionary<string, double> weights, string filePath, DateTime date)
         {
             using (var writer = new StreamWriter(filePath))
             {
-                writer.WriteLine("Component,Weight");
+                // Write original headers
+                writer.WriteLine("UtcTimeStamp\tIndexName\tComponentsName\tComponentsWeight");
 
-                foreach (var kvp in weights.OrderByDescending(kvp => kvp.Value))
+                // Format the timestamp to match the input files
+                string timestamp = date.ToString("yyyy-MM-dd 00:00:00.0000000");
+
+                // Write data lines (sorted by component name to match original order)
+                foreach (var kvp in weights.OrderBy(kvp => kvp.Key))
                 {
-                    writer.WriteLine($"{kvp.Key},{kvp.Value.ToString("0.0000", CultureInfo.InvariantCulture)}");
+                    writer.WriteLine($"{timestamp}\tSPX\t{kvp.Key}\t{kvp.Value.ToString("0.0000", CultureInfo.InvariantCulture)}");
                 }
             }
         }
