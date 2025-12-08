@@ -11,10 +11,13 @@ namespace Async
     {
         static void Main(string[] args)
         {
-            IEnumerable<int> items = Enumerable.Range(0, 20);
+            IEnumerable<int> items = Enumerable.Range(0, 20000000);
             Parallel.ForEach(items, i =>
             {
-                Console.WriteLine(i);
+                for (int j = 0; j < 10_000_000; j++)
+                {
+                    double v = Math.Tan(j);
+                }
             });
         }
     }
