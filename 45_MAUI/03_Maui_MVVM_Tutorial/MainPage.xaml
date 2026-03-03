@@ -10,13 +10,15 @@
             VerticalOptions="Center">
 
             <Entry x:Name="EntryFirst" Placeholder="First Name" TextChanged="EntryFirst_TextChanged"/>
-            <Entry x:Name="EntryLast" Placeholder="Last Name" TextChanged="EntryLastTextChanged"/>
+            <Entry x:Name="EntryLast" Placeholder="Last Name" TextChanged="EntryLast_TextChanged"/>
 
             <Label x:Name="LabelFullName"/>
 
             <Button
+                x:Name="ButtonTest"
                 Text="Click Me"
-                HorizontalOptions="Center"/>
+                HorizontalOptions="Center"
+                Clicked="Button_Clicked"/>
 
         </VerticalStackLayout>
     </ScrollView>

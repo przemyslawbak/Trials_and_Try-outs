@@ -1,8 +1,8 @@
 ﻿
 namespace Sample_MAUI
 {
-    //https://www.youtube.com/watch?v=B-5e0PJtSDs
-    
+    //https://youtu.be/AXpTeiWtbC8?t=558
+
     public partial class MainPage : ContentPage
     {
         public MainPage()
@@ -23,6 +23,11 @@ namespace Sample_MAUI
         void UpdateLabel()
         {
             LabelFullName.Text = $"(EntryFirst.Text) (EntryLast.Text)";
+        }
+
+        void Button_Clicked(object? sender, EventArgs e)
+        {
+            Console.WriteLine(LabelFullName.Text);
         }
     }
 }
