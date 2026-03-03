@@ -1,27 +1,28 @@
-﻿namespace Sample_MAUI
+﻿
+namespace Sample_MAUI
 {
     //https://www.youtube.com/watch?v=B-5e0PJtSDs
     
     public partial class MainPage : ContentPage
     {
-        int count = 0;
-
         public MainPage()
         {
             InitializeComponent();
         }
 
-        private void OnCounterClicked(object sender, EventArgs e)
+        private void EntryFirst_TextChanged(object? sender, TextChangedEventArgs e)
         {
-            count += 10;
+            UpdateLabel();
+        }
 
-            if (count == 1)
-                CounterBtn.Text = $"Clicked {count} time";
-            else
-                CounterBtn.Text = $"Clicked {count} times";
+        private void EntryLast_TextChanged(object? sender, TextChangedEventArgs e)
+        {
+            UpdateLabel();
+        }
 
-            SemanticScreenReader.Announce(CounterBtn.Text);
+        void UpdateLabel()
+        {
+            LabelFullName.Text = $"(EntryFirst.Text) (EntryLast.Text)";
         }
     }
-
 }
