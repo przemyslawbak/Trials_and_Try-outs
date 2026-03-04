@@ -1,6 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewmodel="clr-namespace:Sample_MAUI"
+             x:DataType="viewmodel:MainViewModel"
              x:Class="Sample_MAUI.MainPage">
 
     <ScrollView>
@@ -9,16 +11,23 @@
             Padding="30"
             VerticalOptions="Center">
 
-            <Entry x:Name="EntryFirst" Placeholder="First Name" TextChanged="EntryFirst_TextChanged"/>
-            <Entry x:Name="EntryLast" Placeholder="Last Name" TextChanged="EntryLast_TextChanged"/>
+            <Entry Placeholder="First Name"
+                   Text="{Binding FirstName}"
+                   />
+            <Entry Placeholder="Last Name"
+                   Text="{Binding LastName}"
+                   />
 
-            <Label x:Name="LabelFullName"/>
+            <Label 
+                   Text="{Binding FullName}"
+                
+                />
 
             <Button
-                x:Name="ButtonTest"
+                IsEnabled="{Binding IsNotBusy}"
+                Command="{Binding TapCommand}"
                 Text="Click Me"
-                HorizontalOptions="Center"
-                Clicked="Button_Clicked"/>
+                HorizontalOptions="Center"/>
 
         </VerticalStackLayout>
     </ScrollView>

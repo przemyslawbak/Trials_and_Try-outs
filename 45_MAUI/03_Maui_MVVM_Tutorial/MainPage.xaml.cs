@@ -8,26 +8,8 @@ namespace Sample_MAUI
         public MainPage()
         {
             InitializeComponent();
-        }
 
-        private void EntryFirst_TextChanged(object? sender, TextChangedEventArgs e)
-        {
-            UpdateLabel();
-        }
-
-        private void EntryLast_TextChanged(object? sender, TextChangedEventArgs e)
-        {
-            UpdateLabel();
-        }
-
-        void UpdateLabel()
-        {
-            LabelFullName.Text = $"(EntryFirst.Text) (EntryLast.Text)";
-        }
-
-        void Button_Clicked(object? sender, EventArgs e)
-        {
-            Console.WriteLine(LabelFullName.Text);
+            BindingContext = new MainViewModel();
         }
     }
 }
