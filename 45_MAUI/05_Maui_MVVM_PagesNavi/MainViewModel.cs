@@ -33,7 +33,11 @@ namespace Sample_MAUI
         [RelayCommand]
         async Task Go()
         {
-            await Shell.Current.GoToAsync(nameof(DetailPage));
+            await Shell.Current.GoToAsync(nameof(DetailPage), true, 
+                new Dictionary<string, object>()
+                {
+                    {"FullName", FullName },
+                });
         }
     }
 }
