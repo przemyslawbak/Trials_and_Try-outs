@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewmodel="clr-namespace:Sample_MAUI"
+             x:DataType="viewmodel:MainViewModel"
+             x:Class="Sample_MAUI.MainPage">
+
+    <ScrollView>
+        <VerticalStackLayout
+            Spacing="25"
+            Padding="30"
+            VerticalOptions="Center">
+
+            <Entry Placeholder="First Name"
+                   Text="{Binding FirstName}"
+                   />
+            <Entry Placeholder="Last Name"
+                   Text="{Binding LastName}"
+                   />
+
+            <Label 
+                   Text="{Binding FullName}"
+                
+                />
+
+            <Button
+                IsEnabled="{Binding IsNotBusy}"
+                Command="{Binding TapCommand}"
+                Text="Click Me"
+                HorizontalOptions="Center"/>
+            
+            <Button
+                Command="{Binding GoCommand}"
+                CommandParameter="{Binding .}"
+                Text="Go to detail page"
+                HorizontalOptions="Center"/>
+
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>
