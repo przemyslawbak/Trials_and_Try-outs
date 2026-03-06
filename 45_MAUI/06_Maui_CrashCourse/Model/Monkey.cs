@@ -1,4 +1,6 @@
-﻿namespace Sample_MAUI.Model;
+﻿using System.Text.Json.Serialization;
+
+namespace MonkeyFinder.Model;
 
 public class Monkey
 {
@@ -9,5 +11,9 @@ public class Monkey
     public int Population { get; set; }
     public double Latitude { get; set; }
     public double Longitude { get; set; }
+}
+
+[JsonSerializable(typeof(List<Monkey>))]
+internal sealed partial class MonkeyContext : JsonSerializerContext{
 
 }

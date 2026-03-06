@@ -1,4 +1,4 @@
-﻿namespace Sample_MAUI.ViewModel;
+﻿namespace MonkeyFinder.ViewModel;
 
 public partial class BaseViewModel : ObservableObject
 {

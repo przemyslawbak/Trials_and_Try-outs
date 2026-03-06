@@ -1,5 +1,32 @@
-﻿namespace Sample_MAUI.ViewModel;
+﻿namespace MonkeyFinder.ViewModel;
 
+[QueryProperty(nameof(Monkey), "Monkey")]
 public partial class MonkeyDetailsViewModel : BaseViewModel
 {
+    IMap map;
+    public MonkeyDetailsViewModel(IMap map)
+    {
+        this.map = map;
+    }
+
+    [ObservableProperty]
+    public partial Monkey Monkey { get; set; }
+
+    [RelayCommand]
+    async Task OpenMap()
+    {
+        try
+        {
+            await map.OpenAsync(Monkey.Latitude, Monkey.Longitude, new MapLaunchOptions
+            {
+                Name = Monkey.Name,
+                NavigationMode = NavigationMode.None
+            });
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine($"Unable to launch maps: {ex.Message}");
+            await Shell.Current.DisplayAlertAsync("Error, no Maps app!", ex.Message, "OK");
+        }
+    }
 }

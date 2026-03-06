@@ -1,7 +1,7 @@
 ﻿global using CommunityToolkit.Mvvm.ComponentModel;
 global using CommunityToolkit.Mvvm.Input;
-global using Sample_MAUI.Model;
-global using Sample_MAUI.ViewModel;
+global using MonkeyFinder.Model;
+global using MonkeyFinder.ViewModel;
 global using System.Collections.ObjectModel;
 global using System.ComponentModel;
 global using System.Diagnostics;
