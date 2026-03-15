@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="03_Learning_GDScript_Book"
-run/main_scene="uid://e2uvgxft1wo2"
+run/main_scene="uid://cua1wpp2yw05d"
 config/features=PackedStringArray("4.6", "GL Compatibility")
 config/icon="res://icon.svg"
 
