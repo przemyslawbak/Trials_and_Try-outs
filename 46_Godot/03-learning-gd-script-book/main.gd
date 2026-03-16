@@ -16,5 +16,22 @@ func _ready():
 		"c": 1.5,
 	}
 	
-	for item in inventory:
-		print(item)
+	var xxx = Enemy.new()
+	
+	var i: int = 1
+	#i = "dupa" <= does not work
+	
+	print(add(1, 1))
+
+func add(a: int, b: int):
+	return a + b
+	
+class Enemy:
+	var damage = 5
+	var health = 10
+	func take_damage(amount):
+		health -= amount
+		if health <= 0:
+			die()
+	func die():
+		print("Aaargh I died!")
