@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://d043w3m3l6dr0"]
+
+[ext_resource type="Script" uid="uid://dm5ae65ul2ss7" path="res://control_flow_test.gd" id="1_r208r"]
+
+[node name="ControlFlowTest" type="Node2D" unique_id=321251241]
+script = ExtResource("1_r208r")
