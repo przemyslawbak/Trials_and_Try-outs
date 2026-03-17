@@ -1,10 +1,22 @@
 [gd_scene format=3 uid="uid://ck2g1dbq0ftuw"]
 
 [ext_resource type="Script" uid="uid://bogn8s7l6tf3a" path="res://player.gd" id="1_ig7tw"]
+[ext_resource type="Texture2D" uid="uid://bb36r4crpguyv" path="res://assets/sprites/character/character01.png" id="2_0xm2m"]
 
 [node name="Main" type="Node" unique_id=55030060]
 
 [node name="Player" type="Node2D" parent="." unique_id=1032440381]
+position = Vector2(82, 53)
 script = ExtResource("1_ig7tw")
 
 [node name="Sprite2D" type="Sprite2D" parent="Player" unique_id=805855118]
+scale = Vector2(3, 3)
+texture = ExtResource("2_0xm2m")
+
+[node name="HealthLabel" type="Label" parent="Player" unique_id=1427880069]
+offset_left = -21.0
+offset_top = -48.0
+offset_right = 22.0
+offset_bottom = -25.0
+text = "10/10"
+metadata/_edit_use_anchors_ = true
