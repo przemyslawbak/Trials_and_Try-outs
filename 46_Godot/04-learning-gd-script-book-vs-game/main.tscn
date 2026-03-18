@@ -6,8 +6,9 @@
 [node name="Main" type="Node" unique_id=55030060]
 
 [node name="Player" type="Node2D" parent="." unique_id=1032440381]
-position = Vector2(82, 53)
+position = Vector2(45, 56)
 script = ExtResource("1_ig7tw")
+health = 8
 
 [node name="Sprite2D" type="Sprite2D" parent="Player" unique_id=805855118]
 scale = Vector2(3, 3)

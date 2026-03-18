@@ -27,3 +27,4 @@ project/assembly_name="04_Learning_GDScript_Book_VSGame"
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0
+environment/defaults/default_clear_color=Color(0.3718309, 0.22369769, 0.032200243, 1)
