@@ -1,5 +1,8 @@
-extends Node2D
+extends CharacterBody2D
 const MAX_HEALTH: int = 10
+@export var max_speed: float = 500.0
+@export var acceleration: float = 2500.0
+@export var deceleration: float = 1500.0
 @export var damage: float = 0.0
 @export var player_name: String = "Erika"
 @export var health: int = 10:
@@ -10,6 +13,15 @@ const MAX_HEALTH: int = 10
 		update_health_label()
 
 @onready var _health_label: Label = $HealthLabel
+
+func _physics_process(delta: float):
+	var input_direction: Vector2 = Input.get_vector("move_left", "move_right", "move_up",
+	"move_down")
+	if input_direction != Vector2.ZERO:
+		velocity = velocity.move_toward(input_direction * max_speed, acceleration * delta)
+	else:
+		velocity = velocity.move_toward(Vector2.ZERO, deceleration * delta)
+	move_and_slide()
 
 func add_health_points(difference: int):
 	health += difference

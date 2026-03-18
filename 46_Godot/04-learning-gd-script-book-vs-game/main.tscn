@@ -5,7 +5,21 @@
 
 [node name="Main" type="Node" unique_id=55030060]
 
-[node name="Player" type="Node2D" parent="." unique_id=1032440381]
+[node name="Arena" type="Node2D" parent="." unique_id=1897710018]
+
+[node name="Boulder" type="Polygon2D" parent="Arena" unique_id=341108638]
+position = Vector2(111.78082, 11.71875)
+scale = Vector2(0.5890411, 0.7395833)
+color = Color(0.82618886, 0.49855062, 0.4219139, 1)
+polygon = PackedVector2Array(152, 45, 126, 92, 211, 141, 272, 89, 251, 49)
+
+[node name="OuterWall" type="Polygon2D" parent="Arena" unique_id=1056905292]
+color = Color(0.1764706, 0.17254902, 0.18039216, 1)
+invert_enabled = true
+invert_border = 10.0
+polygon = PackedVector2Array(15, 11, 443, 9, 443, 228, 11, 223)
+
+[node name="Player" type="CharacterBody2D" parent="." unique_id=3896707]
 position = Vector2(45, 56)
 script = ExtResource("1_ig7tw")
 health = 8
