@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://crebuauuy04bv"]
+
+[node name="Boulder" type="Polygon2D" unique_id=1452461317]
+scale = Vector2(0.5890411, 0.7395833)
+color = Color(0.82618886, 0.49855062, 0.4219139, 1)
+polygon = PackedVector2Array(152, 45, 126, 92, 211, 141, 272, 89, 251, 49)
