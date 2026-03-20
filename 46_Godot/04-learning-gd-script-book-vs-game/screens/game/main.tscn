@@ -1,5 +1,6 @@
 [gd_scene format=3 uid="uid://ck2g1dbq0ftuw"]
 
+[ext_resource type="PackedScene" uid="uid://buyhicgkbkqa5" path="res://parts/collectibles/health_potion.tscn" id="1_230xn"]
 [ext_resource type="PackedScene" uid="uid://be2eg5vgcemrj" path="res://parts/player/player.tscn" id="1_q216d"]
 
 [node name="Main" type="Node" unique_id=55030060]
@@ -18,4 +19,25 @@ invert_enabled = true
 invert_border = 10.0
 polygon = PackedVector2Array(15, 11, 443, 9, 443, 228, 11, 223)
 
+[node name="StaticBody2D" type="StaticBody2D" parent="Arena/OuterWall" unique_id=2079515195]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Arena/OuterWall/StaticBody2D" unique_id=1333634978]
+polygon = PackedVector2Array(443, -1, 443, 239, 457, 239, 458, -2)
+
+[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="Arena/OuterWall/StaticBody2D" unique_id=1449249191]
+polygon = PackedVector2Array(1, 222, 453, 229, 454, 241, 1, 240)
+
+[node name="CollisionPolygon2D3" type="CollisionPolygon2D" parent="Arena/OuterWall/StaticBody2D" unique_id=795507690]
+polygon = PackedVector2Array(457, 7, 0, 9, 0, -3, 465, -2)
+
+[node name="CollisionPolygon2D4" type="CollisionPolygon2D" parent="Arena/OuterWall/StaticBody2D" unique_id=1426329312]
+polygon = PackedVector2Array(11, 221, 16, -11, -1, -10, 0, 223)
+
+[node name="HealthPotion" parent="Arena" unique_id=1047868435 instance=ExtResource("1_230xn")]
+position = Vector2(126, 160)
+
+[node name="HealthPotion2" parent="Arena" unique_id=1198852997 instance=ExtResource("1_230xn")]
+position = Vector2(355, 164)
+
 [node name="Player" parent="." unique_id=244421971 instance=ExtResource("1_q216d")]
+position = Vector2(60, 60)

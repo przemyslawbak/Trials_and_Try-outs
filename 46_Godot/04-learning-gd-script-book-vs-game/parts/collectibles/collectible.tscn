@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://c3nn8nnnaf56"]
+
+[ext_resource type="Script" uid="uid://buvxbihkrl0pv" path="res://parts/collectibles/collectible.gd" id="1_gysdb"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_qpy8h"]
+radius = 25.01
+
+[node name="Collectible" type="Node2D" unique_id=1047868435]
+script = ExtResource("1_gysdb")
+
+[node name="Area2D" type="Area2D" parent="." unique_id=1487328030]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1583830693]
+shape = SubResource("CircleShape2D_qpy8h")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1371284141]
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

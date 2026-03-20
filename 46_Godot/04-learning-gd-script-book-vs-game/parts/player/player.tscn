@@ -4,7 +4,13 @@
 [ext_resource type="Texture2D" uid="uid://bb36r4crpguyv" path="res://assets/sprites/character/character01.png" id="2_i3pqv"]
 [ext_resource type="Script" uid="uid://c0xolikmuph2x" path="res://parts/player/camera_position.gd" id="3_l4n0l"]
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_l4n0l"]
+radius = 23.0
+height = 48.0
+
 [node name="Player" type="CharacterBody2D" unique_id=244421971]
+collision_layer = 3
+up_direction = Vector2(0.99875236, -0.049937617)
 script = ExtResource("1_onrkg")
 health = 8
 
@@ -31,3 +37,7 @@ drag_top_margin = 0.1
 drag_right_margin = 0.1
 drag_bottom_margin = 0.1
 editor_draw_drag_margin = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=450876590]
+position = Vector2(0, 2)
+shape = SubResource("CapsuleShape2D_l4n0l")

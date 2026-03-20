@@ -1,0 +1,12 @@
+[gd_scene format=3 uid="uid://buyhicgkbkqa5"]
+
+[ext_resource type="PackedScene" uid="uid://c3nn8nnnaf56" path="res://parts/collectibles/collectible.tscn" id="1_dk62n"]
+[ext_resource type="Texture2D" uid="uid://dtcu32oasjseu" path="res://assets/sprites/collectibles/health_potion.png" id="2_c6n0i"]
+[ext_resource type="Script" uid="uid://cd41mdf2thpk2" path="res://parts/collectibles/health_potion.gd" id="2_n50sm"]
+
+[node name="HealthPotion" unique_id=1047868435 instance=ExtResource("1_dk62n")]
+script = ExtResource("2_n50sm")
+
+[node name="Sprite2D" parent="." index="1" unique_id=1371284141]
+scale = Vector2(2, 2)
+texture = ExtResource("2_c6n0i")

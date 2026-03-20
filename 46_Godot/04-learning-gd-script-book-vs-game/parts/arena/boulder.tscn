@@ -4,3 +4,8 @@
 scale = Vector2(0.5890411, 0.7395833)
 color = Color(0.82618886, 0.49855062, 0.4219139, 1)
 polygon = PackedVector2Array(152, 45, 126, 92, 211, 141, 272, 89, 251, 49)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=1803613276]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D" unique_id=311380803]
+polygon = PackedVector2Array(152.7907, 44.61972, 127.32558, 93.295784, 210.51163, 140.61972, 271.6279, 89.23944, 251.25581, 50.02817)
