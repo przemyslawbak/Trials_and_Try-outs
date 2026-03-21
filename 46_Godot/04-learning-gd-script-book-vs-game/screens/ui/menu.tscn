@@ -1,0 +1,60 @@
+[gd_scene format=3 uid="uid://boacujucp7ffk"]
+
+[node name="Menu" type="Node2D" unique_id=1908461747]
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1871310221]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="." unique_id=132113639]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -161.0
+offset_top = -41.5
+offset_right = 161.0
+offset_bottom = 41.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MainUIContainer" type="VBoxContainer" parent="CenterContainer" unique_id=835864252]
+layout_mode = 2
+theme_override_constants/separation = 200
+
+[node name="TitleLabel" type="Label" parent="CenterContainer/MainUIContainer" unique_id=1725992722]
+layout_mode = 2
+theme_override_font_sizes/font_size = 60
+text = "TEST GAME"
+horizontal_alignment = 1
+
+[node name="PanelContainer" type="PanelContainer" parent="CenterContainer/MainUIContainer" unique_id=1821562005]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="CenterContainer/MainUIContainer/PanelContainer" unique_id=1332677958]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/MainUIContainer/PanelContainer/MarginContainer" unique_id=997012695]
+layout_mode = 2
+theme_override_constants/separation = 50
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/MainUIContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=767710258]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="PlayButton" type="Button" parent="CenterContainer/MainUIContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer" unique_id=597174766]
+layout_mode = 2
+text = "PLAY"
+
+[node name="ExitButton" type="Button" parent="CenterContainer/MainUIContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer" unique_id=703905555]
+layout_mode = 2
+text = "EXIT"
+
+[node name="Label" type="Label" parent="CenterContainer/MainUIContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=577453113]
+layout_mode = 2
+text = "Lorem ipsu ccredit label"
+horizontal_alignment = 1
