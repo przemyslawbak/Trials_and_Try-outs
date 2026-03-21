@@ -3,6 +3,14 @@
 [ext_resource type="PackedScene" uid="uid://buyhicgkbkqa5" path="res://parts/collectibles/health_potion.tscn" id="1_230xn"]
 [ext_resource type="PackedScene" uid="uid://be2eg5vgcemrj" path="res://parts/player/player.tscn" id="1_q216d"]
 
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_230xn"]
+vertices = PackedVector2Array(402.1797, 187.0625, 50.953125, 178.92969, 54.046875, 50.71875, 402.8125, 48.28125)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(15, 11, 10, 218, 442, 228, 443, 8)])
+parsed_geometry_type = 1
+source_geometry_mode = 1
+agent_radius = 40.0
+
 [node name="Main" type="Node" unique_id=55030060]
 
 [node name="Arena" type="Node2D" parent="." unique_id=1897710018]
@@ -41,3 +49,6 @@ position = Vector2(355, 164)
 
 [node name="Player" parent="." unique_id=244421971 instance=ExtResource("1_q216d")]
 position = Vector2(60, 60)
+
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="." unique_id=729298310 groups=["navigation_polygon_source_geometry_group"]]
+navigation_polygon = SubResource("NavigationPolygon_230xn")
