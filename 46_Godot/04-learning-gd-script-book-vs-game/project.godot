@@ -16,7 +16,7 @@ compatibility/default_parent_skeleton_in_mesh_instance_3d=true
 
 config/name="04_Learning_GDScript_Book_VSGame"
 config/description="Enter an interesting project description here!"
-run/main_scene="uid://ck2g1dbq0ftuw"
+run/main_scene="uid://boacujucp7ffk"
 config/features=PackedStringArray("4.6")
 config/icon="res://icon.png"
 
