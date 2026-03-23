@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://boacujucp7ffk"]
 
 [ext_resource type="Script" uid="uid://chxbrsm70cjjm" path="res://screens/ui/menu.gd" id="1_l4wkl"]
+[ext_resource type="PackedScene" uid="uid://bxw604s6uehnc" path="res://parts/game_over_scene/game_over_menu.tscn" id="2_extux"]
 
 [node name="Menu" type="Control" unique_id=1236611205]
 layout_mode = 3
@@ -64,6 +65,11 @@ text = "EXIT"
 layout_mode = 2
 text = "Lorem ipsu ccredit label"
 horizontal_alignment = 1
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=2096804512]
+
+[node name="GameOverMenu" parent="CanvasLayer" unique_id=1622671236 instance=ExtResource("2_extux")]
+visible = false
 
 [connection signal="pressed" from="CenterContainer/MainUIContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/PlayButton" to="." method="_on_play_button_pressed"]
 [connection signal="pressed" from="CenterContainer/MainUIContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/ExitButton" to="." method="_on_exit_button_pressed"]
