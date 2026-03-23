@@ -5,6 +5,7 @@ extends Node2D
 @export var start_interval: float = 1.5
 @export var end_interval: float = 0.5
 @export var time_delta: float = -0.01
+@export var spawn_interval: float = 1.5
 
 
 @onready var _spawn_timer: Timer = $SpawnTimer
