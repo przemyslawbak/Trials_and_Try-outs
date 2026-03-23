@@ -3,3 +3,5 @@
 [node name="EntitySpawner" type="Node2D" unique_id=1981042939]
 
 [node name="Positions" type="Node2D" parent="." unique_id=788114376]
+
+[node name="SpawnTimer" type="Timer" parent="." unique_id=1203721086]
