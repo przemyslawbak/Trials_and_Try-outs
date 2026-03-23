@@ -1,0 +1,5 @@
+[gd_scene format=3 uid="uid://prf3d0mrmnx6"]
+
+[node name="EntitySpawner" type="Node2D" unique_id=1981042939]
+
+[node name="Positions" type="Node2D" parent="." unique_id=788114376]
