@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://bppggt8owxuqx"]
+
+[ext_resource type="Texture2D" uid="uid://b53enicokee3b" path="res://assets/sprites/projectiles/arrow01.png" id="1_30p03"]
+[ext_resource type="Script" uid="uid://wbhpsbq2qn10" path="res://parts/projectile/projectile.gd" id="1_wiihm"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_30p03"]
+radius = 6.0
+height = 12.0
+
+[node name="Projectile" type="Node2D" unique_id=767075006]
+script = ExtResource("1_wiihm")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=2115606942]
+texture = ExtResource("1_30p03")
+
+[node name="EnemyDetectionArea" type="Area2D" parent="." unique_id=863039161]
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyDetectionArea" unique_id=1586098853]
+shape = SubResource("CapsuleShape2D_30p03")

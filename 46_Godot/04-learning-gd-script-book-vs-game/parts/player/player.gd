@@ -1,6 +1,11 @@
 class_name Player extends CharacterBody2D
 
+
 signal died
+
+
+@export var pojectile_scene: PackedScene = preload("res://parts/projectile/projectile.tscn")
+
 
 const MAX_HEALTH: int = 10
 
@@ -57,3 +62,29 @@ func _physics_process(delta: float):
 
 func get_hit():
 	health -= 1
+
+
+func _on_shoot_timer_timeout():
+	if health == 0: return
+
+	var closest_enemy: Enemy
+	var smallest_distance: float = INF
+
+	var all_enemies: Array = get_tree().get_nodes_in_group("enemy")
+
+	for enemy in all_enemies:
+		var distance_to_enemy: float = global_position.distance_to(enemy.global_position)
+		if distance_to_enemy < smallest_distance:
+			closest_enemy = enemy
+			smallest_distance = distance_to_enemy
+
+	if not closest_enemy:
+		return
+
+	if smallest_distance > shoot_distance:
+		return
+
+	var new_projectile: Projectile = pojectile_scene.instantiate()
+	new_projectile.target = closest_enemy
+	get_parent().add_child(new_projectile)
+	new_projectile.global_position = global_position

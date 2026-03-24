@@ -12,7 +12,12 @@ height = 48.0
 collision_layer = 3
 up_direction = Vector2(0.99875236, -0.049937617)
 script = ExtResource("1_onrkg")
+pojectile_scene = null
 health = 8
+max_speed = null
+acceleration = null
+deceleration = null
+shoot_distance = null
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=110908856]
 scale = Vector2(3, 3)
@@ -41,3 +46,7 @@ editor_draw_drag_margin = true
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=450876590]
 position = Vector2(0, 2)
 shape = SubResource("CapsuleShape2D_l4n0l")
+
+[node name="ShootTimer" type="Timer" parent="." unique_id=1802675917]
+wait_time = 0.5
+autostart = true
