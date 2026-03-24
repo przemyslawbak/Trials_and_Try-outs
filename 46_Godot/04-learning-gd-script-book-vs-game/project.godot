@@ -20,6 +20,10 @@ run/main_scene="uid://boacujucp7ffk"
 config/features=PackedStringArray("4.6")
 config/icon="res://icon.png"
 
+[autoload]
+
+HighscoreManager="*uid://d8bubwm4skm1"
+
 [dotnet]
 
 project/assembly_name="04_Learning_GDScript_Book_VSGame"
