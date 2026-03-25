@@ -11,6 +11,7 @@ config_version=5
 [application]
 
 config/name="05_GodotIntro"
+run/main_scene="uid://cog747yplddgj"
 config/features=PackedStringArray("4.6", "GL Compatibility")
 config/icon="res://icon.svg"
 
