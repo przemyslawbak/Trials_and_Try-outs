@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://qq41mdtx2kcl"]
+
+[ext_resource type="Texture2D" uid="uid://34igx2tce64" path="res://Sprites/character_robot_interact.png" id="1_v0iea"]
+[ext_resource type="Script" uid="uid://bljsv0gq77ial" path="res://Scripts/player.gd" id="2_cvnsp"]
+[ext_resource type="PackedScene" uid="uid://351p7v3qyuoq" path="res://Scenes/greetings_label.tscn" id="3_6t5aa"]
+
+[node name="Player" type="Sprite2D" unique_id=102555814]
+position = Vector2(539, 449)
+texture = ExtResource("1_v0iea")
+script = ExtResource("2_cvnsp")
+
+[node name="GreetingsLabel" parent="." unique_id=691782157 instance=ExtResource("3_6t5aa")]
+offset_left = 62.0
+offset_top = -79.0
+offset_right = 153.0
+offset_bottom = -56.0
