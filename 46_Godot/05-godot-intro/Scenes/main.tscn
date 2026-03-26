@@ -1,11 +1,10 @@
 [gd_scene format=3 uid="uid://cog747yplddgj"]
 
-[ext_resource type="Script" uid="uid://bw41351soq5kn" path="res://Scripts/greetings_label.gd" id="1_jjgbg"]
+[ext_resource type="PackedScene" uid="uid://351p7v3qyuoq" path="res://Scenes/greetings_label.tscn" id="1_jjgbg"]
 
 [node name="Main" type="Node2D" unique_id=1811512659]
 
-[node name="GreetingsLabel" type="Label" parent="." unique_id=501424445]
-offset_right = 40.0
-offset_bottom = 23.0
-text = "Hello World"
-script = ExtResource("1_jjgbg")
+[node name="GreetingsLabel" parent="." unique_id=691782157 instance=ExtResource("1_jjgbg")]
+
+[node name="GreetingsLabel2" parent="." unique_id=596698506 instance=ExtResource("1_jjgbg")]
+text = "Hello Godot"
