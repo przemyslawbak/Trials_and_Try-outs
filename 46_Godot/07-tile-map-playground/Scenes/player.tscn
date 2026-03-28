@@ -282,5 +282,5 @@ shape = SubResource("CircleShape2D_f60y1")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1793708804]
 sprite_frames = SubResource("SpriteFrames_yh6i2")
-animation = &"up-right-idle"
+animation = &"up-right-walk"
 offset = Vector2(0, -14)

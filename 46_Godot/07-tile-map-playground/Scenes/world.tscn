@@ -1,6 +1,8 @@
 [gd_scene format=4 uid="uid://dua3yjlsabbaf"]
 
+[ext_resource type="Script" uid="uid://blsduc1ni1qnr" path="res://Scripts/world.gd" id="1_5a7ea"]
 [ext_resource type="Texture2D" uid="uid://cj84th15f1xo0" path="res://Assets/MapTiles/spritesheet.png" id="1_a02cp"]
+[ext_resource type="PackedScene" uid="uid://datokhdybmaoo" path="res://Scenes/player.tscn" id="2_go701"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_go701"]
 texture = ExtResource("1_a02cp")
@@ -268,6 +270,7 @@ physics_layer_0/collision_layer = 1
 sources/2 = SubResource("TileSetAtlasSource_go701")
 
 [node name="World" type="Node2D" unique_id=228562071]
+script = ExtResource("1_5a7ea")
 
 [node name="Ground-lvl0" type="TileMapLayer" parent="." unique_id=1936472476]
 y_sort_enabled = true
@@ -284,3 +287,20 @@ tile_set = SubResource("TileSet_5a7ea")
 y_sort_enabled = true
 tile_map_data = PackedByteArray("AAAGABQAAgAEAAQAAAAIABIAAgAFAAQAAAAGABsAAgAKAAUAAAALABwAAgAAAAQAAAALABsAAgAAAAQAAAAMABwAAgAAAAQAAAA=")
 tile_set = SubResource("TileSet_5a7ea")
+
+[node name="Player" parent="." unique_id=2014952304 instance=ExtResource("2_go701")]
+position = Vector2(160, 94)
+
+[node name="UI" type="CanvasLayer" parent="." unique_id=531903486]
+
+[node name="MarginContainer" type="MarginContainer" parent="UI" unique_id=987402686]
+offset_right = 40.0
+offset_bottom = 40.0
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+
+[node name="NextTurnButton" type="Button" parent="UI/MarginContainer" unique_id=232353272]
+layout_mode = 2
+text = "Next Turn"
+
+[connection signal="pressed" from="UI/MarginContainer/NextTurnButton" to="Player" method="_on_next_turn_button_pressed"]
