@@ -23,7 +23,6 @@ var _is_moving := false
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
 
 
-# Returns all valid target world-positions (1–3 steps along each iso axis)
 func get_reachable_positions(max_tiles: int = 3) -> Array[Vector2]:
 	var result: Array[Vector2] = []
 	for dir in ISO_DIRECTIONS:
@@ -33,7 +32,6 @@ func get_reachable_positions(max_tiles: int = 3) -> Array[Vector2]:
 	return result
 
 
-# Returns direction + tile count for a reachable position, or empty dict if none
 func get_move_data_for(target: Vector2) -> Dictionary:
 	for dir in ISO_DIRECTIONS:
 		var step: Vector2 = ISO_DIRECTIONS[dir]

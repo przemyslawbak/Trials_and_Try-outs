@@ -6,9 +6,9 @@ const CLICK_RADIUS := 12.0
 @onready var player: CharacterBody2D = $Player
 @onready var next_turn_button: Button = $UI/MarginContainer/NextTurnButton
 
-var _reachable_positions: Array[Vector2] = []
 var _selected_direction: String = ""
 var _selected_tiles: int = 0
+var _reachable_positions: Array[Vector2] = []
 
 
 func _ready() -> void:
@@ -58,9 +58,7 @@ func _on_next_turn_button_pressed() -> void:
 		return
 	if _selected_tiles == 0 or _selected_direction == "":
 		return
-
 	player.move_in_direction(_selected_direction, _selected_tiles)
-
 	await get_tree().create_timer(0.1).timeout
 	while player.is_moving():
 		await get_tree().create_timer(0.05).timeout
