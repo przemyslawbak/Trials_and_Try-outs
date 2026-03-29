@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://blsduc1ni1qnr" path="res://Scripts/world.gd" id="1_5a7ea"]
 [ext_resource type="Texture2D" uid="uid://cj84th15f1xo0" path="res://Assets/MapTiles/spritesheet.png" id="1_a02cp"]
 [ext_resource type="PackedScene" uid="uid://datokhdybmaoo" path="res://Scenes/player.tscn" id="2_go701"]
+[ext_resource type="Script" uid="uid://b7yo1umfwwk1g" path="res://Scripts/arrow_overlay.gd" id="3_8j60k"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_go701"]
 texture = ExtResource("1_a02cp")
@@ -287,6 +288,9 @@ tile_set = SubResource("TileSet_5a7ea")
 y_sort_enabled = true
 tile_map_data = PackedByteArray("AAAGABQAAgAEAAQAAAAIABIAAgAFAAQAAAAGABsAAgAKAAUAAAALABwAAgAAAAQAAAALABsAAgAAAAQAAAAMABwAAgAAAAQAAAA=")
 tile_set = SubResource("TileSet_5a7ea")
+
+[node name="ArrowOverlay" type="Node2D" parent="." unique_id=1127894480]
+script = ExtResource("3_8j60k")
 
 [node name="Player" parent="." unique_id=2014952304 instance=ExtResource("2_go701")]
 position = Vector2(160, 94)
