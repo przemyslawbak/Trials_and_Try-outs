@@ -23,6 +23,26 @@ var _is_moving := false
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
 
 
+# Returns all valid target world-positions (1–3 steps along each iso axis)
+func get_reachable_positions(max_tiles: int = 3) -> Array[Vector2]:
+	var result: Array[Vector2] = []
+	for dir in ISO_DIRECTIONS:
+		var step: Vector2 = ISO_DIRECTIONS[dir]
+		for t in range(1, max_tiles + 1):
+			result.append(global_position + step * t)
+	return result
+
+
+# Returns direction + tile count for a reachable position, or empty dict if none
+func get_move_data_for(target: Vector2) -> Dictionary:
+	for dir in ISO_DIRECTIONS:
+		var step: Vector2 = ISO_DIRECTIONS[dir]
+		for t in range(1, 4):
+			if (global_position + step * t).distance_to(target) < 2.0:
+				return {"direction": dir, "tiles": t}
+	return {}
+
+
 func move_in_direction(direction: String, tiles: int) -> void:
 	if _is_moving or tiles <= 0:
 		return
@@ -38,7 +58,6 @@ func move_in_direction(direction: String, tiles: int) -> void:
 
 	var anim_base: String = DIR_ANIMATION.get(direction, "down-right")
 	sprite.play(anim_base + "-walk")
-
 	_is_moving = true
 
 	var tween := create_tween()
