@@ -33,6 +33,16 @@ func _refresh_reachable() -> void:
 		arrow_overlay.hide_facing_cursor()
 
 
+func _clear_selection() -> void:
+	_selected_direction = ""
+	_selected_tiles     = 0
+	_selected_facing    = ""
+	_awaiting_facing    = false
+	_destination        = Vector2.INF
+	arrow_overlay.clear_path()
+	arrow_overlay.hide_facing_cursor()
+
+
 func _pick_tile(mouse_pos: Vector2) -> Vector2:
 	var best      := Vector2.INF
 	var best_dist := CLICK_RADIUS
@@ -68,6 +78,12 @@ func _input(event: InputEvent) -> void:
 	if player.is_moving():
 		return
 
+	# ── escape key: clear all selection ──────────────────────────────────────
+	if event is InputEventKey and event.pressed and not event.echo:
+		if event.keycode == KEY_ESCAPE:
+			_clear_selection()
+		return
+
 	# ── mouse motion: update orbiting facing cursor ───────────────────────────
 	if event is InputEventMouseMotion:
 		if _awaiting_facing:
@@ -79,6 +95,11 @@ func _input(event: InputEvent) -> void:
 	if not (event is InputEventMouseButton):
 		return
 	if not event.pressed:
+		return
+
+	# ── right click: clear all selection ─────────────────────────────────────
+	if event.button_index == MOUSE_BUTTON_RIGHT:
+		_clear_selection()
 		return
 
 	# ── left click ────────────────────────────────────────────────────────────
