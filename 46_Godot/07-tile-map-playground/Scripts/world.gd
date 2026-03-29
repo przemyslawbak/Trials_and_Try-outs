@@ -93,10 +93,6 @@ func _input(event: InputEvent) -> void:
 			arrow_overlay.keep_facing_cursor(_selected_facing)
 			return
 
-		if event.double_click:
-			_on_next_turn_button_pressed()
-			return
-
 		var picked := _pick_tile(get_global_mouse_position())
 		if picked == Vector2.INF:
 			arrow_overlay.clear_path()
