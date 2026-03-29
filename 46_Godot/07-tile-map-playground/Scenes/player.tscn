@@ -3,8 +3,8 @@
 [ext_resource type="Script" uid="uid://kic7r2boipap" path="res://Scripts/player.gd" id="1_cvnsp"]
 [ext_resource type="Texture2D" uid="uid://ddnog8uthtof1" path="res://Assets/SpriteSheets/spritesheet.png" id="1_v0iea"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_f60y1"]
-radius = 8.0
+[sub_resource type="CircleShape2D" id="CircleShape2D_cvnsp"]
+radius = 7.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_cvnsp"]
 atlas = ExtResource("1_v0iea")
@@ -278,7 +278,7 @@ collision_layer = 2
 script = ExtResource("1_cvnsp")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=341511888]
-shape = SubResource("CircleShape2D_f60y1")
+shape = SubResource("CircleShape2D_cvnsp")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1793708804]
 sprite_frames = SubResource("SpriteFrames_yh6i2")

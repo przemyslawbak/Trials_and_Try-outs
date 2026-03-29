@@ -302,5 +302,3 @@ theme_override_constants/margin_top = 20
 [node name="NextTurnButton" type="Button" parent="UI/MarginContainer" unique_id=232353272]
 layout_mode = 2
 text = "Next Turn"
-
-[connection signal="pressed" from="UI/MarginContainer/NextTurnButton" to="Player" method="_on_next_turn_button_pressed"]
