@@ -1,14 +1,9 @@
 extends CharacterBody2D
 
-# Isometric tile size (must match TileMapLayer settings: 32x16)
 const TILE_WIDTH := 32
 const TILE_HEIGHT := 16
-
-# Movement speed in pixels per second during tween
 const MOVE_SPEED := 120.0
 
-# Direction vectors in isometric screen-space (per tile step)
-# Isometric axes: NE = right+up, SE = right+down, SW = left+down, NW = left+up
 const ISO_DIRECTIONS := {
 	"NE": Vector2(TILE_WIDTH / 2.0,  -TILE_HEIGHT / 2.0),
 	"SE": Vector2(TILE_WIDTH / 2.0,   TILE_HEIGHT / 2.0),
@@ -16,7 +11,6 @@ const ISO_DIRECTIONS := {
 	"NW": Vector2(-TILE_WIDTH / 2.0, -TILE_HEIGHT / 2.0),
 }
 
-# Animation names per direction
 const DIR_ANIMATION := {
 	"NE": "up-right",
 	"SE": "down-right",
@@ -30,9 +24,7 @@ var _is_moving := false
 
 
 func move_in_direction(direction: String, tiles: int) -> void:
-	if _is_moving:
-		return
-	if tiles <= 0:
+	if _is_moving or tiles <= 0:
 		return
 
 	var dir_vector: Vector2 = ISO_DIRECTIONS.get(direction, Vector2.ZERO)
@@ -44,15 +36,14 @@ func move_in_direction(direction: String, tiles: int) -> void:
 	var distance: float = global_position.distance_to(target_position)
 	var duration: float = distance / MOVE_SPEED
 
-	# Play walk animation
 	var anim_base: String = DIR_ANIMATION.get(direction, "down-right")
 	sprite.play(anim_base + "-walk")
 
 	_is_moving = true
 
-	# Tween to target
 	var tween := create_tween()
-	tween.tween_property(self, "global_position", target_position, duration).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+	tween.tween_property(self, "global_position", target_position, duration) \
+		.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
 	tween.tween_callback(_on_move_finished.bind(anim_base))
 
 

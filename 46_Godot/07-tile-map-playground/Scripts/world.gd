@@ -10,7 +10,6 @@ const MAX_TILES := 3
 var selected_direction: String = "SE"
 var selected_tiles: int = 1
 
-# Guard flag — prevents toggled handlers from firing during programmatic updates
 var _updating := false
 
 
