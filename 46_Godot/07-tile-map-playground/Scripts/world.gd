@@ -6,7 +6,7 @@ const CLICK_RADIUS := 12.0
 @onready var player: CharacterBody2D = $Player
 @onready var next_turn_button: Button = $UI/MarginContainer/NextTurnButton
 
-var _selected_direction: String = ""
+var _selected_direction: String = "NE"
 var _selected_tiles: int = 0
 var _reachable_positions: Array[Vector2] = []
 

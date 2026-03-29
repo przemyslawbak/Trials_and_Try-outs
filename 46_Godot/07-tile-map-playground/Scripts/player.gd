@@ -22,6 +22,9 @@ var _is_moving := false
 
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
 
+func _ready() -> void:
+	var anim_base: String = DIR_ANIMATION.get( "NE", "up-right")
+	sprite.play(anim_base + "-idle")
 
 func get_reachable_positions(max_tiles: int = 3) -> Array[Vector2]:
 	var result: Array[Vector2] = []
