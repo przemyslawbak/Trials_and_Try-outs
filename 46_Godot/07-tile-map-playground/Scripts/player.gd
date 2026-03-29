@@ -19,12 +19,15 @@ const DIR_ANIMATION := {
 }
 
 var _is_moving := false
+var facing_direction: String = "NE"
 
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
 
+
 func _ready() -> void:
-	var anim_base: String = DIR_ANIMATION.get( "NE", "down-right")
+	var anim_base: String = DIR_ANIMATION.get(facing_direction, "up-right")
 	sprite.play(anim_base + "-idle")
+
 
 func get_reachable_positions(max_tiles: int = 3) -> Array[Vector2]:
 	var result: Array[Vector2] = []
@@ -57,6 +60,7 @@ func move_in_direction(direction: String, tiles: int) -> void:
 	var distance: float = global_position.distance_to(target_position)
 	var duration: float = distance / MOVE_SPEED
 
+	facing_direction = direction
 	var anim_base: String = DIR_ANIMATION.get(direction, "down-right")
 	sprite.play(anim_base + "-walk")
 	_is_moving = true
@@ -69,6 +73,14 @@ func move_in_direction(direction: String, tiles: int) -> void:
 
 func _on_move_finished(anim_base: String) -> void:
 	_is_moving = false
+	sprite.play(anim_base + "-idle")
+
+
+func set_facing(direction: String) -> void:
+	if not ISO_DIRECTIONS.has(direction):
+		return
+	facing_direction = direction
+	var anim_base: String = DIR_ANIMATION.get(direction, "down-right")
 	sprite.play(anim_base + "-idle")
 
 
