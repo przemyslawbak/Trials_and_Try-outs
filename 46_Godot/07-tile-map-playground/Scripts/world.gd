@@ -1,6 +1,5 @@
 extends Node2D
 
-const MAX_TILES    := 3
 const CLICK_RADIUS := 12.0
 
 @onready var player:           CharacterBody2D = $Player
@@ -22,7 +21,8 @@ func _ready() -> void:
 
 
 func _refresh_reachable() -> void:
-	_reachable_positions = player.get_reachable_positions(MAX_TILES)
+	player.reset_available_tiles()
+	_reachable_positions = player.get_reachable_positions()
 	_selected_direction  = ""
 	_selected_tiles      = 0
 	_selected_facing     = ""
@@ -41,6 +41,20 @@ func _clear_selection() -> void:
 	_destination        = Vector2.INF
 	arrow_overlay.clear_path()
 	arrow_overlay.hide_facing_cursor()
+
+
+# AP remaining after the planned move is spent.
+func _ap_after_move() -> int:
+	return player.available_tiles - _selected_tiles
+
+
+# AP remaining after both the planned move AND a facing change to `to_dir`.
+func _ap_after_facing(to_dir: String) -> int:
+	# Facing rotates from the movement direction (where player ends up facing),
+	# or from current facing if no move is planned.
+	var from_dir: String = _selected_direction if _selected_direction != "" else player.facing_direction
+	var cost:     int    = player.facing_cost(from_dir, to_dir)
+	return _ap_after_move() - cost
 
 
 func _pick_tile(mouse_pos: Vector2) -> Vector2:
@@ -88,7 +102,8 @@ func _input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
 		if _awaiting_facing:
 			var dir := _nearest_facing_dir(get_global_mouse_position(), _destination)
-			if dir != "":
+			# Only move the facing arrow if AP budget allows this facing change
+			if dir != "" and _ap_after_facing(dir) >= 0:
 				arrow_overlay.update_facing_cursor(dir)
 		return
 
@@ -106,12 +121,15 @@ func _input(event: InputEvent) -> void:
 	if event.button_index == MOUSE_BUTTON_LEFT:
 
 		if _awaiting_facing:
-			# Confirm facing, keep arrow + frozen arrowhead visible
 			var dir := _nearest_facing_dir(get_global_mouse_position(), _destination)
-			if dir != "":
+			# Only confirm facing if AP budget allows it
+			if dir != "" and _ap_after_facing(dir) >= 0:
 				_selected_facing = dir
 			_awaiting_facing = false
-			arrow_overlay.keep_facing_cursor(_selected_facing)
+			# Show the confirmed facing (falls back to movement direction if facing
+			# was never affordable / never changed)
+			var confirmed := _selected_facing if _selected_facing != "" else _selected_direction
+			arrow_overlay.keep_facing_cursor(confirmed)
 			return
 
 		var picked := _pick_tile(get_global_mouse_position())
