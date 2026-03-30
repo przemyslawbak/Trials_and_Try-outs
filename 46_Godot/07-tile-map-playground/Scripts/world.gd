@@ -146,7 +146,7 @@ func _input(event: InputEvent) -> void:
 
 		_selected_direction = data["direction"]
 		_selected_tiles     = data["tiles"]
-		_selected_facing    = ""
+		_selected_facing    = "NE"
 		_destination        = picked
 		_awaiting_facing    = true
 
