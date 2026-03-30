@@ -436,3 +436,4 @@ MigrationBackup/
 /29_Financial/Trial_07_OHLCV_Spike/List_Comparer/KeyLocker.cs
 /29_Financial/Trial_21_Renko/List_Comparer/KeyLocker.cs
 /12_String/String_30_ReadingFileDataAndSavingToDb/Secret.cs
+/46_Godot/07-tile-map-playground/addons/claude_3.5_sonnet_chat_api
