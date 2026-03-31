@@ -6,3 +6,4 @@ OK - Clean up in Debugger;
 - Water ground tiles sholud be excluded for Player 
 	to move through;
 - Over the Player add a single color blue shield;
+- Bug fix: when 3 tile move and click away, facing turns;
