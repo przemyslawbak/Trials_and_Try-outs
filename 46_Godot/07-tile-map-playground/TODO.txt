@@ -1,2 +1,5 @@
 - Display over the Player a label with remaining available tiles after each left clickk they should be updated;
-- Clean up in Debugger
+- Clean up in Debugger;
+- Over the Player add life bar;
+- In Player scripts add life value;
+- Water ground tiles sholud be excluded for Player to move through;
