@@ -1,0 +1,2 @@
+- Display over the Player a label with remaining available tiles after each left clickk they should be updated;
+- Clean up in Debugger
