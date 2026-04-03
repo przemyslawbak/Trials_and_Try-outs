@@ -67,9 +67,10 @@ func set_move_tiles_label_value(value: int) -> void:
 
 func set_move_tiles_label_ok() -> void:
 	if move_tiles_label:
+		move_tiles_label.text = "OK"
 		move_tiles_label.visible = false
 	if move_tiles_icon:
-		move_tiles_icon.visible = true
+		move_tiles_icon.visible = false
 
 
 func reset_available_tiles() -> void:
