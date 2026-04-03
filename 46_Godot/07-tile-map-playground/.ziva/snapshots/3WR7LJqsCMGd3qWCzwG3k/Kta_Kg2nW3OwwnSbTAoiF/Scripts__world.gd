@@ -132,11 +132,6 @@ func _input(event: InputEvent) -> void:
 			arrow_overlay.keep_facing_cursor(confirmed)
 			return
 
-		# Selection lock: once movement + facing are chosen, ignore extra left-clicks.
-		# Selection is only cleared by right-click / Escape (or after turn resolution).
-		if _selected_direction != "" and _selected_tiles > 0 and not _awaiting_facing:
-			return
-
 		var picked := _pick_tile(get_global_mouse_position())
 		if picked == Vector2.INF:
 			arrow_overlay.clear_path()
