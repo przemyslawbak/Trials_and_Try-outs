@@ -30,17 +30,13 @@ var facing_direction: String = "NE"
 
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var move_tiles_label: Label = $MoveTilesLabel
-@onready var move_tiles_icon: Sprite2D = $MoveTilesIcon
 
 
 func _ready() -> void:
 	var anim_base: String = DIR_ANIMATION.get(facing_direction, "up-right")
 	sprite.play(anim_base + "-idle")
 	if move_tiles_label:
-		move_tiles_label.add_theme_color_override("font_color", Color.WHITE)
 		move_tiles_label.text = "%d/%d" % [available_tiles, MAX_AVAILABLE_TILES]
-	if move_tiles_icon:
-		move_tiles_icon.visible = true
 
 
 # Returns the AP cost to rotate from `from_dir` to `to_dir`.
@@ -59,18 +55,12 @@ func facing_cost(from_dir: String, to_dir: String) -> int:
 
 func set_move_tiles_label_value(value: int) -> void:
 	if move_tiles_label:
-		move_tiles_label.visible = true
 		move_tiles_label.text = "%d/%d" % [clampi(value, 0, MAX_AVAILABLE_TILES), MAX_AVAILABLE_TILES]
-	if move_tiles_icon:
-		move_tiles_icon.visible = true
 
 
 func set_move_tiles_label_ok() -> void:
 	if move_tiles_label:
 		move_tiles_label.text = "OK"
-		move_tiles_label.visible = false
-	if move_tiles_icon:
-		move_tiles_icon.visible = false
 
 
 func reset_available_tiles() -> void:

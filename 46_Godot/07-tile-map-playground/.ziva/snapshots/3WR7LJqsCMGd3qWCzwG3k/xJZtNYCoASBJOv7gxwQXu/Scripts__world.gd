@@ -7,9 +7,8 @@ const CLICK_RADIUS := 12.0
 @onready var arrow_overlay:    Node2D          = $ArrowOverlay
 
 var _selected_direction: String  = ""
-var _selected_move_tiles: int	= 0
-var _selected_tiles:	 int	 = 0
-var _selected_facing:	String  = ""
+var _selected_tiles:     int     = 0
+var _selected_facing:    String  = ""
 var _reachable_positions: Array[Vector2] = []
 
 var _awaiting_facing: bool    = false
@@ -25,7 +24,6 @@ func _refresh_reachable() -> void:
 	player.reset_available_tiles()
 	_reachable_positions = player.get_reachable_positions()
 	_selected_direction  = ""
-	_selected_move_tiles = 0
 	_selected_tiles	  = 0
 	player.set_move_tiles_label_value(player.available_tiles)
 	_selected_facing	 = ""
@@ -34,25 +32,22 @@ func _refresh_reachable() -> void:
 	if arrow_overlay:
 		arrow_overlay.clear_path()
 		arrow_overlay.hide_facing_cursor()
-		arrow_overlay.set_confirmed_facing_visual(false)
 
 
 func _clear_selection() -> void:
 	_selected_direction = ""
-	_selected_move_tiles = 0
-	_selected_tiles	  = 0
+	_selected_tiles	 = 0
 	player.set_move_tiles_label_value(player.available_tiles)
 	_selected_facing	= ""
 	_awaiting_facing	= false
 	_destination		= Vector2.INF
 	arrow_overlay.clear_path()
 	arrow_overlay.hide_facing_cursor()
-	arrow_overlay.set_confirmed_facing_visual(false)
 
 
 # AP remaining after the planned move is spent.
 func _ap_after_move() -> int:
-	return player.available_tiles - _selected_move_tiles
+	return player.available_tiles - _selected_tiles
 
 
 # AP remaining after both the planned move AND a facing change to `to_dir`.
@@ -132,16 +127,11 @@ func _input(event: InputEvent) -> void:
 			# Only confirm facing if AP budget allows it
 			if dir != "" and _ap_after_facing(dir) >= 0:
 				_selected_facing = dir
-			var confirmed := _selected_facing if _selected_facing != "" else _selected_direction
-			var turn_cost: int = player.facing_cost(_selected_direction, confirmed)
-			_selected_tiles = _selected_move_tiles + turn_cost
-			if player.has_method("set_move_tiles_label_ok"):
-				player.set_move_tiles_label_ok()
 			_awaiting_facing = false
 			# Show the confirmed facing (falls back to movement direction if facing
 			# was never affordable / never changed)
+			var confirmed := _selected_facing if _selected_facing != "" else _selected_direction
 			arrow_overlay.keep_facing_cursor(confirmed)
-			arrow_overlay.set_confirmed_facing_visual(true)
 			return
 
 		# Selection lock: once movement + facing are chosen, ignore extra left-clicks.
@@ -162,15 +152,13 @@ func _input(event: InputEvent) -> void:
 			return
 
 		_selected_direction = data["direction"]
-		_selected_move_tiles = data["tiles"]
-		_selected_tiles	  = _selected_move_tiles
+		_selected_tiles	 = data["tiles"]
 		player.set_move_tiles_label_value(player.available_tiles - _selected_tiles)
 		_selected_facing	= ""
 		_destination		= picked
 		_awaiting_facing	= true
 
 		var path := _build_path_positions(_selected_direction, _selected_tiles)
-		arrow_overlay.set_confirmed_facing_visual(false)
 		arrow_overlay.set_path(path)
 		arrow_overlay.show_facing_cursor(_destination, _selected_direction)
 
@@ -178,15 +166,14 @@ func _input(event: InputEvent) -> void:
 func _on_next_turn_button_pressed() -> void:
 	if player.is_moving():
 		return
-	if _selected_move_tiles == 0 or _selected_direction == "":
+	if _selected_tiles == 0 or _selected_direction == "":
 		return
 
 	_awaiting_facing = false
 	arrow_overlay.clear_path()
 	arrow_overlay.hide_facing_cursor()
-	arrow_overlay.set_confirmed_facing_visual(false)
 
-	player.move_in_direction(_selected_direction, _selected_move_tiles)
+	player.move_in_direction(_selected_direction, _selected_tiles)
 	await get_tree().create_timer(0.1).timeout
 	while player.is_moving():
 		await get_tree().create_timer(0.05).timeout

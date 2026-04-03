@@ -2,7 +2,6 @@
 
 [ext_resource type="Script" uid="uid://kic7r2boipap" path="res://Scripts/player.gd" id="1_cvnsp"]
 [ext_resource type="Texture2D" uid="uid://ddnog8uthtof1" path="res://Assets/SpriteSheets/spritesheet.png" id="1_v0iea"]
-[ext_resource type="Texture2D" uid="uid://uuljhdmfsinj" path="res://Assets/Icons/foot-sign.png" id="2_foot"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_cvnsp"]
 radius = 7.0
@@ -293,8 +292,3 @@ offset_right = 14.0
 offset_bottom = -18.0
 text = "3/3"
 horizontal_alignment = 1
-
-[node name="MoveTilesIcon" type="Sprite2D" parent="." unique_id=1155946732]
-position = Vector2(-22, -31)
-scale = Vector2(0.3, 0.3)
-texture = ExtResource("2_foot")
