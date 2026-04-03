@@ -287,25 +287,14 @@ animation = &"up-right-walk"
 offset = Vector2(0, -14)
 
 [node name="MoveTilesLabel" type="Label" parent="." unique_id=1175946731]
-z_index = 2
-offset_left = 23.0
-offset_top = -47.0
-offset_right = 48.0
-offset_bottom = -24.0
-scale = Vector2(0.5, 0.5)
+offset_left = -14.0
+offset_top = -44.0
+offset_right = 14.0
+offset_bottom = -18.0
 text = "3/3"
 horizontal_alignment = 1
 
 [node name="MoveTilesIcon" type="Sprite2D" parent="." unique_id=1155946732]
-z_index = 2
-position = Vector2(15.000002, -41)
-scale = Vector2(0.22843139, 0.22843136)
+position = Vector2(-22, -31)
+scale = Vector2(0.3, 0.3)
 texture = ExtResource("2_foot")
-
-[node name="Shield" type="Polygon2D" parent="." unique_id=1155946733]
-z_index = 3
-position = Vector2(0, -41)
-scale = Vector2(0.5490501, 0.6412665)
-color = Color(0, 0.22363022, 0.56230897, 1)
-polygon = PackedVector2Array(-9.401821, -10.215719, 9.543301, -10.215719, 9.543301, -0.14362907, 7.984524, 7.8900604, 0.3105507, 12.686295, -7.8430443, 8.009966, -9.401821, -0.023723602)
-uv = PackedVector2Array(-9.401821, -10.215719, 9.543301, -10.215719, 9.543301, -0.14362907, 7.984524, 7.8900604, 0.3105507, 12.686295, -7.8430443, 8.009966, -9.521725, 0.09618187)
