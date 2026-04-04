@@ -1,9 +1,4 @@
 Open:
-- Over the Player add commanders rank with star;
-- Over the Player add foot army with icon;
-- Over the Player add mounted army with icon;
-- Over the Player add archers army with icon;
-- Over the Player add knights army with icon;
 - Water ground tiles sholud be excluded for Player 
 	to move through;
 
@@ -15,3 +10,8 @@ OK - Display over the Player a label with remaining
 OK - Over the Player add a single color blue shield;
 NO - Over the Player add life bar;
 NO - In Player scripts add life value;
+NO - Over the Player add commanders rank with star;
+OK - Over the Player add foot army with icon;
+NO - Over the Player add mounted army with icon;
+NO - Over the Player add archers army with icon;
+NO - Over the Player add knights army with icon;

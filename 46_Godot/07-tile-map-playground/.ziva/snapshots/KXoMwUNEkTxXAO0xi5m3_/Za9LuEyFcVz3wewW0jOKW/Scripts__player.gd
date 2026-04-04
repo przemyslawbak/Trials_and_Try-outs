@@ -25,11 +25,7 @@ const DIR_ANIMATION := {
 const DIR_RING := ["NE", "SE", "SW", "NW"]
 
 var available_tiles: int = MAX_AVAILABLE_TILES
-var available_swords: int = MAX_AVAILABLE_SWORDS:
-	set(value):
-		available_swords = value
-		if sword_label:
-			sword_label.text = str(available_swords)
+var available_swords: int = MAX_AVAILABLE_SWORDS
 
 var _is_moving := false
 var facing_direction: String = "NE"
@@ -37,7 +33,6 @@ var facing_direction: String = "NE"
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var move_tiles_label: Label = $MoveTilesLabel
 @onready var move_tiles_icon: Sprite2D = $MoveTilesIcon
-@onready var sword_label: Label = $SwordLabel
 
 
 func _ready() -> void:
@@ -46,10 +41,6 @@ func _ready() -> void:
 	if move_tiles_label:
 		move_tiles_label.add_theme_color_override("font_color", Color.WHITE)
 		move_tiles_label.text = "%d/%d" % [available_tiles, MAX_AVAILABLE_TILES]
-	if sword_label and move_tiles_label:
-		sword_label.add_theme_font_size_override("font_size", move_tiles_label.get_theme_font_size("font_size"))
-		sword_label.scale = move_tiles_label.scale
-		sword_label.text = str(available_swords)
 	if move_tiles_icon:
 		move_tiles_icon.visible = true
 

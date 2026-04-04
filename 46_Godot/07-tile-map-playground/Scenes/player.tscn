@@ -303,6 +303,16 @@ position = Vector2(-14, -41)
 scale = Vector2(0.22843139, 0.22843136)
 texture = ExtResource("2_foot")
 
+[node name="SwordLabel" type="Label" parent="." unique_id=985655501]
+z_index = 2
+offset_left = 17.0
+offset_top = -47.0
+offset_right = 42.0
+offset_bottom = -24.0
+scale = Vector2(0.5, 0.5)
+text = "3/3"
+horizontal_alignment = 1
+
 [node name="SwordIcon" type="Sprite2D" parent="." unique_id=1131860777]
 z_index = 2
 position = Vector2(12.999998, -41)
