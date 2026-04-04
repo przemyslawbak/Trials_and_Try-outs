@@ -146,5 +146,3 @@ func _bezier_points(p0: Vector2, p1: Vector2, p2: Vector2, steps: int) -> Array[
 		var t := float(i) / float(steps)
 		pts.append((1.0-t)*(1.0-t)*p0 + 2.0*(1.0-t)*t*p1 + t*t*p2)
 	return pts
-
-# trailing line to keep editor caret restore safely in range

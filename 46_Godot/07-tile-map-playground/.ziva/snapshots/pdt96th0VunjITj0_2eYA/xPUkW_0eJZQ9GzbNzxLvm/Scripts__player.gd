@@ -39,8 +39,6 @@ var facing_direction: String = "NE"
 @onready var move_tiles_icon: Sprite2D = $MoveTilesIcon
 @onready var sword_label: Label = $SwordLabel
 
-var _blocked_layers: Array[TileMapLayer] = []
-
 
 func _ready() -> void:
 	var anim_base: String = DIR_ANIMATION.get(facing_direction, "up-right")
@@ -54,16 +52,6 @@ func _ready() -> void:
 		sword_label.text = str(available_swords)
 	if move_tiles_icon:
 		move_tiles_icon.visible = true
-
-	# The player cannot enter these layers.
-	var world := get_parent()
-	if world:
-		var ground_lvl1 := world.get_node_or_null("Ground-lvl1") as TileMapLayer
-		if ground_lvl1:
-			_blocked_layers.append(ground_lvl1)
-		var decoration := world.get_node_or_null("Decoration-lvl-0") as TileMapLayer
-		if decoration:
-			_blocked_layers.append(decoration)
 
 
 # Returns the AP cost to rotate from `from_dir` to `to_dir`.
@@ -106,10 +94,7 @@ func get_reachable_positions() -> Array[Vector2]:
 	for dir in ISO_DIRECTIONS:
 		var step: Vector2 = ISO_DIRECTIONS[dir]
 		for t in range(1, available_tiles + 1):
-			var target := global_position + step * t
-			if _is_position_blocked(target):
-				break
-			result.append(target)
+			result.append(global_position + step * t)
 	return result
 
 
@@ -118,22 +103,9 @@ func get_move_data_for(target: Vector2) -> Dictionary:
 	for dir in ISO_DIRECTIONS:
 		var step: Vector2 = ISO_DIRECTIONS[dir]
 		for t in range(1, available_tiles + 1):
-			var candidate := global_position + step * t
-			if _is_position_blocked(candidate):
-				break
-			if candidate.distance_to(target) < 2.0:
+			if (global_position + step * t).distance_to(target) < 2.0:
 				return {"direction": dir, "tiles": t}
 	return {}
-
-
-func _is_position_blocked(world_position: Vector2) -> bool:
-	for layer in _blocked_layers:
-		if not is_instance_valid(layer):
-			continue
-		var map_coords: Vector2i = layer.local_to_map(layer.to_local(world_position))
-		if layer.get_cell_source_id(map_coords) != -1:
-			return true
-	return false
 
 
 func move_in_direction(direction: String, tiles: int) -> void:

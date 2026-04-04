@@ -1,12 +1,14 @@
 Open:
 - Highlight available tiles
-- Make decorations and lvl-1 not accessible for Player
+- Make lvl-1 items not hiding Player behind
+- Make water tiles not accessible
 - Consider moving lvl-1 horizontally
 - Create base unit scene, player inherits from it
 - Create one more Player unit
 - Create enemy unit
 
 Closed:
+OK - Make decorations and lvl-1 not accessible for Player
 OK - Bug fix: when 3 tile move and click away, facing turns;
 OK - Clean up in Debugger;
 OK - Display over the Player a label with remaining 
