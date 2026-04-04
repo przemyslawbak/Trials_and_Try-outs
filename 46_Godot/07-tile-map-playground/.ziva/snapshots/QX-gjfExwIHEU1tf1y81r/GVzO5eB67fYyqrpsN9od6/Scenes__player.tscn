@@ -276,7 +276,6 @@ animations = [{
 }]
 
 [node name="Player" type="CharacterBody2D" unique_id=2014952304]
-y_sort_enabled = true
 collision_layer = 2
 script = ExtResource("1_cvnsp")
 
