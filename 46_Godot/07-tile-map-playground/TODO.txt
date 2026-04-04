@@ -1,6 +1,9 @@
 Open:
-- Water ground tiles sholud be excluded for Player 
-	to move through;
+- Make decorations and lvl-1 not accessible for Player
+- Consider moving lvl-1 horizontally
+- Create base unit scene, player inherits from it
+- Create one more Player unit
+- Create enemy unit
 
 Closed:
 OK - Bug fix: when 3 tile move and click away, facing turns;
