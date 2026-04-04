@@ -1,11 +1,11 @@
 Open:
 - Highlight available tiles
-- Consider moving lvl-1 horizontally
 - Create base unit scene, player inherits from it
 - Create one more Player unit
 - Create enemy unit
 
 Closed:
+OK - Consider moving lvl-1 horizontally
 OK - Make lvl-1 items not hiding Player behind
 OK - Make water tiles not accessible
 OK - Make decorations and lvl-1 not accessible for Player
