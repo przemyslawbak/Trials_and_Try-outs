@@ -176,6 +176,7 @@ physics_layer_0/collision_layer = 1
 sources/2 = SubResource("TileSetAtlasSource_go701")
 
 [node name="World" type="Node2D" unique_id=228562071]
+y_sort_enabled = true
 script = ExtResource("1_5a7ea")
 
 [node name="Ground-lvl0" type="TileMapLayer" parent="." unique_id=1936472476]
@@ -184,7 +185,6 @@ tile_map_data = PackedByteArray("AAADAAkAAgADAAAAAAADAAoAAgADAAAAAAADAAsAAgADAAA
 tile_set = SubResource("TileSet_5a7ea")
 
 [node name="Ground-lvl1" type="TileMapLayer" parent="." unique_id=84408873]
-z_index = 1
 y_sort_enabled = true
 position = Vector2(0, -8)
 tile_map_data = PackedByteArray("AAALAA0AAgAFAAEAAAAMAA4AAgAFAAEAAAAMAA8AAgAFAAEAAAAMABAAAgAFAAEAAAALAA8AAgAFAAEAAAALAA4AAgAFAAEAAAAMAA0AAgAFAAEAAAAMAAwAAgAFAAEAAAALAAsAAgAFAAEAAAALAAwAAgAFAAEAAAAKAAsAAgAFAAEAAAALAAoAAgAFAAEAAAAMAAsAAgAFAAEAAAANAAwAAgAFAAEAAAANAA0AAgAFAAEAAAANAA4AAgAFAAEAAAANAA8AAgAFAAEAAAAOAA4AAgAFAAEAAAAOAA8AAgAFAAEAAAAOABAAAgAFAAEAAAANABEAAgAFAAEAAAA=")
@@ -199,7 +199,7 @@ tile_set = SubResource("TileSet_5a7ea")
 script = ExtResource("3_8j60k")
 
 [node name="Player" parent="." unique_id=2014952304 instance=ExtResource("2_go701")]
-position = Vector2(321, 110)
+position = Vector2(320, 110)
 
 [node name="UI" type="CanvasLayer" parent="." unique_id=531903486]
 

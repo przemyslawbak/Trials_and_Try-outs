@@ -199,7 +199,7 @@ tile_set = SubResource("TileSet_5a7ea")
 script = ExtResource("3_8j60k")
 
 [node name="Player" parent="." unique_id=2014952304 instance=ExtResource("2_go701")]
-position = Vector2(321, 110)
+position = Vector2(320, 110)
 
 [node name="UI" type="CanvasLayer" parent="." unique_id=531903486]
 
