@@ -1,10 +1,10 @@
 Open:
-- Highlight available tiles
-- Create base unit scene, player inherits from it
+- Refactoring: create base unit scene, player inherits from it
 - Create one more Player unit
 - Create enemy unit
 
 Closed:
+OK - Highlight available tiles
 OK - Consider moving lvl-1 horizontally
 OK - Make lvl-1 items not hiding Player behind
 OK - Make water tiles not accessible

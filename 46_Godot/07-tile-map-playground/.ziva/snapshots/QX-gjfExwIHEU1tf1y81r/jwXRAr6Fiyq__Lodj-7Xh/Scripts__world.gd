@@ -2,10 +2,9 @@ extends Node2D
 
 const CLICK_RADIUS := 12.0
 
-@onready var player:		   CharacterBody2D = $Player
-@onready var next_turn_button: Button		  = $UI/MarginContainer/NextTurnButton
-@onready var arrow_overlay:	Node2D		  = $ArrowOverlay
-@onready var tile_highlight:   Node2D		  = $TileHighlight
+@onready var player:           CharacterBody2D = $Player
+@onready var next_turn_button: Button          = $UI/MarginContainer/NextTurnButton
+@onready var arrow_overlay:    Node2D          = $ArrowOverlay
 
 var _selected_direction: String  = ""
 var _selected_move_tiles: int	= 0
@@ -36,9 +35,6 @@ func _refresh_reachable() -> void:
 		arrow_overlay.clear_path()
 		arrow_overlay.hide_facing_cursor()
 		arrow_overlay.set_confirmed_facing_visual(false)
-	
-	if tile_highlight:
-		tile_highlight.set_highlights(_reachable_positions)
 
 
 func _clear_selection() -> void:
@@ -189,9 +185,6 @@ func _on_next_turn_button_pressed() -> void:
 	arrow_overlay.clear_path()
 	arrow_overlay.hide_facing_cursor()
 	arrow_overlay.set_confirmed_facing_visual(false)
-	
-	if tile_highlight:
-		tile_highlight.clear_highlights()
 
 	player.move_in_direction(_selected_direction, _selected_move_tiles)
 	await get_tree().create_timer(0.1).timeout
