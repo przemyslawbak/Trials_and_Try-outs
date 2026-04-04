@@ -1,4 +1,5 @@
 Open:
+- Highlight available tiles
 - Make decorations and lvl-1 not accessible for Player
 - Consider moving lvl-1 horizontally
 - Create base unit scene, player inherits from it
