@@ -4,6 +4,7 @@ Open:
 - Create enemy unit
 
 Closed:
+OK - Hide tile highlight when movement selected
 OK - Highlight available tiles
 OK - Consider moving lvl-1 horizontally
 OK - Make lvl-1 items not hiding Player behind

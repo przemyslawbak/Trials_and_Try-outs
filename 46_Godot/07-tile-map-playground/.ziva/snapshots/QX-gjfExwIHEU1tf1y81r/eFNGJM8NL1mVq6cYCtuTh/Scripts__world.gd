@@ -52,9 +52,6 @@ func _clear_selection() -> void:
 	arrow_overlay.clear_path()
 	arrow_overlay.hide_facing_cursor()
 	arrow_overlay.set_confirmed_facing_visual(false)
-	
-	if tile_highlight:
-		tile_highlight.set_highlights(_reachable_positions)
 
 
 # AP remaining after the planned move is spent.
@@ -149,9 +146,6 @@ func _input(event: InputEvent) -> void:
 			# was never affordable / never changed)
 			arrow_overlay.keep_facing_cursor(confirmed)
 			arrow_overlay.set_confirmed_facing_visual(true)
-			
-			if tile_highlight:
-				tile_highlight.clear_highlights()
 			return
 
 		# Selection lock: once movement + facing are chosen, ignore extra left-clicks.
