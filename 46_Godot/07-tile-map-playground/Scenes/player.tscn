@@ -4,12 +4,6 @@
 [ext_resource type="Texture2D" uid="uid://ddnog8uthtof1" path="res://Assets/SpriteSheets/spritesheet.png" id="1_v0iea"]
 [ext_resource type="Texture2D" uid="uid://uuljhdmfsinj" path="res://Assets/Icons/foot-sign.png" id="2_foot"]
 [ext_resource type="Texture2D" uid="uid://l5ys4vuski7d" path="res://Assets/Icons/sword-pngrepo-com.png" id="4_3smsa"]
-[ext_resource type="Texture2D" uid="uid://ctg57lbf1thxt" path="res://Assets/Icons/star.png" id="4_8erm5"]
-[ext_resource type="Texture2D" uid="uid://dqoy8nj62jhgj" path="res://Assets/Icons/bow.png" id="5_8erm5"]
-[ext_resource type="Texture2D" uid="uid://bmtba1htkvbl5" path="res://Assets/Icons/shield.png" id="5_tx1dd"]
-[ext_resource type="Texture2D" uid="uid://djb70rfgxtym4" path="res://Assets/Icons/horse-head.png" id="6_f1ek2"]
-[ext_resource type="Texture2D" uid="uid://co8ck5rwg31ym" path="res://Assets/Icons/death.png" id="6_gymyn"]
-[ext_resource type="Texture2D" uid="uid://xa5i0fdm04qw" path="res://Assets/Icons/knight-helmet.png" id="7_tx1dd"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_cvnsp"]
 radius = 7.0
@@ -296,60 +290,24 @@ offset = Vector2(0, -14)
 [node name="MoveTilesLabel" type="Label" parent="." unique_id=1175946731]
 z_index = 2
 offset_left = -32.0
-offset_top = -86.0
+offset_top = -47.0
 offset_right = -7.0
-offset_bottom = -63.0
+offset_bottom = -24.0
 scale = Vector2(0.5, 0.5)
 text = "3/3"
 horizontal_alignment = 1
 
 [node name="MoveTilesIcon" type="Sprite2D" parent="." unique_id=1155946732]
 z_index = 2
-position = Vector2(-14, -80)
+position = Vector2(-14, -41)
 scale = Vector2(0.22843139, 0.22843136)
 texture = ExtResource("2_foot")
-
-[node name="StarIcon" type="Sprite2D" parent="." unique_id=107226511]
-z_index = 2
-position = Vector2(-13, -67)
-scale = Vector2(0.22843139, 0.22843136)
-texture = ExtResource("4_8erm5")
-
-[node name="ShieldIcon" type="Sprite2D" parent="." unique_id=1122186272]
-z_index = 2
-position = Vector2(-13, -54)
-scale = Vector2(0.22843139, 0.22843136)
-texture = ExtResource("5_tx1dd")
-
-[node name="DeathIcon" type="Sprite2D" parent="." unique_id=1000282687]
-z_index = 2
-position = Vector2(-13, -41)
-scale = Vector2(0.22843139, 0.22843136)
-texture = ExtResource("6_gymyn")
 
 [node name="SwordIcon" type="Sprite2D" parent="." unique_id=1131860777]
 z_index = 2
 position = Vector2(12.999998, -41)
 scale = Vector2(0.22843139, 0.22843136)
 texture = ExtResource("4_3smsa")
-
-[node name="BowIcon" type="Sprite2D" parent="." unique_id=1531543668]
-z_index = 2
-position = Vector2(13, -54)
-scale = Vector2(0.22843139, 0.22843136)
-texture = ExtResource("5_8erm5")
-
-[node name="HorseIcon" type="Sprite2D" parent="." unique_id=147952849]
-z_index = 2
-position = Vector2(13.000001, -67)
-scale = Vector2(0.22843139, 0.22843136)
-texture = ExtResource("6_f1ek2")
-
-[node name="KnightIcon" type="Sprite2D" parent="." unique_id=1942859652]
-z_index = 2
-position = Vector2(13, -80)
-scale = Vector2(0.22843139, 0.22843136)
-texture = ExtResource("7_tx1dd")
 
 [node name="Shield" type="Polygon2D" parent="." unique_id=1155946733]
 z_index = 3
