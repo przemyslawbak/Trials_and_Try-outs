@@ -6,7 +6,6 @@ const MOVE_SPEED  := 30.0
 
 const MAX_AVAILABLE_TILES := 3
 const MAX_AVAILABLE_SWORDS := 999
-const WATER_ATLAS_ROW := 10
 
 const ISO_DIRECTIONS := {
 	"NE": Vector2(TILE_WIDTH / 2.0,  -TILE_HEIGHT / 2.0),
@@ -41,7 +40,6 @@ var facing_direction: String = "NE"
 @onready var sword_label: Label = $SwordLabel
 
 var _blocked_layers: Array[TileMapLayer] = []
-var _ground_lvl0: TileMapLayer
 
 
 func _ready() -> void:
@@ -60,7 +58,6 @@ func _ready() -> void:
 	# The player cannot enter these layers.
 	var world := get_parent()
 	if world:
-		_ground_lvl0 = world.get_node_or_null("Ground-lvl0") as TileMapLayer
 		var ground_lvl1 := world.get_node_or_null("Ground-lvl1") as TileMapLayer
 		if ground_lvl1:
 			_blocked_layers.append(ground_lvl1)
@@ -136,15 +133,6 @@ func _is_position_blocked(world_position: Vector2) -> bool:
 		var map_coords: Vector2i = layer.local_to_map(layer.to_local(world_position))
 		if layer.get_cell_source_id(map_coords) != -1:
 			return true
-
-	# On Ground-lvl0, only the last atlas row (water tiles) should block movement.
-	if is_instance_valid(_ground_lvl0):
-		var ground_coords: Vector2i = _ground_lvl0.local_to_map(_ground_lvl0.to_local(world_position))
-		if _ground_lvl0.get_cell_source_id(ground_coords) != -1:
-			var atlas_coords: Vector2i = _ground_lvl0.get_cell_atlas_coords(ground_coords)
-			if atlas_coords.y == WATER_ATLAS_ROW:
-				return true
-
 	return false
 
 

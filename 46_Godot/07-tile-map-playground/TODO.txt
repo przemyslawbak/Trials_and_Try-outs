@@ -1,23 +1,23 @@
 Open:
 - Highlight available tiles
 - Make lvl-1 items not hiding Player behind
-- Make water tiles not accessible
 - Consider moving lvl-1 horizontally
 - Create base unit scene, player inherits from it
 - Create one more Player unit
 - Create enemy unit
 
 Closed:
+OK - Make water tiles not accessible
 OK - Make decorations and lvl-1 not accessible for Player
-OK - Bug fix: when 3 tile move and click away, facing turns;
-OK - Clean up in Debugger;
+OK - Bug fix: when 3 tile move and click away, facing turns
+OK - Clean up in Debugger
 OK - Display over the Player a label with remaining 
-	available tiles after each left clickk they should be updated;
-OK - Over the Player add a single color blue shield;
-NO - Over the Player add life bar;
-NO - In Player scripts add life value;
-NO - Over the Player add commanders rank with star;
-OK - Over the Player add foot army with icon;
-NO - Over the Player add mounted army with icon;
-NO - Over the Player add archers army with icon;
-NO - Over the Player add knights army with icon;
+	available tiles after each left clickk they should be updated
+OK - Over the Player add a single color blue shield
+NO - Over the Player add life bar
+NO - In Player scripts add life value
+NO - Over the Player add commanders rank with star
+OK - Over the Player add foot army with icon
+NO - Over the Player add mounted army with icon
+NO - Over the Player add archers army with icon
+NO - Over the Player add knights army with icon
