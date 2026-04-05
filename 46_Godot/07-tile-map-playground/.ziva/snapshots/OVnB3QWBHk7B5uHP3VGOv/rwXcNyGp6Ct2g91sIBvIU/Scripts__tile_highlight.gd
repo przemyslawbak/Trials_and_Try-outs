@@ -6,7 +6,7 @@ const ISO_HEIGHT = 16.0
 var _highlighted_positions: Array[Vector2] = []
 
 func set_highlights(positions: Array[Vector2]) -> void:
-	_highlighted_positions = positions.duplicate()
+	_highlighted_positions = positions
 	queue_redraw()
 
 func clear_highlights() -> void:
