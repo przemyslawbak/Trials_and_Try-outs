@@ -1,4 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://bdnfci5432o67"]
+class_name TestFixPlayer extends SceneTree
+
+func _init():
+	var f = FileAccess.open("res://Scenes/player.tscn", FileAccess.WRITE)
+	f.store_string("""[gd_scene load_steps=5 format=3 uid="uid://bdnfci5432o67"]
 
 [ext_resource type="PackedScene" uid="uid://datokhdybmaop" path="res://Scenes/character_base.tscn" id="1_base"]
 [ext_resource type="Script" uid="uid://kic7r2boipap" path="res://Scripts/player.gd" id="2_script"]
@@ -47,3 +51,6 @@ scale = Vector2(0.54905, 0.641267)
 color = Color(0, 0.22363, 0.562309, 1)
 polygon = PackedVector2Array(-9.40182, -10.2157, 9.5433, -10.2157, 9.5433, -0.143629, 7.98452, 7.89006, 0.310551, 12.6863, -7.84304, 8.01002, -9.40182, -0.0237236)
 uv = PackedVector2Array(-9.40182, -10.2157, 9.5433, -10.2157, 9.5433, -0.143629, 7.98452, 7.89006, 0.310551, 12.6863, -7.84304, 8.01002, -9.52173, 0.0961819)
+""")
+	f.close()
+	quit()

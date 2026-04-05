@@ -13,18 +13,11 @@ var _selected_tiles:	 int	 = 0
 var _selected_facing:	String  = ""
 var _reachable_positions: Array[Vector2] = []
 
-var _awaiting_facing: bool	= false
-var _destination:	 Vector2 = Vector2.INF
+var _awaiting_facing: bool    = false
+var _destination:     Vector2 = Vector2.INF
 
-var path: WorldPath
-var movement: WorldMovement
-var facing: WorldFacing
 
 func _ready() -> void:
-	path = WorldPath.new(self)
-	movement = WorldMovement.new(self)
-	facing = WorldFacing.new(self)
-
 	next_turn_button.pressed.connect(_on_next_turn_button_pressed)
 	_refresh_reachable()
 
@@ -64,7 +57,49 @@ func _clear_selection() -> void:
 		tile_highlight.set_highlights(_reachable_positions)
 
 
+# AP remaining after the planned move is spent.
+func _ap_after_move() -> int:
+	return player.available_tiles - _selected_move_tiles
 
+
+# AP remaining after both the planned move AND a facing change to `to_dir`.
+func _ap_after_facing(to_dir: String) -> int:
+	# Facing rotates from the movement direction (where player ends up facing),
+	# or from current facing if no move is planned.
+	var from_dir: String = _selected_direction if _selected_direction != "" else player.facing_direction
+	var cost:     int    = player.facing_cost(from_dir, to_dir)
+	return _ap_after_move() - cost
+
+
+func _pick_tile(mouse_pos: Vector2) -> Vector2:
+	var best      := Vector2.INF
+	var best_dist := CLICK_RADIUS
+	for pos in _reachable_positions:
+		var d := mouse_pos.distance_to(pos)
+		if d < best_dist:
+			best_dist = d
+			best      = pos
+	return best
+
+
+func _build_path_positions(direction: String, tiles: int) -> Array[Vector2]:
+	var step: Vector2       = player.ISO_DIRECTIONS.get(direction, Vector2.ZERO)
+	var pts: Array[Vector2] = [player.global_position]
+	for t in range(1, tiles + 1):
+		pts.append(player.global_position + step * t)
+	return pts
+
+
+func _nearest_facing_dir(mouse_pos: Vector2, center: Vector2) -> String:
+	var best_dir  := ""
+	var best_dist := INF
+	for dir in player.ISO_DIRECTIONS:
+		var neighbour: Vector2 = center + player.ISO_DIRECTIONS[dir]
+		var d := mouse_pos.distance_to(neighbour)
+		if d < best_dist:
+			best_dist = d
+			best_dir  = dir
+	return best_dir
 
 
 func _input(event: InputEvent) -> void:
@@ -80,9 +115,9 @@ func _input(event: InputEvent) -> void:
 	# ── mouse motion: update orbiting facing cursor ───────────────────────────
 	if event is InputEventMouseMotion:
 		if _awaiting_facing:
-			var dir := facing.nearest_facing_dir(get_global_mouse_position(), _destination)
+			var dir := _nearest_facing_dir(get_global_mouse_position(), _destination)
 			# Only move the facing arrow if AP budget allows this facing change
-			if dir != "" and facing.ap_after_facing(dir) >= 0:
+			if dir != "" and _ap_after_facing(dir) >= 0:
 				arrow_overlay.update_facing_cursor(dir)
 		return
 
@@ -100,9 +135,9 @@ func _input(event: InputEvent) -> void:
 	if event.button_index == MOUSE_BUTTON_LEFT:
 
 		if _awaiting_facing:
-			var dir := facing.nearest_facing_dir(get_global_mouse_position(), _destination)
+			var dir := _nearest_facing_dir(get_global_mouse_position(), _destination)
 			# Only confirm facing if AP budget allows it
-			if dir != "" and facing.ap_after_facing(dir) >= 0:
+			if dir != "" and _ap_after_facing(dir) >= 0:
 				_selected_facing = dir
 			var confirmed := _selected_facing if _selected_facing != "" else _selected_direction
 			var turn_cost: int = player.facing_cost(_selected_direction, confirmed)
@@ -124,7 +159,7 @@ func _input(event: InputEvent) -> void:
 		if _selected_direction != "" and _selected_tiles > 0 and not _awaiting_facing:
 			return
 
-		var picked := path.pick_tile(get_global_mouse_position())
+		var picked := _pick_tile(get_global_mouse_position())
 		if picked == Vector2.INF:
 			arrow_overlay.clear_path()
 			arrow_overlay.hide_facing_cursor()
@@ -144,9 +179,9 @@ func _input(event: InputEvent) -> void:
 		_destination		= picked
 		_awaiting_facing	= true
 
-		var path_positions = path.build_path_positions(_selected_direction, _selected_tiles)
+		var path := _build_path_positions(_selected_direction, _selected_tiles)
 		arrow_overlay.set_confirmed_facing_visual(false)
-		arrow_overlay.set_path(path_positions)
+		arrow_overlay.set_path(path)
 		arrow_overlay.show_facing_cursor(_destination, _selected_direction)
 
 

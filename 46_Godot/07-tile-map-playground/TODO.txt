@@ -1,9 +1,10 @@
 Open:
-- Refactoring
 - Create one more Player unit
 - Create enemy unit
+- Add diplomacy scipt with 3 states: enemy, ally, neutral
 
 Closed:
+OK - Refactoring
 OK - After move cancellation must highlight tiles again
 OK - Hide tile highlight when movement selected
 OK - Highlight available tiles
