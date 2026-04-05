@@ -1,5 +1,6 @@
 Open:
-- Refactoring: create base unit scene, player inherits from it
+- After move cancellation must highlight tiles again
+- Refactoring
 - Create one more Player unit
 - Create enemy unit
 
