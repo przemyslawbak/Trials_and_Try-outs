@@ -1,2 +1,0 @@
-Ground 6,3: 0
-Spawns total: 0
