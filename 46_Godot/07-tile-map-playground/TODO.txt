@@ -1,5 +1,5 @@
 Open:
-a Add nome spawn point times in various places
+- Add nome spawn point times in various places
 - Spawn points set in spawn tiles
 - Players with blue shield, enemies with red sheld
 - Deploy 1 Player in random spawn point

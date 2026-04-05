@@ -39,14 +39,10 @@ func is_position_blocked(world_position: Vector2) -> bool:
 
 	if is_instance_valid(character._ground_lvl0):
 		var ground_coords: Vector2i = character._ground_lvl0.local_to_map(character._ground_lvl0.to_local(world_position))
-		if character._ground_lvl0.get_cell_source_id(ground_coords) == -1:
-			return true
-			
-		var atlas_coords: Vector2i = character._ground_lvl0.get_cell_atlas_coords(ground_coords)
-		if atlas_coords.y == character.WATER_ATLAS_ROW:
-			return true
-	else:
-		return true
+		if character._ground_lvl0.get_cell_source_id(ground_coords) != -1:
+			var atlas_coords: Vector2i = character._ground_lvl0.get_cell_atlas_coords(ground_coords)
+			if atlas_coords.y == character.WATER_ATLAS_ROW:
+				return true
 
 	return false
 
