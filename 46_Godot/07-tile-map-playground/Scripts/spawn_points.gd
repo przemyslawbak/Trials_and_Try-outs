@@ -30,6 +30,20 @@ func _ready() -> void:
 		if is_blocked:
 			continue
 			
+		var is_edge = false
+		for dx in range(-1, 2):
+			for dy in range(-1, 2):
+				if dx == 0 and dy == 0:
+					continue
+				if get_cell_source_id(cell + Vector2i(dx, dy)) == -1:
+					is_edge = true
+					break
+			if is_edge:
+				break
+				
+		if is_edge:
+			continue
+			
 		valid_cells.append(cell)
 		
 	if valid_cells.size() > 0:
