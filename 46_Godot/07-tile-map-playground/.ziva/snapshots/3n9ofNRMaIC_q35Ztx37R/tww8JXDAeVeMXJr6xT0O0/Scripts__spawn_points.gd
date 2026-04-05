@@ -46,35 +46,10 @@ func _ready() -> void:
 			
 		valid_cells.append(cell)
 		
-	if valid_cells.size() >= 3:
-		var selected_cells: Array[Vector2i] = []
-		var min_distance := 10.0
-		
-		# Try multiple times to find 3 spots that are far enough apart.
-		# If the map is too small to fit them, gradually reduce the required distance to ensure 3 are always found.
-		while selected_cells.size() < 3 and min_distance >= 0.0:
-			for attempt in range(50):
-				valid_cells.shuffle()
-				selected_cells.clear()
-				
-				for cell in valid_cells:
-					var valid_distance = true
-					for s_cell in selected_cells:
-						if cell.distance_to(s_cell) < min_distance:
-							valid_distance = false
-							break
-					if valid_distance:
-						selected_cells.append(cell)
-					if selected_cells.size() == 3:
-						break
-						
-				if selected_cells.size() == 3:
-					break
-					
-			if selected_cells.size() < 3:
-				min_distance -= 1.0
-				
-		_black_cells = selected_cells
+	if valid_cells.size() > 0:
+		valid_cells.shuffle()
+		var limit = mini(3, valid_cells.size())
+		_black_cells = valid_cells.slice(0, limit)
 		
 		notify_runtime_tile_data_update()
 

@@ -1,5 +1,4 @@
 Open:
-- Make sure that all spawn points ae at least 15 tile from each other
 - Spawn points set in spawn tiles
 - Players with blue shield, enemies with red sheld
 - Deploy 1 Player in random spawn point
@@ -8,6 +7,7 @@ Open:
 - Create enemy unit
 
 Closed:
+OK - Make sure that all spawn points are at least 11 tile from each other
 OK - Make sure that all spawn points are at least 1 tile away of map edge
 OK - Add some spawn point tiles in various places
 OK - Refactoring
