@@ -124,27 +124,17 @@ func _facing_color() -> Color:
 	return ARROW_COLOR_GREEN if _confirmed_facing else ARROW_COLOR_RED
 
 func _draw_facing_arrowhead(center: Vector2, direction: String) -> void:
-	# Calculate in pure Cartesian space first to avoid skewing when flattening
-	var cart_dir := Vector2.ZERO
-	match direction:
-		"NE": cart_dir = Vector2( 1, -1).normalized()
-		"SE": cart_dir = Vector2( 1,  1).normalized()
-		"SW": cart_dir = Vector2(-1,  1).normalized()
-		"NW": cart_dir = Vector2(-1, -1).normalized()
+	var offset  := _iso_offset(direction)
+	var tip	 := center + offset
+	var dir_vec := offset.normalized()
 
-	# Expand by ~1.25 so the flattened isometric length matches the desired pixel length
-	var cart_tip  := cart_dir * (FACING_ORBIT * 1.25)
-	var cart_base := cart_tip - cart_dir * (FACING_HEAD_SIZE * 1.25)
-	
-	# Perpendicular in pure Cartesian space
-	var cart_perp  := Vector2(-cart_dir.y, cart_dir.x)
-	var cart_left  := cart_base + cart_perp * 7.0
-	var cart_right := cart_base - cart_perp * 7.0
+	# Perp in isometric space: rotate dir_vec 90° then flatten Y
+	var perp_raw := Vector2(-dir_vec.y, dir_vec.x)
+	var perp	 := Vector2(perp_raw.x * ISO_X, perp_raw.y * ISO_Y).normalized()
 
-	# Flatten Y to isometric (2:1 ratio) and offset by center
-	var tip   := center + Vector2(cart_tip.x, cart_tip.y * ISO_Y)
-	var left  := center + Vector2(cart_left.x, cart_left.y * ISO_Y)
-	var right := center + Vector2(cart_right.x, cart_right.y * ISO_Y)
+	var base  := tip - dir_vec * FACING_HEAD_SIZE
+	var left  := base + perp * 2
+	var right := base - perp * 1
 
 	draw_colored_polygon(
 		PackedVector2Array([tip, left, right]),
