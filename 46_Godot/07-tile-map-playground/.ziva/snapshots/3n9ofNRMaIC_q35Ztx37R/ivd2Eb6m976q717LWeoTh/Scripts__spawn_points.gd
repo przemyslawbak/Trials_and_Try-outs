@@ -6,28 +6,23 @@ var _black_cells: Array[Vector2i] = []
 
 func _ready() -> void:
 	var world := get_parent()
-	var ground_lvl1 = world.get_node_or_null("Ground-lvl1") as TileMapLayer if world else null
-	var dec_lvl0 = world.get_node_or_null("Decoration-lvl-0") as TileMapLayer if world else null
-	
-	var used := get_used_cells()
+	if not world:
+		return
+		
+	var ground_layer := world.get_node_or_null("Ground-lvl0") as TileMapLayer
+	if not ground_layer:
+		return
+		
+	var used := ground_layer.get_used_cells()
 	var valid_cells: Array[Vector2i] = []
 	
 	for cell in used:
-		var source_id := get_cell_source_id(cell)
+		var source_id := ground_layer.get_cell_source_id(cell)
 		if source_id == -1:
 			continue
 			
-		var atlas_coords := get_cell_atlas_coords(cell)
+		var atlas_coords := ground_layer.get_cell_atlas_coords(cell)
 		if atlas_coords.y == WATER_ATLAS_ROW:
-			continue
-			
-		var is_blocked = false
-		if ground_lvl1 and ground_lvl1.get_cell_source_id(cell) != -1:
-			is_blocked = true
-		if dec_lvl0 and dec_lvl0.get_cell_source_id(cell) != -1:
-			is_blocked = true
-			
-		if is_blocked:
 			continue
 			
 		valid_cells.append(cell)
@@ -37,6 +32,12 @@ func _ready() -> void:
 		var limit = mini(3, valid_cells.size())
 		_black_cells = valid_cells.slice(0, limit)
 		
+		for cell in _black_cells:
+			var source_id = ground_layer.get_cell_source_id(cell)
+			var atlas_coords = ground_layer.get_cell_atlas_coords(cell)
+			var alt_tile = ground_layer.get_cell_alternative_tile(cell)
+			set_cell(cell, source_id, atlas_coords, alt_tile)
+			
 		notify_runtime_tile_data_update()
 
 func _use_tile_data_runtime_update(coords: Vector2i) -> bool:
