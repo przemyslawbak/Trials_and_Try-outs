@@ -216,26 +216,3 @@ theme_override_constants/margin_top = 20
 [node name="NextTurnButton" type="Button" parent="UI/MarginContainer" unique_id=232353272]
 layout_mode = 2
 text = "Next Turn"
-
-[node name="RightMarginContainer" type="MarginContainer" parent="UI" unique_id=1462191733]
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -40.0
-offset_bottom = 40.0
-grow_horizontal = 0
-theme_override_constants/margin_top = 20
-theme_override_constants/margin_right = 20
-
-[node name="VBoxContainer" type="VBoxContainer" parent="UI/RightMarginContainer" unique_id=368494659]
-layout_mode = 2
-
-[node name="WeatherLabel" type="Label" parent="UI/RightMarginContainer/VBoxContainer" unique_id=1150980965]
-layout_mode = 2
-text = "Weather"
-horizontal_alignment = 2
-
-[node name="TurnLabel" type="Label" parent="UI/RightMarginContainer/VBoxContainer" unique_id=1297928311]
-layout_mode = 2
-text = "Turn"
-horizontal_alignment = 2

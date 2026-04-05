@@ -5,21 +5,12 @@ const CLICK_RADIUS := 12.0
 const PlayerScene = preload("res://Scenes/player.tscn")
 const EnemyScene = preload("res://Scenes/enemy.tscn")
 
-enum Weather { SUNNY, RAINING, CLOUDY, WINDY }
-enum Turn { PLAYER, ENEMY }
-
-var current_weather: Weather
-var current_turn: Turn
-
 var player: CharacterBody2D
 var enemy: CharacterBody2D
 
 @onready var next_turn_button: Button		  = $UI/MarginContainer/NextTurnButton
 @onready var arrow_overlay:	Node2D		  = $ArrowOverlay
 @onready var tile_highlight:   Node2D		  = $TileHighlight
-
-@onready var weather_label: Label = $UI/RightMarginContainer/VBoxContainer/WeatherLabel
-@onready var turn_label: Label = $UI/RightMarginContainer/VBoxContainer/TurnLabel
 
 var _selected_direction: String  = ""
 var _selected_move_tiles: int	= 0
@@ -47,20 +38,8 @@ func _ready() -> void:
 	enemy = get_node_or_null("Enemy")
 	enemy = _deploy_character(EnemyScene, "Enemy", enemy)
 	
-	_initialize_game_state()
-	
 	if player:
 		_refresh_reachable()
-
-func _initialize_game_state() -> void:
-	# Select random weather
-	var weather_values = Weather.values()
-	current_weather = weather_values[randi() % weather_values.size()]
-	weather_label.text = "Weather: " + Weather.keys()[current_weather].capitalize()
-	
-	# Set turn to Player
-	current_turn = Turn.PLAYER
-	turn_label.text = "Turn: Player"
 
 func _deploy_character(character_scene: PackedScene, char_name: String, existing_ref: CharacterBody2D) -> CharacterBody2D:
 	var ground = get_node_or_null("Ground-lvl0") as SpawnPoints
@@ -138,10 +117,7 @@ func _clear_selection() -> void:
 	arrow_overlay.set_confirmed_facing_visual(false)
 	
 	if tile_highlight:
-		if current_turn == Turn.PLAYER:
-			tile_highlight.set_highlights(_reachable_positions)
-		else:
-			tile_highlight.clear_highlights()
+		tile_highlight.set_highlights(_reachable_positions)
 
 
 
@@ -149,8 +125,6 @@ func _clear_selection() -> void:
 
 func _input(event: InputEvent) -> void:
 	if not player or player.is_moving():
-		return
-	if current_turn != Turn.PLAYER:
 		return
 
 	# ── escape key: clear all selection ──────────────────────────────────────
@@ -233,42 +207,26 @@ func _input(event: InputEvent) -> void:
 
 
 func _on_next_turn_button_pressed() -> void:
-	if current_turn == Turn.PLAYER:
-		if not player or player.is_moving():
-			return
+	if not player or player.is_moving():
+		return
+	if _selected_move_tiles == 0 or _selected_direction == "":
+		return
 
-		next_turn_button.disabled = true
+	_awaiting_facing = false
+	arrow_overlay.clear_path()
+	arrow_overlay.hide_facing_cursor()
+	arrow_overlay.set_confirmed_facing_visual(false)
+	
+	if tile_highlight:
+		tile_highlight.clear_highlights()
 
-		if _selected_move_tiles > 0 and _selected_direction != "":
-			_awaiting_facing = false
-			arrow_overlay.clear_path()
-			arrow_overlay.hide_facing_cursor()
-			arrow_overlay.set_confirmed_facing_visual(false)
-			
-			if tile_highlight:
-				tile_highlight.clear_highlights()
+	player.move_in_direction(_selected_direction, _selected_move_tiles)
+	await get_tree().create_timer(0.1).timeout
+	while player.is_moving():
+		await get_tree().create_timer(0.05).timeout
 
-			player.move_in_direction(_selected_direction, _selected_move_tiles)
-			await get_tree().create_timer(0.1).timeout
-			while player.is_moving():
-				await get_tree().create_timer(0.05).timeout
+	# Apply confirmed facing at the very end of movement
+	if _selected_facing != "" and _selected_facing != _selected_direction:
+		player.set_facing(_selected_facing)
 
-			# Apply confirmed facing at the very end of movement
-			if _selected_facing != "" and _selected_facing != _selected_direction:
-				player.set_facing(_selected_facing)
-
-		current_turn = Turn.ENEMY
-		turn_label.text = "Turn: Enemy"
-		_clear_selection()
-		next_turn_button.disabled = false
-	else:
-		# Currently it's ENEMY turn
-		current_turn = Turn.PLAYER
-		turn_label.text = "Turn: Player"
-		
-		# Roll new random weather for the new turn
-		var weather_values = Weather.values()
-		current_weather = weather_values[randi() % weather_values.size()]
-		weather_label.text = "Weather: " + Weather.keys()[current_weather].capitalize()
-		
-		_refresh_reachable()
+	_refresh_reachable()

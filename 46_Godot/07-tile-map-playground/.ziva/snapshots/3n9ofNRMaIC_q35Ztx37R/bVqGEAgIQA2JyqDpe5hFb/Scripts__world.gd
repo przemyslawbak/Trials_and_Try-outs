@@ -138,10 +138,7 @@ func _clear_selection() -> void:
 	arrow_overlay.set_confirmed_facing_visual(false)
 	
 	if tile_highlight:
-		if current_turn == Turn.PLAYER:
-			tile_highlight.set_highlights(_reachable_positions)
-		else:
-			tile_highlight.clear_highlights()
+		tile_highlight.set_highlights(_reachable_positions)
 
 
 
@@ -259,16 +256,12 @@ func _on_next_turn_button_pressed() -> void:
 
 		current_turn = Turn.ENEMY
 		turn_label.text = "Turn: Enemy"
+		if tile_highlight:
+			tile_highlight.clear_highlights()
 		_clear_selection()
 		next_turn_button.disabled = false
 	else:
 		# Currently it's ENEMY turn
 		current_turn = Turn.PLAYER
 		turn_label.text = "Turn: Player"
-		
-		# Roll new random weather for the new turn
-		var weather_values = Weather.values()
-		current_weather = weather_values[randi() % weather_values.size()]
-		weather_label.text = "Weather: " + Weather.keys()[current_weather].capitalize()
-		
 		_refresh_reachable()

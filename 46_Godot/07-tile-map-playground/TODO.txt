@@ -3,6 +3,8 @@ Open:
 - Create one more Player unit
 
 Closed:
+OK - Right side add info whose turn is
+OK - Right side add info about turn weather
 OK - Refactor Player scene
 OK - Players with blue shield, Enemies with red sheld
 OK - Create enemy unit
