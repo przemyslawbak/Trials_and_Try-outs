@@ -1,12 +1,13 @@
 Open:
-OK - Remove existing Player
-OK - Deploy 1 Player in random spawn point
-- Players with blue shield, enemies with red sheld
 - Add diplomacy scipt with 3 states: enemy, ally, neutral
 - Create one more Player unit
-- Create enemy unit
 
 Closed:
+OK - Refactor Player scene
+OK - Players with blue shield, Enemies with red sheld
+OK - Create enemy unit
+OK - Remove existing Player
+OK - Deploy 1 Player in random spawn point
 OK - Spawn points set in spawn tiles
 OK - Make sure that all spawn points are at least 11 tile from each other
 OK - Make sure that all spawn points are at least 1 tile away of map edge

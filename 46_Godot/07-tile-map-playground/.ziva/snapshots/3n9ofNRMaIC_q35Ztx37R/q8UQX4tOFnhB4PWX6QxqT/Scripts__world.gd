@@ -3,11 +3,8 @@ extends Node2D
 const CLICK_RADIUS := 12.0
 
 const PlayerScene = preload("res://Scenes/player.tscn")
-const EnemyScene = preload("res://Scenes/enemy.tscn")
 
 var player: CharacterBody2D
-var enemy: CharacterBody2D
-
 @onready var next_turn_button: Button		  = $UI/MarginContainer/NextTurnButton
 @onready var arrow_overlay:	Node2D		  = $ArrowOverlay
 @onready var tile_highlight:   Node2D		  = $TileHighlight
@@ -33,25 +30,22 @@ func _ready() -> void:
 	next_turn_button.pressed.connect(_on_next_turn_button_pressed)
 	
 	player = get_node_or_null("Player")
-	player = _deploy_character(PlayerScene, "Player", player)
-	
-	enemy = get_node_or_null("Enemy")
-	enemy = _deploy_character(EnemyScene, "Enemy", enemy)
+	_deploy_player()
 	
 	if player:
 		_refresh_reachable()
 
-func _deploy_character(character_scene: PackedScene, char_name: String, existing_ref: CharacterBody2D) -> CharacterBody2D:
+func _deploy_player() -> void:
 	var ground = get_node_or_null("Ground-lvl0") as SpawnPoints
 	if not ground or ground._black_cells.is_empty():
-		return existing_ref
+		return
 		
 	var spawn_points = ground._black_cells.duplicate()
 	spawn_points.shuffle()
 	
 	var existing_chars: Array[Node] = []
 	for child in get_children():
-		if child is CharacterBody2D and child != existing_ref:
+		if child is CharacterBody2D and child != player:
 			existing_chars.append(child)
 			
 	var chosen_cell: Vector2i
@@ -71,15 +65,11 @@ func _deploy_character(character_scene: PackedScene, char_name: String, existing
 			break
 			
 	if cell_found:
-		var char_inst = existing_ref
-		if not char_inst:
-			char_inst = character_scene.instantiate()
-			char_inst.name = char_name
-			add_child(char_inst)
-		char_inst.position = ground.map_to_local(chosen_cell)
-		return char_inst
-		
-	return existing_ref
+		if not player:
+			player = PlayerScene.instantiate()
+			player.name = "Player"
+			add_child(player)
+		player.position = ground.map_to_local(chosen_cell)
 
 
 func _refresh_reachable() -> void:
