@@ -201,6 +201,10 @@ y_sort_enabled = true
 tile_map_data = PackedByteArray("AAAGABQAAgAEAAQAAAAIABIAAgAFAAQAAAAGABsAAgAKAAUAAAALABwAAgAAAAQAAAALABsAAgAAAAQAAAAMABwAAgAAAAQAAAA=")
 tile_set = SubResource("TileSet_5a7ea")
 
+[node name="SpawnPoints" type="TileMapLayer" parent="." unique_id=207852378]
+y_sort_enabled = true
+tile_set = SubResource("TileSet_5a7ea")
+
 [node name="TileHighlight" type="Node2D" parent="." unique_id=763523865]
 script = ExtResource("4_xxxx")
 

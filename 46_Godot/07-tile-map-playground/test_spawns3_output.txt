@@ -1,0 +1,4 @@
+Ground-lvl0 6,3 count: 0
+Ground-lvl1 6,3 count: 0
+Decoration-lvl-0 6,3 count: 0
+SpawnPoints 6,3 count: 0

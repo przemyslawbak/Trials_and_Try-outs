@@ -1,0 +1,2 @@
+Black cells: 0
+Spawn tiles on SpawnPoints layer: 0
