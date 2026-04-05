@@ -2,9 +2,7 @@ extends Node2D
 
 const CLICK_RADIUS := 12.0
 
-const PlayerScene = preload("res://Scenes/player.tscn")
-
-var player: CharacterBody2D
+@onready var player:		   CharacterBody2D = $Player
 @onready var next_turn_button: Button		  = $UI/MarginContainer/NextTurnButton
 @onready var arrow_overlay:	Node2D		  = $ArrowOverlay
 @onready var tile_highlight:   Node2D		  = $TileHighlight
@@ -28,53 +26,10 @@ func _ready() -> void:
 	facing = WorldFacing.new(self)
 
 	next_turn_button.pressed.connect(_on_next_turn_button_pressed)
-	
-	player = get_node_or_null("Player")
-	_deploy_player()
-	
-	if player:
-		_refresh_reachable()
-
-func _deploy_player() -> void:
-	var ground = get_node_or_null("Ground-lvl0") as SpawnPoints
-	if not ground or ground._black_cells.is_empty():
-		return
-		
-	var spawn_points = ground._black_cells.duplicate()
-	spawn_points.shuffle()
-	
-	var existing_chars: Array[Node] = []
-	for child in get_children():
-		if child is CharacterBody2D and child != player:
-			existing_chars.append(child)
-			
-	var chosen_cell: Vector2i
-	var cell_found := false
-	
-	for cell in spawn_points:
-		var world_pos = ground.map_to_local(cell)
-		var occupied = false
-		for char_node in existing_chars:
-			if char_node.position.distance_to(world_pos) < 5.0:
-				occupied = true
-				break
-				
-		if not occupied:
-			chosen_cell = cell
-			cell_found = true
-			break
-			
-	if cell_found:
-		if not player:
-			player = PlayerScene.instantiate()
-			player.name = "Player"
-			add_child(player)
-		player.position = ground.map_to_local(chosen_cell)
+	_refresh_reachable()
 
 
 func _refresh_reachable() -> void:
-	if not player:
-		return
 	player.reset_available_tiles()
 	_reachable_positions = player.get_reachable_positions()
 	_selected_direction  = ""
@@ -97,8 +52,7 @@ func _clear_selection() -> void:
 	_selected_direction = ""
 	_selected_move_tiles = 0
 	_selected_tiles	  = 0
-	if player:
-		player.set_move_tiles_label_value(player.available_tiles)
+	player.set_move_tiles_label_value(player.available_tiles)
 	_selected_facing	= ""
 	_awaiting_facing	= false
 	_destination		= Vector2.INF
@@ -114,7 +68,7 @@ func _clear_selection() -> void:
 
 
 func _input(event: InputEvent) -> void:
-	if not player or player.is_moving():
+	if player.is_moving():
 		return
 
 	# ── escape key: clear all selection ──────────────────────────────────────
@@ -197,7 +151,7 @@ func _input(event: InputEvent) -> void:
 
 
 func _on_next_turn_button_pressed() -> void:
-	if not player or player.is_moving():
+	if player.is_moving():
 		return
 	if _selected_move_tiles == 0 or _selected_direction == "":
 		return

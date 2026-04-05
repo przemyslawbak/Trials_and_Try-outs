@@ -2,7 +2,6 @@
 
 [ext_resource type="Script" uid="uid://blsduc1ni1qnr" path="res://Scripts/world.gd" id="1_5a7ea"]
 [ext_resource type="Texture2D" uid="uid://cj84th15f1xo0" path="res://Assets/MapTiles/spritesheet.png" id="1_a02cp"]
-[ext_resource type="PackedScene" uid="uid://bdnfci5432o67" path="res://Scenes/player.tscn" id="2_go701"]
 [ext_resource type="Script" uid="uid://b7yo1umfwwk1g" path="res://Scripts/arrow_overlay.gd" id="3_8j60k"]
 [ext_resource type="Script" uid="uid://bs3xrfw6oql3q" path="res://Scripts/tile_highlight.gd" id="4_xxxx"]
 [ext_resource type="Script" uid="uid://bdkoe1i2wuyla" path="res://Scripts/spawn_points.gd" id="5_spwn"]
@@ -180,9 +179,6 @@ sources/2 = SubResource("TileSetAtlasSource_go701")
 [node name="World" type="Node2D" unique_id=228562071]
 y_sort_enabled = true
 script = ExtResource("1_5a7ea")
-
-[node name="Player" parent="." unique_id=776361006 instance=ExtResource("2_go701")]
-position = Vector2(321, 110)
 
 [node name="Ground-lvl0" type="TileMapLayer" parent="." unique_id=1936472476]
 z_index = -1
