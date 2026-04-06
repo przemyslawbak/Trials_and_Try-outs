@@ -213,17 +213,9 @@ offset_bottom = 40.0
 theme_override_constants/margin_left = 20
 theme_override_constants/margin_top = 20
 
-[node name="VBoxContainer" type="VBoxContainer" parent="UI/MarginContainer" unique_id=1970428725]
-layout_mode = 2
-theme_override_constants/separation = 5
-
-[node name="NextTurnButton" type="Button" parent="UI/MarginContainer/VBoxContainer" unique_id=232353272]
+[node name="NextTurnButton" type="Button" parent="UI/MarginContainer" unique_id=232353272]
 layout_mode = 2
 text = "Next Turn"
-
-[node name="TurnNoLabel" type="Label" parent="UI/MarginContainer/VBoxContainer" unique_id=1217791759]
-layout_mode = 2
-text = "Turn No: 1"
 
 [node name="RightMarginContainer" type="MarginContainer" parent="UI" unique_id=1462191733]
 anchors_preset = 1
@@ -249,3 +241,8 @@ bbcode_enabled = true
 text = "[right]Turn[/right]"
 fit_content = true
 autowrap_mode = 0
+
+[node name="TurnNoLabel" type="Label" parent="UI/RightMarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Turn No: 1"
+horizontal_alignment = 2

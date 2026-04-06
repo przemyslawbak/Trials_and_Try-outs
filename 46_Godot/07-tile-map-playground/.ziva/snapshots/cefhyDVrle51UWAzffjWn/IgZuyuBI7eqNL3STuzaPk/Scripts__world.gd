@@ -14,13 +14,13 @@ var current_turn: Turn
 var player: CharacterBody2D
 var enemy: CharacterBody2D
 
-@onready var next_turn_button: Button		  = $UI/MarginContainer/VBoxContainer/NextTurnButton
+@onready var next_turn_button: Button		  = $UI/MarginContainer/NextTurnButton
 @onready var arrow_overlay:	Node2D		  = $ArrowOverlay
 @onready var tile_highlight:   Node2D		  = $TileHighlight
 
 @onready var weather_label: Label = $UI/RightMarginContainer/VBoxContainer/WeatherLabel
 @onready var turn_label: RichTextLabel = $UI/RightMarginContainer/VBoxContainer/TurnLabel
-@onready var turn_no_label: Label = $UI/MarginContainer/VBoxContainer/TurnNoLabel
+@onready var turn_no_label: Label = $UI/RightMarginContainer/VBoxContainer/TurnNoLabel
 
 var turn_number: int = 1
 

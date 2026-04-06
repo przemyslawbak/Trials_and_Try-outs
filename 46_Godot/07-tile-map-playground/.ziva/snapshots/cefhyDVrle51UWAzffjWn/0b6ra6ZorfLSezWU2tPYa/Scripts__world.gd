@@ -14,15 +14,12 @@ var current_turn: Turn
 var player: CharacterBody2D
 var enemy: CharacterBody2D
 
-@onready var next_turn_button: Button		  = $UI/MarginContainer/VBoxContainer/NextTurnButton
+@onready var next_turn_button: Button		  = $UI/MarginContainer/NextTurnButton
 @onready var arrow_overlay:	Node2D		  = $ArrowOverlay
 @onready var tile_highlight:   Node2D		  = $TileHighlight
 
 @onready var weather_label: Label = $UI/RightMarginContainer/VBoxContainer/WeatherLabel
 @onready var turn_label: RichTextLabel = $UI/RightMarginContainer/VBoxContainer/TurnLabel
-@onready var turn_no_label: Label = $UI/MarginContainer/VBoxContainer/TurnNoLabel
-
-var turn_number: int = 1
 
 var _selected_direction: String  = ""
 var _selected_move_tiles: int	= 0
@@ -63,9 +60,6 @@ func _initialize_game_state() -> void:
 	
 	# Set turn to Player
 	current_turn = Turn.PLAYER
-	turn_number = 1
-	if turn_no_label:
-		turn_no_label.text = "Turn No: " + str(turn_number)
 	if player and player.shield:
 		turn_label.text = "[right]Turn: [color=#%s]Player[/color][/right]" % player.shield.color.to_html(false)
 	else:
@@ -276,9 +270,6 @@ func _on_next_turn_button_pressed() -> void:
 	else:
 		# Currently it's ENEMY turn
 		current_turn = Turn.PLAYER
-		turn_number += 1
-		if turn_no_label:
-			turn_no_label.text = "Turn No: " + str(turn_number)
 		if player and player.shield:
 			turn_label.text = "[right]Turn: [color=#%s]Player[/color][/right]" % player.shield.color.to_html(false)
 		else:
