@@ -19,13 +19,21 @@ var facing_direction: String = "NE"
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var move_tiles_label: Label = $MoveTilesLabel
 @onready var move_tiles_icon: Sprite2D = $MoveTilesIcon
-@onready var name_label: Label = $NameLabel
+@onready var sword_label: Label = $SwordLabel
+@onready var sword_icon: Sprite2D = $SwordIcon
 @onready var shield: Polygon2D = $Shield
 
 var movement: CharacterMovement
 var facing: CharacterFacing
 
 const MAX_AVAILABLE_TILES := 3
+const MAX_AVAILABLE_SWORDS := 999
+
+var available_swords: int = MAX_AVAILABLE_SWORDS:
+	set(value):
+		available_swords = value
+		if sword_label:
+			sword_label.text = str(available_swords)
 
 var _blocked_layers: Array[TileMapLayer] = []
 var _ground_lvl0: TileMapLayer
@@ -34,17 +42,6 @@ func _init() -> void:
 	movement = CharacterMovement.new(self)
 	facing = CharacterFacing.new(self)
 
-func _get_random_name() -> String:
-	if not FileAccess.file_exists("res://Assets/Text/names.txt"):
-		return name
-	var file = FileAccess.open("res://Assets/Text/names.txt", FileAccess.READ)
-	if file:
-		var content = file.get_as_text().strip_edges()
-		if content:
-			var names = content.split("\n", false)
-			if names.size() > 0:
-				return names[randi() % names.size()].strip_edges()
-	return name
 
 func _ready() -> void:
 	facing.play_idle()
@@ -52,10 +49,10 @@ func _ready() -> void:
 	if move_tiles_label:
 		move_tiles_label.add_theme_color_override("font_color", Color.WHITE)
 		move_tiles_label.text = "%d/%d" % [available_tiles, MAX_AVAILABLE_TILES]
-	if name_label and move_tiles_label:
-		name_label.add_theme_font_size_override("font_size", move_tiles_label.get_theme_font_size("font_size"))
-		name_label.scale = move_tiles_label.scale
-		name_label.text = _get_random_name()
+	if sword_label and move_tiles_label:
+		sword_label.add_theme_font_size_override("font_size", move_tiles_label.get_theme_font_size("font_size"))
+		sword_label.scale = move_tiles_label.scale
+		sword_label.text = str(available_swords)
 	if move_tiles_icon:
 		move_tiles_icon.visible = true
 	

@@ -6,5 +6,5 @@
 [node name="Player" unique_id=528072603 instance=ExtResource("1_base")]
 script = ExtResource("2_script")
 
-[node name="Shield" parent="." index="5"]
+[node name="Shield" parent="." index="6"]
 color = Color(0, 0.22363, 0.562309, 1)

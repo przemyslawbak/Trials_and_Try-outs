@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://wy8uou04gi72" path="res://Scripts/character_base.gd" id="1_cvnsp"]
 [ext_resource type="Texture2D" uid="uid://ddnog8uthtof1" path="res://Assets/SpriteSheets/spritesheet.png" id="1_v0iea"]
 [ext_resource type="Texture2D" uid="uid://uuljhdmfsinj" path="res://Assets/Icons/foot-sign.png" id="2_foot"]
+[ext_resource type="Texture2D" uid="uid://l5ys4vuski7d" path="res://Assets/Icons/sword-pngrepo-com.png" id="3_sword"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_cvnsp"]
 radius = 7.0
@@ -303,14 +304,21 @@ position = Vector2(-14, -41)
 scale = Vector2(0.228431, 0.228431)
 texture = ExtResource("2_foot")
 
-[node name="NameLabel" type="Label" parent="." unique_id=1037923603]
+[node name="SwordLabel" type="Label" parent="." unique_id=1037923603]
 z_index = 2
-offset_left = 8.0
+offset_left = 17.0
 offset_top = -47.0
-offset_right = 55.0
+offset_right = 42.0
 offset_bottom = -24.0
 scale = Vector2(0.5, 0.5)
-text = "Name"
+text = "3/3"
+horizontal_alignment = 1
+
+[node name="SwordIcon" type="Sprite2D" parent="." unique_id=479602332]
+z_index = 2
+position = Vector2(13, -41)
+scale = Vector2(0.228431, 0.228431)
+texture = ExtResource("3_sword")
 
 [node name="Shield" type="Polygon2D" parent="." unique_id=939159428]
 z_index = 3

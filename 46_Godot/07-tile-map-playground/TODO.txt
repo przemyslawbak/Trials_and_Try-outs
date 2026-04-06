@@ -1,5 +1,6 @@
 Open:
-- Cards deck(?)
+- Cards decks at the bottom of the view
+- On the fight pop up dialogue window: auto resolve / manual
 
 Closed:
 OK - Create Ally unit

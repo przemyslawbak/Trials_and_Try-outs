@@ -34,17 +34,6 @@ func _init() -> void:
 	movement = CharacterMovement.new(self)
 	facing = CharacterFacing.new(self)
 
-func _get_random_name() -> String:
-	if not FileAccess.file_exists("res://Assets/Text/names.txt"):
-		return name
-	var file = FileAccess.open("res://Assets/Text/names.txt", FileAccess.READ)
-	if file:
-		var content = file.get_as_text().strip_edges()
-		if content:
-			var names = content.split("\n", false)
-			if names.size() > 0:
-				return names[randi() % names.size()].strip_edges()
-	return name
 
 func _ready() -> void:
 	facing.play_idle()
@@ -55,7 +44,7 @@ func _ready() -> void:
 	if name_label and move_tiles_label:
 		name_label.add_theme_font_size_override("font_size", move_tiles_label.get_theme_font_size("font_size"))
 		name_label.scale = move_tiles_label.scale
-		name_label.text = _get_random_name()
+		name_label.text = name
 	if move_tiles_icon:
 		move_tiles_icon.visible = true
 	
