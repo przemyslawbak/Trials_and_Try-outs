@@ -96,7 +96,7 @@ func _deploy_character(character_scene: PackedScene, char_name: String, existing
 	var cell_found := false
 	
 	for cell in spawn_points:
-		var world_pos = ground.position + ground.map_to_local(cell)
+		var world_pos = ground.map_to_local(cell)
 		var occupied = false
 		for char_node in existing_chars:
 			if char_node.position.distance_to(world_pos) < 5.0:
@@ -114,7 +114,7 @@ func _deploy_character(character_scene: PackedScene, char_name: String, existing
 			char_inst = character_scene.instantiate()
 			char_inst.name = char_name
 			add_child(char_inst)
-		char_inst.position = ground.position + ground.map_to_local(chosen_cell)
+		char_inst.position = ground.map_to_local(chosen_cell)
 		return char_inst
 		
 	return existing_ref
