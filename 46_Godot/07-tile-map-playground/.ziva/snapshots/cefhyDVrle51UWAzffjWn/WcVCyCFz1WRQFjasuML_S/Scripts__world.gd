@@ -19,7 +19,7 @@ var enemy: CharacterBody2D
 @onready var tile_highlight:   Node2D		  = $TileHighlight
 
 @onready var weather_label: Label = $UI/RightMarginContainer/VBoxContainer/WeatherLabel
-@onready var turn_label: RichTextLabel = $UI/RightMarginContainer/VBoxContainer/TurnLabel
+@onready var turn_label: Label = $UI/RightMarginContainer/VBoxContainer/TurnLabel
 
 var _selected_direction: String  = ""
 var _selected_move_tiles: int	= 0
@@ -60,10 +60,9 @@ func _initialize_game_state() -> void:
 	
 	# Set turn to Player
 	current_turn = Turn.PLAYER
+	turn_label.text = "Turn: Player"
 	if player and player.shield:
-		turn_label.text = "[right]Turn: [color=#%s]Player[/color][/right]" % player.shield.color.to_html(false)
-	else:
-		turn_label.text = "[right]Turn: Player[/right]"
+		turn_label.add_theme_color_override("font_color", player.shield.color)
 
 func _deploy_character(character_scene: PackedScene, char_name: String, existing_ref: CharacterBody2D) -> CharacterBody2D:
 	var ground = get_node_or_null("Ground-lvl0") as SpawnPoints
@@ -261,19 +260,17 @@ func _on_next_turn_button_pressed() -> void:
 				player.set_facing(_selected_facing)
 
 		current_turn = Turn.ENEMY
+		turn_label.text = "Turn: Enemy"
 		if enemy and enemy.shield:
-			turn_label.text = "[right]Turn: [color=#%s]Enemy[/color][/right]" % enemy.shield.color.to_html(false)
-		else:
-			turn_label.text = "[right]Turn: Enemy[/right]"
+			turn_label.add_theme_color_override("font_color", enemy.shield.color)
 		_clear_selection()
 		next_turn_button.disabled = false
 	else:
 		# Currently it's ENEMY turn
 		current_turn = Turn.PLAYER
+		turn_label.text = "Turn: Player"
 		if player and player.shield:
-			turn_label.text = "[right]Turn: [color=#%s]Player[/color][/right]" % player.shield.color.to_html(false)
-		else:
-			turn_label.text = "[right]Turn: Player[/right]"
+			turn_label.add_theme_color_override("font_color", player.shield.color)
 		
 		# Roll new random weather for the new turn
 		var weather_values = Weather.values()

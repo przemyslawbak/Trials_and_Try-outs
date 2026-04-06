@@ -235,9 +235,7 @@ layout_mode = 2
 text = "Weather"
 horizontal_alignment = 2
 
-[node name="TurnLabel" type="RichTextLabel" parent="UI/RightMarginContainer/VBoxContainer" unique_id=1297928311]
+[node name="TurnLabel" type="Label" parent="UI/RightMarginContainer/VBoxContainer" unique_id=1297928311]
 layout_mode = 2
-bbcode_enabled = true
-text = "[right]Turn[/right]"
-fit_content = true
-autowrap_mode = 0
+text = "Turn"
+horizontal_alignment = 2
