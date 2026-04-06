@@ -1,7 +1,7 @@
 Open:
 - Add diplomacy scipt with 3 states: enemy, ally, neutral
 - Create one more Player unit
-- Cards deck
+- Cards deck(?)
 
 Closed:
 OK - Add weather icons
