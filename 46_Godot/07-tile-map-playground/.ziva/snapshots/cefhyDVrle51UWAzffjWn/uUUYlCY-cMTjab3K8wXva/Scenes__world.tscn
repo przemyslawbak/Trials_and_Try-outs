@@ -239,18 +239,10 @@ theme_override_constants/margin_right = 20
 layout_mode = 2
 alignment = 2
 
-[node name="WeatherContainer" type="HBoxContainer" parent="UI/RightMarginContainer/VBoxContainer" unique_id=2127476060]
-layout_mode = 2
-size_flags_horizontal = 8
-
-[node name="Weather_Label" type="Label" parent="UI/RightMarginContainer/VBoxContainer/WeatherContainer" unique_id=1647801337]
-layout_mode = 2
-text = "Weather:"
-
-[node name="WeatherIcon" type="TextureRect" parent="UI/RightMarginContainer/VBoxContainer/WeatherContainer" unique_id=1284525526]
+[node name="WeatherIcon" type="TextureRect" parent="UI/RightMarginContainer/VBoxContainer" unique_id=1284525526]
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
-expand_mode = 1
+size_flags_horizontal = 8
 stretch_mode = 5
 
 [node name="TurnLabel" type="RichTextLabel" parent="UI/RightMarginContainer/VBoxContainer" unique_id=1297928311]

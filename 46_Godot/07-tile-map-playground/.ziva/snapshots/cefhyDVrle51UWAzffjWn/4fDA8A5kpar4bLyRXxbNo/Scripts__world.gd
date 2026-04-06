@@ -18,7 +18,7 @@ var enemy: CharacterBody2D
 @onready var arrow_overlay:	Node2D		  = $ArrowOverlay
 @onready var tile_highlight:   Node2D		  = $TileHighlight
 
-@onready var weather_icon: TextureRect = $UI/RightMarginContainer/VBoxContainer/WeatherContainer/WeatherIcon
+@onready var weather_icon: TextureRect = $UI/RightMarginContainer/VBoxContainer/WeatherIcon
 @onready var turn_label: RichTextLabel = $UI/RightMarginContainer/VBoxContainer/TurnLabel
 @onready var turn_no_label: Label = $UI/MarginContainer/VBoxContainer/TurnNoLabel
 

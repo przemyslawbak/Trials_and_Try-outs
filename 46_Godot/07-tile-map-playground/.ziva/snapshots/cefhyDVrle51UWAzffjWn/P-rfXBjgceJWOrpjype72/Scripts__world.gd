@@ -18,16 +18,9 @@ var enemy: CharacterBody2D
 @onready var arrow_overlay:	Node2D		  = $ArrowOverlay
 @onready var tile_highlight:   Node2D		  = $TileHighlight
 
-@onready var weather_icon: TextureRect = $UI/RightMarginContainer/VBoxContainer/WeatherContainer/WeatherIcon
+@onready var weather_label: Label = $UI/RightMarginContainer/VBoxContainer/WeatherLabel
 @onready var turn_label: RichTextLabel = $UI/RightMarginContainer/VBoxContainer/TurnLabel
 @onready var turn_no_label: Label = $UI/MarginContainer/VBoxContainer/TurnNoLabel
-
-const WEATHER_ICONS = {
-	Weather.SUNNY: preload("res://Assets/Icons/Weather/sunny.png"),
-	Weather.RAINING: preload("res://Assets/Icons/Weather/rainy.png"),
-	Weather.CLOUDY: preload("res://Assets/Icons/Weather/cloudy.png"),
-	Weather.WINDY: preload("res://Assets/Icons/Weather/windy.png")
-}
 
 var turn_number: int = 1
 
@@ -66,8 +59,7 @@ func _initialize_game_state() -> void:
 	# Select random weather
 	var weather_values = Weather.values()
 	current_weather = weather_values[randi() % weather_values.size()]
-	if weather_icon:
-		weather_icon.texture = WEATHER_ICONS[current_weather]
+	weather_label.text = "Weather: " + Weather.keys()[current_weather].capitalize()
 	
 	# Set turn to Player
 	current_turn = Turn.PLAYER
@@ -295,7 +287,6 @@ func _on_next_turn_button_pressed() -> void:
 		# Roll new random weather for the new turn
 		var weather_values = Weather.values()
 		current_weather = weather_values[randi() % weather_values.size()]
-		if weather_icon:
-			weather_icon.texture = WEATHER_ICONS[current_weather]
+		weather_label.text = "Weather: " + Weather.keys()[current_weather].capitalize()
 		
 		_refresh_reachable()

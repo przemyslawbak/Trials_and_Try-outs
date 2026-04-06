@@ -1,11 +1,11 @@
 Open:
-- Add weather icons
-- Add turn counter
 - Add diplomacy scipt with 3 states: enemy, ally, neutral
 - Create one more Player unit
 - Cards deck
 
 Closed:
+OK - Add weather icons
+OK - Add turn counter
 OK - Right side add info whose turn is
 OK - Right side add info about turn weather
 OK - Refactor Player scene
