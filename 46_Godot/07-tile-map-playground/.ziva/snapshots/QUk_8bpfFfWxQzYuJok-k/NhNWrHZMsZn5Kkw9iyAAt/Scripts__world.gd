@@ -4,17 +4,15 @@ const CLICK_RADIUS := 12.0
 
 const PlayerScene = preload("res://Scenes/player.tscn")
 const EnemyScene = preload("res://Scenes/enemy.tscn")
-const AllyScene = preload("res://Scenes/ally.tscn")
 
 enum Weather { SUNNY, RAINING, CLOUDY, WINDY }
-enum Turn { PLAYER, ALLY, ENEMY }
+enum Turn { PLAYER, ENEMY }
 
 var current_weather: Weather
 var current_turn: Turn
 
 var player: CharacterBody2D
 var enemy: CharacterBody2D
-var ally: CharacterBody2D
 
 @onready var next_turn_button: Button		  = $UI/RightMarginContainer/VBoxContainer/NextTurnButton
 @onready var arrow_overlay:	Node2D		  = $ArrowOverlay
@@ -59,9 +57,6 @@ func _ready() -> void:
 	enemy = get_node_or_null("Enemy")
 	enemy = _deploy_character(EnemyScene, "Enemy", enemy)
 	
-	ally = get_node_or_null("Ally")
-	ally = _deploy_character(AllyScene, "Ally", ally)
-	
 	_initialize_game_state()
 	
 	if player:
@@ -80,9 +75,9 @@ func _initialize_game_state() -> void:
 	if turn_no_label:
 		turn_no_label.text = "Turn No: " + str(turn_number)
 	if player and player.shield:
-		turn_label.text = "Turn: [color=#%s]Player[/color]" % player.shield.color.to_html(false)
+		turn_label.text = "[right]Turn: [color=#%s]Player[/color][/right]" % player.shield.color.to_html(false)
 	else:
-		turn_label.text = "Turn: Player"
+		turn_label.text = "[right]Turn: Player[/right]"
 
 func _deploy_character(character_scene: PackedScene, char_name: String, existing_ref: CharacterBody2D) -> CharacterBody2D:
 	var ground = get_node_or_null("Ground-lvl0") as SpawnPoints
@@ -279,31 +274,23 @@ func _on_next_turn_button_pressed() -> void:
 			if _selected_facing != "" and _selected_facing != _selected_direction:
 				player.set_facing(_selected_facing)
 
-		current_turn = Turn.ALLY
-		if ally and ally.shield:
-			turn_label.text = "Turn: [color=#%s]Ally[/color]" % ally.shield.color.to_html(false)
-		else:
-			turn_label.text = "Turn: Ally"
-		_clear_selection()
-		next_turn_button.disabled = false
-		
-	elif current_turn == Turn.ALLY:
 		current_turn = Turn.ENEMY
 		if enemy and enemy.shield:
-			turn_label.text = "Turn: [color=#%s]Enemy[/color]" % enemy.shield.color.to_html(false)
+			turn_label.text = "[right]Turn: [color=#%s]Enemy[/color][/right]" % enemy.shield.color.to_html(false)
 		else:
-			turn_label.text = "Turn: Enemy"
+			turn_label.text = "[right]Turn: Enemy[/right]"
 		_clear_selection()
-		
-	elif current_turn == Turn.ENEMY:
+		next_turn_button.disabled = false
+	else:
+		# Currently it's ENEMY turn
 		current_turn = Turn.PLAYER
 		turn_number += 1
 		if turn_no_label:
 			turn_no_label.text = "Turn No: " + str(turn_number)
 		if player and player.shield:
-			turn_label.text = "Turn: [color=#%s]Player[/color]" % player.shield.color.to_html(false)
+			turn_label.text = "[right]Turn: [color=#%s]Player[/color][/right]" % player.shield.color.to_html(false)
 		else:
-			turn_label.text = "Turn: Player"
+			turn_label.text = "[right]Turn: Player[/right]"
 		
 		# Roll new random weather for the new turn
 		var weather_values = Weather.values()

@@ -1,9 +1,8 @@
 Open:
-- Add diplomacy scipt with 3 states: enemy, ally, neutral
-- Create one more Player unit
 - Cards deck(?)
 
 Closed:
+OK - Create Ally unit
 OK - Add weather icons
 OK - Add turn counter
 OK - Right side add info whose turn is

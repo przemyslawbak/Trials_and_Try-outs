@@ -227,17 +227,17 @@ alignment = 2
 
 [node name="NextTurnButton" type="Button" parent="UI/RightMarginContainer/VBoxContainer" unique_id=232353272]
 layout_mode = 2
-size_flags_horizontal = 0
+size_flags_horizontal = 8
 text = "Next Turn"
 
 [node name="TurnNoLabel" type="Label" parent="UI/RightMarginContainer/VBoxContainer" unique_id=1217791759]
 layout_mode = 2
-size_flags_horizontal = 0
+size_flags_horizontal = 8
 text = "Turn No: 1"
 
 [node name="WeatherContainer" type="HBoxContainer" parent="UI/RightMarginContainer/VBoxContainer" unique_id=2127476060]
 layout_mode = 2
-size_flags_horizontal = 0
+size_flags_horizontal = 8
 
 [node name="Weather_Label" type="Label" parent="UI/RightMarginContainer/VBoxContainer/WeatherContainer" unique_id=1647801337]
 layout_mode = 2
@@ -252,6 +252,6 @@ stretch_mode = 5
 [node name="TurnLabel" type="RichTextLabel" parent="UI/RightMarginContainer/VBoxContainer" unique_id=1297928311]
 layout_mode = 2
 bbcode_enabled = true
-text = "Turn"
+text = "[right]Turn[/right]"
 fit_content = true
 autowrap_mode = 0
