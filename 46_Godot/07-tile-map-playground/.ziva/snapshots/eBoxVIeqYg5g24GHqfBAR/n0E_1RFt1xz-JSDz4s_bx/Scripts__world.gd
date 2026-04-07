@@ -16,21 +16,19 @@ var player: CharacterBody2D
 var enemy: CharacterBody2D
 var ally: CharacterBody2D
 
-@onready var next_turn_button: Button		  = $UI/RightMarginContainer/TurnContainer/NextTurnButton
+@onready var next_turn_button: Button		  = $UI/RightMarginContainer/VBoxContainer/NextTurnButton
 @onready var arrow_overlay:	Node2D		  = $ArrowOverlay
 @onready var tile_highlight:   Node2D		  = $TileHighlight
 
-@onready var weather_icon: TextureRect = $UI/RightMarginContainer/TurnContainer/WeatherContainer/WeatherIcon
-@onready var turn_label: RichTextLabel = $UI/RightMarginContainer/TurnContainer/TurnLabel
-@onready var turn_no_label: Label = $UI/RightMarginContainer/TurnContainer/TurnNoLabel
+@onready var weather_icon: TextureRect = $UI/RightMarginContainer/VBoxContainer/WeatherContainer/WeatherIcon
+@onready var turn_label: RichTextLabel = $UI/RightMarginContainer/VBoxContainer/TurnLabel
+@onready var turn_no_label: Label = $UI/RightMarginContainer/VBoxContainer/TurnNoLabel
 
-@onready var stats_container: VBoxContainer = $UI/RightMarginContainer/TurnContainer/StatsContainer
-@onready var stats_name_label: Label = $UI/RightMarginContainer/TurnContainer/StatsContainer/NameLabel
-@onready var footmen_label: Label = $UI/RightMarginContainer/TurnContainer/StatsContainer/FootmenLabel
-@onready var horsemen_label: Label = $UI/RightMarginContainer/TurnContainer/StatsContainer/HorsemenLabel
-@onready var archers_label: Label = $UI/RightMarginContainer/TurnContainer/StatsContainer/ArchersLabel
-@onready var pikemen_label: Label = $UI/RightMarginContainer/TurnContainer/StatsContainer/PikemenLabel
-@onready var command_label: Label = $UI/RightMarginContainer/TurnContainer/StatsContainer/CommandLabel
+@onready var footmen_label: Label = $UI/RightMarginContainer/VBoxContainer/FootmenLabel
+@onready var horsemen_label: Label = $UI/RightMarginContainer/VBoxContainer/HorsemenLabel
+@onready var archers_label: Label = $UI/RightMarginContainer/VBoxContainer/ArchersLabel
+@onready var pikemen_label: Label = $UI/RightMarginContainer/VBoxContainer/PikemenLabel
+@onready var command_label: Label = $UI/RightMarginContainer/VBoxContainer/CommandLabel
 
 const WEATHER_ICONS = {
 	Weather.SUNNY: preload("res://Assets/Icons/Weather/sunny.png"),
@@ -93,7 +91,11 @@ func _initialize_game_state() -> void:
 		turn_label.text = "Turn: Player"
 		
 	if player:
-		_update_stats_ui(player)
+		if footmen_label: footmen_label.text = "Footmen: %d" % player.footmen
+		if horsemen_label: horsemen_label.text = "Horsemen: %d" % player.horsemen
+		if archers_label: archers_label.text = "Archers: %d" % player.archers
+		if pikemen_label: pikemen_label.text = "Pikemen: %d" % player.pikemen
+		if command_label: command_label.text = "Command: %d" % player.command
 
 func _deploy_character(character_scene: PackedScene, char_name: String, existing_ref: CharacterBody2D) -> CharacterBody2D:
 	var ground = get_node_or_null("Ground-lvl0") as SpawnPoints
@@ -180,44 +182,7 @@ func _clear_selection() -> void:
 
 
 
-func _get_character_at_position(pos: Vector2) -> CharacterBody2D:
-	var chars = [player, enemy, ally]
-	for c in chars:
-		if c and c.is_inside_tree():
-			# Character sprites are offset by -14px Y usually, so adjust the target click slightly if needed
-			# The simplest approach is just a distance check:
-			if pos.distance_to(c.position + Vector2(0, -14)) < CLICK_RADIUS * 1.5:
-				return c
-	return null
-
-func _update_stats_ui(character: CharacterBody2D) -> void:
-	if not character:
-		return
-	
-	if stats_name_label:
-		if character.has_node("NameLabel"):
-			stats_name_label.text = "Name: " + character.get_node("NameLabel").text
-		else:
-			stats_name_label.text = "Name: " + character.name
-			
-	if footmen_label and "footmen" in character:
-		footmen_label.text = "Footmen: " + str(character.footmen)
-	if horsemen_label and "horsemen" in character:
-		horsemen_label.text = "Horsemen: " + str(character.horsemen)
-	if archers_label and "archers" in character:
-		archers_label.text = "Archers: " + str(character.archers)
-	if pikemen_label and "pikemen" in character:
-		pikemen_label.text = "Pikemen: " + str(character.pikemen)
-	if command_label and "command" in character:
-		command_label.text = "Command: " + str(character.command)
-
 func _input(event: InputEvent) -> void:
-	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
-		var click_pos = get_global_mouse_position()
-		var clicked_char = _get_character_at_position(click_pos)
-		if clicked_char:
-			_update_stats_ui(clicked_char)
-
 	if not player or player.is_moving():
 		return
 	if current_turn != Turn.PLAYER:
