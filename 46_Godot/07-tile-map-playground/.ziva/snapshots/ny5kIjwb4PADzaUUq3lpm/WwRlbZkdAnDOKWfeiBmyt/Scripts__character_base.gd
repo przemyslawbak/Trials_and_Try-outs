@@ -16,38 +16,16 @@ const ISO_DIRECTIONS := {
 var available_tiles: int = 3
 var facing_direction: String = "NE"
 
-func update_command_stars() -> void:
-	if not command_stars:
-		return
-		
-	for child in command_stars.get_children():
-		child.queue_free()
-		
-	var star_tex = preload("res://Assets/Icons/star.png")
-	for i in range(command):
-		var tr = TextureRect.new()
-		tr.texture = star_tex
-		tr.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
-		tr.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
-		tr.custom_minimum_size = Vector2(10, 10)
-		command_stars.add_child(tr)
-
 @export var footmen: int = 0
 @export var horsemen: int = 0
 @export var archers: int = 0
 @export var pikemen: int = 0
-@export var command: int = 0:
-	set(value):
-		command = value
-		if is_node_ready():
-			update_command_stars()
-@export var knights: int = 0
+@export var command: int = 0
 
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var move_tiles_label: Label = $MoveTilesLabel
 @onready var move_tiles_icon: Sprite2D = $MoveTilesIcon
 @onready var name_label: Label = $NameLabel
-@onready var command_stars: HBoxContainer = $CommandStars
 @onready var shield: Polygon2D = $Shield
 
 var movement: CharacterMovement
@@ -75,13 +53,6 @@ func _get_random_name() -> String:
 	return name
 
 func _ready() -> void:
-	footmen = randi_range(600, 999)
-	horsemen = randi_range(20, 99)
-	archers = randi_range(100, 199)
-	pikemen = randi_range(100, 199)
-	knights = randi_range(0, 19)
-	command = randi_range(1, 3)
-	
 	facing.play_idle()
 	
 	if move_tiles_label:
@@ -93,8 +64,6 @@ func _ready() -> void:
 		name_label.text = _get_random_name()
 	if move_tiles_icon:
 		move_tiles_icon.visible = true
-		
-	update_command_stars()
 	
 	var world := get_parent()
 	if world:
