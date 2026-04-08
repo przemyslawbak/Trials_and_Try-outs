@@ -86,14 +86,12 @@ func _ready() -> void:
 	if player:
 		_refresh_reachable()
 
-func _roll_weather() -> void:
+func _initialize_game_state() -> void:
+	# Select random weather
 	var weather_values = Weather.values()
 	current_weather = weather_values[randi() % weather_values.size()]
 	if weather_icon:
 		weather_icon.texture = WEATHER_ICONS[current_weather]
-
-func _initialize_game_state() -> void:
-	_roll_weather()
 	
 	# Set turn to Player
 	current_turn = Turn.PLAYER
@@ -226,7 +224,8 @@ func _update_stats_ui(character: CharacterBody2D) -> void:
 			
 		var stars_str = ""
 		if "command" in character:
-			stars_str = "[img=10]res://Assets/Icons/star.png[/img]".repeat(character.command)
+			for i in range(character.command):
+				stars_str += "[img=10]res://Assets/Icons/star.png[/img]"
 				
 		stats_name_label.text = "Name: " + char_name + " " + stars_str
 			
@@ -384,6 +383,9 @@ func _on_next_turn_button_pressed() -> void:
 			turn_label.text = "Turn: Player"
 		
 		# Roll new random weather for the new turn
-		_roll_weather()
+		var weather_values = Weather.values()
+		current_weather = weather_values[randi() % weather_values.size()]
+		if weather_icon:
+			weather_icon.texture = WEATHER_ICONS[current_weather]
 		
 		_refresh_reachable()

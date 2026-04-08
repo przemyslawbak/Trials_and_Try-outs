@@ -64,23 +64,16 @@ func _init() -> void:
 	movement = CharacterMovement.new(self)
 	facing = CharacterFacing.new(self)
 
-static var _names_cache: Array[String] = []
-
 func _get_random_name() -> String:
-	if _names_cache.is_empty():
-		if FileAccess.file_exists("res://Assets/Text/names.txt"):
-			var file = FileAccess.open("res://Assets/Text/names.txt", FileAccess.READ)
-			if file:
-				var content = file.get_as_text().strip_edges()
-				if content:
-					var names = content.split("\n", false)
-					for n in names:
-						var stripped = n.strip_edges()
-						if not stripped.is_empty():
-							_names_cache.append(stripped)
-	
-	if not _names_cache.is_empty():
-		return _names_cache[randi() % _names_cache.size()]
+	if not FileAccess.file_exists("res://Assets/Text/names.txt"):
+		return name
+	var file = FileAccess.open("res://Assets/Text/names.txt", FileAccess.READ)
+	if file:
+		var content = file.get_as_text().strip_edges()
+		if content:
+			var names = content.split("\n", false)
+			if names.size() > 0:
+				return names[randi() % names.size()].strip_edges()
 	return name
 
 func set_selected(selected: bool) -> void:
@@ -88,6 +81,17 @@ func set_selected(selected: bool) -> void:
 		_top_glow.visible = selected
 
 func _ready() -> void:
+	# Create bottom glow
+	var bottom_tex = GradientTexture2D.new()
+	bottom_tex.width = 40
+	bottom_tex.height = 20
+	bottom_tex.fill = GradientTexture2D.FILL_RADIAL
+	bottom_tex.fill_from = Vector2(0.5, 0.5)
+	bottom_tex.fill_to = Vector2(0.5, 0)
+	var bottom_grad = Gradient.new()
+	bottom_grad.colors = [Color(1.0, 1.0, 0.0, 0.6), Color(1.0, 1.0, 0.0, 0.0)]
+	bottom_tex.gradient = bottom_grad
+
 	# Create top glow for NameLabel, CommandStars and Shield
 	_top_glow = Sprite2D.new()
 	var top_tex = GradientTexture2D.new()
