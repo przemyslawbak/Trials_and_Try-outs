@@ -58,8 +58,6 @@ const MAX_AVAILABLE_TILES := 3
 var _blocked_layers: Array[TileMapLayer] = []
 var _ground_lvl0: TileMapLayer
 
-var _top_glow: Sprite2D
-
 func _init() -> void:
 	movement = CharacterMovement.new(self)
 	facing = CharacterFacing.new(self)
@@ -76,41 +74,7 @@ func _get_random_name() -> String:
 				return names[randi() % names.size()].strip_edges()
 	return name
 
-func set_selected(selected: bool) -> void:
-	if _top_glow:
-		_top_glow.visible = selected
-
 func _ready() -> void:
-	# Create bottom glow
-	var bottom_tex = GradientTexture2D.new()
-	bottom_tex.width = 40
-	bottom_tex.height = 20
-	bottom_tex.fill = GradientTexture2D.FILL_RADIAL
-	bottom_tex.fill_from = Vector2(0.5, 0.5)
-	bottom_tex.fill_to = Vector2(0.5, 0)
-	var bottom_grad = Gradient.new()
-	bottom_grad.colors = [Color(1.0, 1.0, 0.0, 0.6), Color(1.0, 1.0, 0.0, 0.0)]
-	bottom_tex.gradient = bottom_grad
-
-	# Create top glow for NameLabel, CommandStars and Shield
-	_top_glow = Sprite2D.new()
-	var top_tex = GradientTexture2D.new()
-	top_tex.width = 60
-	top_tex.height = 40
-	top_tex.fill = GradientTexture2D.FILL_RADIAL
-	top_tex.fill_from = Vector2(0.5, 0.5)
-	top_tex.fill_to = Vector2(0.5, 0)
-	var top_grad = Gradient.new()
-	top_grad.colors = [Color(1.0, 1.0, 0.0, 0.6), Color(1.0, 1.0, 0.0, 0.0)]
-	top_tex.gradient = top_grad
-	_top_glow.texture = top_tex
-	# Under NameLabel (z_index=2) and Shield (z_index=3), so z_index=1 is good
-	_top_glow.z_index = 1
-	# Positioned roughly at the height of NameLabel, Stars and Shield (-41)
-	_top_glow.position = Vector2(0, -41)
-	_top_glow.visible = false
-	add_child(_top_glow)
-
 	footmen = randi_range(600, 999)
 	horsemen = randi_range(20, 99)
 	archers = randi_range(100, 199)

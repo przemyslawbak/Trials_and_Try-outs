@@ -51,8 +51,6 @@ var _reachable_positions: Array[Vector2] = []
 var _awaiting_facing: bool	= false
 var _destination:	 Vector2 = Vector2.INF
 
-var selected_character: CharacterBody2D
-
 var path: WorldPath
 var movement: WorldMovement
 var facing: WorldFacing
@@ -196,13 +194,6 @@ func _get_character_at_position(pos: Vector2) -> CharacterBody2D:
 func _update_stats_ui(character: CharacterBody2D) -> void:
 	if not character:
 		return
-	
-	if selected_character and selected_character != character and selected_character.has_method("set_selected"):
-		selected_character.set_selected(false)
-		
-	selected_character = character
-	if selected_character.has_method("set_selected"):
-		selected_character.set_selected(true)
 	
 	if stats_name_label:
 		var char_name = character.name
