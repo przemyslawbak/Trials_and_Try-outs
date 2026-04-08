@@ -25,7 +25,7 @@ var ally: CharacterBody2D
 @onready var turn_no_label: Label = $UI/RightMarginContainer/TurnContainer/TurnNoLabel
 
 @onready var stats_container: VBoxContainer = $UI/RightMarginContainer/TurnContainer/StatsContainer
-@onready var stats_name_label: RichTextLabel = $UI/RightMarginContainer/TurnContainer/StatsContainer/NameLabel
+@onready var stats_name_label: Label = $UI/RightMarginContainer/TurnContainer/StatsContainer/NameLabel
 @onready var footmen_label: RichTextLabel = $UI/RightMarginContainer/TurnContainer/StatsContainer/FootmenLabel
 @onready var horsemen_label: RichTextLabel = $UI/RightMarginContainer/TurnContainer/StatsContainer/HorsemenLabel
 @onready var archers_label: RichTextLabel = $UI/RightMarginContainer/TurnContainer/StatsContainer/ArchersLabel
@@ -195,16 +195,10 @@ func _update_stats_ui(character: CharacterBody2D) -> void:
 		return
 	
 	if stats_name_label:
-		var char_name = character.name
 		if character.has_node("NameLabel"):
-			char_name = character.get_node("NameLabel").text
-			
-		var stars_str = ""
-		if "command" in character:
-			for i in range(character.command):
-				stars_str += "[img=10]res://Assets/Icons/star.png[/img]"
-				
-		stats_name_label.text = "Name: " + char_name + " " + stars_str
+			stats_name_label.text = "Name: " + character.get_node("NameLabel").text
+		else:
+			stats_name_label.text = "Name: " + character.name
 			
 	if footmen_label and "footmen" in character:
 		footmen_label.text = "[img=16]res://Assets/Icons/sword-pngrepo-com.png[/img] " + str(character.footmen)

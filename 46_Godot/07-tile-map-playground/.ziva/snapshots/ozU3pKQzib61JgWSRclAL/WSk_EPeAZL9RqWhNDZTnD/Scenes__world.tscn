@@ -262,12 +262,9 @@ layout_mode = 2
 [node name="StatsContainer" type="VBoxContainer" parent="UI/RightMarginContainer/TurnContainer" unique_id=103356461]
 layout_mode = 2
 
-[node name="NameLabel" type="RichTextLabel" parent="UI/RightMarginContainer/TurnContainer/StatsContainer" unique_id=1919366710]
+[node name="NameLabel" type="Label" parent="UI/RightMarginContainer/TurnContainer/StatsContainer" unique_id=1919366710]
 layout_mode = 2
-theme_override_font_sizes/normal_font_size = 10
-bbcode_enabled = true
-fit_content = true
-autowrap_mode = 0
+theme_override_font_sizes/font_size = 10
 
 [node name="FootmenLabel" type="RichTextLabel" parent="UI/RightMarginContainer/TurnContainer/StatsContainer" unique_id=385541061]
 layout_mode = 2
@@ -296,3 +293,7 @@ theme_override_font_sizes/normal_font_size = 10
 bbcode_enabled = true
 fit_content = true
 autowrap_mode = 0
+
+[node name="CommandLabel" type="Label" parent="UI/RightMarginContainer/TurnContainer/StatsContainer" unique_id=1378071944]
+layout_mode = 2
+theme_override_font_sizes/font_size = 10

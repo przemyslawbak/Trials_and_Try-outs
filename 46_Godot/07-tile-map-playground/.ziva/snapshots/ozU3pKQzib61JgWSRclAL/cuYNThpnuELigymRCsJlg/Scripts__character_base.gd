@@ -25,12 +25,12 @@ func update_command_stars() -> void:
 		
 	var star_tex = preload("res://Assets/Icons/star.png")
 	for i in range(command):
-		var tex_rect = TextureRect.new()
-		tex_rect.texture = star_tex
-		tex_rect.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
-		tex_rect.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
-		tex_rect.custom_minimum_size = Vector2(10, 10)
-		command_stars.add_child(tex_rect)
+		var tr = TextureRect.new()
+		tr.texture = star_tex
+		tr.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+		tr.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+		tr.custom_minimum_size = Vector2(10, 10)
+		command_stars.add_child(tr)
 
 @export var footmen: int = 0
 @export var horsemen: int = 0

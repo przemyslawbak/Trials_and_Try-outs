@@ -1,5 +1,4 @@
 Open:
-- On each character click display details on the right
 - On each character click highlight character
 - On Player character click show available tiles highlight
 - If other character is clicked, dont show available tiles highlight
@@ -16,6 +15,8 @@ Open:
 	knights?
 
 Closed:
+OK - On each character click display details on the right
+OK - Replace stats categories with icons
 OK - To character attach some details props, army etc
 OK - To each character instace give random values 
 OK - Stars under the name

@@ -25,11 +25,11 @@ var ally: CharacterBody2D
 @onready var turn_no_label: Label = $UI/RightMarginContainer/TurnContainer/TurnNoLabel
 
 @onready var stats_container: VBoxContainer = $UI/RightMarginContainer/TurnContainer/StatsContainer
-@onready var stats_name_label: RichTextLabel = $UI/RightMarginContainer/TurnContainer/StatsContainer/NameLabel
-@onready var footmen_label: RichTextLabel = $UI/RightMarginContainer/TurnContainer/StatsContainer/FootmenLabel
-@onready var horsemen_label: RichTextLabel = $UI/RightMarginContainer/TurnContainer/StatsContainer/HorsemenLabel
-@onready var archers_label: RichTextLabel = $UI/RightMarginContainer/TurnContainer/StatsContainer/ArchersLabel
-@onready var pikemen_label: RichTextLabel = $UI/RightMarginContainer/TurnContainer/StatsContainer/PikemenLabel
+@onready var stats_name_label: Label = $UI/RightMarginContainer/TurnContainer/StatsContainer/NameLabel
+@onready var footmen_label: Label = $UI/RightMarginContainer/TurnContainer/StatsContainer/FootmenLabel
+@onready var horsemen_label: Label = $UI/RightMarginContainer/TurnContainer/StatsContainer/HorsemenLabel
+@onready var archers_label: Label = $UI/RightMarginContainer/TurnContainer/StatsContainer/ArchersLabel
+@onready var pikemen_label: Label = $UI/RightMarginContainer/TurnContainer/StatsContainer/PikemenLabel
 @onready var command_label: Label = $UI/RightMarginContainer/TurnContainer/StatsContainer/CommandLabel
 
 const WEATHER_ICONS = {
@@ -195,25 +195,19 @@ func _update_stats_ui(character: CharacterBody2D) -> void:
 		return
 	
 	if stats_name_label:
-		var char_name = character.name
 		if character.has_node("NameLabel"):
-			char_name = character.get_node("NameLabel").text
-			
-		var stars_str = ""
-		if "command" in character:
-			for i in range(character.command):
-				stars_str += "[img=10]res://Assets/Icons/star.png[/img]"
-				
-		stats_name_label.text = "Name: " + char_name + " " + stars_str
+			stats_name_label.text = "Name: " + character.get_node("NameLabel").text
+		else:
+			stats_name_label.text = "Name: " + character.name
 			
 	if footmen_label and "footmen" in character:
-		footmen_label.text = "[img=16]res://Assets/Icons/sword-pngrepo-com.png[/img] " + str(character.footmen)
+		footmen_label.text = "Footmen: " + str(character.footmen)
 	if horsemen_label and "horsemen" in character:
-		horsemen_label.text = "[img=16]res://Assets/Icons/horse-head.png[/img] " + str(character.horsemen)
+		horsemen_label.text = "Horsemen: " + str(character.horsemen)
 	if archers_label and "archers" in character:
-		archers_label.text = "[img=16]res://Assets/Icons/bow.png[/img] " + str(character.archers)
+		archers_label.text = "Archers: " + str(character.archers)
 	if pikemen_label and "pikemen" in character:
-		pikemen_label.text = "[img=16]res://Assets/Icons/spear.png[/img] " + str(character.pikemen)
+		pikemen_label.text = "Pikemen: " + str(character.pikemen)
 	if command_label and "command" in character:
 		command_label.text = "Command: " + str(character.command)
 
