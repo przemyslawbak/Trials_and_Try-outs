@@ -1,7 +1,4 @@
 Open:
-OK - To character attach some details props, army etc
-OK - To each character instace give random values 
-OK - Stars under the name
 - On each character click display details on the right
 - On each character click highlight character
 - On Player character click show available tiles highlight
@@ -10,6 +7,7 @@ OK - Stars under the name
 - Cards decks at the bottom of the view
 - Display some 4 basic cards: move, fortify, recruit, something special
 - On the fight pop up dialogue window: auto resolve / manual
+- Player name change on click
 - For unit types give bonus attack modifiers:
 	horsemen vs footmen, archers
 	footmen vs archers, pikemen
@@ -18,6 +16,9 @@ OK - Stars under the name
 	knights?
 
 Closed:
+OK - To character attach some details props, army etc
+OK - To each character instace give random values 
+OK - Stars under the name
 OK - Create Ally unit
 OK - Add weather icons
 OK - Add turn counter
