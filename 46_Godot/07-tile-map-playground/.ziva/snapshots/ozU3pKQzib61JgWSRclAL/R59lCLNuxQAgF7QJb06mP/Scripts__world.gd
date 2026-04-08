@@ -31,6 +31,7 @@ var ally: CharacterBody2D
 @onready var archers_label: RichTextLabel = $UI/RightMarginContainer/TurnContainer/StatsContainer/ArchersLabel
 @onready var pikemen_label: RichTextLabel = $UI/RightMarginContainer/TurnContainer/StatsContainer/PikemenLabel
 @onready var knights_label: RichTextLabel = $UI/RightMarginContainer/TurnContainer/StatsContainer/KnightsLabel
+@onready var command_label: Label = $UI/RightMarginContainer/TurnContainer/StatsContainer/CommandLabel
 
 const WEATHER_ICONS = {
 	Weather.SUNNY: preload("res://Assets/Icons/Weather/sunny.png"),
@@ -51,7 +52,6 @@ var _awaiting_facing: bool	= false
 var _destination:	 Vector2 = Vector2.INF
 
 var selected_character: CharacterBody2D
-var flag_rect: ColorRect
 
 var path: WorldPath
 var movement: WorldMovement
@@ -61,14 +61,6 @@ func _ready() -> void:
 	path = WorldPath.new(self)
 	movement = WorldMovement.new(self)
 	facing = WorldFacing.new(self)
-
-	flag_rect = ColorRect.new()
-	flag_rect.custom_minimum_size = Vector2(0, 40)
-	var mat = ShaderMaterial.new()
-	mat.shader = preload("res://flag.gdshader")
-	flag_rect.material = mat
-	stats_container.add_child(flag_rect)
-	stats_container.move_child(flag_rect, stats_name_label.get_index())
 
 	next_turn_button.pressed.connect(_on_next_turn_button_pressed)
 	
@@ -211,11 +203,6 @@ func _update_stats_ui(character: CharacterBody2D) -> void:
 	selected_character = character
 	if selected_character.has_method("set_selected"):
 		selected_character.set_selected(true)
-		
-	if flag_rect and selected_character.has_node("Shield"):
-		var shield = selected_character.get_node("Shield") as Polygon2D
-		if shield:
-			flag_rect.material.set_shader_parameter("flag_color", shield.color)
 	
 	if stats_name_label:
 		var char_name = character.name
@@ -239,6 +226,8 @@ func _update_stats_ui(character: CharacterBody2D) -> void:
 		pikemen_label.text = "[img=16]res://Assets/Icons/spear.png[/img] " + str(character.pikemen)
 	if knights_label and "knights" in character:
 		knights_label.text = "[img=16]res://Assets/Icons/knight-helmet.png[/img] " + str(character.knights)
+	if command_label and "command" in character:
+		command_label.text = "Command: " + str(character.command)
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:

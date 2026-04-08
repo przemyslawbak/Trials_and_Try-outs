@@ -31,6 +31,7 @@ var ally: CharacterBody2D
 @onready var archers_label: RichTextLabel = $UI/RightMarginContainer/TurnContainer/StatsContainer/ArchersLabel
 @onready var pikemen_label: RichTextLabel = $UI/RightMarginContainer/TurnContainer/StatsContainer/PikemenLabel
 @onready var knights_label: RichTextLabel = $UI/RightMarginContainer/TurnContainer/StatsContainer/KnightsLabel
+@onready var command_label: Label = $UI/RightMarginContainer/TurnContainer/StatsContainer/CommandLabel
 
 const WEATHER_ICONS = {
 	Weather.SUNNY: preload("res://Assets/Icons/Weather/sunny.png"),
@@ -239,6 +240,8 @@ func _update_stats_ui(character: CharacterBody2D) -> void:
 		pikemen_label.text = "[img=16]res://Assets/Icons/spear.png[/img] " + str(character.pikemen)
 	if knights_label and "knights" in character:
 		knights_label.text = "[img=16]res://Assets/Icons/knight-helmet.png[/img] " + str(character.knights)
+	if command_label and "command" in character:
+		command_label.text = "Command: " + str(character.command)
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
