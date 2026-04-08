@@ -1,5 +1,4 @@
 Open:
-- Under UI display waving flag
 - On Player character click show available tiles highlight
 - If other character is clicked, dont show available tiles highlight
 - Cards decks at the bottom of the view
@@ -14,6 +13,7 @@ Open:
 	knights?
 
 Closed:
+OK - Under UI display waving flag
 OK - On each character click highlight character
 OK - On each character click display details on the right
 OK - Replace stats categories with icons

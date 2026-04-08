@@ -6,20 +6,12 @@ uniform float amplitude = 0.2;
 uniform vec4 flag_color : source_color = vec4(1.0, 1.0, 1.0, 1.0);
 
 void fragment() {
-	// Pixel art settings
-	vec2 grid_size = vec2(128.0, 32.0); // How many "pixels" wide and tall the flag is
-	float fps = 12.0; // Reduce framerate for pixel art feel
-	
-	// Quantize UV
-	vec2 uv = floor(UV * grid_size) / grid_size;
-	
-	// Quantize time
-	float t = floor(TIME * fps) / fps;
+	vec2 uv = UV;
 	
 	// Left side of the flag should be pinned (less movement), right side waves more
 	float pin = uv.x; 
 	
-	float wave = sin(uv.x * frequency - t * speed) * amplitude * pin;
+	float wave = sin(uv.x * frequency - TIME * speed) * amplitude * pin;
 	
 	// We want the flag to occupy the center 60% of the rect height
 	// So we scale uv.y
@@ -45,10 +37,8 @@ void fragment() {
 			COLOR = vec4(0.0);
 		} else {
 			COLOR = flag_color;
-			// Add cell-shading based on the derivative of the wave
-			float shade = cos(uv.x * frequency - t * speed) * 0.3 * pin + 0.7;
-			// Quantize shading into 3 steps
-			shade = floor(shade * 4.0) / 4.0;
+			// Add shading based on the derivative of the wave
+			float shade = cos(uv.x * frequency - TIME * speed) * 0.3 * pin + 0.7;
 			COLOR.rgb *= shade;
 		}
 	}
