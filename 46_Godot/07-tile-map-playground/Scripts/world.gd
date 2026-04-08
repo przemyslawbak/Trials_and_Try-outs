@@ -87,8 +87,16 @@ func _ready() -> void:
 		_refresh_reachable()
 
 func _roll_weather() -> void:
-	var weather_values = Weather.values()
-	current_weather = weather_values[randi() % weather_values.size()]
+	var rand_val := randf()
+	if rand_val < 0.30:
+		current_weather = Weather.SUNNY
+	elif rand_val < 0.50: # 0.30 + 0.20
+		current_weather = Weather.RAINING
+	elif rand_val < 0.65: # 0.50 + 0.15
+		current_weather = Weather.WINDY
+	else: # remaining 0.35
+		current_weather = Weather.CLOUDY
+		
 	if weather_icon:
 		weather_icon.texture = WEATHER_ICONS[current_weather]
 

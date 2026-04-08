@@ -11,6 +11,7 @@ Open:
 	knights?
 
 Closed:
+OK - Random weather more relistic probabilities
 OK - On Player character click show available tiles highlight
 OK - If other character is clicked, dont show available tiles highlight
 OK - Under UI display waving flag
