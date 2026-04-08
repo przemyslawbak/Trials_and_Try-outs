@@ -215,8 +215,6 @@ func _update_stats_ui(character: CharacterBody2D) -> void:
 		archers_label.text = "[img=16]res://Assets/Icons/bow.png[/img] " + str(character.archers)
 	if pikemen_label and "pikemen" in character:
 		pikemen_label.text = "[img=16]res://Assets/Icons/spear.png[/img] " + str(character.pikemen)
-	if knights_label and "knights" in character:
-		knights_label.text = "[img=16]res://Assets/Icons/knight-helmet.png[/img] " + str(character.knights)
 	if command_label and "command" in character:
 		command_label.text = "Command: " + str(character.command)
 

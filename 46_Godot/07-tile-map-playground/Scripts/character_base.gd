@@ -32,6 +32,7 @@ func update_command_stars() -> void:
 		tex_rect.custom_minimum_size = Vector2(10, 10)
 		command_stars.add_child(tex_rect)
 
+@export var knights: int = 0
 @export var footmen: int = 0
 @export var horsemen: int = 0
 @export var archers: int = 0
@@ -41,7 +42,6 @@ func update_command_stars() -> void:
 		command = value
 		if is_node_ready():
 			update_command_stars()
-@export var knights: int = 0
 
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var move_tiles_label: Label = $MoveTilesLabel

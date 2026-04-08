@@ -1,8 +1,8 @@
 Open:
+- Under UI display waving flag
 - On each character click highlight character
 - On Player character click show available tiles highlight
 - If other character is clicked, dont show available tiles highlight
-- Under UI display waving blue flag
 - Cards decks at the bottom of the view
 - Display some 4 basic cards: move, fortify, recruit, something special
 - On the fight pop up dialogue window: auto resolve / manual
