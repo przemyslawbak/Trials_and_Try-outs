@@ -1,4 +1,11 @@
 Open:
+- Player's hero name change on click
+- Terrain modifiers: defence / attack / speed
+- Display defence / attack / speed character value
+- Add basic urban tiles
+- Attack if adjacent (?)
+- Change arrow ending
+- Cards sprite sheet source finding
 - Cards decks at the bottom of the view
 - Display some 4 basic cards: move, fortify, recruit, something special
 - On the fight pop up dialogue window: auto resolve / manual
