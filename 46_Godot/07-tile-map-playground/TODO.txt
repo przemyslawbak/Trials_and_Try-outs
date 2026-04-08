@@ -1,6 +1,4 @@
 Open:
-- On Player character click show available tiles highlight
-- If other character is clicked, dont show available tiles highlight
 - Cards decks at the bottom of the view
 - Display some 4 basic cards: move, fortify, recruit, something special
 - On the fight pop up dialogue window: auto resolve / manual
@@ -13,6 +11,8 @@ Open:
 	knights?
 
 Closed:
+OK - On Player character click show available tiles highlight
+OK - If other character is clicked, dont show available tiles highlight
 OK - Under UI display waving flag
 OK - On each character click highlight character
 OK - On each character click display details on the right

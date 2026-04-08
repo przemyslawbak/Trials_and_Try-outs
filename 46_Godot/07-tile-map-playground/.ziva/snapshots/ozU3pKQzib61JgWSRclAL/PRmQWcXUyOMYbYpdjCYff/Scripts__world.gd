@@ -167,10 +167,7 @@ func _refresh_reachable() -> void:
 		arrow_overlay.set_confirmed_facing_visual(false)
 	
 	if tile_highlight:
-		if selected_character == player:
-			tile_highlight.set_highlights(_reachable_positions)
-		else:
-			tile_highlight.clear_highlights()
+		tile_highlight.set_highlights(_reachable_positions)
 
 
 func _clear_selection() -> void:
@@ -187,7 +184,7 @@ func _clear_selection() -> void:
 	arrow_overlay.set_confirmed_facing_visual(false)
 	
 	if tile_highlight:
-		if current_turn == Turn.PLAYER and selected_character == player:
+		if current_turn == Turn.PLAYER:
 			tile_highlight.set_highlights(_reachable_positions)
 		else:
 			tile_highlight.clear_highlights()
@@ -221,12 +218,6 @@ func _update_stats_ui(character: CharacterBody2D) -> void:
 		var shield = selected_character.get_node("Shield") as Polygon2D
 		if shield:
 			flag_rect.material.set_shader_parameter("flag_color", shield.color)
-			
-	if tile_highlight:
-		if selected_character == player and current_turn == Turn.PLAYER and _selected_direction == "":
-			tile_highlight.set_highlights(_reachable_positions)
-		else:
-			tile_highlight.clear_highlights()
 	
 	if stats_name_label:
 		var char_name = character.name
