@@ -16,6 +16,7 @@ Open:
 	knights?
 
 Closed:
+OK - Add main menu
 OK - Player's hero name change on click
 OK - Random weather more relistic probabilities
 OK - On Player character click show available tiles highlight
