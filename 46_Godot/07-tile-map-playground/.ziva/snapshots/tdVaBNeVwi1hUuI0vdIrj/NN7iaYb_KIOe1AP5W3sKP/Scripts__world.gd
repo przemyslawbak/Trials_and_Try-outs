@@ -76,7 +76,6 @@ func _ready() -> void:
 	stats_container.add_child(_name_edit)
 	_name_edit.text_submitted.connect(_on_name_edit_submitted)
 	_name_edit.focus_exited.connect(_on_name_edit_focus_exited)
-	_name_edit.gui_input.connect(_on_name_edit_gui_input)
 	
 	stats_name_label.gui_input.connect(_on_stats_name_label_gui_input)
 	stats_name_label.mouse_filter = Control.MOUSE_FILTER_STOP
@@ -232,18 +231,6 @@ func _on_name_edit_submitted(new_text: String) -> void:
 
 func _on_name_edit_focus_exited() -> void:
 	_finish_name_edit(_name_edit.text)
-
-func _on_name_edit_gui_input(event: InputEvent) -> void:
-	if event is InputEventKey and event.pressed and event.keycode == KEY_ESCAPE:
-		_cancel_name_edit()
-
-func _cancel_name_edit() -> void:
-	if not _name_edit.visible:
-		return
-	_name_edit.visible = false
-	stats_name_label.visible = true
-	if _name_edit.has_focus():
-		_name_edit.release_focus()
 
 func _finish_name_edit(new_text: String) -> void:
 	if not _name_edit.visible:
