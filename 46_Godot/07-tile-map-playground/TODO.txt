@@ -1,5 +1,4 @@
 Open:
-- Player's hero name change on click
 - Terrain modifiers: defence / attack / speed
 - Display defence / attack / speed character value
 - Add basic urban tiles
@@ -9,7 +8,6 @@ Open:
 - Cards decks at the bottom of the view
 - Display some 4 basic cards: move, fortify, recruit, something special
 - On the fight pop up dialogue window: auto resolve / manual
-- Player name change on click
 - For unit types give bonus attack modifiers:
 	horsemen vs footmen, archers
 	footmen vs archers, pikemen
@@ -18,6 +16,7 @@ Open:
 	knights?
 
 Closed:
+OK - Player's hero name change on click
 OK - Random weather more relistic probabilities
 OK - On Player character click show available tiles highlight
 OK - If other character is clicked, dont show available tiles highlight

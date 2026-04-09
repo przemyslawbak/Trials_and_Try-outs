@@ -291,12 +291,12 @@ func _update_stats_ui(character: CharacterBody2D) -> void:
 		if "command" in character:
 			stars_str = "[img=10]res://Assets/Icons/star.png[/img]".repeat(character.command)
 				
+		stats_name_label.text = "Name: " + char_name + " " + stars_str
+		
 		if selected_character == player:
-			stats_name_label.text = "[img=10]res://Assets/Icons/UI/edit-icon.png[/img] Name: " + char_name + " " + stars_str
 			stats_name_label.mouse_default_cursor_shape = Control.CURSOR_IBEAM
 			stats_name_label.tooltip_text = "Click to rename"
 		else:
-			stats_name_label.text = "Name: " + char_name + " " + stars_str
 			stats_name_label.mouse_default_cursor_shape = Control.CURSOR_ARROW
 			stats_name_label.tooltip_text = ""
 			

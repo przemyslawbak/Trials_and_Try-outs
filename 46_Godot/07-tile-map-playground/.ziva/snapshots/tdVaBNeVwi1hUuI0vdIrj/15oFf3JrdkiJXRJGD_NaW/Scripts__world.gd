@@ -71,15 +71,6 @@ func _ready() -> void:
 	stats_container.add_child(flag_rect)
 	stats_container.move_child(flag_rect, stats_name_label.get_index())
 
-	_name_edit = LineEdit.new()
-	_name_edit.visible = false
-	stats_container.add_child(_name_edit)
-	_name_edit.text_submitted.connect(_on_name_edit_submitted)
-	_name_edit.focus_exited.connect(_on_name_edit_focus_exited)
-	
-	stats_name_label.gui_input.connect(_on_stats_name_label_gui_input)
-	stats_name_label.mouse_filter = Control.MOUSE_FILTER_STOP
-
 	next_turn_button.pressed.connect(_on_next_turn_button_pressed)
 	
 	player = get_node_or_null("Player")
@@ -214,38 +205,6 @@ func _clear_selection() -> void:
 
 
 
-func _on_stats_name_label_gui_input(event: InputEvent) -> void:
-	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
-		if selected_character == player:
-			var current_name = selected_character.name
-			if selected_character.has_node("NameLabel"):
-				current_name = selected_character.get_node("NameLabel").text
-			_name_edit.text = current_name
-			_name_edit.visible = true
-			stats_name_label.visible = false
-			stats_container.move_child(_name_edit, stats_name_label.get_index())
-			_name_edit.grab_focus()
-
-func _on_name_edit_submitted(new_text: String) -> void:
-	_finish_name_edit(new_text)
-
-func _on_name_edit_focus_exited() -> void:
-	_finish_name_edit(_name_edit.text)
-
-func _finish_name_edit(new_text: String) -> void:
-	if not _name_edit.visible:
-		return
-	_name_edit.visible = false
-	stats_name_label.visible = true
-	var final_name = new_text.strip_edges()
-	if final_name != "" and selected_character == player:
-		if player.has_node("NameLabel"):
-			player.get_node("NameLabel").text = final_name
-		else:
-			player.name = final_name
-	if selected_character:
-		_update_stats_ui(selected_character)
-
 func _get_character_at_position(pos: Vector2) -> CharacterBody2D:
 	var chars = [player, enemy, ally]
 	for c in chars:
@@ -259,10 +218,6 @@ func _get_character_at_position(pos: Vector2) -> CharacterBody2D:
 func _update_stats_ui(character: CharacterBody2D) -> void:
 	if not character:
 		return
-	
-	if _name_edit and _name_edit.visible:
-		_name_edit.visible = false
-		stats_name_label.visible = true
 	
 	if selected_character and selected_character != character and selected_character.has_method("set_selected"):
 		selected_character.set_selected(false)
@@ -291,14 +246,7 @@ func _update_stats_ui(character: CharacterBody2D) -> void:
 		if "command" in character:
 			stars_str = "[img=10]res://Assets/Icons/star.png[/img]".repeat(character.command)
 				
-		if selected_character == player:
-			stats_name_label.text = "[img=10]res://Assets/Icons/UI/edit-icon.png[/img] Name: " + char_name + " " + stars_str
-			stats_name_label.mouse_default_cursor_shape = Control.CURSOR_IBEAM
-			stats_name_label.tooltip_text = "Click to rename"
-		else:
-			stats_name_label.text = "Name: " + char_name + " " + stars_str
-			stats_name_label.mouse_default_cursor_shape = Control.CURSOR_ARROW
-			stats_name_label.tooltip_text = ""
+		stats_name_label.text = "Name: " + char_name + " " + stars_str
 			
 	if footmen_label and "footmen" in character:
 		footmen_label.text = "[img=16]res://Assets/Icons/sword-pngrepo-com.png[/img] " + str(character.footmen)
