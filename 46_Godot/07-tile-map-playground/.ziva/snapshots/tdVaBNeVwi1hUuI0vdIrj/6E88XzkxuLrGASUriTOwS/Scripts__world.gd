@@ -17,7 +17,6 @@ var enemy: CharacterBody2D
 var ally: CharacterBody2D
 
 @onready var next_turn_button: Button		  = $UI/RightMarginContainer/TurnContainer/NextTurnButton
-@onready var menu_button: TextureButton = $UI/LeftMarginContainer/MenuButton
 @onready var arrow_overlay:	Node2D		  = $ArrowOverlay
 @onready var tile_highlight:   Node2D		  = $TileHighlight
 
@@ -83,7 +82,6 @@ func _ready() -> void:
 	stats_name_label.mouse_filter = Control.MOUSE_FILTER_STOP
 
 	next_turn_button.pressed.connect(_on_next_turn_button_pressed)
-	menu_button.pressed.connect(_on_menu_button_pressed)
 	
 	player = get_node_or_null("Player")
 	player = _deploy_character(PlayerScene, "Player", player)
@@ -416,12 +414,6 @@ func _input(event: InputEvent) -> void:
 		arrow_overlay.set_path(path_positions)
 		arrow_overlay.show_facing_cursor(_destination, _selected_direction)
 
-
-func _on_menu_button_pressed() -> void:
-	var main_menu = preload("res://Scenes/main_menu.tscn").instantiate()
-	main_menu.is_overlay = true
-	$UI.add_child(main_menu)
-	get_tree().paused = true
 
 func _on_next_turn_button_pressed() -> void:
 	if current_turn == Turn.PLAYER:
