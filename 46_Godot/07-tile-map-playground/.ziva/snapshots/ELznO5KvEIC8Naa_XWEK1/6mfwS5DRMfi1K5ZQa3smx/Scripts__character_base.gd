@@ -102,8 +102,8 @@ func _ready() -> void:
 	_top_glow.texture = top_tex
 	# Under NameLabel (z_index=2) and Shield (z_index=3), so z_index=1 is good
 	_top_glow.z_index = 1
-	# Positioned roughly at the height of NameLabel, Stars and Shield (-49)
-	_top_glow.position = Vector2(0, -49)
+	# Positioned roughly at the height of NameLabel, Stars and Shield (-41)
+	_top_glow.position = Vector2(0, -41)
 	_top_glow.visible = false
 	add_child(_top_glow)
 

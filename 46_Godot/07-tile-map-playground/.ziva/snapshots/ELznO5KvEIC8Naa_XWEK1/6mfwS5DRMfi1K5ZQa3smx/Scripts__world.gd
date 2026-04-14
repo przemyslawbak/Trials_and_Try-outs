@@ -267,7 +267,7 @@ func _get_character_at_position(pos: Vector2) -> CharacterBody2D:
 		if c and c.is_inside_tree():
 			# Character sprites are offset by -14px Y usually, so adjust the target click slightly if needed
 			# The simplest approach is just a distance check:
-			if pos.distance_to(c.position + Vector2(0, -22)) < CLICK_RADIUS * 1.5:
+			if pos.distance_to(c.position + Vector2(0, -14)) < CLICK_RADIUS * 1.5:
 				return c
 	return null
 
