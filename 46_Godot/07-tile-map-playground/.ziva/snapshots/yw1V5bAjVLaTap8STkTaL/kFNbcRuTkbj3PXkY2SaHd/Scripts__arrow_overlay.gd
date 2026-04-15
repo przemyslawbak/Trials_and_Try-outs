@@ -72,11 +72,11 @@ func keep_facing_cursor(direction: String) -> void:
 func _draw() -> void:
 	if _path.size() >= 2:
 		for i in range(_path.size() - 1):
-			_draw_shaft(to_local(_path[i]) + Vector2(0, -8), to_local(_path[i + 1]) + Vector2(0, -8))
-		_draw_iso_dot(to_local(_path[-1]) + Vector2(0, -8))
+			_draw_shaft(to_local(_path[i]), to_local(_path[i + 1]))
+		_draw_iso_dot(to_local(_path[-1]))
 
 	if _show_facing_cursor and _destination != Vector2.INF and _facing_dir != "":
-		_draw_facing_arrowhead(to_local(_destination) + Vector2(0, -8), _facing_dir)
+		_draw_facing_arrowhead(to_local(_destination), _facing_dir)
 
 
 # ── shaft ─────────────────────────────────────────────────────────────────────

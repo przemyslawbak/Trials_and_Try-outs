@@ -31,11 +31,11 @@ tile_set = SubResource("TileSet_5v1tr")
 script = ExtResource("5_spwn")
 
 [node name="TileHighlight" type="Node2D" parent="." unique_id=763523865]
-position = Vector2(-50, -26)
+position = Vector2(-50, -32)
 script = ExtResource("4_xxxx")
 
 [node name="ArrowOverlay" type="Node2D" parent="." unique_id=1127894480]
-position = Vector2(-50, -26)
+position = Vector2(-50, -32)
 script = ExtResource("3_8j60k")
 
 [node name="UI" type="CanvasLayer" parent="." unique_id=531903486]
