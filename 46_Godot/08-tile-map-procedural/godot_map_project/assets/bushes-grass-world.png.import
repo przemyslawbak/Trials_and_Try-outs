@@ -2,16 +2,12 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cn40d25a0lmbp"
-path="res://.godot/imported/lakes-grass-world.png-cbbe01b90c29b5e3cb33034fd4fdde8b.ctex"
-metadata={
-"vram_texture": false
-}
+uid="uid://dcluuw0bro272"
+valid=false
 
 [deps]
 
-source_file="res://MapSheets/lakes-grass-world.png"
-dest_files=["res://.godot/imported/lakes-grass-world.png-cbbe01b90c29b5e3cb33034fd4fdde8b.ctex"]
+source_file="res://assets/bushes-grass-world.png"
 
 [params]
 

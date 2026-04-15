@@ -2,16 +2,12 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ddfc5tufotvay"
-path="res://.godot/imported/river-grass-world.png-859ba7c0d6b59733148e60222148586b.ctex"
-metadata={
-"vram_texture": false
-}
+uid="uid://dlqtpma8u3p38"
+valid=false
 
 [deps]
 
-source_file="res://MapSheets/river-grass-world.png"
-dest_files=["res://.godot/imported/river-grass-world.png-859ba7c0d6b59733148e60222148586b.ctex"]
+source_file="res://assets/base-grass-world.png"
 
 [params]
 

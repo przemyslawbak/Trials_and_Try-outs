@@ -1,0 +1,116 @@
+[gd_scene load_steps=8 format=3 uid="uid://main_scene"]
+
+[ext_resource type="Script" path="res://scripts/main.gd" id="1_main"]
+[ext_resource type="Script" path="res://scripts/tile_renderer.gd" id="2_renderer"]
+[ext_resource type="Script" path="res://scripts/minimap_node.gd" id="3_minimap"]
+
+[node name="Main" type="Node2D" groups=["main"]]
+script = ExtResource("1_main")
+map_width = 40
+map_height = 25
+map_seed = 0
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(640, 360)
+zoom = Vector2(1.5, 1.5)
+
+[node name="TileRenderer" type="Node2D" parent="."]
+script = ExtResource("2_renderer")
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="Panel" type="Panel" parent="UI"]
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 220.0
+offset_bottom = 260.0
+
+[node name="VBox" type="VBoxContainer" parent="UI/Panel"]
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 212.0
+offset_bottom = 252.0
+theme_override_constants/separation = 6
+
+[node name="TitleLabel" type="Label" parent="UI/Panel/VBox"]
+text = "Isometric Map Generator"
+theme_override_font_sizes/font_size = 13
+
+[node name="HSep1" type="HSeparator" parent="UI/Panel/VBox"]
+
+[node name="HBoxW" type="HBoxContainer" parent="UI/Panel/VBox"]
+
+[node name="LabelW" type="Label" parent="UI/Panel/VBox/HBoxW"]
+text = "Width:"
+custom_minimum_size = Vector2(50, 0)
+
+[node name="WidthSpin" type="SpinBox" parent="UI/Panel/VBox/HBoxW"]
+min_value = 10.0
+max_value = 200.0
+step = 1.0
+value = 40.0
+custom_minimum_size = Vector2(80, 0)
+
+[node name="HBoxH" type="HBoxContainer" parent="UI/Panel/VBox"]
+
+[node name="LabelH" type="Label" parent="UI/Panel/VBox/HBoxH"]
+text = "Height:"
+custom_minimum_size = Vector2(50, 0)
+
+[node name="HeightSpin" type="SpinBox" parent="UI/Panel/VBox/HBoxH"]
+min_value = 10.0
+max_value = 200.0
+step = 1.0
+value = 25.0
+custom_minimum_size = Vector2(80, 0)
+
+[node name="HBoxS" type="HBoxContainer" parent="UI/Panel/VBox"]
+
+[node name="LabelS" type="Label" parent="UI/Panel/VBox/HBoxS"]
+text = "Seed:"
+custom_minimum_size = Vector2(50, 0)
+
+[node name="SeedSpin" type="SpinBox" parent="UI/Panel/VBox/HBoxS"]
+min_value = 0.0
+max_value = 999999.0
+step = 1.0
+value = 0.0
+custom_minimum_size = Vector2(80, 0)
+
+[node name="RegenButton" type="Button" parent="UI/Panel/VBox"]
+text = "Generate New Map"
+
+[node name="HSep2" type="HSeparator" parent="UI/Panel/VBox"]
+
+[node name="SeedLabel" type="Label" parent="UI/Panel/VBox"]
+text = "Seed: —"
+theme_override_font_sizes/font_size = 11
+
+[node name="StatsLabel" type="Label" parent="UI/Panel/VBox"]
+text = "Biome distribution:\n  …"
+theme_override_font_sizes/font_size = 11
+
+[node name="MinimapAnchor" type="Control" parent="UI"]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -10.0
+offset_top = -10.0
+offset_right = -10.0
+offset_bottom = -10.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="Minimap" type="Node2D" parent="UI/MinimapAnchor"]
+position = Vector2(-130, -80)
+script = ExtResource("3_minimap")
+
+[node name="HintLabel" type="Label" parent="UI"]
+offset_left = 0.0
+offset_top = 268.0
+offset_right = 300.0
+offset_bottom = 310.0
+text = "Drag / Arrow keys: pan   Scroll / +/-: zoom"
+theme_override_font_sizes/font_size = 11
+modulate = Color(1, 1, 1, 0.7)
