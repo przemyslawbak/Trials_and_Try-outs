@@ -36,8 +36,8 @@ const TARGET_RATIOS = {
 	TileType.GRASS:  0.50,
 	TileType.BUSHES: 0.05,
 	TileType.FOREST: 0.40,
-	TileType.RIVER:  0.04,
-	TileType.LAKE:   0.01,
+	TileType.RIVER:  0.03,
+	TileType.LAKE:   0.02,
 }
 
 # Display names for UI
