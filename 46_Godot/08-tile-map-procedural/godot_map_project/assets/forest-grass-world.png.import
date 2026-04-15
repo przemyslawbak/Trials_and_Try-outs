@@ -2,12 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c1fl648egt8jo"
-valid=false
+uid="uid://ci77hvj6wy2c1"
+path="res://.godot/imported/forest-grass-world.png-739fcfaa036b5df4534f7732f96bcf7b.ctex"
+metadata={
+"vram_texture": false
+}
 
 [deps]
 
 source_file="res://assets/forest-grass-world.png"
+dest_files=["res://.godot/imported/forest-grass-world.png-739fcfaa036b5df4534f7732f96bcf7b.ctex"]
 
 [params]
 

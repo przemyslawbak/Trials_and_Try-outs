@@ -2,12 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dcluuw0bro272"
-valid=false
+uid="uid://cx246m8gqth70"
+path="res://.godot/imported/bushes-grass-world.png-81cee68951b33ac00f7d5ec5d4437455.ctex"
+metadata={
+"vram_texture": false
+}
 
 [deps]
 
 source_file="res://assets/bushes-grass-world.png"
+dest_files=["res://.godot/imported/bushes-grass-world.png-81cee68951b33ac00f7d5ec5d4437455.ctex"]
 
 [params]
 

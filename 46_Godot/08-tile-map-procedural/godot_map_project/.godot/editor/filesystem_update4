@@ -1,0 +1,5 @@
+res://scripts/main.gd
+res://scripts/map_generator.gd
+res://scripts/minimap_node.gd
+res://scripts/tile_definitions.gd
+res://scripts/tile_renderer.gd
