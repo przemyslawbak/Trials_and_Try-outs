@@ -5,10 +5,6 @@ const WATER_ATLAS_ROW := 10
 var _black_cells: Array[Vector2i] = []
 
 func _ready() -> void:
-	update_spawn_points()
-
-func update_spawn_points() -> void:
-	_black_cells.clear()
 	var world := get_parent()
 	var ground_lvl1 = world.get_node_or_null("Ground-lvl1") as TileMapLayer if world else null
 	var dec_lvl0 = world.get_node_or_null("Decoration-lvl-0") as TileMapLayer if world else null
@@ -21,8 +17,8 @@ func update_spawn_points() -> void:
 		if source_id == -1:
 			continue
 			
-		# River and Lake types are water
-		if source_id == TileDefinitions.TileType.RIVER or source_id == TileDefinitions.TileType.LAKE:
+		var atlas_coords := get_cell_atlas_coords(cell)
+		if atlas_coords.y == WATER_ATLAS_ROW:
 			continue
 			
 		var is_blocked = false
@@ -80,7 +76,7 @@ func update_spawn_points() -> void:
 				
 		_black_cells = selected_cells
 		
-	notify_runtime_tile_data_update()
+		notify_runtime_tile_data_update()
 
 func _use_tile_data_runtime_update(coords: Vector2i) -> bool:
 	return coords in _black_cells

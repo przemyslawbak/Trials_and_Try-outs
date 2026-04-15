@@ -21,8 +21,8 @@ func update_spawn_points() -> void:
 		if source_id == -1:
 			continue
 			
-		# River and Lake types are water
-		if source_id == TileDefinitions.TileType.RIVER or source_id == TileDefinitions.TileType.LAKE:
+		var atlas_coords := get_cell_atlas_coords(cell)
+		if atlas_coords.y == WATER_ATLAS_ROW:
 			continue
 			
 		var is_blocked = false

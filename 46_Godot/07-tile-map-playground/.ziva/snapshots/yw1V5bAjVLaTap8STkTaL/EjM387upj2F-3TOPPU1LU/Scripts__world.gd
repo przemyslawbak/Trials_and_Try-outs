@@ -85,11 +85,6 @@ func _ready() -> void:
 	next_turn_button.pressed.connect(_on_next_turn_button_pressed)
 	menu_button.pressed.connect(_on_menu_button_pressed)
 	
-	var ground = get_node_or_null("Ground-lvl0") as SpawnPoints
-	if ground:
-		MapGenerator.generate_map(ground)
-		ground.update_spawn_points()
-	
 	player = get_node_or_null("Player")
 	player = _deploy_character(PlayerScene, "Player", player)
 	

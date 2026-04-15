@@ -33,10 +33,10 @@ const TILE_TEXTURES = {
 
 # Target distribution ratios (must sum to 1.0)
 const TARGET_RATIOS = {
-	TileType.GRASS:  0.30,
-	TileType.BUSHES: 0.30,
-	TileType.FOREST: 0.30,
-	TileType.RIVER:  0.09,
+	TileType.GRASS:  0.50,
+	TileType.BUSHES: 0.05,
+	TileType.FOREST: 0.40,
+	TileType.RIVER:  0.04,
 	TileType.LAKE:   0.01,
 }
 
