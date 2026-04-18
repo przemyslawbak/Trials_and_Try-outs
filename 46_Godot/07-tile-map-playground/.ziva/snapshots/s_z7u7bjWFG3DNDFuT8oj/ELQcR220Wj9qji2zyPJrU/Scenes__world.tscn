@@ -6,7 +6,6 @@
 [ext_resource type="Script" uid="uid://bs3xrfw6oql3q" path="res://Scripts/tile_highlight.gd" id="4_xxxx"]
 [ext_resource type="Script" uid="uid://bdkoe1i2wuyla" path="res://Scripts/spawn_points.gd" id="5_spwn"]
 [ext_resource type="Texture2D" uid="uid://dt1hbf7id0pjx" path="res://Assets/Icons/UI/settings-gear.png" id="6_gear"]
-[ext_resource type="Script" uid="uid://dsd8n7fc5pslb" path="res://Scripts/camera_controller.gd" id="7_cam"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_k7acu"]
 texture = ExtResource("2_o06y3")
@@ -28,9 +27,6 @@ y_sort_enabled = true
 position = Vector2(550, 50)
 tile_set = SubResource("TileSet_5v1tr")
 script = ExtResource("5_spwn")
-
-[node name="Camera2D" type="Camera2D" parent="Ground-lvl0" unique_id=1212347357]
-script = ExtResource("7_cam")
 
 [node name="TileHighlight" type="Node2D" parent="." unique_id=763523865]
 position = Vector2(-50, -26)
