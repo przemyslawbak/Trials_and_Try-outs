@@ -7,10 +7,10 @@ const MOVE_SPEED  := 30.0
 const WATER_ATLAS_ROW := 10
 
 const ISO_DIRECTIONS := {
-	"NE": Vector2(16, -8),
-	"SE": Vector2(16, 8),
-	"SW": Vector2(-16, 8),
-	"NW": Vector2(-16, -8),
+	"NE": Vector2(0, -TILE_HEIGHT),
+	"SE": Vector2(TILE_WIDTH, 0),
+	"SW": Vector2(0, TILE_HEIGHT),
+	"NW": Vector2(-TILE_WIDTH, 0),
 }
 
 var available_tiles: int = 3

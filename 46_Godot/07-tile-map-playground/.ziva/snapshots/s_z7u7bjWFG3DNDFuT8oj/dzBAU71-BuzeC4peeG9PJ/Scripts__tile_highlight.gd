@@ -1,7 +1,7 @@
 extends Node2D
 
 const ISO_WIDTH = 32.0
-const ISO_HEIGHT = 16.0
+const ISO_HEIGHT = 32.0
 
 var _highlighted_positions: Array[Vector2] = []
 
@@ -18,9 +18,9 @@ func _draw() -> void:
 	for pos in _highlighted_positions:
 		var local_pos = to_local(pos)
 		var pts = PackedVector2Array([
-			local_pos + Vector2(0, -ISO_HEIGHT / 2),
-			local_pos + Vector2(ISO_WIDTH / 2, 0),
-			local_pos + Vector2(0, ISO_HEIGHT / 2),
-			local_pos + Vector2(-ISO_WIDTH / 2, 0)
+			local_pos + Vector2(-ISO_WIDTH / 2, -ISO_HEIGHT / 2),
+			local_pos + Vector2(ISO_WIDTH / 2, -ISO_HEIGHT / 2),
+			local_pos + Vector2(ISO_WIDTH / 2, ISO_HEIGHT / 2),
+			local_pos + Vector2(-ISO_WIDTH / 2, ISO_HEIGHT / 2)
 		])
 		draw_colored_polygon(pts, color)

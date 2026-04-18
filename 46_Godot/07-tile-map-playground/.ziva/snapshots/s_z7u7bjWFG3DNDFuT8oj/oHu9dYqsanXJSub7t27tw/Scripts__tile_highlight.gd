@@ -16,7 +16,7 @@ func clear_highlights() -> void:
 func _draw() -> void:
 	var color = Color(1.0, 1.0, 0.0, 0.3)
 	for pos in _highlighted_positions:
-		var local_pos = to_local(pos)
+		var local_pos = to_local(pos) + Vector2(0, -8)
 		var pts = PackedVector2Array([
 			local_pos + Vector2(0, -ISO_HEIGHT / 2),
 			local_pos + Vector2(ISO_WIDTH / 2, 0),

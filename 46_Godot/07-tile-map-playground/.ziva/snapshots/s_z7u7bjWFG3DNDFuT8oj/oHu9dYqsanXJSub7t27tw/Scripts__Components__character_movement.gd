@@ -42,8 +42,8 @@ func is_position_blocked(world_position: Vector2) -> bool:
 		if character._ground_lvl0.get_cell_source_id(ground_coords) == -1:
 			return true
 			
-		var source_id = character._ground_lvl0.get_cell_source_id(ground_coords)
-		if source_id == TileDefinitions.TileType.RIVER or source_id == TileDefinitions.TileType.LAKE:
+		var atlas_coords: Vector2i = character._ground_lvl0.get_cell_atlas_coords(ground_coords)
+		if atlas_coords.y == character.WATER_ATLAS_ROW:
 			return true
 	else:
 		return true

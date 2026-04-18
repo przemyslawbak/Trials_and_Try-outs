@@ -72,11 +72,11 @@ func keep_facing_cursor(direction: String) -> void:
 func _draw() -> void:
 	if _path.size() >= 2:
 		for i in range(_path.size() - 1):
-			_draw_shaft(to_local(_path[i]), to_local(_path[i + 1]))
-		_draw_iso_dot(to_local(_path[-1]))
+			_draw_shaft(to_local(_path[i]) + Vector2(0, -8), to_local(_path[i + 1]) + Vector2(0, -8))
+		_draw_iso_dot(to_local(_path[-1]) + Vector2(0, -8))
 
 	if _show_facing_cursor and _destination != Vector2.INF and _facing_dir != "":
-		_draw_facing_arrowhead(to_local(_destination), _facing_dir)
+		_draw_facing_arrowhead(to_local(_destination) + Vector2(0, -8), _facing_dir)
 
 
 # ── shaft ─────────────────────────────────────────────────────────────────────
@@ -109,10 +109,10 @@ func _ready() -> void:
 	for direction in ["NE", "SE", "SW", "NW"]:
 		var cart_dir := Vector2.ZERO
 		match direction:
-			"NE": cart_dir = Vector2( 0, -1).normalized()
-			"SE": cart_dir = Vector2( 1,  0).normalized()
-			"SW": cart_dir = Vector2( 0,  1).normalized()
-			"NW": cart_dir = Vector2(-1,  0).normalized()
+			"NE": cart_dir = Vector2( 1, -1).normalized()
+			"SE": cart_dir = Vector2( 1,  1).normalized()
+			"SW": cart_dir = Vector2(-1,  1).normalized()
+			"NW": cart_dir = Vector2(-1, -1).normalized()
 
 		var cart_tip  := cart_dir * (FACING_ORBIT * 1.25)
 		var cart_base := cart_tip - cart_dir * (FACING_HEAD_SIZE * 1.25)
@@ -136,11 +136,14 @@ func _draw_iso_dot(center: Vector2) -> void:
 # ── facing arrowhead ──────────────────────────────────────────────────────────
 
 func _iso_offset(direction: String) -> Vector2:
+	# Each iso direction maps to a diagonal in screen space,
+	# flattened by the tile ratio so the arrowhead sits exactly
+	# on the isometric grid axes (NE = right+up, SE = right+down, etc.)
 	match direction:
-		"NE": return Vector2( 0, -1).normalized() * FACING_ORBIT
-		"SE": return Vector2( 1,  0).normalized() * FACING_ORBIT
-		"SW": return Vector2( 0,  1).normalized() * FACING_ORBIT
-		"NW": return Vector2(-1,  0).normalized() * FACING_ORBIT
+		"NE": return Vector2( ISO_X, -ISO_Y).normalized() * FACING_ORBIT
+		"SE": return Vector2( ISO_X,  ISO_Y).normalized() * FACING_ORBIT
+		"SW": return Vector2(-ISO_X,  ISO_Y).normalized() * FACING_ORBIT
+		"NW": return Vector2(-ISO_X, -ISO_Y).normalized() * FACING_ORBIT
 	return Vector2.ZERO
 
 

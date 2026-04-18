@@ -11,7 +11,7 @@ const FACING_ORBIT     := 16.0
 
 # ISO scale matches tile ratio 32x16 → x:y = 2:1
 const ISO_X := 1.0
-const ISO_Y := 0.5
+const ISO_Y := 1.0
 
 var _path: Array[Vector2]	 = []
 var _destination: Vector2	 = Vector2.INF

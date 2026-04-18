@@ -8,9 +8,8 @@ static func setup_tileset(layer: TileMapLayer) -> void:
 		ts = TileSet.new()
 		layer.tile_set = ts
 	
-	ts.tile_shape = TileSet.TILE_SHAPE_ISOMETRIC
-	ts.tile_layout = TileSet.TILE_LAYOUT_DIAMOND_DOWN
-	ts.tile_size = Vector2i(32, 16)
+	ts.tile_shape = TileSet.TILE_SHAPE_SQUARE
+	ts.tile_size = Vector2i(32, 32)
 	
 	for type in TileDefinitions.TILE_TEXTURES:
 		var source_id = type
@@ -28,7 +27,7 @@ static func setup_tileset(layer: TileMapLayer) -> void:
 			atlas_source.create_tile(coords)
 			var tile_data = atlas_source.get_tile_data(coords, 0)
 			if tile_data:
-				tile_data.texture_origin = Vector2i(0, 8)
+				tile_data.texture_origin = Vector2i.ZERO
 			
 		ts.add_source(atlas_source, source_id)
 

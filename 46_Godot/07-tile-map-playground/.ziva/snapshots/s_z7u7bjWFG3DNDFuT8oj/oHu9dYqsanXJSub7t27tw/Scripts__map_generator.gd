@@ -6,11 +6,9 @@ static func setup_tileset(layer: TileMapLayer) -> void:
 	var ts = layer.tile_set
 	if not ts:
 		ts = TileSet.new()
+		ts.tile_shape = TileSet.TILE_SHAPE_ISOMETRIC
+		ts.tile_size = Vector2i(32, 16)
 		layer.tile_set = ts
-	
-	ts.tile_shape = TileSet.TILE_SHAPE_ISOMETRIC
-	ts.tile_layout = TileSet.TILE_LAYOUT_DIAMOND_DOWN
-	ts.tile_size = Vector2i(32, 16)
 	
 	for type in TileDefinitions.TILE_TEXTURES:
 		var source_id = type
@@ -35,7 +33,10 @@ static func setup_tileset(layer: TileMapLayer) -> void:
 static func generate_map(layer: TileMapLayer) -> void:
 	setup_tileset(layer)
 	
-	var rect = Rect2i(0, 0, 30, 30)
+	var rect = layer.get_used_rect()
+	if rect.size == Vector2i.ZERO:
+		# Use a default size if no tiles exist (e.g. 30x30)
+		rect = Rect2i(0, 0, 30, 30)
 		
 	layer.clear()
 	
