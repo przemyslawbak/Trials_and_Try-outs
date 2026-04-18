@@ -8,7 +8,6 @@
 [ext_resource type="Script" uid="uid://dsd8n7fc5pslb" path="res://Scripts/camera_controller.gd" id="7_cam"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_5ukr8"]
-load_path = "res://.godot/imported/base-grass-world.png-7cf47f60c03418993c5b7380d2a80fc5.ctex"
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_k7acu"]
 texture = SubResource("CompressedTexture2D_5ukr8")
@@ -34,8 +33,7 @@ script = ExtResource("5_spwn")
 [node name="Camera2D" type="Camera2D" parent="Ground-lvl0" unique_id=1212347357]
 script = ExtResource("7_cam")
 
-[node name="Ground-back" type="TileMapLayer" parent="." unique_id=1599618566]
-visible = false
+[node name="Ground-bottom" type="TileMapLayer" parent="." unique_id=1599618566]
 y_sort_enabled = true
 position = Vector2(550, 50)
 tile_set = SubResource("TileSet_5v1tr")
