@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dxm5q1y2vaw4q"
-path="res://.godot/imported/lakes-grass-world.png-cbbe01b90c29b5e3cb33034fd4fdde8b.ctex"
+uid="uid://bt7o6pk27ybk5"
+path="res://.godot/imported/green_1.png-0d5bbfc571738bfa866101ca64eb5383.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://MapSheets/lakes-grass-world.png"
-dest_files=["res://.godot/imported/lakes-grass-world.png-cbbe01b90c29b5e3cb33034fd4fdde8b.ctex"]
+source_file="res://MapSheets/green_1.png"
+dest_files=["res://.godot/imported/green_1.png-0d5bbfc571738bfa866101ca64eb5383.ctex"]
 
 [params]
 

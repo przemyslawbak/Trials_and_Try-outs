@@ -7,9 +7,9 @@ const SHAFT_WIDTH	  := 4.0
 const HOP_HEIGHT       := 6.0
 const DOT_RADIUS       := 7.0
 const FACING_HEAD_SIZE := 8.0
-const FACING_ORBIT	 := 32.0
+const FACING_ORBIT     := 16.0
 
-# ISO scale matches tile ratio 64x32 → x:y = 2:1
+# ISO scale matches tile ratio 32x16 → x:y = 2:1
 const ISO_X := 1.0
 const ISO_Y := 0.5
 

@@ -1,7 +1,7 @@
 extends Node2D
 
-const ISO_WIDTH = 64.0
-const ISO_HEIGHT = 32.0
+const ISO_WIDTH = 32.0
+const ISO_HEIGHT = 16.0
 
 var _highlighted_positions: Array[Vector2] = []
 

@@ -1,16 +1,16 @@
 class_name CharacterBase
 extends CharacterBody2D
 
-const TILE_WIDTH  := 64
+const TILE_WIDTH  := 32
 const TILE_HEIGHT := 32
 const MOVE_SPEED  := 30.0
 const WATER_ATLAS_ROW := 10
 
 const ISO_DIRECTIONS := {
-	"NE": Vector2(32, -16),
-	"SE": Vector2(32, 16),
-	"SW": Vector2(-32, 16),
-	"NW": Vector2(-32, -16),
+	"NE": Vector2(16, -8),
+	"SE": Vector2(16, 8),
+	"SW": Vector2(-16, 8),
+	"NW": Vector2(-16, -8),
 }
 
 var available_tiles: int = 3

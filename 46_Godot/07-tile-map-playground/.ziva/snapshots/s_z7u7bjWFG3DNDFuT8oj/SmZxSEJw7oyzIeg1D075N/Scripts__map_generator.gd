@@ -20,7 +20,7 @@ static func setup_tileset(layer: TileMapLayer) -> void:
 			
 		var atlas_source = TileSetAtlasSource.new()
 		atlas_source.texture = load(TileDefinitions.TILE_TEXTURES[type])
-		atlas_source.texture_region_size = Vector2i(64, 64)
+		atlas_source.texture_region_size = Vector2i(64, 32)
 		
 		var count = TileDefinitions.TILE_COUNTS[type]
 		for i in range(count):
@@ -28,7 +28,7 @@ static func setup_tileset(layer: TileMapLayer) -> void:
 			atlas_source.create_tile(coords)
 			var tile_data = atlas_source.get_tile_data(coords, 0)
 			if tile_data:
-				tile_data.texture_origin = Vector2i(0, 16)
+				tile_data.texture_origin = Vector2i(0, 0)
 			
 		ts.add_source(atlas_source, source_id)
 

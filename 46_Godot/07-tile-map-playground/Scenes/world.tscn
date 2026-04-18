@@ -1,15 +1,17 @@
 [gd_scene format=3 uid="uid://dlxdbixpq0cyv"]
 
 [ext_resource type="Script" uid="uid://blsduc1ni1qnr" path="res://Scripts/world.gd" id="1_5a7ea"]
-[ext_resource type="Texture2D" uid="uid://c14folglyhgv2" path="res://MapSheets/base-grass-world.png" id="2_o06y3"]
 [ext_resource type="Script" uid="uid://b7yo1umfwwk1g" path="res://Scripts/arrow_overlay.gd" id="3_8j60k"]
 [ext_resource type="Script" uid="uid://bs3xrfw6oql3q" path="res://Scripts/tile_highlight.gd" id="4_xxxx"]
 [ext_resource type="Script" uid="uid://bdkoe1i2wuyla" path="res://Scripts/spawn_points.gd" id="5_spwn"]
 [ext_resource type="Texture2D" uid="uid://dt1hbf7id0pjx" path="res://Assets/Icons/UI/settings-gear.png" id="6_gear"]
 [ext_resource type="Script" uid="uid://dsd8n7fc5pslb" path="res://Scripts/camera_controller.gd" id="7_cam"]
 
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_5ukr8"]
+load_path = "res://.godot/imported/base-grass-world.png-7cf47f60c03418993c5b7380d2a80fc5.ctex"
+
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_k7acu"]
-texture = ExtResource("2_o06y3")
+texture = SubResource("CompressedTexture2D_5ukr8")
 texture_region_size = Vector2i(32, 32)
 0:0/0 = 0
 0:0/0/texture_origin = Vector2i(0, 8)
@@ -31,6 +33,21 @@ script = ExtResource("5_spwn")
 
 [node name="Camera2D" type="Camera2D" parent="Ground-lvl0" unique_id=1212347357]
 script = ExtResource("7_cam")
+
+[node name="Ground-back" type="TileMapLayer" parent="." unique_id=1599618566]
+visible = false
+y_sort_enabled = true
+position = Vector2(550, 50)
+tile_set = SubResource("TileSet_5v1tr")
+script = ExtResource("5_spwn")
+
+[node name="Ground-front" type="TileMapLayer" parent="." unique_id=726963541]
+visible = false
+z_index = 2
+y_sort_enabled = true
+position = Vector2(550, 50)
+tile_set = SubResource("TileSet_5v1tr")
+script = ExtResource("5_spwn")
 
 [node name="TileHighlight" type="Node2D" parent="." unique_id=763523865]
 position = Vector2(-50, -26)

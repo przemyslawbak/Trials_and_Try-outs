@@ -21,6 +21,10 @@ func update_spawn_points() -> void:
 		if source_id == -1:
 			continue
 			
+		# River and Lake types are water
+		if source_id == TileDefinitions.TileType.RIVER or source_id == TileDefinitions.TileType.LAKE:
+			continue
+			
 		var is_blocked = false
 		if ground_lvl1 and ground_lvl1.get_cell_source_id(cell) != -1:
 			is_blocked = true

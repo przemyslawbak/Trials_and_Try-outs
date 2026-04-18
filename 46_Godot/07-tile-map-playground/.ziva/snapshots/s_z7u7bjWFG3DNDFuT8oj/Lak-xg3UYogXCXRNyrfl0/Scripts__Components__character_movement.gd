@@ -41,6 +41,10 @@ func is_position_blocked(world_position: Vector2) -> bool:
 		var ground_coords: Vector2i = character._ground_lvl0.local_to_map(character._ground_lvl0.to_local(world_position))
 		if character._ground_lvl0.get_cell_source_id(ground_coords) == -1:
 			return true
+			
+		var source_id = character._ground_lvl0.get_cell_source_id(ground_coords)
+		if source_id == TileDefinitions.TileType.RIVER or source_id == TileDefinitions.TileType.LAKE:
+			return true
 	else:
 		return true
 
