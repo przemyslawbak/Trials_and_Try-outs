@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bt7o6pk27ybk5"
-path="res://.godot/imported/green_1.png-0d5bbfc571738bfa866101ca64eb5383.ctex"
+uid="uid://blt0pca42gmdp"
+path="res://.godot/imported/ground_turf_sheet.png-1138cb22c69e2d9b9091ea4b1d1eb4ad.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://MapSheets/green_1.png"
-dest_files=["res://.godot/imported/green_1.png-0d5bbfc571738bfa866101ca64eb5383.ctex"]
+source_file="res://MapSheets/Ground/ground_turf_sheet.png"
+dest_files=["res://.godot/imported/ground_turf_sheet.png-1138cb22c69e2d9b9091ea4b1d1eb4ad.ctex"]
 
 [params]
 

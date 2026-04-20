@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b2w8j8blr3bwf"
-path="res://.godot/imported/forest_quarters.png-3dc8390160e25f91bdc040a657c153f8.ctex"
+uid="uid://bbdjla1w6dria"
+path="res://.godot/imported/ground_meadow_sheet.png-07de2bfef8a1fbc43ee578a48c98c867.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://MapSheets/forest_quarters.png"
-dest_files=["res://.godot/imported/forest_quarters.png-3dc8390160e25f91bdc040a657c153f8.ctex"]
+source_file="res://MapSheets/Ground/ground_meadow_sheet.png"
+dest_files=["res://.godot/imported/ground_meadow_sheet.png-07de2bfef8a1fbc43ee578a48c98c867.ctex"]
 
 [params]
 
