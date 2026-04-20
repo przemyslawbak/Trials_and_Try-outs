@@ -87,7 +87,7 @@ func _ready() -> void:
 	
 	var ground = get_node_or_null("Ground-lvl0") as SpawnPoints
 	if ground:
-		MapGenerator.generate_map(ground)
+		MapGenerator.generate_map(self)
 		ground.update_spawn_points()
 	
 	player = get_node_or_null("Player")
