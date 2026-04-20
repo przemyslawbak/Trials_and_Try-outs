@@ -64,49 +64,49 @@ static func build_front_tileset() -> TileSet:
 	ts.tile_shape       = TileSet.TILE_SHAPE_ISOMETRIC
 	ts.tile_layout      = TileSet.TILE_LAYOUT_DIAMOND_DOWN
 	ts.tile_offset_axis = TileSet.TILE_OFFSET_AXIS_HORIZONTAL
-	ts.tile_size        = Vector2i(32, 16)
+	ts.tile_size        = Vector2i(64, 32)
 
 	# Source 5 – mountains plain  (14 tiles)
 	_add_source(ts, 5,
 		"res://MapSheets/Quarters/mountains_plain_sheet.png",
 		Vector2i(32, 32), 14,
-		Vector2i(0, -26))
+		Vector2i.ZERO)
 
 	# Source 6 – turf plain  (17 tiles)
 	_add_source(ts, 6,
 		"res://MapSheets/Quarters/turf_plain_sheet.png",
 		Vector2i(32, 32), 17,
-		Vector2i(0, -26))
+		Vector2i.ZERO)
 
 	# Source 7 – grass plain  (18 tiles)
 	_add_source(ts, 7,
 		"res://MapSheets/Quarters/grass_plain_sheet.png",
 		Vector2i(32, 32), 18,
-		Vector2i(0, -26))
+		Vector2i.ZERO)
 
 	# Source 8 – grass flowers  (19 tiles)
 	_add_source(ts, 8,
 		"res://MapSheets/Quarters/grass_flowers_sheet.png",
 		Vector2i(32, 32), 19,
-		Vector2i(0, -26))
+		Vector2i.ZERO)
 
 	# Source 9 – forest spruce  (19 tiles)
 	_add_source(ts, 9,
 		"res://MapSheets/Quarters/forest_spruce_sheet.png",
 		Vector2i(32, 32), 19,
-		Vector2i(0, -26))
+		Vector2i.ZERO)
 
 	# Source 10 – forest mixed  (16 tiles)
 	_add_source(ts, 10,
 		"res://MapSheets/Quarters/forest_mixed_sheet.png",
 		Vector2i(32, 32), 16,
-		Vector2i(0, -26))
+		Vector2i.ZERO)
 
 	# Source 11 – forest deciduous  (18 tiles)
 	_add_source(ts, 11,
 		"res://MapSheets/Quarters/forest_dedicious_sheet.png",
 		Vector2i(32, 32), 18,
-		Vector2i(0, -26))
+		Vector2i.ZERO)
 
 	return ts
 
