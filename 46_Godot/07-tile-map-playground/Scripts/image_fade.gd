@@ -1,194 +1,138 @@
 extends Node
 
-## Attach this script to the ImageBurn node (parent of both TextureRect children).
+## Attach this script to the ImageBurn node.
 ##
 ## Scene structure:
 ##   ImageBurn        ← attach this script here
-##   ├── 1            ← TextureRect  (top image — burns away)
-##   └── 2            ← TextureRect  (bottom image — revealed beneath)
+##   ├── 1            ← TextureRect  (bottom image — revealed beneath)
+##   └── 2            ← TextureRect  (top image — fades into darkness)
 ##
-## The shader is applied directly to node "1" only.
-## Pixels that burn away are discarded → the effect is strictly limited
-## to that node's own texture rect, nothing bleeds outside.
+## Node "2" darkens from pure black outward, as though a shadow or void is
+## consuming it from within.  As its pixels become fully black they become
+## transparent, gradually unveiling node "1" underneath.
 
 # ── Exports ──────────────────────────────────────────────────────────────────
 
 @export_group("Timing")
-@export var burn_duration: float = 4.0   ## Seconds for a full burn
-@export var auto_play: bool      = true  ## Begin on _ready()
+@export var fade_duration: float = 3.5  ## Seconds for a full fade
+@export var auto_play:     bool  = true ## Begin on _ready()
 
-@export_group("Burn Shape")
-## How radial vs chaotic the fire front spreads.
-## 0 = pure noise chaos, 1 = strict radial wave from centre.
-@export_range(0.0, 1.0) var radial_blend: float = 0.35
+@export_group("Fade Shape")
+## How the darkness spreads.
+## 0 = pure noise (organic blotches), 1 = clean radial from centre.
+@export_range(0.0, 1.0) var radial_blend: float = 0.25
+## Direction bias for the darkness wave (degrees, 0 = no bias / uniform).
+## e.g. 270 = sweeps top-down, 90 = bottom-up, 0 = pure radial/noise.
+@export_range(0.0, 360.0) var sweep_angle: float = 0.0
+## Strength of the directional sweep vs radial/noise (0 = off).
+@export_range(0.0, 1.0)   var sweep_strength: float = 0.0
 ## Noise seed (0 = random each run).
 @export var noise_seed: int = 0
 
-@export_group("Ember Edge")
-## Total width of the glowing edge band (UV units, ~0.03–0.10).
-@export_range(0.002, 0.15) var edge_width: float  = 0.018
-## White-hot core colour.
-@export var color_core:  Color = Color(1.00, 0.98, 0.80, 1.0)
-## Mid ember colour (orange).
-@export var color_ember: Color = Color(1.00, 0.40, 0.02, 1.0)
-## Outer char/glow colour (deep red-black).
-@export var color_char:  Color = Color(0.18, 0.02, 0.00, 1.0)
+@export_group("Darkness Edge")
+## Soft gradient width at the darkness boundary (UV units).
+## Larger = a wider, smoother fade-in of the black; smaller = sharper edge.
+@export_range(0.005, 0.25) var edge_softness: float = 0.06
+## Colour the darkness fades TO (default: pure black).
+@export var dark_color: Color = Color(0.0, 0.0, 0.0, 1.0)
 
-@export_group("Char & Darken")
-## Width of the dark-charring region just behind the fire front.
-@export_range(0.0, 0.3)  var char_width:    float = 0.025
-## Maximum darkness of the charred region (1 = pitch black).
-@export_range(0.0, 1.0)  var char_strength: float = 0.72
-
-@export_group("Heat Distortion")
-## UV distortion magnitude near the fire front.  0 = disabled.
-@export_range(0.0, 0.03) var distortion_strength: float = 0.012
-## Speed of the shimmer ripple.
-@export_range(0.0, 8.0)  var distortion_speed:    float = 3.5
+@export_group("Vignette")
+## Add a subtle brightness dip around the edges of the whole image
+## as the fade progresses (0 = off, 1 = strong vignette).
+@export_range(0.0, 1.0) var vignette_strength: float = 0.35
 
 # ── Internals ────────────────────────────────────────────────────────────────
 
-var _top_image:     TextureRect
-var _mat:           ShaderMaterial
-var _burn_progress: float = 0.0
-var _burning:       bool  = false
-var _elapsed:       float = 0.0
+var _top_image:    TextureRect   # node "2"
+var _mat:          ShaderMaterial
+var _progress:     float = 0.0
+var _active:       bool  = false
+var _elapsed:      float = 0.0
 
-signal burn_finished
+signal fade_finished
 
-# ── Shader ────────────────────────────────────────────────────────────────────
+# ── Shader ───────────────────────────────────────────────────────────────────
 #
-#  Applied exclusively to node "1".
-#  Burned pixels are discarded → effect is strictly bounded by the TextureRect.
-#  Two noise layers give an organic, multi-scale fire front.
-#  A separate animated noise layer drives heat distortion on surviving pixels.
+#  Applied to node "2" only.
+#  Each pixel darkens toward dark_color then fades its alpha to 0,
+#  revealing node "1" beneath — strictly bounded to node "2"'s own rect.
 #
 const _SHADER := """
 shader_type canvas_item;
 render_mode blend_mix;
 
-// ── uniforms ────────────────────────────────────────────────────────────
-uniform float  burn_progress    : hint_range(0.0, 1.1) = 0.0;
-uniform float  edge_width       : hint_range(0.002, 0.15) = 0.018;
-uniform float  char_width       : hint_range(0.0, 0.3)   = 0.08;
-uniform float  char_strength    : hint_range(0.0, 1.0)   = 0.72;
-uniform float  radial_blend     : hint_range(0.0, 1.0)   = 0.35;
-uniform float  distortion_str   : hint_range(0.0, 0.03)  = 0.012;
-uniform float  distortion_speed : hint_range(0.0, 8.0)   = 3.5;
-uniform float  time_val                                   = 0.0;
+uniform float progress       : hint_range(0.0, 1.1) = 0.0;
+uniform float edge_softness  : hint_range(0.005, 0.25) = 0.06;
+uniform float radial_blend   : hint_range(0.0, 1.0)    = 0.25;
+uniform float sweep_angle_rad                          = 0.0;
+uniform float sweep_strength : hint_range(0.0, 1.0)    = 0.0;
+uniform float vignette_str   : hint_range(0.0, 1.0)    = 0.35;
+uniform vec4  dark_color     : source_color = vec4(0.0, 0.0, 0.0, 1.0);
 
-uniform vec4   color_core  : source_color = vec4(1.00, 0.98, 0.80, 1.0);
-uniform vec4   color_ember : source_color = vec4(1.00, 0.40, 0.02, 1.0);
-uniform vec4   color_char  : source_color = vec4(0.18, 0.02, 0.00, 1.0);
+uniform sampler2D noise_coarse;   // 128 px Perlin
+uniform sampler2D noise_fine;     // 256 px Perlin
 
-uniform sampler2D noise_tex;   // coarse burn-shape noise  (128 px)
-uniform sampler2D noise_fine;  // fine detail + distortion (256 px)
+// ── helpers ──────────────────────────────────────────────────────────────
 
-// ── multi-octave noise from a pre-baked texture ─────────────────────────
-float fbm(sampler2D tex, vec2 uv, float t) {
-	float v  = texture(tex, uv                              ).r * 0.50;
-	      v += texture(tex, uv * 2.10 + vec2(0.31,  0.71)  ).r * 0.25;
-	      v += texture(tex, uv * 4.30 + vec2(t * 0.07, 0.0)).r * 0.15;
-	      v += texture(tex, uv * 8.70 + vec2(0.0, t * 0.04)).r * 0.10;
-	// Sharpen contrast: push values toward 0/1 so the threshold cuts a
-	// crisp, thin line instead of a wide blurry gradient.
-	v = clamp((v - 0.5) * 2.2 + 0.5, 0.0, 1.0);
+float fbm(sampler2D tex, vec2 uv) {
+	float v  = texture(tex, uv                          ).r * 0.50;
+	      v += texture(tex, uv * 2.1 + vec2(0.31, 0.71)).r * 0.25;
+	      v += texture(tex, uv * 4.5 + vec2(0.67, 0.13)).r * 0.15;
+	      v += texture(tex, uv * 9.1 + vec2(0.44, 0.88)).r * 0.10;
+	// Sharpen: push values toward 0/1 for a crisper, non-blobby edge.
+	v = clamp((v - 0.5) * 2.0 + 0.5, 0.0, 1.0);
 	return v;
 }
 
 void fragment() {
-	// ── 1. heat distortion ─────────────────────────────────────────────
-	// Independently animated noise drives UV warp near the fire front.
-	float dn1 = texture(noise_fine,
-		UV * 3.0 + vec2( time_val * distortion_speed * 0.031,
-		                 time_val * distortion_speed * 0.017)).r;
-	float dn2 = texture(noise_fine,
-		UV * 2.2 + vec2(-time_val * distortion_speed * 0.019,
-		                 time_val * distortion_speed * 0.027)).r;
-
-	// Distortion peaks right at the burn front and fades away from it.
-	float burn_local = fbm(noise_tex, UV, time_val * 0.4);
-	float proximity  = 1.0 - abs(burn_local - burn_progress) / max(edge_width * 2.5, 0.001);
-	proximity = pow(clamp(proximity, 0.0, 1.0), 1.5);
-
-	vec2 warped_uv = UV + vec2(
-		(dn1 - 0.5) * 2.0,
-		(dn2 - 0.5) * 2.0
-	) * distortion_str * proximity;
-
-	// Hard-clamp to [0,1]: keeps distortion strictly inside the node rect.
-	warped_uv = clamp(warped_uv, vec2(0.0), vec2(1.0));
-
-	vec4 tex = texture(TEXTURE, warped_uv);
-
-	// Discard fully transparent source pixels (non-rect sprites, etc.)
-	// so the fire never appears on empty areas of the texture.
+	vec4 tex = texture(TEXTURE, UV);
 	if (tex.a < 0.01) { discard; }
 
-	// ── 2. burn mask ───────────────────────────────────────────────────
-	// Coarse noise drives the macro shape; fine noise adds jagged detail.
-	float coarse    = fbm(noise_tex,  UV, time_val * 0.4);
-	float fine      = fbm(noise_fine, UV, time_val * 0.6);
-	float noise_val = coarse * 0.70 + fine * 0.30;
+	// ── darkness mask ──────────────────────────────────────────────────
+	float coarse    = fbm(noise_coarse, UV);
+	float fine      = fbm(noise_fine,   UV * 1.6 + vec2(0.2, 0.5));
+	float noise_val = coarse * 0.65 + fine * 0.35;
 
-	// Optional radial component: fire starts in the centre and spreads out.
-	float radial    = length(UV - vec2(0.5)) * 1.4142;
-	float burn_mask = mix(noise_val, radial, radial_blend);
+	// Radial: 0 at centre → 1 at corners.
+	float radial = length(UV - vec2(0.5)) * 1.4142;
 
-	float threshold    = burn_progress;
-	float burned_edge  = threshold - edge_width;
-	float charred_edge = burned_edge - char_width;
+	// Optional directional sweep (e.g. top-down).
+	vec2 dir = vec2(cos(sweep_angle_rad), sin(sweep_angle_rad));
+	float sweep = dot(UV - vec2(0.5), dir) + 0.5;  // 0..1 across the image
 
-	// ── 3. classify and shade ──────────────────────────────────────────
-	if (burn_mask < burned_edge) {
-		// Fully burned → discard (transparent → node "2" shows through).
+	float mask = noise_val;
+	mask = mix(mask, radial, radial_blend);
+	mask = mix(mask, sweep,  sweep_strength);
+
+	// ── vignette ───────────────────────────────────────────────────────
+	// Independent of the fade — darkens edges gently as progress grows.
+	float vig_dist = length(UV - vec2(0.5)) * 1.4142;  // 0 centre, 1 corner
+	float vig = pow(vig_dist, 2.5) * vignette_str * progress;
+
+	// ── classify pixel ─────────────────────────────────────────────────
+	// The darkness threshold sweeps from 0 → 1 as progress increases.
+	float threshold = progress;
+
+	if (mask < threshold - edge_softness) {
+		// Fully consumed by darkness → transparent (reveals node "1").
 		discard;
 
-	} else if (burn_mask < threshold) {
-		// ── Glowing ember band ──────────────────────────────────────────
-		// t = 0 at innermost (just-burned) edge, 1 at outermost (unburned) edge.
-		float t = (burn_mask - burned_edge) / edge_width;
+	} else if (mask < threshold) {
+		// Softening edge: image fades smoothly into dark_color then vanishes.
+		float t = (mask - (threshold - edge_softness)) / edge_softness;
+		// t = 1 at the untouched side, 0 at the fully-dark side.
 
-		// Three-stop colour ramp: char_color → ember → core (white-hot).
-		vec4 glow;
-		if (t < 0.45) {
-			float u = t / 0.45;
-			glow = mix(color_char, color_ember, smoothstep(0.0, 1.0, u));
-		} else {
-			float u = (t - 0.45) / 0.55;
-			glow = mix(color_ember, color_core, smoothstep(0.0, 1.0, u));
-		}
+		// Darken the pixel toward dark_color as t → 0.
+		vec3 darkened = mix(dark_color.rgb, tex.rgb, t);
+		// Then fade alpha to 0 in the innermost part of the edge.
+		float alpha   = smoothstep(0.0, 0.55, t) * tex.a;
 
-		// Flicker the glow with animated noise for a live-ember look.
-		float flicker = texture(noise_fine,
-			UV * 5.0 + vec2(time_val * 1.3, -time_val * 0.9)).r;
-		glow.rgb *= 0.75 + 0.25 * flicker;
-
-		// Blend ember over the still-surviving source texture.
-		float ember_mix = smoothstep(0.0, 1.0, 1.0 - t * 0.6);
-		COLOR.rgb = mix(tex.rgb, glow.rgb, ember_mix);
-		COLOR.a   = tex.a;   // preserve source alpha for non-rect sprites
-
-	} else if (burn_mask < threshold + char_width && char_strength > 0.0) {
-		// ── Charring band (dark scorch just ahead of the fire front) ───
-		float t = (burn_mask - threshold) / char_width; // 0=just ahead 1=undamaged
-		float darkness = char_strength * (1.0 - smoothstep(0.0, 1.0, t));
-
-		// Darken and tint toward char colour.
-		vec3 charred = mix(
-			tex.rgb * (1.0 - darkness),
-			color_char.rgb,
-			darkness * 0.6
-		);
-		// Subtle red-orange glow bleed into the char zone near the fire.
-		float near_fire = 1.0 - smoothstep(0.0, 0.35, t);
-		charred = mix(charred, color_char.rgb * 1.4, near_fire * 0.25);
-
-		COLOR = vec4(charred, tex.a);
+		COLOR = vec4(darkened, alpha);
 
 	} else {
-		// ── Undamaged — render with heat distortion only ────────────────
-		COLOR = tex;
+		// Untouched region — apply vignette only.
+		vec3 vignetted = mix(tex.rgb, dark_color.rgb, vig);
+		COLOR = vec4(vignetted, tex.a);
 	}
 }
 """
@@ -196,10 +140,7 @@ void fragment() {
 # ── Lifecycle ────────────────────────────────────────────────────────────────
 
 func _ready() -> void:
-	_top_image = $"2"
-	
-	get_viewport().size_changed.connect(_on_viewport_size_changed)
-	_on_viewport_size_changed()
+	_top_image = $"2"   # node "2" is the TOP image that fades out
 
 	var shader := Shader.new()
 	shader.code = _SHADER
@@ -208,90 +149,73 @@ func _ready() -> void:
 	_mat.shader = shader
 
 	var seed_val := noise_seed if noise_seed != 0 else randi()
-	_mat.set_shader_parameter("noise_tex",        _make_noise(128, seed_val,       0.035, 5))
-	_mat.set_shader_parameter("noise_fine",       _make_noise(256, seed_val + 999, 0.055, 6))
-	_mat.set_shader_parameter("burn_progress",    0.0)
-	_mat.set_shader_parameter("edge_width",       edge_width)
-	_mat.set_shader_parameter("char_width",       char_width)
-	_mat.set_shader_parameter("char_strength",    char_strength)
-	_mat.set_shader_parameter("radial_blend",     radial_blend)
-	_mat.set_shader_parameter("distortion_str",   distortion_strength)
-	_mat.set_shader_parameter("distortion_speed", distortion_speed)
-	_mat.set_shader_parameter("color_core",       color_core)
-	_mat.set_shader_parameter("color_ember",      color_ember)
-	_mat.set_shader_parameter("color_char",       color_char)
-	_mat.set_shader_parameter("time_val",         0.0)
+	_mat.set_shader_parameter("noise_coarse",    _make_noise(128, seed_val,       0.035, 5))
+	_mat.set_shader_parameter("noise_fine",      _make_noise(256, seed_val + 999, 0.055, 6))
+
+	_sync_params()
+	_mat.set_shader_parameter("progress", 0.0)
 
 	_top_image.material = _mat
 
 	if auto_play:
-		start_burn()
+		start_fade()
 
 
 func _process(delta: float) -> void:
-	if not _burning:
+	if not _active:
 		return
 
-	_elapsed       += delta
-	_burn_progress  = clamp(_elapsed / burn_duration, 0.0, 1.0)
+	_elapsed   += delta
+	_progress   = clamp(_elapsed / fade_duration, 0.0, 1.0)
+	_mat.set_shader_parameter("progress", _progress)
 
-	# time_val runs independently so distortion/flicker continue at their own pace.
-	_mat.set_shader_parameter("time_val",      _elapsed)
-	_mat.set_shader_parameter("burn_progress", _burn_progress)
-
-	if _burn_progress >= 1.0:
-		_burning = false
+	if _progress >= 1.0:
+		_active = false
 		_top_image.visible = false
-		burn_finished.emit()
-
-func _on_viewport_size_changed() -> void:
-	var viewport_size := get_viewport().get_visible_rect().size
-	if is_instance_valid(_top_image):
-		_top_image.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
-		_top_image.size = viewport_size
-	if has_node("1"):
-		$"1".expand_mode = TextureRect.EXPAND_IGNORE_SIZE
-		$"1".size = viewport_size
+		fade_finished.emit()
 
 # ── Public API ───────────────────────────────────────────────────────────────
 
-func start_burn() -> void:
-	## Trigger (or restart) the burn animation.
-	_elapsed       = 0.0
-	_burn_progress = 0.0
-	_burning       = true
+func start_fade() -> void:
+	## Trigger (or restart) the fade-to-darkness animation.
+	_elapsed  = 0.0
+	_progress = 0.0
+	_active   = true
 	_top_image.visible = true
-	_mat.set_shader_parameter("burn_progress", 0.0)
-	_mat.set_shader_parameter("time_val",      0.0)
+	_sync_params()
+	_mat.set_shader_parameter("progress", 0.0)
 
 
 func reset() -> void:
-	## Restore the top image to fully visible, no animation.
-	_burning       = false
-	_elapsed       = 0.0
-	_burn_progress = 0.0
+	## Restore node "2" to fully visible.
+	_active   = false
+	_elapsed  = 0.0
+	_progress = 0.0
 	_top_image.visible = true
-	_mat.set_shader_parameter("burn_progress", 0.0)
-	_mat.set_shader_parameter("time_val",      0.0)
+	_mat.set_shader_parameter("progress", 0.0)
 
-# ── Noise baking ─────────────────────────────────────────────────────────────
+# ── Helpers ──────────────────────────────────────────────────────────────────
+
+func _sync_params() -> void:
+	## Push all export values to the shader uniforms.
+	_mat.set_shader_parameter("edge_softness",   edge_softness)
+	_mat.set_shader_parameter("radial_blend",    radial_blend)
+	_mat.set_shader_parameter("sweep_angle_rad", deg_to_rad(sweep_angle))
+	_mat.set_shader_parameter("sweep_strength",  sweep_strength)
+	_mat.set_shader_parameter("vignette_str",    vignette_strength)
+	_mat.set_shader_parameter("dark_color",      dark_color)
+
 
 func _make_noise(size: int, seed_val: int, freq: float, octaves: int) -> ImageTexture:
-	## Bake a Perlin noise field into an RF ImageTexture.
-	## Two separate textures (coarse + fine) give the shader richer detail
-	## without expensive per-pixel computation.
 	var img := Image.create(size, size, false, Image.FORMAT_RF)
-
-	var fn := FastNoiseLite.new()
+	var fn   := FastNoiseLite.new()
 	fn.noise_type      = FastNoiseLite.TYPE_PERLIN
 	fn.frequency       = freq
 	fn.fractal_octaves = octaves
 	fn.seed            = seed_val
-
 	for y in size:
 		for x in size:
 			var v: float = fn.get_noise_2d(x, y)
-			v = (v + 1.0) * 0.5          # remap [-1, 1] → [0, 1]
+			v = (v + 1.0) * 0.5
 			img.set_pixel(x, y, Color(v, v, v, 1.0))
-
 	return ImageTexture.create_from_image(img)
