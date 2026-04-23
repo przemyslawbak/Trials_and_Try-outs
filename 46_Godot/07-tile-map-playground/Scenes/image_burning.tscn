@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://brntkdpnfg6v7"]
+
+[ext_resource type="Script" uid="uid://dkc31y62koqah" path="res://Scripts/image_burning.gd" id="1_script"]
+[ext_resource type="Texture2D" uid="uid://dltlg75xcr6w1" path="res://Assets/pixellab-Brooding-ruler-The-player-char-1776908338710.png" id="1_tex1"]
+[ext_resource type="Texture2D" uid="uid://d4mgsxb2p3d1t" path="res://Assets/pixellab-castle-on-a-hill-covered-with--1776898916076.png" id="2_tex2"]
+
+[node name="ImageBurning" type="Node2D" unique_id=1915687578]
+script = ExtResource("1_script")
+
+[node name="1" type="TextureRect" parent="." unique_id=456862967]
+offset_right = 1280.0
+offset_bottom = 720.0
+texture = ExtResource("2_tex2")
+expand_mode = 1
+
+[node name="2" type="TextureRect" parent="." unique_id=426356743]
+offset_right = 1280.0
+offset_bottom = 720.0
+texture = ExtResource("1_tex1")
+expand_mode = 1
