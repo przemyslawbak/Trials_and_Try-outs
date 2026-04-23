@@ -86,6 +86,15 @@ theme_override_styles/pressed = SubResource("StyleBoxFlat_btn")
 theme_override_styles/hover = SubResource("StyleBoxFlat_btn")
 text = "PAN CUT"
 
+[node name="MistButton" type="Button" parent="VBoxContainer"]
+custom_minimum_size = Vector2(200, 40)
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_styles/normal = SubResource("StyleBoxFlat_btn")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_btn")
+theme_override_styles/hover = SubResource("StyleBoxFlat_btn")
+text = "MIST"
+
 [node name="ExitButton" type="Button" parent="VBoxContainer" unique_id=999531372]
 custom_minimum_size = Vector2(200, 40)
 layout_mode = 2

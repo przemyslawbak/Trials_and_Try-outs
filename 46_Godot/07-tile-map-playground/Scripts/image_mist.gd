@@ -1,128 +1,202 @@
 extends Node
 
-## Slow Pan + Cross-Dissolve — cinematic narration effect.
+## Mist Transition — dark smoke swirls outward from the centre, dissolving image "2" to reveal image "1".
 ##
 ## Scene structure:
 ##   ImageBurn        ← attach this script here
-##   ├── 1            ← TextureRect  (second image — revealed by dissolve)
-##   └── 2            ← TextureRect  (first image — pans Left→Right, then dissolves out)
+##   ├── 1            ← TextureRect  (bottom — revealed as smoke clears)
+##   └── 2            ← TextureRect  (top    — consumed by smoke expanding from centre)
 ##
-## Timeline:
-##   Phase 1 — HOLD    : image "2" sits still for a moment (optional beat)
-##   Phase 2 — PAN     : image "2" slowly pans Left→Right (Ken Burns style)
-##   Phase 3 — DISSOLVE: image "2" cross-fades into image "1" underneath
-##
-## Both nodes should use STRETCH_MODE_KEEP_ASPECT_COVERED (or similar) so
-## there is texture to pan into.  The pan works by shifting the MATERIAL
-## OFFSET of node "2"; no viewport or camera needed.
+## The shader is applied to node "2" only.
+## Animated layered noise creates volumetric-feeling smoke that swirls and
+## expands outward from the image centre, with wispy tendrils trailing at
+## the annular boundary before dissolving completely.
 
 # ── Exports ──────────────────────────────────────────────────────────────────
 
 @export_group("Timing")
-## Seconds to hold still before the pan begins.
-@export var hold_duration:     float = 0.6
-## Seconds for the pan movement.
-@export var pan_duration:      float = 4.5
-## Seconds for the cross-dissolve after the pan.
-@export var dissolve_duration: float = 1.2
-## Start automatically on _ready().
-@export var auto_play:         bool  = true
+@export var duration:   float = 2.5   ## Seconds for the full transition
+@export var auto_play:  bool  = true  ## Start on _ready()
 
-@export_group("Pan")
-## Total UV distance panned (0.08 = 8% of image width — subtle and cinematic).
-## Increase for a more dramatic push.
-@export_range(0.02, 0.40) var pan_amount: float = 0.10
-## Easing of the pan motion.
-## 0 = linear, 1 = ease-in-out (cinematic), 2 = ease-in only, 3 = ease-out only.
-@export_range(0, 3) var pan_easing: int = 1
-## Gentle zoom-in during the pan (1.0 = no zoom, 1.05 = 5% zoom-in).
-@export_range(1.0, 1.20) var zoom_amount: float = 1.04
+@export_group("Smoke")
+## Speed of the smoke layers swirling and expanding outward.
+@export_range(0.01, 0.4)  var drift_speed:    float = 0.16
+## How turbulent / billowy the smoke edge is. Higher = more chaotic tendrils.
+@export_range(0.5, 4.0)   var turbulence:     float = 1.8
+## Softness of the smoke boundary. Higher = thicker, hazier transition band.
+@export_range(0.02, 0.5)  var smoke_softness: float = 0.10
+## Opacity of the smoke colour at its densest (0=invisible, 1=fully opaque).
+@export_range(0.0, 1.0)   var smoke_opacity:  float = 0.82
+## Primary smoke / mist colour.
+@export var smoke_color: Color = Color(0.04, 0.04, 0.06, 1.0)  ## Near-black smoke
+## Secondary wisp colour — thinner edges of the smoke tendrils.
+@export var wisp_color:  Color = Color(0.12, 0.12, 0.16, 1.0)  ## Dark grey wisps
 
-@export_group("Dissolve")
-## Dissolve style.
-## 0 = simple alpha fade, 1 = luminance-dip (dips through black mid-dissolve).
-@export_range(0, 1) var dissolve_style: int = 0
-## Dip-to-black depth when dissolve_style = 1  (0 = no dip, 1 = full black dip).
-@export_range(0.0, 1.0) var dip_strength: float = 0.55
+@export_group("Reveal")
+## How the bottom image "1" appears — 0 = instant, 1 = fades in gently.
+@export_range(0.0, 1.0) var reveal_softness: float = 0.6
+## Noise seed (0 = random every run).
+@export var noise_seed: int = 0
 
 # ── Internals ────────────────────────────────────────────────────────────────
 
-var _img1:    TextureRect   # bottom — "1"
-var _img2:    TextureRect   # top    — "2"
-var _mat2:    ShaderMaterial
-
+var _img2:    TextureRect
+var _mat:     ShaderMaterial
 var _elapsed: float = 0.0
 var _active:  bool  = false
 
-# Phase durations baked at start for convenience.
-var _t_pan_start:      float
-var _t_dissolve_start: float
-var _t_total:          float
-
-signal effect_finished
+signal transition_finished
 
 # ── Shader ───────────────────────────────────────────────────────────────────
-# Applied to node "2" only.
-# Handles both the UV pan/zoom AND the cross-dissolve alpha in one pass.
+#
+#  Five layered noise samples at different scales and drift speeds create
+#  a convincing volumetric smoke feel without a 3-D renderer.
+#
+#  The "smoke front" rises from the bottom: as progress → 1, the threshold
+#  climbs from UV.y = 1.0 (bottom) to UV.y = 0.0 (top).
+#  Noise warps the front into irregular billowing tendrils.
+#  The image dims and desaturates as the smoke thickens over it,
+#  then pixels become transparent once fully consumed.
+#
 const _SHADER := """
 shader_type canvas_item;
 render_mode blend_mix;
 
-uniform vec2  uv_offset    = vec2(0.0, 0.0);   // animated pan offset
-uniform float uv_scale     = 1.0;               // animated zoom  (>1 = zoom in)
-uniform float dissolve_t   : hint_range(0.0, 1.0) = 0.0;  // 0=opaque 1=transparent
-uniform int   dissolve_style                   = 0;
-uniform float dip_strength : hint_range(0.0, 1.0) = 0.55;
+uniform float progress       : hint_range(0.0, 1.05) = 0.0;
+uniform float time_val                               = 0.0;
+uniform float drift_speed    : hint_range(0.01, 0.4) = 0.16;
+uniform float turbulence     : hint_range(0.5, 4.0)  = 1.8;
+uniform float smoke_softness : hint_range(0.02, 0.5) = 0.10;
+uniform float smoke_opacity  : hint_range(0.0, 1.0)  = 0.82;
+uniform float reveal_soft    : hint_range(0.0, 1.0)  = 0.6;
+
+uniform vec4 smoke_color : source_color = vec4(0.04, 0.04, 0.06, 1.0);
+uniform vec4 wisp_color  : source_color = vec4(0.12, 0.12, 0.16, 1.0);
+
+uniform sampler2D noise_a;   // 128 px  — macro smoke bodies
+uniform sampler2D noise_b;   // 256 px  — fine wisp detail
+uniform sampler2D noise_c;   // 64  px  — slow rolling base
+
+// ── animated multi-layer smoke field ─────────────────────────────────────
+float smoke_density(vec2 uv, float t) {
+	vec2  c     = uv - vec2(0.5);
+	float angle = atan(c.y, c.x);
+	float spin1 =  t * drift_speed * 0.30;
+	float spin2 = -t * drift_speed * 0.22;
+	float spin3 =  t * drift_speed * 0.17;
+
+	float push  = t * drift_speed * 0.55;
+
+	vec2 off1 = vec2(cos(angle + spin1), sin(angle + spin1)) * push * 0.60;
+	vec2 off2 = vec2(cos(angle + spin2), sin(angle + spin2)) * push * 0.80;
+	vec2 off3 = vec2(cos(angle + spin3), sin(angle + spin3)) * push * 0.40;
+
+	float sway = sin(t * 0.18) * 0.010;
+
+	float v  = texture(noise_a, uv * 1.0  + off1                      ).r * 0.38;
+	      v += texture(noise_b, uv * 2.1  + off2 + vec2(0.31,  0.71)  ).r * 0.24;
+	      v += texture(noise_c, uv * 0.55 + off3                       ).r * 0.20;
+	      v += texture(noise_b, uv * 3.8  + off1 + vec2(0.67,  0.13)  ).r * 0.12;
+	      v += texture(noise_a, uv * 1.5  + off2 + vec2(sway,  -sway) ).r * 0.06;
+
+	return v;
+}
 
 void fragment() {
-	// ── pan + zoom ─────────────────────────────────────────────────────
-	// Scale UV around image centre, then shift by offset.
-	vec2 uv = (UV - vec2(0.5)) * uv_scale + vec2(0.5) + uv_offset;
-	uv = clamp(uv, vec2(0.0), vec2(1.0));
+	vec4 tex = texture(TEXTURE, UV);
+	if (tex.a < 0.01) { discard; }
 
-	vec4 col = texture(TEXTURE, uv);
-	if (col.a < 0.01) { discard; }
+	float smoke = smoke_density(UV, time_val);
 
-	// ── dissolve ───────────────────────────────────────────────────────
-	if (dissolve_style == 0) {
-		// Simple alpha fade.
-		col.a *= 1.0 - dissolve_t;
+	// ── domain warp: warp the UV before sampling smoke a second time ──
+	// This folds the noise back on itself, producing deeply irregular,
+	// non-circular tendrils rather than a smooth ring.
+	float warp_coarse = (texture(noise_a,
+		UV * 1.8 + vec2(time_val * drift_speed * 0.28, time_val * drift_speed * 0.19)
+	).r - 0.5) * 2.0;
+	float warp_fine = (texture(noise_b,
+		UV * 3.7 + vec2(-time_val * drift_speed * 0.41, time_val * drift_speed * 0.33)
+	).r - 0.5) * 2.0;
+	float warp_micro = (texture(noise_c,
+		UV * 7.2 + vec2(time_val * drift_speed * 0.55, -time_val * drift_speed * 0.47)
+	).r - 0.5) * 2.0;
+
+	// Combine three warp scales — coarse shape, fine tears, micro fraying.
+	float warp = warp_coarse * turbulence * smoke_softness * 1.20
+	           + warp_fine   * turbulence * smoke_softness * 0.55
+	           + warp_micro  * turbulence * smoke_softness * 0.25;
+
+	// Radial distance from centre: 0 at centre, 1.0 at corners.
+	float dist_centre  = length(UV - vec2(0.5)) * 1.4142;
+	float front_radius = progress * (1.0 + smoke_softness);
+	float dist = dist_centre - front_radius + warp;  // <0 consumed, >0 clear
+
+	// band: 1.0 = fully consumed, 0.0 = untouched.
+	float band = clamp(-dist / smoke_softness, 0.0, 1.0);
+
+	// Extra high-frequency fraying right at the boundary.
+	float angle_uv    = atan(UV.y - 0.5, UV.x - 0.5);
+	float edge_detail = texture(noise_b,
+		UV * 6.5 + vec2(cos(angle_uv + time_val * drift_speed * 1.3),
+		                sin(angle_uv + time_val * drift_speed * 1.1)) * 0.06
+	).r;
+	// Sharpen so tendrils are spiky, not blobby.
+	edge_detail = pow(edge_detail, 0.7);
+	float tendril = edge_detail * (1.0 - abs(band - 0.5) * 2.0);
+
+	if (band >= 1.0) {
+		discard;
+
+	} else if (band > 0.0) {
+		float smoke_mix = smoothstep(0.0, 1.0, band);
+
+		// Desaturate as smoke covers the image.
+		float lum  = dot(tex.rgb, vec3(0.299, 0.587, 0.114));
+		vec3 desat = mix(vec3(lum), tex.rgb, 1.0 - smoke_mix * 0.8);
+
+		// Darken toward smoke colour.
+		vec3 smoked = mix(desat, smoke_color.rgb, smoke_mix * smoke_opacity);
+
+		// Wisp highlights at the churning edge.
+		smoked = mix(smoked, wisp_color.rgb, tendril * (1.0 - smoke_mix) * 0.6);
+
+		// Alpha: fade out; wisp tails keep a little opacity at the very edge.
+		float alpha = (1.0 - smoothstep(0.3, 1.0, band)) * tex.a;
+		alpha = max(alpha, tendril * (1.0 - band) * 0.35);
+
+		COLOR = vec4(smoked, alpha);
 
 	} else {
-		// Luminance dip: brightness collapses to black at mid-dissolve,
-		// then alpha fades — mimics a photochemical cross-dissolve.
-		float dip = sin(dissolve_t * PI);            // peaks at t=0.5
-		col.rgb   = mix(col.rgb, vec3(0.0), dip * dip_strength);
-		col.a    *= 1.0 - dissolve_t;
+		// Untouched — faint smoke bloom bleeds inward toward the front.
+		float bloom  = clamp(1.0 - dist / (smoke_softness * 0.5), 0.0, 1.0);
+		bloom        = pow(bloom, 2.2) * smoke_opacity * 0.25;
+		vec3 bloomed = mix(tex.rgb, smoke_color.rgb, bloom);
+		COLOR        = vec4(bloomed, tex.a);
 	}
-
-	COLOR = col;
 }
 """
 
 # ── Lifecycle ────────────────────────────────────────────────────────────────
 
 func _ready() -> void:
-	_img1 = $"1"
 	_img2 = $"2"
-
-	# Node "1" starts invisible — it will show through as "2" dissolves.
-	_img1.visible = true
-	_img1.modulate.a = 1.0
 
 	var shader := Shader.new()
 	shader.code = _SHADER
 
-	_mat2 = ShaderMaterial.new()
-	_mat2.shader = shader
-	_mat2.set_shader_parameter("uv_offset",      Vector2.ZERO)
-	_mat2.set_shader_parameter("uv_scale",       1.0)
-	_mat2.set_shader_parameter("dissolve_t",     0.0)
-	_mat2.set_shader_parameter("dissolve_style", dissolve_style)
-	_mat2.set_shader_parameter("dip_strength",   dip_strength)
-	_img2.material = _mat2
+	_mat = ShaderMaterial.new()
+	_mat.shader = shader
 
-	_bake_timeline()
+	var seed_val := noise_seed if noise_seed != 0 else randi()
+	_mat.set_shader_parameter("noise_a",       _make_noise(128, seed_val,        0.030, 4))
+	_mat.set_shader_parameter("noise_b",       _make_noise(256, seed_val + 1337, 0.050, 5))
+	_mat.set_shader_parameter("noise_c",       _make_noise(64,  seed_val + 42,   0.018, 3))
+
+	_sync_params()
+	_mat.set_shader_parameter("progress",  0.0)
+	_mat.set_shader_parameter("time_val",  0.0)
+
+	_img2.material = _mat
 
 	if auto_play:
 		start()
@@ -133,89 +207,59 @@ func _process(delta: float) -> void:
 		return
 
 	_elapsed += delta
-	var t: float = clamp(_elapsed, 0.0, _t_total)
 
-	# ── Phase 1: Hold ──────────────────────────────────────────────────
-	if t < _t_pan_start:
-		# Slight breathing zoom even during hold — adds life.
-		var hold_t : float = t / max(hold_duration, 0.001)
-		_mat2.set_shader_parameter("uv_scale",  lerp(1.0, zoom_amount, hold_t * 0.3))
-		_mat2.set_shader_parameter("uv_offset", Vector2.ZERO)
-		_mat2.set_shader_parameter("dissolve_t", 0.0)
+	var p : float = clamp(_elapsed / duration, 0.0, 1.0)
 
-	# ── Phase 2: Pan ───────────────────────────────────────────────────
-	elif t < _t_dissolve_start:
-		var pan_t := (t - _t_pan_start) / pan_duration
-		var eased := _ease(pan_t, pan_easing)
+	_mat.set_shader_parameter("progress",  p)
+	_mat.set_shader_parameter("time_val",  _elapsed)
 
-		# Left→Right: UV offset goes from 0 → +pan_amount
-		# (shifting the sample window right = image appears to pan right)
-		var offset := Vector2(eased * pan_amount, 0.0)
-		var scale  : float = lerp(1.0, zoom_amount, eased)
-
-		_mat2.set_shader_parameter("uv_offset", offset)
-		_mat2.set_shader_parameter("uv_scale",  scale)
-		_mat2.set_shader_parameter("dissolve_t", 0.0)
-
-	# ── Phase 3: Cross-Dissolve ────────────────────────────────────────
-	else:
-		var dis_t := (t - _t_dissolve_start) / dissolve_duration
-		dis_t = clamp(dis_t, 0.0, 1.0)
-
-		# Hold the final pan position during dissolve.
-		_mat2.set_shader_parameter("uv_offset", Vector2(pan_amount, 0.0))
-		_mat2.set_shader_parameter("uv_scale",  zoom_amount)
-		_mat2.set_shader_parameter("dissolve_t", _ease(dis_t, 1))  # ease-in-out
-
-	if _elapsed >= _t_total:
+	if p >= 1.0:
 		_active = false
 		_img2.visible = false
-		effect_finished.emit()
+		transition_finished.emit()
 
 # ── Public API ───────────────────────────────────────────────────────────────
 
 func start() -> void:
-	## Play the full pan + dissolve sequence.
+	## Play the smoke transition.
 	_elapsed = 0.0
 	_active  = true
 	_img2.visible = true
-	_img2.modulate.a = 1.0
-	_bake_timeline()
-	_mat2.set_shader_parameter("uv_offset",  Vector2.ZERO)
-	_mat2.set_shader_parameter("uv_scale",   1.0)
-	_mat2.set_shader_parameter("dissolve_t", 0.0)
-	_mat2.set_shader_parameter("dissolve_style", dissolve_style)
-	_mat2.set_shader_parameter("dip_strength",   dip_strength)
+	_sync_params()
+	_mat.set_shader_parameter("progress", 0.0)
+	_mat.set_shader_parameter("time_val", 0.0)
 
 
 func reset() -> void:
-	## Return both images to their starting state.
+	## Restore image "2" to fully visible.
 	_active  = false
 	_elapsed = 0.0
-	_img2.visible    = true
-	_img2.modulate.a = 1.0
-	_mat2.set_shader_parameter("uv_offset",  Vector2.ZERO)
-	_mat2.set_shader_parameter("uv_scale",   1.0)
-	_mat2.set_shader_parameter("dissolve_t", 0.0)
-
-
-func skip_to_dissolve() -> void:
-	## Jump straight to the cross-dissolve phase (useful for skipping narration).
-	_elapsed = _t_dissolve_start
+	_img2.visible = true
+	_mat.set_shader_parameter("progress", 0.0)
+	_mat.set_shader_parameter("time_val", 0.0)
 
 # ── Helpers ──────────────────────────────────────────────────────────────────
 
-func _bake_timeline() -> void:
-	_t_pan_start      = hold_duration
-	_t_dissolve_start = hold_duration + pan_duration
-	_t_total          = hold_duration + pan_duration + dissolve_duration
+func _sync_params() -> void:
+	_mat.set_shader_parameter("drift_speed",    drift_speed)
+	_mat.set_shader_parameter("turbulence",     turbulence)
+	_mat.set_shader_parameter("smoke_softness", smoke_softness)
+	_mat.set_shader_parameter("smoke_opacity",  smoke_opacity)
+	_mat.set_shader_parameter("reveal_soft",    reveal_softness)
+	_mat.set_shader_parameter("smoke_color",    smoke_color)
+	_mat.set_shader_parameter("wisp_color",     wisp_color)
 
 
-func _ease(t: float, mode: int) -> float:
-	t = clamp(t, 0.0, 1.0)
-	match mode:
-		0: return t                                      # linear
-		1: return t * t * (3.0 - 2.0 * t)               # smooth-step (ease in-out)
-		2: return t * t                                  # ease in (slow start)
-		3: return 1.0 - (1.0 - t) * (1.0 - t)          # ease out (slow end)
-		_: return t
+func _make_noise(size: int, seed_val: int, freq: float, octaves: int) -> ImageTexture:
+	var img := Image.create(size, size, false, Image.FORMAT_RF)
+	var fn   := FastNoiseLite.new()
+	fn.noise_type      = FastNoiseLite.TYPE_PERLIN
+	fn.frequency       = freq
+	fn.fractal_octaves = octaves
+	fn.seed            = seed_val
+	for y in size:
+		for x in size:
+			var v: float = fn.get_noise_2d(x, y)
+			v = (v + 1.0) * 0.5
+			img.set_pixel(x, y, Color(v, v, v, 1.0))
+	return ImageTexture.create_from_image(img)

@@ -9,6 +9,7 @@ func _ready() -> void:
 	$VBoxContainer/BurningButton.pressed.connect(_on_burning_pressed)
 	$VBoxContainer/FadingButton.pressed.connect(_on_fading_pressed)
 	$VBoxContainer/PanCutButton.pressed.connect(_on_pan_cut_pressed)
+	$VBoxContainer/MistButton.pressed.connect(_on_mist_pressed)
 	$VBoxContainer/ExitButton.pressed.connect(_on_exit_pressed)
 	
 	if is_overlay:
@@ -38,6 +39,12 @@ func _on_pan_cut_pressed() -> void:
 		get_tree().paused = false
 		queue_free()
 	get_tree().change_scene_to_file("res://Scenes/image_pan_cut.tscn")
+
+func _on_mist_pressed() -> void:
+	if is_overlay:
+		get_tree().paused = false
+		queue_free()
+	get_tree().change_scene_to_file("res://Scenes/image_mist.tscn")
 
 func _on_exit_pressed() -> void:
 	get_tree().quit()
